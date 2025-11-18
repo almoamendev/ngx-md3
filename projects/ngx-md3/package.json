@@ -1,0 +1,25 @@
+{
+    "name": "@vip9008/ngx-md3",
+    "version": "0.0.1",
+    "description": "MD3-style Angular components & style library",
+    "author": "Hussain Almomen",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/vip9008/ngx-md3.git"
+    },
+    "keywords": [
+        "angular",
+        "material design 3",
+        "components",
+        "ui"
+    ],
+    "peerDependencies": {
+        "@angular/common": "^20.3.0",
+        "@angular/core": "^20.3.0"
+    },
+    "dependencies": {
+        "tslib": "^2.3.0"
+    },
+    "sideEffects": false
+}
