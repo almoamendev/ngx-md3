@@ -66,8 +66,8 @@
     --md-scheme-inverse-primary: #5C4DD4;  /* P-80 */
 
     /* Other */
-    --md-scheme-scrim: #000000;
-    --md-scheme-shadow: #000000;
+    --md-scheme-scrim: 0, 0, 0;
+    --md-scheme-shadow: 0, 0, 0;
 }
 
 .md-scheme-dark {
@@ -138,6 +138,6 @@
     --md-scheme-inverse-primary: #5C4DD4;  /* P-40 */
 
     /* Other */
-    --md-scheme-scrim: #000000;
-    --md-scheme-shadow: #000000;
+    --md-scheme-scrim: 0, 0, 0;
+    --md-scheme-shadow: 0, 0, 0;
 }
