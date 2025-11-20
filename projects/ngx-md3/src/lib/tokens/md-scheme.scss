@@ -1,4 +1,4 @@
-.light {
+:root, .md-scheme-light {
     /* Primary */
     --md-scheme-primary: #5C4DD4;           /* P-40 */
     --md-scheme-on-primary: #FFFFFF;        /* P-100 */
@@ -70,7 +70,7 @@
     --md-scheme-shadow: #000000;
 }
 
-.dark {
+.md-scheme-dark {
     /* Primary */
     --md-scheme-primary: #C7BFFF;           /* P-80 */
     --md-scheme-on-primary: #371E92;        /* P-20 */
