@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NgxMd3 } from './ngx-md3';
+import { LoadingIndicator } from './loading-indicator';
 
-describe('NgxMd3', () => {
-  let component: NgxMd3;
-  let fixture: ComponentFixture<NgxMd3>;
+describe('LoadingIndicator', () => {
+  let component: LoadingIndicator;
+  let fixture: ComponentFixture<LoadingIndicator>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [NgxMd3]
+      imports: [LoadingIndicator]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(NgxMd3);
+    fixture = TestBed.createComponent(LoadingIndicator);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

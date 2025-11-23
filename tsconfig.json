@@ -8,7 +8,7 @@
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
     "paths": {
-      "ngx-md3": [
+      "@vip9008/ngx-md3": [
         "./dist/ngx-md3"
       ]
     },
