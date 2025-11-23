@@ -72,9 +72,11 @@ body {
     margin: 0;
     padding: 0;
 
-    color: var(--md-scheme-on-surface);
-    background-color: var(--md-scheme-surface);
-    border-color: var(--md-scheme-outline-variant);
+    &, .md-scheme-light, .md-scheme-dark {
+        color: var(--md-scheme-on-surface);
+        background-color: var(--md-scheme-surface);
+        border-color: var(--md-scheme-outline-variant);
+    }
 
     * {
         -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
