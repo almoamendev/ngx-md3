@@ -9,6 +9,10 @@
 
     width: var(--size);
     height: var(--size);
+    min-width: 1.5rem;
+    min-height: 1.5rem;
+    max-width: 15rem;
+    max-height: 15rem;
     border-radius: 100%;
     display: inline-block;
 

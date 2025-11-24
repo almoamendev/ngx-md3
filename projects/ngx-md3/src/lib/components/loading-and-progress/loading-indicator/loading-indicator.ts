@@ -8,4 +8,9 @@ import { Component, Input } from '@angular/core';
 })
 export class LoadingIndicator {
     @Input() contained: boolean = false;
+    @Input() size: number = 48;
+
+    public get remSize(): number {
+        return this.size / 16;
+    }
 }
