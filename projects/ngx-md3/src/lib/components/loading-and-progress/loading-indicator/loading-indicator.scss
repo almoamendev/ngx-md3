@@ -9,7 +9,13 @@
 
     width: var(--size);
     height: var(--size);
+    border-radius: 100%;
     display: inline-block;
+
+    &.contained {
+        --color: var(--md-scheme-on-primary-container);
+        background-color: var(--track);
+    }
 }
 
 .indicator-svg {
