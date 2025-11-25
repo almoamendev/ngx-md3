@@ -25,13 +25,13 @@
 .indicator-svg {
     width: 100%;
     height: 100%;
-    animation: md3-rotate 1.8s infinite;
+    animation: md3-rotate 1.6s infinite;
 
     overflow: visible;
 
     .indicator-shape {
         fill: var(--color);
-        animation: md3-shape-morph 4.5s infinite;
+        animation: md3-shape-morph 4.6s infinite;
         transform-origin: center;
     }
 }
