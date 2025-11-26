@@ -6,6 +6,11 @@
     "ngx-md3": {
       "projectType": "library",
       "root": "projects/ngx-md3",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
       "sourceRoot": "projects/ngx-md3/src",
       "prefix": "md3",
       "architect": {
