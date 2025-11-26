@@ -1,10 +1,12 @@
 import { Component, signal } from '@angular/core';
-import { LoadingIndicator } from '@vip9008/ngx-md3';
+import { CircularProgressIndicator, LinearProgressIndicator, LoadingIndicator } from '@vip9008/ngx-md3';
 
 @Component({
     selector: 'app-root',
     imports: [
-        LoadingIndicator
+        LoadingIndicator,
+        LinearProgressIndicator,
+        CircularProgressIndicator,
     ],
     templateUrl: './app.html',
     styleUrl: './app.scss'

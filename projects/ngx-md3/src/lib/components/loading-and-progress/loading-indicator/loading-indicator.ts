@@ -11,6 +11,6 @@ export class LoadingIndicator {
     @Input() size: number = 48;
 
     public get remSize(): number {
-        return this.size / 16;
+        return Number((this.size / 16).toFixed(4));
     }
 }

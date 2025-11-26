@@ -1,0 +1,7 @@
+.linear-indicator {
+    --thickness: 0.25rem;
+    --color: var(--md-scheme-primary);
+    --track: var(--md-scheme-primary-container);
+
+    height: var(--thickness);
+}
