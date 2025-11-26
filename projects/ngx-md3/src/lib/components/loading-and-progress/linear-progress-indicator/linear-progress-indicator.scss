@@ -2,6 +2,63 @@
     --thickness: 0.25rem;
     --color: var(--md-scheme-primary);
     --track: var(--md-scheme-primary-container);
+    
+    font-size: var(--thickness);
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+    height: 1em;
 
-    height: var(--thickness);
+    .track {
+        flex: 1 1 auto;
+        min-width: 0;
+        max-width: 100%;
+        border-radius: 0.5em;
+        display: flex;
+        flex-direction: row;
+
+        &::before {
+            content: "";
+            display: block;
+            flex: 1 1 auto;
+            border-radius: inherit;
+            height: 100%;
+            background-color: var(--track);
+        }
+
+        &::after {
+            content: "";
+            display: block;
+            flex: 0 1 0.25rem;
+            min-width: 0;
+            max-width: 0.25rem;
+            border-radius: inherit;
+            height: 100%;
+        }
+    }
+
+    .active-indicator {
+        flex: 1 1 unset;
+        min-width: 0.125rem;
+        max-width: 100%;
+        border-radius: 0.5em;
+        background-color: var(--color);
+
+        & + .track {
+            flex-direction: row-reverse;
+        }
+    }
+
+    &::after {
+        content: '';
+        position: absolute;
+        inset-inline-end: 0;
+        top: 50%;
+        margin-top: -0.125rem;
+        width: 0.25rem;
+        height: 0.25rem;
+        background-color: var(--color);
+        border-radius: 100%;
+    }
 }
