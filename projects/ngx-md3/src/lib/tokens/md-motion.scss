@@ -1,0 +1,47 @@
+:root {
+    /* Expressive – spatial */
+    --md-motion-expressive-fast-spatial-duration: 350ms;
+    // --md-motion-expressive-fast-spatial-easing: cubic-bezier(0.42, 1.67, 0.21, 0.90);
+    --md-motion-expressive-fast-spatial-easing: cubic-bezier(0.20, 1.40, 0.20, 1.10);
+
+    --md-motion-expressive-default-spatial-duration: 500ms;
+    // --md-motion-expressive-default-spatial-easing: cubic-bezier(0.38, 1.21, 0.22, 1.00);
+    --md-motion-expressive-default-spatial-easing: cubic-bezier(0.25, 1.15, 0.20, 1.05);
+
+    --md-motion-expressive-slow-spatial-duration: 650ms;
+    // --md-motion-expressive-slow-spatial-easing: cubic-bezier(0.39, 1.29, 0.35, 0.98);
+    --md-motion-expressive-slow-spatial-easing: cubic-bezier(0.30, 1.02, 0.22, 1.00);
+
+    /* Expressive – effects */
+    --md-motion-expressive-fast-effects-duration: 150ms;
+    // --md-motion-expressive-fast-effects-easing: cubic-bezier(0.31, 0.94, 0.34, 1.00);
+    --md-motion-expressive-fast-effects-easing: cubic-bezier(0.20, 1.30, 0.30, 1.10);
+
+    --md-motion-expressive-default-effects-duration: 200ms;
+    // --md-motion-expressive-default-effects-easing: cubic-bezier(0.34, 0.80, 0.34, 1.00);
+    --md-motion-expressive-default-effects-easing: cubic-bezier(0.25, 1.10, 0.25, 1.05);
+
+    --md-motion-expressive-slow-effects-duration: 300ms;
+    // --md-motion-expressive-slow-effects-easing: cubic-bezier(0.34, 0.88, 0.34, 1.00);
+    --md-motion-expressive-slow-effects-easing: cubic-bezier(0.30, 1.02, 0.30, 1.00);
+
+    /* Standard – spatial */
+    --md-motion-standard-fast-spatial-duration: 350ms;
+    --md-motion-standard-fast-spatial-easing: cubic-bezier(0.27, 1.06, 0.18, 1.00);
+
+    --md-motion-standard-default-spatial-duration: 500ms;
+    --md-motion-standard-default-spatial-easing: cubic-bezier(0.27, 1.06, 0.18, 1.00);
+
+    --md-motion-standard-slow-spatial-duration: 750ms;
+    --md-motion-standard-slow-spatial-easing: cubic-bezier(0.27, 1.06, 0.18, 1.00);
+
+    /* Standard – effects */
+    --md-motion-standard-fast-effects-duration: 150ms;
+    --md-motion-standard-fast-effects-easing: cubic-bezier(0.31, 0.94, 0.34, 1.00);
+
+    --md-motion-standard-default-effects-duration: 200ms;
+    --md-motion-standard-default-effects-easing: cubic-bezier(0.34, 0.80, 0.34, 1.00);
+
+    --md-motion-standard-slow-effects-duration: 300ms;
+    --md-motion-standard-slow-effects-easing: cubic-bezier(0.34, 0.88, 0.34, 1.00);
+}
