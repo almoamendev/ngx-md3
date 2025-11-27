@@ -18,6 +18,8 @@
         display: flex;
         flex-direction: row;
 
+        transition: width var(--md-motion-standard-fast-effects-duration) var(--md-motion-standard-fast-effects-easing);
+
         &::before {
             content: "";
             display: block;
@@ -44,6 +46,8 @@
         max-width: 100%;
         border-radius: 0.5em;
         background-color: var(--color);
+
+        transition: width var(--md-motion-standard-fast-effects-duration) var(--md-motion-standard-fast-effects-easing);
 
         & + .track {
             flex-direction: row-reverse;
