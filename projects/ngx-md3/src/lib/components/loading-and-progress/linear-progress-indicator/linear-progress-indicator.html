@@ -1,4 +1,27 @@
-<div class="linear-indicator" [style]="'--thickness: '+remThickness+'rem'">
+<div class="linear-indicator" [class.thickness-8dp]="thickness == 8">
     <div class="active-indicator" style="width: 50%;"></div>
+    <div class="track"></div>
+</div>
+
+<div style="margin: 0.5rem;"></div>
+
+<div class="linear-indicator wave" [class.thickness-8dp]="thickness == 8">
+    <div class="active-indicator" style="width: 50%;">
+        <!-- wave-thin.svg -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 10">
+            <path
+                d="M 0 5
+                Q 5 2 10 5
+                T 20 5
+                T 30 5
+                T 40 5"
+                fill="none"
+                stroke="black"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            />
+        </svg>
+    </div>
     <div class="track"></div>
 </div>

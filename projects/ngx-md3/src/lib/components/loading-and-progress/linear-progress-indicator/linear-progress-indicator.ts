@@ -8,9 +8,5 @@ import { Component, Input } from '@angular/core';
 })
 export class LinearProgressIndicator {
     @Input() indeterminate: boolean = false;
-    @Input() thickness: number = 4;
-
-    public get remThickness(): number {
-        return Number((this.thickness / 16).toFixed(4));
-    }
+    @Input() thickness: 4 | 8 = 4;
 }
