@@ -14,7 +14,7 @@
         flex: 1 1 auto;
         min-width: 0;
         max-width: 100%;
-        border-radius: 0.5em;
+        border-radius: 1em;
         display: flex;
         flex-direction: row;
 
@@ -44,7 +44,7 @@
         flex: 1 1 unset;
         min-width: 0.125rem;
         max-width: 100%;
-        border-radius: 0.5em;
+        border-radius: 1em;
         background-color: var(--color);
 
         transition: width var(--md-motion-standard-fast-effects-duration) var(--md-motion-standard-fast-effects-easing);
