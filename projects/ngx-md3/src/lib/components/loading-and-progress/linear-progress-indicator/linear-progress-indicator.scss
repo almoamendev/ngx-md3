@@ -36,3 +36,33 @@
         transition: width var(--md-motion-standard-fast-effects-duration) var(--md-motion-standard-fast-effects-easing);
     }
 }
+
+@keyframes indeterminate-indicator {
+    0% {
+        inset-inline-start: -35%;
+        inset-inline-end: 100%;
+    }
+    60% {
+        inset-inline-start: 100%;
+        inset-inline-end: -90%;
+    }
+    100% {
+        inset-inline-start: 100%;
+        inset-inline-end: -90%;
+    }
+}
+
+@keyframes indeterminate-indicator-short {
+    0% {
+        inset-inline-start: -200%;
+        inset-inline-end: 100%;
+    }
+    60% {
+        inset-inline-start: 107%;
+        inset-inline-end: -8%;
+    }
+    100% {
+        inset-inline-start: 107%;
+        inset-inline-end: -8%;
+    }
+}
