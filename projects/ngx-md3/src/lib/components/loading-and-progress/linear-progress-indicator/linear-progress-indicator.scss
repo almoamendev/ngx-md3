@@ -14,6 +14,17 @@
         font-size: 0.5rem;
     }
 
+    .track {
+        position: absolute;
+        inset-block: 0;
+        inset-inline-end: 0;
+        height: 100%;
+        width: calc(100% - var(--progress) - 0.25rem);
+        border-radius: 1em;
+        background-color: var(--track);
+        transition: width var(--md-motion-standard-fast-effects-duration) var(--md-motion-standard-fast-effects-easing);
+    }
+
     .active-indicator {
         position: absolute;
         inset-block: 0;
@@ -25,34 +36,77 @@
         transition: width var(--md-motion-standard-fast-effects-duration) var(--md-motion-standard-fast-effects-easing);
     }
 
-    .track {
-        position: absolute;
-        inset-block: 0;
-        inset-inline-end: 0;
-        height: 100%;
-        width: calc(100% - var(--progress) - 0.25rem);
-        border-radius: 1em;
-        background-color: var(--track);
-        transition: width var(--md-motion-standard-fast-effects-duration) var(--md-motion-standard-fast-effects-easing);
+    &.indeterminate {
+        --x: 50;
+
+        &::before {
+            content: '';
+            position: absolute;
+            display: block;
+            inset-block: 0;
+            inset-inline-start: 0;
+            height: 100%;
+            border-radius: 1em;
+            background-color: var(--track);
+            transition: width var(--md-motion-standard-fast-effects-duration) var(--md-motion-standard-fast-effects-easing);
+            animation: md3-indeterminate-track-start calc(var(--md-motion-standard-slow-effects-duration) * var(--x)) cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;
+        }
+
+        .track {
+            width: auto;
+            inset-inline-start: auto;
+            inset-inline-end: 0;
+            animation: md3-indeterminate-track-end calc(var(--md-motion-standard-slow-effects-duration) * var(--x)) cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;
+        }
+
+        .active-indicator {
+            width: auto;
+            inset-inline: auto;
+            animation: md3-indeterminate-indicator calc(var(--md-motion-standard-slow-effects-duration) * var(--x)) cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;
+        }
     }
 }
 
-@keyframes indeterminate-indicator {
+@keyframes md3-indeterminate-track-start {
+    0% {
+        inset-inline-end: calc(135% + 0.25rem);
+    }
+    60% {
+        inset-inline-end: 0;
+    }
+    100% {
+        inset-inline-end: 0;
+    }
+}
+
+@keyframes md3-indeterminate-track-end {
+    0% {
+        inset-inline-start: calc(0% + 0.25rem);
+    }
+    60% {
+        inset-inline-start: calc(190% + 0.25rem);
+    }
+    100% {
+        inset-inline-start: calc(190% + 0.25rem);
+    }
+}
+
+@keyframes md3-indeterminate-indicator {
     0% {
         inset-inline-start: -35%;
         inset-inline-end: 100%;
     }
     60% {
-        inset-inline-start: 100%;
+        inset-inline-start: calc(100% + 0.25rem);
         inset-inline-end: -90%;
     }
     100% {
-        inset-inline-start: 100%;
+        inset-inline-start: calc(100% + 0.25rem);
         inset-inline-end: -90%;
     }
 }
 
-@keyframes indeterminate-indicator-short {
+@keyframes md3-indeterminate-indicator-short {
     0% {
         inset-inline-start: -200%;
         inset-inline-end: 100%;
