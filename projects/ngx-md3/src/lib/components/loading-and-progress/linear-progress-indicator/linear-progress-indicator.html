@@ -1,9 +1,8 @@
-<div class="linear-indicator" [class.thickness-8dp]="thickness == 8" [style.--progress]="progress + '%'">
+<div class="linear-indicator" [class.thickness-8dp]="thickness == 8" [class.indeterminate]="indeterminate" [style.--progress]="progress + '%'">
     <div class="track"></div>
     <div class="active-indicator"></div>
-</div>
-
-<div class="linear-indicator indeterminate" [class.thickness-8dp]="thickness == 8" style="margin-top: 1rem;">
-    <div class="track"></div>
-    <div class="active-indicator"></div>
+    @if (indeterminate) {
+        <div class="track-secondary"></div>
+        <div class="active-indicator-secondary"></div>
+    }
 </div>
