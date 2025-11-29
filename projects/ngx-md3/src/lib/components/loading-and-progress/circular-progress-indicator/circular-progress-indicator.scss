@@ -55,19 +55,19 @@
     }
 
     &.indeterminate {
-        animation: container-rotate calc(var(--md-motion-standard-slow-effects-duration) * 6) linear infinite;
+        animation: container-rotate calc(var(--md-motion-standard-slow-effects-duration) * 5) linear infinite;
         
         .circlar-indicator {
-            animation: indicator-track-rotate calc(var(--md-motion-standard-slow-effects-duration) * 9) var(--md-motion-standard-slow-effects-easing) infinite;
+            animation: indicator-track-rotate calc(var(--md-motion-standard-slow-effects-duration) * 8) var(--md-motion-standard-slow-effects-easing) infinite;
 
             .track {
                 stroke-dashoffset: 92;
-                animation: track-fill calc(var(--md-motion-standard-slow-effects-duration) * 9) var(--md-motion-standard-slow-effects-easing) infinite;
+                animation: track-fill calc(var(--md-motion-standard-slow-effects-duration) * 8) var(--md-motion-standard-slow-effects-easing) infinite;
             }
             
             .active-indicator {
                 stroke-dashoffset: 0;
-                animation: indicator-fill calc(var(--md-motion-standard-slow-effects-duration) * 9) var(--md-motion-standard-slow-effects-easing) infinite;
+                animation: indicator-fill calc(var(--md-motion-standard-slow-effects-duration) * 8) var(--md-motion-standard-slow-effects-easing) infinite;
             }
         }
 
@@ -75,7 +75,7 @@
             .circlar-indicator {
                 .track {
                     stroke-dashoffset: 90;
-                    animation: track-fill-8dp calc(var(--md-motion-standard-slow-effects-duration) * 9) var(--md-motion-standard-slow-effects-easing) infinite;
+                    animation: track-fill-8dp calc(var(--md-motion-standard-slow-effects-duration) * 8) var(--md-motion-standard-slow-effects-easing) infinite;
                 }
             }
         }
