@@ -1,4 +1,4 @@
-.circlar-indicator {
+.indicator-container {
     font-size: 0.25rem;
     --gap: 7;
     --progress: 0;
@@ -17,35 +17,155 @@
     --radius: calc(var(--size) / 2 - var(--stroke) / 2);
     --track-arc: calc(100 - var(--progress));
 
+    display: inline-block;
     width: var(--size);
     height: var(--size);
-    display: block;
+    
+    .circlar-indicator {
+        display: block;
+        width: var(--size);
+        height: var(--size);
+    }
+    
+    .track,
+    .active-indicator {
+        fill: none;
+        stroke-width: var(--stroke);
+        stroke-linecap: round;
+        cx: var(--center);
+        cy: var(--center);
+        r: var(--radius);
+        transform-origin: center;
+        transform: rotate(-90deg); /* start at top */
+        transition: stroke-dasharray var(--md-motion-standard-fast-effects-duration) var(--md-motion-standard-fast-effects-easing),
+            stroke-dashoffset var(--md-motion-standard-fast-effects-duration) var(--md-motion-standard-fast-effects-easing);
+    }
+    
+    .track {
+        --track-length: calc(var(--track-arc) - var(--gap) * 2);
+    
+        stroke: var(--track-color);
+        stroke-dasharray: var(--track-length) calc(100 - var(--track-length));
+        stroke-dashoffset: calc(var(--track-arc) - var(--gap));
+    }
+    
+    .active-indicator {
+        stroke: var(--indicator-color);
+        stroke-dasharray: var(--progress) calc(100 - var(--progress));
+    }
+
+    &.indeterminate {
+        animation: container-rotate calc(var(--md-motion-standard-slow-effects-duration) * 6) linear infinite;
+        
+        .circlar-indicator {
+            animation: indicator-track-rotate calc(var(--md-motion-standard-slow-effects-duration) * 9) var(--md-motion-standard-slow-effects-easing) infinite;
+
+            .track {
+                stroke-dashoffset: 92;
+                animation: track-fill calc(var(--md-motion-standard-slow-effects-duration) * 9) var(--md-motion-standard-slow-effects-easing) infinite;
+            }
+            
+            .active-indicator {
+                stroke-dashoffset: 0;
+                animation: indicator-fill calc(var(--md-motion-standard-slow-effects-duration) * 9) var(--md-motion-standard-slow-effects-easing) infinite;
+            }
+        }
+
+        &.thickness-8dp {
+            .circlar-indicator {
+                .track {
+                    stroke-dashoffset: 90;
+                    animation: track-fill-8dp calc(var(--md-motion-standard-slow-effects-duration) * 9) var(--md-motion-standard-slow-effects-easing) infinite;
+                }
+            }
+        }
+    }
 }
 
-/* shared circle styles (use CSS to set cx, cy, r) */
-.track,
-.active-indicator {
-    fill: none;
-    stroke-width: var(--stroke);
-    stroke-linecap: round;
-    cx: var(--center);
-    cy: var(--center);
-    r: var(--radius);
-    transform-origin: center;
-    transform: rotate(-90deg); /* start at top */
+@keyframes container-rotate {
+    to {
+        transform: rotate(360deg);
+    }
 }
 
-/* track arc: gap → indicator → gap → TRACK */
-.track {
-    --track-length: calc(var(--track-arc) - var(--gap) * 2);
-
-    stroke: var(--track-color);
-    stroke-dasharray: var(--track-length) calc(100 - var(--track-length));
-    stroke-dashoffset: calc(var(--track-arc) - var(--gap));
+@keyframes indicator-track-rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    30% {
+        transform: rotate(0deg);
+    }
+    50% {
+        transform: rotate(180deg);
+    }
+    80% {
+        transform: rotate(180deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
-/* indicator arc: gap → INDICATOR → rest */
-.active-indicator {
-    stroke: var(--indicator-color);
-    stroke-dasharray: var(--progress) calc(100 - var(--progress));
+@keyframes track-fill {
+    0% {
+        stroke-dasharray: 84 16;
+        stroke-dashoffset: 92;
+    }
+    25% {
+        stroke-dasharray: 34 66;
+        stroke-dashoffset: 42;
+    }
+    50% {
+        stroke-dasharray: 84 16;
+        stroke-dashoffset: 92;
+    }
+    75% {
+        stroke-dasharray: 34 66;
+        stroke-dashoffset: 42;
+    }
+    100% {
+        stroke-dasharray: 84 16;
+        stroke-dashoffset: 92;
+    }
+}
+
+@keyframes track-fill-8dp {
+    0% {
+        stroke-dasharray: 80 20;
+        stroke-dashoffset: 90;
+    }
+    30% {
+        stroke-dasharray: 30 70;
+        stroke-dashoffset: 40;
+    }
+    50% {
+        stroke-dasharray: 80 20;
+        stroke-dashoffset: 90;
+    }
+    80% {
+        stroke-dasharray: 30 70;
+        stroke-dashoffset: 40;
+    }
+    100% {
+        stroke-dasharray: 80 20;
+        stroke-dashoffset: 90;
+    }
+}
+
+@keyframes indicator-fill {
+    0% {
+        stroke-dasharray: 0 100;
+    }
+    30% {
+        stroke-dasharray: 50 50;
+    }
+    50% {
+        stroke-dasharray: 0 100;
+    }
+    80% {
+        stroke-dasharray: 50 50;
+    }
+    100% {
+        stroke-dasharray: 0 100;
+    }
 }
