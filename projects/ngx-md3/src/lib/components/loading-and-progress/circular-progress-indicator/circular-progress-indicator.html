@@ -1,1 +1,4 @@
-<p>circular-progress-indicator works!</p>
+<svg class="circlar-indicator" [class.thickness-8dp]="thickness == 8" [class.indeterminate]="indeterminate" [style.--progress]="progress">
+    <circle class="track" pathLength="100"></circle>
+    <circle class="active-indicator" pathLength="100"></circle>
+</svg>
