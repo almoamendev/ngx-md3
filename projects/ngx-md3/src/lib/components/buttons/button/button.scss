@@ -1,0 +1,35 @@
+:host {
+    font-size: 1rem;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    display: inline-flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none !important;
+    overflow: hidden;
+    vertical-align: middle;
+    white-space: nowrap;
+    transition: all var(--md-motion-expressive-fast-effects-duration) var(--md-motion-expressive-fast-effects-easing);
+
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none;   /* Chrome/Safari/Opera */
+    -moz-user-select: none;      /* Firefox */
+    -ms-user-select: none;       /* Internet Explorer/Edge */
+    user-select: none;
+
+    // default (small)
+    padding: 0 1em;
+    height: 2.5em;
+    line-height: 2.5em;
+    border-radius: 2.5em;
+
+    &.square {
+        border-radius: 0.75em;
+    }
+}
