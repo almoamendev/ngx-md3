@@ -4,10 +4,7 @@ import { Component, AfterViewInit, Input, ElementRef } from '@angular/core';
     selector: 'md3-icon',
     imports: [],
     templateUrl: './material-icon.html',
-    styleUrl: './material-icon.scss',
-    host: {
-        'class': 'material-icon'
-    }
+    styleUrl: './material-icon.scss'
 })
 export class MaterialIcon {
     @Input() iconVersion: 'MaterialIcons' | 'MaterialSymbols' = 'MaterialSymbols';
