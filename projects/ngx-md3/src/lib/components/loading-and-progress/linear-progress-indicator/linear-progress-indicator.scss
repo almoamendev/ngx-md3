@@ -1,6 +1,6 @@
 .linear-indicator {
-    --indicator-color: var(--md-scheme-primary);
-    --track-color: var(--md-scheme-primary-container);
+    --indicator-color: rgb(var(--md-scheme-primary));
+    --track-color: rgb(var(--md-scheme-primary-container));
     --progress: 0%;
     
     font-size: 0.25rem;

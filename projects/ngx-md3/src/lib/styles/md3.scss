@@ -1,5 +1,4 @@
-@import "https://fonts.googleapis.com/css?family=Roboto:400,400i,500,500i,700,700i";
-@import "https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@100..900&display=swap";
+@import "https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap";
 
 @import "https://fonts.googleapis.com/icon?family=Material+Icons";
 @import "https://fonts.googleapis.com/icon?family=Material+Icons+Outlined";
@@ -74,9 +73,9 @@ body {
     padding: 0;
 
     &, .md-scheme-light, .md-scheme-dark {
-        color: var(--md-scheme-on-surface);
-        background-color: var(--md-scheme-surface);
-        border-color: var(--md-scheme-outline-variant);
+        color: rgb(var(--md-scheme-on-surface));
+        background-color: rgb(var(--md-scheme-surface));
+        border-color: rgb(var(--md-scheme-outline-variant));
     }
 
     * {

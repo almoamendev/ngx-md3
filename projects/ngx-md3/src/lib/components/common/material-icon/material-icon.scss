@@ -31,7 +31,7 @@
     &.two-tone {
         font-family: 'Material Icons Two Tone' !important;
         color: transparent !important;
-        background: var(--foreground-color, var(--md-scheme-on-surface)) !important;
+        background: rgb(var(--foreground-color, var(--md-scheme-on-surface))) !important;
         -webkit-background-clip: text !important;
         background-clip: text !important;
     }

@@ -8,10 +8,8 @@
     align-items: center;
     justify-content: center;
     text-decoration: none !important;
-    overflow: hidden;
-    vertical-align: middle;
     white-space: nowrap;
-    transition: all var(--md-motion-expressive-fast-effects-duration) var(--md-motion-expressive-fast-effects-easing);
+    transition: all var(--md-motion-expressive-fast-spatial-duration) var(--md-motion-expressive-fast-spatial-easing);
 
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -23,13 +21,42 @@
     -ms-user-select: none;       /* Internet Explorer/Edge */
     user-select: none;
 
-    // default (small)
+    &::after {
+        content: '';
+        position: absolute;
+        display: block;
+        inset-inline: 0;
+        inset-block: -0.5em;
+        min-height: 3em;
+    }
+
+    // default (small - filled)
+    gap: 0.5em;
     padding: 0 1em;
     height: 2.5em;
-    line-height: 2.5em;
     border-radius: 2.5em;
+    background-color: rgb(var(--md-scheme-primary));
+    color: rgb(var(--md-scheme-on-primary));
+
+    &:disabled {
+        background-color: rgb(var(--md-scheme-primary));
+        color: rgb(var(--md-scheme-on-primary));
+    }
 
     &.square {
         border-radius: 0.75em;
+    }
+
+    ::ng-deep [md3-icon-element] {
+        font-size: 1.25em !important;
+        line-height: 1;
+        width: 1em;
+    }
+
+    .label {
+        font-size: 0.875em;
+        font-weight: 500;
+        line-height: 1.4286em;
+        letter-spacing: 0.0675em;
     }
 }

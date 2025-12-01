@@ -8,8 +8,8 @@
         --gap: 10;
     }
 
-    --indicator-color: var(--md-scheme-primary);
-    --track-color: var(--md-scheme-primary-container);
+    --indicator-color: rgb(var(--md-scheme-primary));
+    --track-color: rgb(var(--md-scheme-primary-container));
 
     --size: calc(2.25rem + 1em);
     --stroke: 1em;

@@ -4,7 +4,7 @@
 
 .indicator-indeterminate {
     --size: 3rem;
-    --indicator-color: var(--md-scheme-primary);
+    --indicator-color: rgb(var(--md-scheme-primary));
 
     width: var(--size);
     height: var(--size);
@@ -16,8 +16,8 @@
     display: inline-block;
 
     &.contained {
-        --indicator-color: var(--md-scheme-on-primary-container);
-        background-color: var(--md-scheme-primary-container);
+        --indicator-color: rgb(var(--md-scheme-on-primary-container));
+        background-color: rgb(var(--md-scheme-primary-container));
     }
 }
 
