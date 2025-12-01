@@ -31,7 +31,7 @@
     &.two-tone {
         font-family: 'Material Icons Two Tone' !important;
         color: transparent !important;
-        background: rgb(var(--foreground-color, var(--md-scheme-on-surface))) !important;
+        background: var(--foreground-color, rgb(var(--md-scheme-on-surface))) !important;
         -webkit-background-clip: text !important;
         background-clip: text !important;
     }
@@ -57,19 +57,19 @@
         }
     }
 
-    &.md-20 {
+    &.md3-20 {
         font-size: 1.25rem;
     }
     
-    &.md-24 {
+    &.md3-24 {
         font-size: 1.5rem;
     }
     
-    &.md-36 {
+    &.md3-36 {
         font-size: 2.25rem;
     }
     
-    &.md-48 {
+    &.md3-48 {
         font-size: 3rem;
     }
 

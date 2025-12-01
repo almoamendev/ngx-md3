@@ -82,3 +82,39 @@ body {
         -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     }
 }
+
+.md3-state-component {
+    position: relative;
+
+    .md3-state-layer {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        border-radius: inherit;
+        transition: all var(--md-motion-expressive-fast-spatial-duration) var(--md-motion-expressive-fast-spatial-easing);
+        background-color: var(--state-color, transparent);
+        opacity: 0;
+
+        & ~ * {
+            z-index: 10;
+        }
+    }
+
+    &:hover {
+        .md3-state-layer {
+            opacity: 0.08;
+        }
+    }
+
+    &:focus, &:active {
+        .md3-state-layer {
+            opacity: 0.1;
+        }
+    }
+
+    &.draggable:active {
+        .md3-state-layer {
+            opacity: 0.16;
+        }
+    }
+}

@@ -1,4 +1,9 @@
 :host {
+    --background-color: rgb(var(--md-scheme-primary));
+    --foreground-color: rgb(var(--md-scheme-on-primary));
+    --state-color: rgb(var(--md-scheme-on-primary));
+    --outline-width: 0.0625em;
+
     font-size: 1rem;
     border: none;
     outline: none;
@@ -31,16 +36,27 @@
     }
 
     // default (small - filled)
+    background-color: var(--background-color);
+    color: var(--foreground-color);
     gap: 0.5em;
     padding: 0 1em;
     height: 2.5em;
     border-radius: 2.5em;
-    background-color: rgb(var(--md-scheme-primary));
-    color: rgb(var(--md-scheme-on-primary));
+    box-shadow: var(--md-shadow-0dp);
 
     &:disabled {
-        background-color: rgb(var(--md-scheme-primary));
-        color: rgb(var(--md-scheme-on-primary));
+        --background-color: rgba(var(--md-scheme-on-surface), 0.1) !important;
+        --foreground-color: rgba(var(--md-scheme-on-surface), 0.38) !important;
+        
+        cursor: default !important;
+
+        &::before {
+            display: none;
+        }
+
+        .md3-state-layer {
+            display: none;
+        }
     }
 
     &.square {
@@ -57,6 +73,156 @@
         font-size: 0.875em;
         font-weight: 500;
         line-height: 1.4286em;
-        letter-spacing: 0.0675em;
+        letter-spacing: 0.071429em;
+    }
+
+    &:not(:disabled):active {
+        border-radius: 0.5em;
+    }
+
+    &.md3-x-small {
+        gap: 0.25em;
+        padding: 0 0.75em;
+        height: 2em;
+        border-radius: 2em;
+
+        &.square {
+            border-radius: 0.75em;
+        }
+
+        ::ng-deep [md3-icon-element] {
+            font-size: 1.25em !important;
+        }
+
+        .label {
+            font-size: 0.875em;
+            font-weight: 500;
+            line-height: 1.4286em;
+            letter-spacing: 0.071429em;
+        }
+
+        &:not(:disabled):active {
+            border-radius: 0.5em;
+        }
+    }
+
+    // &.md3-small {
+    // }
+
+    &.md3-medium {
+        gap: 0.5em;
+        padding: 0 1.5em;
+        height: 3.5em;
+        border-radius: 3.5em;
+
+        &.square {
+            border-radius: 1em;
+        }
+
+        ::ng-deep [md3-icon-element] {
+            font-size: 1.5em !important;
+        }
+
+        .label {
+            font-size: 1em;
+            font-weight: 500;
+            line-height: 1.5em;
+            letter-spacing: 0.09375em;
+        }
+
+        &:not(:disabled):active {
+            border-radius: 0.75em;
+        }
+    }
+
+    &.md3-large {
+        --outline-width: 0.125em;
+
+        gap: 0.75em;
+        padding: 0 3em;
+        height: 6em;
+        border-radius: 6em;
+
+        &.square {
+            border-radius: 1.75em;
+        }
+
+        ::ng-deep [md3-icon-element] {
+            font-size: 2em !important;
+        }
+
+        .label {
+            font-size: 1.5em;
+            font-weight: 400;
+            line-height: 1.333332em;
+            letter-spacing: 0;
+        }
+
+        &:not(:disabled):active {
+            border-radius: 1em;
+        }
+    }
+
+    &.md3-x-large {
+        --outline-width: 0.1875em;
+
+        gap: 1em;
+        padding: 0 4em;
+        height: 8.5em;
+        border-radius: 8.5em;
+
+        &.square {
+            border-radius: 1.75em;
+        }
+
+        ::ng-deep [md3-icon-element] {
+            font-size: 2.5em !important;
+        }
+
+        .label {
+            font-size: 2em;
+            font-weight: 400;
+            line-height: 1.25em;
+            letter-spacing: 0;
+        }
+
+        &:not(:disabled):active {
+            border-radius: 1em;
+        }
+    }
+
+    &.md3-elevated {
+        --background-color: rgb(var(--md-scheme-surface-container-low));
+        --foreground-color: rgb(var(--md-scheme-primary));
+        --state-color: rgb(var(--md-scheme-primary));
+
+        box-shadow: var(--md-shadow-1dp);
+
+        &:disabled {
+            box-shadow: var(--md-shadow-0dp);
+        }
+    }
+
+    // &.md3-filled {
+    // }
+
+    &.md3-tonal {
+        --background-color: rgb(var(--md-scheme-secondary-container));
+        --foreground-color: rgb(var(--md-scheme-on-secondary-container));
+        --state-color: rgb(var(--md-scheme-on-secondary-container));
+    }
+
+    &.md3-outlined {
+        --background-color: transparent;
+        --foreground-color: rgb(var(--md-scheme-on-surface-variant));
+        --state-color: rgb(var(--md-scheme-on-surface-variant));
+
+        border: var(--outline-width) solid rgb(var(--md-scheme-outline-variant));
+    }
+
+    &.md3-text {
+        --background-color: transparent;
+        --foreground-color: rgb(var(--md-scheme-primary));
+        --state-color: rgb(var(--md-scheme-primary));
     }
 }

@@ -6,7 +6,7 @@ import { Component, AfterViewInit, Input, ElementRef } from '@angular/core';
     templateUrl: './material-icon.html',
     styleUrl: './material-icon.scss'
 })
-export class MaterialIcon {
+export class MaterialIcon implements AfterViewInit {
     @Input() iconVersion: 'MaterialIcons' | 'MaterialSymbols' = 'MaterialSymbols';
     @Input() filled: boolean = false;
     @Input() iconStyle: 'normal' | 'outlined' | 'rounded' | 'sharp' | 'two-tone' = 'normal';
@@ -21,7 +21,7 @@ export class MaterialIcon {
     }
 
     ngAfterViewInit(): void {
-        let iconSize = 'md-' + this.iconSize.toString();
+        let iconSize = 'md3-' + this.iconSize.toString();
         this.element.classList.add(iconSize);
 
         if (this.filled) {
