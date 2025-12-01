@@ -21,10 +21,8 @@ export class MaterialIcon {
     }
 
     ngAfterViewInit(): void {
-        if (this.iconSize != 24) {
-            let iconSize = 'md-' + this.iconSize.toString();
-            this.element.classList.add(iconSize);
-        }
+        let iconSize = 'md-' + this.iconSize.toString();
+        this.element.classList.add(iconSize);
 
         if (this.filled) {
             this.element.classList.add('filled');
