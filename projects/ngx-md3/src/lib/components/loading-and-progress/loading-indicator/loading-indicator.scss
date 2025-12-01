@@ -4,8 +4,7 @@
 
 .indicator-indeterminate {
     --size: 3rem;
-    --color: var(--md-scheme-primary);
-    --track: var(--md-scheme-primary-container);
+    --indicator-color: var(--md-scheme-primary);
 
     width: var(--size);
     height: var(--size);
@@ -17,8 +16,8 @@
     display: inline-block;
 
     &.contained {
-        --color: var(--md-scheme-on-primary-container);
-        background-color: var(--track);
+        --indicator-color: var(--md-scheme-on-primary-container);
+        background-color: var(--md-scheme-primary-container);
     }
 }
 
@@ -30,7 +29,7 @@
     overflow: visible;
 
     .indicator-shape {
-        fill: var(--color);
+        fill: var(--indicator-color);
         animation: md3-shape-morph calc(var(--md-motion-expressive-slow-effects-duration) * 14) infinite;
         transform-origin: center;
     }
