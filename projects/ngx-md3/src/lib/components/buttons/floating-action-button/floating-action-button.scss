@@ -1,0 +1,165 @@
+:host {
+    --background-color: rgb(var(--md-scheme-primary-container));
+    --foreground-color: rgb(var(--md-scheme-on-primary-container));
+    --state-color: rgb(var(--md-scheme-on-primary-container));
+
+    font-size: 1rem;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    display: inline-flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none !important;
+    white-space: nowrap;
+    transition: all var(--md-motion-expressive-fast-spatial-duration) var(--md-motion-expressive-fast-spatial-easing);
+    background-color: var(--background-color);
+    color: var(--foreground-color);
+    height: var(--fab-height);
+    box-shadow: var(--md-shadow-6dp);
+
+    &:hover {
+        box-shadow: var(--md-shadow-8dp);
+    }
+
+    &:active, &:focus {
+        box-shadow: var(--md-shadow-6dp);
+    }
+
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none;   /* Chrome/Safari/Opera */
+    -moz-user-select: none;      /* Firefox */
+    -ms-user-select: none;       /* Internet Explorer/Edge */
+    user-select: none;
+
+    // default (small)
+    --fab-height: 3.5em;
+
+    padding: 0 1em;
+    border-radius: 1em;
+
+    ::ng-deep [md3-icon-element] {
+        font-size: 1.5em !important;
+    }
+
+    .icon-label-space {
+        display: none;
+        height: 100%;
+        width: 0;
+
+        transition: width var(--md-motion-expressive-fast-spatial-duration) var(--md-motion-expressive-fast-spatial-easing);
+    }
+
+    .label {
+        font-size: 1em;
+        font-weight: 500;
+        line-height: 1.5em;
+        letter-spacing: 0.09375em;
+
+        transition: all var(--md-motion-expressive-fast-spatial-duration) var(--md-motion-expressive-fast-spatial-easing);
+        max-width: 0;
+        visibility: hidden;
+        opacity: 0;
+    }
+
+    &.extended-fab {
+        ::ng-deep [md3-icon-element] + .icon-label-space {
+            display: block;
+        }
+
+        .icon-label-space {
+            width: 0.5em;
+        }
+
+        .label {
+            max-width: 32rem;
+            visibility: visible;
+            opacity: 1;
+        }
+    }
+    
+    // &.md3-small {
+    // }
+    
+    &.md3-medium {
+        --fab-height: 5em;
+        
+        padding: 0 1.625em;
+        border-radius: 1.25em;
+
+        ::ng-deep [md3-icon-element] {
+            font-size: 1.75em !important;
+        }
+
+        .icon-label-space {
+            width: 0.75em;
+        }
+
+        .label {
+            font-size: 1.375em;
+            font-weight: 400;
+            line-height: 1.27273em;
+            letter-spacing: 0;
+        }
+    }
+    
+    &.md3-large {
+        --fab-height: 6em;
+    
+        padding: 0 1.75em;
+        border-radius: 1.75em;
+
+        ::ng-deep [md3-icon-element] {
+            font-size: 2.25em !important;
+        }
+
+        .icon-label-space {
+            width: 1em;
+        }
+
+        .label {
+            font-size: 1.5em;
+            font-weight: 400;
+            line-height: 1.333332em;
+            letter-spacing: 0;
+        }
+    }
+
+    // &.md3-tonal-primary {
+    // }
+    
+    &.md3-tonal-secondary {
+        --background-color: rgb(var(--md-scheme-secondary-container));
+        --foreground-color: rgb(var(--md-scheme-on-secondary-container));
+        --state-color: rgb(var(--md-scheme-on-secondary-container));
+    }
+    
+    &.md3-tonal-tertiary {
+        --background-color: rgb(var(--md-scheme-tertiary-container));
+        --foreground-color: rgb(var(--md-scheme-on-tertiary-container));
+        --state-color: rgb(var(--md-scheme-on-tertiary-container));
+    }
+    
+    &.md3-primary {
+        --background-color: rgb(var(--md-scheme-primary));
+        --foreground-color: rgb(var(--md-scheme-on-primary));
+        --state-color: rgb(var(--md-scheme-on-primary));
+    }
+    
+    &.md3-secondary {
+        --background-color: rgb(var(--md-scheme-secondary));
+        --foreground-color: rgb(var(--md-scheme-on-secondary));
+        --state-color: rgb(var(--md-scheme-on-secondary));
+    }
+    
+    &.md3-tertiary {
+        --background-color: rgb(var(--md-scheme-tertiary));
+        --foreground-color: rgb(var(--md-scheme-on-tertiary));
+        --state-color: rgb(var(--md-scheme-on-tertiary));
+    }
+}

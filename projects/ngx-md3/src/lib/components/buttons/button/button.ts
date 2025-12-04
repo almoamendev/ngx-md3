@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ElementRef, Input } from '@angular/core';
 
 @Component({
-    selector: 'button[md3-button], a[md3-button]',
+    selector: 'button[md3-button]',
     imports: [],
     templateUrl: './button.html',
     styleUrl: './button.scss',

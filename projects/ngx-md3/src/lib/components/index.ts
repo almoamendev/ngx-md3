@@ -4,6 +4,7 @@ export * from './common/material-icon/material-icon';
 
 // buttons
 export * from './buttons/button/button';
+export * from './buttons/floating-action-button/floating-action-button';
 
 // loading and progress
 export * from './loading-and-progress/loading-indicator/loading-indicator';
