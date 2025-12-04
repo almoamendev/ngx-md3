@@ -1,4 +1,5 @@
 // common components and directives
+export * from './common/state-component';
 export * from './common/icon-element';
 export * from './common/material-icon/material-icon';
 

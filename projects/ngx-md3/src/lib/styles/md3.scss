@@ -89,13 +89,14 @@ body {
     .md3-state-layer {
         --ripple-x: 50%;
         --ripple-y: 50%;
+        --ripple-m: -144%;
 
         position: absolute;
         inset: 0;
         z-index: 0;
         border-radius: inherit;
         overflow: hidden;
-        transition: all var(--md-motion-expressive-default-spatial-duration) var(--md-motion-expressive-default-spatial-easing);
+        transition: all var(--md-motion-expressive-slow-spatial-duration) var(--md-motion-expressive-slow-spatial-easing);
         background-color: rgb(var(--state-color));
         opacity: 0;
         pointer-events: none;
@@ -105,14 +106,17 @@ body {
             display: block;
             position: absolute;
             border-radius: 100%;
-            width: 288%;
-            height: 288%;
+            width: calc(var(--ripple-m) * -2);
+            height: calc(var(--ripple-m) * -2);
+            margin-top: var(--ripple-m);
+            margin-left: var(--ripple-m);
             top: var(--ripple-x);
             left: var(--ripple-y);
-            transform: translate(-50%, -50%) scale(0);
+            transform: scale(0);
             background-color: rgb(var(--state-color));
             opacity: 0;
-            transition: all var(--md-motion-expressive-default-spatial-duration) var(--md-motion-expressive-default-spatial-easing);
+            transition: transform 2s var(--md-motion-expressive-slow-spatial-easing),
+                        opacity var(--md-motion-expressive-slow-spatial-duration) var(--md-motion-expressive-slow-spatial-easing);
         }
 
         & ~ * {
@@ -138,7 +142,7 @@ body {
             opacity: 0.1;
             
             &::before {
-                transform: translate(-50%, -50%) scale(1);
+                transform: scale(2.88);
                 opacity: 1;
             }
         }

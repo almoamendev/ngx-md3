@@ -1,0 +1,56 @@
+import { Directive, ElementRef, HostListener, OnInit, Renderer2 } from '@angular/core';
+
+@Directive({
+    selector: '[md3-state-component]',
+    host: {
+        class: 'md3-state-component',
+    },
+})
+export class StateComponent implements OnInit {
+    private stateLayer?: HTMLDivElement;
+
+    constructor(
+        private el: ElementRef<HTMLElement>,
+        private renderer: Renderer2
+    ) {}
+
+    ngOnInit(): void {
+        let layer = this.el.nativeElement.querySelector(
+            ':scope > .md3-state-layer'
+        ) as HTMLDivElement | null;
+
+        if (!layer) {
+            // Create the state layer and insert as the first child
+            layer = this.renderer.createElement('div') as HTMLDivElement;
+            this.renderer.addClass(layer, 'md3-state-layer');
+
+            this.renderer.insertBefore(
+                this.el.nativeElement,
+                layer,
+                this.el.nativeElement.firstChild
+            );
+
+        }
+
+        this.stateLayer = layer;
+    }
+
+    @HostListener('pointerdown', ['$event'])
+    onPointerDown(event: PointerEvent): void {
+        if (!this.stateLayer) {
+            return;
+        }
+
+        const rect = this.el.nativeElement.getBoundingClientRect();
+        const x = event.clientX - rect.left;
+        const y = event.clientY - rect.top;
+        const m = Math.max(rect.width, rect.height) * -1.44;
+
+        this.stateLayer.style.setProperty('--ripple-x', `${x}px`);
+        this.stateLayer.style.setProperty('--ripple-y', `${y}px`);
+        this.stateLayer.style.setProperty('--ripple-m', `${m}px`);
+
+        // this.renderer.setStyle(this.stateLayer, '--ripple-x', `${x}%`);
+        // this.renderer.setStyle(this.stateLayer, '--ripple-y', `${y}%`);
+    }
+}
