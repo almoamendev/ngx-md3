@@ -13,7 +13,7 @@
     justify-content: center;
     text-decoration: none !important;
     white-space: nowrap;
-    transition: all var(--md-motion-expressive-fast-spatial-duration) var(--md-motion-expressive-fast-spatial-easing);
+    transition: all var(--md-motion-expressive-default-spatial-duration) var(--md-motion-expressive-default-spatial-easing);
     background-color: var(--background-color);
     color: var(--foreground-color);
     height: var(--fab-height);
@@ -51,8 +51,9 @@
         display: none;
         height: 100%;
         width: 0;
+        transform: scaleX(0);
 
-        transition: width var(--md-motion-expressive-fast-spatial-duration) var(--md-motion-expressive-fast-spatial-easing);
+        transition: all var(--md-motion-expressive-default-spatial-duration) var(--md-motion-expressive-default-spatial-easing);
     }
 
     .label {
@@ -61,7 +62,8 @@
         line-height: 1.5em;
         letter-spacing: 0.09375em;
 
-        transition: all var(--md-motion-expressive-fast-spatial-duration) var(--md-motion-expressive-fast-spatial-easing);
+        transition: all var(--md-motion-expressive-default-spatial-duration) var(--md-motion-expressive-default-spatial-easing);
+        transform: scaleX(0);
         max-width: 0;
         visibility: hidden;
         opacity: 0;
@@ -74,10 +76,12 @@
 
         .icon-label-space {
             width: 0.5em;
+            transform: scaleX(1);
         }
 
         .label {
-            max-width: 32rem;
+            transform: scaleX(1);
+            max-width: initial;
             visibility: visible;
             opacity: 1;
         }
