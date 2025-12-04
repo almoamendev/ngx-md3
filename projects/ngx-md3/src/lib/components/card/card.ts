@@ -8,7 +8,7 @@ import { StateComponent } from '../common/state-component';
     styleUrl: './card.scss',
     hostDirectives: [
         StateComponent
-    ]
+    ],
 })
 export class Card implements AfterViewInit {
     @Input() cardType: 'elevated' | 'filled' | 'outlined' = 'elevated';

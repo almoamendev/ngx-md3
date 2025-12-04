@@ -1,13 +1,14 @@
 import { AfterViewInit, Component, ElementRef, Input } from '@angular/core';
+import { StateComponent } from '../../common/state-component';
 
 @Component({
     selector: 'button[md3-button]',
     imports: [],
     templateUrl: './button.html',
     styleUrl: './button.scss',
-    host: {
-        class: 'md3-state-component'
-    },
+    hostDirectives: [
+        StateComponent
+    ],
 })
 export class Button implements AfterViewInit {
     @Input() buttonSize: 'x-small' | 'small' | 'medium' | 'large' | 'x-large' = 'small';

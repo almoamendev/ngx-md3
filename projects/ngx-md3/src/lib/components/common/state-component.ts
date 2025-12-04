@@ -42,15 +42,12 @@ export class StateComponent implements OnInit {
         }
 
         const rect = this.el.nativeElement.getBoundingClientRect();
+        const w = Math.max(rect.width, rect.height);
         const x = event.clientX - rect.left;
         const y = event.clientY - rect.top;
-        const m = Math.max(rect.width, rect.height) * -1.44;
 
+        this.stateLayer.style.setProperty('--ripple-w', `${w}px`);
         this.stateLayer.style.setProperty('--ripple-x', `${x}px`);
         this.stateLayer.style.setProperty('--ripple-y', `${y}px`);
-        this.stateLayer.style.setProperty('--ripple-m', `${m}px`);
-
-        // this.renderer.setStyle(this.stateLayer, '--ripple-x', `${x}%`);
-        // this.renderer.setStyle(this.stateLayer, '--ripple-y', `${y}%`);
     }
 }

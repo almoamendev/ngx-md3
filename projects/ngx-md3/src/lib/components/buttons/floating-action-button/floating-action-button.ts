@@ -1,13 +1,14 @@
 import { AfterViewInit, Component, ElementRef, Input } from '@angular/core';
+import { StateComponent } from '../../common/state-component';
 
 @Component({
     selector: 'button[md3-fab]',
     imports: [],
     templateUrl: './floating-action-button.html',
     styleUrl: './floating-action-button.scss',
-    host: {
-        class: 'md3-state-component'
-    },
+    hostDirectives: [
+        StateComponent
+    ],
 })
 export class FloatingActionButton implements AfterViewInit {
     @Input() buttonSize: 'small' | 'medium' | 'large' = 'small';
