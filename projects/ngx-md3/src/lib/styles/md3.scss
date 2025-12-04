@@ -87,13 +87,33 @@ body {
     position: relative;
 
     .md3-state-layer {
+        --ripple-x: 50%;
+        --ripple-y: 50%;
+
         position: absolute;
         inset: 0;
         z-index: 0;
         border-radius: inherit;
-        transition: all var(--md-motion-expressive-fast-spatial-duration) var(--md-motion-expressive-fast-spatial-easing);
-        background-color: var(--state-color, transparent);
+        overflow: hidden;
+        transition: all var(--md-motion-expressive-default-spatial-duration) var(--md-motion-expressive-default-spatial-easing);
+        background-color: rgb(var(--state-color));
         opacity: 0;
+        pointer-events: none;
+
+        &::before {
+            content: '';
+            display: block;
+            position: absolute;
+            border-radius: 100%;
+            width: 288%;
+            height: 288%;
+            top: var(--ripple-x);
+            left: var(--ripple-y);
+            transform: translate(-50%, -50%) scale(0);
+            background-color: rgb(var(--state-color));
+            opacity: 0;
+            transition: all var(--md-motion-expressive-default-spatial-duration) var(--md-motion-expressive-default-spatial-easing);
+        }
 
         & ~ * {
             z-index: 10;
@@ -106,14 +126,27 @@ body {
         }
     }
 
-    &:focus, &:active {
+    &:focus {
         .md3-state-layer {
             opacity: 0.1;
         }
     }
 
+    &:active {
+        .md3-state-layer {
+            background-color: rgba(var(--state-color), 0);
+            opacity: 0.1;
+            
+            &::before {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 1;
+            }
+        }
+    }
+
     &.draggable:active {
         .md3-state-layer {
+            background-color: var(--state-color, transparent);
             opacity: 0.16;
         }
     }

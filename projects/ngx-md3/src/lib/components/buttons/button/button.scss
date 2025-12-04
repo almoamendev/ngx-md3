@@ -1,7 +1,7 @@
 :host {
     --background-color: rgb(var(--md-scheme-primary));
     --foreground-color: rgb(var(--md-scheme-on-primary));
-    --state-color: rgb(var(--md-scheme-on-primary));
+    --state-color: var(--md-scheme-on-primary);
     --outline-width: 0.0625em;
 
     font-size: 1rem;
@@ -200,7 +200,7 @@
     &.md3-elevated {
         --background-color: rgb(var(--md-scheme-surface-container-low));
         --foreground-color: rgb(var(--md-scheme-primary));
-        --state-color: rgb(var(--md-scheme-primary));
+        --state-color: var(--md-scheme-primary);
 
         box-shadow: var(--md-shadow-1dp);
 
@@ -215,13 +215,13 @@
     &.md3-tonal {
         --background-color: rgb(var(--md-scheme-secondary-container));
         --foreground-color: rgb(var(--md-scheme-on-secondary-container));
-        --state-color: rgb(var(--md-scheme-on-secondary-container));
+        --state-color: var(--md-scheme-on-secondary-container);
     }
 
     &.md3-outlined {
         --background-color: transparent;
         --foreground-color: rgb(var(--md-scheme-on-surface-variant));
-        --state-color: rgb(var(--md-scheme-on-surface-variant));
+        --state-color: var(--md-scheme-on-surface-variant);
 
         border: var(--outline-width) solid rgb(var(--md-scheme-outline-variant));
     }
@@ -229,6 +229,6 @@
     &.md3-text {
         --background-color: transparent;
         --foreground-color: rgb(var(--md-scheme-primary));
-        --state-color: rgb(var(--md-scheme-primary));
+        --state-color: var(--md-scheme-primary);
     }
 }

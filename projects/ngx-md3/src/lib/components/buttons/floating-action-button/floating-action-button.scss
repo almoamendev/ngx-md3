@@ -1,7 +1,7 @@
 :host {
     --background-color: rgb(var(--md-scheme-primary-container));
     --foreground-color: rgb(var(--md-scheme-on-primary-container));
-    --state-color: rgb(var(--md-scheme-on-primary-container));
+    --state-color: var(--md-scheme-on-primary-container);
 
     font-size: 1rem;
     border: none;
@@ -140,30 +140,30 @@
     &.md3-tonal-secondary {
         --background-color: rgb(var(--md-scheme-secondary-container));
         --foreground-color: rgb(var(--md-scheme-on-secondary-container));
-        --state-color: rgb(var(--md-scheme-on-secondary-container));
+        --state-color: var(--md-scheme-on-secondary-container);
     }
     
     &.md3-tonal-tertiary {
         --background-color: rgb(var(--md-scheme-tertiary-container));
         --foreground-color: rgb(var(--md-scheme-on-tertiary-container));
-        --state-color: rgb(var(--md-scheme-on-tertiary-container));
+        --state-color: var(--md-scheme-on-tertiary-container);
     }
     
     &.md3-primary {
         --background-color: rgb(var(--md-scheme-primary));
         --foreground-color: rgb(var(--md-scheme-on-primary));
-        --state-color: rgb(var(--md-scheme-on-primary));
+        --state-color: var(--md-scheme-on-primary);
     }
     
     &.md3-secondary {
         --background-color: rgb(var(--md-scheme-secondary));
         --foreground-color: rgb(var(--md-scheme-on-secondary));
-        --state-color: rgb(var(--md-scheme-on-secondary));
+        --state-color: var(--md-scheme-on-secondary);
     }
     
     &.md3-tertiary {
         --background-color: rgb(var(--md-scheme-tertiary));
         --foreground-color: rgb(var(--md-scheme-on-tertiary));
-        --state-color: rgb(var(--md-scheme-on-tertiary));
+        --state-color: var(--md-scheme-on-tertiary);
     }
 }

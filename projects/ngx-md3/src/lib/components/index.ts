@@ -10,3 +10,6 @@ export * from './buttons/floating-action-button/floating-action-button';
 export * from './loading-and-progress/loading-indicator/loading-indicator';
 export * from './loading-and-progress/linear-progress-indicator/linear-progress-indicator';
 export * from './loading-and-progress/circular-progress-indicator/circular-progress-indicator';
+
+// cards
+export * from './card/card';
