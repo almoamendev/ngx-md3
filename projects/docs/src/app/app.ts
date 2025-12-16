@@ -1,10 +1,11 @@
 import { Component, signal } from '@angular/core';
-import { TextFieldModule } from '@vip9008/ngx-md3';
+import { MaterialIcon, TextFieldModule } from '@vip9008/ngx-md3';
 
 @Component({
     selector: 'app-root',
     imports: [
         TextFieldModule,
+        MaterialIcon,
     ],
     templateUrl: './app.html',
     styleUrl: './app.scss'

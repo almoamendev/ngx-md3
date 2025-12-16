@@ -1,4 +1,4 @@
-import { Directive } from '@angular/core';
+import { Directive, Input } from '@angular/core';
 
 @Directive({
     selector: '[md3-icon-element]',
@@ -6,4 +6,6 @@ import { Directive } from '@angular/core';
         'class': 'md3-icon-element'
     }
 })
-export class IconElement {}
+export class IconElement {
+    @Input('md3-icon-element') iconType?: string;
+}
