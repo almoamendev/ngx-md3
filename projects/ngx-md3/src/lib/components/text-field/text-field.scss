@@ -1,5 +1,52 @@
 :host {
+    --background-color: rgb(var(--md-scheme-surface-container-highest));
+    --foreground-color: rgb(var(--md-scheme-on-surface));
+    --placeholder-color: rgb(var(--md-scheme-on-surface-variant));
+    --caret-color: rgb(var(--md-scheme-primary));
+
     display: block;
     position: relative;
     font-size: 1rem;
+
+    .md3-text-field-label {
+        position: absolute;
+        top: 1em;
+        left: 1em;
+        right: 1em;
+        font-size: 1em;
+        font-weight: 400;
+        line-height: 1.5em;
+        letter-spacing: 0.03125em;
+        pointer-events: none;
+        color: var(--placeholder-color);
+        transform-origin: top left;
+        transform: scale(1);
+        transition: all var(--md-motion-expressive-fast-spatial-duration) var(--md-motion-expressive-fast-spatial-easing);
+    }
+
+    ::ng-deep [md3-text-input] {
+        display: block;
+        width: 100%;
+        border: none;
+        outline: none;
+        border-radius: 0.25em 0.25em 0 0;
+        padding: 1.5em 1em 0.5em;
+        font-size: 1em;
+        font-weight: 400;
+        line-height: 1.5em;
+        letter-spacing: 0.03125em;
+        background-color: var(--background-color);
+        color: var(--foreground-color);
+        caret-color: var(--caret-color);
+
+        &:focus~.md3-text-field-label,
+        &:not(:placeholder-shown)~.md3-text-field-label {
+            top: 0.4375em;
+            transform: scale(0.75);
+        }
+
+        &:focus~.md3-text-field-label {
+            color: var(--caret-color);
+        }
+    }
 }
