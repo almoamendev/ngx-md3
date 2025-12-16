@@ -1,4 +1,7 @@
-<ng-content></ng-content>
-@if (label) {
-<label class="md3-text-field-label">{{ label }}</label>
-}
+<div class="md3-text-field-container">
+    <ng-content></ng-content>
+    @if (label) {
+    <div class="md3-text-field-label">{{ label }}</div>
+    }
+    <div class="md3-text-field-state"></div>
+</div>
