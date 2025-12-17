@@ -1,4 +1,4 @@
-import { Directive, Input } from '@angular/core';
+import { Directive, ElementRef, Input } from '@angular/core';
 
 @Directive({
     selector: '[md3-icon-element]',
@@ -8,4 +8,10 @@ import { Directive, Input } from '@angular/core';
 })
 export class IconElement {
     @Input('md3-icon-element') iconType?: string;
+
+    constructor(private el: ElementRef) { }
+
+    public get nativeElement(): HTMLElement {
+        return this.el.nativeElement;
+    }
 }

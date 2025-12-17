@@ -1,9 +1,9 @@
-<div class="md3-text-field-container">
-    <ng-content select="[md3-icon-element=leading]"></ng-content>
-    <ng-content select="[md3-icon-element=trailing]"></ng-content>
-    <ng-content></ng-content>
+<div #inputContainer class="md3-text-field-container">
+    <ng-content select="[md3-text-input]"></ng-content>
     @if (label) {
     <div class="md3-text-field-label">{{ label }}</div>
     }
+    <ng-content select="[md3-icon-element=leading]"></ng-content>
+    <ng-content select="[md3-icon-element=trailing]"></ng-content>
     <div class="md3-text-field-state"></div>
 </div>

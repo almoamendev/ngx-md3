@@ -13,6 +13,33 @@
         border-radius: 0.25em 0.25em 0 0;
         overflow: hidden;
 
+        ::ng-deep [md3-icon-element=leading] {
+            position: absolute;
+            font-size: 1.5em !important;
+            height: 1em !important;
+            width: 1em !important;
+            top: 0.666667em;
+            inset-inline-start: 0.5em;
+            pointer-events: none;
+            color: var(--label-color);
+        }
+
+        ::ng-deep [md3-icon-element=trailing] {
+            position: absolute;
+            font-size: 1.5em !important;
+            height: 1em !important;
+            width: 1em !important;
+            top: 0.666667em;
+            inset-inline-end: 0.5em;
+            pointer-events: none;
+            color: var(--label-color);
+        }
+
+        ::ng-deep button[md3-icon-element=leading],
+        ::ng-deep button[md3-icon-element=trailing] {
+            pointer-events: initial !important;
+        }
+
         .md3-text-field-label {
             position: absolute;
             top: 1em;
@@ -109,6 +136,10 @@
                     color: rgba(var(--md-scheme-on-surface), 0.38);
                 }
 
+                &~[md3-icon-element] {
+                    color: rgba(var(--md-scheme-on-surface), 0.38);
+                }
+
                 &~.md3-text-field-state::before {
                     background-color: rgba(var(--md-scheme-on-surface), 0.38);
                 }
@@ -119,44 +150,24 @@
             }
         }
 
-        ::ng-deep [md3-icon-element=leading] {
-            position: absolute;
-            font-size: 1.5em !important;
-            height: 1em !important;
-            width: 1em !important;
-            top: 0.666667em;
-            inset-inline-start: 0.5em;
-            pointer-events: none;
-
-            &~.md3-text-field-label {
-                inset-inline-start: 3.25em;
-            }
-
-            &~.md3-text-input {
+        &.has-leading-icon {
+            ::ng-deep .md3-text-input {
                 padding-inline-start: 3.25em;
             }
+
+            .md3-text-field-label {
+                inset-inline-start: 3.25em;
+            }
         }
 
-        ::ng-deep [md3-icon-element=trailing] {
-            position: absolute;
-            font-size: 1.5em !important;
-            height: 1em !important;
-            width: 1em !important;
-            top: 0.666667em;
-            inset-inline-end: 0.5em;
-
-            &~.md3-text-field-label {
-                inset-inline-end: 3.25em;
-            }
-
-            &~.md3-text-input {
+        &.has-trailing-icon {
+            ::ng-deep .md3-text-input {
                 padding-inline-end: 3.25em;
             }
-        }
 
-        ::ng-deep button[md3-icon-element=leading],
-        ::ng-deep button[md3-icon-element=trailing] {
-            pointer-events: initial !important;
+            .md3-text-field-label {
+                inset-inline-end: 3.25em;
+            }
         }
     }
 }
