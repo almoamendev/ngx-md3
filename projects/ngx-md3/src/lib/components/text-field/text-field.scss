@@ -148,6 +148,36 @@
                     display: none;
                 }
             }
+
+            &[aria-invalid=true] {
+                caret-color: rgb(var(--md-scheme-error));
+
+                &~.md3-text-field-label {
+                    color: rgb(var(--md-scheme-error));
+                }
+
+                &~[md3-icon-element=trailing] {
+                    color: rgb(var(--md-scheme-error));
+                }
+
+                &~.md3-text-field-state::before {
+                    background-color: rgb(var(--md-scheme-error));
+                }
+
+                &:hover {
+                    &~.md3-text-field-label {
+                        color: rgb(var(--md-scheme-on-error-container));
+                    }
+
+                    &~[md3-icon-element=trailing] {
+                        color: rgb(var(--md-scheme-on-error-container));
+                    }
+
+                    &~.md3-text-field-state::before {
+                        background-color: rgb(var(--md-scheme-on-error-container));
+                    }
+                }
+            }
         }
 
         &.has-leading-icon {
