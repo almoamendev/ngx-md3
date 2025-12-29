@@ -31,4 +31,10 @@ export class IconButton implements AfterViewInit {
             'md3-' + this.buttonWidth,
         );
     }
+
+    public set size(value: typeof this.buttonSize) {
+        this.element.classList.remove('md3-' + this.buttonSize);
+        this.buttonSize = value;
+        this.element.classList.add('md3-' + this.buttonSize);
+    }
 }

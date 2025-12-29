@@ -35,9 +35,11 @@
             color: var(--label-color);
         }
 
-        ::ng-deep button[md3-icon-element=leading],
-        ::ng-deep button[md3-icon-element=trailing] {
-            pointer-events: initial !important;
+        ::ng-deep [md3-icon-button] {
+            position: absolute;
+            font-size: 1em !important;
+            top: 0.5em;
+            inset-inline-end: 0.5em;
         }
 
         .md3-text-field-label {

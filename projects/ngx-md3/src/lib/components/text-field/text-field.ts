@@ -4,6 +4,7 @@ import { IconElement } from '../common/icon-element';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { AbstractControl, FormControlName } from '@angular/forms';
 import { fromEvent } from 'rxjs';
+import { IconButton } from '../buttons/icon-button/icon-button';
 
 @Component({
     standalone: false,
@@ -24,6 +25,7 @@ export class TextField implements AfterContentInit {
     @ViewChild('inputContainer', { static: true }) inputContainer!: ElementRef<HTMLDivElement>;
     @ContentChild(TextInput) input?: TextInput;
     @ContentChildren(IconElement, { descendants: true }) iconElements?: QueryList<IconElement>;
+    @ContentChildren(IconButton, { descendants: true }) iconButtons?: QueryList<IconButton>;
     @ContentChild(FormControlName) controlName?: FormControlName;
 
     constructor(private destroyRef: DestroyRef) {}
@@ -51,6 +53,14 @@ export class TextField implements AfterContentInit {
         this.applyIconClasses();
 
         this.iconElements?.changes.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
+            this.applyIconClasses();
+        });
+
+        this.iconButtons?.forEach((iconButton) => {
+            iconButton.size = 'small';
+        });
+
+        this.iconButtons?.changes.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
             this.applyIconClasses();
         });
 
@@ -97,8 +107,8 @@ export class TextField implements AfterContentInit {
             return;
         }
 
-        const hasLeading = this.iconElements?.some(i => i.iconType === 'leading') ?? false;
-        const hasTrailing = this.iconElements?.some(i => i.iconType === 'trailing') ?? false;
+        const hasLeading: boolean = this.iconElements?.some(i => i.iconType === 'leading') ?? false;
+        const hasTrailing: boolean = (this.iconElements?.some(i => i.iconType === 'trailing') || !!this.iconButtons?.length) ?? false;
 
         container.classList.toggle('has-leading-icon', hasLeading);
         container.classList.toggle('has-trailing-icon', hasTrailing);

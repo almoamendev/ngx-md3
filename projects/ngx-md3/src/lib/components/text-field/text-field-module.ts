@@ -3,10 +3,11 @@ import { TextField } from './text-field';
 import { TextInput } from './text-input';
 import { IconElement } from '../common/icon-element';
 import { SupportingText } from './supporting-text';
+import { IconButton } from '../buttons/icon-button/icon-button';
 
 @NgModule({
     declarations: [TextField, TextInput, SupportingText],
-    imports: [IconElement],
-    exports: [TextField, TextInput, SupportingText, IconElement],
+    imports: [IconElement, IconButton],
+    exports: [TextField, TextInput, SupportingText, IconElement, IconButton],
 })
 export class TextFieldModule { }
