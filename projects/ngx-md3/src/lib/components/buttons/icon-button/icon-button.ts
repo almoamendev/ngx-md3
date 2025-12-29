@@ -2,18 +2,19 @@ import { AfterViewInit, Component, ElementRef, Input } from '@angular/core';
 import { StateComponent } from '../../common/state-component';
 
 @Component({
-    selector: 'button[md3-button]',
+    selector: 'button[md3-icon-button]',
     imports: [],
-    templateUrl: './button.html',
-    styleUrl: './button.scss',
+    templateUrl: './icon-button.html',
+    styleUrl: './icon-button.scss',
     hostDirectives: [
         StateComponent
     ],
 })
-export class Button implements AfterViewInit {
+export class IconButton implements AfterViewInit {
     @Input() buttonSize: 'x-small' | 'small' | 'medium' | 'large' | 'x-large' = 'small';
-    @Input() buttonType: 'elevated' | 'filled' | 'tonal' | 'outlined' | 'text' = 'filled';
-    @Input() buttonSquared: boolean = false;
+    @Input() buttonShape: 'round' | 'square' = 'round';
+    @Input() buttonType: 'filled' | 'tonal' | 'outlined' | 'standard' = 'filled';
+    @Input() buttonWidth: 'default' | 'narrow' | 'wide' = 'default';
 
     constructor(private el: ElementRef) {
     }
@@ -23,10 +24,11 @@ export class Button implements AfterViewInit {
     }
 
     ngAfterViewInit(): void {
-        this.element.classList.add(...[
+        this.element.classList.add(
             'md3-' + this.buttonSize,
+            'md3-' + this.buttonShape,
             'md3-' + this.buttonType,
-            ...(this.buttonSquared ? ['md3-square'] : [])
-        ]);
+            'md3-' + this.buttonWidth,
+        );
     }
 }

@@ -26,7 +26,7 @@ export class FloatingActionButton implements AfterViewInit {
         this.element.classList.add(...[
             'md3-' + this.buttonSize,
             'md3-' + this.buttonColor,
-            ...(this.extendedFAB ? ['extended-fab'] : [])
+            ...(this.extendedFAB ? ['md3-extended-fab'] : [])
         ]);
     }
 }

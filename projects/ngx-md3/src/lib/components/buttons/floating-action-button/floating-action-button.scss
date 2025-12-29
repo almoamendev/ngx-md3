@@ -45,6 +45,9 @@
 
     ::ng-deep [md3-icon-element] {
         font-size: 1.5em !important;
+        line-height: 1;
+        height: 1em !important;
+        width: 1em !important;
     }
 
     .icon-label-space {
@@ -69,7 +72,7 @@
         opacity: 0;
     }
 
-    &.extended-fab {
+    &.md3-extended-fab {
         ::ng-deep [md3-icon-element] + .icon-label-space {
             display: block;
         }

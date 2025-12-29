@@ -1,0 +1,226 @@
+:host {
+    --background-color: rgb(var(--md-scheme-primary));
+    --foreground-color: rgb(var(--md-scheme-on-primary));
+    --state-color: var(--md-scheme-on-primary);
+    --border-radius: 2.5em;
+    --outline-color: rgb(var(--md-scheme-secondary));
+    --outline-width: 0.1875em;
+    --outline-offset: -0.125em;
+
+    font-size: 1rem;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    display: inline-flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none !important;
+    white-space: nowrap;
+    transition: all var(--md-motion-expressive-fast-spatial-duration) var(--md-motion-expressive-fast-spatial-easing);
+    background-color: var(--background-color);
+    color: var(--foreground-color);
+
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none;   /* Chrome/Safari/Opera */
+    -moz-user-select: none;      /* Firefox */
+    -ms-user-select: none;       /* Internet Explorer/Edge */
+    user-select: none;
+
+    // default (small - round - filled)
+    padding: 0 0.5em;
+    height: 2.5em;
+    border-radius: var(--border-radius);
+
+    ::ng-deep [md3-icon-element] {
+        font-size: 1.5em !important;
+        line-height: 1;
+        height: 1em !important;
+        width: 1em !important;
+    }
+
+    &::before {
+        content: '';
+        position: absolute;
+        display: block;
+        inset: calc(var(--outline-offset) - var(--outline-width));
+        border-radius: calc(var(--border-radius) + (var(--outline-offset) * -2));
+        border: var(--outline-width) solid var(--outline-color);
+        transition: all var(--md-motion-expressive-fast-spatial-duration) var(--md-motion-expressive-fast-spatial-easing);
+        pointer-events: none;
+        opacity: 0;
+    }
+
+    &.md3-narrow {
+        padding: 0 0.25em;
+    }
+
+    &.md3-wide {
+        padding: 0 0.825em;
+    }
+
+    &.md3-square {
+        --border-radius: 0.75em;
+    }
+
+    &:disabled {
+        --background-color: rgba(var(--md-scheme-on-surface), 0.1) !important;
+        --foreground-color: rgba(var(--md-scheme-on-surface), 0.38) !important;
+        
+        cursor: default !important;
+
+        &::before {
+            display: none;
+        }
+
+        .md3-state-layer {
+            display: none;
+        }
+    }
+
+    &:not(:disabled):active {
+        --border-radius: 0.5em;
+    }
+
+    &:focus:before {
+        opacity: 1;
+    }
+
+    &.md3-x-small {
+        --border-radius: 2em;
+
+        padding: 0 0.375em;
+        height: 2em;
+
+        ::ng-deep [md3-icon-element] {
+            font-size: 1.25em !important;
+        }
+
+        &.md3-narrow {
+            padding: 0 0.25em;
+        }
+
+        &.md3-wide {
+            padding: 0 0.625em;
+        }
+
+        &.md3-square {
+            --border-radius: 0.75em;
+        }
+
+        &:not(:disabled):active {
+            --border-radius: 0.5em;
+        }
+    }
+
+    // &.md3-small {
+    // }
+
+    &.md3-medium {
+        --border-radius: 3.5em;
+        
+        padding: 0 1em;
+        height: 3.5em;
+
+        ::ng-deep [md3-icon-element] {
+            font-size: 1.5em !important;
+        }
+
+        &.md3-narrow {
+            padding: 0 0.75em;
+        }
+
+        &.md3-wide {
+            padding: 0 1.5em;
+        }
+
+        &.md3-square {
+            --border-radius: 1em;
+        }
+
+        &:not(:disabled):active {
+            --border-radius: 0.75em;
+        }
+    }
+
+    &.md3-large {
+        --border-radius: 6em;
+        
+        padding: 0 2em;
+        height: 6em;
+
+        ::ng-deep [md3-icon-element] {
+            font-size: 2em !important;
+        }
+
+        &.md3-narrow {
+            padding: 0 1em;
+        }
+
+        &.md3-wide {
+            padding: 0 3em;
+        }
+
+        &.md3-square {
+            --border-radius: 1.75em;
+        }
+
+        &:not(:disabled):active {
+            --border-radius: 1em;
+        }
+    }
+
+    &.md3-x-large {
+        --border-radius: 8.5em;
+        
+        padding: 0 3em;
+        height: 8.5em;
+
+        ::ng-deep [md3-icon-element] {
+            font-size: 2.5em !important;
+        }
+
+        &.md3-narrow {
+            padding: 0 2em;
+        }
+
+        &.md3-wide {
+            padding: 0 4.5em;
+        }
+
+        &.md3-square {
+            --border-radius: 1.75em;
+        }
+
+        &:not(:disabled):active {
+            --border-radius: 1em;
+        }
+    }
+
+    // &.md3-filled {
+    // }
+
+    &.md3-tonal {
+        --background-color: rgb(var(--md-scheme-secondary-container));
+        --foreground-color: rgb(var(--md-scheme-on-secondary-container));
+        --state-color: var(--md-scheme-on-secondary-container);
+    }
+
+    &.md3-outlined {
+        --background-color: transparent;
+        --foreground-color: rgb(var(--md-scheme-on-surface-variant));
+        --state-color: var(--md-scheme-on-surface-variant);
+
+        border: 0.0625em solid rgb(var(--md-scheme-outline-variant));
+    }
+
+    &.md3-standard {
+        --background-color: transparent;
+        --foreground-color: rgb(var(--md-scheme-on-surface-variant));
+        --state-color: var(--md-scheme-on-surface-variant);
+    }
+}
