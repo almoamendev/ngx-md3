@@ -3,6 +3,7 @@
     --foreground-color: rgb(var(--md-scheme-on-primary));
     --state-color: var(--md-scheme-on-primary);
     --border-radius: 2.5em;
+    --border-size: 0.0625em;
     --outline-color: rgb(var(--md-scheme-secondary));
     --outline-width: 0.1875em;
     --outline-offset: -0.125em;
@@ -32,9 +33,10 @@
     user-select: none;
 
     // default (small - round - filled)
-    padding: 0 0.5em;
+    padding: 0 calc(0.5em - var(--border-size));
     height: 2.5em;
     border-radius: var(--border-radius);
+    border: var(--border-size) solid var(--background-color);
 
     ::ng-deep [md3-icon-element] {
         font-size: 1.5em !important;
@@ -47,8 +49,8 @@
         content: '';
         position: absolute;
         display: block;
-        inset: calc(var(--outline-offset) - var(--outline-width));
-        border-radius: calc(var(--border-radius) + (var(--outline-offset) * -2));
+        inset: calc(var(--outline-offset) - var(--outline-width) - var(--border-size));
+        border-radius: calc(var(--border-radius) + (var(--outline-offset) * -1));
         border: var(--outline-width) solid var(--outline-color);
         transition: all var(--md-motion-expressive-fast-spatial-duration) var(--md-motion-expressive-fast-spatial-easing);
         pointer-events: none;
@@ -56,11 +58,11 @@
     }
 
     &.md3-narrow {
-        padding: 0 0.25em;
+        padding: 0 calc(0.25em - var(--border-size));
     }
 
     &.md3-wide {
-        padding: 0 0.825em;
+        padding: 0 calc(0.825em - var(--border-size));
     }
 
     &.md3-square {
@@ -93,7 +95,7 @@
     &.md3-x-small {
         --border-radius: 2em;
 
-        padding: 0 0.375em;
+        padding: 0 calc(0.375em - var(--border-size));
         height: 2em;
 
         ::ng-deep [md3-icon-element] {
@@ -101,11 +103,11 @@
         }
 
         &.md3-narrow {
-            padding: 0 0.25em;
+            padding: 0 calc(0.25em - var(--border-size));
         }
 
         &.md3-wide {
-            padding: 0 0.625em;
+            padding: 0 calc(0.625em - var(--border-size));
         }
 
         &.md3-square {
@@ -123,7 +125,7 @@
     &.md3-medium {
         --border-radius: 3.5em;
         
-        padding: 0 1em;
+        padding: 0 calc(1em - var(--border-size));
         height: 3.5em;
 
         ::ng-deep [md3-icon-element] {
@@ -131,11 +133,11 @@
         }
 
         &.md3-narrow {
-            padding: 0 0.75em;
+            padding: 0 calc(0.75em - var(--border-size));
         }
 
         &.md3-wide {
-            padding: 0 1.5em;
+            padding: 0 calc(1.5em - var(--border-size));
         }
 
         &.md3-square {
@@ -149,8 +151,9 @@
 
     &.md3-large {
         --border-radius: 6em;
+        --border-size: 0.125em;
         
-        padding: 0 2em;
+        padding: 0 calc(2em - var(--border-size));
         height: 6em;
 
         ::ng-deep [md3-icon-element] {
@@ -158,11 +161,11 @@
         }
 
         &.md3-narrow {
-            padding: 0 1em;
+            padding: 0 calc(1em - var(--border-size));
         }
 
         &.md3-wide {
-            padding: 0 3em;
+            padding: 0 calc(3em - var(--border-size));
         }
 
         &.md3-square {
@@ -176,8 +179,9 @@
 
     &.md3-x-large {
         --border-radius: 8.5em;
+        --border-size: 0.1875em;
         
-        padding: 0 3em;
+        padding: 0 calc(3em - var(--border-size));
         height: 8.5em;
 
         ::ng-deep [md3-icon-element] {
@@ -185,11 +189,11 @@
         }
 
         &.md3-narrow {
-            padding: 0 2em;
+            padding: 0 calc(2em - var(--border-size));
         }
 
         &.md3-wide {
-            padding: 0 4.5em;
+            padding: 0 calc(4.5em - var(--border-size));
         }
 
         &.md3-square {
@@ -215,7 +219,7 @@
         --foreground-color: rgb(var(--md-scheme-on-surface-variant));
         --state-color: var(--md-scheme-on-surface-variant);
 
-        border: 0.0625em solid rgb(var(--md-scheme-outline-variant));
+        border-color: rgb(var(--md-scheme-outline-variant));
     }
 
     &.md3-standard {
