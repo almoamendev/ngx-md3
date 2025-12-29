@@ -163,6 +163,33 @@
                     color: rgb(var(--md-scheme-error));
                 }
 
+                &~[md3-icon-button] {
+                    &.md3-filled {
+                        --background-color: rgb(var(--md-scheme-error));
+                        --foreground-color: rgb(var(--md-scheme-on-error));
+                        --state-color: var(--md-scheme-on-error);
+                    }
+
+                    &.md3-tonal {
+                        --background-color: rgb(var(--md-scheme-error-container));
+                        --foreground-color: rgb(var(--md-scheme-on-error-container));
+                        --state-color: var(--md-scheme-on-error-container);
+                    }
+
+                    &.md3-outlined {
+                        --background-color: transparent;
+                        --foreground-color: rgb(var(--md-scheme-error));
+                        --state-color: var(--md-scheme-error);
+                        border-color: var(--md-scheme-error);
+                    }
+
+                    &.md3-standard {
+                        --background-color: transparent;
+                        --foreground-color: rgb(var(--md-scheme-error));
+                        --state-color: var(--md-scheme-error);
+                    }
+                }
+
                 &~.md3-text-field-state::before {
                     background-color: rgb(var(--md-scheme-error));
                 }
@@ -221,7 +248,7 @@
             color: rgb(var(--md-scheme-error));
         }
 
-        & > ::ng-deep * {
+        &> ::ng-deep * {
             margin-top: 0.333332em;
         }
     }
