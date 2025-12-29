@@ -3,7 +3,7 @@
     --foreground-color: rgb(var(--md-scheme-on-primary));
     --state-color: var(--md-scheme-on-primary);
     --border-radius: 2.5em;
-    --border-size: 0.0625em;
+    --border-size: 0em;
     --outline-color: rgb(var(--md-scheme-secondary));
     --outline-width: 0.1875em;
     --outline-offset: -0.125em;
@@ -36,7 +36,7 @@
     padding: 0 calc(0.5em - var(--border-size));
     height: 2.5em;
     border-radius: var(--border-radius);
-    border: var(--border-size) solid var(--background-color);
+    border: var(--border-size) solid transparent;
 
     ::ng-deep [md3-icon-element] {
         font-size: 1.5em !important;
@@ -151,7 +151,6 @@
 
     &.md3-large {
         --border-radius: 6em;
-        --border-size: 0.125em;
         
         padding: 0 calc(2em - var(--border-size));
         height: 6em;
@@ -179,7 +178,6 @@
 
     &.md3-x-large {
         --border-radius: 8.5em;
-        --border-size: 0.1875em;
         
         padding: 0 calc(3em - var(--border-size));
         height: 8.5em;
@@ -218,6 +216,15 @@
         --background-color: transparent;
         --foreground-color: rgb(var(--md-scheme-on-surface-variant));
         --state-color: var(--md-scheme-on-surface-variant);
+        --border-size: 0.0625em;
+
+        &.md3-large {
+            --border-size: 0.125em;
+        }
+        
+        &.md3-x-large {
+            --border-size: 0.1875em;
+        }
 
         border-color: rgb(var(--md-scheme-outline-variant));
     }
