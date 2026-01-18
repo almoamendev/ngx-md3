@@ -24,6 +24,30 @@
             <input md3-text-input type="text" disabled>
             <md3-icon md3-icon-element="trailing">close</md3-icon>
         </md3-text-field>
+        ----------------------------------------
+        <md3-text-field label="Label" [inputCounter]="5000" type="outlined">
+            <textarea md3-text-input></textarea>
+            <div md3-supporting-text>Supporting text with input counter</div>
+        </md3-text-field>
+        <md3-text-field label="Label" type="outlined">
+            <md3-icon md3-icon-element="leading">person</md3-icon>
+            <input md3-text-input type="text">
+            <md3-icon md3-icon-element="trailing">close</md3-icon>
+        </md3-text-field>
+        <md3-text-field label="Error input" type="outlined">
+            <md3-icon md3-icon-element="leading">person</md3-icon>
+            <input md3-text-input type="text" aria-invalid="true">
+            <md3-icon md3-icon-element="trailing">close</md3-icon>
+            <div md3-supporting-text>Supporting text</div>
+        </md3-text-field>
+        <md3-text-field label="Label" type="outlined">
+            <input md3-text-input type="text" disabled>
+        </md3-text-field>
+        <md3-text-field label="Label" type="outlined">
+            <md3-icon md3-icon-element="leading">person</md3-icon>
+            <input md3-text-input type="text" disabled>
+            <md3-icon md3-icon-element="trailing">close</md3-icon>
+        </md3-text-field>
 
         <div style="display: flex; gap: 1rem; margin: 1rem 0;">
             <button md3-icon-button>

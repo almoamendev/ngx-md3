@@ -3,8 +3,7 @@
     --foreground-color: rgb(var(--md-scheme-on-surface));
     --label-color: rgb(var(--md-scheme-on-surface-variant));
     --caret-color: rgb(var(--md-scheme-primary));
-    --outline-color: rgb(var(--md-scheme-outline));
-    --outline-active-color: rgb(var(--md-scheme-primary));
+    --outline-color: rgb(var(--md-scheme-on-surface-variant));
 
     font-size: 1rem;
 
@@ -98,6 +97,10 @@
             position: absolute;
             inset: 0;
             pointer-events: none;
+            border-radius: inherit;
+            background-color: rgba(var(--md-scheme-on-surface));
+            opacity: 0;
+            transition: all var(--md-motion-standard-fast-spatial-duration) var(--md-motion-standard-fast-spatial-easing);
         }
 
         ::ng-deep .md3-text-input {
@@ -121,14 +124,20 @@
             }
 
             &:hover {
-                &~.md3-text-field-state::after {
+                &~.md3-text-field-state {
                     opacity: 0.08;
+                }
+
+                &~.md3-text-field-outline {
+                    --outline-color: rgb(var(--md-scheme-on-surface));
                 }
             }
 
             &:focus {
                 &~.md3-text-field-outline {
-                    border-bottom: 0.1875em solid var(--outline-active-color);
+                    --outline-color: rgb(var(--md-scheme-primary));
+
+                    border-bottom-width: 0.1875em;
                 }
 
                 &~.md3-text-field-label {
@@ -141,6 +150,10 @@
             &:disabled {
                 --background-color: rgba(var(--md-scheme-surface-container), 0.4);
                 --foreground-color: rgba(var(--md-scheme-on-surface), 0.38);
+                
+                &~.md3-text-field-state {
+                    display: none;
+                }
 
                 &~.md3-text-field-outline {
                     border-bottom: 0.0625em solid rgba(var(--md-scheme-on-surface), 0.38);
@@ -159,7 +172,7 @@
                 caret-color: rgb(var(--md-scheme-error));
 
                 &~.md3-text-field-outline {
-                    border-color: rgb(var(--md-scheme-error));
+                    --outline-color: rgb(var(--md-scheme-error));
                 }
 
                 &~.md3-text-field-label {
@@ -199,7 +212,7 @@
 
                 &:hover {
                     &~.md3-text-field-outline {
-                        border-color: rgb(var(--md-scheme-on-error-container));
+                        --outline-color: rgb(var(--md-scheme-on-error-container));
                     }
 
                     &~.md3-text-field-label {
@@ -234,9 +247,7 @@
         }
 
         &.md3-text-field-outlined {
-            --background-color: rgb(var(--md-scheme-surface-container-highest));
-            --caret-color: rgb(var(--md-scheme-primary));
-            --outline-active-color: rgb(var(--md-scheme-primary));
+            --background-color: transparent;
 
             border-radius: 0.25em;
             padding-top: 0.5em;
@@ -258,22 +269,37 @@
 
             ::ng-deep .md3-text-input {
                 padding-block: 1em;
-                background-color: transparent;
 
                 &:focus~.md3-text-field-outline {
                     padding: 0 0.5em;
-                    border: 0.1875em solid var(--outline-active-color);
+                    border-width: 0.1875em;
                 }
 
                 &:focus, &:not(:placeholder-shown) {
                     &~.md3-text-field-outline .md3-label-gap {
-                        padding: 0 0.333332em;
+                        padding: 0 0.375em;
                         max-width: fit-content;
                     }
 
                     &~.md3-text-field-label {
                         top: 0;
                         inset-inline: 1em;
+                    }
+                }
+
+                &:disabled {
+                    --foreground-color: rgba(var(--md-scheme-on-surface), 0.38);
+
+                    &~.md3-text-field-outline {
+                        border: 0.0625em solid rgba(var(--md-scheme-on-surface), 0.38);
+                    }
+
+                    &~.md3-text-field-label {
+                        color: rgba(var(--md-scheme-on-surface), 0.38);
+                    }
+
+                    &~[md3-icon-element] {
+                        color: rgba(var(--md-scheme-on-surface), 0.38);
                     }
                 }
             }
