@@ -46,8 +46,8 @@
             position: absolute;
             inset: 0;
             pointer-events: none;
-            padding: 0 0.6875em;
-            margin: 0;
+            padding: 0 0.625em;
+            margin: 0.0625em 0 0;
             border: none;
             border-bottom: 0.0625em solid var(--outline-color);
             transition: all var(--md-motion-standard-fast-spatial-duration) var(--md-motion-standard-fast-spatial-easing), border-width none;
@@ -246,11 +246,25 @@
                 border: 0.0625em solid var(--outline-color);
             }
 
+            ::ng-deep [md3-icon-element=leading],
+            ::ng-deep [md3-icon-element=trailing],
+            ::ng-deep [md3-icon-button] {
+                top: 1em;
+            }
+
             .md3-text-field-label {
-                // color: rgba(var(--md-scheme-on-surface), 0.38);
+                top: 1.5em;
             }
 
             ::ng-deep .md3-text-input {
+                padding-block: 1em;
+                background-color: transparent;
+
+                &:focus~.md3-text-field-outline {
+                    padding: 0 0.5em;
+                    border: 0.1875em solid var(--outline-active-color);
+                }
+
                 &:focus, &:not(:placeholder-shown) {
                     &~.md3-text-field-outline .md3-label-gap {
                         padding: 0 0.333332em;
