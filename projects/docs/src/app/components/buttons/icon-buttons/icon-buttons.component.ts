@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IconButton, MaterialIcon } from "@vip9008/ngx-md3";
 
 @Component({
-    selector: 'app-icon-buttons.component',
+    selector: 'app-icon-buttons',
     imports: [
         IconButton,
         MaterialIcon

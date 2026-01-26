@@ -6,6 +6,7 @@
     --outline-color: rgb(var(--md-scheme-on-surface-variant));
 
     font-size: 1rem;
+    width: 100%;
 
     .md3-text-field-container {
         position: relative;
@@ -323,7 +324,11 @@
             color: rgb(var(--md-scheme-error));
         }
 
-        &> ::ng-deep * {
+        .md3-text-input-counter {
+            margin-inline-start: auto;
+        }
+
+        & > ::ng-deep * {
             margin-top: 0.333332em;
         }
     }

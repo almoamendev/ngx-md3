@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FloatingActionButton, MaterialIcon } from "@vip9008/ngx-md3";
 
 @Component({
-	selector: 'app-fabs.component',
+	selector: 'app-fabs',
 	imports: [
 		FloatingActionButton,
 		MaterialIcon

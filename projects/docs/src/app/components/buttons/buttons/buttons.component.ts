@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Button } from '@vip9008/ngx-md3';
 
 @Component({
-    selector: 'app-buttons.component',
+    selector: 'app-buttons',
     imports: [
         Button
     ],
