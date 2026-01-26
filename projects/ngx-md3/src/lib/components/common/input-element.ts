@@ -1,13 +1,12 @@
 import { Directive, ElementRef } from '@angular/core';
 
 @Directive({
-    standalone: false,
-    selector: '[md3-text-input]',
+    selector: '[md3-input-element]',
     host: {
-        'class': 'md3-text-input'
+        'class': 'md3-input-element'
     }
 })
-export class TextInput {
+export class InputElement {
     constructor(private el: ElementRef<HTMLInputElement>) { }
 
     public get nativeElement(): HTMLInputElement {

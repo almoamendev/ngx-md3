@@ -1,5 +1,5 @@
 import { AfterContentInit, Component, ContentChild, ContentChildren, DestroyRef, ElementRef, Input, QueryList, ViewChild } from '@angular/core';
-import { TextInput } from './text-input';
+import { InputElement } from '../common/input-element';
 import { IconElement } from '../common/icon-element';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { AbstractControl, FormControlName } from '@angular/forms';
@@ -23,12 +23,12 @@ export class TextField implements AfterContentInit {
     public valueLength: number = 0;
 
     @ViewChild('inputContainer', { static: true }) inputContainer!: ElementRef<HTMLDivElement>;
-    @ContentChild(TextInput) input?: TextInput;
+    @ContentChild(InputElement) input?: InputElement;
     @ContentChildren(IconElement, { descendants: true }) iconElements?: QueryList<IconElement>;
     @ContentChildren(IconButton, { descendants: true }) iconButtons?: QueryList<IconButton>;
     @ContentChild(FormControlName) controlName?: FormControlName;
 
-    constructor(private destroyRef: DestroyRef) {}
+    constructor(private destroyRef: DestroyRef) { }
 
     ngAfterContentInit(): void {
         if (this.input) {
@@ -87,7 +87,7 @@ export class TextField implements AfterContentInit {
         if (this.formControl) {
             return this.formControl?.invalid && (this.formControl?.touched || this.formControl?.dirty);
         }
-        
+
         return !(this.input?.nativeElement.validity.valid ?? true) || this.input?.nativeElement.ariaInvalid === 'true';
     }
 

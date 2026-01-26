@@ -17,7 +17,7 @@ export * from './loading-and-progress/circular-progress-indicator/circular-progr
 export * from './card/card';
 
 // text fields
-export * from './text-field/text-input';
+export * from './common/input-element';
 export * from './text-field/text-field';
 export * from './text-field/supporting-text';
 export * from './text-field/text-field-module';
