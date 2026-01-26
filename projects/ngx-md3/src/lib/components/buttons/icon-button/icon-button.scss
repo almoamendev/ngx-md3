@@ -50,7 +50,7 @@
         position: absolute;
         display: block;
         inset: calc(var(--outline-offset) - var(--outline-width) - var(--border-size));
-        border-radius: calc(var(--border-radius) + (var(--outline-offset) * -1));
+        border-radius: calc(var(--border-radius) + (var(--outline-offset) * -2));
         border: var(--outline-width) solid var(--outline-color);
         transition: all var(--md-motion-expressive-fast-spatial-duration) var(--md-motion-expressive-fast-spatial-easing);
         pointer-events: none;
@@ -88,7 +88,7 @@
         --border-radius: 0.5em;
     }
 
-    &:focus:before {
+    &:focus::before {
         opacity: 1;
     }
 
