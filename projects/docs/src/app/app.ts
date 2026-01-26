@@ -1,17 +1,13 @@
-import { Component, signal } from '@angular/core';
-import { IconButton, IconElement, MaterialIcon, TextFieldModule } from '@vip9008/ngx-md3';
+import { Component } from '@angular/core';
+import { RouterOutlet } from "@angular/router";
 
 @Component({
     selector: 'app-root',
     imports: [
-        TextFieldModule,
-        MaterialIcon,
-        IconButton,
-        IconElement,
+        RouterOutlet
     ],
     templateUrl: './app.html',
     styleUrl: './app.scss'
 })
 export class App {
-    protected readonly title = signal('docs');
 }

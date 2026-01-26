@@ -1,0 +1,18 @@
+<h1>Buttons</h1>
+
+<ul>
+    <li>@Input() buttonSize: 'x-small' | 'small' | 'medium' | 'large' | 'x-large' = 'small';</li>
+    <li>@Input() buttonType: 'elevated' | 'filled' | 'tonal' | 'outlined' | 'text' = 'filled';</li>
+    <li>@Input() buttonSquared: boolean = false;</li>
+</ul>
+
+<div style="display: flex; gap: 1rem;">
+    <button md3-button>Default</button>
+    <button md3-button [buttonSquared]="true">Square button</button>
+
+    <button md3-button buttonType="elevated">Elevated</button>
+    <button md3-button buttonType="filled">Filled</button>
+    <button md3-button buttonType="tonal">Tonal</button>
+    <button md3-button buttonType="outlined">Outlined</button>
+    <button md3-button buttonType="text">Text</button>
+</div>

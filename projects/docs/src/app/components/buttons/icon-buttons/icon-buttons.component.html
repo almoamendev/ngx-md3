@@ -1,0 +1,37 @@
+<h1>Floating Action Buttons</h1>
+
+<ul>
+    <li>@Input() buttonSize: 'x-small' | 'small' | 'medium' | 'large' | 'x-large' = 'small';</li>
+    <li>@Input() buttonShape: 'round' | 'square' = 'round';</li>
+    <li>@Input() buttonType: 'filled' | 'tonal' | 'outlined' | 'standard' = 'filled';</li>
+    <li>@Input() buttonWidth: 'default' | 'narrow' | 'wide' = 'default';</li>
+</ul>
+
+<div style="display: flex; gap: 1rem; margin-top: 1rem;">
+    <button md3-icon-button>
+        <md3-icon md3-icon-element>person</md3-icon>
+    </button>
+    <button md3-icon-button buttonWidth="narrow">
+        <md3-icon md3-icon-element>person</md3-icon>
+    </button>
+    <button md3-icon-button buttonWidth="wide">
+        <md3-icon md3-icon-element>person</md3-icon>
+    </button>
+    <button md3-icon-button buttonShape="square">
+        <md3-icon md3-icon-element>person</md3-icon>
+    </button>
+</div>
+<div style="display: flex; gap: 1rem; margin-top: 1rem;">
+    <button md3-icon-button buttonType="filled">
+        <md3-icon md3-icon-element>person</md3-icon>
+    </button>
+    <button md3-icon-button buttonType="tonal">
+        <md3-icon md3-icon-element>person</md3-icon>
+    </button>
+    <button md3-icon-button buttonType="outlined">
+        <md3-icon md3-icon-element>person</md3-icon>
+    </button>
+    <button md3-icon-button buttonType="standard">
+        <md3-icon md3-icon-element>person</md3-icon>
+    </button>
+</div>

@@ -1,0 +1,38 @@
+<h1>Floating Action Buttons</h1>
+
+<ul>
+    <li>@Input() buttonSize: 'small' | 'medium' | 'large' = 'small';</li>
+    <li>@Input() buttonColor: 'tonal-primary' | 'tonal-secondary' | 'tonal-tertiary' | 'primary' | 'secondary' | 'tertiary' = 'tonal-primary';</li>
+    <li>@Input() extendedFAB: boolean = false;</li>
+</ul>
+
+<div style="display: flex; gap: 1rem;">
+    <button md3-fab>
+        <md3-icon md3-icon-element>person</md3-icon>
+    </button>
+    <button md3-fab [extendedFAB]="true">
+        <md3-icon md3-icon-element>person</md3-icon>
+        Extended button
+    </button>
+</div>
+
+<div style="display: flex; gap: 1rem; margin-top: 1rem;">
+    <button md3-fab buttonColor="tonal-primary" [extendedFAB]="true">
+        Tonal primary
+    </button>
+    <button md3-fab buttonColor="tonal-secondary" [extendedFAB]="true">
+        Tonal secondary
+    </button>
+    <button md3-fab buttonColor="tonal-tertiary" [extendedFAB]="true">
+        Tonal tertiary
+    </button>
+    <button md3-fab buttonColor="primary" [extendedFAB]="true">
+        Primary
+    </button>
+    <button md3-fab buttonColor="secondary" [extendedFAB]="true">
+        Secondary
+    </button>
+    <button md3-fab buttonColor="tertiary" [extendedFAB]="true">
+        Tertiary
+    </button>
+</div>
