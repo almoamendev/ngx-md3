@@ -39,25 +39,13 @@
     border-radius: var(--border-radius);
     box-shadow: var(--md-shadow-0dp);
 
-    &::after {
-        content: '';
-        position: absolute;
-        display: block;
-        inset: calc(var(--outline-offset) - var(--outline-width) - var(--border-size));
-        border-radius: calc(var(--border-radius) + (var(--outline-offset) * -2));
-        border: var(--outline-width) solid var(--outline-color);
-        transition: all var(--md-motion-expressive-fast-spatial-duration) var(--md-motion-expressive-fast-spatial-easing);
-        pointer-events: none;
-        opacity: 0;
-    }
-
     &:disabled {
         --background-color: rgba(var(--md-scheme-on-surface), 0.1) !important;
         --foreground-color: rgba(var(--md-scheme-on-surface), 0.38) !important;
         
         cursor: default !important;
 
-        &::before, &::after {
+        &::before {
             display: none;
         }
 
@@ -86,10 +74,6 @@
 
     &:not(:disabled):active {
         --border-radius: 0.5em;
-    }
-
-    &:focus::after {
-        opacity: 1;
     }
 
     &.md3-x-small {
@@ -223,6 +207,7 @@
         --background-color: rgb(var(--md-scheme-surface-container-low));
         --foreground-color: rgb(var(--md-scheme-primary));
         --state-color: var(--md-scheme-primary);
+        --border-size: 0em;
 
         box-shadow: var(--md-shadow-1dp);
 
@@ -231,13 +216,15 @@
         }
     }
 
-    // &.md3-filled {
-    // }
+    &.md3-filled {
+        --border-size: 0em;
+    }
 
     &.md3-tonal {
         --background-color: rgb(var(--md-scheme-secondary-container));
         --foreground-color: rgb(var(--md-scheme-on-secondary-container));
         --state-color: var(--md-scheme-on-secondary-container);
+        --border-size: 0em;
     }
 
     &.md3-outlined {
@@ -252,5 +239,6 @@
         --background-color: transparent;
         --foreground-color: rgb(var(--md-scheme-primary));
         --state-color: var(--md-scheme-primary);
+        --border-size: 0em;
     }
 }

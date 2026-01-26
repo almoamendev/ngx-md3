@@ -2,6 +2,11 @@
     --background-color: rgb(var(--md-scheme-surface-container-low));
     --foreground-color: rgb(var(--md-scheme-on-surface));
     --state-color: var(--md-scheme-on-surface);
+    --border-radius: 0.75em;
+    --border-size: 0em;
+    --outline-color: rgb(var(--md-scheme-secondary));
+    --outline-width: 0.1875em;
+    --outline-offset: -0.125em;
 
     font-size: 1rem;
     border-radius: 0.75em;
@@ -37,8 +42,10 @@
 
     &.md3-outlined {
         --background-color: rgb(var(--md-scheme-surface));
+        --border-size: 0.0625em;
+
         box-shadow: var(--md-shadow-0dp);
-        border: 0.0625em solid rgb(var(--md-scheme-outline-variant));
+        border: var(--border-size) solid rgb(var(--md-scheme-outline-variant));
 
         &:hover {
             box-shadow: var(--md-shadow-1dp);

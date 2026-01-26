@@ -85,6 +85,25 @@ body {
 
 .md3-state-component {
     position: relative;
+    
+    --state-color: var(--state-color, --md-scheme-primary);
+    --border-radius: var(--border-radiu, 0em);
+    --border-size: var(--border-size, 0em);
+    --outline-color: var(--outline-color, rgb(var(--md-scheme-secondary)));
+    --outline-width: var(--outline-width, 0.1875em);
+    --outline-offset: var(--outline-offset, -0.125em);
+
+    &::after {
+        content: '';
+        position: absolute;
+        display: block;
+        inset: calc(var(--outline-offset) - var(--outline-width) - var(--border-size));
+        border-radius: calc(var(--border-radius) + (var(--outline-offset) * -2));
+        border: var(--outline-width) solid var(--outline-color);
+        transition: all var(--md-motion-expressive-fast-spatial-duration) var(--md-motion-expressive-fast-spatial-easing);
+        pointer-events: none;
+        opacity: 0;
+    }
 
     .md3-state-layer {
         --ripple-w: 288%;
@@ -131,6 +150,10 @@ body {
     &:focus {
         .md3-state-layer {
             opacity: 0.1;
+        }
+
+        &::after {
+            opacity: 1;
         }
     }
 
