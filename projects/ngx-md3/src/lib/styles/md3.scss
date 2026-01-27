@@ -1,4 +1,4 @@
-@import "https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap";
+@import "https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Noto+Sans+Arabic:wght@100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap";
 
 @import "https://fonts.googleapis.com/icon?family=Material+Icons";
 @import "https://fonts.googleapis.com/icon?family=Material+Icons+Outlined";
@@ -27,7 +27,7 @@
     -moz-outline: 0;
     outline: 0;
 
-    font-family: 'Roboto', sans-serif;
+    font-family: "Google Sans", "Roboto", sans-serif;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
     -moz-osx-font-smoothing: grayscale;
@@ -180,3 +180,125 @@ body {
         }
     }
 }
+
+.md3-display {
+    font-family: "Google Sans", "Roboto", sans-serif;
+    font-weight: 400;
+    letter-spacing: 0em;
+    font-style: normal;
+    font-optical-sizing: auto;
+    font-stretch: 100%;
+
+    &.md3-large {
+        font-size: 3.5625rem;
+        line-height: 1.122807em;
+    }
+
+    &.md3-medium {
+        font-size: 2.8125rem;
+        line-height: 1.155556em;
+    }
+
+    &.md3-small {
+        font-size: 2.25rem;
+        line-height: 1.222222em;
+    }
+}
+
+.md3-headline {
+    font-family: "Google Sans", "Roboto", sans-serif;
+    font-weight: 400;
+    letter-spacing: 0em;
+    font-style: normal;
+    font-optical-sizing: auto;
+    font-stretch: 100%;
+
+    &.md3-large {
+        font-size: 2rem;
+        line-height: 0.25em;
+    }
+
+    &.md3-medium {
+        font-size: 1.75rem;
+        line-height: 1.285714em;
+    }
+
+    &.md3-small {
+        font-size: 1.5rem;
+        line-height: 1.333333em;
+    }
+}
+
+.md3-title {
+    font-family: "Google Sans", "Roboto", sans-serif;
+    font-weight: 400;
+    letter-spacing: 0em;
+    font-style: normal;
+    font-optical-sizing: auto;
+    font-stretch: 100%;
+
+    &.md3-large {
+        font-size: 1.375rem;
+        line-height: 1.272727em;
+    }
+
+    &.md3-medium {
+        font-size: 1rem;
+        line-height: 1.5em;
+        font-weight: 500;
+    }
+
+    &.md3-small {
+        font-size: 0.875rem;
+        line-height: 1.428571em;
+        font-weight: 500;
+    }
+}
+
+.md3-body {
+    font-family: "Google Sans", "Roboto", sans-serif;
+    font-weight: 400;
+    letter-spacing: 0em;
+    font-style: normal;
+    font-optical-sizing: auto;
+    font-stretch: 100%;
+
+    &.md3-large {
+        font-size: 1rem;
+        line-height: 1.5em;
+    }
+
+    &.md3-medium {
+        font-size: 0.875rem;
+        line-height: 1.428571em;
+    }
+
+    &.md3-small {
+        font-size: 0.75rem;
+        line-height: 1.333333em;
+    }
+}
+
+// .md3-label {
+//     font-family: "Google Sans", "Roboto", sans-serif;
+//     font-weight: 400;
+//     letter-spacing: 0em;
+//     font-style: normal;
+//     font-optical-sizing: auto;
+//     font-stretch: 100%;
+
+//     &.md3-large {
+//         font-size: 1rem;
+//         line-height: 1.5em;
+//     }
+
+//     &.md3-medium {
+//         font-size: 0.875rem;
+//         line-height: 1.428571em;
+//     }
+
+//     &.md3-small {
+//         font-size: 0.75rem;
+//         line-height: 1.333333em;
+//     }
+// }

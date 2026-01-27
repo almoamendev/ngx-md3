@@ -1,4 +1,10 @@
 // common components and directives
+export * from './common/type-display';
+export * from './common/type-headline';
+export * from './common/type-title';
+export * from './common/type-body';
+export * from './common/type-label';
+
 export * from './common/state-component';
 export * from './common/icon-element';
 export * from './common/material-icon/material-icon';
