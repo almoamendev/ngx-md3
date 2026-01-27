@@ -157,6 +157,10 @@ body {
         }
     }
 
+    &.md3-focused::after {
+        opacity: 1;
+    }
+
     &:active {
         .md3-state-layer {
             background-color: rgba(var(--state-color), 0);

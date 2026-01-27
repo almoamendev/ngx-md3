@@ -1,0 +1,69 @@
+:host {
+    --checkbox-color: rgb(var(--md-scheme-on-surface-variant));
+    --checkbox-icon-color: rgb(var(--md-scheme-on-primary));
+    --state-color: var(--md-scheme-primary);
+    --border-radius: 2.5em;
+    --border-size: 0em;
+    --outline-color: rgb(var(--md-scheme-on-surface));
+    --outline-width: 0.1875em;
+    --outline-offset: -0.125em;
+
+    position: relative;
+    font-size: 1rem;
+    height: 2.5em;
+    width: 2.5em;
+    border-radius: var(--border-radius);
+
+    .md3-checkbox-icon {
+        font-size: 1rem;
+        position: absolute;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        inset: 0.5em;
+        width: 1.5em;
+        height: 1.5em;
+        pointer-events: none;
+
+        &::before {
+            content: '';
+            display: block;
+            height: 0.875em;
+            width: 0.875em;
+            border: 0.125em solid var(--checkbox-color);
+            border-radius: 0.125em;
+            transition: all var(--md-motion-standard-fast-spatial-duration) var(--md-motion-standard-fast-spatial-easing);
+        }
+
+        md3-icon {
+            position: absolute;
+            inset: 0;
+            color: var(--checkbox-icon-color);
+            opacity: 0;
+            transition: all var(--md-motion-standard-fast-spatial-duration) var(--md-motion-standard-fast-spatial-easing);
+        }
+    }
+
+    ::ng-deep .md3-input-element {
+        display: block;
+        height: 100%;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        opacity: 0;
+
+        &:checked, &:indeterminate {
+            &+.md3-checkbox-icon {
+                --checkbox-color: rgb(var(--md-scheme-primary));
+
+                &::before {
+                    background-color: var(--checkbox-color);
+                }
+    
+                md3-icon {
+                    opacity: 1;
+                }
+            }
+        }
+    }
+}

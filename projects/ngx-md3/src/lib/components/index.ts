@@ -16,6 +16,9 @@ export * from './loading-and-progress/circular-progress-indicator/circular-progr
 // cards
 export * from './card/card';
 
+// checkboxes
+export * from './checkbox/checkbox';
+
 // text fields
 export * from './common/input-element';
 export * from './text-field/text-field';

@@ -8,6 +8,7 @@ import { LoadingIndicatorsComponent } from './components/loading-and-progress/lo
 import { ProgressIndicatorsComponent } from './components/loading-and-progress/progress-indicators/progress-indicators.component';
 import { CardsComponent } from './components/cards/cards.component';
 import { TextFieldsComponent } from './components/text-fields/text-fields.component';
+import { CheckboxesComponent } from './components/checkboxes/checkboxes.component';
 
 export const routes: Routes = [
     {
@@ -34,6 +35,10 @@ export const routes: Routes = [
             {
                 path: 'cards',
                 component: CardsComponent,
+            },
+            {
+                path: 'checkboxes',
+                component: CheckboxesComponent,
             },
             {
                 path: 'loading-and-progress',
