@@ -12,7 +12,7 @@ export class StateComponent implements OnInit {
     constructor(
         private el: ElementRef<HTMLElement>,
         private renderer: Renderer2
-    ) {}
+    ) { }
 
     ngOnInit(): void {
         let layer = this.el.nativeElement.querySelector(
@@ -24,10 +24,9 @@ export class StateComponent implements OnInit {
             layer = this.renderer.createElement('div') as HTMLDivElement;
             this.renderer.addClass(layer, 'md3-state-layer');
 
-            this.renderer.insertBefore(
+            this.renderer.appendChild(
                 this.el.nativeElement,
-                layer,
-                this.el.nativeElement.firstChild
+                layer
             );
 
         }
