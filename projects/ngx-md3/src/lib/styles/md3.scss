@@ -183,122 +183,162 @@ body {
 
 .md3-display {
     font-family: "Google Sans", "Roboto", sans-serif;
+    font-size: 3.5625rem;
+    line-height: 1.122807em;
     font-weight: 400;
     letter-spacing: 0em;
     font-style: normal;
     font-optical-sizing: auto;
     font-stretch: 100%;
 
-    &.md3-large {
-        font-size: 3.5625rem;
-        line-height: 1.122807em;
+    &[emphasized] {
+        font-weight: 500;
     }
 
-    &.md3-medium {
-        font-size: 2.8125rem;
-        line-height: 1.155556em;
+    &[md3-type-display=large] {
+        font-size: 3.5625rem; // 57pt
+        line-height: 1.122807em; // 64pt
     }
 
-    &.md3-small {
-        font-size: 2.25rem;
-        line-height: 1.222222em;
+    &[md3-type-display=medium] {
+        font-size: 2.8125rem; // 45pt
+        line-height: 1.155556em; // 52pt
+    }
+
+    &[md3-type-display=small] {
+        font-size: 2.25rem; // 36pt
+        line-height: 1.222222em; // 44pt
     }
 }
 
 .md3-headline {
     font-family: "Google Sans", "Roboto", sans-serif;
+    font-size: 2rem;
+    line-height: 0.25em;
     font-weight: 400;
     letter-spacing: 0em;
     font-style: normal;
     font-optical-sizing: auto;
     font-stretch: 100%;
 
-    &.md3-large {
-        font-size: 2rem;
-        line-height: 0.25em;
+    &[emphasized] {
+        font-weight: 500;
     }
 
-    &.md3-medium {
-        font-size: 1.75rem;
-        line-height: 1.285714em;
+    &[md3-type-headline=large] {
+        font-size: 2rem; // 32pt
+        line-height: 0.25em; // 40pt
     }
 
-    &.md3-small {
-        font-size: 1.5rem;
-        line-height: 1.333333em;
+    &[md3-type-headline=medium] {
+        font-size: 1.75rem; // 28pt
+        line-height: 1.285714em; // 36pt
+    }
+
+    &[md3-type-headline=small] {
+        font-size: 1.5rem; // 24pt
+        line-height: 1.333333em; // 32pt
     }
 }
 
 .md3-title {
     font-family: "Google Sans", "Roboto", sans-serif;
+    font-size: 1.375rem;
+    line-height: 1.272727em;
     font-weight: 400;
     letter-spacing: 0em;
     font-style: normal;
     font-optical-sizing: auto;
     font-stretch: 100%;
 
-    &.md3-large {
-        font-size: 1.375rem;
-        line-height: 1.272727em;
+    &[md3-type-title=large] {
+        font-size: 1.375rem; // 22pt
+        line-height: 1.272727em; // 28pt
+
+        &[emphasized] {
+            font-weight: 500;
+        }
     }
 
-    &.md3-medium {
-        font-size: 1rem;
-        line-height: 1.5em;
+    &[md3-type-title=medium] {
+        font-size: 1rem; // 16pt
+        line-height: 1.5em; // 24pt
         font-weight: 500;
+
+        &[emphasized] {
+            font-weight: 600;
+        }
     }
 
-    &.md3-small {
-        font-size: 0.875rem;
-        line-height: 1.428571em;
+    &[md3-type-title=small] {
+        font-size: 0.875rem; // 14pt
+        line-height: 1.428571em; // 20pt
         font-weight: 500;
+
+        &[emphasized] {
+            font-weight: 600;
+        }
     }
 }
 
 .md3-body {
     font-family: "Google Sans", "Roboto", sans-serif;
+    font-size: 1rem;
+    line-height: 1.5em;
     font-weight: 400;
     letter-spacing: 0em;
     font-style: normal;
     font-optical-sizing: auto;
     font-stretch: 100%;
 
-    &.md3-large {
-        font-size: 1rem;
-        line-height: 1.5em;
+    &[emphasized] {
+        font-weight: 500;
     }
 
-    &.md3-medium {
-        font-size: 0.875rem;
-        line-height: 1.428571em;
+    &[md3-type-body=large] {
+        font-size: 1rem; // 16pt
+        line-height: 1.5em; // 24pt
     }
 
-    &.md3-small {
-        font-size: 0.75rem;
-        line-height: 1.333333em;
+    &[md3-type-body=medium] {
+        font-size: 0.875rem; // 14pt
+        line-height: 1.428571em; // 20pt
+    }
+
+    &[md3-type-body=small] {
+        font-size: 0.75rem; // 12pt
+        line-height: 1.333333em; // 16pt
     }
 }
 
-// .md3-label {
-//     font-family: "Google Sans", "Roboto", sans-serif;
-//     font-weight: 400;
-//     letter-spacing: 0em;
-//     font-style: normal;
-//     font-optical-sizing: auto;
-//     font-stretch: 100%;
+.md3-label {
+    font-family: "Google Sans", "Roboto", sans-serif;
+    font-size: 0.875rem;
+    line-height: 1.428571em;
+    font-weight: 500;
+    letter-spacing: 0em;
+    font-style: normal;
+    font-optical-sizing: auto;
+    font-stretch: 100%;
 
-//     &.md3-large {
-//         font-size: 1rem;
-//         line-height: 1.5em;
-//     }
+    &[emphasized] {
+        font-weight: 700;
+    }
 
-//     &.md3-medium {
-//         font-size: 0.875rem;
-//         line-height: 1.428571em;
-//     }
+    &[md3-type-label=large] {
+        font-size: 0.875rem; // 14pt
+        line-height: 1.428571em; // 20pt
+    }
 
-//     &.md3-small {
-//         font-size: 0.75rem;
-//         line-height: 1.333333em;
-//     }
-// }
+    &[md3-type-label=medium] {
+        font-size: 0.75rem; // 12pt
+        line-height: 1.333333em; // 16pt
+        letter-spacing: 0.008333em; // 0.1pt
+    }
+
+    &[md3-type-label=small] {
+        font-size: 0.6875rem; // 11pt
+        line-height: 1.454545em; // 16pt
+        letter-spacing: 0.009090em; // 0.1pt
+    }
+}

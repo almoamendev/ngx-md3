@@ -9,6 +9,7 @@ import { ProgressIndicatorsComponent } from './components/loading-and-progress/p
 import { CardsComponent } from './components/cards/cards.component';
 import { TextFieldsComponent } from './components/text-fields/text-fields.component';
 import { CheckboxesComponent } from './components/checkboxes/checkboxes.component';
+import { TypographyComponent } from './styles/typography/typography.component';
 
 export const routes: Routes = [
     {
@@ -16,50 +17,64 @@ export const routes: Routes = [
         component: LayoutComponent,
         children: [
             {
-                path: 'buttons',
+                path: 'styles',
+                children: [
+                    {
+                        path: 'typography',
+                        component: TypographyComponent,
+                    },
+                ],
+            },
+            {
+                path: 'components',
                 children: [
                     {
                         path: 'buttons',
-                        component: ButtonsComponent,
+                        children: [
+                            {
+                                path: 'buttons',
+                                component: ButtonsComponent,
+                            },
+                            {
+                                path: 'floating-action-buttons',
+                                component: FabsComponent,
+                            },
+                            {
+                                path: 'icon-buttons',
+                                component: IconButtonsComponent,
+                            },
+                        ],
                     },
                     {
-                        path: 'floating-action-buttons',
-                        component: FabsComponent,
+                        path: 'cards',
+                        component: CardsComponent,
                     },
                     {
-                        path: 'icon-buttons',
-                        component: IconButtonsComponent,
+                        path: 'checkboxes',
+                        component: CheckboxesComponent,
+                    },
+                    {
+                        path: 'loading-and-progress',
+                        children: [
+                            {
+                                path: 'loading-indicators',
+                                component: LoadingIndicatorsComponent,
+                            },
+                            {
+                                path: 'progress-indicators',
+                                component: ProgressIndicatorsComponent,
+                            },
+                        ],
+                    },
+                    {
+                        path: 'text-fields',
+                        component: TextFieldsComponent,
+                    },
+                    {
+                        path: '**',
+                        component: ErrorComponent
                     },
                 ],
-            },
-            {
-                path: 'cards',
-                component: CardsComponent,
-            },
-            {
-                path: 'checkboxes',
-                component: CheckboxesComponent,
-            },
-            {
-                path: 'loading-and-progress',
-                children: [
-                    {
-                        path: 'loading-indicators',
-                        component: LoadingIndicatorsComponent,
-                    },
-                    {
-                        path: 'progress-indicators',
-                        component: ProgressIndicatorsComponent,
-                    },
-                ],
-            },
-            {
-                path: 'text-fields',
-                component: TextFieldsComponent,
-            },
-            {
-                path: '**',
-                component: ErrorComponent
             },
         ],
     },
