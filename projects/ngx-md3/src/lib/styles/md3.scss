@@ -86,21 +86,14 @@ body {
 
 .md3-state-component {
     position: relative;
-    
-    --state-color: var(--state-color, --md-scheme-primary);
-    --border-radius: var(--border-radiu, 0em);
-    --border-size: var(--border-size, 0em);
-    --outline-color: var(--outline-color, rgb(var(--md-scheme-secondary)));
-    --outline-width: var(--outline-width, 0.1875em);
-    --outline-offset: var(--outline-offset, -0.125em);
 
     &::after {
         content: '';
         position: absolute;
         display: block;
-        inset: calc(var(--outline-offset) - var(--outline-width) - var(--border-size));
-        border-radius: calc(var(--border-radius) + (var(--outline-offset) * -2));
-        border: var(--outline-width) solid var(--outline-color);
+        inset: calc(var(--outline-offset, -0.125em) - var(--outline-width, 0.1875em) - var(--border-size, 0em));
+        border-radius: calc(var(--border-radius, 0em) + (var(--outline-offset, -0.125em) * -2));
+        border: var(--outline-width) solid var(--outline-color, rgb(var(--md-scheme-secondary)));
         transition: all var(--md-motion-expressive-fast-spatial-duration) var(--md-motion-expressive-fast-spatial-easing);
         pointer-events: none;
         opacity: 0;
@@ -117,7 +110,7 @@ body {
         border-radius: inherit;
         overflow: hidden;
         transition: opacity var(--md-motion-expressive-slow-spatial-duration) var(--md-motion-expressive-slow-spatial-easing);
-        background-color: rgb(var(--state-color));
+        background-color: rgb(var(--state-color, --md-scheme-primary));
         opacity: 0;
         pointer-events: none;
 
@@ -131,7 +124,7 @@ body {
             left: var(--ripple-x);
             top: var(--ripple-y);
             transform: translate(-50%, -50%) scale(0);
-            background-color: rgb(var(--state-color));
+            background-color: rgb(var(--state-color, --md-scheme-primary));
             opacity: 0;
             transition: transform var(--md-motion-expressive-slow-spatial-duration) var(--md-motion-expressive-slow-spatial-easing),
                         opacity var(--md-motion-expressive-slow-spatial-duration) var(--md-motion-expressive-slow-spatial-easing);
@@ -164,7 +157,7 @@ body {
 
     &:active {
         .md3-state-layer {
-            background-color: rgba(var(--state-color), 0);
+            background-color: rgba(var(--state-color, --md-scheme-primary), 0);
             opacity: 0.1;
             
             &::before {
