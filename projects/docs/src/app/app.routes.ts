@@ -10,6 +10,7 @@ import { CardsComponent } from './components/cards/cards.component';
 import { TextFieldsComponent } from './components/text-fields/text-fields.component';
 import { CheckboxesComponent } from './components/checkboxes/checkboxes.component';
 import { TypographyComponent } from './styles/typography/typography.component';
+import { ListsComponent } from './components/lists/lists.component';
 
 export const routes: Routes = [
     {
@@ -52,6 +53,10 @@ export const routes: Routes = [
                     {
                         path: 'checkboxes',
                         component: CheckboxesComponent,
+                    },
+                    {
+                        path: 'lists',
+                        component: ListsComponent,
                     },
                     {
                         path: 'loading-and-progress',

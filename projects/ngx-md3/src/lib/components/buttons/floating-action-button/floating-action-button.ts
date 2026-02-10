@@ -23,10 +23,10 @@ export class FloatingActionButton implements AfterViewInit {
     }
 
     ngAfterViewInit(): void {
-        this.element.classList.add(...[
+        this.element.classList.add(
             'md3-' + this.buttonSize,
             'md3-' + this.buttonColor,
             ...(this.extendedFAB ? ['md3-extended-fab'] : [])
-        ]);
+        );
     }
 }

@@ -15,16 +15,22 @@ export * from './components/buttons/button/button';
 export * from './components/buttons/floating-action-button/floating-action-button';
 export * from './components/buttons/icon-button/icon-button';
 
-// loading and progress
-export * from './components/loading-and-progress/loading-indicator/loading-indicator';
-export * from './components/loading-and-progress/linear-progress-indicator/linear-progress-indicator';
-export * from './components/loading-and-progress/circular-progress-indicator/circular-progress-indicator';
-
 // cards
 export * from './components/card/card';
 
 // checkboxes
 export * from './components/checkbox/checkbox';
+
+// list
+export * from './components/list/list';
+export * from './components/list/list-item/list-item';
+export * from './components/list/list-slot';
+export * from './components/list/list-module';
+
+// loading and progress
+export * from './components/loading-and-progress/loading-indicator/loading-indicator';
+export * from './components/loading-and-progress/linear-progress-indicator/linear-progress-indicator';
+export * from './components/loading-and-progress/circular-progress-indicator/circular-progress-indicator';
 
 // text fields
 export * from './components/common/input-element';

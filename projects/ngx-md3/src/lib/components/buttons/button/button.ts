@@ -23,10 +23,10 @@ export class Button implements AfterViewInit {
     }
 
     ngAfterViewInit(): void {
-        this.element.classList.add(...[
+        this.element.classList.add(
             'md3-' + this.buttonSize,
             'md3-' + this.buttonType,
             ...(this.buttonSquared ? ['md3-square'] : [])
-        ]);
+        );
     }
 }
