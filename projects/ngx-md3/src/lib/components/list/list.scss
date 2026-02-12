@@ -1,5 +1,14 @@
 :host {
+    --background-color: rgb(var(--md-scheme-surface));
+    --foreground-color: rgb(var(--md-scheme-on-surface-variant));
+    --state-color: var(--md-scheme-on-surface);
+    --border-radius: 0.25em;
+    --border-size: 0em;
+    --outline-color: rgb(var(--md-scheme-secondary));
+    --outline-width: 0.1875em;
+    --outline-offset: 0em;
     --padding-y: 0.625em;
+    --slots-gap: 0.75em;
 
     font-size: 1rem;
     display: flex;
@@ -14,9 +23,31 @@
         &.md3-segmented {
             gap: 0.125em;
         }
+
+        ::ng-deep md3-list-item {
+            &:first-child {
+                border-start-start-radius: 1em;
+                border-start-end-radius: 1em;
+            }
+            
+            &:last-child {
+                border-end-start-radius: 1em;
+                border-end-end-radius: 1em;
+            }
+
+            &:hover {
+                --border-radius: 0.75em;
+            }
+
+            &:focus {
+                --border-radius: 1em;
+            }
+        }
     }
 
     &.md3-baseline {
+        --border-radius: 0em;
         --padding-y: 0.5em;
+        --slots-gap: 1em;
     }
 }

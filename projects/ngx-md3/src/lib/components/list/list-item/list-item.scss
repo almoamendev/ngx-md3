@@ -2,5 +2,10 @@
     flex: 1 1 auto;
     display: flex;
     align-items: center;
-    padding: var(--padding-y, 0.625em) 0em;
+    gap: var(--slots-gap, 0.75em);
+    padding: var(--padding-y, 0.625em) 1em;
+    background-color: va(--background-color);
+    color: var(--foreground-color);
+    border-radius: var(--border-radius);
+    transition: all var(--md-motion-expressive-fast-spatial-duration) var(--md-motion-expressive-fast-spatial-easing);
 }

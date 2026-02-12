@@ -93,7 +93,7 @@ body {
         display: block;
         inset: calc(var(--outline-offset, -0.125em) - var(--outline-width, 0.1875em) - var(--border-size, 0em));
         border-radius: calc(var(--border-radius, 0em) + (var(--outline-offset, -0.125em) * -2));
-        border: var(--outline-width) solid var(--outline-color, rgb(var(--md-scheme-secondary)));
+        border: var(--outline-width, 0.1875em) solid var(--outline-color, rgb(var(--md-scheme-secondary)));
         transition: all var(--md-motion-expressive-fast-spatial-duration) var(--md-motion-expressive-fast-spatial-easing);
         pointer-events: none;
         opacity: 0;

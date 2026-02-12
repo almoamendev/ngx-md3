@@ -1,14 +1,10 @@
 import { Component, ElementRef, Input } from '@angular/core';
-import { StateComponent } from '../common/state-component';
 
 @Component({
     selector: 'md3-list',
     standalone: false,
     templateUrl: './list.html',
     styleUrl: './list.scss',
-    hostDirectives: [
-        StateComponent
-    ],
 })
 export class List {
     @Input() variant: 'expressive' | 'baseline' = 'expressive';
