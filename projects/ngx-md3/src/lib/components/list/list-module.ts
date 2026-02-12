@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { List } from './list';
 import { ListItem } from './list-item/list-item';
 import { ListSlot } from './list-slot';
+import { ListLeading } from './list-leading';
 
 
 
@@ -11,6 +12,7 @@ import { ListSlot } from './list-slot';
         List,
         ListItem,
         ListSlot,
+        ListLeading,
     ],
     imports: [
     ],
@@ -18,6 +20,7 @@ import { ListSlot } from './list-slot';
         List,
         ListItem,
         ListSlot,
+        ListLeading,
     ]
 })
 export class ListModule { }
