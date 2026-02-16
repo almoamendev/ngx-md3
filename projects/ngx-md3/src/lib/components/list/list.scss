@@ -16,6 +16,9 @@
     gap: 0em;
 
     &.md3-expressive {
+        --leading-icon-size: 1.25em;
+        --leading-media-radius: 0.5em;
+
         &.md3-standard {
             gap: 0em;
         }
@@ -49,5 +52,11 @@
         --border-radius: 0em;
         --padding-y: 0.5em;
         --slots-gap: 1em;
+
+        ::ng-deep md3-list-leading[type=media] {
+            &[size=small-video], &[size=large-video] {
+                margin-inline-start: -1em;
+            }
+        }
     }
 }

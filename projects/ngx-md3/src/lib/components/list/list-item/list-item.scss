@@ -1,5 +1,5 @@
 :host {
-    flex: 1 1 auto;
+    flex: 0 1 auto;
     display: flex;
     align-items: center;
     gap: var(--slots-gap, 0.75em);
@@ -8,4 +8,59 @@
     color: var(--foreground-color);
     border-radius: var(--border-radius);
     transition: all var(--md-motion-expressive-fast-spatial-duration) var(--md-motion-expressive-fast-spatial-easing);
+
+    ::ng-deep md3-list-leading {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+
+        &[type=icon] {
+            font-size: var(--leading-icon-size, 1.5em);
+            width: 1em;
+            height: 1em;
+            color: rgb(var(--md-scheme-on-surface-variant));
+
+            md3-icon {
+                font-size: inherit;
+            }
+        }
+
+        &[type=avatar] {
+            font-size: 1em;
+            line-height: 1.5em;
+            font-weight: 500;
+            letter-spacing: 0.009375em;
+            width: 2.5em;
+            height: 2.5em;
+            background-color: rgb(var(--md-scheme-primary-container));
+            color: rgb(var(--md-scheme-on-primary-container));
+            border-radius: 2.5em;
+        }
+
+        &[type=media] {
+            font-size: 1em;
+            width: 3.5em;
+            height: 3.5em;
+            border-radius: 0.5em;
+
+            &[size=small-video] {
+                width: 6.25em;
+                height: 3.5em;
+                border-radius: var(--leading-media-radius, 0em);
+            }
+
+            &[size=large-video] {
+                width: 7.125em;
+                height: 4em;
+                border-radius: var(--leading-media-radius, 0em);
+            }
+
+            & > * {
+                width: inherit;
+                height: inherit;
+                object-fit: cover;
+            }
+        }
+    }
 }

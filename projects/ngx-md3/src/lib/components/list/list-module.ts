@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { List } from './list';
 import { ListItem } from './list-item/list-item';
 import { ListSlot } from './list-slot';
-import { ListLeading } from './list-leading';
+import { ListLeading } from './list-leading/list-leading';
+import { MaterialIcon } from '../common/material-icon/material-icon';
 
 
 
@@ -15,12 +15,14 @@ import { ListLeading } from './list-leading';
         ListLeading,
     ],
     imports: [
+        MaterialIcon,
     ],
     exports: [
         List,
         ListItem,
         ListSlot,
         ListLeading,
+        MaterialIcon,
     ]
 })
 export class ListModule { }
