@@ -11,9 +11,9 @@ import { StateComponent } from '../../common/state-component';
     ],
 })
 export class FloatingActionButton implements AfterViewInit {
-    @Input() buttonSize: 'small' | 'medium' | 'large' = 'small';
-    @Input() buttonColor: 'tonal-primary' | 'tonal-secondary' | 'tonal-tertiary' | 'primary' | 'secondary' | 'tertiary' = 'tonal-primary';
-    @Input() extendedFAB: boolean = false;
+    @Input('button-size') buttonSize: 'small' | 'medium' | 'large' = 'small';
+    @Input('button-color') buttonColor: 'tonal-primary' | 'tonal-secondary' | 'tonal-tertiary' | 'primary' | 'secondary' | 'tertiary' = 'tonal-primary';
+    @Input('extended-fab') extendedFAB: boolean = false;
 
     constructor(private el: ElementRef) {
     }

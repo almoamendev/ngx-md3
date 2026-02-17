@@ -11,7 +11,7 @@ import { StateComponent } from '../common/state-component';
     ],
 })
 export class Card implements AfterViewInit {
-    @Input() cardType: 'elevated' | 'filled' | 'outlined' = 'elevated';
+    @Input('card-type') cardType: 'elevated' | 'filled' | 'outlined' = 'elevated';
 
     constructor(private el: ElementRef) {
     }

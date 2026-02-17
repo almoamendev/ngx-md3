@@ -15,7 +15,7 @@ import { IconButton } from '../buttons/icon-button/icon-button';
 export class TextField implements AfterContentInit {
     @Input() label?: string;
     @Input() type: 'filled' | 'outlined' = 'filled';
-    @Input() inputCounter: boolean | number = false;
+    @Input('input-counter') inputCounter: boolean | number = false;
     @Input() control?: AbstractControl;
 
     public hasError: boolean = false;

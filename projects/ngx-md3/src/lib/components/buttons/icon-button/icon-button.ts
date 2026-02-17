@@ -11,10 +11,10 @@ import { StateComponent } from '../../common/state-component';
     ],
 })
 export class IconButton implements AfterViewInit {
-    @Input() buttonSize: 'x-small' | 'small' | 'medium' | 'large' | 'x-large' = 'small';
-    @Input() buttonShape: 'round' | 'square' = 'round';
-    @Input() buttonType: 'filled' | 'tonal' | 'outlined' | 'standard' = 'filled';
-    @Input() buttonWidth: 'default' | 'narrow' | 'wide' = 'default';
+    @Input('button-size') buttonSize: 'x-small' | 'small' | 'medium' | 'large' | 'x-large' = 'small';
+    @Input('button-shape') buttonShape: 'round' | 'square' = 'round';
+    @Input('button-type') buttonType: 'filled' | 'tonal' | 'outlined' | 'standard' = 'filled';
+    @Input('button-width') buttonWidth: 'default' | 'narrow' | 'wide' = 'default';
 
     constructor(private el: ElementRef) {
     }

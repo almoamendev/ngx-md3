@@ -4,6 +4,8 @@ import { ListItem } from './list-item/list-item';
 import { ListSlot } from './list-slot';
 import { ListLeading } from './list-leading/list-leading';
 import { MaterialIcon } from '../common/material-icon/material-icon';
+import { IconButton } from '../buttons/icon-button/icon-button';
+import { IconElement } from '../common/icon-element';
 
 
 
@@ -16,6 +18,8 @@ import { MaterialIcon } from '../common/material-icon/material-icon';
     ],
     imports: [
         MaterialIcon,
+        IconButton,
+        IconElement,
     ],
     exports: [
         List,
@@ -23,6 +27,8 @@ import { MaterialIcon } from '../common/material-icon/material-icon';
         ListSlot,
         ListLeading,
         MaterialIcon,
+        IconButton,
+        IconElement,
     ]
 })
 export class ListModule { }

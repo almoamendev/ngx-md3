@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input } from '@angular/core';
 import { StateComponent } from '../../common/state-component';
 
 @Component({
@@ -11,6 +11,8 @@ import { StateComponent } from '../../common/state-component';
     ],
 })
 export class ListItem implements AfterViewInit {
+    @Input('slots-alignment') slotsAlignment: 'start' | 'center' | 'end' = 'center';
+
     constructor(private el: ElementRef) {
     }
 

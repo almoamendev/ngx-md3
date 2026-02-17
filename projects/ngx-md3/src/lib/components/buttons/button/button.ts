@@ -11,9 +11,9 @@ import { StateComponent } from '../../common/state-component';
     ],
 })
 export class Button implements AfterViewInit {
-    @Input() buttonSize: 'x-small' | 'small' | 'medium' | 'large' | 'x-large' = 'small';
-    @Input() buttonType: 'elevated' | 'filled' | 'tonal' | 'outlined' | 'text' = 'filled';
-    @Input() buttonSquared: boolean = false;
+    @Input('button-size') buttonSize: 'x-small' | 'small' | 'medium' | 'large' | 'x-large' = 'small';
+    @Input('button-type') buttonType: 'elevated' | 'filled' | 'tonal' | 'outlined' | 'text' = 'filled';
+    @Input('button-squared') buttonSquared: boolean = false;
 
     constructor(private el: ElementRef) {
     }

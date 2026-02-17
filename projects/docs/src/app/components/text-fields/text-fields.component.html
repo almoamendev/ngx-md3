@@ -3,7 +3,7 @@
 <ul>
     <li>@Input() label?: string;</li>
     <li>@Input() type: 'filled' | 'outlined' = 'filled';</li>
-    <li>@Input() inputCounter: boolean | number = false;</li>
+    <li>@Input() input-counter: boolean | number = false;</li>
     <li>@Input() control?: AbstractControl;</li>
 </ul>
 
@@ -51,7 +51,7 @@
     </md3-text-field>
     <md3-text-field label="Trailing button">
         <input md3-input-element type="text">
-        <button md3-icon-button buttonType="standard">
+        <button md3-icon-button button-type="standard">
             <md3-icon md3-icon-element>close</md3-icon>
         </button>
         <div md3-supporting-text>Input with trailing icon button</div>
@@ -59,18 +59,18 @@
 </div>
 
 <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
-    <md3-text-field label="Text counter" [inputCounter]="true">
+    <md3-text-field label="Text counter" [input-counter]="true">
         <input md3-input-element type="text">
         <div md3-supporting-text>Input with counter</div>
     </md3-text-field>
-    <md3-text-field label="Text counter/limit" [inputCounter]="300">
+    <md3-text-field label="Text counter/limit" [input-counter]="300">
         <input md3-input-element type="text">
         <div md3-supporting-text>Input with limited counter</div>
     </md3-text-field>
 </div>
 
 <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
-    <md3-text-field label="Textarea" [inputCounter]="3000">
+    <md3-text-field label="Textarea" [input-counter]="3000">
         <textarea md3-input-element></textarea>
         <div md3-supporting-text>Textarea input and counter</div>
     </md3-text-field>

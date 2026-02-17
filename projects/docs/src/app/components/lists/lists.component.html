@@ -7,26 +7,32 @@
 
 <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
     <md3-list style="flex: 1 1 auto;">
-        <md3-list-item>
+        <md3-list-item slots-alignment="start">
             <md3-list-leading type="icon">
                 <md3-icon>person</md3-icon>
             </md3-list-leading>
             <div md3-list-slot="content">Icon</div>
-            <div md3-list-slot="trailing"></div>
+            <div md3-list-slot="trailing">+100</div>
         </md3-list-item>
         <md3-list-item>
             <md3-list-leading type="avatar">
                 <span>A</span>
             </md3-list-leading>
             <div md3-list-slot="content">Avatar</div>
-            <div md3-list-slot="trailing"></div>
+            <div md3-list-slot="trailing">
+                <md3-icon>chevron_right</md3-icon>
+            </div>
         </md3-list-item>
         <md3-list-item>
             <md3-list-leading type="media">
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9zOGcuI9vSzATrKTCoudSLSY36LWLrtU-xA&s">
             </md3-list-leading>
             <div md3-list-slot="content">Media = image</div>
-            <div md3-list-slot="trailing"></div>
+            <div md3-list-slot="trailing">
+                <button md3-icon-button button-type="standard" button-width="narrow">
+                    <md3-icon md3-icon-element>person</md3-icon>
+                </button>
+            </div>
         </md3-list-item>
         <md3-list-item>
             <md3-list-leading type="media" size="small-video">

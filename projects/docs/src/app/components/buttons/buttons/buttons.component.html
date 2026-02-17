@@ -1,34 +1,34 @@
 <h1>Buttons</h1>
 
 <ul>
-    <li>@Input() buttonSize: 'x-small' | 'small' | 'medium' | 'large' | 'x-large' = 'small';</li>
-    <li>@Input() buttonType: 'elevated' | 'filled' | 'tonal' | 'outlined' | 'text' = 'filled';</li>
-    <li>@Input() buttonSquared: boolean = false;</li>
+    <li>@Input() button-size: 'x-small' | 'small' | 'medium' | 'large' | 'x-large' = 'small';</li>
+    <li>@Input() button-type: 'elevated' | 'filled' | 'tonal' | 'outlined' | 'text' = 'filled';</li>
+    <li>@Input() button-squared: boolean = false;</li>
 </ul>
 
 <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
     <button md3-button>Default</button>
-    <button md3-button [buttonSquared]="true">Square button</button>
+    <button md3-button [button-squared]="true">Square button</button>
 
-    <button md3-button buttonType="elevated">Elevated</button>
-    <button md3-button buttonType="filled">Filled</button>
-    <button md3-button buttonType="tonal">Tonal</button>
-    <button md3-button buttonType="outlined">Outlined</button>
-    <button md3-button buttonType="text">Text</button>
+    <button md3-button button-type="elevated">Elevated</button>
+    <button md3-button button-type="filled">Filled</button>
+    <button md3-button button-type="tonal">Tonal</button>
+    <button md3-button button-type="outlined">Outlined</button>
+    <button md3-button button-type="text">Text</button>
 </div>
 
 <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
-    <button md3-button buttonSize="x-small">x-small</button>
-    <button md3-button buttonSize="small">small</button>
-    <button md3-button buttonSize="medium">medium</button>
-    <button md3-button buttonSize="large">large</button>
-    <button md3-button buttonSize="x-large">x-large</button>
+    <button md3-button button-size="x-small">x-small</button>
+    <button md3-button button-size="small">small</button>
+    <button md3-button button-size="medium">medium</button>
+    <button md3-button button-size="large">large</button>
+    <button md3-button button-size="x-large">x-large</button>
 </div>
 
 <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
-    <button md3-button [buttonSquared]="true" buttonSize="x-small">x-small</button>
-    <button md3-button [buttonSquared]="true" buttonSize="small">small</button>
-    <button md3-button [buttonSquared]="true" buttonSize="medium">medium</button>
-    <button md3-button [buttonSquared]="true" buttonSize="large">large</button>
-    <button md3-button [buttonSquared]="true" buttonSize="x-large">x-large</button>
+    <button md3-button [button-squared]="true" button-size="x-small">x-small</button>
+    <button md3-button [button-squared]="true" button-size="small">small</button>
+    <button md3-button [button-squared]="true" button-size="medium">medium</button>
+    <button md3-button [button-squared]="true" button-size="large">large</button>
+    <button md3-button [button-squared]="true" button-size="x-large">x-large</button>
 </div>

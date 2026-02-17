@@ -9,6 +9,18 @@
     border-radius: var(--border-radius);
     transition: all var(--md-motion-expressive-fast-spatial-duration) var(--md-motion-expressive-fast-spatial-easing);
 
+    &[slots-alignment=start] {
+        align-items: start;
+    }
+    
+    &[slots-alignment=center] {
+        align-items: center;
+    }
+
+    &[slots-alignment=end] {
+        align-items: end;
+    }
+
     ::ng-deep md3-list-leading {
         display: inline-flex;
         align-items: center;
@@ -62,5 +74,24 @@
                 object-fit: cover;
             }
         }
+    }
+
+    ::ng-deep [md3-list-slot=content] {
+        flex: 1 1 max-content;
+        font-size: 1em;
+        line-height: 1.5em;
+        letter-spacing: 0.03125em;
+        font-weight: 400;
+        color: rgb(var(--md-scheme-on-surface));
+    }
+
+    ::ng-deep [md3-list-slot=trailing] {
+        flex: 0 1 max-content;
+        display: inline-flex;
+        align-items: center;
+        font-size: 0.6875em;
+        line-height: 1.454545em;
+        letter-spacing: 0.045455em;
+        font-weight: 500;
     }
 }

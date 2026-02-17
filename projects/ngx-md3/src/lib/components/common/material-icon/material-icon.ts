@@ -7,11 +7,11 @@ import { Component, AfterViewInit, Input, ElementRef } from '@angular/core';
     styleUrl: './material-icon.scss'
 })
 export class MaterialIcon implements AfterViewInit {
-    @Input() iconVersion: 'MaterialIcons' | 'MaterialSymbols' = 'MaterialSymbols';
+    @Input('icon-version') iconVersion: 'MaterialIcons' | 'MaterialSymbols' = 'MaterialSymbols';
     @Input() filled: boolean = false;
-    @Input() iconStyle: 'normal' | 'outlined' | 'rounded' | 'sharp' | 'two-tone' = 'normal';
-    @Input() iconSize: 48 | 36 | 24 | 18 = 24;
-    @Input() biDirectional: boolean = false;
+    @Input('icon-style') iconStyle: 'normal' | 'outlined' | 'rounded' | 'sharp' | 'two-tone' = 'normal';
+    @Input('icon-size') iconSize: 48 | 36 | 24 | 18 = 24;
+    @Input('bi-directional') biDirectional: boolean = false;
 
     constructor(private el: ElementRef) {
     }

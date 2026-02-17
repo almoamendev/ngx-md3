@@ -1,38 +1,38 @@
 <h1>Floating Action Buttons</h1>
 
 <ul>
-    <li>@Input() buttonSize: 'small' | 'medium' | 'large' = 'small';</li>
-    <li>@Input() buttonColor: 'tonal-primary' | 'tonal-secondary' | 'tonal-tertiary' | 'primary' | 'secondary' | 'tertiary' = 'tonal-primary';</li>
-    <li>@Input() extendedFAB: boolean = false;</li>
+    <li>@Input() button-size: 'small' | 'medium' | 'large' = 'small';</li>
+    <li>@Input() button-color: 'tonal-primary' | 'tonal-secondary' | 'tonal-tertiary' | 'primary' | 'secondary' | 'tertiary' = 'tonal-primary';</li>
+    <li>@Input() extended-fab: boolean = false;</li>
 </ul>
 
 <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
     <button md3-fab>
         <md3-icon md3-icon-element>person</md3-icon>
     </button>
-    <button md3-fab [extendedFAB]="true">
+    <button md3-fab [extended-fab]="true">
         <md3-icon md3-icon-element>person</md3-icon>
         Extended button
     </button>
 </div>
 
 <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
-    <button md3-fab buttonColor="tonal-primary" [extendedFAB]="true">
+    <button md3-fab button-color="tonal-primary" [extended-fab]="true">
         Tonal primary
     </button>
-    <button md3-fab buttonColor="tonal-secondary" [extendedFAB]="true">
+    <button md3-fab button-color="tonal-secondary" [extended-fab]="true">
         Tonal secondary
     </button>
-    <button md3-fab buttonColor="tonal-tertiary" [extendedFAB]="true">
+    <button md3-fab button-color="tonal-tertiary" [extended-fab]="true">
         Tonal tertiary
     </button>
-    <button md3-fab buttonColor="primary" [extendedFAB]="true">
+    <button md3-fab button-color="primary" [extended-fab]="true">
         Primary
     </button>
-    <button md3-fab buttonColor="secondary" [extendedFAB]="true">
+    <button md3-fab button-color="secondary" [extended-fab]="true">
         Secondary
     </button>
-    <button md3-fab buttonColor="tertiary" [extendedFAB]="true">
+    <button md3-fab button-color="tertiary" [extended-fab]="true">
         Tertiary
     </button>
 </div>
