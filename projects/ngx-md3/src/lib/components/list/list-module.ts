@@ -6,6 +6,7 @@ import { ListLeading } from './list-leading/list-leading';
 import { MaterialIcon } from '../common/material-icon/material-icon';
 import { IconButton } from '../buttons/icon-button/icon-button';
 import { IconElement } from '../common/icon-element';
+import { PrimaryAction } from './primary-action';
 
 
 
@@ -15,6 +16,7 @@ import { IconElement } from '../common/icon-element';
         ListItem,
         ListSlot,
         ListLeading,
+        PrimaryAction,
     ],
     imports: [
         MaterialIcon,
@@ -29,6 +31,7 @@ import { IconElement } from '../common/icon-element';
         MaterialIcon,
         IconButton,
         IconElement,
+        PrimaryAction,
     ]
 })
 export class ListModule { }

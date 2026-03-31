@@ -8,6 +8,7 @@
     color: var(--foreground-color);
     border-radius: var(--border-radius);
     transition: all var(--md-motion-expressive-fast-spatial-duration) var(--md-motion-expressive-fast-spatial-easing);
+    position: relative;
 
     &[slots-alignment=start] {
         align-items: start;
@@ -93,5 +94,14 @@
         line-height: 1.454545em;
         letter-spacing: 0.045455em;
         font-weight: 500;
+    }
+
+    ::ng-deep [md3-primary-action] {
+        cursor: pointer;
+        position: absolute;
+        inset: 0;
+        border-radius: var(--border-radius);
+        border: none;
+        background: none;
     }
 }

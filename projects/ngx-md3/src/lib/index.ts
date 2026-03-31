@@ -26,6 +26,7 @@ export * from './components/list/list';
 export * from './components/list/list-item/list-item';
 export * from './components/list/list-leading/list-leading';
 export * from './components/list/list-slot';
+export * from './components/list/primary-action';
 export * from './components/list/list-module';
 
 // loading and progress

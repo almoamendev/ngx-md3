@@ -28,21 +28,21 @@
         }
 
         ::ng-deep md3-list-item {
-            &:first-child {
+            &:first-child, &:first-child [md3-primary-action] {
                 border-start-start-radius: 1em;
                 border-start-end-radius: 1em;
             }
             
-            &:last-child {
+            &:last-child, &:last-child [md3-primary-action] {
                 border-end-start-radius: 1em;
                 border-end-end-radius: 1em;
             }
 
-            &:hover {
+            [md3-primary-action]:hover {
                 --border-radius: 0.75em;
             }
 
-            &:focus {
+            [md3-primary-action]:focus {
                 --border-radius: 1em;
             }
         }
