@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
-import { ListModule } from '@vip9008/ngx-md3';
+import { Checkbox, InputElement, ListModule } from '@vip9008/ngx-md3';
 
 @Component({
     selector: 'app-lists.component',
     imports: [
         ListModule,
+        Checkbox,
+        InputElement
     ],
     templateUrl: './lists.component.html',
     styleUrl: './lists.component.scss',

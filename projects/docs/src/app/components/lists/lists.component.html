@@ -8,7 +8,6 @@
 <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
     <md3-list style="flex: 1 1 auto;">
         <md3-list-item slots-alignment="start">
-            <label md3-primary-action></label>
             <md3-list-leading type="icon">
                 <md3-icon>person</md3-icon>
             </md3-list-leading>
@@ -49,6 +48,17 @@
             <div md3-list-slot="content">Media = large video</div>
             <div md3-list-slot="trailing"></div>
         </md3-list-item>
+        <label md3-list-item slots-alignment="center">
+            <md3-list-leading type="media" size="large-video">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9zOGcuI9vSzATrKTCoudSLSY36LWLrtU-xA&s">
+            </md3-list-leading>
+            <div md3-list-slot="content">Media = large video (Checkbox)</div>
+            <div md3-list-slot="trailing">
+                <md3-checkbox>
+                    <input type="checkbox" md3-input-element>
+                </md3-checkbox>
+            </div>
+        </label>
     </md3-list>
     <md3-list type="segmented" style="flex: 1 1 auto;">
         <md3-list-item>
