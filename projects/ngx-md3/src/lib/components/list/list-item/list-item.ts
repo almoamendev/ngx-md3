@@ -1,4 +1,4 @@
-import { Component, ContentChild, ElementRef, Input, OnInit } from '@angular/core';
+import { Component, ContentChild, ElementRef, Input, AfterViewInit } from '@angular/core';
 import { PrimaryAction } from '../primary-action';
 import { StateComponent } from '../../common/state-component';
 
@@ -11,7 +11,7 @@ import { StateComponent } from '../../common/state-component';
         StateComponent
     ],
 })
-export class ListItem implements OnInit {
+export class ListItem implements AfterViewInit {
     @Input('slots-alignment') slotsAlignment: 'start' | 'center' | 'end' = 'center';
     @ContentChild(PrimaryAction) primaryAction?: PrimaryAction;
 
@@ -24,7 +24,7 @@ export class ListItem implements OnInit {
         return this.el.nativeElement as HTMLElement;
     }
 
-    ngOnInit(): void {
+    ngAfterViewInit(): void {
         let tagName = this.element.tagName.toLowerCase();
 
         if (tagName == 'label') {

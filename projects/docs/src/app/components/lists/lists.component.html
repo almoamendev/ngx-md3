@@ -96,6 +96,13 @@
             <div md3-list-slot="content">Media = large video</div>
             <div md3-list-slot="trailing"></div>
         </md3-list-item>
+        <button md3-list-item>
+            <md3-list-leading type="media" size="large-video">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9zOGcuI9vSzATrKTCoudSLSY36LWLrtU-xA&s">
+            </md3-list-leading>
+            <div md3-list-slot="content">Interactive -> primary action</div>
+            <div md3-list-slot="trailing"></div>
+        </button>
     </md3-list>
     <md3-list variant="baseline" style="flex: 1 1 auto;">
         <md3-list-item>
@@ -132,6 +139,18 @@
             </md3-list-leading>
             <div md3-list-slot="content">Media = large video</div>
             <div md3-list-slot="trailing"></div>
+        </md3-list-item>
+        <md3-list-item>
+            <button md3-primary-action></button>
+            <md3-list-leading type="media">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9zOGcuI9vSzATrKTCoudSLSY36LWLrtU-xA&s">
+            </md3-list-leading>
+            <div md3-list-slot="content">Primary + secondary actions</div>
+            <div md3-list-slot="trailing">
+                <button md3-icon-button button-type="standard" button-width="narrow">
+                    <md3-icon md3-icon-element>person</md3-icon>
+                </button>
+            </div>
         </md3-list-item>
     </md3-list>
 </div>
