@@ -17,7 +17,10 @@ export class ListItem implements AfterViewInit {
 
     public isActionTag: boolean = false;
 
-    constructor(private el: ElementRef) {
+    constructor(
+        private el: ElementRef,
+        private state: StateComponent
+    ) {
     }
 
     public get element(): HTMLElement {
@@ -34,7 +37,7 @@ export class ListItem implements AfterViewInit {
         this.isActionTag = tagName != 'md3-list-item';
         
         if (!this.isActionTag) {
-            this.element.classList.remove('md3-state-component');
+            this.state.disable();
         }
     }
 }

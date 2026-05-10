@@ -154,3 +154,37 @@
         </md3-list-item>
     </md3-list>
 </div>
+<div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
+    <md3-list style="flex: 1 1 auto;">
+        <button type="button" md3-list-item>
+            <md3-list-leading type="avatar">
+                <span>A</span>
+            </md3-list-leading>
+            <div md3-list-slot="content">Enabled</div>
+        </button>
+        <button type="button" md3-list-item disabled>
+            <md3-list-leading type="avatar">
+                <span>A</span>
+            </md3-list-leading>
+            <div md3-list-slot="content">Disabled</div>
+        </button>
+    </md3-list>
+    <md3-list style="flex: 1 1 auto;">
+        <md3-list-item>
+            <button type="button" md3-primary-action></button>
+            <md3-list-leading type="avatar">
+                <span>A</span>
+            </md3-list-leading>
+            <div md3-list-slot="content">Primary-action: Enabled</div>
+        </md3-list-item>
+        <md3-list-item>
+            <button type="button" md3-primary-action disabled></button>
+            <md3-list-leading type="avatar">
+                <span>A</span>
+            </md3-list-leading>
+            <div md3-list-slot="content">Primary-action: Disabled</div>
+        </md3-list-item>
+    </md3-list>
+    <md3-list style="flex: 1 1 auto;">
+    </md3-list>
+</div>

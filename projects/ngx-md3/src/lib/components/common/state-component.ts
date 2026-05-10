@@ -12,9 +12,13 @@ export class StateComponent implements OnInit {
     constructor(
         private el: ElementRef<HTMLElement>,
         private renderer: Renderer2
-    ) { }
+    ) {}
 
     ngOnInit(): void {
+        this.init();
+    }
+
+    private init(): void {
         let layer = this.el.nativeElement.querySelector(
             ':scope > .md3-state-layer'
         ) as HTMLDivElement | null;
@@ -32,6 +36,16 @@ export class StateComponent implements OnInit {
         }
 
         this.stateLayer = layer;
+    }
+
+    public enable(): void {
+        this.el.nativeElement.classList.add('md3-state-component');
+        this.init();
+    }
+
+    public disable(): void {
+        this.el.nativeElement.classList.remove('md3-state-component');
+        this.stateLayer?.remove();
     }
 
     @HostListener('pointerdown', ['$event'])

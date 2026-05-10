@@ -173,6 +173,23 @@ body {
             opacity: 0.16;
         }
     }
+
+    &.disabled, &:disabled {
+        cursor: default !important;
+
+        .md3-state-layer {
+            opacity: 0.1;
+            background-color: rgb(var(--state-color, --md-scheme-primary));
+
+            &::before {
+                display: none;
+            }
+        }
+
+        &::after {
+            display: none;
+        }
+    }
 }
 
 .md3-display {
