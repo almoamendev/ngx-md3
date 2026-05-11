@@ -1,4 +1,4 @@
-import { AfterContentInit, Component, ContentChild, DestroyRef, ElementRef, Input } from '@angular/core';
+import { AfterContentInit, Component, ContentChild, DestroyRef, effect, ElementRef, input, Input } from '@angular/core';
 import { StateComponent } from '../common/state-component';
 import { InputElement } from '../common/input-element';
 import { MaterialIcon } from '../common/material-icon/material-icon';
@@ -19,7 +19,11 @@ import { AbstractControl, FormControlName } from '@angular/forms';
 })
 export class Checkbox implements AfterContentInit {
     @Input() control?: AbstractControl;
-
+    
+    public readonly disableStateLayer = input<boolean>(false, {
+        alias: 'disable-state-layer'
+    });
+    
     public checkboxIcon: 'check_small' | 'check_indeterminate_small' = 'check_small';
     public hasError: boolean = false;
 
@@ -28,8 +32,16 @@ export class Checkbox implements AfterContentInit {
 
     constructor(
         private el: ElementRef<HTMLElement>,
+        private state: StateComponent,
         private destroyRef: DestroyRef
     ) {
+        effect(() => {
+            if (this.disableStateLayer()) {
+                this.state.disable();
+            } else {
+                this.state.enable();
+            }
+        })
     }
 
     public get formControl(): AbstractControl | undefined {

@@ -54,7 +54,7 @@
             </md3-list-leading>
             <div md3-list-slot="content">Media = large video (Checkbox)</div>
             <div md3-list-slot="trailing">
-                <md3-checkbox>
+                <md3-checkbox [disable-state-layer]="true">
                     <input type="checkbox" md3-input-element>
                 </md3-checkbox>
             </div>
@@ -186,5 +186,31 @@
         </md3-list-item>
     </md3-list>
     <md3-list style="flex: 1 1 auto;">
+        <button type="button" md3-list-item class="selected">
+            <md3-list-leading type="avatar">
+                <span>A</span>
+            </md3-list-leading>
+            <div md3-list-slot="content">Selected</div>
+        </button>
+        <md3-list-item>
+            <button type="button" md3-primary-action class="selected"></button>
+            <md3-list-leading type="avatar">
+                <span>A</span>
+            </md3-list-leading>
+            <div md3-list-slot="content">Primary-action: Selected</div>
+        </md3-list-item>
+        <button type="button" md3-list-item class="selected" disabled>
+            <md3-list-leading type="avatar">
+                <span>A</span>
+            </md3-list-leading>
+            <div md3-list-slot="content">Selected</div>
+        </button>
+        <md3-list-item>
+            <button type="button" md3-primary-action class="selected" disabled></button>
+            <md3-list-leading type="avatar">
+                <span>A</span>
+            </md3-list-leading>
+            <div md3-list-slot="content">Primary-action: Selected</div>
+        </md3-list-item>
     </md3-list>
 </div>

@@ -16,6 +16,15 @@
     position: relative;
     z-index: 1;
 
+    &:has(.md3-state-component) {
+        background-color: transparent;
+    }
+
+    &.selected, &:has(.md3-state-component.selected) {
+        --background-color: rgb(var(--md-scheme-secondary-container));
+        --foreground-color: rgb(var(--md-scheme-on-secondary-container));
+    }
+
     &:hover, &:has(.md3-state-component:hover) {
         z-index: 2;
     }
@@ -41,6 +50,7 @@
         align-items: center;
         justify-content: center;
         overflow: hidden;
+        pointer-events: none;
 
         &[type=icon] {
             font-size: var(--leading-icon-size, 1.5em);
@@ -98,6 +108,7 @@
         letter-spacing: 0.03125em;
         font-weight: 400;
         color: rgb(var(--md-scheme-on-surface));
+        pointer-events: none;
     }
 
     ::ng-deep [md3-list-slot=trailing] {
@@ -108,6 +119,7 @@
         line-height: 1.454545em;
         letter-spacing: 0.045455em;
         font-weight: 500;
+        pointer-events: none;
     }
 
     ::ng-deep [md3-primary-action] {
@@ -117,9 +129,13 @@
         font-size: 1rem;
         border-radius: var(--border-radius);
         border: none;
-        background: none;
+        background-color: var(--background-color);
+        z-index: -1;
 
         &.disabled, &:disabled {
+            --background-color: transparent;
+            --state-color: var(--md-scheme-on-surface);
+
             &, & ~ * {
                 --foreground-color: rgb(var(--md-scheme-on-surface));
                 --border-radius: 0.75em;
@@ -130,9 +146,14 @@
     }
 
     &.disabled, &:disabled {
+        --background-color: transparent;
         --foreground-color: rgb(var(--md-scheme-on-surface));
         --border-radius: 0.75em;
 
         opacity: 0.38;
+    }
+
+    ::ng-deep input, ::ng-deep button, ::ng-deep a {
+        pointer-events: all;
     }
 }
