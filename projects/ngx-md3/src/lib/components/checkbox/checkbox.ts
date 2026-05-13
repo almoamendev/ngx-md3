@@ -1,4 +1,4 @@
-import { AfterContentInit, Component, ContentChild, DestroyRef, effect, ElementRef, input, Input } from '@angular/core';
+import { AfterContentInit, Component, ContentChild, DestroyRef, effect, ElementRef, input, Input, signal } from '@angular/core';
 import { StateComponent } from '../common/state-component';
 import { InputElement } from '../common/input-element';
 import { MaterialIcon } from '../common/material-icon/material-icon';
@@ -19,6 +19,9 @@ import { AbstractControl, FormControlName } from '@angular/forms';
 })
 export class Checkbox implements AfterContentInit {
     @Input() control?: AbstractControl;
+
+    @ContentChild(InputElement) input?: InputElement;
+    @ContentChild(FormControlName) controlName?: FormControlName;
     
     public readonly disableStateLayer = input<boolean>(false, {
         alias: 'disable-state-layer'
@@ -26,20 +29,18 @@ export class Checkbox implements AfterContentInit {
     
     public checkboxIcon: 'check_small' | 'check_indeterminate_small' = 'check_small';
     public hasError: boolean = false;
-
-    @ContentChild(InputElement) input?: InputElement;
-    @ContentChild(FormControlName) controlName?: FormControlName;
+    public state = signal<boolean | null>(false);
 
     constructor(
         private el: ElementRef<HTMLElement>,
-        private state: StateComponent,
+        private stateComponent: StateComponent,
         private destroyRef: DestroyRef
     ) {
         effect(() => {
             if (this.disableStateLayer()) {
-                this.state.disable();
+                this.stateComponent.disable();
             } else {
-                this.state.enable();
+                this.stateComponent.enable();
             }
         })
     }
@@ -83,15 +84,18 @@ export class Checkbox implements AfterContentInit {
             fromEvent(this.input.nativeElement, 'change').pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
                 if (this.input?.nativeElement.indeterminate) {
                     this.checkboxIcon = 'check_indeterminate_small';
+                    this.state.set(null);
                 } else {
                     this.checkboxIcon = 'check_small';
+                    this.state.set(this.input?.nativeElement.checked ?? false);
                 }
             });
         }
 
         this.updateInputValidity();
 
-        this.formControl?.statusChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
+        this.formControl?.statusChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((change) => {
+            this.state.set(this.formControl?.value);
             this.updateInputValidity();
         });
     }
@@ -102,5 +106,7 @@ export class Checkbox implements AfterContentInit {
             this.input.nativeElement.checked = state === true;
             this.input.nativeElement.dispatchEvent(new Event('change'));
         }
+
+        this.formControl?.setValue(state);
     }
 }

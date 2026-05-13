@@ -1,6 +1,7 @@
-import { Component, ContentChild, ElementRef, Input, AfterViewInit } from '@angular/core';
+import { Component, ContentChild, ElementRef, Input, AfterViewInit, effect, signal, computed, contentChild } from '@angular/core';
 import { PrimaryAction } from '../primary-action';
 import { StateComponent } from '../../common/state-component';
+import { Checkbox } from '../../checkbox/checkbox';
 
 @Component({
     selector: 'md3-list-item, label[md3-list-item], button[md3-list-item], a[md3-list-item]',
@@ -13,14 +14,38 @@ import { StateComponent } from '../../common/state-component';
 })
 export class ListItem implements AfterViewInit {
     @Input('slots-alignment') slotsAlignment: 'start' | 'center' | 'end' = 'center';
+    @Input() set selected(value: boolean) {
+        this.selectSignal.set(value);
+    }
+    
     @ContentChild(PrimaryAction) primaryAction?: PrimaryAction;
 
     public isActionTag: boolean = false;
+    private checkbox = contentChild(Checkbox);
+    private selectSignal = signal<boolean>(false);
+    private selectionControlSignal = computed(() => {
+        if (this.checkbox()) {
+            return this.checkbox()?.state() === true;
+        }
+
+        return this.selectSignal();
+    });
 
     constructor(
         private el: ElementRef,
         private state: StateComponent
     ) {
+        effect(() => {
+            if (this.selectSignal()) {
+                this.element?.classList.add('selected');
+            } else {
+                this.element?.classList.remove('selected');
+            }
+        });
+
+        effect(() => {
+            this.selected = this.selectionControlSignal();
+        });
     }
 
     public get element(): HTMLElement {

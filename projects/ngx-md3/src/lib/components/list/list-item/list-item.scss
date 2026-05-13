@@ -20,9 +20,10 @@
         background-color: transparent;
     }
 
-    &.selected, &:has(.md3-state-component.selected) {
+    &.selected {
         --background-color: rgb(var(--md-scheme-secondary-container));
         --foreground-color: rgb(var(--md-scheme-on-secondary-container));
+        --border-radius: 1em;
     }
 
     &:hover, &:has(.md3-state-component:hover) {

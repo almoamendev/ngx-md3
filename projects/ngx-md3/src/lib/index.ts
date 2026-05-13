@@ -1,3 +1,6 @@
+//types
+export * from './types/text-color.type';
+
 // typography
 export * from './typography/type-display';
 export * from './typography/type-headline';
