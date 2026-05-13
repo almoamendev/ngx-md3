@@ -5,7 +5,7 @@ import { Directive, ElementRef, Input } from '@angular/core';
     standalone: false
 })
 export class ListSlot {
-    @Input('md3-list-slot') position!: string;
+    @Input({ alias: 'md3-list-slot', required: true }) position!: 'content' | 'trailing';
 
     constructor(private el: ElementRef) { }
 

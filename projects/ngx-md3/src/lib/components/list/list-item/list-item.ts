@@ -2,6 +2,7 @@ import { Component, ContentChild, ElementRef, Input, AfterViewInit, effect, sign
 import { PrimaryAction } from '../primary-action';
 import { StateComponent } from '../../common/state-component';
 import { Checkbox } from '../../checkbox/checkbox';
+import { RadioButton } from '../../radio-button/radio-button';
 
 @Component({
     selector: 'md3-list-item, label[md3-list-item], button[md3-list-item], a[md3-list-item]',
@@ -22,10 +23,11 @@ export class ListItem implements AfterViewInit {
 
     public isActionTag: boolean = false;
     private checkbox = contentChild(Checkbox);
+    private radioButton = contentChild(RadioButton);
     private selectSignal = signal<boolean>(false);
     private selectionControlSignal = computed(() => {
-        if (this.checkbox()) {
-            return this.checkbox()?.state() === true;
+        if (this.checkbox() || this.radioButton()) {
+            return (this.checkbox()?.state() || this.radioButton()?.state()) === true;
         }
 
         return this.selectSignal();

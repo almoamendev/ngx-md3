@@ -11,6 +11,7 @@ import { TextFieldsComponent } from './components/text-fields/text-fields.compon
 import { CheckboxesComponent } from './components/checkboxes/checkboxes.component';
 import { TypographyComponent } from './styles/typography/typography.component';
 import { ListsComponent } from './components/lists/lists.component';
+import { RadioButtonsComponent } from './components/radio-buttons/radio-buttons.component';
 
 export const routes: Routes = [
     {
@@ -53,6 +54,10 @@ export const routes: Routes = [
                     {
                         path: 'checkboxes',
                         component: CheckboxesComponent,
+                    },
+                    {
+                        path: 'radio-buttons',
+                        component: RadioButtonsComponent,
                     },
                     {
                         path: 'lists',

@@ -7,6 +7,6 @@ import { Component, Input } from '@angular/core';
     styleUrl: './list-leading.scss',
 })
 export class ListLeading {
-    @Input() type: 'icon' | 'avatar' | 'media' = 'icon';
+    @Input() type: 'icon' | 'avatar' | 'media' | 'selection-input' = 'icon';
     @Input() size: 'image' | 'small-video' | 'large-video' = 'image';
 }

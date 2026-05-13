@@ -1,0 +1,104 @@
+:host {
+    --radio-button-color: rgb(var(--md-scheme-on-surface-variant));
+    --radio-button-icon-color: rgb(var(--md-scheme-primary));
+    --state-color: var(--md-scheme-on-surface);
+    --border-radius: 2.5em;
+    --border-size: 0em;
+    --outline-color: rgb(var(--md-scheme-secondary));
+    --outline-width: 0.1875em;
+    --outline-offset: -0.125em;
+
+    position: relative;
+    font-size: 1rem;
+    height: 2.5em;
+    width: 2.5em;
+    border-radius: var(--border-radius);
+
+    .md3-radio-button-icon {
+        font-size: 1rem;
+        position: absolute;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        inset: 0.5em;
+        width: 1.5em;
+        height: 1.5em;
+        pointer-events: none;
+
+        &::before {
+            content: '';
+            display: block;
+            height: 1.125em;
+            width: 1.125em;
+            border: 0.125em solid var(--radio-button-color);
+            border-radius: 50%;
+            transition: all var(--md-motion-standard-fast-spatial-duration) var(--md-motion-standard-fast-spatial-easing);
+        }
+
+        &::after {
+            content: '';
+            position: absolute;
+            display: block;
+            height: 0.625em;
+            width: 0.625em;
+            border-radius: 50%;
+            background-color: var(--radio-button-icon-color);
+            opacity: 0;
+            transform: scale(0);
+            transition: all var(--md-motion-standard-fast-spatial-duration) var(--md-motion-standard-fast-spatial-easing);
+        }
+    }
+
+    ::ng-deep .md3-input-element {
+        display: block;
+        height: 100%;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        opacity: 0;
+
+        &:focus {
+            & + .md3-radio-button-icon {
+                --radio-button-color: rgb(var(--md-scheme-on-surface));
+            }
+        }
+
+        &:checked {
+            & + .md3-radio-button-icon {
+                --radio-button-color: rgb(var(--md-scheme-primary));
+
+                &::after {
+                    opacity: 1;
+                    transform: scale(1);
+                }
+            }
+
+            & ~ .md3-state-layer {
+                --state-color: var(--md-scheme-primary);
+            }
+        }
+
+        &[aria-invalid=true] {
+            & + .md3-radio-button-icon {
+                --radio-button-color: rgb(var(--md-scheme-error));
+                --radio-button-icon-color: rgb(var(--md-scheme-error));
+            }
+
+            & ~ .md3-state-layer {
+                --state-color: var(--md-scheme-error);
+            }
+        }
+
+        &:disabled {
+            & + .md3-radio-button-icon {
+                --radio-button-color: rgb(var(--md-scheme-on-surface));
+                --radio-button-icon-color: rgb(var(--md-scheme-on-surface));
+                opacity: 0.38;
+            }
+
+            & ~ .md3-state-layer {
+                display: none;
+            }
+        }
+    }
+}

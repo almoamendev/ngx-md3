@@ -1,8 +1,32 @@
 <h1>Lists</h1>
 
+<h3>md3-list options</h3>
 <ul>
     <li>@Input() variant: 'expressive' | 'baseline' = 'expressive';</li>
     <li>@Input() type: 'standard' | 'segmented' = 'standard';</li>
+</ul>
+
+<h3>md3-list-item options</h3>
+<ul>
+    <li>@Input() slots-alignment: 'start' | 'center' | 'end' = 'center';</li>
+    <li>@Input() selected: boolean = false;</li>
+</ul>
+
+<h3>md3-list-item options</h3>
+<ul>
+    <li>@Input() slots-alignment: 'start' | 'center' | 'end' = 'center';</li>
+    <li>@Input() selected: boolean = false;</li>
+</ul>
+
+<h3>md3-list-leading options</h3>
+<ul>
+    <li>@Input() type: 'icon' | 'avatar' | 'media' = 'icon';</li>
+    <li>@Input() size: 'image' | 'small-video' | 'large-video' = 'image';</li>
+</ul>
+
+<h3>md3-list-slot options</h3>
+<ul>
+    <li>@Input({{'{ required: true }'}}) md3-list-slot: 'content' | 'trailing';</li>
 </ul>
 
 <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
@@ -51,17 +75,6 @@
             <div md3-list-slot="content">Media = large video</div>
             <div md3-list-slot="trailing"></div>
         </md3-list-item>
-        <label md3-list-item slots-alignment="center">
-            <md3-list-leading type="media" size="large-video">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9zOGcuI9vSzATrKTCoudSLSY36LWLrtU-xA&s">
-            </md3-list-leading>
-            <div md3-list-slot="content">Media = large video (Checkbox)</div>
-            <div md3-list-slot="trailing">
-                <md3-checkbox [disable-state-layer]="true">
-                    <input type="checkbox" md3-input-element>
-                </md3-checkbox>
-            </div>
-        </label>
     </md3-list>
     <md3-list type="segmented" style="flex: 1 1 auto;">
         <md3-list-item>
@@ -171,6 +184,41 @@
             </md3-list-leading>
             <div md3-list-slot="content">Disabled</div>
         </button>
+        
+        <label md3-list-item slots-alignment="center">
+            <md3-list-leading type="media" size="large-video">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9zOGcuI9vSzATrKTCoudSLSY36LWLrtU-xA&s">
+            </md3-list-leading>
+            <div md3-list-slot="content">Media = large video (Checkbox)</div>
+            <div md3-list-slot="trailing">
+                <md3-checkbox [disable-state-layer]="true">
+                    <input type="checkbox" md3-input-element>
+                </md3-checkbox>
+            </div>
+        </label>
+        
+        <label md3-list-item slots-alignment="center">
+            <md3-list-leading type="media" size="large-video">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9zOGcuI9vSzATrKTCoudSLSY36LWLrtU-xA&s">
+            </md3-list-leading>
+            <div md3-list-slot="content">Media = large video (Radio)</div>
+            <div md3-list-slot="trailing">
+                <md3-radio-button [disable-state-layer]="true">
+                    <input type="radio" md3-input-element name="radio1" checked>
+                </md3-radio-button>
+            </div>
+        </label>
+        <label md3-list-item slots-alignment="center">
+            <md3-list-leading type="media" size="large-video">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9zOGcuI9vSzATrKTCoudSLSY36LWLrtU-xA&s">
+            </md3-list-leading>
+            <div md3-list-slot="content">Media = large video (Radio)</div>
+            <div md3-list-slot="trailing">
+                <md3-radio-button [disable-state-layer]="true">
+                    <input type="radio" md3-input-element name="radio1">
+                </md3-radio-button>
+            </div>
+        </label>
     </md3-list>
     <md3-list style="flex: 1 1 auto;">
         <md3-list-item>
@@ -187,6 +235,33 @@
             </md3-list-leading>
             <div md3-list-slot="content">Primary-action: Disabled</div>
         </md3-list-item>
+        <label md3-list-item slots-alignment="center">
+            <md3-list-leading type="selection-input">
+                <md3-checkbox [disable-state-layer]="true">
+                    <input type="checkbox" md3-input-element>
+                </md3-checkbox>
+            </md3-list-leading>
+            <div md3-list-slot="content">Selection input = Checkbox</div>
+        </label>
+        
+        <label md3-list-item slots-alignment="center">
+            <md3-list-leading type="selection-input">
+                <md3-radio-button [disable-state-layer]="true">
+                    <input type="radio" md3-input-element name="radio2" checked>
+                </md3-radio-button>
+            </md3-list-leading>
+            <div md3-list-slot="content">Selection input = Radio</div>
+            <div md3-list-slot="trailing">
+            </div>
+        </label>
+        <label md3-list-item slots-alignment="center">
+            <md3-list-leading type="selection-input">
+                <md3-radio-button [disable-state-layer]="true">
+                    <input type="radio" md3-input-element name="radio2" checked>
+                </md3-radio-button>
+            </md3-list-leading>
+            <div md3-list-slot="content">Selection input = Radio</div>
+        </label>
     </md3-list>
     <md3-list style="flex: 1 1 auto;">
         <button type="button" md3-list-item [selected]="true">
