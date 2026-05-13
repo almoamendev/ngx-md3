@@ -71,6 +71,57 @@ export class Checkbox implements AfterContentInit {
         }
     }
 
+    private updateState(state: boolean | null = false): void {
+        this.checkboxIcon = state === null
+            ? 'check_indeterminate_small'
+            : 'check_small';
+
+        this.state.set(state);
+    }
+
+    private syncStateFromInput(): void {
+        if (!this.input?.nativeElement) {
+            return;
+        }
+
+        if (this.input.nativeElement.indeterminate) {
+            this.updateState(null);
+            return;
+        }
+
+        this.updateState(this.input.nativeElement.checked);
+    }
+
+    private syncInputFromState(state: boolean | null = false): void {
+        if (!this.input?.nativeElement) {
+            return;
+        }
+
+        this.input.nativeElement.indeterminate = state === null;
+        this.input.nativeElement.checked = state === true;
+    }
+
+    private syncControlFromState(state: boolean | null = false): void {
+        if (!this.formControl || this.formControl.value === state) {
+            return;
+        }
+
+        this.formControl.setValue(state);
+    }
+
+    private syncStateFromControl(): void {
+        if (!this.formControl) {
+            return;
+        }
+
+        let controlState = this.formControl.value === null
+            ? null
+            : this.formControl.value === true;
+
+        this.updateState(controlState);
+        this.syncInputFromState(controlState);
+    }
+
     ngAfterContentInit(): void {
         if (this.input?.nativeElement) {
             fromEvent(this.input.nativeElement, 'focus').pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
@@ -82,24 +133,27 @@ export class Checkbox implements AfterContentInit {
             });
 
             fromEvent(this.input.nativeElement, 'change').pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
-                if (this.input?.nativeElement.indeterminate) {
-                    this.checkboxIcon = 'check_indeterminate_small';
-                    this.state.set(null);
-                } else {
-                    this.checkboxIcon = 'check_small';
-                    this.state.set(this.input?.nativeElement.checked ?? false);
-                }
+                this.syncStateFromInput();
+                this.syncControlFromState(this.state());
+                this.updateInputValidity();
             });
+        }
+
+        if (this.formControl) {
+            this.syncStateFromControl();
+        } else {
+            this.syncStateFromInput();
         }
 
         this.updateInputValidity();
 
         this.formControl?.statusChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
+            this.syncStateFromControl();
             this.updateInputValidity();
         });
 
-        this.formControl?.valueChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((change) => {
-            this.state.set(change);
+        this.formControl?.valueChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
+            this.syncStateFromControl();
             this.updateInputValidity();
         });
     }
@@ -111,6 +165,7 @@ export class Checkbox implements AfterContentInit {
             this.input.nativeElement.dispatchEvent(new Event('change'));
         }
 
-        this.formControl?.setValue(state);
+        this.updateState(state);
+        this.syncControlFromState(state);
     }
 }
