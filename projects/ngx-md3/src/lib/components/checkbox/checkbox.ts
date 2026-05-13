@@ -94,8 +94,12 @@ export class Checkbox implements AfterContentInit {
 
         this.updateInputValidity();
 
-        this.formControl?.statusChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((change) => {
-            this.state.set(this.formControl?.value);
+        this.formControl?.statusChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
+            this.updateInputValidity();
+        });
+
+        this.formControl?.valueChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((change) => {
+            this.state.set(change);
             this.updateInputValidity();
         });
     }

@@ -53,14 +53,14 @@
         opacity: 0;
 
         &:focus {
-            &+.md3-checkbox-icon {
+            & + .md3-checkbox-icon {
                 --checkbox-color: rgb(var(--md-scheme-on-surface));
             }
         }
 
         &:checked,
         &:indeterminate {
-            &+.md3-checkbox-icon {
+            & + .md3-checkbox-icon {
                 --checkbox-color: rgb(var(--md-scheme-primary));
 
                 &::before {
@@ -72,30 +72,31 @@
                 }
             }
 
-            &~.md3-state-layer {
+            & ~ .md3-state-layer {
                 --state-color: var(--md-scheme-primary);
             }
         }
 
-        &:disabled {
-            &+.md3-checkbox-icon {
-                --checkbox-color: rgb(var(--md-scheme-on-surface));
-                opacity: 0.38;
-            }
-
-            &~.md3-state-layer {
-                display: none;
-            }
-        }
-
         &[aria-invalid=true] {
-            &+.md3-checkbox-icon {
+            & + .md3-checkbox-icon {
                 --checkbox-color: rgb(var(--md-scheme-error));
                 --checkbox-icon-color: rgb(var(--md-scheme-on-error));
             }
 
-            &~.md3-state-layer {
+            & ~ .md3-state-layer {
                 --state-color: var(--md-scheme-error);
+            }
+        }
+
+        &:disabled {
+            & + .md3-checkbox-icon {
+                --checkbox-color: rgb(var(--md-scheme-on-surface));
+                --checkbox-icon-color: rgb(var(--md-scheme-on-primary));
+                opacity: 0.38;
+            }
+
+            & ~ .md3-state-layer {
+                display: none;
             }
         }
     }
