@@ -25,6 +25,9 @@ export * from './components/card/card';
 // checkboxes
 export * from './components/checkbox/checkbox';
 
+// switches
+export * from './components/switch/switch';
+
 // radio buttons
 export * from './components/radio-button/radio-button';
 

@@ -13,6 +13,7 @@ import { TypographyComponent } from './styles/typography/typography.component';
 import { ListsComponent } from './components/lists/lists.component';
 import { RadioButtonsComponent } from './components/radio-buttons/radio-buttons.component';
 import { SlidersComponent } from './components/sliders/sliders.component';
+import { SwitchesComponent } from './components/switches/switches.component';
 
 export const routes: Routes = [
     {
@@ -55,6 +56,10 @@ export const routes: Routes = [
                     {
                         path: 'checkboxes',
                         component: CheckboxesComponent,
+                    },
+                    {
+                        path: 'switches',
+                        component: SwitchesComponent,
                     },
                     {
                         path: 'radio-buttons',
