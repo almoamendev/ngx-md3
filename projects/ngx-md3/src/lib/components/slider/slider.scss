@@ -140,9 +140,10 @@
                 border-radius: 1.375em;
                 color: rgb(var(--md-scheme-inverse-on-surface));
                 background-color: rgb(var(--md-scheme-inverse-surface));
-                transform: translateX(-50%);
+                transform: translateX(-50%) scale(0);
                 opacity: 0;
-                transition: opacity var(--md-motion-standard-fast-spatial-duration) var(--md-motion-standard-fast-spatial-easing);
+                transition: transform var(--md-motion-expressive-fast-spatial-duration) var(--md-motion-expressive-fast-spatial-easing),
+                            opacity var(--md-motion-expressive-fast-spatial-duration) var(--md-motion-expressive-fast-spatial-easing);
 
                 [md3-type-body] {
                     white-space: nowrap;
@@ -160,12 +161,12 @@
         opacity: 0;
         cursor: pointer;
 
-        &:hover,
         &:focus,
         &:active {
             & ~ .slider-container .slider-handle {
                 .value-label {
                     opacity: 1 !important;
+                    transform: translateX(-50%) scale(1) !important;
                 }
             }
         }
