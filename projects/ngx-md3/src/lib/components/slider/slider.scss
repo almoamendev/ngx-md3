@@ -1,0 +1,213 @@
+:host {
+    --slider-active-track-color: rgb(var(--md-scheme-primary));
+    --slider-track-color: rgb(var(--md-scheme-secondary-container));
+    --slider-handle-color: rgb(var(--md-scheme-primary));
+    --outline-color: rgb(var(--md-scheme-secondary));
+    --slider-size: 1em;
+    --border-radius: 0.5em;
+    --slider-progress: 0%;
+
+    position: relative;
+    display: block;
+    width: 100%;
+    font-size: 1rem;
+    min-width: 12.5em;
+    min-height: 2.75em;
+    height: calc(var(--slider-size) + 1.125em);
+    border-radius: var(--border-radius);
+
+    &.md3-x-small {
+        --slider-size: 1em;
+        --border-radius: 0.5em;
+    }
+
+    &.md3-small {
+        --slider-size: 1.5em;
+        --border-radius: 0.5em;
+    }
+
+    &.md3-medium {
+        --slider-size: 2.5em;
+        --border-radius: 0.75em;
+    }
+
+    &.md3-large {
+        --slider-size: 3.5em;
+        --border-radius: 1em;
+    }
+
+    &.md3-x-large {
+        --slider-size: 6em;
+        --border-radius: 1.75em;
+    }
+
+    .slider-container {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+    
+        .slider-track {
+            display: flex;
+            flex: 1 1 100%;
+            align-items: center;
+            height: var(--slider-size);
+        
+            .active-track {
+                width: var(--slider-progress);
+                border-start-start-radius: var(--border-radius);
+                border-end-start-radius: var(--border-radius);
+                overflow: hidden;
+                height: 100%;
+                transition: width var(--md-motion-standard-fast-spatial-duration) var(--md-motion-standard-fast-spatial-easing);
+                
+                &::before {
+                    content: '';
+                    display: block;
+                    height: 100%;
+                    width: auto;
+                    margin-inline-end: 0.5em;
+                    border-radius: 0.125em;
+                    background-color: var(--slider-active-track-color);
+                }
+            }
+        
+            .inactive-track {
+                flex: 1 1 0;
+                border-start-end-radius: var(--border-radius);
+                border-end-end-radius: var(--border-radius);
+                overflow: hidden;
+                height: 100%;
+                transition: width var(--md-motion-standard-fast-spatial-duration) var(--md-motion-standard-fast-spatial-easing);
+                
+                &::before {
+                    content: '';
+                    display: block;
+                    height: 100%;
+                    width: auto;
+                    margin-inline-start: 0.5em;
+                    border-radius: 0.125em;
+                    background-color: var(--slider-track-color);
+                }
+            }
+        }
+    
+        .slider-handle {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            inset-inline-start: calc(var(--slider-progress) - 0.5em);
+            width: 1em;
+            height: 100%;
+            transition: all var(--md-motion-standard-fast-spatial-duration) var(--md-motion-standard-fast-spatial-easing);
+
+            &::before {
+                content: '';
+                display: block;
+                height: 100%;
+                width: 0.25em;
+                border-radius: 0.125em;
+                margin: auto;
+                background-color: var(--slider-handle-color);
+                transition: width var(--md-motion-expressive-slow-spatial-duration) var(--md-motion-expressive-slow-spatial-easing);
+            }
+
+            &::after {
+                content: '';
+                position: absolute;
+                display: block;
+                inset: -0.5625em -0.1875em;
+                border-radius: 1em;
+                border: 0.1875em solid var(--outline-color);
+                pointer-events: none;
+                opacity: 0;
+                transition: opacity var(--md-motion-expressive-slow-spatial-duration) var(--md-motion-expressive-slow-spatial-easing);
+            }
+        
+            .value-label {
+                position: absolute;
+                inset-inline-start: 50%;
+                bottom: calc(100% + 0.25em);
+                min-width: 3em;
+                height: 2.75em;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                padding: 0 1em;
+                border-radius: 1.375em;
+                color: rgb(var(--md-scheme-inverse-on-surface));
+                background-color: rgb(var(--md-scheme-inverse-surface));
+                transform: translateX(-50%);
+                opacity: 0;
+                transition: opacity var(--md-motion-standard-fast-spatial-duration) var(--md-motion-standard-fast-spatial-easing);
+
+                [md3-type-body] {
+                    white-space: nowrap;
+                }
+            }
+        }
+    }
+
+    ::ng-deep .md3-input-element {
+        display: block;
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        opacity: 0;
+        cursor: pointer;
+
+        &:hover,
+        &:focus,
+        &:active {
+            & ~ .slider-container .slider-handle {
+                .value-label {
+                    opacity: 1 !important;
+                }
+            }
+        }
+        
+        &:focus {
+            & ~ .slider-container .slider-handle {
+                &::before {
+                    width: 0.125em;
+                }
+
+                &::after {
+                    opacity: 1;
+                }
+            }
+        }
+
+        &:disabled {
+            cursor: default;
+
+            & ~ .slider-container {
+                --slider-active-track-color: rgb(var(--md-scheme-on-surface));
+                --slider-track-color: rgb(var(--md-scheme-on-surface));
+                --slider-handle-color: rgb(var(--md-scheme-on-surface));
+                
+                .slider-track {
+                    .active-track {
+                        opacity: 0.38;
+                    }
+
+                    .inactive-track {
+                        opacity: 0.12;
+                    }
+                }
+
+                .slider-handle {
+                    opacity: 0.38;
+
+                    .value-label {
+                        display: none !important;
+                    }
+                }
+            }
+        }
+    }
+}

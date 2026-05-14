@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Checkbox, InputElement, ListModule, RadioButton, TypeBody } from '@vip9008/ngx-md3';
+import { Checkbox, Divider, InputElement, ListModule, RadioButton, TypeBody } from '@vip9008/ngx-md3';
 
 @Component({
     selector: 'app-lists.component',
@@ -9,6 +9,7 @@ import { Checkbox, InputElement, ListModule, RadioButton, TypeBody } from '@vip9
         RadioButton,
         InputElement,
         TypeBody,
+        Divider,
     ],
     templateUrl: './lists.component.html',
     styleUrl: './lists.component.scss',

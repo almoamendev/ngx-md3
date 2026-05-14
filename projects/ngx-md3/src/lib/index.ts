@@ -12,6 +12,7 @@ export * from './typography/type-label';
 export * from './components/common/state-component';
 export * from './components/common/icon-element';
 export * from './components/common/material-icon/material-icon';
+export * from './components/common/divider';
 
 // buttons
 export * from './components/buttons/button/button';
@@ -26,6 +27,9 @@ export * from './components/checkbox/checkbox';
 
 // radio buttons
 export * from './components/radio-button/radio-button';
+
+// sliders
+export * from './components/slider/slider';
 
 // list
 export * from './components/list/list';

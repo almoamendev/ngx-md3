@@ -426,3 +426,12 @@ body {
         color: rgb(var(--md-scheme-inverse-on-surface));
     }
 }
+
+md3-divider {
+    display: block;
+    width: auto;
+    clear: both;
+    margin: 0;
+    padding: 0;
+    border-top: solid 0.0625rem rgb(var(--md-scheme-outline-variant));
+}

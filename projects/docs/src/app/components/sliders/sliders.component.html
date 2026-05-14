@@ -1,0 +1,30 @@
+<h1>Sliders</h1>
+
+<ul>
+    <li>@Input() control?: AbstractControl;</li>
+    <li>@Input('slider-size') sliderSize: 'x-small' | 'small' | 'medium' | 'large' | 'x-large' = 'x-small';</li>
+</ul>
+
+<md3-slider [show-value-label]="true" style="margin-bottom: 2rem;">
+    <input type="range" min="0" max="200" value="40" md3-input-element>
+</md3-slider>
+
+<md3-slider [show-value-label]="true" slider-size="small" style="margin-bottom: 2rem;">
+    <input type="range" min="0" max="200" value="40" md3-input-element>
+</md3-slider>
+
+<md3-slider [show-value-label]="true" slider-size="medium" style="margin-bottom: 2rem;">
+    <input type="range" min="0" max="200" value="40" md3-input-element>
+</md3-slider>
+
+<md3-slider [show-value-label]="true" slider-size="large" style="margin-bottom: 2rem;">
+    <input type="range" min="0" max="200" value="40" md3-input-element>
+</md3-slider>
+
+<md3-slider [show-value-label]="true" slider-size="x-large" style="margin-bottom: 2rem;">
+    <input type="range" min="0" max="200" value="40" md3-input-element>
+</md3-slider>
+
+<md3-slider [show-value-label]="true">
+    <input type="range" min="0" max="200" value="40" md3-input-element disabled>
+</md3-slider>

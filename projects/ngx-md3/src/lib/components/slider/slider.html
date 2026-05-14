@@ -1,0 +1,14 @@
+<ng-content select="[md3-input-element]"></ng-content>
+<div class="slider-container">
+    <div class="slider-track">
+        <div class="active-track"></div>
+        <div class="inactive-track"></div>
+    </div>
+    <div class="slider-handle">
+        @if (showValueLabel()) {
+            <div class="value-label">
+                <div md3-type-body="medium">{{ value() }}</div>
+            </div>
+        }
+    </div>
+</div>
