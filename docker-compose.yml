@@ -1,0 +1,32 @@
+services:
+
+  # ── Serve a specific project ──────────────────
+  # Usage: docker compose up md3
+
+  md3:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "4200:4200"
+    volumes:
+      - .:/md3
+    environment:
+      NG_ALLOWED_HOSTS: localhost
+      NG_CLI_ANALYTICS: "false"
+      CHOKIDAR_USEPOLLING: "true"
+    command: >
+      sh -c "
+        npm install;
+        touch /tmp/ngx-md3-watch-start;
+        npm run ng -- build ngx-md3 --configuration development --watch --poll 2000 &
+        LIB_PID=$$!;
+        until [ -f dist/ngx-md3/package.json ] && [ dist/ngx-md3/package.json -nt /tmp/ngx-md3-watch-start ]; do
+          if ! kill -0 $$LIB_PID 2>/dev/null; then
+            wait $$LIB_PID;
+            exit $$?;
+          fi;
+          sleep 1;
+        done;
+        npm run ng -- serve docs --host 0.0.0.0 --poll 2000
+      "

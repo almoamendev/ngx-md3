@@ -85,27 +85,25 @@
         .slider-track {
             display: flex;
             flex: 1 1 100%;
+            position: relative;
             align-items: center;
             height: var(--slider-size);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+
+            .track-gap {
+                flex: 0 0 1em;
+                height: 100%;
+            }
         
             .active-track {
                 position: relative;
-                width: var(--slider-progress);
-                border-start-start-radius: var(--border-radius);
-                border-end-start-radius: var(--border-radius);
+                width: calc(var(--slider-progress) - 0.5em);
                 overflow: hidden;
                 height: 100%;
                 transition: width var(--md-motion-standard-fast-spatial-duration) var(--md-motion-standard-fast-spatial-easing);
-                
-                &::before {
-                    content: '';
-                    display: block;
-                    height: 100%;
-                    width: auto;
-                    margin-inline-end: 0.5em;
-                    border-radius: 0.125em;
-                    background-color: var(--slider-active-track-color);
-                }
+                border-radius: 0.125em;
+                background-color: var(--slider-active-track-color);
 
                 .icon-container {
                     --icon-size: 1.5em;
@@ -131,21 +129,11 @@
             .inactive-track {
                 position: relative;
                 flex: 1 1 0;
-                border-start-end-radius: var(--border-radius);
-                border-end-end-radius: var(--border-radius);
                 overflow: hidden;
                 height: 100%;
                 transition: width var(--md-motion-standard-fast-spatial-duration) var(--md-motion-standard-fast-spatial-easing);
-                
-                &::before {
-                    content: '';
-                    display: block;
-                    height: 100%;
-                    width: auto;
-                    margin-inline-start: 0.5em;
-                    border-radius: 0.125em;
-                    background-color: var(--slider-track-color);
-                }
+                border-radius: 0.125em;
+                background-color: var(--slider-track-color);
                 
                 &::after {
                     content: '';
