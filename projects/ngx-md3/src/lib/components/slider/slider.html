@@ -1,7 +1,11 @@
 <ng-content select="[md3-input-element]"></ng-content>
 <div class="slider-container">
     <div class="slider-track">
-        <div class="active-track"></div>
+        <div class="active-track">
+            <div class="icon-container">
+                <ng-content select="[md3-icon-element]"></ng-content>
+            </div>
+        </div>
         <div class="inactive-track"></div>
     </div>
     <div class="slider-handle">

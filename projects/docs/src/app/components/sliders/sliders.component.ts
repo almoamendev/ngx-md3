@@ -1,11 +1,14 @@
 import { Component } from '@angular/core';
-import { InputElement, Slider } from '@vip9008/ngx-md3';
+import { Divider, IconElement, InputElement, MaterialIcon, Slider } from '@vip9008/ngx-md3';
 
 @Component({
     selector: 'app-sliders.component',
     imports: [
         Slider,
         InputElement,
+        MaterialIcon,
+        IconElement,
+        Divider,
     ],
     templateUrl: './sliders.component.html',
     styleUrl: './sliders.component.scss',
