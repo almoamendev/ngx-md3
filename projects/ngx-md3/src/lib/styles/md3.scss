@@ -139,6 +139,10 @@ body {
         .md3-state-layer {
             opacity: 0.08;
         }
+
+        &::after {
+            opacity: 0;
+        }
     }
 
     &:focus {
@@ -164,6 +168,10 @@ body {
                 transform: translate(-50%, -50%) scale(2.4);
                 opacity: 1;
             }
+        }
+
+        &::after {
+            opacity: 0;
         }
     }
 

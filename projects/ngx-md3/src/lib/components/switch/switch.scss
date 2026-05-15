@@ -1,10 +1,10 @@
 :host {
-    --switch-track-color: rgb(var(--md-scheme-surface-container-highest));
-    --switch-track-outline-color: rgb(var(--md-scheme-outline));
+    --track-color: rgb(var(--md-scheme-surface-container-highest));
+    --track-outline-color: rgb(var(--md-scheme-outline));
     --switch-handle-color: rgb(var(--md-scheme-outline));
+    --switch-handle-size: 1em;
     --state-color: var(--md-scheme-on-surface);
-    --border-radius: 2.5em;
-    --border-size: 0em;
+    --border-radius: 1em;
     --outline-color: rgb(var(--md-scheme-secondary));
     --outline-width: 0.1875em;
     --outline-offset: -0.125em;
@@ -14,31 +14,40 @@
     align-items: center;
     justify-content: center;
     font-size: 1rem;
-    height: 3em;
+    height: 2em;
     width: 3.25em;
     border-radius: var(--border-radius);
 
-    .md3-switch-track {
+    .track {
         position: absolute;
         display: inline-flex;
         align-items: center;
         width: 3.25em;
         height: 2em;
-        border: 0.125em solid var(--switch-track-outline-color);
+        border: 0.125em solid var(--track-outline-color);
         border-radius: 1em;
-        background-color: var(--switch-track-color);
+        background-color: var(--track-color);
         pointer-events: none;
         transition: all var(--md-motion-standard-fast-spatial-duration) var(--md-motion-standard-fast-spatial-easing);
-    }
+    
+        .handle-container {
+            position: absolute;
+            height: 1.75em;
+            width: 1.75em;
+            left: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all var(--md-motion-standard-fast-spatial-duration) var(--md-motion-standard-fast-spatial-easing);
 
-    .md3-switch-handle {
-        position: absolute;
-        left: 0.375em;
-        width: 1em;
-        height: 1em;
-        border-radius: 50%;
-        background-color: var(--switch-handle-color);
-        transition: all var(--md-motion-standard-fast-spatial-duration) var(--md-motion-standard-fast-spatial-easing);
+            .handle {
+                width: var(--switch-handle-size);
+                height: var(--switch-handle-size);
+                border-radius: 100%;
+                background-color: var(--switch-handle-color);
+                transition: all var(--md-motion-standard-fast-spatial-duration) var(--md-motion-standard-fast-spatial-easing);
+            }
+        }
     }
 
     ::ng-deep .md3-input-element {
@@ -49,40 +58,61 @@
         padding: 0;
         opacity: 0;
 
+        & ~ .md3-state-layer {
+            height: 2.5em;
+            width: 2.5em;
+            top: -0.25em;
+            left: -0.25em;
+            border-radius: 100%;
+            transition: left var(--md-motion-standard-fast-spatial-duration) var(--md-motion-standard-fast-spatial-easing),
+                        right var(--md-motion-standard-fast-spatial-duration) var(--md-motion-standard-fast-spatial-easing),
+                        opacity var(--md-motion-expressive-slow-spatial-duration) var(--md-motion-expressive-slow-spatial-easing);
+        }
+
         &:focus {
-            & + .md3-switch-track {
+            & + .track {
                 --switch-handle-color: rgb(var(--md-scheme-on-surface-variant));
             }
         }
 
         &:checked {
-            & + .md3-switch-track {
-                --switch-track-color: rgb(var(--md-scheme-primary));
-                --switch-track-outline-color: rgb(var(--md-scheme-primary));
+            & + .track {
+                --track-color: rgb(var(--md-scheme-primary));
+                --track-outline-color: rgb(var(--md-scheme-primary));
                 --switch-handle-color: rgb(var(--md-scheme-on-primary));
 
-                .md3-switch-handle {
-                    left: 1.5em;
-                    width: 1.5em;
-                    height: 1.5em;
+                .handle-container {
+                    --switch-handle-size: 1.5em;
+
+                    left: 1.25em;
                 }
             }
 
             & ~ .md3-state-layer {
                 --state-color: var(--md-scheme-primary);
+
+                left: 1em;
+            }
+        }
+        
+        &:active {
+            & + .track {
+                .handle-container {
+                    --switch-handle-size: 1.75em;
+                }
             }
         }
 
         &[aria-invalid=true] {
-            & + .md3-switch-track {
-                --switch-track-color: rgb(var(--md-scheme-error-container));
-                --switch-track-outline-color: rgb(var(--md-scheme-error));
+            & + .track {
+                --track-color: rgb(var(--md-scheme-error-container));
+                --track-outline-color: rgb(var(--md-scheme-error));
                 --switch-handle-color: rgb(var(--md-scheme-error));
             }
 
-            &:checked + .md3-switch-track {
-                --switch-track-color: rgb(var(--md-scheme-error));
-                --switch-track-outline-color: rgb(var(--md-scheme-error));
+            &:checked + .track {
+                --track-color: rgb(var(--md-scheme-error));
+                --track-outline-color: rgb(var(--md-scheme-error));
                 --switch-handle-color: rgb(var(--md-scheme-on-error));
             }
 
@@ -92,16 +122,16 @@
         }
 
         &:disabled {
-            & + .md3-switch-track {
-                --switch-track-color: rgb(var(--md-scheme-surface-container-highest));
-                --switch-track-outline-color: rgb(var(--md-scheme-on-surface));
+            & + .track {
+                --track-color: rgb(var(--md-scheme-surface-container-highest));
+                --track-outline-color: rgb(var(--md-scheme-on-surface));
                 --switch-handle-color: rgb(var(--md-scheme-on-surface));
                 opacity: 0.38;
             }
 
-            &:checked + .md3-switch-track {
-                --switch-track-color: rgb(var(--md-scheme-on-surface));
-                --switch-track-outline-color: rgb(var(--md-scheme-on-surface));
+            &:checked + .track {
+                --track-color: rgb(var(--md-scheme-on-surface));
+                --track-outline-color: rgb(var(--md-scheme-on-surface));
                 --switch-handle-color: rgb(var(--md-scheme-surface));
             }
 
