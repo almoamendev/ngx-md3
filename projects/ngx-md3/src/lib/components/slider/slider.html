@@ -2,12 +2,15 @@
 <div class="slider-container">
     <div class="slider-track">
         <div class="active-track">
-            <div class="icon-container">
-                <ng-content select="[md3-icon-element]"></ng-content>
+            <div class="track-bar">
+                <div class="icon-container">
+                    <ng-content select="[md3-icon-element]"></ng-content>
+                </div>
             </div>
         </div>
-        <div class="track-gap"></div>
-        <div class="inactive-track"></div>
+        <div class="inactive-track">
+            <div class="track-bar"></div>
+        </div>
     </div>
     <div class="slider-handle">
         @if (showValueLabel()) {

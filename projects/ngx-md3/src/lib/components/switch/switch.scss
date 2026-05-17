@@ -3,6 +3,7 @@
     --track-outline-color: rgb(var(--md-scheme-outline));
     --switch-handle-color: rgb(var(--md-scheme-outline));
     --switch-handle-size: 1em;
+    --icon-color: rgb(var(--md-scheme-surface-container-highest));
     --state-color: var(--md-scheme-on-surface);
     --border-radius: 1em;
     --outline-color: rgb(var(--md-scheme-secondary));
@@ -41,11 +42,30 @@
             transition: all var(--md-motion-standard-fast-spatial-duration) var(--md-motion-standard-fast-spatial-easing);
 
             .handle {
-                width: var(--switch-handle-size);
-                height: var(--switch-handle-size);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                min-width: var(--switch-handle-size);
+                min-height: var(--switch-handle-size);
                 border-radius: 100%;
                 background-color: var(--switch-handle-color);
                 transition: all var(--md-motion-standard-fast-spatial-duration) var(--md-motion-standard-fast-spatial-easing);
+
+                ::ng-deep [md3-icon-element] {
+                    font-size: 1em !important;
+                    height: 1em;
+                    width: 1em;
+                    margin: 0.25em;
+                    color: var(--icon-color);
+                }
+
+                ::ng-deep [md3-icon-element=unselected] {
+                    display: block;
+                }
+
+                ::ng-deep [md3-icon-element=selected] {
+                    display: none;
+                }
             }
         }
     }
@@ -80,11 +100,21 @@
                 --track-color: rgb(var(--md-scheme-primary));
                 --track-outline-color: rgb(var(--md-scheme-primary));
                 --switch-handle-color: rgb(var(--md-scheme-on-primary));
+                --icon-color: rgb(var(--md-scheme-primary));
+                --switch-handle-size: 1.5em;
 
                 .handle-container {
-                    --switch-handle-size: 1.5em;
-
                     left: 1.25em;
+
+                    .handle {
+                        ::ng-deep [md3-icon-element=unselected] {
+                            display: none !important;
+                        }
+
+                        ::ng-deep [md3-icon-element=selected] {
+                            display: block !important;
+                        }
+                    }
                 }
             }
 
@@ -95,7 +125,7 @@
             }
         }
         
-        &:active {
+        &:active:not(:disabled) {
             & + .track {
                 .handle-container {
                     --switch-handle-size: 1.75em;
@@ -133,6 +163,7 @@
                 --track-color: rgb(var(--md-scheme-on-surface));
                 --track-outline-color: rgb(var(--md-scheme-on-surface));
                 --switch-handle-color: rgb(var(--md-scheme-surface));
+                --icon-color: rgb(var(--md-scheme-on-surface));
             }
 
             & ~ .md3-state-layer {

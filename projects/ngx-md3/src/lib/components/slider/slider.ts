@@ -140,14 +140,6 @@ export class Slider implements AfterContentInit {
 
     ngAfterContentInit(): void {
         if (this.input?.nativeElement) {
-            fromEvent(this.input.nativeElement, 'focus').pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
-                this.element.classList.add('md3-focused');
-            });
-
-            fromEvent(this.input.nativeElement, 'blur').pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
-                this.element.classList.remove('md3-focused');
-            });
-
             fromEvent(this.input.nativeElement, 'input').pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
                 this.syncStateFromInput();
                 this.syncControlFromState(this.value());
