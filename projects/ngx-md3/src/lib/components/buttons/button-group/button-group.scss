@@ -8,86 +8,47 @@
     gap: var(--button-group-gap);
     align-items: center;
     font-size: 1rem;
+    position: relative;
 
     ::ng-deep [md3-button], ::ng-deep [md3-icon-button] {
         --outline-width: var(--outline-width);
         --outline-offset: var(--outline-offset);
+
+        z-index: 1;
+
+        &:focus {
+            z-index: 2;
+        }
+
+        &:active {
+            z-index: 3;
+        }
     }
 
     &.md3-standard {
-        &[button-size=x-small] {
+        &.md3-x-small {
             --button-group-gap: 1.125em;
         }
         
-        &[button-size=small] {
+        &.md3-small {
             --button-group-gap: 0.75em;
         }
         
-        &[button-size=medium] {
+        &.md3-medium {
             --button-group-gap: 0.5em;
         }
         
-        &[button-size=large] {
+        &.md3-large {
             --button-group-gap: 0.5em;
         }
         
-        &[button-size=x-large] {
+        &.md3-x-large {
             --button-group-gap: 0.5em;
         }
     }
 
     &.md3-connected {
         --button-group-gap: 0.125em;
-
-        &[button-size=x-small] {
-            --button-inner-radius: 0.5em;
-
-            ::ng-deep [md3-button], ::ng-deep [md3-icon-button] {
-                &:not(:disabled):active {
-                    --button-innter-radius: 0.25em;
-                }
-            }
-        }
-        
-        &[button-size=small] {
-            --button-inner-radius: 0.5em;
-
-            ::ng-deep [md3-button], ::ng-deep [md3-icon-button] {
-                &:not(:disabled):active {
-                    --button-innter-radius: 0.25em;
-                }
-            }
-        }
-        
-        &[button-size=medium] {
-            --button-inner-radius: 0.5em;
-
-            ::ng-deep [md3-button], ::ng-deep [md3-icon-button] {
-                &:not(:disabled):active {
-                    --button-innter-radius: 0.25em;
-                }
-            }
-        }
-        
-        &[button-size=large] {
-            --button-inner-radius: 1em;
-
-            ::ng-deep [md3-button], ::ng-deep [md3-icon-button] {
-                &:not(:disabled):active {
-                    --button-innter-radius: 0.75em;
-                }
-            }
-        }
-        
-        &[button-size=x-large] {
-            --button-inner-radius: 1.25em;
-
-            ::ng-deep [md3-button], ::ng-deep [md3-icon-button] {
-                &:not(:disabled):active {
-                    --button-innter-radius: 1em;
-                }
-            }
-        }
 
         ::ng-deep [md3-button], ::ng-deep [md3-icon-button] {
             &:first-child {
@@ -115,9 +76,63 @@
 
                 border-radius: var(--button-inner-radius);
             }
+            
+            &:not(:disabled):active {
+                border-radius: var(--button-innter-radius);
+            }
 
-            &:not(disabled):active {
-                border-radius: var(--button-inner-radius) !important;
+            &.md3-selected {
+                border-radius: var(--button-innter-radius);
+            }
+        }
+
+        &.md3-x-small {
+            --button-inner-radius: 0.5em;
+
+            ::ng-deep [md3-button], ::ng-deep [md3-icon-button] {
+                &:not(:disabled):active {
+                    --button-innter-radius: 0.25em;
+                }
+            }
+        }
+        
+        &.md3-small {
+            --button-inner-radius: 0.5em;
+
+            ::ng-deep [md3-button], ::ng-deep [md3-icon-button] {
+                &:not(:disabled):active {
+                    --button-innter-radius: 0.25em;
+                }
+            }
+        }
+        
+        &.md3-medium {
+            --button-inner-radius: 0.5em;
+
+            ::ng-deep [md3-button], ::ng-deep [md3-icon-button] {
+                &:not(:disabled):active {
+                    --button-innter-radius: 0.25em;
+                }
+            }
+        }
+        
+        &.md3-large {
+            --button-inner-radius: 1em;
+
+            ::ng-deep [md3-button], ::ng-deep [md3-icon-button] {
+                &:not(:disabled):active {
+                    --button-innter-radius: 0.75em;
+                }
+            }
+        }
+        
+        &.md3-x-large {
+            --button-inner-radius: 1.25em;
+
+            ::ng-deep [md3-button], ::ng-deep [md3-icon-button] {
+                &:not(:disabled):active {
+                    --button-innter-radius: 1em;
+                }
             }
         }
     }
