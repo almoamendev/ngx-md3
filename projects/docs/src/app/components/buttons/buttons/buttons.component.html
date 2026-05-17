@@ -4,6 +4,7 @@
     <li>@Input() button-size: 'x-small' | 'small' | 'medium' | 'large' | 'x-large' = 'small';</li>
     <li>@Input() button-type: 'elevated' | 'filled' | 'tonal' | 'outlined' | 'text' = 'filled';</li>
     <li>@Input() button-squared: boolean = false;</li>
+    <li>@Input() selected: boolean | null = null;</li>
 </ul>
 
 <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
@@ -56,9 +57,25 @@
 </div>
 
 <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
+    <button md3-button button-size="x-small" [selected]="false">x-small</button>
+    <button md3-button button-size="small" [selected]="false">small</button>
+    <button md3-button button-size="medium" [selected]="false">medium</button>
+    <button md3-button button-size="large" [selected]="false">large</button>
+    <button md3-button button-size="x-large" [selected]="false">x-large</button>
+</div>
+
+<div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
     <button md3-button [button-squared]="true" button-size="x-small">x-small</button>
     <button md3-button [button-squared]="true" button-size="small">small</button>
     <button md3-button [button-squared]="true" button-size="medium">medium</button>
     <button md3-button [button-squared]="true" button-size="large">large</button>
     <button md3-button [button-squared]="true" button-size="x-large">x-large</button>
+</div>
+
+<div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
+    <button md3-button [button-squared]="true" button-size="x-small" [selected]="false">x-small</button>
+    <button md3-button [button-squared]="true" button-size="small" [selected]="false">small</button>
+    <button md3-button [button-squared]="true" button-size="medium" [selected]="false">medium</button>
+    <button md3-button [button-squared]="true" button-size="large" [selected]="false">large</button>
+    <button md3-button [button-squared]="true" button-size="x-large" [selected]="false">x-large</button>
 </div>

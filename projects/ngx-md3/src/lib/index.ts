@@ -2,6 +2,8 @@
 export * from './types/text-color.type';
 export * from './types/button-size.type';
 export * from './types/button-type.type';
+export * from './types/icon-button-type.type';
+export * from './types/icon-button-width.type';
 
 // typography
 export * from './typography/type-display';

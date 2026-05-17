@@ -56,6 +56,26 @@
         --border-radius: 0.75em;
     }
 
+    &.md3-toggle {
+        --background-color: rgb(var(--md-scheme-surface-container));
+        --foreground-color: rgb(var(--md-scheme-on-surface-variant));
+        --state-color: var(--md-scheme-on-surface-variant);
+
+        &.md3-selected {
+            --background-color: rgb(var(--md-scheme-primary));
+            --foreground-color: rgb(var(--md-scheme-on-primary));
+            --state-color: var(--md-scheme-on-primary);
+
+            &:not(:active) {
+                --border-radius: 0.75em;
+    
+                &.md3-square {
+                    --border-radius: 2.5em;
+                }
+            }
+        }
+    }
+
     &:disabled {
         --background-color: rgba(var(--md-scheme-on-surface), 0.1) !important;
         --foreground-color: rgba(var(--md-scheme-on-surface), 0.38) !important;
@@ -93,6 +113,14 @@
             --border-radius: 0.75em;
         }
 
+        &:not(:active).md3-toggle.md3-selected {
+            --border-radius: 0.75em;
+
+            &.md3-square {
+                --border-radius: 2em;
+            }
+        }
+
         &:not(:disabled):active {
             --border-radius: 0.5em;
         }
@@ -123,6 +151,14 @@
             --border-radius: 1em;
         }
 
+        &:not(:active).md3-toggle.md3-selected {
+            --border-radius: 1em;
+
+            &.md3-square {
+                --border-radius: 3.5em;
+            }
+        }
+
         &:not(:disabled):active {
             --border-radius: 0.75em;
         }
@@ -148,6 +184,14 @@
 
         &.md3-square {
             --border-radius: 1.75em;
+        }
+
+        &:not(:active).md3-toggle.md3-selected {
+            --border-radius: 1.75em;
+
+            &.md3-square {
+                --border-radius: 6em;
+            }
         }
 
         &:not(:disabled):active {
@@ -177,6 +221,14 @@
             --border-radius: 1.75em;
         }
 
+        &:not(:active).md3-toggle.md3-selected {
+            --border-radius: 1.75em;
+
+            &.md3-square {
+                --border-radius: 8.5em;
+            }
+        }
+
         &:not(:disabled):active {
             --border-radius: 1em;
         }
@@ -189,6 +241,14 @@
         --background-color: rgb(var(--md-scheme-secondary-container));
         --foreground-color: rgb(var(--md-scheme-on-secondary-container));
         --state-color: var(--md-scheme-on-secondary-container);
+
+        &.md3-toggle {
+            &.md3-selected {
+                --background-color: rgb(var(--md-scheme-secondary));
+                --foreground-color: rgb(var(--md-scheme-on-secondary));
+                --state-color: var(--md-scheme-on-secondary);
+            }
+        }
     }
 
     &.md3-outlined {
@@ -206,11 +266,27 @@
         }
 
         border-color: rgb(var(--md-scheme-outline-variant));
+
+        &.md3-toggle {
+            &.md3-selected {
+                --background-color: rgb(var(--md-scheme-inverse-surface));
+                --foreground-color: rgb(var(--md-scheme-inverse-on-surface));
+                --state-color: var(--md-scheme-inverse-on-surface);
+            }
+        }
     }
 
     &.md3-standard {
         --background-color: transparent;
         --foreground-color: rgb(var(--md-scheme-on-surface-variant));
         --state-color: var(--md-scheme-on-surface-variant);
+
+        &.md3-toggle {
+            &.md3-selected {
+                --background-color: transparent;
+                --foreground-color: rgb(var(--md-scheme-primary));
+                --state-color: var(--md-scheme-primary);
+            }
+        }
     }
 }
