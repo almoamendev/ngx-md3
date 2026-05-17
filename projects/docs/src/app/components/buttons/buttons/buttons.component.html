@@ -9,7 +9,6 @@
 <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
     <button md3-button>Default</button>
     <button md3-button [button-squared]="true">Square button</button>
-
     <button md3-button>
         <md3-icon md3-icon-element>person</md3-icon>
         Default (icon)
@@ -18,11 +17,33 @@
         <md3-icon md3-icon-element>person</md3-icon>
         Square button (icon)
     </button>
+</div>
 
+<div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
     <button md3-button button-type="elevated">Elevated</button>
+    <button md3-button button-type="elevated" [selected]="false">Toggle</button>
+    <button md3-button button-type="elevated" [button-squared]="true" [selected]="false">Toggle (square)</button>
+</div>
+
+<div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
     <button md3-button button-type="filled">Filled</button>
+    <button md3-button button-type="filled" [selected]="false">Toggle</button>
+    <button md3-button button-type="filled" [button-squared]="true" [selected]="false">Toggle (square)</button>
+</div>
+
+<div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
     <button md3-button button-type="tonal">Tonal</button>
+    <button md3-button button-type="tonal" [selected]="false">Toggle</button>
+    <button md3-button button-type="tonal" [button-squared]="true" [selected]="false">Toggle (square)</button>
+</div>
+
+<div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
     <button md3-button button-type="outlined">Outlined</button>
+    <button md3-button button-type="outlined" [selected]="false">Toggle</button>
+    <button md3-button button-type="outlined" [button-squared]="true" [selected]="false">Toggle (square)</button>
+</div>
+
+<div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
     <button md3-button button-type="text">Text</button>
 </div>
 

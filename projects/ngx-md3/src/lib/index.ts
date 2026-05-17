@@ -1,6 +1,7 @@
 //types
 export * from './types/text-color.type';
 export * from './types/button-size.type';
+export * from './types/button-type.type';
 
 // typography
 export * from './typography/type-display';
