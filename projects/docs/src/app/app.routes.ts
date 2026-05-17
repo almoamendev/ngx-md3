@@ -14,6 +14,7 @@ import { ListsComponent } from './components/lists/lists.component';
 import { RadioButtonsComponent } from './components/radio-buttons/radio-buttons.component';
 import { SlidersComponent } from './components/sliders/sliders.component';
 import { SwitchesComponent } from './components/switches/switches.component';
+import { ButtonGroupsComponent } from './components/buttons/button-groups/button-groups.component';
 
 export const routes: Routes = [
     {
@@ -46,6 +47,10 @@ export const routes: Routes = [
                             {
                                 path: 'icon-buttons',
                                 component: IconButtonsComponent,
+                            },
+                            {
+                                path: 'button-groups',
+                                component: ButtonGroupsComponent,
                             },
                         ],
                     },

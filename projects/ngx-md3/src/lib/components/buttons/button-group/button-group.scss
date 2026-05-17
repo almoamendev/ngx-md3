@@ -1,0 +1,40 @@
+:host {
+    --button-group-gap: 0.75em;
+
+    display: inline-flex;
+    gap: var(--button-group-gap);
+    align-items: center;
+    font-size: 1rem;
+
+    &.md3-standard {
+        &[button-size="x-small"] {
+            --button-group-gap: 1.125em;
+        }
+        
+        &[button-size="small"] {
+            --button-group-gap: 0.75em;
+        }
+        
+        &[button-size="medium"] {
+            --button-group-gap: 0.5em;
+        }
+        
+        &[button-size="large"] {
+            --button-group-gap: 0.5em;
+        }
+        
+        &[button-size="x-large"] {
+            --button-group-gap: 0.5em;
+        }
+
+        ::ng-deep [md3-button], ::ng-deep [md3-icon-button] {
+            &:active {
+                transform: scaleX(1.15);
+            }
+        }
+    }
+
+    &.md3-connected {
+        --button-group-gap: 0.125em;
+    }
+}

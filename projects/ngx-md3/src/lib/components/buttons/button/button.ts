@@ -29,4 +29,10 @@ export class Button implements AfterViewInit {
             ...(this.buttonSquared ? ['md3-square'] : [])
         );
     }
+
+    public set size(value: typeof this.buttonSize) {
+        this.element.classList.remove('md3-' + this.buttonSize);
+        this.buttonSize = value;
+        this.element.classList.add('md3-' + this.buttonSize);
+    }
 }
