@@ -1,0 +1,1 @@
+export type ButtonSize = 'x-small' | 'small' | 'medium' | 'large' | 'x-large';

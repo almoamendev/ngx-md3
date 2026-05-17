@@ -1,6 +1,7 @@
 import { AfterContentInit, Component, ContentChildren, ElementRef, Input, QueryList } from '@angular/core';
 import { Button } from '../button/button';
 import { IconButton } from '../icon-button/icon-button';
+import { ButtonSize } from '../../../types/button-size.type';
 
 @Component({
     selector: 'md3-button-group',
@@ -12,7 +13,7 @@ import { IconButton } from '../icon-button/icon-button';
     }
 })
 export class ButtonGroup implements AfterContentInit {
-    @Input('button-size') buttonSize: 'x-small' | 'small' | 'medium' | 'large' | 'x-large' = 'small';
+    @Input('button-size') buttonSize: ButtonSize = 'small';
     @Input() selection: 'none' | 'single' | 'multiple' = 'none';
     @Input('group-type') groupType: 'standard' | 'connected' = 'standard';
     

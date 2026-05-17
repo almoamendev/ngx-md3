@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, ElementRef, Input } from '@angular/core';
 import { StateComponent } from '../../common/state-component';
+import { ButtonSize } from '../../../types/button-size.type';
 
 @Component({
     selector: 'button[md3-icon-button]',
@@ -11,7 +12,7 @@ import { StateComponent } from '../../common/state-component';
     ],
 })
 export class IconButton implements AfterViewInit {
-    @Input('button-size') buttonSize: 'x-small' | 'small' | 'medium' | 'large' | 'x-large' = 'small';
+    @Input('button-size') buttonSize: ButtonSize = 'small';
     @Input('button-shape') buttonShape: 'round' | 'square' = 'round';
     @Input('button-type') buttonType: 'filled' | 'tonal' | 'outlined' | 'standard' = 'filled';
     @Input('button-width') buttonWidth: 'default' | 'narrow' | 'wide' = 'default';
