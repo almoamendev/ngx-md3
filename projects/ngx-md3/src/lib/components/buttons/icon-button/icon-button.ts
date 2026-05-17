@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, effect, ElementRef, HostListener, Input, signal } from '@angular/core';
+import { Component, effect, ElementRef, HostListener, Input, signal } from '@angular/core';
 import { StateComponent } from '../../common/state-component';
 import { ButtonSize } from '../../../types/button-size.type';
 import { IconButtonType } from '../../../types/icon-button-type.type';
@@ -15,21 +15,39 @@ import { IconButtonWidth } from '../../../types/icon-button-width.type';
 })
 export class IconButton {
     @Input('button-size') set size(value: ButtonSize) {
-        this.element.classList.remove('md3-' + this.buttonSize());
-        this.buttonSize.set(value);
+        this.buttonSize.update((current) => {
+            if (value == current) {
+                return current;
+            }
+
+            this.element.classList.remove('md3-' + current);
+            return value;
+        });
     };
     @Input('button-type') set type(value: IconButtonType) {
-        this.element.classList.remove('md3-' + this.buttonType());
-        this.buttonType.set(value);
+        this.buttonType.update((current) => {
+            if (value == current) {
+                return current;
+            }
+
+            this.element.classList.remove('md3-' + current);
+            return value;
+        });
     };
     @Input('button-width') set width(value: IconButtonWidth) {
-        this.element.classList.remove('md3-' + this.buttonWidth());
-        this.buttonWidth.set(value);
+        this.buttonWidth.update((current) => {
+            if (value == current) {
+                return current;
+            }
+
+            this.element.classList.remove('md3-' + current);
+            return value;
+        });
     };
     @Input('button-squared') set squared(value: boolean) {
         this.isSquared.set(value);
     };
-    @Input('selected') set selected(value: boolean) {
+    @Input('selected') set selected(value: boolean | null) {
         this.isSelected.set(value);
     };
     
@@ -89,5 +107,15 @@ export class IconButton {
 
     public get element(): HTMLElement {
         return this.el.nativeElement as HTMLElement;
+    }
+
+    public enableSelection() {
+        this.isSelected.update((current) => {
+            if (current !== null) {
+                return current;
+            }
+
+            return false;
+        });
     }
 }

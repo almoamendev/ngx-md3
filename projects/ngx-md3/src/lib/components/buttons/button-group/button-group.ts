@@ -1,7 +1,9 @@
-import { AfterContentInit, Component, ContentChildren, ElementRef, Input, QueryList } from '@angular/core';
+import { Component, contentChildren, effect, ElementRef, Input, signal } from '@angular/core';
 import { Button } from '../button/button';
 import { IconButton } from '../icon-button/icon-button';
 import { ButtonSize } from '../../../types/button-size.type';
+import { ButtonGroupSelection } from '../../../types/button-group-selection.type';
+import { ButtonGroupType } from '../../../types/button-group-type.type';
 
 @Component({
     selector: 'md3-button-group',
@@ -12,49 +14,81 @@ import { ButtonSize } from '../../../types/button-size.type';
         'role': 'group',
     }
 })
-export class ButtonGroup implements AfterContentInit {
-    @Input('button-size') buttonSize: ButtonSize = 'small';
-    @Input() selection: 'none' | 'single' | 'multiple' = 'none';
-    @Input('group-type') groupType: 'standard' | 'connected' = 'standard';
+export class ButtonGroup {
+    @Input('button-size') set size(value: ButtonSize) {
+        this.buttonSize.update((current) => {
+            if (value == current) {
+                return current;
+            }
+
+            this.element.classList.remove('md3-' + current);
+            return value;
+        });
+    };
+    @Input('group-type') set type(value: ButtonGroupType) {
+        this.groupType.update((current) => {
+            if (value == current) {
+                return current;
+            }
+
+            this.element.classList.remove('md3-' + current);
+            return value;
+        });
+    };
+
+    @Input() set selection(value: ButtonGroupSelection) {
+        this.groupSelection.set(value);
+    };
     
-    @ContentChildren(Button, { descendants: true }) private buttons?: QueryList<Button>;
-    @ContentChildren(IconButton, { descendants: true }) private iconButtons?: QueryList<IconButton>;
+    private buttonSize = signal<ButtonSize>('small');
+    private groupType = signal<ButtonGroupType>('standard');
+    private groupSelection = signal<ButtonGroupSelection>('none');
+
+    private buttons = contentChildren<Button>(Button, { descendants: true });
+    private iconButtons = contentChildren<IconButton>(IconButton, { descendants: true });
 
     constructor(private el: ElementRef) {
+        effect(() => {
+            const size = this.buttonSize();
+            this.element.classList.add('md3-' + size);
+
+            this.buttons().forEach((item) => {
+                item.size = size;
+            });
+
+            this.iconButtons().forEach((item) => {
+                item.size = size;
+            });
+        });
+
+        effect(() => {
+            this.element.classList.add('md3-' + this.groupType());
+        });
+
+        effect(() => {
+            const selection = this.groupSelection();
+
+            if (selection == 'none') {
+                this.buttons().forEach((item) => {
+                    item.selected = null;
+                });
+
+                this.iconButtons().forEach((item) => {
+                    item.selected = null;
+                });
+            } else {
+                this.buttons().forEach((item) => {
+                    item.enableSelection();
+                });
+
+                this.iconButtons().forEach((item) => {
+                    item.enableSelection();
+                });
+            }
+        });
     }
 
     public get element(): HTMLElement {
         return this.el.nativeElement as HTMLElement;
-    }
-
-    ngAfterContentInit(): void {
-        this.element.classList.add(
-            'md3-' + this.groupType,
-            'md3-' + this.buttonSize
-        );
-        
-        this.syncButtonSize();
-    }
-
-    public set size(value: typeof this.buttonSize) {
-        if (this.buttonSize == value) {
-            return;
-        }
-        
-        this.element.classList.remove('md3-' + this.buttonSize);
-        this.buttonSize = value;
-        this.element.classList.add('md3-' + this.buttonSize);
-
-        this.syncButtonSize();
-    }
-
-    private syncButtonSize() {
-        this.buttons?.forEach((item) => {
-            item.size = this.buttonSize;
-        });
-
-        this.iconButtons?.forEach((item) => {
-            item.size = this.buttonSize;
-        });
     }
 }

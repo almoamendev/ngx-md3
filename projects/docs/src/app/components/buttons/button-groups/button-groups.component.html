@@ -1,14 +1,14 @@
 <div style="margin-bottom: 1rem;">
-    <md3-button-group>
-        <button md3-button value="left">
+    <md3-button-group selection="multiple">
+        <button md3-button>
             <md3-icon md3-icon-element>person</md3-icon>
             Default (left)
         </button>
-        <button md3-button value="center">
+        <button md3-button [selected]="true">
             <md3-icon md3-icon-element>person</md3-icon>
             Default (center)
         </button>
-        <button md3-button value="right">
+        <button md3-button>
             <md3-icon md3-icon-element>person</md3-icon>
             Default (right)
         </button>
@@ -17,13 +17,13 @@
 
 <div style="margin-bottom: 1rem;">
     <md3-button-group button-size="medium">
-        <button md3-icon-button>
+        <button md3-icon-button button-type="outlined" [button-squared]="true">
             <md3-icon md3-icon-element>person</md3-icon>
         </button>
-        <button md3-icon-button>
+        <button md3-icon-button button-type="outlined" [button-squared]="true">
             <md3-icon md3-icon-element>person</md3-icon>
         </button>
-        <button md3-icon-button>
+        <button md3-icon-button button-type="outlined" [button-squared]="true">
             <md3-icon md3-icon-element>person</md3-icon>
         </button>
     </md3-button-group>
@@ -31,15 +31,15 @@
 
 <div style="margin-bottom: 1rem;">
     <md3-button-group group-type="connected">
-        <button md3-button value="left">
+        <button md3-button>
             <md3-icon md3-icon-element>person</md3-icon>
             Default (left)
         </button>
-        <button md3-button value="center">
+        <button md3-button>
             <md3-icon md3-icon-element>person</md3-icon>
             Default (center)
         </button>
-        <button md3-button value="right">
+        <button md3-button>
             <md3-icon md3-icon-element>person</md3-icon>
             Default (right)
         </button>
@@ -47,14 +47,14 @@
 </div>
 
 <div style="margin-bottom: 1rem;">
-    <md3-button-group button-size="x-large" group-type="connected">
-        <button md3-icon-button>
+    <md3-button-group button-size="medium" group-type="connected" selection="multiple">
+        <button md3-icon-button [button-squared]="true">
             <md3-icon md3-icon-element>person</md3-icon>
         </button>
-        <button md3-icon-button>
+        <button md3-icon-button [button-squared]="true" [selected]="true">
             <md3-icon md3-icon-element>person</md3-icon>
         </button>
-        <button md3-icon-button>
+        <button md3-icon-button [button-squared]="true">
             <md3-icon md3-icon-element>person</md3-icon>
         </button>
     </md3-button-group>

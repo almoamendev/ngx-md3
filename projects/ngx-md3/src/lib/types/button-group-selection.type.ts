@@ -1,0 +1,1 @@
+export type ButtonGroupSelection = 'none' | 'single' | 'multiple';

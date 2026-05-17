@@ -4,6 +4,8 @@ export * from './types/button-size.type';
 export * from './types/button-type.type';
 export * from './types/icon-button-type.type';
 export * from './types/icon-button-width.type';
+export * from './types/button-group-type.type';
+export * from './types/button-group-selection.type';
 
 // typography
 export * from './typography/type-display';

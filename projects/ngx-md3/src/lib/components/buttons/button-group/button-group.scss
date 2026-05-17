@@ -51,38 +51,36 @@
         --button-group-gap: 0.125em;
 
         ::ng-deep [md3-button], ::ng-deep [md3-icon-button] {
-            &:first-child {
-                border-start-end-radius: var(--button-inner-radius);
-                border-end-end-radius: var(--button-inner-radius);
-
-                &::after {
-                    border-start-end-radius: calc(var(--button-inner-radius) + var(--outline-width, 0.1875em) + var(--outline-offset, -0.125em) * -2);
-                    border-end-end-radius: calc(var(--button-inner-radius) + var(--outline-width, 0.1875em) + var(--outline-offset, -0.125em) * -2);
+            &:not(.md3-selected) {
+                &:first-child {
+                    border-start-end-radius: var(--button-inner-radius);
+                    border-end-end-radius: var(--button-inner-radius);
+    
+                    &::after {
+                        border-start-end-radius: calc(var(--button-inner-radius) + var(--outline-width, 0.1875em) + var(--outline-offset, -0.125em) * -2);
+                        border-end-end-radius: calc(var(--button-inner-radius) + var(--outline-width, 0.1875em) + var(--outline-offset, -0.125em) * -2);
+                    }
                 }
-            }
-
-            &:last-child {
-                border-start-start-radius: var(--button-inner-radius);
-                border-end-start-radius: var(--button-inner-radius);
-
-                &::after {
-                    border-start-start-radius: calc(var(--button-inner-radius) + var(--outline-width, 0.1875em) + var(--outline-offset, -0.125em) * -2);
-                    border-end-start-radius: calc(var(--button-inner-radius) + var(--outline-width, 0.1875em) + var(--outline-offset, -0.125em) * -2);
+    
+                &:last-child {
+                    border-start-start-radius: var(--button-inner-radius);
+                    border-end-start-radius: var(--button-inner-radius);
+    
+                    &::after {
+                        border-start-start-radius: calc(var(--button-inner-radius) + var(--outline-width, 0.1875em) + var(--outline-offset, -0.125em) * -2);
+                        border-end-start-radius: calc(var(--button-inner-radius) + var(--outline-width, 0.1875em) + var(--outline-offset, -0.125em) * -2);
+                    }
                 }
-            }
-
-            &:not(:first-child):not(:last-child) {
-                --border-radius: var(--button-inner-radius);
-
-                border-radius: var(--button-inner-radius);
-            }
-            
-            &:not(:disabled):active {
-                border-radius: var(--button-innter-radius);
-            }
-
-            &.md3-selected {
-                border-radius: var(--button-innter-radius);
+    
+                &:not(:first-child):not(:last-child) {
+                    --border-radius: var(--button-inner-radius);
+    
+                    border-radius: var(--button-inner-radius);
+                }
+                
+                &:not(:disabled):active {
+                    border-radius: var(--button-innter-radius);
+                }
             }
         }
 

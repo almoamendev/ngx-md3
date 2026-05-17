@@ -14,17 +14,29 @@ import { ButtonType } from '../../../types/button-type.type';
 })
 export class Button {
     @Input('button-size') set size(value: ButtonSize) {
-        this.element.classList.remove('md3-' + this.buttonSize());
-        this.buttonSize.set(value);
+        this.buttonSize.update((current) => {
+            if (value == current) {
+                return current;
+            }
+
+            this.element.classList.remove('md3-' + current);
+            return value;
+        });
     };
     @Input('button-type') set type(value: ButtonType) {
-        this.element.classList.remove('md3-' + this.buttonType());
-        this.buttonType.set(value);
+        this.buttonType.update((current) => {
+            if (value == current) {
+                return current;
+            }
+
+            this.element.classList.remove('md3-' + current);
+            return value;
+        });
     };
     @Input('button-squared') set squared(value: boolean) {
         this.isSquared.set(value);
     };
-    @Input('selected') set selected(value: boolean) {
+    @Input('selected') set selected(value: boolean | null) {
         if (this.buttonType() == 'text') {
             this.isSelected.set(null);
         } else {
@@ -83,5 +95,15 @@ export class Button {
 
     public get element(): HTMLElement {
         return this.el.nativeElement as HTMLElement;
+    }
+
+    public enableSelection() {
+        this.isSelected.update((current) => {
+            if (current !== null) {
+                return current;
+            }
+
+            return false;
+        });
     }
 }
