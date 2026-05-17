@@ -1,14 +1,10 @@
 import { Component } from '@angular/core';
-import { Button, ButtonGroup, IconButton, IconElement, MaterialIcon } from '@vip9008/ngx-md3';
+import { ButtonGroupModule } from '@vip9008/ngx-md3';
 
 @Component({
     selector: 'app-button-groups.component',
     imports: [
-        ButtonGroup,
-        Button,
-        IconButton,
-        MaterialIcon,
-        IconElement,
+        ButtonGroupModule,
     ],
     templateUrl: './button-groups.component.html',
     styleUrl: './button-groups.component.scss',

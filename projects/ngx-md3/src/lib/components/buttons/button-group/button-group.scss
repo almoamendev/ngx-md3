@@ -1,40 +1,124 @@
 :host {
     --button-group-gap: 0.75em;
+    --button-inner-radius: 0.5em;
+    --outline-width: 0.1875em;
+    --outline-offset: -0.125em;
 
     display: inline-flex;
     gap: var(--button-group-gap);
     align-items: center;
     font-size: 1rem;
 
+    ::ng-deep [md3-button], ::ng-deep [md3-icon-button] {
+        --outline-width: var(--outline-width);
+        --outline-offset: var(--outline-offset);
+    }
+
     &.md3-standard {
-        &[button-size="x-small"] {
+        &[button-size=x-small] {
             --button-group-gap: 1.125em;
         }
         
-        &[button-size="small"] {
+        &[button-size=small] {
             --button-group-gap: 0.75em;
         }
         
-        &[button-size="medium"] {
+        &[button-size=medium] {
             --button-group-gap: 0.5em;
         }
         
-        &[button-size="large"] {
+        &[button-size=large] {
             --button-group-gap: 0.5em;
         }
         
-        &[button-size="x-large"] {
+        &[button-size=x-large] {
             --button-group-gap: 0.5em;
-        }
-
-        ::ng-deep [md3-button], ::ng-deep [md3-icon-button] {
-            &:active {
-                transform: scaleX(1.15);
-            }
         }
     }
 
     &.md3-connected {
         --button-group-gap: 0.125em;
+
+        &[button-size=x-small] {
+            --button-inner-radius: 0.5em;
+
+            ::ng-deep [md3-button], ::ng-deep [md3-icon-button] {
+                &:not(:disabled):active {
+                    --button-innter-radius: 0.25em;
+                }
+            }
+        }
+        
+        &[button-size=small] {
+            --button-inner-radius: 0.5em;
+
+            ::ng-deep [md3-button], ::ng-deep [md3-icon-button] {
+                &:not(:disabled):active {
+                    --button-innter-radius: 0.25em;
+                }
+            }
+        }
+        
+        &[button-size=medium] {
+            --button-inner-radius: 0.5em;
+
+            ::ng-deep [md3-button], ::ng-deep [md3-icon-button] {
+                &:not(:disabled):active {
+                    --button-innter-radius: 0.25em;
+                }
+            }
+        }
+        
+        &[button-size=large] {
+            --button-inner-radius: 1em;
+
+            ::ng-deep [md3-button], ::ng-deep [md3-icon-button] {
+                &:not(:disabled):active {
+                    --button-innter-radius: 0.75em;
+                }
+            }
+        }
+        
+        &[button-size=x-large] {
+            --button-inner-radius: 1.25em;
+
+            ::ng-deep [md3-button], ::ng-deep [md3-icon-button] {
+                &:not(:disabled):active {
+                    --button-innter-radius: 1em;
+                }
+            }
+        }
+
+        ::ng-deep [md3-button], ::ng-deep [md3-icon-button] {
+            &:first-child {
+                border-start-end-radius: var(--button-inner-radius);
+                border-end-end-radius: var(--button-inner-radius);
+
+                &::after {
+                    border-start-end-radius: calc(var(--button-inner-radius) + var(--outline-width, 0.1875em) + var(--outline-offset, -0.125em) * -2);
+                    border-end-end-radius: calc(var(--button-inner-radius) + var(--outline-width, 0.1875em) + var(--outline-offset, -0.125em) * -2);
+                }
+            }
+
+            &:last-child {
+                border-start-start-radius: var(--button-inner-radius);
+                border-end-start-radius: var(--button-inner-radius);
+
+                &::after {
+                    border-start-start-radius: calc(var(--button-inner-radius) + var(--outline-width, 0.1875em) + var(--outline-offset, -0.125em) * -2);
+                    border-end-start-radius: calc(var(--button-inner-radius) + var(--outline-width, 0.1875em) + var(--outline-offset, -0.125em) * -2);
+                }
+            }
+
+            &:not(:first-child):not(:last-child) {
+                --border-radius: var(--button-inner-radius);
+
+                border-radius: var(--button-inner-radius);
+            }
+
+            &:not(disabled):active {
+                border-radius: var(--button-inner-radius) !important;
+            }
+        }
     }
 }

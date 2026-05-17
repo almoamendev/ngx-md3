@@ -4,7 +4,7 @@ import { IconButton } from '../icon-button/icon-button';
 
 @Component({
     selector: 'md3-button-group',
-    imports: [],
+    standalone: false,
     templateUrl: './button-group.html',
     styleUrl: './button-group.scss',
     host: {

@@ -19,6 +19,7 @@ export * from './components/buttons/button/button';
 export * from './components/buttons/floating-action-button/floating-action-button';
 export * from './components/buttons/icon-button/icon-button';
 export * from './components/buttons/button-group/button-group';
+export * from './components/buttons/button-group/button-group-module';
 
 // cards
 export * from './components/card/card';
