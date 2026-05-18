@@ -78,20 +78,59 @@
         padding: 0;
         opacity: 0;
 
-        & ~ .md3-state-layer {
-            height: 2.5em;
-            width: 2.5em;
-            top: -0.25em;
-            left: -0.25em;
-            border-radius: 100%;
-            transition: left var(--md-motion-standard-fast-spatial-duration) var(--md-motion-standard-fast-spatial-easing),
-                        right var(--md-motion-standard-fast-spatial-duration) var(--md-motion-standard-fast-spatial-easing),
-                        opacity var(--md-motion-expressive-slow-spatial-duration) var(--md-motion-expressive-slow-spatial-easing);
+        & + .md3-track {
+            .md3-state-layer {
+                height: 2.5em;
+                width: 2.5em;
+                top: -0.25em;
+                left: -0.25em;
+                border-radius: 100%;
+                transition: left var(--md-motion-standard-fast-spatial-duration) var(--md-motion-standard-fast-spatial-easing),
+                            right var(--md-motion-standard-fast-spatial-duration) var(--md-motion-standard-fast-spatial-easing),
+                            opacity var(--md-motion-expressive-slow-spatial-duration) var(--md-motion-expressive-slow-spatial-easing);
+            }
+        }
+
+        &:hover {
+            & + .md3-track {
+                .md3-state-layer {
+                    opacity: 0.08;
+                }
+
+                &::after {
+                    opacity: 0;
+                }
+            }
         }
 
         &:focus {
             & + .md3-track {
                 --switch-handle-color: rgb(var(--md-scheme-on-surface-variant));
+
+                .md3-state-layer {
+                    opacity: 0.1;
+                }
+
+                &::after {
+                    opacity: 1;
+                }
+            }
+        }
+
+        &:active {
+            & + .md3-track {
+                .md3-state-layer {
+                    opacity: 0.1;
+                    
+                    &::before {
+                        transform: translate(-50%, -50%) scale(2.4);
+                        opacity: 1;
+                    }
+                }
+
+                &::after {
+                    opacity: 0;
+                }
             }
         }
 
@@ -116,12 +155,12 @@
                         }
                     }
                 }
-            }
 
-            & ~ .md3-state-layer {
-                --state-color: var(--md-scheme-primary);
-
-                left: 1em;
+                .md3-state-layer {
+                    --state-color: var(--md-scheme-primary);
+    
+                    left: 1em;
+                }
             }
         }
         
@@ -138,16 +177,16 @@
                 --track-color: rgb(var(--md-scheme-error-container));
                 --track-outline-color: rgb(var(--md-scheme-error));
                 --switch-handle-color: rgb(var(--md-scheme-error));
+
+                .md3-state-layer {
+                    --state-color: var(--md-scheme-error);
+                }
             }
 
             &:checked + .md3-track {
                 --track-color: rgb(var(--md-scheme-error));
                 --track-outline-color: rgb(var(--md-scheme-error));
                 --switch-handle-color: rgb(var(--md-scheme-on-error));
-            }
-
-            & ~ .md3-state-layer {
-                --state-color: var(--md-scheme-error);
             }
         }
 
@@ -157,6 +196,10 @@
                 --track-outline-color: rgb(var(--md-scheme-on-surface));
                 --switch-handle-color: rgb(var(--md-scheme-on-surface));
                 opacity: 0.38;
+
+                .md3-state-layer {
+                    display: none;
+                }
             }
 
             &:checked + .md3-track {
@@ -164,10 +207,6 @@
                 --track-outline-color: rgb(var(--md-scheme-on-surface));
                 --switch-handle-color: rgb(var(--md-scheme-surface));
                 --icon-color: rgb(var(--md-scheme-on-surface));
-            }
-
-            & ~ .md3-state-layer {
-                display: none;
             }
         }
     }

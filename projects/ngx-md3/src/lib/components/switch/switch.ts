@@ -1,4 +1,4 @@
-import { AfterContentInit, Component, ContentChild, DestroyRef, effect, ElementRef, input, Input, signal } from '@angular/core';
+import { AfterContentInit, Component, ContentChild, DestroyRef, effect, ElementRef, input, Input, signal, viewChild } from '@angular/core';
 import { AbstractControl, FormControlName } from '@angular/forms';
 import { fromEvent } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -7,15 +7,16 @@ import { StateComponent } from '../common/state-component';
 
 @Component({
     selector: 'md3-switch',
-    imports: [],
-    templateUrl: './switch.html',
-    styleUrl: './switch.scss',
-    hostDirectives: [
+    imports: [
         StateComponent
     ],
+    templateUrl: './switch.html',
+    styleUrl: './switch.scss',
 })
 export class Switch implements AfterContentInit {
     @Input() control?: AbstractControl;
+    
+    private stateComponent = viewChild<StateComponent>(StateComponent);
 
     @ContentChild(InputElement) input?: InputElement;
     @ContentChild(FormControlName) controlName?: FormControlName;
@@ -29,14 +30,13 @@ export class Switch implements AfterContentInit {
 
     constructor(
         private el: ElementRef<HTMLElement>,
-        private stateComponent: StateComponent,
         private destroyRef: DestroyRef
     ) {
         effect(() => {
             if (this.disableStateLayer()) {
-                this.stateComponent.disable();
+                this.stateComponent()?.setStateLayer(false);
             } else {
-                this.stateComponent.enable();
+                this.stateComponent()?.setStateLayer(true);
             }
         });
     }

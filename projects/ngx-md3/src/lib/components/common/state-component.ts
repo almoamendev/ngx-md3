@@ -1,4 +1,4 @@
-import { Directive, ElementRef, HostListener, OnInit, Renderer2 } from '@angular/core';
+import { Directive, effect, ElementRef, HostListener, Input, OnInit, Renderer2, signal } from '@angular/core';
 
 @Directive({
     selector: '[md3-state-component]',
@@ -8,17 +8,30 @@ import { Directive, ElementRef, HostListener, OnInit, Renderer2 } from '@angular
 })
 export class StateComponent implements OnInit {
     private stateLayer?: HTMLDivElement;
+    private stateLayerSignal = signal<boolean>(true);
 
     constructor(
         private el: ElementRef<HTMLElement>,
         private renderer: Renderer2
-    ) {}
+    ) {
+        effect(() => {
+            if (this.stateLayerSignal()) {
+                this.enable();
+            } else {
+                this.disable();
+            }
+        });
+    }
 
     ngOnInit(): void {
         this.init();
     }
 
     private init(): void {
+        if (!this.stateLayerSignal() || this.stateLayer) {
+            return;
+        }
+
         let layer = this.el.nativeElement.querySelector(
             ':scope > .md3-state-layer'
         ) as HTMLDivElement | null;
@@ -38,12 +51,16 @@ export class StateComponent implements OnInit {
         this.stateLayer = layer;
     }
 
-    public enable(): void {
+    public setStateLayer(value: boolean) {
+        this.stateLayerSignal.set(value);
+    }
+
+    private enable(): void {
         this.el.nativeElement.classList.add('md3-state-component');
         this.init();
     }
 
-    public disable(): void {
+    private disable(): void {
         this.el.nativeElement.classList.remove('md3-state-component');
         this.stateLayer?.remove();
     }

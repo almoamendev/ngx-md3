@@ -1,4 +1,4 @@
-import { AfterContentInit, Component, ContentChild, DestroyRef, effect, ElementRef, input, Input, signal } from '@angular/core';
+import { AfterContentInit, Component, ContentChild, DestroyRef, effect, ElementRef, input, Input, signal, viewChild, ViewChild } from '@angular/core';
 import { StateComponent } from '../common/state-component';
 import { InputElement } from '../common/input-element';
 import { MaterialIcon } from '../common/material-icon/material-icon';
@@ -9,16 +9,16 @@ import { AbstractControl, FormControlName } from '@angular/forms';
 @Component({
     selector: 'md3-checkbox',
     imports: [
-        MaterialIcon
+        MaterialIcon,
+        StateComponent,
     ],
     templateUrl: './checkbox.html',
     styleUrl: './checkbox.scss',
-    hostDirectives: [
-        StateComponent
-    ],
 })
 export class Checkbox implements AfterContentInit {
     @Input() control?: AbstractControl;
+
+    private stateComponent = viewChild<StateComponent>(StateComponent);
 
     @ContentChild(InputElement) input?: InputElement;
     @ContentChild(FormControlName) controlName?: FormControlName;
@@ -33,14 +33,13 @@ export class Checkbox implements AfterContentInit {
 
     constructor(
         private el: ElementRef<HTMLElement>,
-        private stateComponent: StateComponent,
         private destroyRef: DestroyRef
     ) {
         effect(() => {
             if (this.disableStateLayer()) {
-                this.stateComponent.disable();
+                this.stateComponent()?.setStateLayer(false);
             } else {
-                this.stateComponent.enable();
+                this.stateComponent()?.setStateLayer(true);
             }
         })
     }
@@ -124,13 +123,13 @@ export class Checkbox implements AfterContentInit {
 
     ngAfterContentInit(): void {
         if (this.input?.nativeElement) {
-            fromEvent(this.input.nativeElement, 'focus').pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
-                this.el.nativeElement.classList.add('md3-focused');
-            });
+            // fromEvent(this.input.nativeElement, 'focus').pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
+            //     this.el.nativeElement.classList.add('md3-focused');
+            // });
 
-            fromEvent(this.input.nativeElement, 'blur').pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
-                this.el.nativeElement.classList.remove('md3-focused');
-            });
+            // fromEvent(this.input.nativeElement, 'blur').pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
+            //     this.el.nativeElement.classList.remove('md3-focused');
+            // });
 
             fromEvent(this.input.nativeElement, 'change').pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
                 this.syncStateFromInput();

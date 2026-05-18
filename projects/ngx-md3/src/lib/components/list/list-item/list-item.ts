@@ -64,7 +64,7 @@ export class ListItem implements AfterViewInit {
         this.isActionTag = tagName != 'md3-list-item';
         
         if (!this.isActionTag) {
-            this.state.disable();
+            this.state.setStateLayer(false);
         }
     }
 }
