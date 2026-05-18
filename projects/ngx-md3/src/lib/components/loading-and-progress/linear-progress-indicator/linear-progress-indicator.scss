@@ -2,7 +2,7 @@
     display: block;
     width: 100%;
 
-    .linear-indicator {
+    .md3-linear-indicator {
         --indicator-color: rgb(var(--md-scheme-primary));
         --track-color: rgb(var(--md-scheme-primary-container));
         --progress: 0%;
@@ -13,11 +13,11 @@
         height: 1em;
         border-radius: 1em;
     
-        &.thickness-8dp {
+        &.md3-thickness-8dp {
             font-size: 0.5rem;
         }
     
-        .track {
+        .md3-track {
             position: absolute;
             inset-block: 0;
             inset-inline-end: 0;
@@ -28,7 +28,7 @@
             transition: width var(--md-motion-standard-fast-effects-duration) var(--md-motion-standard-fast-effects-easing);
         }
     
-        .active-indicator {
+        .md3-active-indicator {
             position: absolute;
             inset-block: 0;
             inset-inline-start: 0;
@@ -39,7 +39,7 @@
             transition: width var(--md-motion-standard-fast-effects-duration) var(--md-motion-standard-fast-effects-easing);
         }
     
-        &.indeterminate {
+        &.md3-indeterminate {
             --multiplier: 6;
     
             &::before {
@@ -56,14 +56,14 @@
                 animation: md3-indeterminate-track-start calc(var(--md-motion-standard-slow-effects-duration) * var(--multiplier)) cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;
             }
     
-            .track {
+            .md3-track {
                 width: auto;
                 inset-inline-start: auto;
                 inset-inline-end: 0;
                 animation: md3-indeterminate-track-end calc(var(--md-motion-standard-slow-effects-duration) * var(--multiplier)) cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;
             }
     
-            .track-secondary {
+            .md3-track-secondary {
                 position: absolute;
                 display: block;
                 inset-block: 0;
@@ -88,13 +88,13 @@
                 animation: md3-indeterminate-track-end-short calc(var(--md-motion-standard-slow-effects-duration) * var(--multiplier)) cubic-bezier(0.165, 0.84, 0.44, 1) calc(var(--md-motion-standard-slow-effects-duration) * var(--multiplier) / 2) infinite;
             }
     
-            .active-indicator {
+            .md3-active-indicator {
                 width: auto;
                 inset-inline: auto;
                 animation: md3-indeterminate-indicator calc(var(--md-motion-standard-slow-effects-duration) * var(--multiplier)) cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;
             }
     
-            .active-indicator-secondary {
+            .md3-active-indicator-secondary {
                 position: absolute;
                 display: block;
                 inset-block: 0;

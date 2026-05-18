@@ -226,7 +226,7 @@
             }
         }
 
-        &.has-leading-icon {
+        &.md3-has-leading-icon {
             ::ng-deep .md3-input-element {
                 padding-inline-start: 3.25em;
             }
@@ -236,7 +236,7 @@
             }
         }
 
-        &.has-trailing-icon {
+        &.md3-has-trailing-icon {
             ::ng-deep .md3-input-element {
                 padding-inline-end: 3.25em;
             }
@@ -320,7 +320,7 @@
         letter-spacing: 0.033332em;
         color: var(--label-color);
 
-        &.has-error {
+        &.md3-has-error {
             color: rgb(var(--md-scheme-error));
         }
 

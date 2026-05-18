@@ -19,7 +19,7 @@
     width: 3.25em;
     border-radius: var(--border-radius);
 
-    .track {
+    .md3-track {
         position: absolute;
         display: inline-flex;
         align-items: center;
@@ -31,7 +31,7 @@
         pointer-events: none;
         transition: all var(--md-motion-standard-fast-spatial-duration) var(--md-motion-standard-fast-spatial-easing);
     
-        .handle-container {
+        .md3-handle-container {
             position: absolute;
             height: 1.75em;
             width: 1.75em;
@@ -41,7 +41,7 @@
             justify-content: center;
             transition: all var(--md-motion-standard-fast-spatial-duration) var(--md-motion-standard-fast-spatial-easing);
 
-            .handle {
+            .md3-handle {
                 display: flex;
                 align-items: center;
                 justify-content: center;
@@ -90,23 +90,23 @@
         }
 
         &:focus {
-            & + .track {
+            & + .md3-track {
                 --switch-handle-color: rgb(var(--md-scheme-on-surface-variant));
             }
         }
 
         &:checked {
-            & + .track {
+            & + .md3-track {
                 --track-color: rgb(var(--md-scheme-primary));
                 --track-outline-color: rgb(var(--md-scheme-primary));
                 --switch-handle-color: rgb(var(--md-scheme-on-primary));
                 --icon-color: rgb(var(--md-scheme-primary));
                 --switch-handle-size: 1.5em;
 
-                .handle-container {
+                .md3-handle-container {
                     left: 1.25em;
 
-                    .handle {
+                    .md3-handle {
                         ::ng-deep [md3-icon-element=unselected] {
                             display: none !important;
                         }
@@ -126,21 +126,21 @@
         }
         
         &:active:not(:disabled) {
-            & + .track {
-                .handle-container {
+            & + .md3-track {
+                .md3-handle-container {
                     --switch-handle-size: 1.75em;
                 }
             }
         }
 
         &[aria-invalid=true] {
-            & + .track {
+            & + .md3-track {
                 --track-color: rgb(var(--md-scheme-error-container));
                 --track-outline-color: rgb(var(--md-scheme-error));
                 --switch-handle-color: rgb(var(--md-scheme-error));
             }
 
-            &:checked + .track {
+            &:checked + .md3-track {
                 --track-color: rgb(var(--md-scheme-error));
                 --track-outline-color: rgb(var(--md-scheme-error));
                 --switch-handle-color: rgb(var(--md-scheme-on-error));
@@ -152,14 +152,14 @@
         }
 
         &:disabled {
-            & + .track {
+            & + .md3-track {
                 --track-color: rgb(var(--md-scheme-surface-container-highest));
                 --track-outline-color: rgb(var(--md-scheme-on-surface));
                 --switch-handle-color: rgb(var(--md-scheme-on-surface));
                 opacity: 0.38;
             }
 
-            &:checked + .track {
+            &:checked + .md3-track {
                 --track-color: rgb(var(--md-scheme-on-surface));
                 --track-outline-color: rgb(var(--md-scheme-on-surface));
                 --switch-handle-color: rgb(var(--md-scheme-surface));

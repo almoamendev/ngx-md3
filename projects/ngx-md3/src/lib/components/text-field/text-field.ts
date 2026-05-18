@@ -110,7 +110,7 @@ export class TextField implements AfterContentInit {
         const hasLeading: boolean = this.iconElements?.some(i => i.iconType === 'leading') ?? false;
         const hasTrailing: boolean = (this.iconElements?.some(i => i.iconType === 'trailing') || !!this.iconButtons?.length) ?? false;
 
-        container.classList.toggle('has-leading-icon', hasLeading);
-        container.classList.toggle('has-trailing-icon', hasTrailing);
+        container.classList.toggle('md3-has-leading-icon', hasLeading);
+        container.classList.toggle('md3-has-trailing-icon', hasTrailing);
     }
 }

@@ -25,13 +25,13 @@ export class MaterialIcon implements AfterViewInit {
         this.element.classList.add(iconSize);
 
         if (this.filled) {
-            this.element.classList.add('filled');
+            this.element.classList.add('md3-filled');
         }
 
         let iconStyle = this.iconStyle == 'normal' ? null : this.iconStyle;
 
         if (this.iconVersion == 'MaterialSymbols') {
-            this.element.classList.add('symbol');
+            this.element.classList.add('md3-symbol');
 
             if (iconStyle == 'two-tone') {
                 iconStyle = null;
@@ -39,11 +39,11 @@ export class MaterialIcon implements AfterViewInit {
         }
 
         if (iconStyle !== null) {
-            this.element.classList.add(iconStyle);
+            this.element.classList.add('md3-' + iconStyle);
         }
 
         if (this.biDirectional) {
-            this.element.classList.add('bi-directional');
+            this.element.classList.add('md3-bi-directional');
         }
     }
 }

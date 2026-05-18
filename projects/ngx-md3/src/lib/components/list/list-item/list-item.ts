@@ -39,9 +39,9 @@ export class ListItem implements AfterViewInit {
     ) {
         effect(() => {
             if (this.selectSignal()) {
-                this.element?.classList.add('selected');
+                this.element?.classList.add('md3-selected');
             } else {
-                this.element?.classList.remove('selected');
+                this.element?.classList.remove('md3-selected');
             }
         });
 

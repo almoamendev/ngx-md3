@@ -2,7 +2,7 @@
     display: inline-flex;
 }
 
-.indicator-indeterminate {
+.md3-indicator-indeterminate {
     --size: 3rem;
     --indicator-color: rgb(var(--md-scheme-primary));
 
@@ -15,20 +15,20 @@
     border-radius: 100%;
     display: inline-block;
 
-    &.contained {
+    &.md3-contained {
         --indicator-color: rgb(var(--md-scheme-on-primary-container));
         background-color: rgb(var(--md-scheme-primary-container));
     }
 }
 
-.indicator-svg {
+.md3-indicator-svg {
     width: 100%;
     height: 100%;
     animation: md3-rotate calc(var(--md-motion-expressive-slow-effects-duration) * 6) infinite;
 
     overflow: visible;
 
-    .indicator-shape {
+    .md3-indicator-shape {
         fill: var(--indicator-color);
         animation: md3-shape-morph calc(var(--md-motion-expressive-slow-effects-duration) * 14) infinite;
         transform-origin: center;

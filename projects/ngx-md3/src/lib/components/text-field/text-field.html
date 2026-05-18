@@ -17,7 +17,7 @@
         <div class="md3-text-field-state"></div>
     }
 </div>
-<div class="md3-supporting-text-container" [class.has-error]="hasError">
+<div class="md3-supporting-text-container" [class.md3-has-error]="hasError">
     <ng-content select="[md3-supporting-text]"></ng-content>
     @if (inputCounter) {
         <div class="md3-text-input-counter">{{ valueLength + (maxLength ? "/" + maxLength : "") }}</div>

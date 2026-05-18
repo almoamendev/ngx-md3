@@ -16,19 +16,19 @@
     -webkit-font-feature-settings: 'liga';
     font-feature-settings: 'liga';
 
-    &.outlined {
+    &.md3-outlined {
         font-family: 'Material Icons Outlined' !important;
     }
 
-    &.rounded {
+    &.md3-rounded {
         font-family: 'Material Icons Round' !important;
     }
 
-    &.sharp {
+    &.md3-sharp {
         font-family: 'Material Icons Sharp' !important;
     }
 
-    &.two-tone {
+    &.md3-two-tone {
         font-family: 'Material Icons Two Tone' !important;
         color: transparent !important;
         background: var(--foreground-color, rgb(var(--md-scheme-on-surface))) !important;
@@ -36,23 +36,23 @@
         background-clip: text !important;
     }
 
-    &.symbol {
+    &.md3-symbol {
         font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
         font-family: 'Material Symbols Outlined' !important;
 
-        &.filled {
+        &.md3-filled {
             font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
         }
 
-        &.outlined {
+        &.md3-outlined {
             font-family: 'Material Symbols Outlined' !important;
         }
     
-        &.rounded {
+        &.md3-rounded {
             font-family: 'Material Symbols Rounded' !important;
         }
     
-        &.sharp {
+        &.md3-sharp {
             font-family: 'Material Symbols Sharp' !important;
         }
     }
@@ -73,7 +73,7 @@
         font-size: 3rem;
     }
 
-    &.bi-directional:dir(rtl) {
+    &.md3-bi-directional:dir(rtl) {
         -webkit-transform: scaleX(-1);
         transform: scaleX(-1);
     }

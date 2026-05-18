@@ -54,7 +54,7 @@
         width: 1em !important;
     }
 
-    .icon-label-space {
+    .md3-icon-label-space {
         display: none;
         height: 100%;
         width: 0;
@@ -63,7 +63,7 @@
         transition: all var(--md-motion-expressive-default-spatial-duration) var(--md-motion-expressive-default-spatial-easing);
     }
 
-    .label {
+    .md3-label {
         font-size: 1em;
         font-weight: 500;
         line-height: 1.5em;
@@ -77,16 +77,16 @@
     }
 
     &.md3-extended-fab {
-        ::ng-deep [md3-icon-element] + .icon-label-space {
+        ::ng-deep [md3-icon-element] + .md3-icon-label-space {
             display: block;
         }
 
-        .icon-label-space {
+        .md3-icon-label-space {
             width: 0.5em;
             transform: scaleX(1);
         }
 
-        .label {
+        .md3-label {
             transform: scaleX(1);
             max-width: initial;
             visibility: visible;
@@ -107,11 +107,11 @@
             font-size: 1.75em !important;
         }
 
-        .icon-label-space {
+        .md3-icon-label-space {
             width: 0.75em;
         }
 
-        .label {
+        .md3-label {
             font-size: 1.375em;
             font-weight: 400;
             line-height: 1.27273em;
@@ -129,11 +129,11 @@
             font-size: 2.25em !important;
         }
 
-        .icon-label-space {
+        .md3-icon-label-space {
             width: 1em;
         }
 
-        .label {
+        .md3-label {
             font-size: 1.5em;
             font-weight: 400;
             line-height: 1.333332em;

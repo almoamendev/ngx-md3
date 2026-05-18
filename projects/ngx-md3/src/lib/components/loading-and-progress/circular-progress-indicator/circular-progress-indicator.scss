@@ -1,9 +1,9 @@
-.indicator-container {
+.md3-indicator-container {
     font-size: 0.25rem;
     --gap: 7;
     --progress: 0;
 
-    &.thickness-8dp {
+    &.md3-thickness-8dp {
         font-size: 0.5rem;
         --gap: 10;
     }
@@ -21,14 +21,14 @@
     width: var(--size);
     height: var(--size);
     
-    .circlar-indicator {
+    .md3-circlar-indicator {
         display: block;
         width: var(--size);
         height: var(--size);
     }
     
-    .track,
-    .active-indicator {
+    .md3-track,
+    .md3-active-indicator {
         fill: none;
         stroke-width: var(--stroke);
         stroke-linecap: round;
@@ -41,7 +41,7 @@
             stroke-dashoffset var(--md-motion-standard-fast-effects-duration) var(--md-motion-standard-fast-effects-easing);
     }
     
-    .track {
+    .md3-track {
         --track-length: calc(var(--track-arc) - var(--gap) * 2);
     
         stroke: var(--track-color);
@@ -49,31 +49,31 @@
         stroke-dashoffset: calc(var(--track-arc) - var(--gap));
     }
     
-    .active-indicator {
+    .md3-active-indicator {
         stroke: var(--indicator-color);
         stroke-dasharray: var(--progress) calc(100 - var(--progress));
     }
 
-    &.indeterminate {
+    &.md3-indeterminate {
         animation: container-rotate calc(var(--md-motion-standard-slow-effects-duration) * 5) linear infinite;
         
-        .circlar-indicator {
+        .md3-circlar-indicator {
             animation: indicator-track-rotate calc(var(--md-motion-standard-slow-effects-duration) * 8) var(--md-motion-standard-slow-effects-easing) infinite;
 
-            .track {
+            .md3-track {
                 stroke-dashoffset: 92;
                 animation: track-fill calc(var(--md-motion-standard-slow-effects-duration) * 8) var(--md-motion-standard-slow-effects-easing) infinite;
             }
             
-            .active-indicator {
+            .md3-active-indicator {
                 stroke-dashoffset: 0;
                 animation: indicator-fill calc(var(--md-motion-standard-slow-effects-duration) * 8) var(--md-motion-standard-slow-effects-easing) infinite;
             }
         }
 
-        &.thickness-8dp {
-            .circlar-indicator {
-                .track {
+        &.md3-thickness-8dp {
+            .md3-circlar-indicator {
+                .md3-track {
                     stroke-dashoffset: 90;
                     animation: track-fill-8dp calc(var(--md-motion-standard-slow-effects-duration) * 8) var(--md-motion-standard-slow-effects-easing) infinite;
                 }

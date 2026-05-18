@@ -28,8 +28,8 @@
     }
 
     &.md3-x-small, &.md3-small {
-        .slider-container .slider-track .active-track {
-            .icon-container {
+        .md3-slider-container .md3-slider-track .md3-active-track {
+            .md3-icon-container {
                 display: none;
             }
         }
@@ -46,8 +46,8 @@
     }
 
     &.md3-medium, &.md3-large {
-        .slider-container .slider-track .active-track {
-            .icon-container {
+        .md3-slider-container .md3-slider-track .md3-active-track {
+            .md3-icon-container {
                 --icon-size: 1.5em;
 
                 margin-top: -0.75em;
@@ -62,8 +62,8 @@
         --slider-size: 6em;
         --border-radius: 1.75em;
         
-        .slider-container .slider-track .active-track {
-            .icon-container {
+        .md3-slider-container .md3-slider-track .md3-active-track {
+            .md3-icon-container {
                 --icon-size: 2em;
 
                 margin-top: -1em;
@@ -73,7 +73,7 @@
         }
     }
 
-    .slider-container {
+    .md3-slider-container {
         position: absolute;
         inset: 0;
         pointer-events: none;
@@ -82,7 +82,7 @@
         justify-content: center;
         height: 100%;
     
-        .slider-track {
+        .md3-slider-track {
             display: flex;
             flex: 1 1 100%;
             position: relative;
@@ -91,14 +91,14 @@
             border-radius: var(--border-radius);
             overflow: hidden;
         
-            .active-track {
+            .md3-active-track {
                 position: relative;
                 width: var(--slider-progress);
                 overflow: hidden;
                 height: 100%;
                 transition: width var(--md-motion-standard-fast-spatial-duration) var(--md-motion-standard-fast-spatial-easing);
 
-                .track-bar {
+                .md3-track-bar {
                     position: relative;
                     overflow: hidden;
                     height: 100%;
@@ -106,7 +106,7 @@
                     background-color: var(--slider-active-track-color);
                     margin-inline-end: 0.5em;
     
-                    .icon-container {
+                    .md3-icon-container {
                         --icon-size: 1.5em;
     
                         position: absolute;
@@ -128,14 +128,14 @@
                 }
             }
         
-            .inactive-track {
+            .md3-inactive-track {
                 position: relative;
                 flex: 1 1 0;
                 overflow: hidden;
                 height: 100%;
                 transition: width var(--md-motion-standard-fast-spatial-duration) var(--md-motion-standard-fast-spatial-easing);
                 
-                .track-bar {
+                .md3-track-bar {
                     position: relative;
                     overflow: hidden;
                     height: 100%;
@@ -159,7 +159,7 @@
             }
         }
     
-        .slider-handle {
+        .md3-slider-handle {
             position: absolute;
             top: 0;
             bottom: 0;
@@ -191,7 +191,7 @@
                 transition: opacity var(--md-motion-expressive-fast-spatial-duration) var(--md-motion-expressive-fast-spatial-easing);
             }
         
-            .value-label {
+            .md3-value-label {
                 position: absolute;
                 inset-inline-start: 50%;
                 bottom: calc(100% + 0.25em);
@@ -228,8 +228,8 @@
 
         &:focus,
         &:active {
-            & ~ .slider-container .slider-handle {
-                .value-label {
+            & ~ .md3-slider-container .md3-slider-handle {
+                .md3-value-label {
                     opacity: 1 !important;
                     transform: translateX(-50%) scale(1) !important;
                 }
@@ -237,7 +237,7 @@
         }
         
         &:focus {
-            & ~ .slider-container .slider-handle {
+            & ~ .md3-slider-container .md3-slider-handle {
                 &::before {
                     width: 0.125em;
                 }
@@ -251,25 +251,25 @@
         &:disabled {
             cursor: default;
 
-            & ~ .slider-container {
+            & ~ .md3-slider-container {
                 --slider-active-track-color: rgb(var(--md-scheme-on-surface));
                 --slider-track-color: rgb(var(--md-scheme-on-surface));
                 --slider-handle-color: rgb(var(--md-scheme-on-surface));
                 
-                .slider-track {
-                    .active-track {
+                .md3-slider-track {
+                    .md3-active-track {
                         opacity: 0.38;
                     }
 
-                    .inactive-track {
+                    .md3-inactive-track {
                         opacity: 0.12;
                     }
                 }
 
-                .slider-handle {
+                .md3-slider-handle {
                     opacity: 0.38;
 
-                    .value-label {
+                    .md3-value-label {
                         display: none !important;
                     }
                 }

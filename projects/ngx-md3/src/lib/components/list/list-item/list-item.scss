@@ -20,7 +20,7 @@
         background-color: transparent;
     }
 
-    &.selected {
+    &.md3-selected {
         --background-color: rgb(var(--md-scheme-secondary-container));
         --foreground-color: rgb(var(--md-scheme-on-secondary-container));
         --border-radius: 1em;
@@ -133,7 +133,7 @@
         background-color: var(--background-color);
         z-index: -1;
 
-        &.disabled, &:disabled {
+        &.md3-disabled, &:disabled {
             --background-color: transparent;
             --state-color: var(--md-scheme-on-surface);
 
@@ -146,7 +146,7 @@
         }
     }
 
-    &.disabled, &:disabled {
+    &.md3-disabled, &:disabled {
         --background-color: transparent;
         --foreground-color: rgb(var(--md-scheme-on-surface));
         --border-radius: 0.75em;
