@@ -123,14 +123,6 @@ export class Checkbox implements AfterContentInit {
 
     ngAfterContentInit(): void {
         if (this.input?.nativeElement) {
-            // fromEvent(this.input.nativeElement, 'focus').pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
-            //     this.el.nativeElement.classList.add('md3-focused');
-            // });
-
-            // fromEvent(this.input.nativeElement, 'blur').pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
-            //     this.el.nativeElement.classList.remove('md3-focused');
-            // });
-
             fromEvent(this.input.nativeElement, 'change').pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
                 this.syncStateFromInput();
                 this.syncControlFromState(this.state());

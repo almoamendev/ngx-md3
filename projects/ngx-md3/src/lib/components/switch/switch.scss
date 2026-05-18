@@ -19,52 +19,58 @@
     width: 3.25em;
     border-radius: var(--border-radius);
 
-    .md3-track {
+    .md3-track-container {
         position: absolute;
-        display: inline-flex;
-        align-items: center;
-        width: 3.25em;
-        height: 2em;
-        border: 0.125em solid var(--track-outline-color);
-        border-radius: 1em;
-        background-color: var(--track-color);
+        inset: 0;
+        border-radius: inherit;
         pointer-events: none;
-        transition: all var(--md-motion-standard-fast-spatial-duration) var(--md-motion-standard-fast-spatial-easing);
-    
-        .md3-handle-container {
-            position: absolute;
-            height: 1.75em;
-            width: 1.75em;
-            left: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all var(--md-motion-standard-fast-spatial-duration) var(--md-motion-standard-fast-spatial-easing);
 
-            .md3-handle {
+        .md3-track {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            border: 0.125em solid var(--track-outline-color);
+            border-radius: inherit;
+            background-color: var(--track-color);
+            transition: all var(--md-motion-standard-fast-spatial-duration) var(--md-motion-standard-fast-spatial-easing);
+        
+            .md3-handle-container {
+                position: absolute;
+                height: 1.75em;
+                width: 1.75em;
+                left: 0;
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                min-width: var(--switch-handle-size);
-                min-height: var(--switch-handle-size);
-                border-radius: 100%;
-                background-color: var(--switch-handle-color);
                 transition: all var(--md-motion-standard-fast-spatial-duration) var(--md-motion-standard-fast-spatial-easing);
-
-                ::ng-deep [md3-icon-element] {
-                    font-size: 1em !important;
-                    height: 1em;
-                    width: 1em;
-                    margin: 0.25em;
-                    color: var(--icon-color);
-                }
-
-                ::ng-deep [md3-icon-element=unselected] {
-                    display: block;
-                }
-
-                ::ng-deep [md3-icon-element=selected] {
-                    display: none;
+    
+                .md3-handle {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    min-width: var(--switch-handle-size);
+                    min-height: var(--switch-handle-size);
+                    border-radius: 100%;
+                    background-color: var(--switch-handle-color);
+                    transition: all var(--md-motion-standard-fast-spatial-duration) var(--md-motion-standard-fast-spatial-easing);
+    
+                    ::ng-deep [md3-icon-element] {
+                        font-size: 1em !important;
+                        height: 1em;
+                        width: 1em;
+                        margin: 0.25em;
+                        color: var(--icon-color);
+                    }
+    
+                    ::ng-deep [md3-icon-element=unselected] {
+                        display: block;
+                    }
+    
+                    ::ng-deep [md3-icon-element=selected] {
+                        display: none;
+                    }
                 }
             }
         }
@@ -78,7 +84,7 @@
         padding: 0;
         opacity: 0;
 
-        & + .md3-track {
+        & + .md3-track-container {
             .md3-state-layer {
                 height: 2.5em;
                 width: 2.5em;
@@ -92,7 +98,7 @@
         }
 
         &:hover {
-            & + .md3-track {
+            & + .md3-track-container {
                 .md3-state-layer {
                     opacity: 0.08;
                 }
@@ -104,7 +110,7 @@
         }
 
         &:focus {
-            & + .md3-track {
+            & + .md3-track-container {
                 --switch-handle-color: rgb(var(--md-scheme-on-surface-variant));
 
                 .md3-state-layer {
@@ -118,7 +124,7 @@
         }
 
         &:active {
-            & + .md3-track {
+            & + .md3-track-container {
                 .md3-state-layer {
                     opacity: 0.1;
                     
@@ -135,23 +141,25 @@
         }
 
         &:checked {
-            & + .md3-track {
+            & + .md3-track-container {
                 --track-color: rgb(var(--md-scheme-primary));
                 --track-outline-color: rgb(var(--md-scheme-primary));
                 --switch-handle-color: rgb(var(--md-scheme-on-primary));
                 --icon-color: rgb(var(--md-scheme-primary));
                 --switch-handle-size: 1.5em;
 
-                .md3-handle-container {
-                    left: 1.25em;
-
-                    .md3-handle {
-                        ::ng-deep [md3-icon-element=unselected] {
-                            display: none !important;
-                        }
-
-                        ::ng-deep [md3-icon-element=selected] {
-                            display: block !important;
+                .md3-track {
+                    .md3-handle-container {
+                        left: 1.25em !important;
+    
+                        .md3-handle {
+                            ::ng-deep [md3-icon-element=unselected] {
+                                display: none !important;
+                            }
+    
+                            ::ng-deep [md3-icon-element=selected] {
+                                display: block !important;
+                            }
                         }
                     }
                 }
@@ -165,7 +173,7 @@
         }
         
         &:active:not(:disabled) {
-            & + .md3-track {
+            & + .md3-track-container .md3-track {
                 .md3-handle-container {
                     --switch-handle-size: 1.75em;
                 }
@@ -173,7 +181,7 @@
         }
 
         &[aria-invalid=true] {
-            & + .md3-track {
+            & + .md3-track-container {
                 --track-color: rgb(var(--md-scheme-error-container));
                 --track-outline-color: rgb(var(--md-scheme-error));
                 --switch-handle-color: rgb(var(--md-scheme-error));
@@ -183,7 +191,7 @@
                 }
             }
 
-            &:checked + .md3-track {
+            &:checked + .md3-track-container {
                 --track-color: rgb(var(--md-scheme-error));
                 --track-outline-color: rgb(var(--md-scheme-error));
                 --switch-handle-color: rgb(var(--md-scheme-on-error));
@@ -191,7 +199,7 @@
         }
 
         &:disabled {
-            & + .md3-track {
+            & + .md3-track-container {
                 --track-color: rgb(var(--md-scheme-surface-container-highest));
                 --track-outline-color: rgb(var(--md-scheme-on-surface));
                 --switch-handle-color: rgb(var(--md-scheme-on-surface));
@@ -202,7 +210,7 @@
                 }
             }
 
-            &:checked + .md3-track {
+            &:checked + .md3-track-container {
                 --track-color: rgb(var(--md-scheme-on-surface));
                 --track-outline-color: rgb(var(--md-scheme-on-surface));
                 --switch-handle-color: rgb(var(--md-scheme-surface));

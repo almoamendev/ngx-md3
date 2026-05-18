@@ -110,14 +110,6 @@ export class Switch implements AfterContentInit {
         if (this.input?.nativeElement) {
             this.input.nativeElement.setAttribute('role', 'switch');
 
-            fromEvent(this.input.nativeElement, 'focus').pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
-                this.el.nativeElement.classList.add('md3-focused');
-            });
-
-            fromEvent(this.input.nativeElement, 'blur').pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
-                this.el.nativeElement.classList.remove('md3-focused');
-            });
-
             fromEvent(this.input.nativeElement, 'change').pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
                 this.syncStateFromInput();
                 this.syncControlFromState(this.state());
