@@ -1,4 +1,4 @@
-import { Component, contentChildren, effect, ElementRef, Input, signal } from '@angular/core';
+import { Component, contentChildren, effect, ElementRef, HostListener, Input, signal } from '@angular/core';
 import { Button } from '../button/button';
 import { IconButton } from '../icon-button/icon-button';
 import { ButtonSize } from '../../../types/button-size.type';
@@ -39,6 +39,18 @@ export class ButtonGroup {
     @Input() set selection(value: ButtonGroupSelection) {
         this.groupSelection.set(value);
     };
+
+    @HostListener('click', ['$event']) onClick(event: PointerEvent): void {
+        if (this.groupSelection() !== 'single') {
+            return;
+        }
+
+        const selectedItem = this.findEventButton(event);
+
+        if (selectedItem?.selected) {
+            this.clearOtherSelections(selectedItem);
+        }
+    }
     
     private buttonSize = signal<ButtonSize>('small');
     private groupType = signal<ButtonGroupType>('standard');
@@ -52,11 +64,7 @@ export class ButtonGroup {
             const size = this.buttonSize();
             this.element.classList.add('md3-' + size);
 
-            this.buttons().forEach((item) => {
-                item.size = size;
-            });
-
-            this.iconButtons().forEach((item) => {
+            this.allButtons().forEach((item) => {
                 item.size = size;
             });
         });
@@ -69,26 +77,59 @@ export class ButtonGroup {
             const selection = this.groupSelection();
 
             if (selection == 'none') {
-                this.buttons().forEach((item) => {
-                    item.selected = null;
-                });
-
-                this.iconButtons().forEach((item) => {
+                this.allButtons().forEach((item) => {
                     item.selected = null;
                 });
             } else {
-                this.buttons().forEach((item) => {
+                this.allButtons().forEach((item) => {
                     item.enableSelection();
                 });
 
-                this.iconButtons().forEach((item) => {
-                    item.enableSelection();
-                });
+                if (selection == 'single') {
+                    this.normalizeSingleSelection();
+                }
             }
         });
     }
 
     public get element(): HTMLElement {
         return this.el.nativeElement as HTMLElement;
+    }
+
+    private findEventButton(event: PointerEvent): Button | IconButton | undefined {
+        const target = event.target;
+
+        if (!(target instanceof Node)) {
+            return undefined;
+        }
+
+        return this.allButtons().find((item) => {
+            return item.element.contains(target);
+        });
+    }
+
+    private normalizeSingleSelection(): void {
+        const selectedItem = this.allButtons().find((item) => {
+            return item.selected;
+        });
+
+        if (selectedItem) {
+            this.clearOtherSelections(selectedItem);
+        }
+    }
+
+    private clearOtherSelections(selectedItem: Button | IconButton): void {
+        this.allButtons().forEach((item) => {
+            if (item != selectedItem) {
+                item.selected = false;
+            }
+        });
+    }
+
+    private allButtons(): (Button | IconButton)[] {
+        return [
+            ...this.buttons(),
+            ...this.iconButtons(),
+        ];
     }
 }

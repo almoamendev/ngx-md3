@@ -97,6 +97,10 @@ export class Button {
         return this.el.nativeElement as HTMLElement;
     }
 
+    public get selected(): boolean | null {
+        return this.isSelected();
+    }
+
     public enableSelection() {
         this.isSelected.update((current) => {
             if (current !== null) {
