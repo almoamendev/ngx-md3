@@ -1,4 +1,4 @@
-//types
+// types
 export * from './types/text-color.type';
 export * from './types/button-size.type';
 export * from './types/button-type.type';
@@ -6,6 +6,13 @@ export * from './types/icon-button-type.type';
 export * from './types/icon-button-width.type';
 export * from './types/button-group-type.type';
 export * from './types/button-group-selection.type';
+export * from './types/dialog-role.type';
+
+// interfaces
+export * from './interfaces/dialog-config.interface';
+
+// services
+export * from './components/dialog/dialog.service';
 
 // typography
 export * from './typography/type-display';
@@ -60,3 +67,8 @@ export * from './components/common/input-element';
 export * from './components/text-field/text-field';
 export * from './components/text-field/supporting-text';
 export * from './components/text-field/text-field-module';
+
+// dialogs
+export * from './components/dialog/dialog';
+export * from './components/dialog/dialog-ref';
+export * from './components/dialog/dialog.service';

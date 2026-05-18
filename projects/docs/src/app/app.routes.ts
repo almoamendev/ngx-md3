@@ -15,6 +15,7 @@ import { RadioButtonsComponent } from './components/radio-buttons/radio-buttons.
 import { SlidersComponent } from './components/sliders/sliders.component';
 import { SwitchesComponent } from './components/switches/switches.component';
 import { ButtonGroupsComponent } from './components/buttons/button-groups/button-groups.component';
+import { DialogsComponent } from './components/dialogs/dialogs.component';
 
 export const routes: Routes = [
     {
@@ -61,6 +62,10 @@ export const routes: Routes = [
                     {
                         path: 'checkboxes',
                         component: CheckboxesComponent,
+                    },
+                    {
+                        path: 'dialogs',
+                        component: DialogsComponent,
                     },
                     {
                         path: 'switches',

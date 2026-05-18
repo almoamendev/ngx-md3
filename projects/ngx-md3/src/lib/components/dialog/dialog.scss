@@ -1,0 +1,43 @@
+::ng-deep .cdk-overlay-container {
+    position: fixed;
+    z-index: 1000;
+    inset: 0;
+    pointer-events: none;
+    font-size: 1rem;
+
+    .cdk-overlay-backdrop {
+        position: absolute;
+        inset: 0;
+        pointer-events: auto;
+    }
+
+    .cdk-global-overlay-wrapper {
+        position: absolute;
+        display: flex;
+        inset: 0;
+        pointer-events: none;
+
+        .cdk-overlay-pane {
+            position: absolute;
+            pointer-events: auto;
+            max-width: 35em;
+        }
+    }
+}
+
+:host {
+    display: block;
+    max-width: 100%;
+    
+    .md3-dialog-container {
+        display: block;
+        width: 100%;
+        max-height: inherit;
+        padding: 1.5rem;
+        overflow: auto;
+        color: rgb(var(--md-scheme-on-surface));
+        background-color: rgb(var(--md-scheme-surface-container-high));
+        border-radius: var(--md-border-radius-xlarge);
+        box-shadow: var(--md-shadow-6dp);
+    }
+}

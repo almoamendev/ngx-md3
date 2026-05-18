@@ -1,0 +1,195 @@
+import { DOCUMENT } from '@angular/common';
+import { Overlay, OverlayConfig, OverlayRef } from '@angular/cdk/overlay';
+import { ComponentPortal } from '@angular/cdk/portal';
+import { ComponentRef, inject, Injectable, Injector, Type, ViewContainerRef } from '@angular/core';
+import { filter, take } from 'rxjs';
+import { Dialog } from './dialog';
+import { DIALOG_COMPONENT, DIALOG_CONFIG, DIALOG_DATA, DialogRef } from './dialog-ref';
+import { DialogConfig } from '../../interfaces/dialog-config.interface';
+
+interface ResolvedDialogConfig<D = unknown> extends DialogConfig<D> {
+    data: D | undefined;
+    bindDataToInputs: boolean;
+    panelClass: string | string[];
+    backdropClass: string | string[];
+    hasBackdrop: boolean;
+    closeOnBackdropClick: boolean;
+    closeOnEscape: boolean;
+    autoFocus: boolean;
+    restoreFocus: boolean;
+    role: 'dialog' | 'alertdialog';
+    ariaLabel: string;
+    ariaLabelledBy: string;
+    ariaDescribedBy: string;
+    viewContainerRef?: ViewContainerRef;
+    injector: Injector;
+}
+
+@Injectable({
+    providedIn: 'root',
+})
+export class DialogService {
+    private readonly overlay = inject(Overlay);
+    private readonly injector = inject(Injector);
+    private readonly document = inject(DOCUMENT);
+
+    public open<T, D = unknown, R = unknown>(
+        component: Type<T>,
+        config: DialogConfig<D> = {},
+    ): DialogRef<T, R> {
+        const dialogConfig = this.mergeConfig(config);
+        const previouslyFocusedElement = this.getFocusedElement();
+        const overlayRef = this.createOverlay(dialogConfig);
+        const dialogRef = new DialogRef<T, R>(
+            overlayRef,
+            previouslyFocusedElement,
+            dialogConfig.restoreFocus,
+        );
+        const injector = this.createInjector(component, dialogConfig, dialogRef);
+
+        // The overlay hosts the MD3 dialog shell. The shell is responsible for
+        // the surface markup and receives the dynamic content through a portal.
+        const dialogPortal = new ComponentPortal(
+            Dialog,
+            dialogConfig.viewContainerRef ?? null,
+            injector,
+        );
+        const dialogComponentRef = overlayRef.attach(dialogPortal);
+        const contentComponentRef = dialogComponentRef.instance.attachContent(component, injector);
+
+        this.bindDataToInputs(contentComponentRef, dialogConfig);
+        dialogRef.componentInstance = contentComponentRef.instance;
+        this.connectCloseEvents(overlayRef, dialogRef, dialogConfig);
+        this.focusDialog(overlayRef, dialogConfig);
+
+        return dialogRef;
+    }
+
+    private mergeConfig<D>(config: DialogConfig<D>): ResolvedDialogConfig<D> {
+        return {
+            data: config.data,
+            bindDataToInputs: config.bindDataToInputs ?? false,
+            panelClass: config.panelClass ?? [],
+            backdropClass: config.backdropClass ?? [],
+            hasBackdrop: config.hasBackdrop ?? true,
+            closeOnBackdropClick: config.closeOnBackdropClick ?? true,
+            closeOnEscape: config.closeOnEscape ?? true,
+            autoFocus: config.autoFocus ?? true,
+            restoreFocus: config.restoreFocus ?? true,
+            role: config.role ?? 'dialog',
+            ariaLabel: config.ariaLabel ?? '',
+            ariaLabelledBy: config.ariaLabelledBy ?? '',
+            ariaDescribedBy: config.ariaDescribedBy ?? '',
+            viewContainerRef: config.viewContainerRef,
+            injector: config.injector ?? this.injector,
+        };
+    }
+
+    private createOverlay(config: ResolvedDialogConfig): OverlayRef {
+        const overlayConfig = new OverlayConfig({
+            hasBackdrop: config.hasBackdrop,
+            backdropClass: this.toClassList('md3-dialog-backdrop', config.backdropClass),
+            panelClass: this.toClassList('md3-dialog-panel', config.panelClass),
+            positionStrategy: this.overlay.position()
+                .global()
+                .centerHorizontally()
+                .centerVertically(),
+            scrollStrategy: this.overlay.scrollStrategies.block(),
+        });
+
+        return this.overlay.create(overlayConfig);
+    }
+
+    private createInjector<T, D, R>(
+        component: Type<T>,
+        config: ResolvedDialogConfig<D>,
+        dialogRef: DialogRef<T, R>,
+    ): Injector {
+        return Injector.create({
+            parent: config.injector,
+            providers: [
+                // These tokens make the dialog controllable from the dynamic
+                // component without coupling that component to the service.
+                { provide: DialogRef, useValue: dialogRef },
+                { provide: DIALOG_DATA, useValue: config.data },
+                { provide: DIALOG_CONFIG, useValue: config },
+                { provide: DIALOG_COMPONENT, useValue: component },
+            ],
+        });
+    }
+
+    private bindDataToInputs<T, D>(
+        componentRef: ComponentRef<T>,
+        config: ResolvedDialogConfig<D>,
+    ): void {
+        if (!config.bindDataToInputs || !this.canBindDataToInputs(config.data)) {
+            return;
+        }
+
+        // setInput runs Angular's normal input pipeline, so input setters,
+        // transforms, signal inputs, and change detection are handled for us.
+        Object.entries(config.data).forEach(([inputName, inputValue]) => {
+            componentRef.setInput(inputName, inputValue);
+        });
+    }
+
+    private connectCloseEvents<T, R>(
+        overlayRef: OverlayRef,
+        dialogRef: DialogRef<T, R>,
+        config: ResolvedDialogConfig,
+    ): void {
+        if (config.closeOnBackdropClick) {
+            overlayRef.backdropClick()
+                .pipe(take(1))
+                .subscribe(() => dialogRef.close());
+        }
+
+        if (config.closeOnEscape) {
+            overlayRef.keydownEvents()
+                .pipe(
+                    filter((event) => event.key === 'Escape'),
+                    take(1),
+                )
+                .subscribe(() => dialogRef.close());
+        }
+    }
+
+    private focusDialog(overlayRef: OverlayRef, config: ResolvedDialogConfig): void {
+        if (!config.autoFocus) {
+            return;
+        }
+
+        queueMicrotask(() => {
+            const surface = overlayRef.overlayElement.querySelector<HTMLElement>('.md3-dialog-container');
+            const focusTarget = surface?.querySelector<HTMLElement>([
+                'button:not([disabled])',
+                '[href]',
+                'input:not([disabled])',
+                'select:not([disabled])',
+                'textarea:not([disabled])',
+                '[tabindex]:not([tabindex="-1"])',
+            ].join(', '));
+
+            (focusTarget ?? surface)?.focus();
+        });
+    }
+
+    private getFocusedElement(): HTMLElement | null {
+        const activeElement = this.document.activeElement;
+
+        return activeElement instanceof HTMLElement ? activeElement : null;
+    }
+
+    private toClassList(defaultClass: string, classes: string | string[]): string[] {
+        const classList = Array.isArray(classes) ? classes : [classes];
+
+        return [
+            defaultClass,
+            ...classList.filter(Boolean),
+        ];
+    }
+
+    private canBindDataToInputs(data: unknown): data is Record<string, unknown> {
+        return typeof data === 'object' && data !== null && !Array.isArray(data);
+    }
+}
