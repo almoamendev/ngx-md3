@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
+import { TypeHeadline } from '../../../typography/type-headline';
 
 @Component({
     selector: 'md3-dialog-header',
-    imports: [],
+    imports: [
+        TypeHeadline
+    ],
     templateUrl: './dialog-header.html',
     styleUrl: './dialog-header.scss',
 })

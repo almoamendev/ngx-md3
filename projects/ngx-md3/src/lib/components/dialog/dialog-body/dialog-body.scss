@@ -1,0 +1,9 @@
+:host {
+    display: block;
+    margin: 1em 1.5em 1.5em;
+    color: rgb(var(--md-scheme-on-surface-variant));
+
+    [md3-type-body=medium] {
+        letter-spacing: 0.017857em;
+    }
+}

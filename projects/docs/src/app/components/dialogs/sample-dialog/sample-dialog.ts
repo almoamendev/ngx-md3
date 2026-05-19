@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { DialogHeader, IconElement, MaterialIcon, TypeHeadline } from '@vip9008/ngx-md3';
+import { Button, DialogActions, DialogBody, DialogHeader, IconElement, MaterialIcon } from '@vip9008/ngx-md3';
 
 @Component({
     selector: 'app-sample-dialog',
@@ -7,7 +7,9 @@ import { DialogHeader, IconElement, MaterialIcon, TypeHeadline } from '@vip9008/
         DialogHeader,
         IconElement,
         MaterialIcon,
-        TypeHeadline,
+        DialogBody,
+        DialogActions,
+        Button,
     ],
     templateUrl: './sample-dialog.html',
     styleUrl: './sample-dialog.scss',

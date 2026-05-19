@@ -12,6 +12,7 @@
         color: rgb(var(--md-scheme-secondary));
 
         & + .md3-dialog-title {
+            margin-top: 1em;
             text-align: center;
         }
     }
