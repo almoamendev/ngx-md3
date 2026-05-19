@@ -28,6 +28,7 @@
         inset: 0;
         pointer-events: none;
         padding: 3.5rem 0;
+        overflow: hidden;
 
         .md3-dialog-panel {
             position: absolute;
@@ -59,7 +60,7 @@
         transition: all var(--md-motion-expressive-default-spatial-duration) var(--md-motion-expressive-default-spatial-easing);
         opacity: 0;
         transform: scaleY(0.8);
-        margin-top: -6rem;
+        margin-top: -4rem;
         
         &.md3-active {
             opacity: 1;
