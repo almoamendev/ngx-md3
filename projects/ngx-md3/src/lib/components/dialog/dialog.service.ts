@@ -52,6 +52,7 @@ export class DialogService {
 
         this.bindDataToInputs(contentComponentRef, dialogConfig);
         dialogRef.componentInstance = contentComponentRef.instance;
+        this.startOpenAnimation(overlayRef);
         this.connectCloseEvents(overlayRef, dialogRef, dialogConfig);
         this.focusDialog(overlayRef, dialogConfig);
 
@@ -75,8 +76,8 @@ export class DialogService {
     private createOverlay(config: ResolvedDialogConfig): OverlayRef {
         const overlayConfig = new OverlayConfig({
             hasBackdrop: true,
-            backdropClass: 'md3-dialog-scrim',
-            panelClass: 'md3-dialog-panel',
+            backdropClass: ['md3-dialog-scrim', 'md3-dialog-opening'],
+            panelClass: ['md3-dialog-panel', 'md3-dialog-opening'],
             positionStrategy: this.overlay.position()
                 .global()
                 .centerHorizontally()
@@ -85,6 +86,20 @@ export class DialogService {
         });
 
         return this.overlay.create(overlayConfig);
+    }
+
+    private startOpenAnimation(overlayRef: OverlayRef): void {
+        const panel = overlayRef.overlayElement;
+        const backdrop = overlayRef.backdropElement;
+
+        // The overlay is inserted already rendered. Keep an initial class for
+        // one frame, force style calculation, then remove it so CSS transitions
+        // have a real from/to state.
+        requestAnimationFrame(() => {
+            panel.getBoundingClientRect();
+            panel.classList.remove('md3-dialog-opening');
+            backdrop?.classList.remove('md3-dialog-opening');
+        });
     }
 
     private createInjector<T, D, R>(

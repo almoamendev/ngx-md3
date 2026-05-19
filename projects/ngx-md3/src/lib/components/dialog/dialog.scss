@@ -10,7 +10,16 @@
         inset: 0;
         pointer-events: auto;
         background-color: rgb(var(--md-scheme-scrim));
+        transition: all var(--md-motion-expressive-slow-spatial-duration) var(--md-motion-expressive-slow-spatial-easing);
         opacity: 0.32;
+
+        &.md3-dialog-opening {
+            opacity: 0;
+        }
+
+        &.md3-dialog-closing {
+            opacity: 0;
+        }
     }
 
     .cdk-global-overlay-wrapper {
@@ -42,5 +51,28 @@
         background-color: rgb(var(--md-scheme-surface-container-high));
         border-radius: var(--md-border-radius-xlarge);
         box-shadow: var(--md-shadow-6dp);
+        opacity: 1;
+        transform: scaleY(1);
+        margin-top: 0;
+        transform-origin: center;
+        transition: all var(--md-motion-expressive-fast-spatial-duration) var(--md-motion-expressive-fast-spatial-easing);
+    }
+}
+
+::ng-deep .md3-dialog-panel.md3-dialog-closing {
+    pointer-events: none;
+
+    .md3-dialog-container {
+        opacity: 0;
+        transform: scaleY(0.6);
+        margin-top: -6rem;
+    }
+}
+
+::ng-deep .md3-dialog-panel.md3-dialog-opening {
+    .md3-dialog-container {
+        opacity: 0;
+        transform: scaleY(0.6);
+        margin-top: -6rem;
     }
 }

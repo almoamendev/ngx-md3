@@ -7,6 +7,8 @@ export const DIALOG_DATA = new InjectionToken<unknown>('MD3_DIALOG_DATA');
 export const DIALOG_CONFIG = new InjectionToken<DialogConfig>('MD3_DIALOG_CONFIG');
 export const DIALOG_COMPONENT = new InjectionToken<Type<unknown>>('MD3_DIALOG_COMPONENT');
 
+const DIALOG_EXIT_ANIMATION_FALLBACK_MS = 700;
+
 export class DialogRef<T = unknown, R = unknown> {
     private readonly closed = new Subject<R | undefined>();
     private isClosed = false;
@@ -29,15 +31,49 @@ export class DialogRef<T = unknown, R = unknown> {
         }
 
         this.isClosed = true;
+        this.startCloseAnimation().then(() => {
+            // Disposing the overlay removes the wrapper, the backdrop, and the
+            // dynamically attached content component in one operation.
+            this.overlayRef.dispose();
 
-        // Disposing the overlay removes the wrapper, the backdrop, and the
-        // dynamically attached content component in one operation.
-        this.overlayRef.dispose();
+            this.previouslyFocusedElement?.focus();
 
-        this.previouslyFocusedElement?.focus();
+            this.closed.next(result);
+            this.closed.complete();
+        });
+    }
 
-        this.closed.next(result);
-        this.closed.complete();
+    private startCloseAnimation(): Promise<void> {
+        let panel = this.overlayRef.overlayElement;
+        let backdrop = this.overlayRef.backdropElement;
+        let animatedElement = panel.querySelector<HTMLElement>('.md3-dialog-container') ?? panel;
+
+        panel.classList.add('md3-dialog-closing');
+        backdrop?.classList.add('md3-dialog-closing');
+
+        return new Promise((resolve) => {
+            let isResolved = false;
+            let timeoutId = setTimeout(done, DIALOG_EXIT_ANIMATION_FALLBACK_MS);
+
+            function done(): void {
+                if (isResolved) {
+                    return;
+                }
+
+                isResolved = true;
+                clearTimeout(timeoutId);
+                animatedElement.removeEventListener('transitionend', onTransitionEnd);
+                resolve();
+            }
+
+            function onTransitionEnd(event: TransitionEvent): void {
+                if (event.target === animatedElement) {
+                    done();
+                }
+            }
+
+            animatedElement.addEventListener('transitionend', onTransitionEnd);
+        });
     }
 
     public afterClosed(): Observable<R | undefined> {
