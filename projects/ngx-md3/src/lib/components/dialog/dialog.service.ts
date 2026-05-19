@@ -52,6 +52,7 @@ export class DialogService {
 
         this.bindDataToInputs(contentComponentRef, dialogConfig);
         dialogRef.componentInstance = contentComponentRef.instance;
+        dialogRef.dialogInstance = dialogComponentRef.instance;
         this.startOpenAnimation(overlayRef);
         this.connectCloseEvents(overlayRef, dialogRef, dialogConfig);
         this.focusDialog(overlayRef, dialogConfig);
@@ -96,9 +97,11 @@ export class DialogService {
         // one frame, force style calculation, then remove it so CSS transitions
         // have a real from/to state.
         requestAnimationFrame(() => {
-            panel.getBoundingClientRect();
-            panel.classList.remove('md3-dialog-opening');
-            backdrop?.classList.remove('md3-dialog-opening');
+            setTimeout(() => {
+                panel.getBoundingClientRect();
+                panel.classList.remove('md3-dialog-opening');
+                backdrop?.classList.remove('md3-dialog-opening');
+            }, 100);
         });
     }
 

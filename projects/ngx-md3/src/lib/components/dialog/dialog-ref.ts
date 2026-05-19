@@ -2,17 +2,19 @@ import { OverlayRef } from '@angular/cdk/overlay';
 import { InjectionToken, Type } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { DialogConfig } from '../../interfaces/dialog-config.interface';
+import { Dialog } from './dialog';
 
 export const DIALOG_DATA = new InjectionToken<unknown>('MD3_DIALOG_DATA');
 export const DIALOG_CONFIG = new InjectionToken<DialogConfig>('MD3_DIALOG_CONFIG');
 export const DIALOG_COMPONENT = new InjectionToken<Type<unknown>>('MD3_DIALOG_COMPONENT');
 
-const DIALOG_EXIT_ANIMATION_FALLBACK_MS = 700;
+const DIALOG_EXIT_ANIMATION_FALLBACK_MS = 300;
 
 export class DialogRef<T = unknown, R = unknown> {
     private readonly closed = new Subject<R | undefined>();
     private isClosed = false;
 
+    public dialogInstance?: Dialog;
     /**
      * Filled by DialogService after the user component is attached. Keeping the
      * instance here lets callers imperatively update inputs when that is useful.
@@ -50,6 +52,7 @@ export class DialogRef<T = unknown, R = unknown> {
 
         panel.classList.add('md3-dialog-closing');
         backdrop?.classList.add('md3-dialog-closing');
+        this.dialogInstance?.isActive.set(false);
 
         return new Promise((resolve) => {
             let isResolved = false;

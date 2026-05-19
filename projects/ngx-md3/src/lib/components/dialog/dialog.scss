@@ -13,7 +13,7 @@
         transition: all var(--md-motion-expressive-slow-spatial-duration) var(--md-motion-expressive-slow-spatial-easing);
         opacity: 0.32;
 
-        &.md3-dialog-opening {
+        &.md3-dialog-openined {
             opacity: 0;
         }
 
@@ -33,6 +33,10 @@
             position: absolute;
             pointer-events: auto;
             max-width: 35em;
+
+            &.md3-dialog-closing {
+                pointer-events: none;
+            }
         }
     }
 }
@@ -51,28 +55,16 @@
         background-color: rgb(var(--md-scheme-surface-container-high));
         border-radius: var(--md-border-radius-xlarge);
         box-shadow: var(--md-shadow-6dp);
-        opacity: 1;
-        transform: scaleY(1);
-        margin-top: 0;
         transform-origin: center;
-        transition: all var(--md-motion-expressive-fast-spatial-duration) var(--md-motion-expressive-fast-spatial-easing);
-    }
-}
-
-::ng-deep .md3-dialog-panel.md3-dialog-closing {
-    pointer-events: none;
-
-    .md3-dialog-container {
+        transition: all var(--md-motion-expressive-default-spatial-duration) var(--md-motion-expressive-default-spatial-easing);
         opacity: 0;
-        transform: scaleY(0.6);
+        transform: scaleY(0.8);
         margin-top: -6rem;
-    }
-}
-
-::ng-deep .md3-dialog-panel.md3-dialog-opening {
-    .md3-dialog-container {
-        opacity: 0;
-        transform: scaleY(0.6);
-        margin-top: -6rem;
+        
+        &.md3-active {
+            opacity: 1;
+            transform: scaleY(1);
+            margin-top: 0;
+        }
     }
 }

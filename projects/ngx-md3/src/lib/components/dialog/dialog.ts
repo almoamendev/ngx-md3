@@ -1,4 +1,4 @@
-import { Component, ComponentRef, inject, Injector, Type, ViewChild, ViewEncapsulation } from '@angular/core';
+import { AfterContentInit, Component, ComponentRef, inject, Injector, signal, Type, ViewChild, ViewEncapsulation } from '@angular/core';
 import { ComponentPortal, CdkPortalOutlet } from '@angular/cdk/portal';
 import { DIALOG_CONFIG } from './dialog-ref';
 import { DialogConfig } from '../../interfaces/dialog-config.interface';
@@ -11,14 +11,22 @@ import { DialogConfig } from '../../interfaces/dialog-config.interface';
     templateUrl: './dialog.html',
     styleUrl: './dialog.scss',
 })
-export class Dialog {
+export class Dialog implements AfterContentInit {
     @ViewChild(CdkPortalOutlet, { static: true })
     private readonly portalOutlet!: CdkPortalOutlet;
+
+    public isActive = signal<boolean>(false);
 
     protected readonly config = inject<DialogConfig>(DIALOG_CONFIG, { optional: true }) ?? {};
 
     protected get role(): string {
         return this.config.role ?? 'dialog';
+    }
+
+    ngAfterContentInit(): void {
+        setTimeout(() => {
+            this.isActive.set(true);
+        }, 10);
     }
 
     /**
