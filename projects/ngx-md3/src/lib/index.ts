@@ -11,9 +11,6 @@ export * from './types/dialog-role.type';
 // interfaces
 export * from './interfaces/dialog-config.interface';
 
-// services
-export * from './components/dialog/dialog.service';
-
 // typography
 export * from './typography/type-display';
 export * from './typography/type-headline';
@@ -72,3 +69,4 @@ export * from './components/text-field/text-field-module';
 export * from './components/dialog/dialog';
 export * from './components/dialog/dialog-ref';
 export * from './components/dialog/dialog.service';
+export * from './components/dialog/dialog-header/dialog-header';
