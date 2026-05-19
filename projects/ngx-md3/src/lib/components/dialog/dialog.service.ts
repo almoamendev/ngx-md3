@@ -10,13 +10,7 @@ import { DialogConfig } from '../../interfaces/dialog-config.interface';
 interface ResolvedDialogConfig<D = unknown> extends DialogConfig<D> {
     data: D | undefined;
     bindDataToInputs: boolean;
-    panelClass: string | string[];
-    backdropClass: string | string[];
-    hasBackdrop: boolean;
-    closeOnBackdropClick: boolean;
-    closeOnEscape: boolean;
-    autoFocus: boolean;
-    restoreFocus: boolean;
+    disableCloseEvents: boolean;
     role: 'dialog' | 'alertdialog';
     ariaLabel: string;
     ariaLabelledBy: string;
@@ -42,8 +36,7 @@ export class DialogService {
         const overlayRef = this.createOverlay(dialogConfig);
         const dialogRef = new DialogRef<T, R>(
             overlayRef,
-            previouslyFocusedElement,
-            dialogConfig.restoreFocus,
+            previouslyFocusedElement
         );
         const injector = this.createInjector(component, dialogConfig, dialogRef);
 
@@ -69,13 +62,7 @@ export class DialogService {
         return {
             data: config.data,
             bindDataToInputs: config.bindDataToInputs ?? false,
-            panelClass: config.panelClass ?? [],
-            backdropClass: config.backdropClass ?? [],
-            hasBackdrop: config.hasBackdrop ?? true,
-            closeOnBackdropClick: config.closeOnBackdropClick ?? true,
-            closeOnEscape: config.closeOnEscape ?? true,
-            autoFocus: config.autoFocus ?? true,
-            restoreFocus: config.restoreFocus ?? true,
+            disableCloseEvents: config.disableCloseEvents ?? false,
             role: config.role ?? 'dialog',
             ariaLabel: config.ariaLabel ?? '',
             ariaLabelledBy: config.ariaLabelledBy ?? '',
@@ -87,9 +74,9 @@ export class DialogService {
 
     private createOverlay(config: ResolvedDialogConfig): OverlayRef {
         const overlayConfig = new OverlayConfig({
-            hasBackdrop: config.hasBackdrop,
-            backdropClass: this.toClassList('md3-dialog-backdrop', config.backdropClass),
-            panelClass: this.toClassList('md3-dialog-panel', config.panelClass),
+            hasBackdrop: true,
+            backdropClass: 'md3-dialog-scrim',
+            panelClass: 'md3-dialog-panel',
             positionStrategy: this.overlay.position()
                 .global()
                 .centerHorizontally()
@@ -138,27 +125,18 @@ export class DialogService {
         dialogRef: DialogRef<T, R>,
         config: ResolvedDialogConfig,
     ): void {
-        if (config.closeOnBackdropClick) {
-            overlayRef.backdropClick()
-                .pipe(take(1))
-                .subscribe(() => dialogRef.close());
-        }
-
-        if (config.closeOnEscape) {
-            overlayRef.keydownEvents()
-                .pipe(
-                    filter((event) => event.key === 'Escape'),
-                    take(1),
-                )
-                .subscribe(() => dialogRef.close());
-        }
-    }
-
-    private focusDialog(overlayRef: OverlayRef, config: ResolvedDialogConfig): void {
-        if (!config.autoFocus) {
+        if (config.disableCloseEvents) {
             return;
         }
 
+        overlayRef.backdropClick().pipe(take(1)).subscribe(() => dialogRef.close());
+        overlayRef.keydownEvents().pipe(
+            filter((event) => event.key === 'Escape'),
+            take(1),
+        ).subscribe(() => dialogRef.close());
+    }
+
+    private focusDialog(overlayRef: OverlayRef, config: ResolvedDialogConfig): void {
         queueMicrotask(() => {
             const surface = overlayRef.overlayElement.querySelector<HTMLElement>('.md3-dialog-container');
             const focusTarget = surface?.querySelector<HTMLElement>([
@@ -176,17 +154,7 @@ export class DialogService {
 
     private getFocusedElement(): HTMLElement | null {
         const activeElement = this.document.activeElement;
-
         return activeElement instanceof HTMLElement ? activeElement : null;
-    }
-
-    private toClassList(defaultClass: string, classes: string | string[]): string[] {
-        const classList = Array.isArray(classes) ? classes : [classes];
-
-        return [
-            defaultClass,
-            ...classList.filter(Boolean),
-        ];
     }
 
     private canBindDataToInputs(data: unknown): data is Record<string, unknown> {

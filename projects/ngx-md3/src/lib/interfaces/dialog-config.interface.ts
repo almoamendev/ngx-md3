@@ -14,13 +14,7 @@ export interface DialogConfig<D = unknown> {
      */
     bindDataToInputs?: boolean;
 
-    panelClass?: string | string[];
-    backdropClass?: string | string[];
-    hasBackdrop?: boolean;
-    closeOnBackdropClick?: boolean;
-    closeOnEscape?: boolean;
-    autoFocus?: boolean;
-    restoreFocus?: boolean;
+    disableCloseEvents?: boolean;
     role?: DialogRole;
     ariaLabel?: string;
     ariaLabelledBy?: string;

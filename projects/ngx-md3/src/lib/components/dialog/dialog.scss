@@ -5,10 +5,12 @@
     pointer-events: none;
     font-size: 1rem;
 
-    .cdk-overlay-backdrop {
+    .md3-dialog-scrim {
         position: absolute;
         inset: 0;
         pointer-events: auto;
+        background-color: rgb(var(--md-scheme-scrim));
+        opacity: 0.32;
     }
 
     .cdk-global-overlay-wrapper {
@@ -16,8 +18,9 @@
         display: flex;
         inset: 0;
         pointer-events: none;
+        padding: 3.5rem 0;
 
-        .cdk-overlay-pane {
+        .md3-dialog-panel {
             position: absolute;
             pointer-events: auto;
             max-width: 35em;
@@ -28,12 +31,12 @@
 :host {
     display: block;
     max-width: 100%;
+    min-width: 17.5em;
     
     .md3-dialog-container {
         display: block;
         width: 100%;
         max-height: inherit;
-        padding: 1.5rem;
         overflow: auto;
         color: rgb(var(--md-scheme-on-surface));
         background-color: rgb(var(--md-scheme-surface-container-high));

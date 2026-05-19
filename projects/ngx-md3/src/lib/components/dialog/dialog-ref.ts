@@ -19,8 +19,7 @@ export class DialogRef<T = unknown, R = unknown> {
 
     constructor(
         private readonly overlayRef: OverlayRef,
-        private readonly previouslyFocusedElement: HTMLElement | null,
-        private readonly shouldRestoreFocus: boolean,
+        private readonly previouslyFocusedElement: HTMLElement | null
     ) {
     }
 
@@ -35,9 +34,7 @@ export class DialogRef<T = unknown, R = unknown> {
         // dynamically attached content component in one operation.
         this.overlayRef.dispose();
 
-        if (this.shouldRestoreFocus) {
-            this.previouslyFocusedElement?.focus();
-        }
+        this.previouslyFocusedElement?.focus();
 
         this.closed.next(result);
         this.closed.complete();
