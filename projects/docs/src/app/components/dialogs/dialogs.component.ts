@@ -15,12 +15,13 @@ export class DialogsComponent {
         private dialogService: DialogService
     ) {}
 
-    public sampleDialog(showIcon: boolean = true) {
+    public sampleDialog(showIcon: boolean = true, closeEvents: boolean = true) {
         const ref = this.dialogService.open(SampleDialog, {
             data: {
                 showIcon: showIcon,
             },
             bindDataToInputs: true,
+            disableCloseEvents: !closeEvents,
             ariaLabel: 'Sample Dialog',
         });
 
