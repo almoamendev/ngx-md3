@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Button, DialogActions, DialogBody, DialogHeader, IconElement, MaterialIcon } from '@vip9008/ngx-md3';
+import { Button, DialogActions, DialogBody, DialogHeader, DialogRef, IconElement, MaterialIcon } from '@vip9008/ngx-md3';
 
 @Component({
     selector: 'app-sample-dialog',
@@ -15,4 +15,12 @@ import { Button, DialogActions, DialogBody, DialogHeader, IconElement, MaterialI
     styleUrl: './sample-dialog.scss',
 })
 export class SampleDialog {
+    constructor(
+        private readonly dialogRef: DialogRef<SampleDialog, boolean>
+    ) {
+    }
+
+    public closeDialog(result: boolean = false) {
+        this.dialogRef.close(result);
+    }
 }
