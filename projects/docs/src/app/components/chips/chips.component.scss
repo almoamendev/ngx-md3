@@ -23,3 +23,59 @@ ul {
     font-size: 0.75rem;
     font-weight: 500;
 }
+
+.demo-chip-input {
+    min-height: 3rem;
+    padding: 0.5rem;
+    border: 0.0625rem solid rgb(var(--md-scheme-outline));
+    border-radius: 0.75rem;
+}
+
+.demo-chip-input-control {
+    flex: 1 1 8rem;
+    min-width: 6rem;
+    border: 0;
+    outline: 0;
+    padding: 0.25rem 0;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+}
+
+:host ::ng-deep .demo-chip-text-field {
+    .md3-text-field-container {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.5rem;
+        min-height: 3.5rem;
+        padding: 1.5em 1em 0.5em;
+    }
+
+    .md3-text-field-container > md3-chip,
+    .md3-text-field-container > .md3-input-element {
+        position: relative;
+        z-index: 1;
+    }
+
+    .md3-text-field-container > .md3-input-element {
+        flex: 1 1 8rem;
+        width: auto;
+        min-width: 6rem;
+        padding: 0;
+        background: transparent;
+    }
+
+    &.has-chips {
+        .md3-text-field-label {
+            top: 0;
+            inset-inline: 1em;
+            transform: scale(0.75);
+        }
+
+        .md3-label-gap {
+            max-width: fit-content;
+            padding: 0 0.375em;
+        }
+    }
+}

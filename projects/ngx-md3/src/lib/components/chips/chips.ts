@@ -279,6 +279,10 @@ export class ChipSet {
 
     @HostListener('keydown', ['$event'])
     protected onKeydown(event: KeyboardEvent): void {
+        if (this.shouldIgnoreKeydown(event)) {
+            return;
+        }
+
         if (!['ArrowRight', 'ArrowDown', 'ArrowLeft', 'ArrowUp', 'Home', 'End'].includes(event.key)) {
             return;
         }
@@ -324,5 +328,23 @@ export class ChipSet {
                 || chip instanceof HTMLAnchorElement
                 || chip instanceof HTMLInputElement;
         });
+    }
+
+    private shouldIgnoreKeydown(event: KeyboardEvent): boolean {
+        const target = event.target;
+
+        if (!(target instanceof HTMLElement)) {
+            return false;
+        }
+
+        if (target instanceof HTMLTextAreaElement || target.isContentEditable) {
+            return true;
+        }
+
+        if (!(target instanceof HTMLInputElement)) {
+            return false;
+        }
+
+        return target.type !== 'checkbox' && target.type !== 'radio';
     }
 }

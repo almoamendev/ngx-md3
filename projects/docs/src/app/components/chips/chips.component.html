@@ -84,6 +84,59 @@
 </section>
 
 <section>
+    <h2>Chip input</h2>
+
+    <md3-chip-set class="demo-chip-input" aria-label="Tags">
+        @for (tag of inlineTags; track tag) {
+            <md3-chip
+                chip-type="input"
+                removable
+                [remove-label]="'Remove ' + tag"
+                (removed)="removeInlineTag(tag)">
+                {{ tag }}
+            </md3-chip>
+        }
+
+        <input
+            class="demo-chip-input-control"
+            type="text"
+            placeholder="Add tag"
+            [value]="inlineTagDraft"
+            (input)="onInlineTagInput($event)"
+            (keydown)="onInlineTagKeydown($event)">
+    </md3-chip-set>
+</section>
+
+<section>
+    <h2>Text field chip input</h2>
+
+    <md3-text-field
+        class="demo-chip-text-field"
+        type="outlined"
+        label="Tags"
+        [class.has-chips]="textFieldTags.length > 0">
+        @for (tag of textFieldTags; track tag) {
+            <md3-chip
+                chip-type="input"
+                removable
+                [remove-label]="'Remove ' + tag"
+                (removed)="removeTextFieldTag(tag)">
+                {{ tag }}
+            </md3-chip>
+        }
+
+        <input
+            md3-input-element
+            type="text"
+            [value]="textFieldTagDraft"
+            (input)="onTextFieldTagInput($event)"
+            (keydown)="onTextFieldTagKeydown($event)">
+
+        <div md3-supporting-text>Press Enter or comma to add a chip.</div>
+    </md3-text-field>
+</section>
+
+<section>
     <h2>Suggestion chips</h2>
 
     <md3-chip-set aria-label="Suggestions">
