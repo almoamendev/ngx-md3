@@ -34,6 +34,9 @@ export * from './components/buttons/button-group/button-group-module';
 // cards
 export * from './components/card/card';
 
+// chips
+export * from './components/chips/chips';
+
 // checkboxes
 export * from './components/checkbox/checkbox';
 

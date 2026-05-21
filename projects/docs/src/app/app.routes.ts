@@ -16,6 +16,7 @@ import { SlidersComponent } from './components/sliders/sliders.component';
 import { SwitchesComponent } from './components/switches/switches.component';
 import { ButtonGroupsComponent } from './components/buttons/button-groups/button-groups.component';
 import { DialogsComponent } from './components/dialogs/dialogs.component';
+import { ChipsComponent } from './components/chips/chips.component';
 
 export const routes: Routes = [
     {
@@ -58,6 +59,10 @@ export const routes: Routes = [
                     {
                         path: 'cards',
                         component: CardsComponent,
+                    },
+                    {
+                        path: 'chips',
+                        component: ChipsComponent,
                     },
                     {
                         path: 'checkboxes',

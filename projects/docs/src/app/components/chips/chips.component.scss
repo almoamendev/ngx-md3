@@ -1,0 +1,25 @@
+section {
+    display: grid;
+    gap: 0.75rem;
+    margin-block: 1.5rem;
+}
+
+h2 {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+ul {
+    margin-block-end: 1.5rem;
+}
+
+.demo-avatar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(var(--md-scheme-primary));
+    color: rgb(var(--md-scheme-on-primary));
+    font-size: 0.75rem;
+    font-weight: 500;
+}

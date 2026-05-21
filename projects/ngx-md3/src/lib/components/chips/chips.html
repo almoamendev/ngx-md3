@@ -1,0 +1,25 @@
+<ng-content select="[md3-input-element]"></ng-content>
+
+<span class="md3-chip-selected-icon" aria-hidden="true">
+    <md3-icon [icon-size]="18">check</md3-icon>
+</span>
+
+<ng-content select="[md3-icon-element=leading], [md3-chip-leading]"></ng-content>
+
+<span class="md3-chip-label">
+    <ng-content></ng-content>
+</span>
+
+<ng-content select="[md3-icon-element=trailing], [md3-chip-trailing]"></ng-content>
+
+@if (canRemove()) {
+    <span
+        class="md3-chip-remove"
+        role="button"
+        tabindex="0"
+        [attr.aria-label]="removeLabel"
+        (click)="removeChip($event)"
+        (keydown)="onRemoveKeydown($event)">
+        <md3-icon [icon-size]="18">close</md3-icon>
+    </span>
+}
