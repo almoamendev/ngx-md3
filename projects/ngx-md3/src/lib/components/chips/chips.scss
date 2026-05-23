@@ -1,7 +1,7 @@
 :host {
     --chip-container-color: transparent;
     --chip-label-color: rgb(var(--md-scheme-on-surface));
-    --chip-outline-color: rgb(var(--md-scheme-outline));
+    --chip-outline-color: rgb(var(--md-scheme-outline-variant));
     --chip-leading-icon-color: rgb(var(--md-scheme-primary));
     --chip-trailing-icon-color: rgb(var(--md-scheme-on-surface-variant));
     --state-color: var(--md-scheme-on-surface-variant);
@@ -15,10 +15,9 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 0.5em;
     height: 2em;
     max-width: 100%;
-    padding-inline: 1em;
+    padding-inline: 0.5em;
     border: var(--border-size) solid var(--chip-outline-color);
     border-radius: var(--border-radius);
     color: var(--chip-label-color);
@@ -96,6 +95,7 @@
         line-height: 1.428572em;
         font-weight: 500;
         letter-spacing: 0.007143em;
+        margin: 0 0.571429em;
     }
 
     .md3-chip-selected-icon,
@@ -114,7 +114,6 @@
     .md3-chip-selected-icon {
         display: none;
         color: var(--chip-leading-icon-color);
-        margin-inline-start: -0.25em;
     }
 
     &.md3-filter.md3-selected .md3-chip-selected-icon {
@@ -122,7 +121,6 @@
     }
 
     .md3-chip-remove {
-        margin-inline-end: -0.25em;
         border-radius: 50%;
         cursor: pointer;
         outline: none;
@@ -133,9 +131,7 @@
         }
     }
 
-    ::ng-deep [md3-icon-element],
-    ::ng-deep [md3-chip-leading],
-    ::ng-deep [md3-chip-trailing] {
+    ::ng-deep [md3-icon-element] {
         position: relative;
         z-index: 1;
         display: inline-flex;
@@ -149,16 +145,13 @@
         color: var(--chip-leading-icon-color);
     }
 
-    ::ng-deep [md3-icon-element=trailing],
-    ::ng-deep [md3-chip-trailing] {
+    ::ng-deep [md3-icon-element=trailing] {
         color: var(--chip-trailing-icon-color);
     }
 
     &.md3-avatar {
-        ::ng-deep [md3-icon-element=leading],
-        ::ng-deep [md3-chip-leading] {
-            width: 1.5em !important;
-            height: 1.5em !important;
+        ::ng-deep [md3-icon-element=leading] {
+            font-size: 1.5em !important;
             border-radius: 50%;
             overflow: hidden;
         }

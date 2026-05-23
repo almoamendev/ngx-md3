@@ -68,12 +68,8 @@
                 [selected]="first"
                 [remove-label]="'Remove ' + chip"
                 (removed)="removeInputChip(chip)">
-                @if (first) {
-                    <span md3-chip-leading class="demo-avatar">{{ chip[0] }}</span>
-                } @else {
                     <md3-icon md3-icon-element="leading">person</md3-icon>
-                }
-                {{ chip }}
+                    {{ chip }}
             </md3-chip>
         }
 
