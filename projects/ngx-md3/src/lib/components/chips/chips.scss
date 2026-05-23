@@ -15,6 +15,7 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    font-size: 1rem;
     height: 2em;
     max-width: 100%;
     padding-inline: 0.5em;
@@ -49,14 +50,30 @@
         box-shadow: var(--md-shadow-1dp);
     }
 
-    &.md3-filter.md3-selected,
-    &.md3-input.md3-selected {
-        --chip-container-color: rgb(var(--md-scheme-secondary-container));
-        --chip-label-color: rgb(var(--md-scheme-on-secondary-container));
-        --chip-leading-icon-color: rgb(var(--md-scheme-on-secondary-container));
-        --chip-trailing-icon-color: rgb(var(--md-scheme-on-secondary-container));
-        --chip-outline-color: transparent;
-        --state-color: var(--md-scheme-on-secondary-container);
+    &.md3-filter {
+        .md3-selected {
+            --chip-container-color: rgb(var(--md-scheme-secondary-container));
+            --chip-label-color: rgb(var(--md-scheme-on-secondary-container));
+            --chip-leading-icon-color: rgb(var(--md-scheme-on-secondary-container));
+            --chip-trailing-icon-color: rgb(var(--md-scheme-on-secondary-container));
+            --chip-outline-color: transparent;
+            --state-color: var(--md-scheme-on-secondary-container);
+
+            .md3-chip-selected-icon {
+                display: inline-flex;
+            }
+        }
+    }
+
+    &.md3-input {
+        .md3-selected {
+            --chip-container-color: rgb(var(--md-scheme-secondary-container));
+            --chip-label-color: rgb(var(--md-scheme-on-secondary-container));
+            --chip-leading-icon-color: rgb(var(--md-scheme-on-secondary-container));
+            --chip-trailing-icon-color: rgb(var(--md-scheme-on-secondary-container));
+            --chip-outline-color: transparent;
+            --state-color: var(--md-scheme-on-secondary-container);
+        }
     }
 
     &.md3-input {
@@ -98,29 +115,28 @@
         margin: 0 0.571429em;
     }
 
-    .md3-chip-selected-icon,
-    .md3-chip-remove {
+    .md3-chip-selected-icon {
+        display: none;
         position: relative;
         z-index: 1;
+        align-items: center;
+        justify-content: center;
+        flex: 0 0 auto;
+        width: 1.125em;
+        height: 1.125em;
+        color: var(--chip-leading-icon-color);
+    }
+
+    .md3-chip-remove {
         display: inline-flex;
+        position: relative;
+        z-index: 1;
         align-items: center;
         justify-content: center;
         flex: 0 0 auto;
         width: 1.125em;
         height: 1.125em;
         color: var(--chip-trailing-icon-color);
-    }
-
-    .md3-chip-selected-icon {
-        display: none;
-        color: var(--chip-leading-icon-color);
-    }
-
-    &.md3-filter.md3-selected .md3-chip-selected-icon {
-        display: inline-flex;
-    }
-
-    .md3-chip-remove {
         border-radius: 50%;
         cursor: pointer;
         outline: none;
