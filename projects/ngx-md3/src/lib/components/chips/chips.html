@@ -13,14 +13,19 @@
     </div>
     @if (hasRemove) {
         <button class="md3-chip-trailing" md3-state-component>
-            <ng-content select="[md3-icon-element=trailing]"></ng-content>
-            @if (!trailing) {
-                <md3-icon [icon-size]="18">close</md3-icon>
-            }
+            <ng-container [ngTemplateOutlet]="trailingContent"></ng-container>
         </button>
     } @else {
         <div class="md3-chip-trailing" [class.has-icon]="trailing">
-            <ng-content select="[md3-icon-element=trailing]"></ng-content>
+            <ng-container [ngTemplateOutlet]="trailingContent"></ng-container>
         </div>
     }
 </div>
+
+<ng-template #trailingContent>
+    <ng-content select="[md3-icon-element=trailing]"></ng-content>
+
+    @if (hasRemove && !trailing) {
+        <md3-icon [icon-size]="18">close</md3-icon>
+    }
+</ng-template>

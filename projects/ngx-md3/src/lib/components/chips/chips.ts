@@ -5,6 +5,7 @@ import { ChipType } from '../../types/chip-type.type';
 import { AbstractControl, FormControlName } from '@angular/forms';
 import { InputElement } from '../common/input-element';
 import { IconElement } from '../common/icon-element';
+import { NgTemplateOutlet } from '@angular/common';
 
 @Directive({
     selector: '[md3-chip-avatar]'
@@ -14,6 +15,7 @@ export class ChipAvatar {}
 @Component({
     selector: 'md3-chip, button[md3-chip], a[md3-chip], label[md3-chip]',
     imports: [
+        NgTemplateOutlet,
         StateComponent,
         MaterialIcon,
     ],
