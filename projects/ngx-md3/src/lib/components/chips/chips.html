@@ -1,4 +1,6 @@
-<ng-content select="[md3-input-element]"></ng-content>
+@if (isSelectable) {
+    <ng-content select="[md3-input-element]"></ng-content>
+}
 <div class="md3-chip-container" md3-state-component>
     <div class="md3-chip-leading" [class.has-icon]="leading" [class.has-avatar]="hasAvatar">
         <ng-content select="[md3-icon-element=leading], [md3-chip-avatar]"></ng-content>
@@ -9,7 +11,16 @@
     <div class="md3-chip-label">
         <ng-content></ng-content>
     </div>
-    <div class="md3-chip-trailing" [class.has-icon]="trailing">
-        <ng-content select="[md3-icon-element=trailing]"></ng-content>
-    </div>
+    @if (hasRemove) {
+        <button class="md3-chip-trailing" md3-state-component>
+            <ng-content select="[md3-icon-element=trailing]"></ng-content>
+            @if (!trailing) {
+                <md3-icon [icon-size]="18">close</md3-icon>
+            }
+        </button>
+    } @else {
+        <div class="md3-chip-trailing" [class.has-icon]="trailing">
+            <ng-content select="[md3-icon-element=trailing]"></ng-content>
+        </div>
+    }
 </div>

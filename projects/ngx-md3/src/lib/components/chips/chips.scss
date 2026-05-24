@@ -1,6 +1,6 @@
 :host {
     --background-color: transparent;
-    --foreground-color: rgb(var(--md-scheme-on-surface));
+    --foreground-color: rgb(var(--md-scheme-on-surface-variant));
     --border-color: rgb(var(--md-scheme-outline-variant));
     --state-color: var(--md-scheme-on-surface);
     --border-radius: 0.5em;
@@ -58,11 +58,14 @@
     
         .md3-chip-leading,
         .md3-chip-trailing {
-            display: none;
+            display: inline-flex;
             align-items: center;
             justify-content: center;
+            font-size: inherit;
+            opacity: 0;
+            transform: scale(1.2);
             height: 1.125em;
-            width: 1.125em;
+            width: 0;
             color: inherit;
             transition: all var(--md-motion-standard-fast-spatial-duration) var(--md-motion-standard-fast-spatial-easing);
     
@@ -72,6 +75,23 @@
                 width: 1em !important;
                 line-height: 1em !important;
             }
+        }
+
+        .md3-chip-leading {
+            color: rgb(var(--md-scheme-primary));
+
+            &.has-avatar {
+                background-color: rgb(var(--md-scheme-on-surface-variant));
+                color: rgb(var(--md-scheme-surface-container-low));
+                height: 1.5em;
+                transform: scale(0.8);
+                border-radius: 100%;
+                margin-inline-start: -0.25em;
+            }
+        }
+
+        .md3-chip-trailing {
+            color: rgb(var(--md-scheme-on-surface-variant));
         }
     
         .md3-chip-label {
@@ -92,130 +112,69 @@
             --foreground-color: rgb(var(--md-scheme-on-surface));
             --border-color: rgb(var(--md-scheme-outline-variant));
 
-            .md3-chip-leading {
-                color: rgb(var(--md-scheme-primary));
-
-                &.has-icon {
-                    display: inline-flex;
-                }
-
-                &.has-avatar {
-                    display: none;
-                }
-            }
-
-            .md3-chip-trailing {
-                display: none;
+            .md3-chip-leading.has-icon {
+                opacity: 1;
+                transform: scale(1);
+                width: 1.125em;
             }
         }
     }
 
     &.md3-filter {
         .md3-chip-container {
-            --background-color: transparent;
-            --foreground-color: rgb(var(--md-scheme-on-surface-variant));
-            --border-color: rgb(var(--md-scheme-outline-variant));
-
-            .md3-chip-leading {
-                color: rgb(var(--md-scheme-primary));
-                display: inline-flex;
-                opacity: 0;
-                transform: scale(1.2);
-                width: 0;
-
-                &.has-avatar {
-                    display: none;
-                }
-            }
-
             .md3-chip-trailing {
-                color: rgb(var(--md-scheme-on-surface-variant));
-
                 &.has-icon {
-                    display: inline-flex;
+                    opacity: 1;
+                    transform: scale(1);
+                    width: 1.125em;
                 }
             }
         }
 
-        &.md3-selected .md3-chip-container,
         ::ng-deep .md3-input-element:checked + .md3-chip-container {
-            --background-color: rgb(var(--md-scheme-secondary-container));
-            --foreground-color: rgb(var(--md-scheme-on-secondary-container));
-            --border-color: rgb(var(--md-scheme-secondary-container));
-
-            box-shadow: var(--md-shadow-0dp);
-
             .md3-chip-leading {
-                color: rgb(var(--md-scheme-on-secondary-container));
                 opacity: 1;
                 transform: scale(1);
                 width: 1.125em;
-            }
-
-            .md3-chip-trailing {
-                color: rgb(var(--md-scheme-on-secondary-container));
-            }
-
-            &::before {
-                opacity: 0;
             }
         }
     }
 
     &.md3-input {
         .md3-chip-container {
-            --background-color: transparent;
-            --foreground-color: rgb(var(--md-scheme-on-surface-variant));
-            --border-color: rgb(var(--md-scheme-outline-variant));
-
             .md3-chip-leading {
-                color: rgb(var(--md-scheme-primary));
-
                 &.has-icon {
-                    display: inline-flex;
+                    opacity: 1;
+                    transform: scale(1);
+                    width: 1.125em;
                 }
 
                 &.has-avatar {
-                    background-color: rgb(var(--md-scheme-on-surface-variant));
-                    color: rgb(var(--md-scheme-surface-container-low));
-                    display: inline-flex;
-                    height: 1.5em;
                     width: 1.5em;
-                    border-radius: 100%;
-                    margin-inline-start: -0.25em;
+                    opacity: 1;
+                    transform: scale(1);
                 }
             }
 
             .md3-chip-trailing {
-                color: rgb(var(--md-scheme-on-surface-variant));
-                display: inline-flex;
-                opacity: 0;
-                transform: scale(1.2);
-                width: 0;
-            }
-        }
-
-        &.md3-selected .md3-chip-container,
-        ::ng-deep .md3-input-element:checked + .md3-chip-container {
-            --background-color: rgb(var(--md-scheme-secondary-container));
-            --foreground-color: rgb(var(--md-scheme-on-secondary-container));
-            --border-color: rgb(var(--md-scheme-secondary-container));
-
-            box-shadow: var(--md-shadow-0dp);
-
-            .md3-chip-leading {
-                color: rgb(var(--md-scheme-on-secondary-container));
                 opacity: 1;
                 transform: scale(1);
                 width: 1.125em;
-            }
+                position: relative;
+                border: none;
+                background-color: transparent;
+                border-radius: 100%;
+                cursor: pointer;
+                z-index: 10;
 
-            .md3-chip-trailing {
-                color: rgb(var(--md-scheme-on-secondary-container));
-            }
-
-            &::before {
-                opacity: 0;
+                &::before {
+                    content: '';
+                    display: block;
+                    position: absolute;
+                    height: 3em;
+                    width: 3em;
+                    border-radius: 100%;
+                }
             }
         }
     }
@@ -234,9 +193,28 @@
             }
         }
 
-        &.md3-selected:hover .md3-chip-container,
         &:hover ::ng-deep .md3-input-element:checked + .md3-chip-container {
             box-shadow: var(--md-shadow-1dp);
+        }
+    }
+
+    ::ng-deep .md3-input-element:checked + .md3-chip-container {
+        --background-color: rgb(var(--md-scheme-secondary-container));
+        --foreground-color: rgb(var(--md-scheme-on-secondary-container));
+        --border-color: rgb(var(--md-scheme-secondary-container));
+
+        box-shadow: var(--md-shadow-0dp);
+
+        .md3-chip-leading.has-icon {
+            color: rgb(var(--md-scheme-on-secondary-container));
+        }
+
+        .md3-chip-trailing {
+            color: rgb(var(--md-scheme-on-secondary-container));
+        }
+
+        &::before {
+            opacity: 0;
         }
     }
     
@@ -254,17 +232,32 @@
         }
     }
 
-    &.md3-disabled .md3-chip-container,
     &:disabled .md3-chip-container,
     ::ng-deep .md3-input-element:disabled + .md3-chip-container {
-        --foreground-color: rgba(var(--md-scheme-on-surface), 0.38) !important;
-        --border-color: rgba(var(--md-scheme-on-surface), 0.12) !important;
+        background-color: transparent;
+        --foreground-color: rgba(var(--md-scheme-on-surface), 0.38);
+        --border-color: rgba(var(--md-scheme-on-surface), 0.12);
         cursor: default;
-        box-shadow: var(--md-shadow-0dp) !important;
+        box-shadow: var(--md-shadow-0dp);
 
-        .md3-chip-leading,
+        .md3-chip-leading {
+            &:not(.has-avatar) {
+                color: rgba(var(--md-scheme-on-surface), 0.38);
+            }
+
+            .has-avatar {
+                opacity: 0.38;
+            }
+        }
+
         .md3-chip-trailing {
-            color: var(--foreground-color) !important;
+            color: rgba(var(--md-scheme-on-surface), 0.38);
+            z-index: auto;
+            pointer-events: none;
+        }
+
+        .md3-chip-label {
+            color: rgba(var(--md-scheme-on-surface), 0.38);
         }
 
         .md3-state-layer {
@@ -276,13 +269,9 @@
         }
     }
 
-    &.md3-elevated.md3-disabled .md3-chip-container,
     &.md3-elevated:disabled .md3-chip-container,
-    &.md3-selected.md3-disabled .md3-chip-container,
-    &.md3-selected:disabled .md3-chip-container,
     &.md3-elevated ::ng-deep .md3-input-element:disabled + .md3-chip-container,
-    &.md3-selected ::ng-deep .md3-input-element:disabled + .md3-chip-container,
     ::ng-deep .md3-input-element:checked:disabled + .md3-chip-container {
-        --background-color: rgba(var(--md-scheme-on-surface), 0.12) !important;
+        background-color: rgba(var(--md-scheme-on-surface), 0.12);
     }
 }

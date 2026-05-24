@@ -1,4 +1,4 @@
-import { booleanAttribute, Component, ContentChild, contentChild, ContentChildren, Directive, effect, ElementRef, input, Input, QueryList, signal } from '@angular/core';
+import { booleanAttribute, Component, ContentChild, contentChild, contentChildren, Directive, effect, ElementRef, input, Input, signal, viewChild } from '@angular/core';
 import { MaterialIcon } from '../common/material-icon/material-icon';
 import { StateComponent } from '../common/state-component';
 import { ChipType } from '../../types/chip-type.type';
@@ -37,14 +37,14 @@ export class Chips {
     @ContentChild(FormControlName) controlName?: FormControlName;
 
     private avatar = contentChild(ChipAvatar);
-    @ContentChildren(IconElement) private iconElements!: QueryList<IconElement>;
+    private iconElements = contentChildren(IconElement);
 
     public get leading(): IconElement | undefined {
-        return this.iconElements?.find((icon) => icon.iconType === 'leading');
+        return this.iconElements().find((icon) => icon.iconType === 'leading');
     }
 
     public get trailing(): IconElement | undefined {
-        return this.iconElements?.find((icon) => icon.iconType === 'trailing');
+        return this.iconElements().find((icon) => icon.iconType === 'trailing');
     }
 
     public isElevated = input<boolean, unknown>(false, {
@@ -54,6 +54,10 @@ export class Chips {
 
     private chipType = signal<ChipType>('assist');
 
+    public get isSelectable(): boolean {
+        return this.chipType() != 'assist';
+    }
+
     public get showCheckIcon(): boolean {
         return !this.leading && this.chipType() == 'filter';
     }
@@ -62,10 +66,28 @@ export class Chips {
         return this.avatar() != undefined && this.chipType() == 'input';
     }
 
+    public get hasRemove(): boolean {
+        return this.chipType() == 'input';
+    }
+
     constructor(private el: ElementRef) {
-        effect(() => {
+        effect((onCleanup) => {
             const type = this.chipType();
             this.element.classList.add('md3-' + type);
+
+            if (type == 'input') {
+                const stop = (event: Event) => {
+                    event.stopPropagation();
+                };
+
+                this.trailing?.nativeElement.addEventListener('click', stop);
+                this.trailing?.nativeElement.addEventListener('pointerdown', stop);
+
+                onCleanup(() => {
+                    this.trailing?.nativeElement.removeEventListener('click', stop);
+                    this.trailing?.nativeElement.removeEventListener('pointerdown', stop);
+                });
+            }
         });
 
         effect(() => {
