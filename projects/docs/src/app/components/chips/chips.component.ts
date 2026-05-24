@@ -1,18 +1,11 @@
 import { Component } from '@angular/core';
-import {
-    ChipSet,
-    Chips,
-    IconElement,
-    InputElement,
-    MaterialIcon,
-    TextFieldModule,
-} from '@vip9008/ngx-md3';
+import { ChipAvatar, Chips, IconElement, InputElement, MaterialIcon, TextFieldModule } from '@vip9008/ngx-md3';
 
 @Component({
     selector: 'app-chips',
     imports: [
-        ChipSet,
         Chips,
+        ChipAvatar,
         IconElement,
         InputElement,
         MaterialIcon,

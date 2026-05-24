@@ -1,0 +1,192 @@
+:host {
+    --chip-container-color: transparent;
+    --chip-label-color: rgb(var(--md-scheme-on-surface));
+    --chip-outline-color: rgb(var(--md-scheme-outline-variant));
+    --chip-leading-icon-color: rgb(var(--md-scheme-primary));
+    --chip-trailing-icon-color: rgb(var(--md-scheme-on-surface-variant));
+    --state-color: var(--md-scheme-on-surface-variant);
+    --border-radius: 0.5em;
+    --border-size: 0.0625em;
+    --outline-color: rgb(var(--md-scheme-secondary));
+    --outline-width: 0.1875em;
+    --outline-offset: -0.125em;
+
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    height: 2em;
+    max-width: 100%;
+    padding-inline: 0.5em;
+    border: var(--border-size) solid var(--chip-outline-color);
+    border-radius: var(--border-radius);
+    color: var(--chip-label-color);
+    background-color: var(--chip-container-color);
+    box-shadow: var(--md-shadow-0dp);
+    cursor: pointer;
+    font-size: 1rem;
+    text-decoration: none;
+    white-space: nowrap;
+    vertical-align: middle;
+    transition: all var(--md-motion-standard-fast-spatial-duration) var(--md-motion-standard-fast-spatial-easing);
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    user-select: none;
+
+    &::before {
+        content: '';
+        position: absolute;
+        display: block;
+        inset-inline: 0;
+        inset-block: -0.5em;
+    }
+
+    &.md3-elevated {
+        --chip-container-color: rgb(var(--md-scheme-surface-container-low));
+        --chip-outline-color: transparent;
+
+        box-shadow: var(--md-shadow-1dp);
+    }
+
+    &.md3-filter {
+        .md3-selected {
+            --chip-container-color: rgb(var(--md-scheme-secondary-container));
+            --chip-label-color: rgb(var(--md-scheme-on-secondary-container));
+            --chip-leading-icon-color: rgb(var(--md-scheme-on-secondary-container));
+            --chip-trailing-icon-color: rgb(var(--md-scheme-on-secondary-container));
+            --chip-outline-color: transparent;
+            --state-color: var(--md-scheme-on-secondary-container);
+
+            .md3-chip-selected-icon {
+                display: inline-flex;
+            }
+        }
+    }
+
+    &.md3-input {
+        .md3-selected {
+            --chip-container-color: rgb(var(--md-scheme-secondary-container));
+            --chip-label-color: rgb(var(--md-scheme-on-secondary-container));
+            --chip-leading-icon-color: rgb(var(--md-scheme-on-secondary-container));
+            --chip-trailing-icon-color: rgb(var(--md-scheme-on-secondary-container));
+            --chip-outline-color: transparent;
+            --state-color: var(--md-scheme-on-secondary-container);
+        }
+    }
+
+    &.md3-input {
+        --chip-container-color: rgb(var(--md-scheme-surface-container-low));
+        --chip-outline-color: transparent;
+    }
+
+    &.md3-avatar {
+        padding-inline-start: 0.25em;
+    }
+
+    &.md3-disabled,
+    &:disabled {
+        --chip-container-color: transparent;
+        --chip-label-color: rgba(var(--md-scheme-on-surface), 0.38);
+        --chip-outline-color: rgba(var(--md-scheme-on-surface), 0.12);
+        --chip-leading-icon-color: rgba(var(--md-scheme-on-surface), 0.38);
+        --chip-trailing-icon-color: rgba(var(--md-scheme-on-surface), 0.38);
+
+        cursor: default;
+        box-shadow: var(--md-shadow-0dp);
+        pointer-events: none;
+
+        .md3-state-layer {
+            display: none;
+        }
+    }
+
+    .md3-chip-label {
+        position: relative;
+        z-index: 1;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        color: inherit;
+        font-size: 0.875em;
+        line-height: 1.428572em;
+        font-weight: 500;
+        letter-spacing: 0.007143em;
+        margin: 0 0.571429em;
+    }
+
+    .md3-chip-selected-icon {
+        display: none;
+        position: relative;
+        z-index: 1;
+        align-items: center;
+        justify-content: center;
+        flex: 0 0 auto;
+        width: 1.125em;
+        height: 1.125em;
+        color: var(--chip-leading-icon-color);
+    }
+
+    .md3-chip-remove {
+        display: inline-flex;
+        position: relative;
+        z-index: 1;
+        align-items: center;
+        justify-content: center;
+        flex: 0 0 auto;
+        width: 1.125em;
+        height: 1.125em;
+        color: var(--chip-trailing-icon-color);
+        border-radius: 50%;
+        cursor: pointer;
+        outline: none;
+
+        &:focus-visible {
+            outline: 0.125em solid var(--outline-color);
+            outline-offset: 0.125em;
+        }
+    }
+
+    ::ng-deep [md3-icon-element] {
+        position: relative;
+        z-index: 1;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        flex: 0 0 auto;
+        font-size: 1.125em !important;
+        width: 1em !important;
+        height: 1em !important;
+        line-height: 1;
+        color: var(--chip-leading-icon-color);
+    }
+
+    ::ng-deep [md3-icon-element=trailing] {
+        color: var(--chip-trailing-icon-color);
+    }
+
+    &.md3-avatar {
+        ::ng-deep [md3-icon-element=leading] {
+            font-size: 1.5em !important;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+    }
+
+    ::ng-deep .md3-input-element {
+        position: absolute;
+        inset: 0;
+        z-index: 2;
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        opacity: 0;
+        cursor: pointer;
+    }
+
+    &.md3-removable ::ng-deep .md3-input-element {
+        inset-inline-end: 2.25em;
+        width: auto;
+    }
+}

@@ -13,6 +13,87 @@
 <section>
     <h2>Assist chips</h2>
 
+    <div style="display: flex; gap: 1em;">
+        <button md3-chip chip-type="assist">
+            <md3-icon md3-icon-element="leading">event</md3-icon>
+            Add to calendar
+        </button>
+        <button md3-chip chip-type="assist" disabled>
+            <md3-icon md3-icon-element="leading">event</md3-icon>
+            Add to calendar
+        </button>
+        <button md3-chip chip-type="assist" elevated>
+            <md3-icon md3-icon-element="leading">notifications</md3-icon>
+            Set reminder
+        </button>
+        <button md3-chip chip-type="assist" elevated disabled>
+            <md3-icon md3-icon-element="leading">notifications</md3-icon>
+            Set reminder
+        </button>
+    </div>
+</section>
+<section>
+    <h2>Filter chips</h2>
+
+    <div style="display: flex; gap: 1em;">
+        <label md3-chip chip-type="filter">
+            <input type="checkbox" md3-input-element>
+            Vegetarian
+        </label>
+        <label md3-chip chip-type="filter">
+            <input type="checkbox" md3-input-element checked>
+            Breakfast
+        </label>
+        <label md3-chip chip-type="filter">
+            <input type="checkbox" md3-input-element disabled>
+            Open now
+        </label>
+        <label md3-chip chip-type="filter">
+            <input type="checkbox" md3-input-element disabled checked>
+            Disabled
+        </label>
+    </div>
+    
+    <div style="display: flex; gap: 1em;">
+        <label md3-chip chip-type="filter" elevated>
+            <input type="checkbox" md3-input-element>
+            Vegetarian
+        </label>
+        <label md3-chip chip-type="filter" elevated>
+            <input type="checkbox" md3-input-element checked>
+            Breakfast
+        </label>
+        <label md3-chip chip-type="filter" elevated>
+            <input type="checkbox" md3-input-element disabled>
+            Open now
+        </label>
+        <label md3-chip chip-type="filter" elevated>
+            <input type="checkbox" md3-input-element disabled checked>
+            Disabled
+        </label>
+    </div>
+</section>
+<section>
+    <h2>Input chips</h2>
+
+    <div style="display: flex; gap: 1em;">
+        <button md3-chip chip-type="input">
+            Add to calendar
+        </button>
+        <button md3-chip chip-type="input">
+            <md3-icon md3-icon-element="leading">notifications</md3-icon>
+            Set reminder
+        </button>
+        <button md3-chip chip-type="input">
+            <md3-icon md3-chip-avatar>person</md3-icon>
+            Contact number
+        </button>
+    </div>
+</section>
+
+<!-- <section>
+    <h2>Assist chips</h2>
+
     <md3-chip-set aria-label="Assist actions">
         <button md3-chip chip-type="assist">
             <md3-icon md3-icon-element="leading">event</md3-icon>
@@ -140,4 +221,4 @@
         <button md3-chip chip-type="suggestion">Open this weekend</button>
         <button md3-chip chip-type="suggestion" elevated>Top rated</button>
     </md3-chip-set>
-</section>
+</section> -->

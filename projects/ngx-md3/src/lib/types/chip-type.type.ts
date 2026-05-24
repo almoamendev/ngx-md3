@@ -1,0 +1,1 @@
+export type ChipType = 'assist' | 'filter' | 'input' | 'suggestion';

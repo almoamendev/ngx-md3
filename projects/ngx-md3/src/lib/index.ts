@@ -7,6 +7,7 @@ export * from './types/icon-button-width.type';
 export * from './types/button-group-type.type';
 export * from './types/button-group-selection.type';
 export * from './types/dialog-role.type';
+export * from './types/chip-type.type';
 
 // interfaces
 export * from './interfaces/dialog-config.interface';
