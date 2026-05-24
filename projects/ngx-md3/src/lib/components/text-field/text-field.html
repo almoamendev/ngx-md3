@@ -1,4 +1,4 @@
-<div #inputContainer class="md3-text-field-container" [ngClass]="{
+<label #inputContainer class="md3-text-field-container" [ngClass]="{
     'md3-text-field-filled': type == 'filled',
     'md3-text-field-outlined': type == 'outlined',
 }">
@@ -16,7 +16,7 @@
     @if (type != 'outlined') {
         <div class="md3-text-field-state"></div>
     }
-</div>
+</label>
 <div class="md3-supporting-text-container" [class.md3-has-error]="hasError">
     <ng-content select="[md3-supporting-text]"></ng-content>
     @if (inputCounter) {
