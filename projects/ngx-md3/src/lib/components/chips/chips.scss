@@ -34,6 +34,10 @@
         opacity: 0;
     }
 
+    &.md3-surface {
+        --background-color: rgb(var(--md-scheme-surface-container-low));
+    }
+
     .md3-chip-container {
         display: flex;
         align-items: center;
@@ -110,9 +114,7 @@
 
     &.md3-assist {
         .md3-chip-container {
-            --background-color: transparent;
             --foreground-color: rgb(var(--md-scheme-on-surface));
-            --border-color: rgb(var(--md-scheme-outline-variant));
 
             .md3-chip-leading.has-icon {
                 opacity: 1;
@@ -281,7 +283,9 @@
     }
 
     &.md3-elevated:disabled .md3-chip-container,
+    &.md3-surface:disabled .md3-chip-container,
     &.md3-elevated ::ng-deep .md3-input-element:disabled + .md3-chip-container,
+    &.md3-surface ::ng-deep .md3-input-element:disabled + .md3-chip-container,
     ::ng-deep .md3-input-element:checked:disabled + .md3-chip-container {
         background-color: rgba(var(--md-scheme-on-surface), 0.12);
     }

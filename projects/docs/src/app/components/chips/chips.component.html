@@ -2,6 +2,7 @@
 
 <ul>
     <li>@Input() chip-type: 'assist' | 'filter' | 'input' | 'suggestion' = 'assist';</li>
+    <li>@Input() surface: boolean = false;</li>
     <li>@Input() elevated: boolean = false;</li>
     <li>@Output() on-chip-remove = () => {{ '{}' }};</li>
 </ul>
@@ -15,6 +16,14 @@
             Add to calendar
         </button>
         <button md3-chip chip-type="assist" disabled>
+            <md3-icon md3-icon-element="leading">event</md3-icon>
+            Add to calendar
+        </button>
+        <button md3-chip chip-type="assist" surface>
+            <md3-icon md3-icon-element="leading">event</md3-icon>
+            Add to calendar
+        </button>
+        <button md3-chip chip-type="assist" surface disabled>
             <md3-icon md3-icon-element="leading">event</md3-icon>
             Add to calendar
         </button>

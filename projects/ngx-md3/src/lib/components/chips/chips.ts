@@ -52,6 +52,11 @@ export class Chips {
         return this.iconElements().find((icon) => icon.iconType === 'trailing');
     }
 
+    public hasSurface = input<boolean, unknown>(false, {
+        alias: 'surface',
+        transform: booleanAttribute,
+    });
+
     public isElevated = input<boolean, unknown>(false, {
         alias: 'elevated',
         transform: booleanAttribute,
@@ -86,6 +91,14 @@ export class Chips {
                 this.element.classList.add('md3-elevated');
             } else {
                 this.element.classList.remove('md3-elevated');
+            }
+        });
+
+        effect(() => {
+            if (this.hasSurface() && !this.isElevated()) {
+                this.element.classList.add('md3-surface');
+            } else {
+                this.element.classList.remove('md3-surface');
             }
         });
     }
