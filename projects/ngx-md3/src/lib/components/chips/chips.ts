@@ -81,7 +81,7 @@ export class Chips {
     }
 
     constructor(private el: ElementRef) {
-        effect((onCleanup) => {
+        effect(() => {
             const type = this.chipType();
             this.element.classList.add('md3-' + type);
         });

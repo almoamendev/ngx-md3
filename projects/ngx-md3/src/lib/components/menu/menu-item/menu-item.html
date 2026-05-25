@@ -1,21 +1,21 @@
-<span class="md3-menu-item-leading" aria-hidden="true">
-    <ng-content select="[md3-icon-element=leading], [md3-menu-leading]"></ng-content>
-</span>
+<div class="md3-menu-item-leading">
+    <ng-content select="[md3-icon-element=leading]"></ng-content>
+</div>
 
-<span class="md3-menu-item-trailing">
+<div class="md3-menu-item-content">
+    <div class="md3-menu-item-label">
+        <ng-content></ng-content>
+    </div>
+
+    @if (supportingText) {
+        <div class="md3-menu-item-supporting-text">{{ supportingText }}</div>
+    }
+</div>
+
+<div class="md3-menu-item-trailing">
     @if (trailingText) {
-        <span class="md3-menu-item-trailing-text">{{ trailingText }}</span>
+        <div class="md3-menu-item-trailing-text">{{ trailingText }}</div>
     }
 
     <ng-content select="[md3-icon-element=trailing], [md3-menu-trailing]"></ng-content>
-</span>
-
-<span class="md3-menu-item-content">
-    <span class="md3-menu-item-label">
-        <ng-content></ng-content>
-    </span>
-
-    @if (supportingText) {
-        <span class="md3-menu-item-supporting-text">{{ supportingText }}</span>
-    }
-</span>
+</div>

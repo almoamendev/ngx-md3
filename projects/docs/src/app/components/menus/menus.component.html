@@ -1,10 +1,6 @@
 <h1>Menus</h1>
 
 <ul>
-    <li>md3-menu: @Input() menu-density: 'default' | 'compact' = 'default';</li>
-    <li>md3-menu: @Input() menu-width: 'default' | 'wide' | 'full' = 'default';</li>
-    <li>md3-menu-group: @Input() group-label?: string;</li>
-    <li>md3-menu-group: @Input() divider: boolean = false;</li>
     <li>md3-menu-item: @Input() selected: boolean = false;</li>
     <li>md3-menu-item: @Input() disabled: boolean = false;</li>
     <li>md3-menu-item: @Input() supporting-text?: string;</li>
@@ -16,18 +12,20 @@
         <h2>Basic menu</h2>
 
         <md3-menu aria-label="File actions">
-            <button md3-menu-item>
-                <md3-icon md3-icon-element="leading">edit</md3-icon>
-                Rename
-            </button>
-            <button md3-menu-item trailing-text="Ctrl+C">
-                <md3-icon md3-icon-element="leading">content_copy</md3-icon>
-                Copy
-            </button>
-            <button md3-menu-item disabled>
-                <md3-icon md3-icon-element="leading">delete</md3-icon>
-                Delete
-            </button>
+            <md3-menu-group>
+                <button md3-menu-item>
+                    <md3-icon md3-icon-element="leading">edit</md3-icon>
+                    Rename
+                </button>
+                <button md3-menu-item trailing-text="Ctrl+C">
+                    <md3-icon md3-icon-element="leading">content_copy</md3-icon>
+                    Copy
+                </button>
+                <button md3-menu-item disabled>
+                    <md3-icon md3-icon-element="leading">delete</md3-icon>
+                    Delete
+                </button>
+            </md3-menu-group>
         </md3-menu>
     </section>
 
@@ -40,7 +38,7 @@
                 <button md3-menu-item trailing-text="Ctrl+Y">Redo</button>
             </md3-menu-group>
 
-            <md3-menu-group group-label="View" divider>
+            <md3-menu-group group-label="View">
                 <button md3-menu-item selected item-role="menuitemcheckbox">
                     Show ruler
                 </button>
@@ -54,26 +52,18 @@
     <section>
         <h2>Supporting text</h2>
 
-        <md3-menu aria-label="Account menu" menu-width="wide">
-            <button md3-menu-item supporting-text="Use your personal workspace">
-                Personal
-            </button>
-            <button md3-menu-item selected supporting-text="Shared by your team">
-                Team
-            </button>
-            <a md3-menu-item href="#" supporting-text="Manage billing and access">
-                Settings
-            </a>
-        </md3-menu>
-    </section>
-
-    <section>
-        <h2>Compact menu</h2>
-
-        <md3-menu aria-label="Compact menu" menu-density="compact">
-            <button md3-menu-item>New file</button>
-            <button md3-menu-item>New folder</button>
-            <button md3-menu-item>Upload</button>
+        <md3-menu aria-label="Account menu">
+            <md3-menu-group>
+                <button md3-menu-item supporting-text="Use your personal workspace">
+                    Personal
+                </button>
+                <button md3-menu-item selected supporting-text="Shared by your team">
+                    Team
+                </button>
+                <button md3-menu-item supporting-text="Manage billing and access">
+                    Settings
+                </button>
+            </md3-menu-group>
         </md3-menu>
     </section>
 </div>

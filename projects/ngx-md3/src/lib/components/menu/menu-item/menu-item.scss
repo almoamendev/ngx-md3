@@ -1,17 +1,16 @@
 :host {
-    --state-color: var(--md-scheme-on-surface);
-    --border-radius: 0;
-    --outline-color: rgb(var(--md-scheme-secondary));
-    --outline-width: 0.1875rem;
-    --outline-offset: -0.1875rem;
+    --state-color: var(--menu-item-state-color);
+    --border-radius: var(--menu-item-border-radius);
+    --outline-color: var(--menu-item-outline-color);
+    --outline-width: var(--menu-item-outline-width);
+    --outline-offset: var(--menu-item-outline-offset);
 
     position: relative;
     display: flex;
     align-items: center;
-    gap: 0.75rem;
-    width: 100%;
-    min-height: var(--menu-item-height, 3rem);
-    padding: 0 var(--menu-item-inline-padding, 0.75rem);
+    gap: 0.75em;
+    min-height: 3em;
+    padding: 0 0.75em;
     border: 0;
     border-radius: var(--border-radius);
     background: transparent;
@@ -25,24 +24,6 @@
     user-select: none;
     transition: background-color var(--md-motion-standard-fast-spatial-duration) var(--md-motion-standard-fast-spatial-easing),
         color var(--md-motion-standard-fast-spatial-duration) var(--md-motion-standard-fast-spatial-easing);
-
-    &.md3-selected {
-        --state-color: var(--md-scheme-on-secondary-container);
-
-        background-color: rgb(var(--md-scheme-secondary-container));
-        color: rgb(var(--md-scheme-on-secondary-container));
-    }
-
-    &.md3-disabled,
-    &:disabled {
-        color: rgba(var(--md-scheme-on-surface), 0.38);
-        cursor: default;
-        pointer-events: none;
-
-        .md3-state-layer {
-            display: none;
-        }
-    }
 }
 
 .md3-menu-item-leading,
@@ -58,8 +39,8 @@
     flex: 0 0 auto;
     align-items: center;
     justify-content: center;
-    min-width: 1.5rem;
-    min-height: 1.5rem;
+    min-width: 1.5em;
+    min-height: 1.5em;
     color: rgb(var(--md-scheme-on-surface-variant));
 
     &:empty {
@@ -89,10 +70,10 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    font-size: 0.875rem;
+    font-size: 0.875em;
     font-weight: 500;
-    line-height: 1.25rem;
-    letter-spacing: 0.00625rem;
+    line-height: 1.25em;
+    letter-spacing: 0.00625em;
 }
 
 .md3-menu-item-supporting-text {
@@ -100,27 +81,18 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     color: rgb(var(--md-scheme-on-surface-variant));
-    font-size: 0.75rem;
+    font-size: 0.75em;
     font-weight: 400;
-    line-height: 1rem;
-    letter-spacing: 0.025rem;
+    line-height: 1em;
+    letter-spacing: 0.025em;
 }
 
 .md3-menu-item-trailing-text {
     color: rgb(var(--md-scheme-on-surface-variant));
-    font-size: 0.75rem;
+    font-size: 0.75em;
     font-weight: 500;
-    line-height: 1rem;
-    letter-spacing: 0.03125rem;
-}
-
-:host(.md3-selected) {
-    .md3-menu-item-leading,
-    .md3-menu-item-trailing,
-    .md3-menu-item-supporting-text,
-    .md3-menu-item-trailing-text {
-        color: rgb(var(--md-scheme-on-secondary-container));
-    }
+    line-height: 1em;
+    letter-spacing: 0.03125em;
 }
 
 :host ::ng-deep [md3-icon-element],
@@ -129,8 +101,8 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 1.5rem !important;
-    height: 1.5rem !important;
-    font-size: 1.5rem !important;
+    width: 1.5em !important;
+    height: 1.5em !important;
+    font-size: 1.5em !important;
     line-height: 1;
 }
