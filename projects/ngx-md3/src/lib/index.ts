@@ -76,3 +76,8 @@ export * from './components/dialog/dialog.service';
 export * from './components/dialog/dialog-header/dialog-header';
 export * from './components/dialog/dialog-body/dialog-body';
 export * from './components/dialog/dialog-actions/dialog-actions';
+
+// menus
+export * from './components/menu/menu';
+export * from './components/menu/menu-group/menu-group';
+export * from './components/menu/menu-item/menu-item';

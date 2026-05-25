@@ -17,6 +17,7 @@ import { SwitchesComponent } from './components/switches/switches.component';
 import { ButtonGroupsComponent } from './components/buttons/button-groups/button-groups.component';
 import { DialogsComponent } from './components/dialogs/dialogs.component';
 import { ChipsComponent } from './components/chips/chips.component';
+import { MenusComponent } from './components/menus/menus.component';
 
 export const routes: Routes = [
     {
@@ -100,6 +101,10 @@ export const routes: Routes = [
                                 component: ProgressIndicatorsComponent,
                             },
                         ],
+                    },
+                    {
+                        path: 'menus',
+                        component: MenusComponent,
                     },
                     {
                         path: 'text-fields',

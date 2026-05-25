@@ -1,0 +1,21 @@
+.demo-menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+    gap: 1.5rem;
+    align-items: start;
+}
+
+section {
+    display: grid;
+    gap: 0.75rem;
+}
+
+h2 {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+ul {
+    margin-block-end: 1.5rem;
+}

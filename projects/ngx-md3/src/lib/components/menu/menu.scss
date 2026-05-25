@@ -1,0 +1,40 @@
+:host {
+    --menu-container-color: rgb(var(--md-scheme-surface-container));
+    --menu-foreground-color: rgb(var(--md-scheme-on-surface));
+    --menu-min-width: 7rem;
+    --menu-max-width: 17.5rem;
+    --menu-item-height: 3rem;
+    --menu-item-inline-padding: 0.75rem;
+    --border-radius: 0.25rem;
+
+    position: relative;
+    display: inline-flex;
+    flex-direction: column;
+    min-width: var(--menu-min-width);
+    max-width: min(var(--menu-max-width), calc(100vw - 2rem));
+    max-height: min(32rem, calc(100vh - 2rem));
+    padding-block: 0.5rem;
+    border-radius: var(--border-radius);
+    background-color: var(--menu-container-color);
+    color: var(--menu-foreground-color);
+    box-shadow: var(--md-shadow-3dp);
+    overflow: hidden auto;
+    outline: none;
+    vertical-align: top;
+
+    &.md3-menu-compact {
+        --menu-item-height: 2.5rem;
+        --menu-item-inline-padding: 0.75rem;
+    }
+
+    &.md3-menu-wide {
+        --menu-min-width: 14rem;
+        --menu-max-width: 22.5rem;
+    }
+
+    &.md3-menu-full {
+        --menu-min-width: 100%;
+        --menu-max-width: 100%;
+        width: 100%;
+    }
+}
