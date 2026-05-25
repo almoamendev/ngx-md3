@@ -29,8 +29,12 @@ export class ChipsComponent {
     }
 
     public addChip(event: Event): void {
-        const input = event.target as HTMLInputElement;
-        let value = input.value.trim();
+        event.preventDefault();
+        const input = event.target;
+        if (!(input instanceof HTMLInputElement)) {
+            return;
+        }
+        const value = input.value.trim();
         if (value.length) {
             this.inputChips.push(value);
         }
