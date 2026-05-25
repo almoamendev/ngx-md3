@@ -3,11 +3,7 @@
 <ul>
     <li>@Input() chip-type: 'assist' | 'filter' | 'input' | 'suggestion' = 'assist';</li>
     <li>@Input() elevated: boolean = false;</li>
-    <li>@Input() avatar: boolean = false;</li>
-    <li>@Input() selected: boolean = false;</li>
-    <li>@Input() removable: boolean = false;</li>
-    <li>@Input() disabled: boolean = false;</li>
-    <li>@Input() remove-label: string = 'Remove';</li>
+    <li>@Output() on-chip-remove = () => {{ '{}' }};</li>
 </ul>
 
 <section>
@@ -77,20 +73,12 @@
     <h2>Input chips</h2>
 
     <div style="display: flex; gap: 1em;">
-        <label md3-chip chip-type="input">
-            <input type="checkbox" md3-input-element>
-            Add to calendar
-        </label>
-        <label md3-chip chip-type="input">
-            <input type="checkbox" md3-input-element checked>
-            <md3-icon md3-icon-element="leading">notifications</md3-icon>
-            Set reminder
-        </label>
-        <label md3-chip chip-type="input">
-            <input type="checkbox" md3-input-element>
-            <md3-icon md3-chip-avatar>person</md3-icon>
-            Contact number
-        </label>
+        @for (item of inputChips; track $index) {
+            <label md3-chip chip-type="input" (on-remove)="removeChip($index)">
+                <input type="checkbox" md3-input-element>
+                {{ item }}
+            </label>
+        }
     </div>
 
     <div style="display: flex; gap: 1em;">

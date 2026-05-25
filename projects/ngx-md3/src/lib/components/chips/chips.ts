@@ -1,9 +1,7 @@
-import { booleanAttribute, Component, ContentChild, contentChild, contentChildren, Directive, effect, ElementRef, input, Input, signal, viewChild } from '@angular/core';
+import { booleanAttribute, Component, contentChild, contentChildren, Directive, effect, ElementRef, input, Input, output, signal } from '@angular/core';
 import { MaterialIcon } from '../common/material-icon/material-icon';
 import { StateComponent } from '../common/state-component';
 import { ChipType } from '../../types/chip-type.type';
-import { AbstractControl, FormControlName } from '@angular/forms';
-import { InputElement } from '../common/input-element';
 import { IconElement } from '../common/icon-element';
 import { NgTemplateOutlet } from '@angular/common';
 
@@ -34,9 +32,14 @@ export class Chips {
         });
     };
 
-    @Input() control?: AbstractControl;
-    @ContentChild(InputElement) input?: InputElement;
-    @ContentChild(FormControlName) controlName?: FormControlName;
+    public removeFunction = output<void>({
+        alias: 'on-remove',
+    });
+
+    protected onRemoveClick(event: Event): void {
+        event.stopPropagation();
+        this.removeFunction.emit();
+    }
 
     private avatar = contentChild(ChipAvatar);
     private iconElements = contentChildren(IconElement);
@@ -76,20 +79,6 @@ export class Chips {
         effect((onCleanup) => {
             const type = this.chipType();
             this.element.classList.add('md3-' + type);
-
-            if (type == 'input') {
-                const stop = (event: Event) => {
-                    event.stopPropagation();
-                };
-
-                this.trailing?.nativeElement.addEventListener('click', stop);
-                this.trailing?.nativeElement.addEventListener('pointerdown', stop);
-
-                onCleanup(() => {
-                    this.trailing?.nativeElement.removeEventListener('click', stop);
-                    this.trailing?.nativeElement.removeEventListener('pointerdown', stop);
-                });
-            }
         });
 
         effect(() => {

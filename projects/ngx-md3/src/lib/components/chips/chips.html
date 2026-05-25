@@ -12,7 +12,7 @@
         <ng-content></ng-content>
     </div>
     @if (hasRemove) {
-        <button class="md3-chip-trailing" md3-state-component>
+        <button class="md3-chip-trailing" md3-state-component (click)="onRemoveClick($event)">
             <ng-container [ngTemplateOutlet]="trailingContent"></ng-container>
         </button>
     } @else {
