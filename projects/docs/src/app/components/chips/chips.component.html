@@ -9,7 +9,7 @@
 <section>
     <h2>Assist chips</h2>
 
-    <div style="display: flex; gap: 1em;">
+    <div style="display: flex; gap: 1em; flex-wrap: wrap;">
         <button md3-chip chip-type="assist">
             <md3-icon md3-icon-element="leading">event</md3-icon>
             Add to calendar
@@ -31,7 +31,7 @@
 <section>
     <h2>Filter chips</h2>
 
-    <div style="display: flex; gap: 1em;">
+    <div style="display: flex; gap: 1em; flex-wrap: wrap;">
         <label md3-chip chip-type="filter">
             <input type="checkbox" md3-input-element>
             Vegetarian
@@ -50,7 +50,7 @@
         </label>
     </div>
     
-    <div style="display: flex; gap: 1em;">
+    <div style="display: flex; gap: 1em; flex-wrap: wrap;">
         <label md3-chip chip-type="filter" elevated>
             <input type="checkbox" md3-input-element>
             Vegetarian
@@ -72,7 +72,7 @@
 <section>
     <h2>Input chips</h2>
 
-    <div style="display: flex; gap: 1em;">
+    <div style="display: flex; gap: 1em; flex-wrap: wrap;">
         @for (item of inputChips; track $index) {
             <label md3-chip chip-type="input" (on-remove)="removeChip($index)">
                 <input type="checkbox" md3-input-element>
@@ -81,7 +81,16 @@
         }
     </div>
 
-    <div style="display: flex; gap: 1em;">
+    <md3-text-field label="Add Chips" type="outlined">
+        <input md3-input-element type="text" (keydown.enter)="addChip($event)">
+        <div md3-supporting-text>Press enter to add input chip</div>
+    </md3-text-field>
+
+    <div style="display: flex; gap: 1em; flex-wrap: wrap;">
+        <label md3-chip chip-type="input">
+            <input type="checkbox" md3-input-element>
+            Material
+        </label>
         <label md3-chip chip-type="input">
             <input type="checkbox" md3-input-element disabled>
             Add to calendar
@@ -98,24 +107,11 @@
         </label>
     </div>
 
-    <div style="display: flex; gap: 1em;">
+    <div style="display: flex; gap: 1em; flex-wrap: wrap;">
         <label md3-chip chip-type="input" elevated>
             <input type="checkbox" md3-input-element>
-            Add to calendar
+            Material
         </label>
-        <label md3-chip chip-type="input" elevated>
-            <input type="checkbox" md3-input-element checked>
-            <md3-icon md3-icon-element="leading">notifications</md3-icon>
-            Set reminder
-        </label>
-        <label md3-chip chip-type="input" elevated>
-            <input type="checkbox" md3-input-element>
-            <md3-icon md3-chip-avatar>person</md3-icon>
-            Contact number
-        </label>
-    </div>
-
-    <div style="display: flex; gap: 1em;">
         <label md3-chip chip-type="input" elevated>
             <input type="checkbox" md3-input-element disabled>
             Add to calendar
@@ -136,7 +132,7 @@
 <section>
     <h2>Suggestion chips</h2>
 
-    <div style="display: flex; gap: 1em;">
+    <div style="display: flex; gap: 1em; flex-wrap: wrap;">
         <button md3-chip chip-type="suggestion">
             Vegetarian
         </button>
@@ -154,135 +150,3 @@
         </button>
     </div>
 </section>
-
-<!-- <section>
-    <h2>Assist chips</h2>
-
-    <md3-chip-set aria-label="Assist actions">
-        <button md3-chip chip-type="assist">
-            <md3-icon md3-icon-element="leading">event</md3-icon>
-            Add to calendar
-        </button>
-
-        <button md3-chip chip-type="assist" elevated>
-            <md3-icon md3-icon-element="leading">notifications</md3-icon>
-            Set reminder
-        </button>
-
-        <button md3-chip chip-type="assist" disabled>
-            Disabled
-        </button>
-    </md3-chip-set>
-</section>
-
-<section>
-    <h2>Filter chips</h2>
-
-    <md3-chip-set aria-label="Filter options">
-        <label md3-chip chip-type="filter">
-            <input type="checkbox" md3-input-element checked>
-            Vegetarian
-        </label>
-
-        <label md3-chip chip-type="filter">
-            <input type="checkbox" md3-input-element>
-            Breakfast
-        </label>
-
-        <label md3-chip chip-type="filter">
-            <input type="checkbox" md3-input-element>
-            Open now
-        </label>
-
-        <label md3-chip chip-type="filter">
-            <input type="checkbox" md3-input-element disabled>
-            Disabled
-        </label>
-    </md3-chip-set>
-</section>
-
-<section>
-    <h2>Input chips</h2>
-
-    <md3-chip-set aria-label="Input chips">
-        @for (chip of inputChips; track chip; let first = $first) {
-            <md3-chip
-                chip-type="input"
-                removable
-                [avatar]="first"
-                [selected]="first"
-                [remove-label]="'Remove ' + chip"
-                (removed)="removeInputChip(chip)">
-                    <md3-icon md3-icon-element="leading">person</md3-icon>
-                    {{ chip }}
-            </md3-chip>
-        }
-
-        <md3-chip chip-type="input" removable disabled>
-            Disabled
-        </md3-chip>
-    </md3-chip-set>
-</section>
-
-<section>
-    <h2>Chip input</h2>
-
-    <md3-chip-set class="demo-chip-input" aria-label="Tags">
-        @for (tag of inlineTags; track tag) {
-            <md3-chip
-                chip-type="input"
-                removable
-                [remove-label]="'Remove ' + tag"
-                (removed)="removeInlineTag(tag)">
-                {{ tag }}
-            </md3-chip>
-        }
-
-        <input
-            class="demo-chip-input-control"
-            type="text"
-            placeholder="Add tag"
-            [value]="inlineTagDraft"
-            (input)="onInlineTagInput($event)"
-            (keydown)="onInlineTagKeydown($event)">
-    </md3-chip-set>
-</section>
-
-<section>
-    <h2>Text field chip input</h2>
-
-    <md3-text-field
-        class="demo-chip-text-field"
-        type="outlined"
-        label="Tags"
-        [class.has-chips]="textFieldTags.length > 0">
-        @for (tag of textFieldTags; track tag) {
-            <md3-chip
-                chip-type="input"
-                removable
-                [remove-label]="'Remove ' + tag"
-                (removed)="removeTextFieldTag(tag)">
-                {{ tag }}
-            </md3-chip>
-        }
-
-        <input
-            md3-input-element
-            type="text"
-            [value]="textFieldTagDraft"
-            (input)="onTextFieldTagInput($event)"
-            (keydown)="onTextFieldTagKeydown($event)">
-
-        <div md3-supporting-text>Press Enter or comma to add a chip.</div>
-    </md3-text-field>
-</section>
-
-<section>
-    <h2>Suggestion chips</h2>
-
-    <md3-chip-set aria-label="Suggestions">
-        <button md3-chip chip-type="suggestion">Near me</button>
-        <button md3-chip chip-type="suggestion">Open this weekend</button>
-        <button md3-chip chip-type="suggestion" elevated>Top rated</button>
-    </md3-chip-set>
-</section> -->
