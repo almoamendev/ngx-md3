@@ -52,8 +52,8 @@
             font-size: inherit;
             opacity: 0;
             transform: scale(1.2);
-            height: 1.25em;
             width: 0;
+            height: 1.25em;
             color: var(--menu-item-supporting-color);
             transition: all var(--md-motion-standard-fast-spatial-duration) var(--md-motion-standard-fast-spatial-easing);
     
@@ -141,12 +141,26 @@
         opacity: 0;
         pointer-events: none;
 
+        & + .md3-menu-item-container {
+            .md3-menu-item-leading {
+                opacity: 0;
+                transform: scale(1.2);
+                width: 0;
+            }
+        }
+
         &:checked + .md3-menu-item-container {
             --menu-item-label-color: var(--menu-item-selected-foreground);
             --menu-item-supporting-color: var(--menu-item-selected-foreground);
             --border-radius: 0.75em;
             
             background-color: var(--menu-item-selected-background);
+            
+            .md3-menu-item-leading {
+                opacity: 1;
+                transform: scale(1);
+                width: 1.25em;
+            }
         }
     }
 

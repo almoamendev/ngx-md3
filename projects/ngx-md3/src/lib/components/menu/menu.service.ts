@@ -1,5 +1,6 @@
 import { Overlay, OverlayConfig, OverlayRef } from '@angular/cdk/overlay';
-import { ComponentRef, DOCUMENT, inject, Injectable, Injector, Type, ViewContainerRef } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { ComponentRef, inject, Injectable, Injector, Type, ViewContainerRef } from '@angular/core';
 import { MenuConfig } from '../../interfaces/menu-config.interface';
 import { MENU_COMPONENT, MENU_CONFIG, MENU_DATA, MenuRef } from './menu-ref';
 import { ComponentPortal } from '@angular/cdk/portal';

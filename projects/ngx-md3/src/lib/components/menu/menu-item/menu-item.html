@@ -3,8 +3,11 @@
 }
 
 <div class="md3-menu-item-container" md3-state-component>
-    <div class="md3-menu-item-leading" [class.has-icon]="!!leading">
+    <div class="md3-menu-item-leading" [class.has-icon]="showLeadingIcon">
         <ng-content select="[md3-icon-element=leading]"></ng-content>
+        @if (!leading) {
+            <md3-icon>check</md3-icon>
+        }
     </div>
 
     <div class="md3-menu-item-content">

@@ -1,13 +1,15 @@
-import { booleanAttribute, Component, contentChildren, ElementRef, Input, signal } from '@angular/core';
+import { Component, contentChildren, ElementRef, Input, signal } from '@angular/core';
 import { StateComponent } from '../../common/state-component';
 import { IconElement } from '../../common/icon-element';
 import { InputElement } from '../../common/input-element';
+import { MaterialIcon } from '../../common/material-icon/material-icon';
 
 @Component({
     selector: 'button[md3-menu-item], a[md3-menu-item]',
     imports: [
         InputElement,
         StateComponent,
+        MaterialIcon,
     ],
     templateUrl: './menu-item.html',
     styleUrl: './menu-item.scss',
@@ -39,6 +41,10 @@ export class MenuItem {
 
     public get trailing(): IconElement | undefined {
         return this.iconElements().find((icon) => icon.iconType === 'trailing');
+    }
+
+    public get showLeadingIcon(): boolean {
+        return (!!this.leading && !this.selected) || this.selected == true;
     }
 
     public onHostClick(): void {

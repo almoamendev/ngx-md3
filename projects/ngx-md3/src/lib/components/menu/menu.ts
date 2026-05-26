@@ -1,11 +1,13 @@
 import { CdkPortalOutlet, ComponentPortal } from '@angular/cdk/portal';
 import { AfterContentInit, Component, ComponentRef, effect, ElementRef, inject, Injector, Input, signal, Type, ViewChild } from '@angular/core';
 import { MenuConfig } from '../../interfaces/menu-config.interface';
-import { DIALOG_CONFIG } from '../dialog/dialog-ref';
+import { MENU_CONFIG } from './menu-ref';
 
 @Component({
     selector: 'md3-menu',
-    imports: [],
+    imports: [
+        CdkPortalOutlet,
+    ],
     templateUrl: './menu.html',
     styleUrl: './menu.scss',
     host: {
@@ -17,7 +19,7 @@ export class Menu implements AfterContentInit {
     @ViewChild(CdkPortalOutlet, { static: true })
     private readonly portalOutlet!: CdkPortalOutlet;
 
-    protected readonly config = inject<MenuConfig>(DIALOG_CONFIG, { optional: true }) ?? {};
+    protected readonly config = inject<MenuConfig>(MENU_CONFIG, { optional: true }) ?? {};
 
     private menuColors = signal<'standard' | 'vibrant'>('standard');
     private isVisible = signal<boolean>(false);
@@ -39,6 +41,14 @@ export class Menu implements AfterContentInit {
                 this.element.classList.remove('md3-inactive');
             } else {
                 this.element.classList.add('md3-inactive');
+            }
+        });
+
+        effect(() => {
+            if (this.isVisible()) {
+                this.element.classList.add('md3-active');
+            } else {
+                this.element.classList.remove('md3-active');
             }
         });
 

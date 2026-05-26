@@ -1,3 +1,35 @@
+::ng-deep .cdk-overlay-container {
+    position: fixed;
+    z-index: 1000;
+    inset: 0;
+    pointer-events: none;
+    font-size: 1rem;
+
+    .md3-menu-scrim {
+        position: absolute;
+        inset: 0;
+        pointer-events: auto;
+    }
+
+    .cdk-global-overlay-wrapper {
+        position: absolute;
+        display: flex;
+        inset: 0;
+        pointer-events: none;
+        padding: 3.5rem 0;
+        overflow: hidden;
+
+        .md3-menu-panel {
+            position: absolute;
+            pointer-events: auto;
+
+            &.md3-menu-closing {
+                pointer-events: none;
+            }
+        }
+    }
+}
+
 :host {
     --background-color: rgb(var(--md-scheme-surface-container-low));
     --foreground-color: rgb(var(--md-scheme-on-surface));
@@ -29,6 +61,15 @@
     max-width: min(var(--menu-max-width), calc(100vw - 2rem));
     max-height: min(32rem, calc(100vh - 2rem));
     outline: none;
+    transition: all var(--md-motion-expressive-default-spatial-duration) var(--md-motion-expressive-default-spatial-easing);
+    opacity: 0;
+    transform: scaleY(0.8);
+    transform-origin: top;
+    
+    &.md3-active {
+        opacity: 1;
+        transform: scaleY(1);
+    }
 
     &.md3-vibrant {
         --background-color: rgb(var(--md-scheme-tertiary-container));
