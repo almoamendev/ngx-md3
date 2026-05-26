@@ -15,13 +15,21 @@ export class MenusComponent {
         private menuService: MenuService
     ) {}
 
-    public sampleMenu(vibrant: boolean = false) {
+    public sampleMenu(
+        event: MouseEvent,
+        vibrant: boolean = false,
+        xPosition: 'start' | 'end' | 'before' | 'after' = 'start',
+        yPosition: 'above' | 'below' = 'below',
+    ) {
         const ref = this.menuService.open(SmapleMenu, {
+            origin: event,
+            xPosition,
+            yPosition,
             menuColors: vibrant ? 'vibrant' : 'standard',
         });
 
         ref.afterClosed().subscribe((result) => {
-            console.log("Dialog closed, results:: ", result);
+            console.log('Menu closed, results:: ', result);
         });
     }
 }

@@ -11,6 +11,18 @@
         pointer-events: auto;
     }
 
+    .cdk-overlay-connected-position-bounding-box {
+        pointer-events: none;
+    }
+
+    .md3-menu-panel {
+        pointer-events: auto;
+
+        &.md3-menu-closing {
+            pointer-events: none;
+        }
+    }
+
     .cdk-global-overlay-wrapper {
         position: absolute;
         display: flex;
@@ -64,7 +76,6 @@
     transition: all var(--md-motion-expressive-default-spatial-duration) var(--md-motion-expressive-default-spatial-easing);
     opacity: 0;
     transform: scaleY(0.8);
-    transform-origin: top;
     
     &.md3-active {
         opacity: 1;

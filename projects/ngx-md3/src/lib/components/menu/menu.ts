@@ -1,5 +1,5 @@
 import { CdkPortalOutlet, ComponentPortal } from '@angular/cdk/portal';
-import { AfterContentInit, Component, ComponentRef, effect, ElementRef, inject, Injector, Input, signal, Type, ViewChild } from '@angular/core';
+import { AfterContentInit, Component, ComponentRef, effect, ElementRef, inject, Injector, signal, Type, ViewChild } from '@angular/core';
 import { MenuConfig } from '../../interfaces/menu-config.interface';
 import { MENU_CONFIG } from './menu-ref';
 
@@ -37,18 +37,18 @@ export class Menu implements AfterContentInit {
         });
 
         effect(() => {
-            if (this.isActive()) {
-                this.element.classList.remove('md3-inactive');
-            } else {
-                this.element.classList.add('md3-inactive');
-            }
-        });
-
-        effect(() => {
             if (this.isVisible()) {
                 this.element.classList.add('md3-active');
             } else {
                 this.element.classList.remove('md3-active');
+            }
+        });
+
+        effect(() => {
+            if (this.isActive()) {
+                this.element.classList.remove('md3-inactive');
+            } else {
+                this.element.classList.add('md3-inactive');
             }
         });
 

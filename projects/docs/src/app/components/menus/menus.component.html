@@ -1,4 +1,7 @@
 <h1>Menus</h1>
 
-<button type="button" md3-button (click)="sampleMenu()">Open menu (standard)</button>
-<button type="button" md3-button (click)="sampleMenu(true)">Open menu (vibrant)</button>
+<button type="button" md3-button (click)="sampleMenu($event)">Open menu (standard)</button>
+<button type="button" md3-button (click)="sampleMenu($event, true)">Open menu (vibrant)</button>
+<button type="button" md3-button (click)="sampleMenu($event, false, 'end')">Open aligned end</button>
+<button type="button" md3-button (click)="sampleMenu($event, false, 'after')">Open after trigger</button>
+<button type="button" md3-button (click)="sampleMenu($event, false, 'start', 'above')">Open above</button>

@@ -1,7 +1,13 @@
-import { Overlay, OverlayConfig, OverlayRef } from '@angular/cdk/overlay';
+import {
+    ConnectedPosition,
+    FlexibleConnectedPositionStrategyOrigin,
+    Overlay,
+    OverlayConfig,
+    OverlayRef,
+} from '@angular/cdk/overlay';
 import { DOCUMENT } from '@angular/common';
-import { ComponentRef, inject, Injectable, Injector, Type, ViewContainerRef } from '@angular/core';
-import { MenuConfig } from '../../interfaces/menu-config.interface';
+import { ComponentRef, ElementRef, inject, Injectable, Injector, Type, ViewContainerRef } from '@angular/core';
+import { MenuConfig, MenuPositionOrigin, MenuPositionX, MenuPositionY, MenuScrollStrategy } from '../../interfaces/menu-config.interface';
 import { MENU_COMPONENT, MENU_CONFIG, MENU_DATA, MenuRef } from './menu-ref';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { Menu } from './menu';
@@ -11,6 +17,14 @@ interface ResolvedMenuConfig<D = unknown> extends MenuConfig<D> {
     data: D | undefined;
     bindDataToInputs: boolean;
     menuColors: 'standard' | 'vibrant';
+    xPosition: MenuPositionX;
+    yPosition: MenuPositionY;
+    overlapTrigger: boolean;
+    offsetX: number;
+    offsetY: number;
+    viewportMargin: number;
+    positions?: ConnectedPosition[];
+    scrollStrategy: MenuScrollStrategy;
     viewContainerRef?: ViewContainerRef;
     injector: Injector;
 }
@@ -29,7 +43,7 @@ export class MenuService {
     ): MenuRef<T, R> {
         const menuConfig = this.mergeConfig(config);
         const previouslyFocusedElement = this.getFocusedElement();
-        const overlayRef = this.createOverlay();
+        const overlayRef = this.createOverlay(menuConfig, previouslyFocusedElement);
         const menuRef = new MenuRef<T, R>(
             overlayRef,
             previouslyFocusedElement
@@ -60,24 +74,241 @@ export class MenuService {
             data: config.data,
             bindDataToInputs: config.bindDataToInputs ?? false,
             menuColors: config.menuColors ?? 'standard',
+            xPosition: config.xPosition ?? 'start',
+            yPosition: config.yPosition ?? 'below',
+            overlapTrigger: config.overlapTrigger ?? false,
+            offsetX: config.offsetX ?? 0,
+            offsetY: config.offsetY ?? 4,
+            viewportMargin: config.viewportMargin ?? 8,
+            positions: config.positions,
+            scrollStrategy: config.scrollStrategy ?? 'reposition',
             viewContainerRef: config.viewContainerRef,
             injector: config.injector ?? this.injector,
         };
     }
 
-    private createOverlay(): OverlayRef {
+    private createOverlay(
+        config: ResolvedMenuConfig,
+        fallbackOrigin: HTMLElement | null,
+    ): OverlayRef {
+        const positionStrategy = this.overlay.position()
+            .flexibleConnectedTo(this.resolveOrigin(config.origin, fallbackOrigin))
+            .withFlexibleDimensions(false)
+            .withGrowAfterOpen(true)
+            .withPush(true)
+            .withViewportMargin(config.viewportMargin)
+            .withPositions(config.positions ?? this.getConnectedPositions(config))
+            .withTransformOriginOn('.md3-menu-container');
+
         const overlayConfig = new OverlayConfig({
             hasBackdrop: true,
             backdropClass: ['md3-menu-scrim', 'md3-menu-opening'],
             panelClass: ['md3-menu-panel', 'md3-menu-opening'],
-            positionStrategy: this.overlay.position()
-                .global()
-                .centerHorizontally()
-                .centerVertically(),
-            scrollStrategy: this.overlay.scrollStrategies.block(),
+            positionStrategy,
+            scrollStrategy: this.getScrollStrategy(config.scrollStrategy),
         });
 
         return this.overlay.create(overlayConfig);
+    }
+
+    private resolveOrigin(
+        origin: MenuPositionOrigin | undefined,
+        fallbackOrigin: HTMLElement | null,
+    ): FlexibleConnectedPositionStrategyOrigin {
+        const resolvedOrigin = origin ?? fallbackOrigin;
+
+        if (resolvedOrigin) {
+            if (this.isMouseEvent(resolvedOrigin)) {
+                if (resolvedOrigin.currentTarget instanceof HTMLElement) {
+                    return resolvedOrigin.currentTarget;
+                }
+
+                return {
+                    x: resolvedOrigin.clientX,
+                    y: resolvedOrigin.clientY,
+                };
+            }
+
+            if (this.isElementRef(resolvedOrigin)) {
+                return resolvedOrigin.nativeElement;
+            }
+
+            return resolvedOrigin;
+        }
+
+        const viewport = this.document.defaultView;
+
+        return {
+            x: (viewport?.innerWidth ?? 0) / 2,
+            y: (viewport?.innerHeight ?? 0) / 2,
+        };
+    }
+
+    private getConnectedPositions(config: ResolvedMenuConfig): ConnectedPosition[] {
+        const preferredX = config.xPosition;
+        const fallbackX = this.getFallbackXPosition(preferredX);
+        const preferredY = config.yPosition;
+        const fallbackY = this.getFallbackYPosition(preferredY);
+
+        return [
+            this.createConnectedPosition(preferredX, preferredY, config),
+            this.createConnectedPosition(preferredX, fallbackY, config),
+            this.createConnectedPosition(fallbackX, preferredY, config),
+            this.createConnectedPosition(fallbackX, fallbackY, config),
+        ];
+    }
+
+    private createConnectedPosition(
+        xPosition: MenuPositionX,
+        yPosition: MenuPositionY,
+        config: ResolvedMenuConfig,
+    ): ConnectedPosition {
+        const horizontal = this.getHorizontalPosition(xPosition);
+        const vertical = this.getVerticalPosition(yPosition, config.overlapTrigger);
+
+        return {
+            ...horizontal,
+            ...vertical,
+            offsetX: config.offsetX,
+            offsetY: this.getOffsetY(yPosition, config),
+            panelClass: [
+                'md3-menu-position-' + xPosition,
+                'md3-menu-position-' + yPosition,
+            ],
+        };
+    }
+
+    private getHorizontalPosition(position: MenuPositionX): Pick<ConnectedPosition, 'originX' | 'overlayX'> {
+        switch (position) {
+            case 'end':
+                return {
+                    originX: 'end',
+                    overlayX: 'end',
+                };
+
+            case 'before':
+                return {
+                    originX: 'start',
+                    overlayX: 'end',
+                };
+
+            case 'after':
+                return {
+                    originX: 'end',
+                    overlayX: 'start',
+                };
+
+            case 'center':
+                return {
+                    originX: 'center',
+                    overlayX: 'center',
+                };
+
+            case 'start':
+            default:
+                return {
+                    originX: 'start',
+                    overlayX: 'start',
+                };
+        }
+    }
+
+    private getVerticalPosition(
+        position: MenuPositionY,
+        overlapTrigger: boolean,
+    ): Pick<ConnectedPosition, 'originY' | 'overlayY'> {
+        switch (position) {
+            case 'above':
+                return {
+                    originY: 'top',
+                    overlayY: overlapTrigger ? 'top' : 'bottom',
+                };
+
+            case 'center':
+                return {
+                    originY: 'center',
+                    overlayY: 'center',
+                };
+
+            case 'below':
+            default:
+                return {
+                    originY: 'bottom',
+                    overlayY: overlapTrigger ? 'bottom' : 'top',
+                };
+        }
+    }
+
+    private getFallbackXPosition(position: MenuPositionX): MenuPositionX {
+        switch (position) {
+            case 'start':
+                return 'end';
+
+            case 'end':
+                return 'start';
+
+            case 'before':
+                return 'after';
+
+            case 'after':
+                return 'before';
+
+            case 'center':
+            default:
+                return 'center';
+        }
+    }
+
+    private getFallbackYPosition(position: MenuPositionY): MenuPositionY {
+        switch (position) {
+            case 'above':
+                return 'below';
+
+            case 'below':
+                return 'above';
+
+            case 'center':
+            default:
+                return 'center';
+        }
+    }
+
+    private getOffsetY(position: MenuPositionY, config: ResolvedMenuConfig): number {
+        if (config.overlapTrigger || position === 'center') {
+            return 0;
+        }
+
+        return position === 'above'
+            ? config.offsetY * -1
+            : config.offsetY;
+    }
+
+    private getScrollStrategy(scrollStrategy: MenuScrollStrategy) {
+        switch (scrollStrategy) {
+            case 'block':
+                return this.overlay.scrollStrategies.block();
+
+            case 'close':
+                return this.overlay.scrollStrategies.close();
+
+            case 'noop':
+                return this.overlay.scrollStrategies.noop();
+
+            case 'reposition':
+            default:
+                return this.overlay.scrollStrategies.reposition();
+        }
+    }
+
+    private isMouseEvent(origin: MenuPositionOrigin | HTMLElement): origin is MouseEvent {
+        return typeof MouseEvent !== 'undefined' && origin instanceof MouseEvent;
+    }
+
+    private isElementRef(origin: Exclude<MenuPositionOrigin, MouseEvent>): origin is ElementRef<HTMLElement> {
+        return typeof origin === 'object'
+            && origin !== null
+            && 'nativeElement' in origin
+            && origin.nativeElement instanceof HTMLElement;
     }
 
     private startOpenAnimation(overlayRef: OverlayRef): void {
@@ -91,6 +322,7 @@ export class MenuService {
             setTimeout(() => {
                 panel.getBoundingClientRect();
                 panel.classList.remove('md3-menu-opening');
+                backdrop?.classList.remove('md3-menu-opening');
             }, 100);
         });
     }
