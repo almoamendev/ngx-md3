@@ -1,21 +1,20 @@
-<div class="md3-menu-item-leading">
-    <ng-content select="[md3-icon-element=leading]"></ng-content>
-</div>
+@if (selected !== null) {
+    <input type="checkbox" md3-input-element [checked]="selected">
+}
 
-<div class="md3-menu-item-content">
-    <div class="md3-menu-item-label">
-        <ng-content></ng-content>
+<div class="md3-menu-item-container" md3-state-component>
+    <div class="md3-menu-item-leading" [class.has-icon]="!!leading">
+        <ng-content select="[md3-icon-element=leading]"></ng-content>
     </div>
 
-    @if (supportingText) {
-        <div class="md3-menu-item-supporting-text">{{ supportingText }}</div>
-    }
-</div>
+    <div class="md3-menu-item-content">
+        <ng-content select="[md3-type-label=large]"></ng-content>
+        <ng-content select="[md3-type-body=small]"></ng-content>
+    </div>
 
-<div class="md3-menu-item-trailing">
-    @if (trailingText) {
-        <div class="md3-menu-item-trailing-text">{{ trailingText }}</div>
-    }
-
-    <ng-content select="[md3-icon-element=trailing], [md3-menu-trailing]"></ng-content>
+    <div class="md3-menu-item-trailing">
+        <ng-content select="md3-badge"></ng-content>
+        <ng-content select="[md3-type-title=small]"></ng-content>
+        <ng-content select="[md3-icon-element=trailing]"></ng-content>
+    </div>
 </div>

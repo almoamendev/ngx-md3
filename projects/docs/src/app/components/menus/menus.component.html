@@ -13,17 +13,40 @@
 
         <md3-menu aria-label="File actions">
             <md3-menu-group>
-                <button md3-menu-item>
+                <button md3-menu-item [selected]="false">
                     <md3-icon md3-icon-element="leading">edit</md3-icon>
-                    Rename
+                    <div md3-type-label="large">Rename</div>
+                    <md3-badge>New</md3-badge>
+                    <md3-icon md3-icon-element="trailing">arrow_right</md3-icon>
                 </button>
-                <button md3-menu-item trailing-text="Ctrl+C">
+                <button md3-menu-item>
                     <md3-icon md3-icon-element="leading">content_copy</md3-icon>
-                    Copy
+                    <div md3-type-label="large">Copy</div>
+                    <div md3-type-title="small">Ctrl+C</div>
                 </button>
                 <button md3-menu-item disabled>
                     <md3-icon md3-icon-element="leading">delete</md3-icon>
-                    Delete
+                    <div md3-type-label="large">Delete</div>
+                </button>
+            </md3-menu-group>
+        </md3-menu>
+
+        <md3-menu aria-label="File actions" menu-color="vibrant">
+            <md3-menu-group>
+                <button md3-menu-item [selected]="false">
+                    <md3-icon md3-icon-element="leading">edit</md3-icon>
+                    <div md3-type-label="large">Rename</div>
+                    <md3-badge>New</md3-badge>
+                    <md3-icon md3-icon-element="trailing">arrow_right</md3-icon>
+                </button>
+                <button md3-menu-item>
+                    <md3-icon md3-icon-element="leading">content_copy</md3-icon>
+                    <div md3-type-label="large">Copy</div>
+                    <div md3-type-title="small">Ctrl+C</div>
+                </button>
+                <button md3-menu-item disabled>
+                    <md3-icon md3-icon-element="leading">delete</md3-icon>
+                    <div md3-type-label="large">Delete</div>
                 </button>
             </md3-menu-group>
         </md3-menu>
@@ -32,18 +55,42 @@
     <section>
         <h2>Grouped menu</h2>
 
-        <md3-menu aria-label="Editor menu" menu-width="wide">
+        <md3-menu aria-label="Editor menu">
             <md3-menu-group group-label="Edit">
-                <button md3-menu-item trailing-text="Ctrl+Z">Undo</button>
-                <button md3-menu-item trailing-text="Ctrl+Y">Redo</button>
+                <button md3-menu-item>
+                    <div md3-type-label="large">Undo</div>
+                </button>
+                <button md3-menu-item>
+                    <div md3-type-label="large">Redo</div>
+                </button>
             </md3-menu-group>
 
             <md3-menu-group group-label="View">
-                <button md3-menu-item selected item-role="menuitemcheckbox">
-                    Show ruler
+                <button md3-menu-item>
+                    <div md3-type-label="large">Show ruler</div>
                 </button>
-                <button md3-menu-item item-role="menuitemcheckbox">
-                    Show minimap
+                <button md3-menu-item>
+                    <div md3-type-label="large">Show minimap</div>
+                </button>
+            </md3-menu-group>
+        </md3-menu>
+
+        <md3-menu aria-label="Editor menu" menu-color="vibrant">
+            <md3-menu-group group-label="Edit">
+                <button md3-menu-item>
+                    <div md3-type-label="large">Undo</div>
+                </button>
+                <button md3-menu-item>
+                    <div md3-type-label="large">Redo</div>
+                </button>
+            </md3-menu-group>
+
+            <md3-menu-group group-label="View">
+                <button md3-menu-item>
+                    <div md3-type-label="large">Show ruler</div>
+                </button>
+                <button md3-menu-item>
+                    <div md3-type-label="large">Show minimap</div>
                 </button>
             </md3-menu-group>
         </md3-menu>
@@ -54,14 +101,34 @@
 
         <md3-menu aria-label="Account menu">
             <md3-menu-group>
-                <button md3-menu-item supporting-text="Use your personal workspace">
-                    Personal
+                <button md3-menu-item>
+                    <div md3-type-label="large">Personal</div>
+                    <div md3-type-body="small">Use your personal workspace</div>
                 </button>
-                <button md3-menu-item selected supporting-text="Shared by your team">
-                    Team
+                <button md3-menu-item [selected]="true">
+                    <div md3-type-label="large">Team</div>
+                    <div md3-type-body="small">Shared by your team</div>
                 </button>
-                <button md3-menu-item supporting-text="Manage billing and access">
-                    Settings
+                <button md3-menu-item>
+                    <div md3-type-label="large">Settings</div>
+                    <div md3-type-body="small">Manage billing and access</div>
+                </button>
+            </md3-menu-group>
+        </md3-menu>
+
+        <md3-menu aria-label="Account menu" menu-color="vibrant">
+            <md3-menu-group>
+                <button md3-menu-item>
+                    <div md3-type-label="large">Personal</div>
+                    <div md3-type-body="small">Use your personal workspace</div>
+                </button>
+                <button md3-menu-item [selected]="true">
+                    <div md3-type-label="large">Team</div>
+                    <div md3-type-body="small">Shared by your team</div>
+                </button>
+                <button md3-menu-item>
+                    <div md3-type-label="large">Settings</div>
+                    <div md3-type-body="small">Manage billing and access</div>
                 </button>
             </md3-menu-group>
         </md3-menu>

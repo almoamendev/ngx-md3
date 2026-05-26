@@ -19,7 +19,7 @@
     }
 
     ::ng-deep [md3-menu-item] {
-        &:first-child {
+        &:first-child .md3-menu-item-container {
             border-start-start-radius: 0.75em;
             border-start-end-radius: 0.75em;
 
@@ -29,7 +29,7 @@
             }
         }
 
-        &:last-child {
+        &:last-child .md3-menu-item-container {
             border-end-start-radius: 0.75em;
             border-end-end-radius: 0.75em;
 

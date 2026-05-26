@@ -24,6 +24,7 @@ export * from './components/common/state-component';
 export * from './components/common/icon-element';
 export * from './components/common/material-icon/material-icon';
 export * from './components/common/divider';
+export * from './components/common/badge';
 
 // buttons
 export * from './components/buttons/button/button';

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IconElement, MaterialIcon, Menu, MenuGroup, MenuItem } from '@vip9008/ngx-md3';
+import { Badge, IconElement, MaterialIcon, Menu, MenuGroup, MenuItem, TypeBody, TypeLabel, TypeTitle } from '@vip9008/ngx-md3';
 
 @Component({
     selector: 'app-menus',
@@ -9,6 +9,10 @@ import { IconElement, MaterialIcon, Menu, MenuGroup, MenuItem } from '@vip9008/n
         Menu,
         MenuGroup,
         MenuItem,
+        TypeLabel,
+        TypeBody,
+        TypeTitle,
+        Badge,
     ],
     templateUrl: './menus.component.html',
     styleUrl: './menus.component.scss',

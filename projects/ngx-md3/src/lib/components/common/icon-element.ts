@@ -11,7 +11,7 @@ export class IconElement {
 
     constructor(private el: ElementRef) { }
 
-    public get nativeElement(): HTMLElement {
-        return this.el.nativeElement;
+    public get element(): HTMLElement {
+        return this.el.nativeElement as HTMLElement;
     }
 }

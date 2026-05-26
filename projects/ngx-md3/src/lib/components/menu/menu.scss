@@ -11,11 +11,16 @@
     
     --menu-item-label-color: rgb(var(--md-scheme-on-surface));
     --menu-item-supporting-color: rgb(var(--md-scheme-on-surface-variant));
+    --menu-item-selected-background: rgb(var(--md-scheme-tertiary-container));
+    --menu-item-selected-foreground: rgb(var(--md-scheme-on-tertiary-container));
     --menu-item-state-color: var(--md-scheme-on-surface);
     --menu-item-border-radius: 0.25em;
     --menu-item-outline-color: rgb(var(--md-scheme-secondary));
     --menu-item-outline-width: 0.1875em;
     --menu-item-outline-offset: -0.1875em;
+
+    --menu-item-badge-background: rgb(var(--md-scheme-primary-container));
+    --menu-item-badge-foreground: rgb(var(--md-scheme-on-primary-container));
 
     position: relative;
     display: block;
@@ -24,6 +29,22 @@
     max-width: min(var(--menu-max-width), calc(100vw - 2rem));
     max-height: min(32rem, calc(100vh - 2rem));
     outline: none;
+
+    &.md3-vibrant {
+        --background-color: rgb(var(--md-scheme-tertiary-container));
+        --foreground-color: rgb(var(--md-scheme-on-tertiary-container));
+
+        --menu-group-label-color: rgb(var(--md-scheme-on-tertiary-container));
+        
+        --menu-item-label-color: rgb(var(--md-scheme-on-tertiary-container));
+        --menu-item-supporting-color: rgb(var(--md-scheme-on-tertiary-container));
+        --menu-item-selected-background: rgb(var(--md-scheme-tertiary));
+        --menu-item-selected-foreground: rgb(var(--md-scheme-on-tertiary));
+        --menu-item-state-color: var(--md-scheme-on-tertiary-container);
+
+        --menu-item-badge-background: rgb(var(--md-scheme-secondary));
+        --menu-item-badge-foreground: rgb(var(--md-scheme-on-secondary));
+    }
 
     &.md3-inactive {
         --border-radius: 0.5em;

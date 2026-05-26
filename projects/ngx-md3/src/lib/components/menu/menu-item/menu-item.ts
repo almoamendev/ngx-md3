@@ -1,46 +1,59 @@
-import { booleanAttribute, Component, ElementRef, HostListener, Input } from '@angular/core';
+import { booleanAttribute, Component, contentChildren, ElementRef, Input, signal } from '@angular/core';
 import { StateComponent } from '../../common/state-component';
+import { IconElement } from '../../common/icon-element';
+import { InputElement } from '../../common/input-element';
 
 @Component({
     selector: 'button[md3-menu-item], a[md3-menu-item]',
-    imports: [],
-    templateUrl: './menu-item.html',
-    styleUrl: './menu-item.scss',
-    hostDirectives: [
+    imports: [
+        InputElement,
         StateComponent,
     ],
+    templateUrl: './menu-item.html',
+    styleUrl: './menu-item.scss',
+    host: {
+        '(click)': 'onHostClick()',
+    },
 })
 export class MenuItem {
-    @Input({ transform: booleanAttribute }) selected = false;
-    @Input({ transform: booleanAttribute }) disabled = false;
-    @Input('item-role') itemRole: 'menuitem' | 'menuitemcheckbox' | 'menuitemradio' | 'option' = 'menuitem';
-    @Input('supporting-text') supportingText?: string;
-    @Input('trailing-text') trailingText?: string;
+    @Input('selected') set selected(value: boolean | null) {
+        this.isSelected.update((current) => {
+            if (value == current) {
+                return current;
+            }
+
+            return value;
+        });
+    };
+
+    public get selected(): boolean | null {
+        return this.isSelected();
+    }
+
+    private isSelected = signal<boolean | null>(null);
+    private iconElements = contentChildren(IconElement);
+    
+    public get leading(): IconElement | undefined {
+        return this.iconElements().find((icon) => icon.iconType === 'leading');
+    }
+
+    public get trailing(): IconElement | undefined {
+        return this.iconElements().find((icon) => icon.iconType === 'trailing');
+    }
+
+    public onHostClick(): void {
+        const selected = this.isSelected();
+        if (selected === null) {
+            return;
+        }
+
+        this.isSelected.set(!selected);
+    }
 
     constructor(private el: ElementRef<HTMLElement>) {
     }
 
     public get element(): HTMLElement {
         return this.el.nativeElement;
-    }
-
-    public get isButton(): boolean {
-        return this.element instanceof HTMLButtonElement;
-    }
-
-    public get isNativeInteractiveElement(): boolean {
-        return this.element instanceof HTMLButtonElement || this.element instanceof HTMLAnchorElement;
-    }
-
-    public get isCheckableRole(): boolean {
-        return this.itemRole === 'menuitemcheckbox' || this.itemRole === 'menuitemradio';
-    }
-
-    public get tabIndex(): string | null {
-        if (this.disabled) {
-            return '-1';
-        }
-
-        return this.isNativeInteractiveElement ? null : '0';
     }
 }

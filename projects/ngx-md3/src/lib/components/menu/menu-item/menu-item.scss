@@ -6,15 +6,11 @@
     --outline-offset: var(--menu-item-outline-offset);
 
     position: relative;
-    display: flex;
-    align-items: center;
-    gap: 0.75em;
-    min-height: 3em;
-    padding: 0 0.75em;
+    display: block;
+    padding: 0;
     border: 0;
-    border-radius: var(--border-radius);
     background: transparent;
-    color: rgb(var(--md-scheme-on-surface));
+    color: var(--menu-item-label-color);
     font: inherit;
     text-align: start;
     text-decoration: none;
@@ -22,87 +18,135 @@
     outline: none;
     appearance: none;
     user-select: none;
-    transition: background-color var(--md-motion-standard-fast-spatial-duration) var(--md-motion-standard-fast-spatial-easing),
-        color var(--md-motion-standard-fast-spatial-duration) var(--md-motion-standard-fast-spatial-easing);
-}
+    z-index: 0;
 
-.md3-menu-item-leading,
-.md3-menu-item-trailing,
-.md3-menu-item-content {
-    position: relative;
-    z-index: 1;
-}
+    &:focus {
+        z-index: 1;
 
-.md3-menu-item-leading,
-.md3-menu-item-trailing {
-    display: inline-flex;
-    flex: 0 0 auto;
-    align-items: center;
-    justify-content: center;
-    min-width: 1.5em;
-    min-height: 1.5em;
-    color: rgb(var(--md-scheme-on-surface-variant));
-
-    &:empty {
-        display: none;
+        .md3-menu-item-container:after {
+            opacity: 1;
+        }
     }
-}
 
-.md3-menu-item-leading {
-    order: 1;
-}
+    &:active {
+        z-index: 2;
+        
+        .md3-menu-item-container:after {
+            opacity: 0;
+        }
+    }
+    
+    .md3-menu-item-container {
+        display: flex;
+        align-items: center;
+        min-height: 3em;
+        padding: 0 0.75em;
+        border-radius: var(--border-radius);
+        transition: background-color var(--md-motion-standard-fast-spatial-duration) var(--md-motion-standard-fast-spatial-easing),
+        color var(--md-motion-standard-fast-spatial-duration) var(--md-motion-standard-fast-spatial-easing);
 
-.md3-menu-item-content {
-    order: 2;
-    display: flex;
-    flex: 1 1 auto;
-    flex-direction: column;
-    justify-content: center;
-    min-width: 0;
-}
+        .md3-menu-item-leading {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: inherit;
+            opacity: 0;
+            transform: scale(1.2);
+            height: 1.25em;
+            width: 0;
+            color: var(--menu-item-supporting-color);
+            transition: all var(--md-motion-standard-fast-spatial-duration) var(--md-motion-standard-fast-spatial-easing);
+    
+            ::ng-deep [md3-icon-element] {
+                font-size: 1.25em !important;
+                height: 1em !important;
+                width: 1em !important;
+                line-height: 1em !important;
+            }
 
-.md3-menu-item-trailing {
-    order: 3;
-    margin-inline-start: auto;
-}
+            &.has-icon {
+                margin-inline-end: 0.5em;
+                opacity: 1;
+                transform: scale(1);
+                height: 1.25em;
+                width: 1.25em;
+            }
+        }
 
-.md3-menu-item-label {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    font-size: 0.875em;
-    font-weight: 500;
-    line-height: 1.25em;
-    letter-spacing: 0.00625em;
-}
+        .md3-menu-item-trailing {
+            flex: 0 1 content;
+            display: inline-flex;
+            gap: 0.5em;
+            align-items: center;
+            justify-content: center;
+            font-size: inherit;
+            margin-inline-start: 0.5em;
+            color: var(--menu-item-supporting-color);
 
-.md3-menu-item-supporting-text {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    color: rgb(var(--md-scheme-on-surface-variant));
-    font-size: 0.75em;
-    font-weight: 400;
-    line-height: 1em;
-    letter-spacing: 0.025em;
-}
+            &:empty {
+                margin: 0;
+            }
 
-.md3-menu-item-trailing-text {
-    color: rgb(var(--md-scheme-on-surface-variant));
-    font-size: 0.75em;
-    font-weight: 500;
-    line-height: 1em;
-    letter-spacing: 0.03125em;
-}
+            ::ng-deep md3-badge {
+                background-color: var(--menu-item-badge-background);
+                color: var(--menu-item-badge-foreground);
+            }
 
-:host ::ng-deep [md3-icon-element],
-:host ::ng-deep [md3-menu-leading],
-:host ::ng-deep [md3-menu-trailing] {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 1.5em !important;
-    height: 1.5em !important;
-    font-size: 1.5em !important;
-    line-height: 1;
+            ::ng-deep [md3-type-title=small] {
+                margin: 0;
+                padding: 0;
+                white-space: nowrap;
+                letter-spacing: 0.007143em;
+            }
+    
+            ::ng-deep [md3-icon-element] {
+                font-size: 1.25em !important;
+                height: 1em !important;
+                width: 1em !important;
+                line-height: 1em !important;
+            }
+        }
+
+        .md3-menu-item-content {
+            flex: 1 1 auto;
+
+            ::ng-deep [md3-type-label=large] {
+                display: block;
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                letter-spacing: 0.007143em;
+                color: var(--menu-item-label-color);
+            }
+
+            ::ng-deep [md3-type-body=small] {
+                display: block;
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                letter-spacing: 0.0333334em;
+                color: var(--menu-item-supporting-color);
+            }
+        }
+    }
+
+    [md3-input-element] {
+        position: absolute;
+        height: 0;
+        width: 0;
+        opacity: 0;
+        pointer-events: none;
+
+        &:checked + .md3-menu-item-container {
+            --menu-item-label-color: var(--menu-item-selected-foreground);
+            --menu-item-supporting-color: var(--menu-item-selected-foreground);
+            --border-radius: 0.75em;
+            
+            background-color: var(--menu-item-selected-background);
+        }
+    }
 }
