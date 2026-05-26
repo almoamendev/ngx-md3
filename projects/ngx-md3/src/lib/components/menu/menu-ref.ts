@@ -1,0 +1,83 @@
+import { OverlayRef } from '@angular/cdk/overlay';
+import { InjectionToken, Type } from '@angular/core';
+import { Observable, Subject } from 'rxjs';
+import { MenuConfig } from '../../interfaces/menu-config.interface';
+import { Menu } from './menu';
+
+export const MENU_DATA = new InjectionToken<unknown>('MD3_MENU_DATA');
+export const MENU_CONFIG = new InjectionToken<MenuConfig>('MD3_MENU_CONFIG');
+export const MENU_COMPONENT = new InjectionToken<Type<unknown>>('MD3_MENU_COMPONENT');
+
+const MENU_EXIT_ANIMATION_FALLBACK_MS = 300;
+
+export class MenuRef<T = unknown, R = unknown> {
+    private readonly closed = new Subject<R | undefined>();
+    private isClosed = false;
+
+    public menuInstance?: Menu;
+    /**
+     * Filled by MenuService after the user component is attached. Keeping the
+     * instance here lets callers imperatively update inputs when that is useful.
+     */
+    public componentInstance?: T;
+
+    constructor(
+        private readonly overlayRef: OverlayRef,
+        private readonly previouslyFocusedElement: HTMLElement | null
+    ) {
+    }
+
+    public close(result?: R): void {
+        if (this.isClosed) {
+            return;
+        }
+
+        this.isClosed = true;
+        this.startCloseAnimation().then(() => {
+            // Disposing the overlay removes the wrapper, the backdrop, and the
+            // dynamically attached content component in one operation.
+            this.overlayRef.dispose();
+
+            this.previouslyFocusedElement?.focus();
+
+            this.closed.next(result);
+            this.closed.complete();
+        });
+    }
+
+    private startCloseAnimation(): Promise<void> {
+        let panel = this.overlayRef.overlayElement;
+        let animatedElement = panel.querySelector<HTMLElement>('.md3-menu-container') ?? panel;
+
+        panel.classList.add('md3-menu-closing');
+        this.menuInstance?.showMenu(false);
+
+        return new Promise((resolve) => {
+            let isResolved = false;
+            let timeoutId = setTimeout(done, MENU_EXIT_ANIMATION_FALLBACK_MS);
+
+            function done(): void {
+                if (isResolved) {
+                    return;
+                }
+
+                isResolved = true;
+                clearTimeout(timeoutId);
+                animatedElement.removeEventListener('transitionend', onTransitionEnd);
+                resolve();
+            }
+
+            function onTransitionEnd(event: TransitionEvent): void {
+                if (event.target === animatedElement) {
+                    done();
+                }
+            }
+
+            animatedElement.addEventListener('transitionend', onTransitionEnd);
+        });
+    }
+
+    public afterClosed(): Observable<R | undefined> {
+        return this.closed.asObservable();
+    }
+}

@@ -149,4 +149,22 @@
             background-color: var(--menu-item-selected-background);
         }
     }
+
+    &:disabled {
+        cursor:  default;
+
+        .md3-menu-item-container {
+            --menu-item-label-color: var(--menu-item-label-color);
+            --menu-item-supporting-color: var(--menu-item-label-color);
+            --menu-item-selected-background: transparent;
+            --menu-item-selected-foreground: var(--menu-item-label-color);
+
+            pointer-events: none;
+            opacity: 0.38;
+            
+            &.md3-state-layer, &:after {
+                display: none;
+            }
+        }
+    }
 }

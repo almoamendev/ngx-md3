@@ -1,0 +1,39 @@
+<md3-menu-group>
+    <button md3-menu-item>
+        <md3-icon md3-icon-element="leading">edit</md3-icon>
+        <div md3-type-label="large">Rename</div>
+        <md3-badge>New</md3-badge>
+        <md3-icon md3-icon-element="trailing">arrow_right</md3-icon>
+    </button>
+    <button md3-menu-item>
+        <md3-icon md3-icon-element="leading">content_copy</md3-icon>
+        <div md3-type-label="large">Copy</div>
+        <div md3-type-title="small">⌘+C</div>
+    </button>
+    <button md3-menu-item disabled>
+        <md3-icon md3-icon-element="leading">delete</md3-icon>
+        <div md3-type-label="large">Delete (disabled)</div>
+    </button>
+</md3-menu-group>
+<md3-menu-group group-label="View">
+    <button md3-menu-item [selected]="true">
+        <div md3-type-label="large">Show ruler</div>
+    </button>
+    <button md3-menu-item [selected]="false">
+        <div md3-type-label="large">Show minimap</div>
+    </button>
+</md3-menu-group>
+<md3-menu-group>
+    <button md3-menu-item>
+        <div md3-type-label="large">Personal</div>
+        <div md3-type-body="small">Use your personal workspace</div>
+    </button>
+    <button md3-menu-item>
+        <div md3-type-label="large">Team</div>
+        <div md3-type-body="small">Shared by your team</div>
+    </button>
+    <button md3-menu-item>
+        <div md3-type-label="large">Settings</div>
+        <div md3-type-body="small">Manage billing and access</div>
+    </button>
+</md3-menu-group>

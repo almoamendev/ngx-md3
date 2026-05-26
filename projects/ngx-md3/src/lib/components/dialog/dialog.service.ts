@@ -33,7 +33,7 @@ export class DialogService {
     ): DialogRef<T, R> {
         const dialogConfig = this.mergeConfig(config);
         const previouslyFocusedElement = this.getFocusedElement();
-        const overlayRef = this.createOverlay(dialogConfig);
+        const overlayRef = this.createOverlay();
         const dialogRef = new DialogRef<T, R>(
             overlayRef,
             previouslyFocusedElement
@@ -55,7 +55,7 @@ export class DialogService {
         dialogRef.dialogInstance = dialogComponentRef.instance;
         this.startOpenAnimation(overlayRef);
         this.connectCloseEvents(overlayRef, dialogRef, dialogConfig);
-        this.focusDialog(overlayRef, dialogConfig);
+        this.focusDialog(overlayRef);
 
         return dialogRef;
     }
@@ -74,7 +74,7 @@ export class DialogService {
         };
     }
 
-    private createOverlay(config: ResolvedDialogConfig): OverlayRef {
+    private createOverlay(): OverlayRef {
         const overlayConfig = new OverlayConfig({
             hasBackdrop: true,
             backdropClass: ['md3-dialog-scrim', 'md3-dialog-opening'],
@@ -154,7 +154,7 @@ export class DialogService {
         ).subscribe(() => dialogRef.close());
     }
 
-    private focusDialog(overlayRef: OverlayRef, config: ResolvedDialogConfig): void {
+    private focusDialog(overlayRef: OverlayRef): void {
         queueMicrotask(() => {
             const surface = overlayRef.overlayElement.querySelector<HTMLElement>('.md3-dialog-container');
             const focusTarget = surface?.querySelector<HTMLElement>([

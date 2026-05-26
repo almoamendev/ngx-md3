@@ -11,6 +11,7 @@ export * from './types/chip-type.type';
 
 // interfaces
 export * from './interfaces/dialog-config.interface';
+export * from './interfaces/menu-config.interface';
 
 // typography
 export * from './typography/type-display';
@@ -80,5 +81,6 @@ export * from './components/dialog/dialog-actions/dialog-actions';
 
 // menus
 export * from './components/menu/menu';
+export * from './components/menu/menu.service';
 export * from './components/menu/menu-group/menu-group';
 export * from './components/menu/menu-item/menu-item';

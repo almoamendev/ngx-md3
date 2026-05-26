@@ -1,4 +1,7 @@
-import { booleanAttribute, Component, effect, ElementRef, input, Input, signal } from '@angular/core';
+import { CdkPortalOutlet, ComponentPortal } from '@angular/cdk/portal';
+import { AfterContentInit, Component, ComponentRef, effect, ElementRef, inject, Injector, Input, signal, Type, ViewChild } from '@angular/core';
+import { MenuConfig } from '../../interfaces/menu-config.interface';
+import { DIALOG_CONFIG } from '../dialog/dialog-ref';
 
 @Component({
     selector: 'md3-menu',
@@ -6,27 +9,20 @@ import { booleanAttribute, Component, effect, ElementRef, input, Input, signal }
     templateUrl: './menu.html',
     styleUrl: './menu.scss',
     host: {
+        'class': 'md3-menu-container',
         'role': 'menu',
     },
 })
-export class Menu {
-    @Input('menu-color') set color(value: 'standard' | 'vibrant') {
-        this.menuColors.update((current) => {
-            if (value == current) {
-                return current;
-            }
+export class Menu implements AfterContentInit {
+    @ViewChild(CdkPortalOutlet, { static: true })
+    private readonly portalOutlet!: CdkPortalOutlet;
 
-            this.element.classList.remove('md3-' + current);
-            return value;
-        });
-    };
+    protected readonly config = inject<MenuConfig>(DIALOG_CONFIG, { optional: true }) ?? {};
 
     private menuColors = signal<'standard' | 'vibrant'>('standard');
+    private isVisible = signal<boolean>(false);
 
-    public isActive = input<boolean, unknown>(true, {
-        alias: 'is-active',
-        transform: booleanAttribute,
-    });
+    public isActive = signal<boolean>(true);
     
     public get element(): HTMLElement {
         return this.el.nativeElement as HTMLElement;
@@ -39,12 +35,46 @@ export class Menu {
         });
 
         effect(() => {
-            const active = this.isActive();
             if (this.isActive()) {
                 this.element.classList.remove('md3-inactive');
             } else {
                 this.element.classList.add('md3-inactive');
             }
         });
+
+        if (this.config.menuColors == 'vibrant') {
+            this.setColors('vibrant');
+        }
+    }
+
+    ngAfterContentInit(): void {
+        setTimeout(() => {
+            this.showMenu(true);
+        }, 10);
+    }
+
+    public showMenu(value: boolean): void {
+        this.isVisible.set(value);
+    }
+
+    public setColors(value: 'standard' | 'vibrant'): void {
+        this.menuColors.update((current) => {
+            if (value == current) {
+                return current;
+            }
+
+            this.element.classList.remove('md3-' + current);
+            return value;
+        });
+    }
+    
+    /**
+     * The service creates this wrapper first, then calls this method to mount
+     * the user supplied component into the dialog container.
+     */
+    public attachContent<T>(component: Type<T>, injector: Injector): ComponentRef<T> {
+        const portal = new ComponentPortal(component, null, injector);
+
+        return this.portalOutlet.attachComponentPortal(portal);
     }
 }
