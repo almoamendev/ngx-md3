@@ -29,6 +29,9 @@ interface ResolvedMenuConfig<D = unknown> extends MenuConfig<D> {
     injector: Injector;
 }
 
+type SubMenuPositionX = Extract<MenuPositionX, 'before' | 'after'>;
+type SubMenuVerticalAlignment = 'top' | 'bottom';
+
 @Injectable({
     providedIn: 'root',
 })
@@ -67,6 +70,31 @@ export class MenuService {
         this.connectCloseEvents(overlayRef, menuRef);
 
         return menuRef;
+    }
+
+    public openSubMenu<T, D = unknown, R = unknown>(
+        component: Type<T>,
+        config: MenuConfig<D> = {},
+    ): MenuRef<T, R> {
+        const xPosition = this.getSubMenuXPosition(config.xPosition);
+        const yPosition = config.yPosition ?? 'below';
+        const offsetX = config.offsetX ?? 0;
+        const offsetY = config.offsetY ?? 0;
+
+        return this.open<T, D, R>(component, {
+            ...config,
+            xPosition,
+            yPosition,
+            overlapTrigger: config.overlapTrigger ?? true,
+            offsetX,
+            offsetY,
+            positions: config.positions ?? this.getSubMenuConnectedPositions(
+                xPosition,
+                yPosition,
+                offsetX,
+                offsetY,
+            ),
+        });
     }
 
     private mergeConfig<D>(config: MenuConfig<D>): ResolvedMenuConfig<D> {
@@ -158,6 +186,24 @@ export class MenuService {
         ];
     }
 
+    private getSubMenuConnectedPositions(
+        xPosition: SubMenuPositionX,
+        yPosition: MenuPositionY,
+        offsetX: number,
+        offsetY: number,
+    ): ConnectedPosition[] {
+        const fallbackX = this.getFallbackXPosition(xPosition) as SubMenuPositionX;
+        const preferredY = this.getSubMenuVerticalAlignment(yPosition);
+        const fallbackY = this.getFallbackSubMenuVerticalAlignment(preferredY);
+
+        return [
+            this.createSubMenuConnectedPosition(xPosition, preferredY, offsetX, offsetY),
+            this.createSubMenuConnectedPosition(xPosition, fallbackY, offsetX, offsetY),
+            this.createSubMenuConnectedPosition(fallbackX, preferredY, offsetX, offsetY),
+            this.createSubMenuConnectedPosition(fallbackX, fallbackY, offsetX, offsetY),
+        ];
+    }
+
     private createConnectedPosition(
         xPosition: MenuPositionX,
         yPosition: MenuPositionY,
@@ -174,6 +220,29 @@ export class MenuService {
             panelClass: [
                 'md3-menu-position-' + xPosition,
                 'md3-menu-position-' + yPosition,
+            ],
+        };
+    }
+
+    private createSubMenuConnectedPosition(
+        xPosition: SubMenuPositionX,
+        yAlignment: SubMenuVerticalAlignment,
+        offsetX: number,
+        offsetY: number,
+    ): ConnectedPosition {
+        const horizontal = this.getHorizontalPosition(xPosition);
+        const yPosition = yAlignment === 'top' ? 'below' : 'above';
+
+        return {
+            ...horizontal,
+            originY: yAlignment,
+            overlayY: yAlignment,
+            offsetX: this.getSubMenuOffsetX(xPosition, offsetX),
+            offsetY: this.getSubMenuOffsetY(yAlignment, offsetY),
+            panelClass: [
+                'md3-menu-position-' + xPosition,
+                'md3-menu-position-' + yPosition,
+                'md3-menu-position-submenu',
             ],
         };
     }
@@ -259,6 +328,10 @@ export class MenuService {
         }
     }
 
+    private getSubMenuXPosition(position: MenuPositionX | undefined): SubMenuPositionX {
+        return position === 'before' ? 'before' : 'after';
+    }
+
     private getFallbackYPosition(position: MenuPositionY): MenuPositionY {
         switch (position) {
             case 'above':
@@ -273,6 +346,16 @@ export class MenuService {
         }
     }
 
+    private getSubMenuVerticalAlignment(position: MenuPositionY): SubMenuVerticalAlignment {
+        return position === 'above' ? 'bottom' : 'top';
+    }
+
+    private getFallbackSubMenuVerticalAlignment(
+        alignment: SubMenuVerticalAlignment,
+    ): SubMenuVerticalAlignment {
+        return alignment === 'top' ? 'bottom' : 'top';
+    }
+
     private getOffsetY(position: MenuPositionY, config: ResolvedMenuConfig): number {
         if (config.overlapTrigger || position === 'center') {
             return 0;
@@ -281,6 +364,17 @@ export class MenuService {
         return position === 'above'
             ? config.offsetY * -1
             : config.offsetY;
+    }
+
+    private getSubMenuOffsetX(position: SubMenuPositionX, offsetX: number): number {
+        return position === 'before' ? offsetX * -1 : offsetX;
+    }
+
+    private getSubMenuOffsetY(
+        alignment: SubMenuVerticalAlignment,
+        offsetY: number,
+    ): number {
+        return alignment === 'bottom' ? offsetY * -1 : offsetY;
     }
 
     private getScrollStrategy(scrollStrategy: MenuScrollStrategy) {

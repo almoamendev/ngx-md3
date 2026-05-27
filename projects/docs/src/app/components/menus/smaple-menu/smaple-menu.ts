@@ -26,14 +26,12 @@ export class SmapleMenu {
     public openSubMenu(
         event: MouseEvent,
     ) {
-        const ref = this.menuService.open(SmapleMenu, {
+        const ref = this.menuService.openSubMenu(SmapleMenu, {
             data: {
                 simple: true,
             },
             bindDataToInputs: true,
             origin: event,
-            xPosition: 'after',
-            yPosition: 'below',
         });
 
         ref.afterClosed().subscribe((result) => {
