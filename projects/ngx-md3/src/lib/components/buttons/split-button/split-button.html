@@ -1,1 +1,24 @@
-<p>split-button works!</p>
+<button
+    class="md3-split-button-action"
+    md3-state-component
+    [attr.type]="actionType"
+    [disabled]="isActionDisabled"
+    (click)="onActionClick($event)"
+>
+    <ng-content select="[md3-icon-element]"></ng-content>
+    <div class="md3-label">
+        <ng-content></ng-content>
+    </div>
+</button>
+<button
+    class="md3-split-button-menu"
+    md3-state-component
+    type="button"
+    [attr.aria-label]="menuLabel"
+    aria-haspopup="menu"
+    [attr.aria-expanded]="menuExpanded === null ? null : menuExpanded"
+    [disabled]="isMenuDisabled"
+    (click)="onMenuClick($event)"
+>
+    <md3-icon>arrow_drop_down</md3-icon>
+</button>
