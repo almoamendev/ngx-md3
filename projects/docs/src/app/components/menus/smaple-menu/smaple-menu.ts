@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { Badge, IconElement, MaterialIcon, MenuGroup, MenuItem, TypeBody, TypeLabel, TypeTitle } from '@vip9008/ngx-md3';
+import { Component, Input } from '@angular/core';
+import { Badge, IconElement, MaterialIcon, MenuGroup, MenuItem, MenuService, TypeBody, TypeLabel, TypeTitle } from '@vip9008/ngx-md3';
 
 @Component({
     selector: 'app-smaple-menu',
@@ -17,4 +17,27 @@ import { Badge, IconElement, MaterialIcon, MenuGroup, MenuItem, TypeBody, TypeLa
     styleUrl: './smaple-menu.scss',
 })
 export class SmapleMenu {
+    @Input() simple: boolean = false;
+    
+    constructor(
+        private menuService: MenuService
+    ) {}
+
+    public openSubMenu(
+        event: MouseEvent,
+    ) {
+        const ref = this.menuService.open(SmapleMenu, {
+            data: {
+                simple: true,
+            },
+            bindDataToInputs: true,
+            origin: event,
+            xPosition: 'after',
+            yPosition: 'below',
+        });
+
+        ref.afterClosed().subscribe((result) => {
+            console.log('Sub menu closed, results:: ', result);
+        });
+    }
 }
