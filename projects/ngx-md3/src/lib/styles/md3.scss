@@ -139,10 +139,6 @@ body {
         .md3-state-layer {
             opacity: 0.08;
         }
-
-        &::after {
-            opacity: 0;
-        }
     }
 
     &:focus {
@@ -150,7 +146,7 @@ body {
             opacity: 0.1;
         }
 
-        &::after {
+        &:not(:hover):not(:active)::after {
             opacity: 1;
         }
     }
@@ -168,10 +164,6 @@ body {
                 transform: translate(-50%, -50%) scale(2.4);
                 opacity: 1;
             }
-        }
-
-        &::after {
-            opacity: 0;
         }
     }
 

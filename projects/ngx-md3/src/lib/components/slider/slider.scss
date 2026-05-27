@@ -237,14 +237,12 @@
         }
         
         &:focus {
-            & ~ .md3-slider-container .md3-slider-handle {
-                &::before {
-                    width: 0.125em;
-                }
+            & ~ .md3-slider-container .md3-slider-handle::before {
+                width: 0.125em;
+            }
 
-                &::after {
-                    opacity: 1;
-                }
+            &:not(:hover):not(:active) ~ .md3-slider-container .md3-slider-handle::after {
+                opacity: 1;
             }
         }
 

@@ -77,10 +77,10 @@
                 .md3-state-layer {
                     opacity: 0.1;
                 }
+            }
 
-                &::after {
-                    opacity: 1;
-                }
+            &:not(:hover):not(:active) + .md3-checkbox-container::after {
+                opacity: 1;
             }
         }
 

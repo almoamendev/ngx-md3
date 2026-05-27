@@ -18,6 +18,7 @@ import { ButtonGroupsComponent } from './components/buttons/button-groups/button
 import { DialogsComponent } from './components/dialogs/dialogs.component';
 import { ChipsComponent } from './components/chips/chips.component';
 import { MenusComponent } from './components/menus/menus.component';
+import { SplitButtonsComponent } from './components/buttons/split-buttons/split-buttons.component';
 
 export const routes: Routes = [
     {
@@ -50,6 +51,10 @@ export const routes: Routes = [
                             {
                                 path: 'icon-buttons',
                                 component: IconButtonsComponent,
+                            },
+                            {
+                                path: 'split-buttons',
+                                component: SplitButtonsComponent,
                             },
                             {
                                 path: 'button-groups',
