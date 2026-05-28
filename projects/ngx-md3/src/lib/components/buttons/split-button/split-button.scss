@@ -1,270 +1,38 @@
 :host {
-    --container-color: rgb(var(--md-scheme-primary));
-    --label-text-color: rgb(var(--md-scheme-on-primary));
-    --state-color: var(--md-scheme-on-primary);
-    --outline-color: rgb(var(--md-scheme-secondary));
-    --outline-width: 0.1875em;
-    --outline-offset: -0.125em;
-    --border-size: 0em;
-    --border-color: transparent;
-    --container-shadow: var(--md-shadow-0dp);
-    --split-button-gap: 0.125em;
-    --split-button-height: 2.5em;
-    --split-button-outer-radius: 2.5em;
-    --split-button-inner-radius: 0.5em;
-    --split-button-pressed-outer-radius: 0.5em;
-    --split-button-pressed-inner-radius: 0.5em;
-    --split-button-action-padding: 1em;
-    --split-button-menu-width: var(--split-button-height);
-    --outline-radius-adjustment: calc(var(--outline-width) + (var(--outline-offset) * -1));
-
     display: inline-flex;
-    align-items: stretch;
-    gap: var(--split-button-gap);
-    position: relative;
-    font-size: 1rem;
-    vertical-align: middle;
+    gap: 0.125em;
 
-    .md3-split-button-action,
-    .md3-split-button-menu {
-        --border-radius: var(--split-button-outer-radius);
+    ::ng-deep [md3-button] {
+        &.md3-x-small {
+            padding-inline-end: 0.625em;
+            --border-top-end-r: 0.25em;
+            --border-bottom-end-r: 0.25em;
+        }
 
-        position: relative;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        height: var(--split-button-height);
-        border: var(--border-size) solid var(--border-color);
-        outline: none;
-        background-color: var(--container-color);
-        color: var(--label-text-color);
-        box-shadow: var(--container-shadow);
-        cursor: pointer;
-        font: inherit;
-        text-decoration: none;
-        white-space: nowrap;
-        appearance: none;
-        user-select: none;
-        transition: all var(--md-motion-expressive-fast-spatial-duration) var(--md-motion-expressive-fast-spatial-easing);
-    }
-
-    .md3-split-button-action {
-        gap: 0.5em;
-        min-width: 0;
-        padding: 0 var(--split-button-action-padding);
-        border-start-start-radius: var(--split-button-outer-radius);
-        border-end-start-radius: var(--split-button-outer-radius);
-        border-start-end-radius: var(--split-button-inner-radius);
-        border-end-end-radius: var(--split-button-inner-radius);
-
-        &::after {
-            border-start-start-radius: calc(var(--split-button-outer-radius) + var(--outline-radius-adjustment));
-            border-end-start-radius: calc(var(--split-button-outer-radius) + var(--outline-radius-adjustment));
-            border-start-end-radius: calc(var(--split-button-inner-radius) + var(--outline-radius-adjustment));
-            border-end-end-radius: calc(var(--split-button-inner-radius) + var(--outline-radius-adjustment));
+        &.md3-small {
+            padding-inline-end: 0.75em;
+            --border-top-end-r: 0.25em;
+            --border-bottom-end-r: 0.25em;
         }
     }
 
-    .md3-split-button-menu {
-        flex: 0 0 var(--split-button-menu-width);
-        width: var(--split-button-menu-width);
-        padding: 0;
-        border-start-start-radius: var(--split-button-inner-radius);
-        border-end-start-radius: var(--split-button-inner-radius);
-        border-start-end-radius: var(--split-button-outer-radius);
-        border-end-end-radius: var(--split-button-outer-radius);
+    ::ng-deep [md3-icon-button] {
+        &.md3-x-small {
+            --border-top-end-r: 0.25em;
+            --border-bottom-end-r: 0.25em;
 
-        &::after {
-            border-start-start-radius: calc(var(--split-button-inner-radius) + var(--outline-radius-adjustment));
-            border-end-start-radius: calc(var(--split-button-inner-radius) + var(--outline-radius-adjustment));
-            border-start-end-radius: calc(var(--split-button-outer-radius) + var(--outline-radius-adjustment));
-            border-end-end-radius: calc(var(--split-button-outer-radius) + var(--outline-radius-adjustment));
-        }
-    }
-
-    .md3-label {
-        display: block;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        font-size: 0.875em;
-        font-weight: 500;
-        line-height: 1.4286em;
-        letter-spacing: 0.071429em;
-    }
-
-    ::ng-deep [md3-icon-element] {
-        flex: 0 0 auto;
-        font-size: 1.25em !important;
-        line-height: 1;
-        width: 1em !important;
-        height: 1em !important;
-    }
-
-    .md3-split-button-menu md3-icon {
-        flex: 0 0 auto;
-        font-size: 1.25em !important;
-        line-height: 1;
-        width: 1em !important;
-        height: 1em !important;
-    }
-
-    .md3-split-button-action:not(:disabled):active,
-    .md3-split-button-menu:not(:disabled):active {
-        --split-button-outer-radius: var(--split-button-pressed-outer-radius);
-        --split-button-inner-radius: var(--split-button-pressed-inner-radius);
-    }
-
-    .md3-split-button-action:disabled,
-    .md3-split-button-menu:disabled {
-        background-color: rgba(var(--md-scheme-on-surface), 0.1);
-        border-color: transparent;
-        box-shadow: var(--md-shadow-0dp);
-        color: rgba(var(--md-scheme-on-surface), 0.38);
-        cursor: default;
-
-        .md3-state-layer {
-            display: none;
-        }
-    }
-
-    &.md3-x-small {
-        --split-button-height: 2em;
-        --split-button-outer-radius: 2em;
-        --split-button-inner-radius: 0.5em;
-        --split-button-pressed-outer-radius: 0.5em;
-        --split-button-pressed-inner-radius: 0.5em;
-        --split-button-action-padding: 0.75em;
-
-        ::ng-deep [md3-icon-element] {
-            font-size: 1.25em !important;
+            [md3-icon-element] {
+                font-size: 1.375em !important;
+            }
         }
 
-        .md3-split-button-menu md3-icon {
-            font-size: 1.25em !important;
-        }
-    }
+        &.md3-small {
+            --border-top-end-r: 0.25em;
+            --border-bottom-end-r: 0.25em;
 
-    &.md3-small {
-        --split-button-height: 2.5em;
-        --split-button-outer-radius: 2.5em;
-        --split-button-inner-radius: 0.5em;
-        --split-button-pressed-outer-radius: 0.5em;
-        --split-button-pressed-inner-radius: 0.5em;
-        --split-button-action-padding: 1em;
-    }
-
-    &.md3-medium {
-        --split-button-height: 3.5em;
-        --split-button-outer-radius: 3.5em;
-        --split-button-inner-radius: 0.5em;
-        --split-button-pressed-outer-radius: 0.75em;
-        --split-button-pressed-inner-radius: 0.5em;
-        --split-button-action-padding: 1.5em;
-
-        ::ng-deep [md3-icon-element] {
-            font-size: 1.5em !important;
-        }
-
-        .md3-split-button-menu md3-icon {
-            font-size: 1.5em !important;
-        }
-
-        .md3-label {
-            font-size: 1em;
-            font-weight: 500;
-            line-height: 1.5em;
-            letter-spacing: 0.09375em;
-        }
-    }
-
-    &.md3-large {
-        --border-size: 0.125em;
-        --split-button-height: 6em;
-        --split-button-outer-radius: 6em;
-        --split-button-inner-radius: 1em;
-        --split-button-pressed-outer-radius: 1em;
-        --split-button-pressed-inner-radius: 0.75em;
-        --split-button-action-padding: 3em;
-
-        .md3-split-button-action {
-            gap: 0.75em;
-        }
-
-        ::ng-deep [md3-icon-element] {
-            font-size: 2em !important;
-        }
-
-        .md3-split-button-menu md3-icon {
-            font-size: 2em !important;
-        }
-
-        .md3-label {
-            font-size: 1.5em;
-            font-weight: 400;
-            line-height: 1.333332em;
-            letter-spacing: 0;
-        }
-    }
-
-    &.md3-x-large {
-        --border-size: 0.1875em;
-        --split-button-height: 8.5em;
-        --split-button-outer-radius: 8.5em;
-        --split-button-inner-radius: 1.25em;
-        --split-button-pressed-outer-radius: 1em;
-        --split-button-pressed-inner-radius: 1em;
-        --split-button-action-padding: 4em;
-
-        .md3-split-button-action {
-            gap: 1em;
-        }
-
-        ::ng-deep [md3-icon-element] {
-            font-size: 2.5em !important;
-        }
-
-        .md3-split-button-menu md3-icon {
-            font-size: 2.5em !important;
-        }
-
-        .md3-label {
-            font-size: 2em;
-            font-weight: 400;
-            line-height: 1.25em;
-            letter-spacing: 0;
-        }
-    }
-
-    &.md3-elevated {
-        --container-color: rgb(var(--md-scheme-surface-container-low));
-        --label-text-color: rgb(var(--md-scheme-primary));
-        --state-color: var(--md-scheme-primary);
-        --border-size: 0em;
-        --container-shadow: var(--md-shadow-1dp);
-    }
-
-    &.md3-filled {
-        --border-size: 0em;
-    }
-
-    &.md3-tonal {
-        --container-color: rgb(var(--md-scheme-secondary-container));
-        --label-text-color: rgb(var(--md-scheme-on-secondary-container));
-        --state-color: var(--md-scheme-on-secondary-container);
-        --border-size: 0em;
-    }
-
-    &.md3-outlined {
-        --container-color: transparent;
-        --label-text-color: rgb(var(--md-scheme-on-surface-variant));
-        --state-color: var(--md-scheme-on-surface-variant);
-        --border-size: 0.0625em;
-        --border-color: rgb(var(--md-scheme-outline-variant));
-
-        .md3-split-button-action:disabled,
-        .md3-split-button-menu:disabled {
-            background-color: transparent;
-            border-color: rgba(var(--md-scheme-on-surface), 0.12);
+            [md3-icon-element] {
+                font-size: 1.375em !important;
+            }
         }
     }
 }

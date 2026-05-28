@@ -35,21 +35,31 @@
 
         ::ng-deep md3-list-item, ::ng-deep [md3-list-item] {
             &.md3-state-component:first-child, &:first-child [md3-primary-action] {
-                border-start-start-radius: 1em;
-                border-start-end-radius: 1em;
+                --border-top-start-r: 1em;
+                --border-top-end-r: 1em;
             }
             
             &.md3-state-component:last-child, &:last-child [md3-primary-action] {
-                border-end-start-radius: 1em;
-                border-end-end-radius: 1em;
+                --border-bottom-start-r: 1em;
+                --border-bottom-end-r: 1em;
             }
 
             &.md3-state-component:hover, [md3-primary-action]:hover {
                 --border-radius: 0.75em;
+
+                --border-top-start-r: var(--border-radius);
+                --border-top-end-r: var(--border-radius);
+                --border-bottom-start-r: var(--border-radius);
+                --border-bottom-end-r: var(--border-radius);
             }
 
             &.md3-state-component:focus, [md3-primary-action]:focus {
                 --border-radius: 1em;
+
+                --border-top-start-r: var(--border-radius);
+                --border-top-end-r: var(--border-radius);
+                --border-bottom-start-r: var(--border-radius);
+                --border-bottom-end-r: var(--border-radius);
             }
         }
     }

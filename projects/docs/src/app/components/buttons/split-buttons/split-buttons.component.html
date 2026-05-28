@@ -3,68 +3,64 @@
 <ul>
     <li>@Input() button-size: 'x-small' | 'small' | 'medium' | 'large' | 'x-large' = 'small';</li>
     <li>@Input() button-type: 'elevated' | 'filled' | 'tonal' | 'outlined' = 'filled';</li>
-    <li>@Input() disabled: boolean = false;</li>
-    <li>@Input() action-disabled: boolean = false;</li>
-    <li>@Input() menu-disabled: boolean = false;</li>
-    <li>@Output() actionClick: MouseEvent;</li>
-    <li>@Output() menuClick: MouseEvent;</li>
 </ul>
 
-<div class="split-button-row">
-    <md3-split-button (actionClick)="logAction('default')" (menuClick)="logMenu('default')">
-        Default
-    </md3-split-button>
-    <md3-split-button (actionClick)="logAction('icon')" (menuClick)="logMenu('icon')">
-        <md3-icon md3-icon-element>edit</md3-icon>
-        With icon
-    </md3-split-button>
-</div>
-
-<div class="split-button-row">
-    <md3-split-button button-type="elevated" (actionClick)="logAction('elevated')" (menuClick)="logMenu('elevated')">
-        <md3-icon md3-icon-element>add</md3-icon>
-        Elevated
-    </md3-split-button>
-    <md3-split-button button-type="filled" (actionClick)="logAction('filled')" (menuClick)="logMenu('filled')">
-        <md3-icon md3-icon-element>add</md3-icon>
-        Filled
-    </md3-split-button>
-    <md3-split-button button-type="tonal" (actionClick)="logAction('tonal')" (menuClick)="logMenu('tonal')">
-        <md3-icon md3-icon-element>add</md3-icon>
-        Tonal
-    </md3-split-button>
-    <md3-split-button button-type="outlined" (actionClick)="logAction('outlined')" (menuClick)="logMenu('outlined')">
-        <md3-icon md3-icon-element>add</md3-icon>
-        Outlined
+<div style="display: flex; gap: 1em; margin-bottom: 1em;">
+    <md3-split-button button-size="x-small">
+        <button md3-button>
+            <md3-icon md3-icon-element>edit</md3-icon>
+            X-Small
+        </button>
+        <button md3-icon-button>
+            <md3-icon md3-icon-element>keyboard_arrow_down</md3-icon>
+        </button>
     </md3-split-button>
 </div>
 
-<div class="split-button-row">
-    <md3-split-button button-size="x-small" button-type="tonal" (actionClick)="logAction('x-small')" (menuClick)="logMenu('x-small')">
-        x-small
-    </md3-split-button>
-    <md3-split-button button-size="small" button-type="tonal" (actionClick)="logAction('small')" (menuClick)="logMenu('small')">
-        small
-    </md3-split-button>
-    <md3-split-button button-size="medium" button-type="tonal" (actionClick)="logAction('medium')" (menuClick)="logMenu('medium')">
-        medium
-    </md3-split-button>
-    <md3-split-button button-size="large" button-type="tonal" (actionClick)="logAction('large')" (menuClick)="logMenu('large')">
-        large
-    </md3-split-button>
-    <md3-split-button button-size="x-large" button-type="tonal" (actionClick)="logAction('x-large')" (menuClick)="logMenu('x-large')">
-        x-large
+<div style="display: flex; gap: 1em; margin-bottom: 1em;">
+    <md3-split-button button-size="small">
+        <button md3-button>
+            <md3-icon md3-icon-element>edit</md3-icon>
+            Small
+        </button>
+        <button md3-icon-button>
+            <md3-icon md3-icon-element>keyboard_arrow_down</md3-icon>
+        </button>
     </md3-split-button>
 </div>
 
-<div class="split-button-row">
-    <md3-split-button disabled>
-        Disabled
+<div style="display: flex; gap: 1em; margin-bottom: 1em;">
+    <md3-split-button button-size="medium">
+        <button md3-button>
+            <md3-icon md3-icon-element>edit</md3-icon>
+            Medium
+        </button>
+        <button md3-icon-button>
+            <md3-icon md3-icon-element>keyboard_arrow_down</md3-icon>
+        </button>
     </md3-split-button>
-    <md3-split-button button-type="outlined" action-disabled>
-        Action disabled
+</div>
+
+<div style="display: flex; gap: 1em; margin-bottom: 1em;">
+    <md3-split-button button-size="large">
+        <button md3-button>
+            <md3-icon md3-icon-element>edit</md3-icon>
+            Large
+        </button>
+        <button md3-icon-button>
+            <md3-icon md3-icon-element>keyboard_arrow_down</md3-icon>
+        </button>
     </md3-split-button>
-    <md3-split-button button-type="outlined" menu-disabled>
-        Menu disabled
+</div>
+
+<div style="display: flex; gap: 1em; margin-bottom: 1em;">
+    <md3-split-button button-size="x-large">
+        <button md3-button>
+            <md3-icon md3-icon-element>edit</md3-icon>
+            X-Large
+        </button>
+        <button md3-icon-button>
+            <md3-icon md3-icon-element>keyboard_arrow_down</md3-icon>
+        </button>
     </md3-split-button>
 </div>

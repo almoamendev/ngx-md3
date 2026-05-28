@@ -86,17 +86,30 @@ body {
 
 .md3-state-component {
     position: relative;
+    --border-top-start-r: var(--border-radius, 0em);
+    --border-top-end-r: var(--border-radius, 0em);
+    --border-bottom-start-r: var(--border-radius, 0em);
+    --border-bottom-end-r: var(--border-radius, 0em);
+
+    border-start-start-radius: var(--border-top-start-r);
+    border-start-end-radius: var(--border-top-end-r);
+    border-end-start-radius: var(--border-bottom-start-r);
+    border-end-end-radius: var(--border-bottom-end-r);
 
     &::after {
         content: '';
         position: absolute;
         display: block;
         inset: calc(var(--outline-offset, -0.125em) - var(--outline-width, 0.1875em) - var(--border-size, 0em));
-        border-radius: calc(var(--border-radius, 0em) + var(--outline-width, 0.1875em) + (var(--outline-offset, -0.125em) * -1));
         border: var(--outline-width, 0.1875em) solid var(--outline-color, rgb(var(--md-scheme-secondary)));
         transition: all var(--md-motion-expressive-fast-spatial-duration) var(--md-motion-expressive-fast-spatial-easing);
         pointer-events: none;
         opacity: 0;
+
+        border-start-start-radius: calc(var(--border-top-start-r) + var(--outline-width, 0.1875em) + (var(--outline-offset, -0.125em) * -1));
+        border-start-end-radius: calc(var(--border-top-end-r) + var(--outline-width, 0.1875em) + (var(--outline-offset, -0.125em) * -1));
+        border-end-start-radius: calc(var(--border-bottom-start-r) + var(--outline-width, 0.1875em) + (var(--outline-offset, -0.125em) * -1));
+        border-end-end-radius: calc(var(--border-bottom-end-r) + var(--outline-width, 0.1875em) + (var(--outline-offset, -0.125em) * -1));
     }
 
     .md3-state-layer {
