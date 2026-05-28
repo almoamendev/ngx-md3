@@ -1,12 +1,14 @@
 :host {
     --outer-radius: 1.25em;
     --inner-radius: 0.25em;
+    --trailing-padding-diff: 0.0625em;
 
     display: inline-flex;
     gap: 0.125em;
 
     &.md3-x-small {
         --outer-radius: 1em;
+        --trailing-padding-diff: 0.0625em;
 
         ::ng-deep [md3-button], ::ng-deep [md3-icon-button] {
             &:not(:disabled):hover, :not(:disabled):active {
@@ -17,6 +19,7 @@
 
     &.md3-small {
         --outer-radius: 1.25em;
+        --trailing-padding-diff: 0.0625em;
 
         ::ng-deep [md3-button], ::ng-deep [md3-icon-button] {
             &:not(:disabled):hover, :not(:disabled):active {
@@ -27,6 +30,7 @@
 
     &.md3-medium {
         --outer-radius: 1.75em;
+        --trailing-padding-diff: 0.125em;
 
         ::ng-deep [md3-button], ::ng-deep [md3-icon-button] {
             &:not(:disabled):hover, :not(:disabled):active {
@@ -38,6 +42,7 @@
     &.md3-large {
         --outer-radius: 3em;
         --inner-radius: 0.75em;
+        --trailing-padding-diff: 0.1875em;
 
         ::ng-deep [md3-button], ::ng-deep [md3-icon-button] {
             &:not(:disabled):hover, :not(:disabled):active {
@@ -49,6 +54,7 @@
     &.md3-x-large {
         --outer-radius: 4.25em;
         --inner-radius: 0.75em;
+        --trailing-padding-diff: 0.375em;
 
         ::ng-deep [md3-button], ::ng-deep [md3-icon-button] {
             &:not(:disabled):hover, :not(:disabled):active {
@@ -83,38 +89,82 @@
         --border-bottom-start-r: var(--inner-radius);
         --border-top-end-r: var(--outer-radius);
         --border-bottom-end-r: var(--outer-radius);
+        --padding-start: 0.8125em;
+        --padding-end: 0.8125em;
 
         position: relative;
+        padding-inline-start: calc(var(--padding-start) - var(--border-size) - var(--trailing-padding-diff));
+        padding-inline-end: calc(var(--padding-end) - var(--border-size) + var(--trailing-padding-diff));
         
         &:not(:disabled):focus {
             z-index: 2;
         }
+        
+        &.md3-menu-active {
+            --border-top-start-r: var(--outer-radius);
+            --border-bottom-start-r: var(--outer-radius);
+
+            padding-inline-start: calc(var(--padding-start) - var(--border-size));
+            padding-inline-end: calc(var(--padding-end) - var(--border-size));
+
+            &.md3-flip-icon [md3-icon-element] {
+                transform: rotate(180deg);
+            }
+        }
+
+        &.md3-standard {
+            --background-color: rgb(var(--md-scheme-surface-container-low));
+            --foreground-color: rgb(var(--md-scheme-primary));
+            --state-color: var(--md-scheme-primary);
+            --border-size: 0em;
+
+            box-shadow: var(--md-shadow-1dp);
+
+            &:disabled {
+                box-shadow: var(--md-shadow-0dp);
+            }
+        }
 
         &.md3-x-small {
+            --padding-start: 0.8125em;
+            --padding-end: 0.8125em;
+
             [md3-icon-element] {
                 font-size: 1.375em !important;
             }
         }
 
         &.md3-small {
+            --padding-start: 0.8125em;
+            --padding-end: 0.8125em;
+
             [md3-icon-element] {
                 font-size: 1.375em !important;
             }
         }
 
         &.md3-medium {
+            --padding-start: 0.9375em;
+            --padding-end: 0.9375em;
+
             [md3-icon-element] {
                 font-size: 1.625em !important;
             }
         }
 
         &.md3-large {
+            --padding-start: 1.8125em;
+            --padding-end: 1.8125em;
+
             [md3-icon-element] {
                 font-size: 2.375em !important;
             }
         }
 
         &.md3-x-large {
+            --padding-start: 2.6875em;
+            --padding-end: 2.6875em;
+
             [md3-icon-element] {
                 font-size: 3.125em !important;
             }

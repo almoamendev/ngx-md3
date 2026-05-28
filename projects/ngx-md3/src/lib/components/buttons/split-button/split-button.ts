@@ -1,4 +1,4 @@
-import { Component, contentChild, effect, ElementRef, Input, signal } from '@angular/core';
+import { booleanAttribute, Component, contentChild, effect, ElementRef, input, Input, signal } from '@angular/core';
 import { ButtonSize } from '../../../types/button-size.type';
 import { SplitButtonType } from '../../../types/split-button-type.type';
 import { Button } from '../button/button';
@@ -35,6 +35,11 @@ export class SplitButton {
             return value;
         });
     };
+
+    public flipTrailingIcon = input<boolean, unknown>(true, {
+        alias: 'flip-trailing-icon',
+        transform: booleanAttribute,
+    });
 
     private buttonSize = signal<ButtonSize>('small');
     private buttonType = signal<SplitButtonType>('filled');
@@ -80,6 +85,12 @@ export class SplitButton {
             iconButton!.width = 'default';
             iconButton!.squared = false;
             iconButton!.selected = null;
+
+            if (this.flipTrailingIcon()) {
+                this.iconButton()?.element.classList.add('md3-flip-icon');
+            } else {
+                this.iconButton()?.element.classList.remove('md3-flip-icon');
+            }
         });
     }
 

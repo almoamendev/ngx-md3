@@ -3,6 +3,7 @@
 <ul>
     <li>@Input() button-size: 'x-small' | 'small' | 'medium' | 'large' | 'x-large' = 'small';</li>
     <li>@Input() button-type: 'elevated' | 'filled' | 'tonal' | 'outlined' = 'filled';</li>
+    <li>@Input() flip-trailing-icon: boolean = true;</li>
 </ul>
 
 <div style="display: flex; gap: 1em; margin-bottom: 1em; flex-wrap: wrap;">
@@ -11,7 +12,7 @@
             <md3-icon md3-icon-element>edit</md3-icon>
             X-Small
         </button>
-        <button md3-icon-button>
+        <button md3-icon-button (click)="openMenu($event)">
             <md3-icon md3-icon-element>keyboard_arrow_down</md3-icon>
         </button>
     </md3-split-button>
@@ -21,7 +22,7 @@
             <md3-icon md3-icon-element>edit</md3-icon>
             X-Small
         </button>
-        <button md3-icon-button>
+        <button md3-icon-button (click)="openMenu($event)">
             <md3-icon md3-icon-element>keyboard_arrow_down</md3-icon>
         </button>
     </md3-split-button>
@@ -31,7 +32,7 @@
             <md3-icon md3-icon-element>edit</md3-icon>
             X-Small
         </button>
-        <button md3-icon-button>
+        <button md3-icon-button (click)="openMenu($event)">
             <md3-icon md3-icon-element>keyboard_arrow_down</md3-icon>
         </button>
     </md3-split-button>
@@ -41,7 +42,7 @@
             <md3-icon md3-icon-element>edit</md3-icon>
             X-Small
         </button>
-        <button md3-icon-button>
+        <button md3-icon-button (click)="openMenu($event)">
             <md3-icon md3-icon-element>keyboard_arrow_down</md3-icon>
         </button>
     </md3-split-button>
@@ -53,7 +54,7 @@
             <md3-icon md3-icon-element>edit</md3-icon>
             Small
         </button>
-        <button md3-icon-button>
+        <button md3-icon-button (click)="openMenu($event)">
             <md3-icon md3-icon-element>keyboard_arrow_down</md3-icon>
         </button>
     </md3-split-button>
@@ -63,7 +64,7 @@
             <md3-icon md3-icon-element>edit</md3-icon>
             Small
         </button>
-        <button md3-icon-button>
+        <button md3-icon-button (click)="openMenu($event)">
             <md3-icon md3-icon-element>keyboard_arrow_down</md3-icon>
         </button>
     </md3-split-button>
@@ -73,7 +74,7 @@
             <md3-icon md3-icon-element>edit</md3-icon>
             Small
         </button>
-        <button md3-icon-button>
+        <button md3-icon-button (click)="openMenu($event)">
             <md3-icon md3-icon-element>keyboard_arrow_down</md3-icon>
         </button>
     </md3-split-button>
@@ -83,7 +84,7 @@
             <md3-icon md3-icon-element>edit</md3-icon>
             Small
         </button>
-        <button md3-icon-button>
+        <button md3-icon-button (click)="openMenu($event)">
             <md3-icon md3-icon-element>keyboard_arrow_down</md3-icon>
         </button>
     </md3-split-button>
@@ -95,7 +96,7 @@
             <md3-icon md3-icon-element>edit</md3-icon>
             Medium
         </button>
-        <button md3-icon-button>
+        <button md3-icon-button (click)="openMenu($event)">
             <md3-icon md3-icon-element>keyboard_arrow_down</md3-icon>
         </button>
     </md3-split-button>
@@ -105,7 +106,7 @@
             <md3-icon md3-icon-element>edit</md3-icon>
             Medium
         </button>
-        <button md3-icon-button>
+        <button md3-icon-button (click)="openMenu($event)">
             <md3-icon md3-icon-element>keyboard_arrow_down</md3-icon>
         </button>
     </md3-split-button>
@@ -115,7 +116,7 @@
             <md3-icon md3-icon-element>edit</md3-icon>
             Medium
         </button>
-        <button md3-icon-button>
+        <button md3-icon-button (click)="openMenu($event)">
             <md3-icon md3-icon-element>keyboard_arrow_down</md3-icon>
         </button>
     </md3-split-button>
@@ -125,7 +126,7 @@
             <md3-icon md3-icon-element>edit</md3-icon>
             Medium
         </button>
-        <button md3-icon-button>
+        <button md3-icon-button (click)="openMenu($event)">
             <md3-icon md3-icon-element>keyboard_arrow_down</md3-icon>
         </button>
     </md3-split-button>
@@ -137,7 +138,7 @@
             <md3-icon md3-icon-element>edit</md3-icon>
             Large
         </button>
-        <button md3-icon-button>
+        <button md3-icon-button (click)="openMenu($event)">
             <md3-icon md3-icon-element>keyboard_arrow_down</md3-icon>
         </button>
     </md3-split-button>
@@ -147,7 +148,7 @@
             <md3-icon md3-icon-element>edit</md3-icon>
             Large
         </button>
-        <button md3-icon-button>
+        <button md3-icon-button (click)="openMenu($event)">
             <md3-icon md3-icon-element>keyboard_arrow_down</md3-icon>
         </button>
     </md3-split-button>
@@ -157,7 +158,7 @@
             <md3-icon md3-icon-element>edit</md3-icon>
             Large
         </button>
-        <button md3-icon-button>
+        <button md3-icon-button (click)="openMenu($event)">
             <md3-icon md3-icon-element>keyboard_arrow_down</md3-icon>
         </button>
     </md3-split-button>
@@ -167,7 +168,7 @@
             <md3-icon md3-icon-element>edit</md3-icon>
             Large
         </button>
-        <button md3-icon-button>
+        <button md3-icon-button (click)="openMenu($event)">
             <md3-icon md3-icon-element>keyboard_arrow_down</md3-icon>
         </button>
     </md3-split-button>
@@ -179,7 +180,7 @@
             <md3-icon md3-icon-element>edit</md3-icon>
             X-Large
         </button>
-        <button md3-icon-button>
+        <button md3-icon-button (click)="openMenu($event)">
             <md3-icon md3-icon-element>keyboard_arrow_down</md3-icon>
         </button>
     </md3-split-button>
@@ -189,7 +190,7 @@
             <md3-icon md3-icon-element>edit</md3-icon>
             X-Large
         </button>
-        <button md3-icon-button>
+        <button md3-icon-button (click)="openMenu($event)">
             <md3-icon md3-icon-element>keyboard_arrow_down</md3-icon>
         </button>
     </md3-split-button>
@@ -199,7 +200,7 @@
             <md3-icon md3-icon-element>edit</md3-icon>
             X-Large
         </button>
-        <button md3-icon-button>
+        <button md3-icon-button (click)="openMenu($event)">
             <md3-icon md3-icon-element>keyboard_arrow_down</md3-icon>
         </button>
     </md3-split-button>
@@ -209,7 +210,7 @@
             <md3-icon md3-icon-element>edit</md3-icon>
             X-Large
         </button>
-        <button md3-icon-button>
+        <button md3-icon-button (click)="openMenu($event)" disabled>
             <md3-icon md3-icon-element>keyboard_arrow_down</md3-icon>
         </button>
     </md3-split-button>

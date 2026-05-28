@@ -46,6 +46,7 @@ export class MenuService {
     ): MenuRef<T, R> {
         const menuConfig = this.mergeConfig(config);
         const previouslyFocusedElement = this.getFocusedElement();
+        const triggerElement = this.resolveTriggerElement(menuConfig.origin, previouslyFocusedElement);
         const overlayRef = this.createOverlay(menuConfig, previouslyFocusedElement);
         const menuRef = new MenuRef<T, R>(
             overlayRef,
@@ -66,6 +67,7 @@ export class MenuService {
         this.bindDataToInputs(contentComponentRef, menuConfig);
         menuRef.componentInstance = contentComponentRef.instance;
         menuRef.menuInstance = menuComponentRef.instance;
+        this.bindTriggerActiveState(triggerElement, overlayRef, menuRef);
         this.startOpenAnimation(overlayRef);
         this.connectCloseEvents(overlayRef, menuRef);
 
@@ -139,6 +141,22 @@ export class MenuService {
         return this.overlay.create(overlayConfig);
     }
 
+    private bindTriggerActiveState<T, R>(
+        triggerElement: HTMLElement | null,
+        overlayRef: OverlayRef,
+        menuRef: MenuRef<T, R>,
+    ): void {
+        if (!triggerElement) {
+            return;
+        }
+
+        const removeActiveClass = () => triggerElement.classList.remove('md3-menu-active');
+
+        triggerElement.classList.add('md3-menu-active');
+        menuRef.afterClosed().pipe(take(1)).subscribe(removeActiveClass);
+        overlayRef.detachments().pipe(take(1)).subscribe(removeActiveClass);
+    }
+
     private resolveOrigin(
         origin: MenuPositionOrigin | undefined,
         fallbackOrigin: HTMLElement | null,
@@ -170,6 +188,29 @@ export class MenuService {
             x: (viewport?.innerWidth ?? 0) / 2,
             y: (viewport?.innerHeight ?? 0) / 2,
         };
+    }
+
+    private resolveTriggerElement(
+        origin: MenuPositionOrigin | undefined,
+        fallbackOrigin: HTMLElement | null,
+    ): HTMLElement | null {
+        const resolvedOrigin = origin ?? fallbackOrigin;
+
+        if (!resolvedOrigin) {
+            return null;
+        }
+
+        if (this.isMouseEvent(resolvedOrigin)) {
+            return resolvedOrigin.currentTarget instanceof HTMLElement
+                ? resolvedOrigin.currentTarget
+                : null;
+        }
+
+        if (this.isElementRef(resolvedOrigin)) {
+            return resolvedOrigin.nativeElement;
+        }
+
+        return resolvedOrigin instanceof HTMLElement ? resolvedOrigin : null;
     }
 
     private getConnectedPositions(config: ResolvedMenuConfig): ConnectedPosition[] {
