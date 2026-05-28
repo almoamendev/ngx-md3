@@ -7,12 +7,54 @@
 
     &.md3-x-small {
         --outer-radius: 1em;
-        --inner-radius: 0.25em;
+
+        ::ng-deep [md3-button], ::ng-deep [md3-icon-button] {
+            &:not(:disabled):hover, :not(:disabled):active {
+                --inner-radius: 0.5em;
+            }
+        }
     }
 
     &.md3-small {
         --outer-radius: 1.25em;
-        --inner-radius: 0.25em;
+
+        ::ng-deep [md3-button], ::ng-deep [md3-icon-button] {
+            &:not(:disabled):hover, :not(:disabled):active {
+                --inner-radius: 0.75em;
+            }
+        }
+    }
+
+    &.md3-medium {
+        --outer-radius: 1.75em;
+
+        ::ng-deep [md3-button], ::ng-deep [md3-icon-button] {
+            &:not(:disabled):hover, :not(:disabled):active {
+                --inner-radius: 0.75em;
+            }
+        }
+    }
+
+    &.md3-large {
+        --outer-radius: 3em;
+        --inner-radius: 0.75em;
+
+        ::ng-deep [md3-button], ::ng-deep [md3-icon-button] {
+            &:not(:disabled):hover, :not(:disabled):active {
+                --inner-radius: 1.25em;
+            }
+        }
+    }
+
+    &.md3-x-large {
+        --outer-radius: 4.25em;
+        --inner-radius: 0.75em;
+
+        ::ng-deep [md3-button], ::ng-deep [md3-icon-button] {
+            &:not(:disabled):hover, :not(:disabled):active {
+                --inner-radius: 0.75em;
+            }
+        }
     }
 
     ::ng-deep [md3-button] {
@@ -21,12 +63,18 @@
         --border-top-end-r: var(--inner-radius);
         --border-bottom-end-r: var(--inner-radius);
 
+        position: relative;
+
+        &:not(:disabled):focus {
+            z-index: 2;
+        }
+
         &.md3-x-small {
-            padding-inline-end: 0.625em;
+            padding-inline-end: calc(0.625em - var(--border-size));
         }
 
         &.md3-small {
-            padding-inline-end: 0.75em;
+            padding-inline-end: calc(0.75em - var(--border-size));
         }
     }
 
@@ -35,6 +83,12 @@
         --border-bottom-start-r: var(--inner-radius);
         --border-top-end-r: var(--outer-radius);
         --border-bottom-end-r: var(--outer-radius);
+
+        position: relative;
+        
+        &:not(:disabled):focus {
+            z-index: 2;
+        }
 
         &.md3-x-small {
             [md3-icon-element] {
@@ -45,6 +99,24 @@
         &.md3-small {
             [md3-icon-element] {
                 font-size: 1.375em !important;
+            }
+        }
+
+        &.md3-medium {
+            [md3-icon-element] {
+                font-size: 1.625em !important;
+            }
+        }
+
+        &.md3-large {
+            [md3-icon-element] {
+                font-size: 2.375em !important;
+            }
+        }
+
+        &.md3-x-large {
+            [md3-icon-element] {
+                font-size: 3.125em !important;
             }
         }
     }

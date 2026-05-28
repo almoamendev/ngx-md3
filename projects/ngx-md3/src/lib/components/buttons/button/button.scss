@@ -23,7 +23,7 @@
     background-color: var(--background-color);
     color: var(--foreground-color);
     gap: 0.5em;
-    padding: 0 var(--inline-padding);
+    padding: 0 calc(var(--inline-padding) - var(--border-size));
     height: 2.5em;
     box-shadow: var(--md-shadow-0dp);
 
@@ -326,6 +326,7 @@
         --state-color: var(--md-scheme-on-surface-variant);
 
         border: var(--border-size) solid rgb(var(--md-scheme-outline-variant));
+        padding-inline: calc(var(--inline-padding) - var(--border-size));
 
         &.md3-toggle {
             &.md3-selected {
