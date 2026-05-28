@@ -1,35 +1,48 @@
 :host {
+    --outer-radius: 1.25em;
+    --inner-radius: 0.25em;
+
     display: inline-flex;
     gap: 0.125em;
 
+    &.md3-x-small {
+        --outer-radius: 1em;
+        --inner-radius: 0.25em;
+    }
+
+    &.md3-small {
+        --outer-radius: 1.25em;
+        --inner-radius: 0.25em;
+    }
+
     ::ng-deep [md3-button] {
+        --border-top-start-r: var(--outer-radius);
+        --border-bottom-start-r: var(--outer-radius);
+        --border-top-end-r: var(--inner-radius);
+        --border-bottom-end-r: var(--inner-radius);
+
         &.md3-x-small {
             padding-inline-end: 0.625em;
-            --border-top-end-r: 0.25em;
-            --border-bottom-end-r: 0.25em;
         }
 
         &.md3-small {
             padding-inline-end: 0.75em;
-            --border-top-end-r: 0.25em;
-            --border-bottom-end-r: 0.25em;
         }
     }
 
     ::ng-deep [md3-icon-button] {
-        &.md3-x-small {
-            --border-top-end-r: 0.25em;
-            --border-bottom-end-r: 0.25em;
+        --border-top-start-r: var(--inner-radius);
+        --border-bottom-start-r: var(--inner-radius);
+        --border-top-end-r: var(--outer-radius);
+        --border-bottom-end-r: var(--outer-radius);
 
+        &.md3-x-small {
             [md3-icon-element] {
                 font-size: 1.375em !important;
             }
         }
 
         &.md3-small {
-            --border-top-end-r: 0.25em;
-            --border-bottom-end-r: 0.25em;
-
             [md3-icon-element] {
                 font-size: 1.375em !important;
             }
