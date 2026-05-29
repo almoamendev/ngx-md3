@@ -1,4 +1,4 @@
-import { Component, ContentChild, ElementRef, Input, AfterViewInit, effect, signal, computed, contentChild } from '@angular/core';
+import { Component, ContentChild, ElementRef, Input, AfterViewInit, effect, signal, computed, contentChild, HostListener } from '@angular/core';
 import { PrimaryAction } from '../primary-action';
 import { StateComponent } from '../../common/state-component';
 import { Checkbox } from '../../checkbox/checkbox';
@@ -22,6 +22,7 @@ export class ListItem implements AfterViewInit {
     @ContentChild(PrimaryAction) primaryAction?: PrimaryAction;
 
     public isActionTag: boolean = false;
+    private isLabelTag: boolean = false;
     private checkbox = contentChild(Checkbox);
     private radioButton = contentChild(RadioButton);
     private selectSignal = signal<boolean>(false);
@@ -57,8 +58,11 @@ export class ListItem implements AfterViewInit {
     ngAfterViewInit(): void {
         let tagName = this.element.tagName.toLowerCase();
 
-        if (tagName == 'label') {
+        this.isLabelTag = tagName == 'label';
+
+        if (this.isLabelTag) {
             this.element.setAttribute('tabindex', '0');
+            this.setLabelInputTabIndex();
         }
 
         this.isActionTag = tagName != 'md3-list-item';
@@ -66,5 +70,57 @@ export class ListItem implements AfterViewInit {
         if (!this.isActionTag) {
             this.state.setStateLayer(false);
         }
+    }
+
+    @HostListener('focusin', ['$event'])
+    protected onFocusIn(event: FocusEvent): void {
+        if (!this.isLabelTag || event.target === this.element || !this.isInputElement(event.target)) {
+            return;
+        }
+
+        this.focusLabel();
+    }
+
+    @HostListener('keydown', ['$event'])
+    protected onKeyDown(event: KeyboardEvent): void {
+        if (!this.isLabelTag || event.target !== this.element || event.defaultPrevented) {
+            return;
+        }
+
+        if (event.key !== ' ' && event.key !== 'Enter') {
+            return;
+        }
+
+        const input = this.getLabelActivationInput();
+
+        if (!input) {
+            return;
+        }
+
+        event.preventDefault();
+        input.click();
+        this.focusLabel();
+    }
+
+    private setLabelInputTabIndex(): void {
+        this.getLabelInputs().forEach((input) => input.tabIndex = -1);
+    }
+
+    private getLabelActivationInput(): HTMLInputElement | undefined {
+        return this.getLabelInputs().find((input) => {
+            return !input.disabled && (input.type === 'checkbox' || input.type === 'radio');
+        }) ?? this.getLabelInputs().find((input) => !input.disabled);
+    }
+
+    private getLabelInputs(): HTMLInputElement[] {
+        return Array.from(this.element.querySelectorAll<HTMLInputElement>('input'));
+    }
+
+    private focusLabel(): void {
+        this.element.focus({ preventScroll: true });
+    }
+
+    private isInputElement(target: EventTarget | null): target is HTMLInputElement {
+        return target instanceof HTMLInputElement;
     }
 }

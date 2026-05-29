@@ -122,7 +122,7 @@ body {
         z-index: 0;
         border-radius: inherit;
         overflow: hidden;
-        transition: opacity var(--md-motion-expressive-slow-spatial-duration) var(--md-motion-expressive-slow-spatial-easing);
+        transition: opacity var(--md-motion-expressive-fast-spatial-duration) var(--md-motion-expressive-fast-spatial-easing);
         background-color: rgb(var(--state-color, --md-scheme-primary));
         opacity: 0;
         pointer-events: none;

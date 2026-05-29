@@ -6,17 +6,31 @@
     <li>@Input() extended-fab: boolean = false;</li>
 </ul>
 
-<div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
-    <button md3-fab>
+<div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1rem;">
+    <button md3-fab button-size="small">
         <md3-icon md3-icon-element>person</md3-icon>
     </button>
-    <button md3-fab extended-fab>
+    <button md3-fab button-size="medium">
+        <md3-icon md3-icon-element>person</md3-icon>
+    </button>
+    <button md3-fab button-size="large">
+        <md3-icon md3-icon-element>person</md3-icon>
+    </button>
+    <button md3-fab button-size="small" extended-fab>
+        <md3-icon md3-icon-element>person</md3-icon>
+        Extended button
+    </button>
+    <button md3-fab button-size="medium" extended-fab>
+        <md3-icon md3-icon-element>person</md3-icon>
+        Extended button
+    </button>
+    <button md3-fab button-size="large" extended-fab>
         <md3-icon md3-icon-element>person</md3-icon>
         Extended button
     </button>
 </div>
 
-<div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
+<div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1rem;">
     <button md3-fab button-type="tonal-primary" extended-fab>
         Tonal primary
     </button>
