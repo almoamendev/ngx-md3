@@ -1,4 +1,4 @@
-import { booleanAttribute, Component, contentChild, effect, ElementRef, input, Input, signal } from '@angular/core';
+import { booleanAttribute, Component, contentChild, contentChildren, effect, ElementRef, input, Input, signal } from '@angular/core';
 import { ButtonSize } from '../../../types/button-size.type';
 import { SplitButtonType } from '../../../types/split-button-type.type';
 import { Button } from '../button/button';
@@ -45,7 +45,7 @@ export class SplitButton {
     private buttonType = signal<SplitButtonType>('filled');
 
     private button = contentChild<Button>(Button);
-    private iconButton = contentChild<IconButton>(IconButton);
+    private iconButtons = contentChildren<IconButton>(IconButton);
 
     constructor(private el: ElementRef) {
         effect(() => {
@@ -72,25 +72,26 @@ export class SplitButton {
         });
         
         effect(() => {
-            const iconButton = this.iconButton();
-            if (!iconButton) {
-                return;
-            }
-            
-            const buttonSize = this.buttonSize();
-            const buttonType = this.buttonType();
-            
-            iconButton!.size = buttonSize;
-            iconButton!.type = buttonType == 'elevated' ? 'standard' : buttonType;
-            iconButton!.width = 'default';
-            iconButton!.squared = false;
-            iconButton!.selected = null;
+            this.iconButtons().forEach((iconButton) => {
+                const buttonSize = this.buttonSize();
+                const buttonType = this.buttonType();
+                
+                iconButton!.size = buttonSize;
+                iconButton!.type = buttonType == 'elevated' ? 'standard' : buttonType;
+                iconButton!.width = 'default';
+                iconButton!.squared = false;
+                iconButton!.selected = null;
+                
+                if (iconButton?.element.hasAttribute('md3-main-action')) {
+                    return;
+                }
 
-            if (this.flipTrailingIcon()) {
-                this.iconButton()?.element.classList.add('md3-flip-icon');
-            } else {
-                this.iconButton()?.element.classList.remove('md3-flip-icon');
-            }
+                if (this.flipTrailingIcon()) {
+                    iconButton?.element.classList.add('md3-flip-icon');
+                } else {
+                    iconButton?.element.classList.remove('md3-flip-icon');
+                }
+            });
         });
     }
 

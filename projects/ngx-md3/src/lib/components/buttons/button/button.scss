@@ -105,8 +105,9 @@
             content: '';
             position: absolute;
             display: block;
-            inset-inline: 0;
-            inset-block: -0.5em;
+            min-width: 3rem;
+            min-height: 3rem;
+            width: 100%;
         }
 
         &.md3-square {
@@ -144,8 +145,9 @@
             content: '';
             position: absolute;
             display: block;
-            inset-inline: 0;
-            inset-block: -0.25em;
+            min-width: 3rem;
+            min-height: 3rem;
+            width: 100%;
         }
 
         &:not(:active).md3-toggle.md3-selected {

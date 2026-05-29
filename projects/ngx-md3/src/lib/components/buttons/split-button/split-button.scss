@@ -58,7 +58,7 @@
 
         ::ng-deep [md3-button], ::ng-deep [md3-icon-button] {
             &:not(:disabled):hover, :not(:disabled):active {
-                --inner-radius: 0.75em;
+                --inner-radius: 1.25em;
             }
         }
     }
@@ -68,8 +68,6 @@
         --border-bottom-start-r: var(--outer-radius);
         --border-top-end-r: var(--inner-radius);
         --border-bottom-end-r: var(--inner-radius);
-
-        position: relative;
 
         &:not(:disabled):focus {
             z-index: 2;
@@ -85,41 +83,17 @@
     }
 
     ::ng-deep [md3-icon-button] {
-        --border-top-start-r: var(--inner-radius);
-        --border-bottom-start-r: var(--inner-radius);
-        --border-top-end-r: var(--outer-radius);
-        --border-bottom-end-r: var(--outer-radius);
         --padding-start: 0.8125em;
         --padding-end: 0.8125em;
-
-        position: relative;
-        padding-inline-start: calc(var(--padding-start) - var(--border-size) - var(--trailing-padding-diff));
-        padding-inline-end: calc(var(--padding-end) - var(--border-size) + var(--trailing-padding-diff));
-        
-        &:not(:disabled):focus {
-            z-index: 2;
-        }
-        
-        &.md3-menu-active {
-            --border-top-start-r: var(--outer-radius);
-            --border-bottom-start-r: var(--outer-radius);
-
-            padding-inline-start: calc(var(--padding-start) - var(--border-size));
-            padding-inline-end: calc(var(--padding-end) - var(--border-size));
-
-            &.md3-flip-icon [md3-icon-element] {
-                transform: rotate(180deg);
-            }
-        }
 
         &.md3-standard {
             --background-color: rgb(var(--md-scheme-surface-container-low));
             --foreground-color: rgb(var(--md-scheme-primary));
             --state-color: var(--md-scheme-primary);
             --border-size: 0em;
-
+    
             box-shadow: var(--md-shadow-1dp);
-
+    
             &:disabled {
                 box-shadow: var(--md-shadow-0dp);
             }
@@ -169,5 +143,54 @@
                 font-size: 3.125em !important;
             }
         }
+
+        &[md3-main-action] {
+            --border-top-start-r: var(--outer-radius);
+            --border-bottom-start-r: var(--outer-radius);
+            --border-top-end-r: var(--inner-radius);
+            --border-bottom-end-r: var(--inner-radius);
+
+            padding-inline-start: calc(var(--padding-end) - var(--border-size) + var(--trailing-padding-diff));
+            padding-inline-end: calc(var(--padding-start) - var(--border-size) - var(--trailing-padding-diff));
+
+            &:not(:disabled):focus {
+                z-index: 2;
+            }
+        }
+
+        &:not([md3-main-action]) {
+            --border-top-start-r: var(--inner-radius);
+            --border-bottom-start-r: var(--inner-radius);
+            --border-top-end-r: var(--outer-radius);
+            --border-bottom-end-r: var(--outer-radius);
+    
+            padding-inline-start: calc(var(--padding-start) - var(--border-size) - var(--trailing-padding-diff));
+            padding-inline-end: calc(var(--padding-end) - var(--border-size) + var(--trailing-padding-diff));
+            
+            &:not(:disabled):focus {
+                z-index: 2;
+            }
+    
+            &.md3-flip-icon [md3-icon-element] {
+                transition: transform var(--md-motion-standard-fast-spatial-duration) var(--md-motion-standard-fast-spatial-easing);
+            }
+            
+            &.md3-menu-active {
+                --border-top-start-r: var(--outer-radius);
+                --border-bottom-start-r: var(--outer-radius);
+    
+                padding-inline-start: calc(var(--padding-start) - var(--border-size));
+                padding-inline-end: calc(var(--padding-end) - var(--border-size));
+    
+                &.md3-flip-icon:dir(ltr) [md3-icon-element] {
+                    transform: rotate(180deg);
+                }
+    
+                &.md3-flip-icon:dir(rtl) [md3-icon-element] {
+                    transform: rotate(-180deg);
+                }
+            }
+        }
     }
+
 }

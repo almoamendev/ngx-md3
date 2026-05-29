@@ -100,6 +100,15 @@
             font-size: 1.25em !important;
         }
 
+        &::before {
+            content: '';
+            position: absolute;
+            display: block;
+            min-width: 3rem;
+            min-height: 3rem;
+            width: 100%;
+        }
+
         &.md3-narrow {
             --inline-padding: calc(0.25em - var(--border-size));
         }
@@ -125,8 +134,16 @@
         }
     }
 
-    // &.md3-small {
-    // }
+    &.md3-small {
+        &::before {
+            content: '';
+            position: absolute;
+            display: block;
+            min-width: 3rem;
+            min-height: 3rem;
+            width: 100%;
+        }
+    }
 
     &.md3-medium {
         --border-radius: 3.5em;
