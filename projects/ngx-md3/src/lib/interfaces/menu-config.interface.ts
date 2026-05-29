@@ -50,6 +50,7 @@ export interface MenuConfig<D = unknown> {
 
     /**
      * Distance in pixels the menu should keep from the viewport edge.
+     * Values below 0.5em are raised to 0.5em.
      */
     viewportMargin?: number;
 

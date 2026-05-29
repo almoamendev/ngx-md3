@@ -1,6 +1,6 @@
 import {
     ConnectedPosition,
-    FlexibleConnectedPositionStrategyOrigin,
+    FlexibleConnectedPositionStrategy,
     Overlay,
     OverlayConfig,
     OverlayRef,
@@ -16,6 +16,7 @@ import { filter, take } from 'rxjs';
 interface ResolvedMenuConfig<D = unknown> extends MenuConfig<D> {
     data: D | undefined;
     bindDataToInputs: boolean;
+    isSubMenu: boolean;
     menuColors: 'standard' | 'vibrant';
     xPosition: MenuPositionX;
     yPosition: MenuPositionY;
@@ -29,6 +30,18 @@ interface ResolvedMenuConfig<D = unknown> extends MenuConfig<D> {
     injector: Injector;
 }
 
+interface InternalMenuConfig<D = unknown> extends MenuConfig<D> {
+    isSubMenu?: boolean;
+}
+
+interface CreatedMenuOverlay {
+    overlayRef: OverlayRef;
+    positionStrategy?: FlexibleConnectedPositionStrategy;
+    origin: ResolvedMenuOrigin;
+}
+
+type ResolvedMenuOrigin = Element | { height?: number; width?: number; x: number; y: number };
+type ClientRect = Pick<DOMRectReadOnly, 'bottom' | 'height' | 'left' | 'right' | 'top' | 'width' | 'x' | 'y'>;
 type SubMenuPositionX = Extract<MenuPositionX, 'before' | 'after'>;
 type SubMenuVerticalAlignment = 'top' | 'bottom';
 
@@ -47,7 +60,8 @@ export class MenuService {
         const menuConfig = this.mergeConfig(config);
         const previouslyFocusedElement = this.getFocusedElement();
         const triggerElement = this.resolveTriggerElement(menuConfig.origin, previouslyFocusedElement);
-        const overlayRef = this.createOverlay(menuConfig, previouslyFocusedElement);
+        const menuOverlay = this.createOverlay(menuConfig, previouslyFocusedElement);
+        const overlayRef = menuOverlay.overlayRef;
         const menuRef = new MenuRef<T, R>(
             overlayRef,
             previouslyFocusedElement
@@ -65,6 +79,7 @@ export class MenuService {
         const contentComponentRef = menuComponentRef.instance.attachContent(component, injector);
 
         this.bindDataToInputs(contentComponentRef, menuConfig);
+        this.flipPositionIfPushBreaksAnchor(menuOverlay, menuConfig);
         menuRef.componentInstance = contentComponentRef.instance;
         menuRef.menuInstance = menuComponentRef.instance;
         this.bindTriggerActiveState(triggerElement, overlayRef, menuRef);
@@ -83,33 +98,33 @@ export class MenuService {
         const offsetX = config.offsetX ?? 0;
         const offsetY = config.offsetY ?? 0;
 
-        return this.open<T, D, R>(component, {
+        const subMenuConfig: InternalMenuConfig<D> = {
             ...config,
+            isSubMenu: true,
             xPosition,
             yPosition,
             overlapTrigger: config.overlapTrigger ?? true,
             offsetX,
             offsetY,
-            positions: config.positions ?? this.getSubMenuConnectedPositions(
-                xPosition,
-                yPosition,
-                offsetX,
-                offsetY,
-            ),
-        });
+        };
+
+        return this.open<T, D, R>(component, subMenuConfig);
     }
 
     private mergeConfig<D>(config: MenuConfig<D>): ResolvedMenuConfig<D> {
+        const viewportMargin = this.getViewportMargin(config.viewportMargin);
+
         return {
             data: config.data,
             bindDataToInputs: config.bindDataToInputs ?? false,
+            isSubMenu: (config as InternalMenuConfig<D>).isSubMenu ?? false,
             menuColors: config.menuColors ?? 'standard',
             xPosition: config.xPosition ?? 'start',
             yPosition: config.yPosition ?? 'below',
             overlapTrigger: config.overlapTrigger ?? false,
             offsetX: config.offsetX ?? 0,
             offsetY: config.offsetY ?? 4,
-            viewportMargin: config.viewportMargin ?? 8,
+            viewportMargin,
             positions: config.positions,
             scrollStrategy: config.scrollStrategy ?? 'reposition',
             viewContainerRef: config.viewContainerRef,
@@ -120,14 +135,15 @@ export class MenuService {
     private createOverlay(
         config: ResolvedMenuConfig,
         fallbackOrigin: HTMLElement | null,
-    ): OverlayRef {
+    ): CreatedMenuOverlay {
+        const origin = this.resolveOrigin(config.origin, fallbackOrigin);
         const positionStrategy = this.overlay.position()
-            .flexibleConnectedTo(this.resolveOrigin(config.origin, fallbackOrigin))
+            .flexibleConnectedTo(origin)
             .withFlexibleDimensions(false)
             .withGrowAfterOpen(true)
             .withPush(true)
             .withViewportMargin(config.viewportMargin)
-            .withPositions(config.positions ?? this.getConnectedPositions(config))
+            .withPositions(config.positions ?? this.getInitialConnectedPositions(config))
             .withTransformOriginOn('.md3-menu-container');
 
         const overlayConfig = new OverlayConfig({
@@ -138,7 +154,11 @@ export class MenuService {
             scrollStrategy: this.getScrollStrategy(config.scrollStrategy),
         });
 
-        return this.overlay.create(overlayConfig);
+        return {
+            overlayRef: this.overlay.create(overlayConfig),
+            positionStrategy: config.positions ? undefined : positionStrategy,
+            origin,
+        };
     }
 
     private bindTriggerActiveState<T, R>(
@@ -160,7 +180,7 @@ export class MenuService {
     private resolveOrigin(
         origin: MenuPositionOrigin | undefined,
         fallbackOrigin: HTMLElement | null,
-    ): FlexibleConnectedPositionStrategyOrigin {
+    ): ResolvedMenuOrigin {
         const resolvedOrigin = origin ?? fallbackOrigin;
 
         if (resolvedOrigin) {
@@ -179,7 +199,7 @@ export class MenuService {
                 return resolvedOrigin.nativeElement;
             }
 
-            return resolvedOrigin;
+            return resolvedOrigin as ResolvedMenuOrigin;
         }
 
         const viewport = this.document.defaultView;
@@ -213,36 +233,138 @@ export class MenuService {
         return resolvedOrigin instanceof HTMLElement ? resolvedOrigin : null;
     }
 
-    private getConnectedPositions(config: ResolvedMenuConfig): ConnectedPosition[] {
-        const preferredX = config.xPosition;
-        const fallbackX = this.getFallbackXPosition(preferredX);
-        const preferredY = config.yPosition;
-        const fallbackY = this.getFallbackYPosition(preferredY);
+    private flipPositionIfPushBreaksAnchor(
+        menuOverlay: CreatedMenuOverlay,
+        config: ResolvedMenuConfig,
+    ): void {
+        if (!menuOverlay.positionStrategy) {
+            return;
+        }
 
-        return [
-            this.createConnectedPosition(preferredX, preferredY, config),
-            this.createConnectedPosition(preferredX, fallbackY, config),
-            this.createConnectedPosition(fallbackX, preferredY, config),
-            this.createConnectedPosition(fallbackX, fallbackY, config),
-        ];
+        menuOverlay.overlayRef.updatePosition();
+
+        const fallbackPosition = this.getFallbackPositionAfterPush(
+            config,
+            this.getOriginClientRect(menuOverlay.origin),
+            menuOverlay.overlayRef.overlayElement.getBoundingClientRect(),
+        );
+
+        if (!fallbackPosition) {
+            return;
+        }
+
+        menuOverlay.positionStrategy.withPositions([fallbackPosition]);
+        menuOverlay.overlayRef.updatePosition();
     }
 
-    private getSubMenuConnectedPositions(
-        xPosition: SubMenuPositionX,
-        yPosition: MenuPositionY,
-        offsetX: number,
-        offsetY: number,
-    ): ConnectedPosition[] {
-        const fallbackX = this.getFallbackXPosition(xPosition) as SubMenuPositionX;
-        const preferredY = this.getSubMenuVerticalAlignment(yPosition);
-        const fallbackY = this.getFallbackSubMenuVerticalAlignment(preferredY);
+    private getInitialConnectedPositions(config: ResolvedMenuConfig): ConnectedPosition[] {
+        return [this.getPreferredConnectedPosition(config)];
+    }
 
-        return [
-            this.createSubMenuConnectedPosition(xPosition, preferredY, offsetX, offsetY),
-            this.createSubMenuConnectedPosition(xPosition, fallbackY, offsetX, offsetY),
-            this.createSubMenuConnectedPosition(fallbackX, preferredY, offsetX, offsetY),
-            this.createSubMenuConnectedPosition(fallbackX, fallbackY, offsetX, offsetY),
-        ];
+    private getPreferredConnectedPosition(config: ResolvedMenuConfig): ConnectedPosition {
+        if (config.isSubMenu) {
+            return this.createSubMenuConnectedPosition(
+                this.getSubMenuXPosition(config.xPosition),
+                this.getSubMenuVerticalAlignment(config.yPosition),
+                config.offsetX,
+                config.offsetY,
+            );
+        }
+
+        return this.createConnectedPosition(config.xPosition, config.yPosition, config);
+    }
+
+    private getFallbackPositionAfterPush(
+        config: ResolvedMenuConfig,
+        originRect: ClientRect,
+        overlayRect: ClientRect,
+    ): ConnectedPosition | null {
+        const xPosition = this.shouldFlipXPosition(
+            config,
+            originRect,
+            overlayRect,
+        )
+            ? this.getFallbackXPosition(config.xPosition)
+            : config.xPosition;
+        const yPosition = this.shouldFlipYPosition(
+            config,
+            originRect,
+            overlayRect,
+        )
+            ? this.getFallbackYPosition(config.yPosition)
+            : config.yPosition;
+
+        if (xPosition === config.xPosition && yPosition === config.yPosition) {
+            return null;
+        }
+
+        return this.getPreferredConnectedPosition({
+            ...config,
+            xPosition,
+            yPosition,
+        });
+    }
+
+    private shouldFlipXPosition(
+        config: ResolvedMenuConfig,
+        originRect: ClientRect,
+        overlayRect: ClientRect,
+    ): boolean {
+        const tolerance = config.viewportMargin;
+
+        switch (config.xPosition) {
+            case 'before':
+                return overlayRect.right > originRect.left + tolerance;
+
+            case 'after':
+                return overlayRect.left < originRect.right - tolerance;
+
+            case 'start':
+                return originRect.left < overlayRect.left - tolerance
+                    || originRect.left > overlayRect.right + tolerance;
+
+            case 'end':
+                return originRect.right < overlayRect.left - tolerance
+                    || originRect.right > overlayRect.right + tolerance;
+
+            case 'center':
+            default:
+                return false;
+        }
+    }
+
+    private shouldFlipYPosition(
+        config: ResolvedMenuConfig,
+        originRect: ClientRect,
+        overlayRect: ClientRect,
+    ): boolean {
+        const tolerance = config.viewportMargin;
+
+        if (config.isSubMenu) {
+            const anchorY = config.yPosition === 'above' ? originRect.bottom : originRect.top;
+
+            return anchorY < overlayRect.top - tolerance
+                || anchorY > overlayRect.bottom + tolerance;
+        }
+
+        if (config.overlapTrigger) {
+            const anchorY = config.yPosition === 'above' ? originRect.top : originRect.bottom;
+
+            return anchorY < overlayRect.top - tolerance
+                || anchorY > overlayRect.bottom + tolerance;
+        }
+
+        switch (config.yPosition) {
+            case 'above':
+                return overlayRect.bottom > originRect.top + tolerance;
+
+            case 'below':
+                return overlayRect.top < originRect.bottom - tolerance;
+
+            case 'center':
+            default:
+                return false;
+        }
     }
 
     private createConnectedPosition(
@@ -391,10 +513,35 @@ export class MenuService {
         return position === 'above' ? 'bottom' : 'top';
     }
 
-    private getFallbackSubMenuVerticalAlignment(
-        alignment: SubMenuVerticalAlignment,
-    ): SubMenuVerticalAlignment {
-        return alignment === 'top' ? 'bottom' : 'top';
+    private getOriginClientRect(origin: ResolvedMenuOrigin): ClientRect {
+        if ('getBoundingClientRect' in origin) {
+            return origin.getBoundingClientRect();
+        }
+
+        return {
+            x: origin.x,
+            y: origin.y,
+            top: origin.y,
+            right: origin.x,
+            bottom: origin.y,
+            left: origin.x,
+            width: 0,
+            height: 0,
+        };
+    }
+
+    private getViewportMargin(configuredMargin: number | undefined): number {
+        const minimumMargin = this.getHalfEmInPixels();
+
+        return Math.max(configuredMargin ?? minimumMargin, minimumMargin);
+    }
+
+    private getHalfEmInPixels(): number {
+        const viewport = this.document.defaultView;
+        const fontSize = viewport?.getComputedStyle(this.document.documentElement).fontSize;
+        const pixels = fontSize ? Number.parseFloat(fontSize) * 0.5 : 8;
+
+        return Number.isFinite(pixels) ? pixels : 8;
     }
 
     private getOffsetY(position: MenuPositionY, config: ResolvedMenuConfig): number {
