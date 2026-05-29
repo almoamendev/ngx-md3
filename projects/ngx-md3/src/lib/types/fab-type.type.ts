@@ -1,0 +1,1 @@
+export type FabType = 'tonal-primary' | 'tonal-secondary' | 'tonal-tertiary' | 'primary' | 'secondary' | 'tertiary';

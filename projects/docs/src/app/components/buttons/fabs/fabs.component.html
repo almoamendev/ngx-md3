@@ -2,7 +2,7 @@
 
 <ul>
     <li>@Input() button-size: 'small' | 'medium' | 'large' = 'small';</li>
-    <li>@Input() button-color: 'tonal-primary' | 'tonal-secondary' | 'tonal-tertiary' | 'primary' | 'secondary' | 'tertiary' = 'tonal-primary';</li>
+    <li>@Input() button-type: 'tonal-primary' | 'tonal-secondary' | 'tonal-tertiary' | 'primary' | 'secondary' | 'tertiary' = 'tonal-primary';</li>
     <li>@Input() extended-fab: boolean = false;</li>
 </ul>
 
@@ -10,29 +10,29 @@
     <button md3-fab>
         <md3-icon md3-icon-element>person</md3-icon>
     </button>
-    <button md3-fab [extended-fab]="true">
+    <button md3-fab extended-fab>
         <md3-icon md3-icon-element>person</md3-icon>
         Extended button
     </button>
 </div>
 
 <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
-    <button md3-fab button-color="tonal-primary" [extended-fab]="true">
+    <button md3-fab button-type="tonal-primary" extended-fab>
         Tonal primary
     </button>
-    <button md3-fab button-color="tonal-secondary" [extended-fab]="true">
+    <button md3-fab button-type="tonal-secondary" extended-fab>
         Tonal secondary
     </button>
-    <button md3-fab button-color="tonal-tertiary" [extended-fab]="true">
+    <button md3-fab button-type="tonal-tertiary" extended-fab>
         Tonal tertiary
     </button>
-    <button md3-fab button-color="primary" [extended-fab]="true">
+    <button md3-fab button-type="primary" extended-fab>
         Primary
     </button>
-    <button md3-fab button-color="secondary" [extended-fab]="true">
+    <button md3-fab button-type="secondary" extended-fab>
         Secondary
     </button>
-    <button md3-fab button-color="tertiary" [extended-fab]="true">
+    <button md3-fab button-type="tertiary" extended-fab>
         Tertiary
     </button>
 </div>

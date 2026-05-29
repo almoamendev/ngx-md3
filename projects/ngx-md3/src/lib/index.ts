@@ -7,6 +7,7 @@ export * from './types/icon-button-width.type';
 export * from './types/split-button-type.type';
 export * from './types/button-group-type.type';
 export * from './types/button-group-selection.type';
+export * from './types/fab-type.type';
 export * from './types/dialog-role.type';
 export * from './types/chip-type.type';
 
