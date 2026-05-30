@@ -10,10 +10,10 @@
 @import "https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200";
 @import "https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200";
 
-@import '../tokens/md-scheme.scss';
-@import '../tokens/md-elevation.scss';
-@import '../tokens/md-motion.scss';
-@import '../tokens/md-border-radius.scss';
+@import '../md-scheme.scss';
+@import '../md-elevation.scss';
+@import '../md-motion.scss';
+@import '../md-border-radius.scss';
 
 @-ms-viewport {
     width: device-width;

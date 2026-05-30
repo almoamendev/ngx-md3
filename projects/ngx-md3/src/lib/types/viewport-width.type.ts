@@ -1,0 +1,1 @@
+export type ViewportWidth = 'compact' | 'medium' | 'expanded' | 'large' | 'extra-large';

@@ -1,0 +1,1 @@
+export type ViewportHeight = 'compact' | 'medium' | 'expanded';

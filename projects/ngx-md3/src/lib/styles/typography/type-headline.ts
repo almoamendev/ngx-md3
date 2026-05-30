@@ -1,5 +1,5 @@
 import { Directive, ElementRef, Input } from '@angular/core';
-import { TextColor } from '../types/text-color.type';
+import { TextColor } from '../../types/text-color.type';
 
 @Directive({
     selector: '[md3-type-headline]',

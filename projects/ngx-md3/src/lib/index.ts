@@ -16,11 +16,15 @@ export * from './interfaces/dialog-config.interface';
 export * from './interfaces/menu-config.interface';
 
 // typography
-export * from './typography/type-display';
-export * from './typography/type-headline';
-export * from './typography/type-title';
-export * from './typography/type-body';
-export * from './typography/type-label';
+export * from './styles/typography/type-display';
+export * from './styles/typography/type-headline';
+export * from './styles/typography/type-title';
+export * from './styles/typography/type-body';
+export * from './styles/typography/type-label';
+
+// foundations
+export * from './foundations/layout.service';
+export * from './foundations/scaffold/scaffold';
 
 // common components and directives
 export * from './components/common/state-component';

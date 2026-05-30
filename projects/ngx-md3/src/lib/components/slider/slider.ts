@@ -3,7 +3,7 @@ import { AbstractControl, FormControlName } from '@angular/forms';
 import { fromEvent } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { InputElement } from '../common/input-element';
-import { TypeBody } from '../../typography/type-body';
+import { TypeBody } from '../../styles/typography/type-body';
 
 @Component({
     selector: 'md3-slider',
