@@ -72,6 +72,9 @@ export * from './components/loading-and-progress/loading-indicator/loading-indic
 export * from './components/loading-and-progress/linear-progress-indicator/linear-progress-indicator';
 export * from './components/loading-and-progress/circular-progress-indicator/circular-progress-indicator';
 
+// navigations
+export * from './components/navigations/navigation-rail/navigation-rail';
+
 // text fields
 export * from './components/common/input-element';
 export * from './components/text-field/text-field';

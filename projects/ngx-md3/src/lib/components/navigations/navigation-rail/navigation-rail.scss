@@ -1,0 +1,44 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    padding: 2.75em 1.25em;
+
+    &.md3-hidden {
+        display: none;
+    }
+
+    .md3-nav-header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.25em;
+        margin-bottom: 2.5em;
+        
+        .md3-menu-button {
+            margin: 0.5em 0;
+            
+            ::ng-deep [md3-menu-expand] {
+                display: inline-block;
+            }
+    
+            ::ng-deep [md3-menu-collapse] {
+                display: none;
+            }
+        }
+    }
+
+    &.md3-expanded {
+        .md3-nav-header {
+            .md3-menu-button {
+                ::ng-deep [md3-menu-expand] {
+                    display: none;
+                }
+                
+                ::ng-deep [md3-menu-collapse] {
+                    display: inline-block;
+                }
+            }
+        }
+    }
+}

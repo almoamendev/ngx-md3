@@ -19,6 +19,7 @@ import { DialogsComponent } from './components/dialogs/dialogs.component';
 import { ChipsComponent } from './components/chips/chips.component';
 import { MenusComponent } from './components/menus/menus.component';
 import { SplitButtonsComponent } from './components/buttons/split-buttons/split-buttons.component';
+import { NavigationRailComponent } from './components/navigations/navigation-rail/navigation-rail.component';
 
 export const routes: Routes = [
     {
@@ -77,6 +78,15 @@ export const routes: Routes = [
                     {
                         path: 'dialogs',
                         component: DialogsComponent,
+                    },
+                    {
+                        path: 'navigations',
+                        children: [
+                            {
+                                path: 'navigation-rail',
+                                component: NavigationRailComponent,
+                            },
+                        ],
                     },
                     {
                         path: 'switches',

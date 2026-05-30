@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
+import { LayoutService } from '../layout.service';
 
 @Component({
     selector: 'md3-scaffold',
@@ -7,5 +8,5 @@ import { Component } from '@angular/core';
     styleUrl: './scaffold.scss',
 })
 export class Scaffold {
-
+    private layoutService = Inject(LayoutService);
 }

@@ -1,4 +1,4 @@
-import { booleanAttribute, Component, effect, ElementRef, input, Input, signal } from '@angular/core';
+import { booleanAttribute, Component, effect, ElementRef, input, Input, model, signal } from '@angular/core';
 import { StateComponent } from '../../common/state-component';
 import { FabType } from '../../../types/fab-type.type';
 
@@ -12,42 +12,33 @@ import { FabType } from '../../../types/fab-type.type';
     ],
 })
 export class FloatingActionButton {
-    @Input('button-size') set size(value: 'small' | 'medium' | 'large') {
-        this.buttonSize.update((current) => {
-            if (value == current) {
-                return current;
-            }
-
-            this.element.classList.remove('md3-' + current);
-            return value;
-        });
-    };
-    @Input('button-type') set type(value: FabType) {
-        this.buttonType.update((current) => {
-            if (value == current) {
-                return current;
-            }
-
-            this.element.classList.remove('md3-' + current);
-            return value;
-        });
-    };
-
-    public isExtended = input<boolean, unknown>(false, {
-        alias: 'extended-fab',
-        transform: booleanAttribute,
+    public buttonSize = model<'small' | 'medium' | 'large'>('small', {
+        alias: 'button-size',
     });
-    
-    private buttonSize = signal<'small' | 'medium' | 'large'>('small');
-    private buttonType = signal<FabType>('tonal-primary');
+    public buttonType = model<FabType>('tonal-primary', {
+        alias: 'button-type',
+    });
+    public isExtended = model<boolean>(false, {
+        alias: 'extended',
+    });
 
     constructor(private el: ElementRef) {
-        effect(() => {
-            this.element.classList.add('md3-' + this.buttonSize());
+        effect((onCleanup) => {
+            const buttonSize = 'md3-' + this.buttonSize();
+            this.element.classList.add(buttonSize);
+
+            onCleanup(() => {
+                this.element.classList.remove(buttonSize);
+            });
         });
 
-        effect(() => {
-            this.element.classList.add('md3-' + this.buttonType());
+        effect((onCleanup) => {
+            const buttonType = 'md3-' + this.buttonType();
+            this.element.classList.add(buttonType);
+
+            onCleanup(() => {
+                this.element.classList.remove(buttonType);
+            });
         });
         
         effect(() => {
