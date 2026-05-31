@@ -60,11 +60,20 @@
             display: flex;
             flex-direction: column;
             align-items: stretch;
-            gap: 0.25em;
             width: 100%;
             transition: opacity var(--md-motion-standard-default-spatial-duration) var(--md-motion-standard-default-spatial-easing);
     
             ::ng-deep [md3-nav-item] {
+                margin-bottom: 0.25em;
+
+                &.md3-hide-on-collapse {
+                    margin-bottom: 0;
+                    transform: scale(0);
+                    opacity: 0;
+                    max-height: 0em;
+                    max-width: 0em;
+                }
+
                 .md3-item-container {
                     padding: 0.375em 0;
                     flex-direction: column;
@@ -187,11 +196,19 @@
             }
 
             .md3-menu-container {
-                gap: 0.5em;
                 opacity: 1;
 
                 ::ng-deep [md3-nav-item] {
                     padding-inline: 1.25em;
+                    margin-bottom: 0.5em;
+
+                    &.md3-hide-on-collapse {
+                        margin-bottom: 0.5em;
+                        transform: scale(1);
+                        opacity: 1;
+                        max-height: 5em;
+                        max-width: 100%;
+                    }
                     
                     .md3-item-container {
                         padding: 0 1em;
