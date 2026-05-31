@@ -2,21 +2,24 @@
     display: flex;
     flex-direction: column;
     align-items: start;
-    padding: 2.75em 1.25em;
+    padding: 2.75em 1.25em 0;
+    background-color: rgb(var(--md-scheme-surface));
+    color: rgb(var(--md-scheme-on-surface));
+    width: 6em;
 
-    &.md3-hidden {
+    .md3-hidden {
         display: none;
     }
 
     .md3-nav-header {
         display: flex;
         flex-direction: column;
-        align-items: center;
+        align-items: start;
         gap: 0.25em;
         margin-bottom: 2.5em;
         
         .md3-menu-button {
-            margin: 0.5em 0;
+            margin: 0.5em;
             
             ::ng-deep [md3-menu-expand] {
                 display: inline-block;
@@ -26,9 +29,45 @@
                 display: none;
             }
         }
+
+        ::ng-deep [md3-fab] {
+            box-shadow: var(--md-shadow-0dp);
+        }
+    }
+
+    .md3-menu-container {
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        gap: 0.25em;
+        width: 100%;
+
+        ::ng-deep [md3-nav-item] {
+            padding: 0.375em 0;
+            flex-direction: column;
+            width: 100%;
+
+            &::before, &::after {
+                top: 0.375em;
+                height: 2em;
+                width: 3.5em;
+                border-radius: 1em;
+            }
+        }
     }
 
     &.md3-expanded {
+        min-width: 13.75em;
+        max-width: 22.5em;
+        width: fit-content;
+
+        &.md3-expanded-modal {
+            background-color: rgb(var(--md-scheme-surface-container));
+            border-start-end-radius: 1em;
+            border-end-end-radius: 1em;
+            box-shadow: var(--md-shadow-3dp);
+        }
+
         .md3-nav-header {
             .md3-menu-button {
                 ::ng-deep [md3-menu-expand] {
@@ -37,6 +76,34 @@
                 
                 ::ng-deep [md3-menu-collapse] {
                     display: inline-block;
+                }
+            }
+        }
+
+        .md3-menu-container {
+            gap: 0.5em;
+
+            ::ng-deep [md3-nav-item] {
+                flex-direction: row;
+                width: auto;
+                padding: 0 1em;
+                height: 3.5em;
+
+                &::before, &::after {
+                    inset: 0;
+                    height: auto;
+                    width: auto;
+                    border-radius: 1.75em;
+                }
+
+                .md3-icon-container {
+                    padding: 0;
+                }
+
+                .md3-label {
+                    font-size: 0.875em;
+                    line-height: 1.428571em;
+                    letter-spacing: 0.007143em;
                 }
             }
         }

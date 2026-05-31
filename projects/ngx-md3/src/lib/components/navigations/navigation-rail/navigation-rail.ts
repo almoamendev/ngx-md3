@@ -59,6 +59,7 @@ export class NavigationRail {
 
     public menuExpandIcon = computed(() => this.menuIcons().find((icon) => icon.element.hasAttribute('md3-menu-expand')));
     public menuCollapseIcon = computed(() => this.menuIcons().find((icon) => icon.element.hasAttribute('md3-menu-collapse')));
+    public hasFab = computed(() => !!this.floatingActionButton());
 
     constructor() {
         effect((onCleanup) => {

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FloatingActionButton, IconElement, MaterialIcon, NavigationRail } from '@vip9008/ngx-md3';
+import { FloatingActionButton, IconElement, MaterialIcon, NavigationRail, Button, NavigationItem } from '@vip9008/ngx-md3';
 
 @Component({
     selector: 'app-navigation-rail.component',
@@ -8,10 +8,12 @@ import { FloatingActionButton, IconElement, MaterialIcon, NavigationRail } from 
         FloatingActionButton,
         MaterialIcon,
         IconElement,
+        NavigationItem,
+        Button
     ],
     templateUrl: './navigation-rail.component.html',
     styleUrl: './navigation-rail.component.scss',
 })
 export class NavigationRailComponent {
-
+    public hideMenuButton: boolean = false;
 }

@@ -1,14 +1,19 @@
-<div class="md3-nav-header">
-    <button md3-icon-button button-type="standard" class="md3-menu-button" [class.md3-hidden]="hideMenuButton()" (click)="toggle()">
-        <ng-content select="[md3-icon-element][md3-menu-expand]"></ng-content>
-        @if (!menuExpandIcon()) {
-            <md3-icon md3-icon-element md3-menu-expand>menu</md3-icon>
-        }
-        <ng-content select="[md3-icon-element][md3-menu-collapse]"></ng-content>
-        @if (!menuCollapseIcon()) {
-            <md3-icon md3-icon-element md3-menu-collapse bi-directional>menu_open</md3-icon>
-        }
-    </button>
+<div class="md3-nav-header" [class.md3-hidden]="hideMenuButton() && !hasFab()">
+    @if (!hideMenuButton()) {
+        <button md3-icon-button button-type="standard" class="md3-menu-button" (click)="toggle()">
+            <ng-content select="[md3-icon-element][md3-menu-expand]"></ng-content>
+            @if (!menuExpandIcon()) {
+                <md3-icon md3-icon-element md3-menu-expand>menu</md3-icon>
+            }
+            <ng-content select="[md3-icon-element][md3-menu-collapse]"></ng-content>
+            @if (!menuCollapseIcon()) {
+                <md3-icon md3-icon-element md3-menu-collapse bi-directional>menu_open</md3-icon>
+            }
+        </button>
+    }
 
     <ng-content select="[md3-fab]"></ng-content>
+</div>
+<div class="md3-menu-container">
+    <ng-content select="[md3-nav-item]"></ng-content>
 </div>

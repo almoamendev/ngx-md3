@@ -1,0 +1,102 @@
+:host {
+    --icon-color: rgb(var(--md-scheme-on-surface-variant));
+    --label-color: rgb(var(--md-scheme-on-surface-variant));
+    --state-color: rgb(var(--md-scheme-on-secondary-container));
+    --active-indicator-color: transparent;
+
+    font-size: 1em;
+    text-decoration: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    display: inline-flex;
+    gap: 0.25em;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none !important;
+    white-space: nowrap;
+    background-color: transparent;
+    padding: 0;
+    transition: all var(--md-motion-expressive-default-spatial-duration) var(--md-motion-expressive-default-spatial-easing);
+
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none;   /* Chrome/Safari/Opera */
+    -moz-user-select: none;      /* Firefox */
+    -ms-user-select: none;       /* Internet Explorer/Edge */
+    user-select: none;
+
+    &::before {
+        content: '';
+        position: absolute;
+        z-index: 0;
+        transition: all var(--md-motion-expressive-default-spatial-duration) var(--md-motion-expressive-default-spatial-easing);
+        transform: scale(0);
+        background-color: var(--active-indicator-color);
+    }
+
+    &::after {
+        content: '';
+        position: absolute;
+        z-index: 1;
+        transition: all var(--md-motion-expressive-default-spatial-duration) var(--md-motion-expressive-default-spatial-easing);
+        transform: scale(0);
+        opacity: 0;
+        background-color: var(--state-color);
+    }
+
+    &:hover::after {
+        transform: scale(1);
+        opacity: 0.08;
+    }
+
+    &:focus::after {
+        transform: scale(1);
+        opacity: 0.1;
+    }
+
+    &:active::after {
+        transform: scale(1);
+        opacity: 0.1;
+    }
+
+    .md3-icon-container {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.25em;
+        z-index: 2;
+        color: var(--icon-color);
+
+        ::ng-deep [md3-icon-element] {
+            font-size: 1.5em !important;
+            line-height: 1;
+            height: 1em !important;
+            width: 1em !important;
+        }
+    }
+
+    .md3-label {
+        font-size: 0.75em;
+        font-weight: 500;
+        line-height: 1.333333em;
+        letter-spacing: 0.041667em;
+        white-space: nowrap;
+        z-index: 2;
+        color: var(--label-color);
+    }
+
+    &.md3-active {
+        --icon-color: rgb(var(--md-scheme-secondary));
+        --label-color: rgb(var(--md-scheme-on-secondary-container));
+        --active-indicator-color: rgb(var(--md-scheme-secondary-container));
+
+        &::before {
+            transform: scale(1);
+        }
+    }
+}
