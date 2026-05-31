@@ -2,8 +2,8 @@ import { Component, Inject } from '@angular/core';
 import { LayoutService } from '../layout.service';
 
 @Component({
+    standalone: false,
     selector: 'md3-scaffold',
-    imports: [],
     templateUrl: './scaffold.html',
     styleUrl: './scaffold.scss',
 })

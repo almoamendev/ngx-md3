@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IconElement, InputElement, MaterialIcon, Switch } from '@vip9008/ngx-md3';
 
 @Component({
-    selector: 'app-switches.component',
+    selector: 'app-switches',
     imports: [
         Switch,
         InputElement,

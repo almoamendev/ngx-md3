@@ -1,0 +1,42 @@
+:host {
+    display: grid;
+    min-block-size: 100dvh;
+    grid-template-areas:
+        "start top end"
+        "start content end"
+        "start bottom end";
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+
+    ::ng-deep {
+        [md3-scaffold-bar=top] {
+            grid-area: top;
+            justify-self: stretch;
+            align-self: stretch;
+        }
+    
+        [md3-scaffold-rail=leading] {
+            grid-area: start;
+            justify-self: stretch;
+            align-self: stretch;
+        }
+    
+        [md3-scaffold-pane] {
+            grid-area: content;
+            min-inline-size: 0;
+            min-block-size: 0;
+        }
+    
+        [md3-scaffold-rail=trailing] {
+            grid-area: end;
+            justify-self: stretch;
+            align-self: stretch;
+        }
+    
+        [md3-scaffold-bar=bottom] {
+            grid-area: bottom;
+            justify-self: stretch;
+            align-self: stretch;
+        }
+    }
+}

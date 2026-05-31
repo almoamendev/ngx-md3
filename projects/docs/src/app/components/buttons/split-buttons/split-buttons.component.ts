@@ -3,7 +3,7 @@ import { Button, IconButton, IconElement, MaterialIcon, MenuService, SplitButton
 import { SmapleMenu } from '../../menus/smaple-menu/smaple-menu';
 
 @Component({
-    selector: 'app-split-buttons.component',
+    selector: 'app-split-buttons',
     imports: [
         SplitButton,
         Button,

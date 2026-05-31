@@ -1,19 +1,14 @@
 import { Component, ElementRef, booleanAttribute, computed, contentChild, contentChildren, effect, inject, input, model } from '@angular/core';
 import { LayoutService } from '../../../foundations/layout.service';
-import { IconButton } from '../../buttons/icon-button/icon-button';
 import { IconElement } from '../../common/icon-element';
-import { MaterialIcon } from '../../common/material-icon/material-icon';
 import { FloatingActionButton } from '../../buttons/floating-action-button/floating-action-button';
 
 type ExpandedLayout = 'standard' | 'modal';
-type CollapsedLayout = 'compact' | 'hidden';
+type CollapsedLayout = 'compact' | 'narrow' | 'hidden';
 
 @Component({
+    standalone: false,
     selector: 'md3-navigation-rail',
-    imports: [
-        IconButton,
-        MaterialIcon,
-    ],
     templateUrl: './navigation-rail.html',
     styleUrl: './navigation-rail.scss',
 })

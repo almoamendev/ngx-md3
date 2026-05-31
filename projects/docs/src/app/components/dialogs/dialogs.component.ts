@@ -3,7 +3,7 @@ import { Button, DialogService } from '@vip9008/ngx-md3';
 import { SampleDialog } from './sample-dialog/sample-dialog';
 
 @Component({
-    selector: 'app-dialogs.component',
+    selector: 'app-dialogs',
     imports: [
         Button
     ],

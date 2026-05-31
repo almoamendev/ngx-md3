@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Checkbox, Divider, InputElement, ListModule, RadioButton, TypeBody } from '@vip9008/ngx-md3';
 
 @Component({
-    selector: 'app-lists.component',
+    selector: 'app-lists',
     imports: [
         ListModule,
         Checkbox,

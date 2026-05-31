@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     align-items: start;
-    padding: 2.75em 1.25em 0;
+    padding: 2.75em 0 0;
     background-color: rgb(var(--md-scheme-surface));
     color: rgb(var(--md-scheme-on-surface));
     width: 6em;
@@ -14,9 +14,10 @@
     .md3-nav-header {
         display: flex;
         flex-direction: column;
-        align-items: start;
+        align-items: center;
         gap: 0.25em;
         margin-bottom: 2.5em;
+        width: 100%;
         
         .md3-menu-button {
             margin: 0.5em;
@@ -38,7 +39,7 @@
     .md3-menu-container {
         display: flex;
         flex-direction: column;
-        align-items: start;
+        align-items: center;
         gap: 0.25em;
         width: 100%;
 
@@ -56,10 +57,15 @@
         }
     }
 
+    &.md3-collapsed-narrow {
+        width: 5em;
+    }
+
     &.md3-expanded {
         min-width: 13.75em;
         max-width: 22.5em;
         width: fit-content;
+        padding: 2.75em 1.25em 0;
 
         &.md3-expanded-modal {
             background-color: rgb(var(--md-scheme-surface-container));
@@ -69,6 +75,8 @@
         }
 
         .md3-nav-header {
+            align-items: start;
+
             .md3-menu-button {
                 ::ng-deep [md3-menu-expand] {
                     display: none;
@@ -81,6 +89,7 @@
         }
 
         .md3-menu-container {
+            align-items: start;
             gap: 0.5em;
 
             ::ng-deep [md3-nav-item] {

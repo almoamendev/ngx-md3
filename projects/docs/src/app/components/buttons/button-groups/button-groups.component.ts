@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ButtonGroupModule } from '@vip9008/ngx-md3';
 
 @Component({
-    selector: 'app-button-groups.component',
+    selector: 'app-button-groups',
     imports: [
         ButtonGroupModule,
     ],

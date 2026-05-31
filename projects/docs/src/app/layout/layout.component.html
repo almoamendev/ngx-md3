@@ -1,47 +1,67 @@
-<section style="padding: 1rem 2rem; display: flex; gap: 1rem;">
-    <ul>
-        <li><a routerLink="styles/typography">Typography</a></li>
-    </ul>
-    <ul>
-        <li><a routerLink="components/buttons/buttons">Buttons</a></li>
-        <li><a routerLink="components/buttons/floating-action-buttons">FABs</a></li>
-        <li><a routerLink="components/buttons/icon-buttons">Icon buttons</a></li>
-        <li><a routerLink="components/buttons/split-buttons">Split buttons</a></li>
-        <li><a routerLink="components/buttons/button-groups">Button groups</a></li>
-    </ul>
-    <ul>
-        <li><a routerLink="components/cards">Cards</a></li>
-    </ul>
-    <ul>
-        <li><a routerLink="components/chips">Chips</a></li>
-    </ul>
-    <ul>
-        <li><a routerLink="components/checkboxes">Checkboxes</a></li>
-        <li><a routerLink="components/switches">Switches</a></li>
-        <li><a routerLink="components/radio-buttons">Radio Buttons</a></li>
-        <li><a routerLink="components/sliders">Sliders</a></li>
-    </ul>
-    <ul>
-        <li><a routerLink="components/lists">Lists</a></li>
-    </ul>
-    <ul>
-        <li><a routerLink="components/loading-and-progress/loading-indicators">Loading indicators</a></li>
-        <li><a routerLink="components/loading-and-progress/progress-indicators">Progress indicators</a></li>
-    </ul>
-    <ul>
-        <li><a routerLink="components/menus">Menus</a></li>
-    </ul>
-    <ul>
-        <li><a routerLink="components/navigations/navigation-rail">Navigation rail</a></li>
-    </ul>
-    <ul>
-        <li><a routerLink="components/text-fields">Text fields</a></li>
-    </ul>
-    <ul>
-        <li><a routerLink="components/dialogs">Dialogs</a></li>
-    </ul>
-</section>
+<md3-scaffold>
+    <md3-navigation-rail md3-scaffold-rail="leading">
+        <button type="button" md3-fab>
+            <md3-icon md3-icon-element>edit</md3-icon>
+            Label
+        </button>
 
-<section class="main-content" style="padding: 1rem 2rem;">
-    <router-outlet></router-outlet>
-</section>
+        <button type="button" md3-nav-item class="md3-active">
+            <md3-icon md3-icon-element>inbox</md3-icon>
+            Inbox
+        </button>
+        <a href="javascript: ;" type="button" md3-nav-item>
+            <md3-icon md3-icon-element>outbox</md3-icon>
+            Outbox
+        </a>
+    </md3-navigation-rail>
+
+    <div md3-scaffold-pane>
+        <section style="padding: 1rem 2rem; display: flex; gap: 1rem;">
+            <ul>
+                <li><a routerLink="styles/typography">Typography</a></li>
+            </ul>
+            <ul>
+                <li><a routerLink="components/buttons/buttons">Buttons</a></li>
+                <li><a routerLink="components/buttons/floating-action-buttons">FABs</a></li>
+                <li><a routerLink="components/buttons/icon-buttons">Icon buttons</a></li>
+                <li><a routerLink="components/buttons/split-buttons">Split buttons</a></li>
+                <li><a routerLink="components/buttons/button-groups">Button groups</a></li>
+            </ul>
+            <ul>
+                <li><a routerLink="components/cards">Cards</a></li>
+            </ul>
+            <ul>
+                <li><a routerLink="components/chips">Chips</a></li>
+            </ul>
+            <ul>
+                <li><a routerLink="components/checkboxes">Checkboxes</a></li>
+                <li><a routerLink="components/switches">Switches</a></li>
+                <li><a routerLink="components/radio-buttons">Radio Buttons</a></li>
+                <li><a routerLink="components/sliders">Sliders</a></li>
+            </ul>
+            <ul>
+                <li><a routerLink="components/lists">Lists</a></li>
+            </ul>
+            <ul>
+                <li><a routerLink="components/loading-and-progress/loading-indicators">Loading indicators</a></li>
+                <li><a routerLink="components/loading-and-progress/progress-indicators">Progress indicators</a></li>
+            </ul>
+            <ul>
+                <li><a routerLink="components/menus">Menus</a></li>
+            </ul>
+            <ul>
+                <li><a routerLink="components/navigations/navigation-rail">Navigation rail</a></li>
+            </ul>
+            <ul>
+                <li><a routerLink="components/text-fields">Text fields</a></li>
+            </ul>
+            <ul>
+                <li><a routerLink="components/dialogs">Dialogs</a></li>
+            </ul>
+        </section>
+
+        <section class="main-content" style="padding: 1rem 2rem;">
+            <router-outlet></router-outlet>
+        </section>
+    </div>
+</md3-scaffold>

@@ -14,4 +14,20 @@
     </a>
 </md3-navigation-rail>
 
+<md3-navigation-rail [hide-menu-button]="hideMenuButton" collapsed-layout="narrow">
+    <button type="button" md3-fab>
+        <md3-icon md3-icon-element>edit</md3-icon>
+        Label
+    </button>
+
+    <button type="button" md3-nav-item class="md3-active">
+        <md3-icon md3-icon-element>inbox</md3-icon>
+        Inbox
+    </button>
+    <a href="javascript: ;" type="button" md3-nav-item>
+        <md3-icon md3-icon-element>outbox</md3-icon>
+        Outbox
+    </a>
+</md3-navigation-rail>
+
 <button md3-button (click)="hideMenuButton = !hideMenuButton">Toggle Menu Button</button>

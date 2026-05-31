@@ -25,6 +25,10 @@ export * from './styles/typography/type-label';
 // foundations
 export * from './foundations/layout.service';
 export * from './foundations/scaffold/scaffold';
+export * from './foundations/scaffold-bar';
+export * from './foundations/scaffold-rail';
+export * from './foundations/scaffold-pane';
+export * from './foundations/scaffold/scaffold-module';
 
 // common components and directives
 export * from './components/common/state-component';
@@ -73,8 +77,9 @@ export * from './components/loading-and-progress/linear-progress-indicator/linea
 export * from './components/loading-and-progress/circular-progress-indicator/circular-progress-indicator';
 
 // navigations
-export * from './components/navigations/navigation-rail/navigation-rail';
 export * from './components/navigations/navigation-item/navigation-item';
+export * from './components/navigations/navigation-rail/navigation-rail';
+export * from './components/navigations/navigation-rail/navigation-rail-module';
 
 // text fields
 export * from './components/common/input-element';
