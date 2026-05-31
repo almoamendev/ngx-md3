@@ -1,118 +1,255 @@
 :host {
     display: flex;
-    flex-direction: column;
-    align-items: start;
-    padding: 2.75em 0 0;
-    background-color: rgb(var(--md-scheme-surface));
-    color: rgb(var(--md-scheme-on-surface));
     width: 6em;
+    transition: all var(--md-motion-standard-default-spatial-duration) var(--md-motion-standard-default-spatial-easing);
 
     .md3-hidden {
         display: none;
     }
 
-    .md3-nav-header {
+    .md3-nav-scrim {
+        position: fixed;
+        inset: 0;
+        z-index: 399;
+        pointer-events: none;
+        display: none;
+        background-color: rgb(var(--md-scheme-scrim));
+        opacity: 0;
+        transition: all var(--md-motion-standard-default-spatial-duration) var(--md-motion-standard-default-spatial-easing);
+    }
+
+    .md3-nav-container {
+        flex: 1 1 auto;
         display: flex;
         flex-direction: column;
-        align-items: center;
-        gap: 0.25em;
-        margin-bottom: 2.5em;
-        width: 100%;
+        align-items: start;
+        position: relative;
+        padding: 2.75em 0 0;
+        background-color: rgb(var(--md-scheme-surface));
+        color: rgb(var(--md-scheme-on-surface));
+        height: 100%;
+        max-width: 6em;
+        transition: all var(--md-motion-standard-default-spatial-duration) var(--md-motion-standard-default-spatial-easing);
         
-        .md3-menu-button {
-            margin: 0.5em;
+        .md3-nav-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.25em;
+            margin-bottom: 2.5em;
+            width: 100%;
             
-            ::ng-deep [md3-menu-expand] {
-                display: inline-block;
+            .md3-menu-button {
+                margin: 0.5em;
+                
+                ::ng-deep [md3-menu-expand] {
+                    display: inline-block;
+                }
+        
+                ::ng-deep [md3-menu-collapse] {
+                    display: none;
+                }
             }
     
-            ::ng-deep [md3-menu-collapse] {
-                display: none;
+            ::ng-deep [md3-fab] {
+                box-shadow: var(--md-shadow-0dp);
             }
         }
+    
+        .md3-menu-container {
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            gap: 0.25em;
+            width: 100%;
+            transition: opacity var(--md-motion-standard-default-spatial-duration) var(--md-motion-standard-default-spatial-easing);
+    
+            ::ng-deep [md3-nav-item] {
+                .md3-item-container {
+                    padding: 0.375em 0;
+                    flex-direction: column;
+                    width: 100%;
+        
+                    &::before, &::after {
+                        top: 0.375em;
+                        height: 2em;
+                        width: 3.5em;
+                        border-radius: 1em;
+                    }
 
-        ::ng-deep [md3-fab] {
-            box-shadow: var(--md-shadow-0dp);
+                    .md3-label {
+                        padding-inline: 0.666667em;
+                    }
+                }
+            }
         }
     }
 
-    .md3-menu-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 0.25em;
-        width: 100%;
+    &.md3-style-elevated {
+        .md3-nav-container {
+            box-shadow: var(--md-shadow-1dp);
+        }
+    }
 
-        ::ng-deep [md3-nav-item] {
-            padding: 0.375em 0;
-            flex-direction: column;
-            width: 100%;
-
-            &::before, &::after {
-                top: 0.375em;
-                height: 2em;
-                width: 3.5em;
-                border-radius: 1em;
-            }
+    &.md3-style-divider {
+        .md3-nav-container::after {
+            content: '';
+            position: absolute;
+            height: 100%;
+            width: 0.0625em;
+            top: 0;
+            bottom: 0;
+            inset-inline-end: 0;
+            background-color: rgb(var(--md-scheme-outline-variant));
+            pointer-events: none;
+            opacity: 1;
+            transition: opacity var(--md-motion-standard-default-spatial-duration) var(--md-motion-standard-default-spatial-easing);
         }
     }
 
     &.md3-collapsed-narrow {
         width: 5em;
+
+        .md3-nav-container {
+            max-width: 5em;
+        }
+    }
+
+    &.md3-collapsed-hidden {
+        width: 0;
+
+        .md3-nav-container {
+            max-width: 0em;
+
+            .md3-nav-header {
+                padding-top: 4em;
+    
+                .md3-menu-button {
+                    position: fixed;
+                    top: 2.75em;
+                    inset-inline-start: 1.25em;
+                    z-index: 400;
+                }
+    
+                ::ng-deep [md3-fab] {
+                    opacity: 0;
+                }
+            }
+    
+            .md3-menu-container {
+                opacity: 0;
+            }
+
+            &::after {
+                opacity: 0;
+            }
+        }
+    }
+
+    &.md3-expanded-modal {
+        .md3-nav-scrim {
+            display: block;
+        }
+
+        .md3-nav-container {
+            position: fixed;
+            z-index: 400;
+            inset-inline-start: 0;
+            top: 0;
+            bottom: 0;
+        }
     }
 
     &.md3-expanded {
-        min-width: 13.75em;
-        max-width: 22.5em;
-        width: fit-content;
-        padding: 2.75em 1.25em 0;
+        .md3-nav-container {
+            min-width: 13.75em;
+            max-width: 22.5em;
+            width: fit-content;
+            padding: 2.75em 0;
 
-        &.md3-expanded-modal {
-            background-color: rgb(var(--md-scheme-surface-container));
-            border-start-end-radius: 1em;
-            border-end-end-radius: 1em;
-            box-shadow: var(--md-shadow-3dp);
-        }
+            .md3-nav-header {
+                align-items: start;
+                padding-inline: 1.25em;
 
-        .md3-nav-header {
-            align-items: start;
-
-            .md3-menu-button {
-                ::ng-deep [md3-menu-expand] {
-                    display: none;
+                .md3-menu-button {
+                    ::ng-deep [md3-menu-expand] {
+                        display: none;
+                    }
+                    
+                    ::ng-deep [md3-menu-collapse] {
+                        display: inline-block;
+                    }
                 }
-                
-                ::ng-deep [md3-menu-collapse] {
-                    display: inline-block;
+
+                ::ng-deep [md3-fab] {
+                    opacity: 1;
+                }
+            }
+
+            .md3-menu-container {
+                gap: 0.5em;
+                opacity: 1;
+
+                ::ng-deep [md3-nav-item] {
+                    padding-inline: 1.25em;
+                    
+                    .md3-item-container {
+                        padding: 0 1em;
+                        flex-direction: row;
+                        align-items: center;
+                        justify-content: start;
+                        width: fit-content;
+                        height: 3.5em;
+                        
+                        &::before, &::after {
+                            inset: 0;
+                            height: auto;
+                            width: auto;
+                            border-radius: 1.75em;
+                        }
+    
+                        .md3-icon-container {
+                            padding: 0;
+                        }
+    
+                        .md3-label {
+                            font-size: 0.875em;
+                            line-height: 1.428571em;
+                            letter-spacing: 0.007143em;
+                            max-height: 2.857143em;
+                            padding-inline: 0;
+                        }
+                    }
+                }
+
+                &.md3-full-width-indicator {
+                    ::ng-deep [md3-nav-item] .md3-item-container {
+                        width: 100%;
+                    }
                 }
             }
         }
 
-        .md3-menu-container {
-            align-items: start;
-            gap: 0.5em;
+        &.md3-expanded-standard {
+            width: auto;
+        }
 
-            ::ng-deep [md3-nav-item] {
-                flex-direction: row;
-                width: auto;
-                padding: 0 1em;
-                height: 3.5em;
+        &.md3-expanded-modal {
+            .md3-nav-scrim {
+                pointer-events: all;
+                opacity: 0.32;
+            }
 
-                &::before, &::after {
-                    inset: 0;
-                    height: auto;
-                    width: auto;
-                    border-radius: 1.75em;
-                }
+            .md3-nav-container {
+                background-color: rgb(var(--md-scheme-surface-container));
+                border-start-end-radius: 1em;
+                border-end-end-radius: 1em;
+                box-shadow: var(--md-shadow-3dp);
+                width: fit-content;
+                max-width: 22.5em;
 
-                .md3-icon-container {
-                    padding: 0;
-                }
-
-                .md3-label {
-                    font-size: 0.875em;
-                    line-height: 1.428571em;
-                    letter-spacing: 0.007143em;
+                &::after {
+                    opacity: 0;
                 }
             }
         }
