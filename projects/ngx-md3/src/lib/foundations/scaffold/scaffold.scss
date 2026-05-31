@@ -1,6 +1,9 @@
 :host {
     display: grid;
-    min-block-size: 100dvh;
+    inline-size: 100%;
+    block-size: 100dvh;
+    min-block-size: 0;
+    overflow: hidden;
     grid-template-areas:
         "start top end"
         "start content end"
@@ -13,30 +16,43 @@
             grid-area: top;
             justify-self: stretch;
             align-self: stretch;
+            min-inline-size: 0;
+            min-block-size: 0;
+            overflow: hidden;
         }
     
         [md3-scaffold-rail=leading] {
             grid-area: start;
             justify-self: stretch;
             align-self: stretch;
+            min-inline-size: 0;
+            min-block-size: 0;
+            overflow: hidden;
         }
     
         [md3-scaffold-pane] {
             grid-area: content;
             min-inline-size: 0;
             min-block-size: 0;
+            overflow: auto;
         }
     
         [md3-scaffold-rail=trailing] {
             grid-area: end;
             justify-self: stretch;
             align-self: stretch;
+            min-inline-size: 0;
+            min-block-size: 0;
+            overflow: hidden;
         }
     
         [md3-scaffold-bar=bottom] {
             grid-area: bottom;
             justify-self: stretch;
             align-self: stretch;
+            min-inline-size: 0;
+            min-block-size: 0;
+            overflow: hidden;
         }
     }
 }
