@@ -1,7 +1,11 @@
 <div class="md3-item-container">
-    <div class="md3-icon-container">
-        <ng-content select="[md3-icon-element]"></ng-content>
-    </div>
+    @if (hasIcons()) {
+        <div class="md3-icon-container">
+            <ng-content select="[md3-icon-element=active]"></ng-content>
+            <ng-content select="[md3-icon-element]"></ng-content>
+            <ng-content select="md3-badge"></ng-content>
+        </div>
+    }
     <div class="md3-label">
         <ng-content></ng-content>
     </div>

@@ -84,6 +84,7 @@
     }
 
     .md3-icon-container {
+        position: relative;
         display: inline-flex;
         align-items: center;
         justify-content: center;
@@ -97,12 +98,38 @@
             height: 1em !important;
             width: 1em !important;
         }
+
+        ::ng-deep [md3-icon-element=active] {
+            display: none;
+        }
+
+        ::ng-deep md3-badge {
+            position: absolute;
+            top: 0.181818em;
+            inset-inline-start: 50%;
+
+            &.md3-small {
+                top: 0.25em;
+                inset-inline-start: auto;
+                inset-inline-end: 0.25em;
+            }
+        }
     }
 
     &.md3-active {
         --icon-color: rgb(var(--md-scheme-secondary));
         --label-color: rgb(var(--md-scheme-on-secondary-container));
         --active-indicator-color: rgb(var(--md-scheme-secondary-container));
+        
+        .md3-icon-container {
+            ::ng-deep [md3-icon-element=active] {
+                display: inline-block;
+
+                & + [md3-icon-element] {
+                    display: none;
+                }
+            }
+        }
 
         .md3-item-container::before {
             transform: scale(1);

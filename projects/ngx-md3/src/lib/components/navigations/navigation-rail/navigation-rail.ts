@@ -62,8 +62,8 @@ export class NavigationRail {
     private menuIcons = contentChildren<IconElement>(IconElement);
     private floatingActionButton = contentChild<FloatingActionButton>(FloatingActionButton);
 
-    public menuExpandIcon = computed(() => this.menuIcons().find((icon) => icon.element.hasAttribute('md3-menu-expand')));
-    public menuCollapseIcon = computed(() => this.menuIcons().find((icon) => icon.element.hasAttribute('md3-menu-collapse')));
+    public menuExpandIcon = computed(() => this.menuIcons().find((icon) => icon.iconType == 'expand'));
+    public menuCollapseIcon = computed(() => this.menuIcons().find((icon) => icon.iconType == 'collapse'));
     public hasFab = computed(() => !!this.floatingActionButton());
 
     constructor() {

@@ -1,0 +1,6 @@
+@if (label()?.length) {
+    <div class="md3-nav-label">
+        <div md3-type-label="large">{{ label() }}</div>
+    </div>
+}
+<ng-content select="[md3-nav-item]"></ng-content>

@@ -78,6 +78,7 @@ export * from './components/loading-and-progress/circular-progress-indicator/cir
 
 // navigations
 export * from './components/navigations/navigation-item/navigation-item';
+export * from './components/navigations/navigation-group/navigation-group';
 export * from './components/navigations/navigation-rail/navigation-rail';
 export * from './components/navigations/navigation-rail/navigation-rail-module';
 

@@ -34,8 +34,9 @@
         .md3-nav-header {
             display: flex;
             flex-direction: column;
-            align-items: center;
+            align-items: start;
             gap: 0.25em;
+            padding-inline: 1.25em;
             margin-bottom: 2.5em;
             width: 100%;
             
@@ -62,13 +63,20 @@
             align-items: stretch;
             width: 100%;
             transition: opacity var(--md-motion-standard-default-spatial-duration) var(--md-motion-standard-default-spatial-easing);
+
+            ::ng-deep md3-nav-group {
+                .md3-nav-label {
+                    max-height: 3.25em;
+                }
+            }
     
             ::ng-deep [md3-nav-item] {
                 margin-bottom: 0.25em;
 
                 &.md3-hide-on-collapse {
                     margin-bottom: 0;
-                    transform: scale(0);
+                    transform: scaleY(0);
+                    transform-origin: top;
                     opacity: 0;
                     max-height: 0em;
                     max-width: 0em;
@@ -121,6 +129,10 @@
 
         .md3-nav-container {
             max-width: 5em;
+
+            .md3-nav-header {
+                padding-inline: 0.75em;
+            }
         }
     }
 
@@ -131,13 +143,15 @@
             max-width: 0em;
 
             .md3-nav-header {
-                padding-top: 4em;
-    
                 .md3-menu-button {
                     position: fixed;
                     top: 2.75em;
                     inset-inline-start: 1.25em;
                     z-index: 400;
+
+                    & + ::ng-deep [md3-fab] {
+                        margin-top: 4em;
+                    }
                 }
     
                 ::ng-deep [md3-fab] {
@@ -169,6 +183,25 @@
         }
     }
 
+    &:not(.md3-expanded) {
+        ::ng-deep md3-nav-group {
+            &.md3-hide-on-collapse {
+                transform: scaleY(0);
+                transform-origin: top;
+                opacity: 0;
+                max-height: 0em;
+                max-width: 0em;
+            }
+
+            .md3-nav-label {
+                transform: scaleY(0);
+                transform-origin: top;
+                opacity: 0;
+                max-height: 0em;
+            }
+        }
+    }
+
     &.md3-expanded {
         .md3-nav-container {
             min-width: 13.75em;
@@ -177,7 +210,6 @@
             padding: 2.75em 0;
 
             .md3-nav-header {
-                align-items: start;
                 padding-inline: 1.25em;
 
                 .md3-menu-button {
@@ -204,7 +236,7 @@
 
                     &.md3-hide-on-collapse {
                         margin-bottom: 0.5em;
-                        transform: scale(1);
+                        transform: scaleY(1);
                         opacity: 1;
                         max-height: 5em;
                         max-width: 100%;

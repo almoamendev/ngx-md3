@@ -6,24 +6,33 @@
         </button>
 
         <button type="button" md3-nav-item>
+            <md3-badge small>99</md3-badge>
             <md3-icon md3-icon-element>add_circle</md3-icon>
             Components
         </button>
-        <a routerLink="components/buttons/button-groups" md3-nav-item hide-on-collapse>
-            Button groups
-        </a>
-        <a routerLink="components/buttons/buttons" md3-nav-item hide-on-collapse>
-            Buttons
-        </a>
-        <a routerLink="components/buttons/floating-action-buttons" md3-nav-item hide-on-collapse>
-            FABs
-        </a>
-        <a routerLink="components/buttons/icon-buttons" md3-nav-item hide-on-collapse>
-            Icon buttons
-        </a>
-        <a routerLink="components/buttons/split-buttons" md3-nav-item hide-on-collapse>
-            Split buttons
-        </a>
+        <button type="button" md3-nav-item>
+            <md3-badge>999+</md3-badge>
+            <md3-icon md3-icon-element>add_circle</md3-icon>
+            <md3-icon md3-icon-element="active" filled>add_circle</md3-icon>
+            Components
+        </button>
+        <md3-nav-group label="Components" hide-on-collapse>
+            <a routerLink="components/buttons/button-groups" md3-nav-item>
+                Button groups
+            </a>
+            <a routerLink="components/buttons/buttons" md3-nav-item>
+                Buttons
+            </a>
+            <a routerLink="components/buttons/floating-action-buttons" md3-nav-item>
+                FABs
+            </a>
+            <a routerLink="components/buttons/icon-buttons" md3-nav-item>
+                Icon buttons
+            </a>
+            <a routerLink="components/buttons/split-buttons" md3-nav-item>
+                Split buttons
+            </a>
+        </md3-nav-group>
     </md3-navigation-rail>
 
     <div md3-scaffold-pane>
