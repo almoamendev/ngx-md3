@@ -9,12 +9,14 @@
     border: none;
     outline: none;
     cursor: pointer;
+    position: relative;
     display: inline-flex;
     align-items: start;
     text-decoration: none !important;
     white-space: nowrap;
     background-color: transparent;
     padding: 0;
+    transform-origin: top;
     transition: all var(--md-motion-expressive-default-spatial-duration) var(--md-motion-expressive-default-spatial-easing);
 
     -webkit-appearance: none;
@@ -102,18 +104,15 @@
         ::ng-deep [md3-icon-element=active] {
             display: none;
         }
+    }
 
-        ::ng-deep md3-badge {
-            position: absolute;
-            top: 0.181818em;
-            inset-inline-start: 50%;
-
-            &.md3-small {
-                top: 0.25em;
-                inset-inline-start: auto;
-                inset-inline-end: 0.25em;
-            }
-        }
+    .md3-badge-container {
+        position: relative;
+        min-height: 0.875em;
+        min-width: 0.875em;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
     }
 
     &.md3-active {

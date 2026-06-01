@@ -76,7 +76,6 @@
                 &.md3-hide-on-collapse {
                     margin-bottom: 0;
                     transform: scaleY(0);
-                    transform-origin: top;
                     opacity: 0;
                     max-height: 0em;
                     max-width: 0em;
@@ -187,7 +186,6 @@
         ::ng-deep md3-nav-group {
             &.md3-hide-on-collapse {
                 transform: scaleY(0);
-                transform-origin: top;
                 opacity: 0;
                 max-height: 0em;
                 max-width: 0em;
@@ -195,9 +193,19 @@
 
             .md3-nav-label {
                 transform: scaleY(0);
-                transform-origin: top;
                 opacity: 0;
                 max-height: 0em;
+            }
+        }
+
+        ::ng-deep [md3-nav-item] {
+            .md3-badge-container {
+                position: absolute;
+                z-index: 3;
+                top: 0.5em;
+                inset-inline-start: 50%;
+                align-items: start;
+                justify-content: end;
             }
         }
     }
@@ -267,6 +275,15 @@
                             letter-spacing: 0.007143em;
                             max-height: 2.857143em;
                             padding-inline: 0;
+                        }
+
+                        .md3-badge-container.md3-small {
+                            position: absolute;
+                            height: 1.875em;
+                            width: 1.625em;
+                            z-index: 3;
+                            align-items: start;
+                            justify-content: end;
                         }
                     }
                 }

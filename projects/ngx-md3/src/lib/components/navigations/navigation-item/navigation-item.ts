@@ -1,6 +1,7 @@
-import { booleanAttribute, Component, computed, contentChildren, effect, ElementRef, HostBinding, inject, input } from '@angular/core';
+import { booleanAttribute, Component, computed, contentChild, contentChildren, effect, ElementRef, HostBinding, inject, input } from '@angular/core';
 import { RouterLinkActive } from '@angular/router';
 import { IconElement } from '../../common/icon-element';
+import { Badge } from '../../common/badge';
 
 @Component({
     selector: 'button[md3-nav-item], a[md3-nav-item]',
@@ -23,6 +24,8 @@ export class NavigationItem {
     private icons = contentChildren<IconElement>(IconElement);
 
     public hasIcons = computed(() => this.icons()?.length != 0);
+
+    public badge = contentChild<Badge>(Badge);
 
     @HostBinding('class.md3-active') get active(): boolean {
         return this.routerLinkActive.isActive;
