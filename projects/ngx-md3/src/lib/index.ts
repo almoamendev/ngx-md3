@@ -81,6 +81,8 @@ export * from './components/navigations/navigation-item/navigation-item';
 export * from './components/navigations/navigation-group/navigation-group';
 export * from './components/navigations/navigation-rail/navigation-rail';
 export * from './components/navigations/navigation-rail/navigation-rail-module';
+export * from './components/navigations/navigation-bar/navigation-bar';
+export * from './components/navigations/navigation-bar/navigation-bar-module';
 
 // text fields
 export * from './components/common/input-element';
