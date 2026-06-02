@@ -1,4 +1,4 @@
-import { Component, contentChildren, effect, ElementRef, HostListener, Input, signal } from '@angular/core';
+import { Component, contentChildren, effect, ElementRef, HostListener, model } from '@angular/core';
 import { Button } from '../button/button';
 import { IconButton } from '../icon-button/icon-button';
 import { ButtonSize } from '../../../types/button-size.type';
@@ -15,31 +15,6 @@ import { ButtonGroupType } from '../../../types/button-group-type.type';
     }
 })
 export class ButtonGroup {
-    @Input('button-size') set size(value: ButtonSize) {
-        this.buttonSize.update((current) => {
-            if (value == current) {
-                return current;
-            }
-
-            this.element.classList.remove('md3-' + current);
-            return value;
-        });
-    };
-    @Input('group-type') set type(value: ButtonGroupType) {
-        this.groupType.update((current) => {
-            if (value == current) {
-                return current;
-            }
-
-            this.element.classList.remove('md3-' + current);
-            return value;
-        });
-    };
-
-    @Input() set selection(value: ButtonGroupSelection) {
-        this.groupSelection.set(value);
-    };
-
     @HostListener('click', ['$event']) onClick(event: PointerEvent): void {
         if (this.groupSelection() !== 'single') {
             return;
@@ -47,30 +22,44 @@ export class ButtonGroup {
 
         const selectedItem = this.findEventButton(event);
 
-        if (selectedItem?.selected) {
+        if (selectedItem?.isSelected()) {
             this.clearOtherSelections(selectedItem);
         }
     }
     
-    private buttonSize = signal<ButtonSize>('small');
-    private groupType = signal<ButtonGroupType>('standard');
-    private groupSelection = signal<ButtonGroupSelection>('none');
+    public buttonSize = model<ButtonSize>('small', {
+        alias: 'button-size',
+    });
+    public groupType = model<ButtonGroupType>('standard', {
+        alias: 'group-type',
+    });
+    public groupSelection = model<ButtonGroupSelection>('none', {
+        alias: 'selection',
+    });
 
     private buttons = contentChildren<Button>(Button, { descendants: true });
     private iconButtons = contentChildren<IconButton>(IconButton, { descendants: true });
 
     constructor(private el: ElementRef) {
-        effect(() => {
+        effect((onCleanup) => {
             const size = this.buttonSize();
             this.element.classList.add('md3-' + size);
 
             this.allButtons().forEach((item) => {
-                item.size = size;
+                item.buttonSize.set(size);
+            });
+
+            onCleanup(() => {
+                this.element.classList.remove('md3-' + this.buttonSize());
             });
         });
 
-        effect(() => {
+        effect((onCleanup) => {
             this.element.classList.add('md3-' + this.groupType());
+
+            onCleanup(() => {
+                this.element.classList.remove('md3-' + this.groupType());
+            });
         });
 
         effect(() => {
@@ -78,7 +67,7 @@ export class ButtonGroup {
 
             if (selection == 'none') {
                 this.allButtons().forEach((item) => {
-                    item.selected = null;
+                    item.isSelected.set(null);
                 });
             } else {
                 this.allButtons().forEach((item) => {
@@ -110,7 +99,7 @@ export class ButtonGroup {
 
     private normalizeSingleSelection(): void {
         const selectedItem = this.allButtons().find((item) => {
-            return item.selected;
+            return item.isSelected();
         });
 
         if (selectedItem) {
@@ -121,7 +110,7 @@ export class ButtonGroup {
     private clearOtherSelections(selectedItem: Button | IconButton): void {
         this.allButtons().forEach((item) => {
             if (item != selectedItem) {
-                item.selected = false;
+                item.isSelected.set(false);
             }
         });
     }

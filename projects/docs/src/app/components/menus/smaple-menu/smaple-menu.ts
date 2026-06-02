@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Badge, IconElement, MaterialIcon, MenuGroup, MenuItem, MenuService, TypeBody, TypeLabel, TypeTitle } from '@vip9008/ngx-md3';
+import { Badge, IconElement, MaterialIcon, MenuGroup, MenuItem, MenuService } from '@vip9008/ngx-md3';
 
 @Component({
     selector: 'app-smaple-menu',
@@ -8,9 +8,6 @@ import { Badge, IconElement, MaterialIcon, MenuGroup, MenuItem, MenuService, Typ
         MaterialIcon,
         MenuGroup,
         MenuItem,
-        TypeLabel,
-        TypeBody,
-        TypeTitle,
         Badge,
     ],
     templateUrl: './smaple-menu.html',

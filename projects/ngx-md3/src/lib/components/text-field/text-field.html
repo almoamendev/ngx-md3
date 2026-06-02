@@ -1,25 +1,25 @@
 <label #inputContainer class="md3-text-field-container" [ngClass]="{
-    'md3-text-field-filled': type == 'filled',
-    'md3-text-field-outlined': type == 'outlined',
+    'md3-text-field-filled': type() == 'filled',
+    'md3-text-field-outlined': type() == 'outlined',
 }">
     <ng-content></ng-content>
     <fieldset aria-hidden="true" class="md3-text-field-outline">
-    @if (label && type == 'outlined') {
-        <legend class="md3-label-gap">{{ label }}</legend>
+    @if (label() && type() == 'outlined') {
+        <legend class="md3-label-gap">{{ label() }}</legend>
     }
     </fieldset>
-    @if (label) {
-        <label class="md3-text-field-label">{{ label }}</label>
+    @if (label()) {
+        <label class="md3-text-field-label">{{ label() }}</label>
     }
     <ng-content select="[md3-icon-element=leading]"></ng-content>
     <ng-content select="[md3-icon-button], [md3-icon-element=trailing]"></ng-content>
-    @if (type != 'outlined') {
+    @if (type() != 'outlined') {
         <div class="md3-text-field-state"></div>
     }
 </label>
-<div class="md3-supporting-text-container" [class.md3-has-error]="hasError">
+<div class="md3-supporting-text-container" [class.md3-has-error]="inputError()">
     <ng-content select="[md3-supporting-text]"></ng-content>
-    @if (inputCounter) {
-        <div class="md3-text-input-counter">{{ valueLength + (maxLength ? "/" + maxLength : "") }}</div>
+    @if (inputCounter()) {
+        <div class="md3-text-input-counter">{{ valueLength + (maxLength() ? "/" + maxLength() : "") }}</div>
     }
 </div>

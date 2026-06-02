@@ -1,4 +1,4 @@
-import { booleanAttribute, Component, contentChild, contentChildren, effect, ElementRef, input, Input, signal } from '@angular/core';
+import { booleanAttribute, Component, contentChild, contentChildren, effect, ElementRef, input } from '@angular/core';
 import { ButtonSize } from '../../../types/button-size.type';
 import { SplitButtonType } from '../../../types/split-button-type.type';
 import { Button } from '../button/button';
@@ -15,45 +15,36 @@ import { IconButton } from '../icon-button/icon-button';
     },
 })
 export class SplitButton {
-    @Input('button-size') set size(value: ButtonSize) {
-        this.buttonSize.update((current) => {
-            if (value == current) {
-                return current;
-            }
-
-            this.element.classList.remove('md3-' + current);
-            return value;
-        });
-    };
-    @Input('button-type') set type(value: SplitButtonType) {
-        this.buttonType.update((current) => {
-            if (value == current) {
-                return current;
-            }
-
-            this.element.classList.remove('md3-' + current);
-            return value;
-        });
-    };
+    public buttonSize = input<ButtonSize>('small', {
+        alias: 'button-size',
+    });
+    public buttonType = input<SplitButtonType>('filled', {
+        alias: 'button-type',
+    });
 
     public flipTrailingIcon = input<boolean, unknown>(true, {
         alias: 'flip-trailing-icon',
         transform: booleanAttribute,
     });
 
-    private buttonSize = signal<ButtonSize>('small');
-    private buttonType = signal<SplitButtonType>('filled');
-
     private button = contentChild<Button>(Button);
     private iconButtons = contentChildren<IconButton>(IconButton);
 
     constructor(private el: ElementRef) {
-        effect(() => {
+        effect((onCleanup) => {
             this.element.classList.add('md3-' + this.buttonSize());
+
+            onCleanup(() => {
+                this.element.classList.remove('md3-' + this.buttonSize());
+            });
         });
 
-        effect(() => {
+        effect((onCleanup) => {
             this.element.classList.add('md3-' + this.buttonType());
+
+            onCleanup(() => {
+                this.element.classList.remove('md3-' + this.buttonType());
+            });
         });
         
         effect(() => {
@@ -65,10 +56,10 @@ export class SplitButton {
             const buttonSize = this.buttonSize();
             const buttonType = this.buttonType();
             
-            button!.size = buttonSize;
-            button!.type = buttonType;
-            button!.squared = false;
-            button!.selected = null;
+            button.buttonSize.set(buttonSize);
+            button.buttonType.set(buttonType);
+            button.isSquared.set(false);
+            button.isSelected.set(null);
         });
         
         effect(() => {
@@ -76,11 +67,11 @@ export class SplitButton {
                 const buttonSize = this.buttonSize();
                 const buttonType = this.buttonType();
                 
-                iconButton!.size = buttonSize;
-                iconButton!.type = buttonType == 'elevated' ? 'standard' : buttonType;
-                iconButton!.width = 'default';
-                iconButton!.squared = false;
-                iconButton!.selected = null;
+                iconButton.buttonSize.set(buttonSize);
+                iconButton.buttonType.set(buttonType == 'elevated' ? 'standard' : buttonType);
+                iconButton.buttonWidth.set('default');
+                iconButton.isSquared.set(false);
+                iconButton.isSelected.set(null);
                 
                 if (iconButton?.element.hasAttribute('md3-main-action')) {
                     return;

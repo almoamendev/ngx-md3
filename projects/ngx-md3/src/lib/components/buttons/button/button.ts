@@ -1,4 +1,4 @@
-import { Component, effect, ElementRef, HostListener, Input, signal } from '@angular/core';
+import { Component, effect, ElementRef, HostListener, model } from '@angular/core';
 import { StateComponent } from '../../common/state-component';
 import { ButtonSize } from '../../../types/button-size.type';
 import { ButtonType } from '../../../types/button-type.type';
@@ -13,37 +13,6 @@ import { ButtonType } from '../../../types/button-type.type';
     ],
 })
 export class Button {
-    @Input('button-size') set size(value: ButtonSize) {
-        this.buttonSize.update((current) => {
-            if (value == current) {
-                return current;
-            }
-
-            this.element.classList.remove('md3-' + current);
-            return value;
-        });
-    };
-    @Input('button-type') set type(value: ButtonType) {
-        this.buttonType.update((current) => {
-            if (value == current) {
-                return current;
-            }
-
-            this.element.classList.remove('md3-' + current);
-            return value;
-        });
-    };
-    @Input('button-squared') set squared(value: boolean) {
-        this.isSquared.set(value);
-    };
-    @Input('selected') set selected(value: boolean | null) {
-        if (this.buttonType() == 'text') {
-            this.isSelected.set(null);
-        } else {
-            this.isSelected.set(value);
-        }
-    };
-    
     @HostListener('click', ['$event']) onClick(event: PointerEvent): void {
         if (this.isSelected() === null) {
             return;
@@ -54,18 +23,34 @@ export class Button {
         });
     }
 
-    private buttonSize = signal<ButtonSize>('small');
-    private buttonType = signal<ButtonType>('filled');
-    private isSquared = signal<boolean>(false);
-    private isSelected = signal<boolean | null>(null);
+    public buttonSize = model<ButtonSize>('small', {
+        alias: 'button-size',
+    });
+    public buttonType = model<ButtonType>('filled', {
+        alias: 'button-type',
+    });
+    public isSquared = model<boolean>(false, {
+        alias: 'button-squared',
+    });
+    public isSelected = model<boolean | null>(null, {
+        alias: 'selected',
+    });
 
     constructor(private el: ElementRef) {
-        effect(() => {
+        effect((onCleanup) => {
             this.element.classList.add('md3-' + this.buttonSize());
+
+            onCleanup(() => {
+                this.element.classList.remove('md3-' + this.buttonSize());
+            });
         });
 
-        effect(() => {
+        effect((onCleanup) => {
             this.element.classList.add('md3-' + this.buttonType());
+
+            onCleanup(() => {
+                this.element.classList.remove('md3-' + this.buttonType());
+            });
         });
 
         effect(() => {
@@ -95,10 +80,6 @@ export class Button {
 
     public get element(): HTMLElement {
         return this.el.nativeElement as HTMLElement;
-    }
-
-    public get selected(): boolean | null {
-        return this.isSelected();
     }
 
     public enableSelection() {

@@ -1,4 +1,4 @@
-import { Component, effect, ElementRef, HostListener, Input, signal } from '@angular/core';
+import { Component, effect, ElementRef, HostListener, model } from '@angular/core';
 import { StateComponent } from '../../common/state-component';
 import { ButtonSize } from '../../../types/button-size.type';
 import { IconButtonType } from '../../../types/icon-button-type.type';
@@ -14,43 +14,6 @@ import { IconButtonWidth } from '../../../types/icon-button-width.type';
     ],
 })
 export class IconButton {
-    @Input('button-size') set size(value: ButtonSize) {
-        this.buttonSize.update((current) => {
-            if (value == current) {
-                return current;
-            }
-
-            this.element.classList.remove('md3-' + current);
-            return value;
-        });
-    };
-    @Input('button-type') set type(value: IconButtonType) {
-        this.buttonType.update((current) => {
-            if (value == current) {
-                return current;
-            }
-
-            this.element.classList.remove('md3-' + current);
-            return value;
-        });
-    };
-    @Input('button-width') set width(value: IconButtonWidth) {
-        this.buttonWidth.update((current) => {
-            if (value == current) {
-                return current;
-            }
-
-            this.element.classList.remove('md3-' + current);
-            return value;
-        });
-    };
-    @Input('button-squared') set squared(value: boolean) {
-        this.isSquared.set(value);
-    };
-    @Input('selected') set selected(value: boolean | null) {
-        this.isSelected.set(value);
-    };
-    
     @HostListener('click', ['$event']) onClick(event: PointerEvent): void {
         if (this.isSelected() === null) {
             return;
@@ -61,23 +24,45 @@ export class IconButton {
         });
     }
 
-    private buttonSize = signal<ButtonSize>('small');
-    private buttonType = signal<IconButtonType>('filled');
-    private buttonWidth = signal<IconButtonWidth>('default');
-    private isSquared = signal<boolean>(false);
-    private isSelected = signal<boolean | null>(null);
+    public buttonSize = model<ButtonSize>('small', {
+        alias: 'button-size',
+    });
+    public buttonType = model<IconButtonType>('filled', {
+        alias: 'button-type',
+    });
+    public buttonWidth = model<IconButtonWidth>('default', {
+        alias: 'button-width',
+    });
+    public isSquared = model<boolean>(false, {
+        alias: 'button-squared',
+    });
+    public isSelected = model<boolean | null>(null, {
+        alias: 'selected',
+    });
 
     constructor(private el: ElementRef) {
-        effect(() => {
+        effect((onCleanup) => {
             this.element.classList.add('md3-' + this.buttonSize());
+
+            onCleanup(() => {
+                this.element.classList.remove('md3-' + this.buttonSize());
+            });
         });
 
-        effect(() => {
+        effect((onCleanup) => {
             this.element.classList.add('md3-' + this.buttonType());
+
+            onCleanup(() => {
+                this.element.classList.remove('md3-' + this.buttonType());
+            });
         });
 
-        effect(() => {
+        effect((onCleanup) => {
             this.element.classList.add('md3-' + this.buttonWidth());
+
+            onCleanup(() => {
+                this.element.classList.remove('md3-' + this.buttonWidth());
+            });
         });
 
         effect(() => {
@@ -107,10 +92,6 @@ export class IconButton {
 
     public get element(): HTMLElement {
         return this.el.nativeElement as HTMLElement;
-    }
-
-    public get selected(): boolean | null {
-        return this.isSelected();
     }
 
     public enableSelection() {

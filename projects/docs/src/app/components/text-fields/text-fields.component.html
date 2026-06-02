@@ -2,7 +2,7 @@
 
 <ul>
     <li>@Input() label?: string;</li>
-    <li>@Input() type: 'filled' | 'outlined' = 'filled';</li>
+    <li>@Input() field-type: 'filled' | 'outlined' = 'filled';</li>
     <li>@Input() input-counter: boolean | number = false;</li>
     <li>@Input() control?: AbstractControl;</li>
 </ul>
@@ -26,16 +26,16 @@
 </div>
 
 <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
-    <md3-text-field label="Text field" type="outlined">
+    <md3-text-field label="Text field" field-type="outlined">
         <input md3-input-element type="text" aria-invalid="true">
         <div md3-supporting-text>aria-invalid="true"</div>
     </md3-text-field>
-    <md3-text-field label="Leading icon" type="outlined">
+    <md3-text-field label="Leading icon" field-type="outlined">
         <md3-icon md3-icon-element="leading">person</md3-icon>
         <input md3-input-element type="text" aria-invalid="true">
         <div md3-supporting-text>aria-invalid="true"</div>
     </md3-text-field>
-    <md3-text-field label="Leading and Trailing" type="outlined">
+    <md3-text-field label="Leading and Trailing" field-type="outlined">
         <md3-icon md3-icon-element="leading">person</md3-icon>
         <input md3-input-element type="text" aria-invalid="true">
         <md3-icon md3-icon-element="trailing">visibility</md3-icon>
