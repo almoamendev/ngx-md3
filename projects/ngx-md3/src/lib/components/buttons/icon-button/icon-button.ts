@@ -48,7 +48,6 @@ export class IconButton {
     public effectiveType = computed(() => {
         const contextType = this.context?.buttonContextType?.();
         if (contextType) {
-            console.log(contextType);
             return contextType == 'elevated' ? 'standard' : contextType;
         }
         
