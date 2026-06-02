@@ -1,6 +1,7 @@
-import { booleanAttribute, Component, effect, ElementRef, input, Input, model, signal } from '@angular/core';
+import { booleanAttribute, Component, computed, effect, ElementRef, inject, input } from '@angular/core';
 import { StateComponent } from '../../common/state-component';
 import { FabType } from '../../../types/fab-type.type';
+import { MD3_BUTTON_CONTEXT } from '../../../interfaces/button-context.interface';
 
 @Component({
     selector: 'button[md3-fab]',
@@ -12,19 +13,25 @@ import { FabType } from '../../../types/fab-type.type';
     ],
 })
 export class FloatingActionButton {
-    public buttonSize = model<'small' | 'medium' | 'large'>('small', {
+    private context = inject(MD3_BUTTON_CONTEXT, { optional: true });
+    
+    public buttonSize = input<'small' | 'medium' | 'large'>('small', {
         alias: 'button-size',
     });
-    public buttonType = model<FabType>('tonal-primary', {
+    public buttonType = input<FabType>('tonal-primary', {
         alias: 'button-type',
     });
-    public isExtended = model<boolean>(false, {
+    public isExtended = input<boolean, unknown>(false, {
         alias: 'extended',
+        transform: booleanAttribute,
     });
+
+    public effectiveSize = computed(() => this.context?.buttonContextSize?.() ?? this.buttonSize());
+    public effectiveExtended = computed(() => this.context?.buttonContextExtended?.() ?? this.isExtended());
 
     constructor(private el: ElementRef) {
         effect((onCleanup) => {
-            const buttonSize = 'md3-' + this.buttonSize();
+            const buttonSize = 'md3-' + this.effectiveSize();
             this.element.classList.add(buttonSize);
 
             onCleanup(() => {
@@ -42,7 +49,7 @@ export class FloatingActionButton {
         });
         
         effect(() => {
-            if (this.isExtended()) {
+            if (this.effectiveExtended()) {
                 this.element.classList.add('md3-extended-fab');
             } else {
                 this.element.classList.remove('md3-extended-fab');

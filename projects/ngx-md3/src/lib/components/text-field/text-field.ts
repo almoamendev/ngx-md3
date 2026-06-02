@@ -1,22 +1,30 @@
-import { Component, computed, contentChild, contentChildren, DestroyRef, effect, ElementRef, input, viewChild } from '@angular/core';
+import { Component, computed, contentChild, contentChildren, DestroyRef, effect, ElementRef, input, signal, Signal, viewChild } from '@angular/core';
 import { InputElement } from '../common/input-element';
 import { IconElement } from '../common/icon-element';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { AbstractControl, FormControlName } from '@angular/forms';
 import { fromEvent } from 'rxjs';
 import { IconButton } from '../buttons/icon-button/icon-button';
+import { ButtonContext, MD3_BUTTON_CONTEXT } from '../../interfaces/button-context.interface';
+import { ButtonSize } from '../../types/button-size.type';
 
 @Component({
     standalone: false,
     selector: 'md3-text-field',
     templateUrl: './text-field.html',
     styleUrl: './text-field.scss',
+    providers: [
+        {
+            provide: MD3_BUTTON_CONTEXT,
+            useExisting: TextField,
+        },
+    ],
 })
-export class TextField {
+export class TextField implements ButtonContext {
     public label = input<string | null>(null, {
         alias: 'label',
     });
-    public type = input<'filled' | 'outlined'>('filled', {
+    public fieldType = input<'filled' | 'outlined'>('filled', {
         alias: 'field-type',
     });
     public inputCounter = input<boolean | number>(false, {
@@ -56,14 +64,11 @@ export class TextField {
         return Number(Number(this.inputCounter()).toFixed(0));
     });
     public valueLength: number = 0;
+    
+    // context values
+    buttonContextSize: Signal<ButtonSize> = signal('small');
 
     constructor(private destroyRef: DestroyRef) {
-        effect(() => {
-            this.iconButtons().forEach((iconButton) => {
-                iconButton.buttonSize.set('small');
-            });
-        });
-
         effect(() => {
             const input = this.input();
             if (!input) {

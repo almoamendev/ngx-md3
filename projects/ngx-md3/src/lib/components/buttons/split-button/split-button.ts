@@ -1,8 +1,10 @@
-import { booleanAttribute, Component, contentChild, contentChildren, effect, ElementRef, input } from '@angular/core';
+import { booleanAttribute, Component, contentChild, contentChildren, effect, ElementRef, input, signal, Signal } from '@angular/core';
 import { ButtonSize } from '../../../types/button-size.type';
 import { SplitButtonType } from '../../../types/split-button-type.type';
 import { Button } from '../button/button';
 import { IconButton } from '../icon-button/icon-button';
+import { ButtonContext, MD3_BUTTON_CONTEXT } from '../../../interfaces/button-context.interface';
+import { IconButtonWidth } from '../../../types/icon-button-width.type';
 
 @Component({
     selector: 'md3-split-button',
@@ -13,8 +15,14 @@ import { IconButton } from '../icon-button/icon-button';
     host: {
         'role': 'group',
     },
+    providers: [
+        {
+            provide: MD3_BUTTON_CONTEXT,
+            useExisting: SplitButton,
+        },
+    ],
 })
-export class SplitButton {
+export class SplitButton implements ButtonContext {
     public buttonSize = input<ButtonSize>('small', {
         alias: 'button-size',
     });
@@ -29,6 +37,12 @@ export class SplitButton {
 
     private button = contentChild<Button>(Button);
     private iconButtons = contentChildren<IconButton>(IconButton);
+
+    // context values
+    buttonContextSize: Signal<ButtonSize> = this.buttonSize;
+    buttonContextType: Signal<SplitButtonType> = this.buttonType;
+    buttonContextWidth: Signal<IconButtonWidth> = signal('default');
+    buttonContextSquared?: Signal<boolean> = signal(false);
 
     constructor(private el: ElementRef) {
         effect((onCleanup) => {
@@ -48,29 +62,11 @@ export class SplitButton {
         });
         
         effect(() => {
-            const button = this.button();
-            if (!button) {
-                return;
-            }
-            
-            const buttonSize = this.buttonSize();
-            const buttonType = this.buttonType();
-            
-            button.buttonSize.set(buttonSize);
-            button.buttonType.set(buttonType);
-            button.isSquared.set(false);
-            button.isSelected.set(null);
+            this.button()?.isSelected.set(null);
         });
         
         effect(() => {
             this.iconButtons().forEach((iconButton) => {
-                const buttonSize = this.buttonSize();
-                const buttonType = this.buttonType();
-                
-                iconButton.buttonSize.set(buttonSize);
-                iconButton.buttonType.set(buttonType == 'elevated' ? 'standard' : buttonType);
-                iconButton.buttonWidth.set('default');
-                iconButton.isSquared.set(false);
                 iconButton.isSelected.set(null);
                 
                 if (iconButton?.element.hasAttribute('md3-main-action')) {

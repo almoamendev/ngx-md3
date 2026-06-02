@@ -1,7 +1,8 @@
-import { Component, effect, ElementRef, HostListener, model } from '@angular/core';
+import { booleanAttribute, Component, computed, effect, ElementRef, HostListener, inject, input, model } from '@angular/core';
 import { StateComponent } from '../../common/state-component';
 import { ButtonSize } from '../../../types/button-size.type';
 import { ButtonType } from '../../../types/button-type.type';
+import { MD3_BUTTON_CONTEXT } from '../../../interfaces/button-context.interface';
 
 @Component({
     selector: 'button[md3-button]',
@@ -13,6 +14,8 @@ import { ButtonType } from '../../../types/button-type.type';
     ],
 })
 export class Button {
+    private context = inject(MD3_BUTTON_CONTEXT, { optional: true });
+    
     @HostListener('click', ['$event']) onClick(event: PointerEvent): void {
         if (this.isSelected() === null) {
             return;
@@ -23,38 +26,43 @@ export class Button {
         });
     }
 
-    public buttonSize = model<ButtonSize>('small', {
+    public buttonSize = input<ButtonSize>('small', {
         alias: 'button-size',
     });
-    public buttonType = model<ButtonType>('filled', {
+    public buttonType = input<ButtonType>('filled', {
         alias: 'button-type',
     });
-    public isSquared = model<boolean>(false, {
+    public isSquared = input<boolean, unknown>(false, {
         alias: 'button-squared',
+        transform: booleanAttribute,
     });
     public isSelected = model<boolean | null>(null, {
         alias: 'selected',
     });
 
+    public effectiveSize = computed(() => this.context?.buttonContextSize?.() ?? this.buttonSize());
+    public effectiveType = computed(() => this.context?.buttonContextType?.() ?? this.buttonType());
+    public effectiveSquared = computed(() => this.context?.buttonContextSquared?.() ?? this.isSquared());
+
     constructor(private el: ElementRef) {
         effect((onCleanup) => {
-            this.element.classList.add('md3-' + this.buttonSize());
+            this.element.classList.add('md3-' + this.effectiveSize());
 
             onCleanup(() => {
-                this.element.classList.remove('md3-' + this.buttonSize());
+                this.element.classList.remove('md3-' + this.effectiveSize());
             });
         });
 
         effect((onCleanup) => {
-            this.element.classList.add('md3-' + this.buttonType());
+            this.element.classList.add('md3-' + this.effectiveType());
 
             onCleanup(() => {
-                this.element.classList.remove('md3-' + this.buttonType());
+                this.element.classList.remove('md3-' + this.effectiveType());
             });
         });
 
         effect(() => {
-            if (this.isSquared()) {
+            if (this.effectiveSquared()) {
                 this.element.classList.add('md3-square');
             } else {
                 this.element.classList.remove('md3-square');

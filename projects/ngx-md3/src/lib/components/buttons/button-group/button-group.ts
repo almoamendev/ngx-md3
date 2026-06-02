@@ -1,9 +1,10 @@
-import { Component, contentChildren, effect, ElementRef, HostListener, model } from '@angular/core';
+import { Component, contentChildren, effect, ElementRef, HostListener, input, Signal } from '@angular/core';
 import { Button } from '../button/button';
 import { IconButton } from '../icon-button/icon-button';
 import { ButtonSize } from '../../../types/button-size.type';
 import { ButtonGroupSelection } from '../../../types/button-group-selection.type';
 import { ButtonGroupType } from '../../../types/button-group-type.type';
+import { ButtonContext, MD3_BUTTON_CONTEXT } from '../../../interfaces/button-context.interface';
 
 @Component({
     selector: 'md3-button-group',
@@ -12,9 +13,15 @@ import { ButtonGroupType } from '../../../types/button-group-type.type';
     styleUrl: './button-group.scss',
     host: {
         'role': 'group',
-    }
+    },
+    providers: [
+        {
+            provide: MD3_BUTTON_CONTEXT,
+            useExisting: ButtonGroup,
+        },
+    ],
 })
-export class ButtonGroup {
+export class ButtonGroup implements ButtonContext {
     @HostListener('click', ['$event']) onClick(event: PointerEvent): void {
         if (this.groupSelection() !== 'single') {
             return;
@@ -27,27 +34,26 @@ export class ButtonGroup {
         }
     }
     
-    public buttonSize = model<ButtonSize>('small', {
+    public buttonSize = input<ButtonSize>('small', {
         alias: 'button-size',
     });
-    public groupType = model<ButtonGroupType>('standard', {
+    public groupType = input<ButtonGroupType>('standard', {
         alias: 'group-type',
     });
-    public groupSelection = model<ButtonGroupSelection>('none', {
+    public groupSelection = input<ButtonGroupSelection>('none', {
         alias: 'selection',
     });
 
     private buttons = contentChildren<Button>(Button, { descendants: true });
     private iconButtons = contentChildren<IconButton>(IconButton, { descendants: true });
+    
+    // context values
+    buttonContextSize: Signal<ButtonSize> = this.buttonSize;
 
     constructor(private el: ElementRef) {
         effect((onCleanup) => {
             const size = this.buttonSize();
             this.element.classList.add('md3-' + size);
-
-            this.allButtons().forEach((item) => {
-                item.buttonSize.set(size);
-            });
 
             onCleanup(() => {
                 this.element.classList.remove('md3-' + this.buttonSize());

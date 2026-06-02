@@ -1,7 +1,9 @@
-import { Component, ElementRef, booleanAttribute, computed, contentChild, contentChildren, effect, inject, input, model } from '@angular/core';
+import { Component, ElementRef, Signal, booleanAttribute, computed, contentChild, contentChildren, effect, inject, input, model, signal } from '@angular/core';
 import { LayoutService } from '../../../foundations/layout.service';
 import { IconElement } from '../../common/icon-element';
 import { FloatingActionButton } from '../../buttons/floating-action-button/floating-action-button';
+import { ButtonContext, MD3_BUTTON_CONTEXT } from '../../../interfaces/button-context.interface';
+import { ButtonSize } from '../../../types/button-size.type';
 
 type ExpandedLayout = 'standard' | 'modal';
 type CollapsedLayout = 'compact' | 'narrow' | 'hidden';
@@ -12,8 +14,14 @@ type ContainerStyle = 'none' | 'elevated' | 'divider';
     selector: 'md3-navigation-rail',
     templateUrl: './navigation-rail.html',
     styleUrl: './navigation-rail.scss',
+    providers: [
+        {
+            provide: MD3_BUTTON_CONTEXT,
+            useExisting: NavigationRail,
+        },
+    ],
 })
-export class NavigationRail {
+export class NavigationRail implements ButtonContext {
     private readonly el = inject(ElementRef<HTMLElement>);
     private readonly layoutService = inject(LayoutService);
 
@@ -65,6 +73,10 @@ export class NavigationRail {
     public menuExpandIcon = computed(() => this.menuIcons().find((icon) => icon.iconType == 'expand'));
     public menuCollapseIcon = computed(() => this.menuIcons().find((icon) => icon.iconType == 'collapse'));
     public hasFab = computed(() => !!this.floatingActionButton());
+    
+    // context values
+    buttonContextSize: Signal<ButtonSize> = signal('small');
+    buttonContextExtended: Signal<boolean> = this.expanded;
 
     constructor() {
         effect((onCleanup) => {
@@ -110,16 +122,6 @@ export class NavigationRail {
             } else {
                 this.element.classList.remove('md3-expanded');
             }
-        });
-
-        effect(() => {
-            const fab = this.floatingActionButton();
-            if (!fab) {
-                return;
-            }
-
-            fab.buttonSize.set('small');
-            fab.isExtended.set(this.expanded());
         });
     }
 

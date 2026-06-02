@@ -1,4 +1,4 @@
-import { Component, contentChildren, ElementRef, input, Input, model, signal } from '@angular/core';
+import { Component, contentChildren, ElementRef, input, model } from '@angular/core';
 import { StateComponent } from '../../common/state-component';
 import { IconElement } from '../../common/icon-element';
 import { InputElement } from '../../common/input-element';

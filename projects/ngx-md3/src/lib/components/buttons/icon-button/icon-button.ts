@@ -1,8 +1,9 @@
-import { Component, effect, ElementRef, HostListener, model } from '@angular/core';
+import { booleanAttribute, Component, computed, effect, ElementRef, HostListener, inject, input, model } from '@angular/core';
 import { StateComponent } from '../../common/state-component';
 import { ButtonSize } from '../../../types/button-size.type';
 import { IconButtonType } from '../../../types/icon-button-type.type';
 import { IconButtonWidth } from '../../../types/icon-button-width.type';
+import { MD3_BUTTON_CONTEXT } from '../../../interfaces/button-context.interface';
 
 @Component({
     selector: 'button[md3-icon-button]',
@@ -14,6 +15,8 @@ import { IconButtonWidth } from '../../../types/icon-button-width.type';
     ],
 })
 export class IconButton {
+    private context = inject(MD3_BUTTON_CONTEXT, { optional: true });
+    
     @HostListener('click', ['$event']) onClick(event: PointerEvent): void {
         if (this.isSelected() === null) {
             return;
@@ -24,49 +27,63 @@ export class IconButton {
         });
     }
 
-    public buttonSize = model<ButtonSize>('small', {
+    public buttonSize = input<ButtonSize>('small', {
         alias: 'button-size',
     });
-    public buttonType = model<IconButtonType>('filled', {
+    public buttonType = input<IconButtonType>('filled', {
         alias: 'button-type',
     });
-    public buttonWidth = model<IconButtonWidth>('default', {
+    public buttonWidth = input<IconButtonWidth>('default', {
         alias: 'button-width',
     });
-    public isSquared = model<boolean>(false, {
+    public isSquared = input<boolean, unknown>(false, {
         alias: 'button-squared',
+        transform: booleanAttribute
     });
     public isSelected = model<boolean | null>(null, {
         alias: 'selected',
     });
 
+    public effectiveSize = computed(() => this.context?.buttonContextSize?.() ?? this.buttonSize());
+    public effectiveType = computed(() => {
+        const contextType = this.context?.buttonContextType?.();
+        if (contextType) {
+            console.log(contextType);
+            return contextType == 'elevated' ? 'standard' : contextType;
+        }
+        
+        return this.buttonType();
+    });
+    public effectiveWidth = computed(() => this.context?.buttonContextWidth?.() ?? this.buttonWidth());
+    public effectiveSquared = computed(() => this.context?.buttonContextSquared?.() ?? this.isSquared());
+
     constructor(private el: ElementRef) {
         effect((onCleanup) => {
-            this.element.classList.add('md3-' + this.buttonSize());
+            this.element.classList.add('md3-' + this.effectiveSize());
 
             onCleanup(() => {
-                this.element.classList.remove('md3-' + this.buttonSize());
+                this.element.classList.remove('md3-' + this.effectiveSize());
             });
         });
 
         effect((onCleanup) => {
-            this.element.classList.add('md3-' + this.buttonType());
+            this.element.classList.add('md3-' + this.effectiveType());
 
             onCleanup(() => {
-                this.element.classList.remove('md3-' + this.buttonType());
+                this.element.classList.remove('md3-' + this.effectiveType());
             });
         });
 
         effect((onCleanup) => {
-            this.element.classList.add('md3-' + this.buttonWidth());
+            this.element.classList.add('md3-' + this.effectiveWidth());
 
             onCleanup(() => {
-                this.element.classList.remove('md3-' + this.buttonWidth());
+                this.element.classList.remove('md3-' + this.effectiveWidth());
             });
         });
 
         effect(() => {
-            if (this.isSquared()) {
+            if (this.effectiveSquared()) {
                 this.element.classList.add('md3-square');
             } else {
                 this.element.classList.remove('md3-square');
