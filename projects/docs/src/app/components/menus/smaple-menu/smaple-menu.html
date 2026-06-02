@@ -1,53 +1,30 @@
 @if (simple) {
     <md3-menu-group>
-        <button md3-menu-item>
-            <div md3-type-label="large">Item 1</div>
-        </button>
-        <button md3-menu-item>
-            <div md3-type-label="large">Item 2</div>
-        </button>
-        <button md3-menu-item>
-            <div md3-type-label="large">Item 3</div>
-        </button>
+        <button md3-menu-item label="Item 1"></button>
+        <button md3-menu-item label="Item 2"></button>
+        <button md3-menu-item label="Item 3"></button>
     </md3-menu-group>
 } @else {
     <md3-menu-group>
-        <button md3-menu-item (click)="openSubMenu($event)">
+        <button md3-menu-item (click)="openSubMenu($event)" label="Rename">
             <md3-icon md3-icon-element="leading">edit</md3-icon>
-            <div md3-type-label="large">Rename</div>
             <md3-badge>New</md3-badge>
             <md3-icon md3-icon-element="trailing">arrow_right</md3-icon>
         </button>
-        <button md3-menu-item>
+        <button md3-menu-item label="Copy" trailing-text="⌘+C">
             <md3-icon md3-icon-element="leading">content_copy</md3-icon>
-            <div md3-type-label="large">Copy</div>
-            <div md3-type-title="small">⌘+C</div>
         </button>
-        <button md3-menu-item disabled>
+        <button md3-menu-item disabled label="Delete (disabled)">
             <md3-icon md3-icon-element="leading">delete</md3-icon>
-            <div md3-type-label="large">Delete (disabled)</div>
         </button>
     </md3-menu-group>
     <md3-menu-group group-label="View">
-        <button md3-menu-item [selected]="true">
-            <div md3-type-label="large">Show ruler</div>
-        </button>
-        <button md3-menu-item [selected]="false">
-            <div md3-type-label="large">Show minimap</div>
-        </button>
+        <button md3-menu-item [selected]="true" label="Show ruler"></button>
+        <button md3-menu-item [selected]="false" label="Show minimap"></button>
     </md3-menu-group>
     <md3-menu-group>
-        <button md3-menu-item>
-            <div md3-type-label="large">Personal</div>
-            <div md3-type-body="small">Use your personal workspace</div>
-        </button>
-        <button md3-menu-item>
-            <div md3-type-label="large">Team</div>
-            <div md3-type-body="small">Shared by your team</div>
-        </button>
-        <button md3-menu-item>
-            <div md3-type-label="large">Settings</div>
-            <div md3-type-body="small">Manage billing and access</div>
-        </button>
+        <button md3-menu-item label="Personal" supporting-text="Use your personal workspace"></button>
+        <button md3-menu-item label="Team" supporting-text="Shared by your team"></button>
+        <button md3-menu-item label="Settings" supporting-text="Manage billing and access"></button>
     </md3-menu-group>
 }

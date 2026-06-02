@@ -92,7 +92,7 @@
                 color: var(--menu-item-badge-foreground);
             }
 
-            ::ng-deep [md3-type-title=small] {
+            [md3-type-title=small] {
                 margin: 0;
                 padding: 0;
                 white-space: nowrap;
@@ -110,7 +110,7 @@
         .md3-menu-item-content {
             flex: 1 1 auto;
 
-            ::ng-deep [md3-type-label=large] {
+            [md3-type-label=large] {
                 display: block;
                 margin: 0;
                 padding: 0;
@@ -121,7 +121,7 @@
                 color: var(--menu-item-label-color);
             }
 
-            ::ng-deep [md3-type-body=small] {
+            [md3-type-body=small] {
                 display: block;
                 margin: 0;
                 padding: 0;

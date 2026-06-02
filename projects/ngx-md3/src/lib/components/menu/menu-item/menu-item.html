@@ -1,5 +1,5 @@
-@if (selected !== null) {
-    <input type="checkbox" md3-input-element [checked]="selected">
+@if (selected() !== null) {
+    <input type="checkbox" md3-input-element [checked]="selected()">
 }
 
 <div class="md3-menu-item-container" md3-state-component>
@@ -11,13 +11,17 @@
     </div>
 
     <div class="md3-menu-item-content">
-        <ng-content select="[md3-type-label=large]"></ng-content>
-        <ng-content select="[md3-type-body=small]"></ng-content>
+        <div md3-type-label="large">{{ label() }}</div>
+        @if (supportingText()?.length) {
+            <div md3-type-body="small">{{ supportingText() }}</div>
+        }
     </div>
 
     <div class="md3-menu-item-trailing">
         <ng-content select="md3-badge"></ng-content>
-        <ng-content select="[md3-type-title=small]"></ng-content>
+        @if (trailingText()?.length) {
+            <div md3-type-title="small">{{ trailingText() }}</div>
+        }
         <ng-content select="[md3-icon-element=trailing]"></ng-content>
     </div>
 </div>
