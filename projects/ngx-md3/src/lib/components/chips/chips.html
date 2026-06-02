@@ -1,22 +1,22 @@
-@if (isSelectable) {
+@if (isSelectable()) {
     <ng-content select="[md3-input-element]"></ng-content>
 }
 <div class="md3-chip-container" md3-state-component>
-    <div class="md3-chip-leading" [class.has-icon]="leading" [class.has-avatar]="hasAvatar">
+    <div class="md3-chip-leading" [class.has-icon]="leading()" [class.has-avatar]="hasAvatar()">
         <ng-content select="[md3-icon-element=leading], [md3-chip-avatar]"></ng-content>
-        @if (showCheckIcon) {
+        @if (showCheckIcon()) {
             <md3-icon [icon-size]="18">check</md3-icon>
         }
     </div>
     <div class="md3-chip-label">
         <ng-content></ng-content>
     </div>
-    @if (hasRemove) {
+    @if (hasRemove()) {
         <button class="md3-chip-trailing" md3-state-component (click)="onRemoveClick($event)">
             <ng-container [ngTemplateOutlet]="trailingContent"></ng-container>
         </button>
     } @else {
-        <div class="md3-chip-trailing" [class.has-icon]="trailing">
+        <div class="md3-chip-trailing" [class.has-icon]="trailing()">
             <ng-container [ngTemplateOutlet]="trailingContent"></ng-container>
         </div>
     }
@@ -25,7 +25,7 @@
 <ng-template #trailingContent>
     <ng-content select="[md3-icon-element=trailing]"></ng-content>
 
-    @if (hasRemove && !trailing) {
+    @if (hasRemove() && !trailing) {
         <md3-icon [icon-size]="18">close</md3-icon>
     }
 </ng-template>

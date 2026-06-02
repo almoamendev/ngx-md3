@@ -1,4 +1,4 @@
-import { booleanAttribute, Component, contentChild, contentChildren, Directive, effect, ElementRef, input, Input, output, signal } from '@angular/core';
+import { booleanAttribute, Component, computed, contentChild, contentChildren, Directive, effect, ElementRef, input, Input, output } from '@angular/core';
 import { MaterialIcon } from '../common/material-icon/material-icon';
 import { StateComponent } from '../common/state-component';
 import { ChipType } from '../../types/chip-type.type';
@@ -21,16 +21,9 @@ export class ChipAvatar {}
     styleUrl: './chips.scss',
 })
 export class Chips {
-    @Input('chip-type') set type(value: ChipType) {
-        this.chipType.update((current) => {
-            if (value == current) {
-                return current;
-            }
-
-            this.element.classList.remove('md3-' + current);
-            return value;
-        });
-    };
+    public chipType = input<ChipType>('assist', {
+        alias: 'chip-type',
+    });
 
     public removeFunction = output<void>({
         alias: 'on-remove',
@@ -44,14 +37,6 @@ export class Chips {
     private avatar = contentChild(ChipAvatar);
     private iconElements = contentChildren(IconElement);
 
-    public get leading(): IconElement | undefined {
-        return this.iconElements().find((icon) => icon.iconType === 'leading');
-    }
-
-    public get trailing(): IconElement | undefined {
-        return this.iconElements().find((icon) => icon.iconType === 'trailing');
-    }
-
     public hasSurface = input<boolean, unknown>(false, {
         alias: 'surface',
         transform: booleanAttribute,
@@ -62,28 +47,21 @@ export class Chips {
         transform: booleanAttribute,
     });
 
-    private chipType = signal<ChipType>('assist');
-
-    public get isSelectable(): boolean {
-        return this.chipType() != 'assist';
-    }
-
-    public get showCheckIcon(): boolean {
-        return !this.leading && this.chipType() == 'filter';
-    }
-
-    public get hasAvatar(): boolean {
-        return this.avatar() != undefined && this.chipType() == 'input';
-    }
-
-    public get hasRemove(): boolean {
-        return this.chipType() == 'input';
-    }
+    public leading = computed(() => this.iconElements().find((icon) => icon.iconType === 'leading'));
+    public trailing = computed(() => this.iconElements().find((icon) => icon.iconType === 'trailing'));
+    public isSelectable = computed(() => this.chipType() != 'assist');
+    public showCheckIcon = computed(() => !this.leading && this.chipType() == 'filter');
+    public hasAvatar = computed(() => this.avatar() != undefined && this.chipType() == 'input');
+    public hasRemove = computed(() => this.chipType() == 'input');
 
     constructor(private el: ElementRef) {
-        effect(() => {
+        effect((onCleanup) => {
             const type = this.chipType();
             this.element.classList.add('md3-' + type);
+
+            onCleanup(() => {
+                this.element.classList.remove('md3-' + type);
+            });
         });
 
         effect(() => {
