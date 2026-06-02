@@ -23,7 +23,7 @@ export class Checkbox implements AfterContentInit {
     @ContentChild(InputElement) input?: InputElement;
     @ContentChild(FormControlName) controlName?: FormControlName;
     
-    public readonly disableStateLayer = input<boolean>(false, {
+    public disableStateLayer = input<boolean>(false, {
         alias: 'disable-state-layer'
     });
     
