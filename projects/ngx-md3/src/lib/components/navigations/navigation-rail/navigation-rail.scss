@@ -83,19 +83,7 @@
 
                 .md3-item-container {
                     padding: 0.375em 0;
-                    flex-direction: column;
                     width: 100%;
-        
-                    &::before, &::after {
-                        top: 0.375em;
-                        height: 2em;
-                        width: 3.5em;
-                        border-radius: 1em;
-                    }
-
-                    .md3-label {
-                        padding-inline: 0.666667em;
-                    }
                 }
             }
         }
@@ -195,17 +183,6 @@
                 transform: scaleY(0);
                 opacity: 0;
                 max-height: 0em;
-            }
-        }
-
-        ::ng-deep [md3-nav-item] {
-            .md3-badge-container {
-                position: absolute;
-                z-index: 3;
-                top: 0.5em;
-                inset-inline-start: 50%;
-                align-items: start;
-                justify-content: end;
             }
         }
     }
