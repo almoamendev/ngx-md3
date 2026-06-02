@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterLink, RouterOutlet } from "@angular/router";
-import { NavigationRailModule, ScaffoldModule } from '@vip9008/ngx-md3';
+import { NavigationBarModule, NavigationRailModule, ScaffoldModule } from '@vip9008/ngx-md3';
 
 @Component({
     selector: 'app-layout',
@@ -9,6 +9,7 @@ import { NavigationRailModule, ScaffoldModule } from '@vip9008/ngx-md3';
         RouterOutlet,
         ScaffoldModule,
         NavigationRailModule,
+        NavigationBarModule,
     ],
     templateUrl: './layout.component.html',
     styleUrl: './layout.component.scss',

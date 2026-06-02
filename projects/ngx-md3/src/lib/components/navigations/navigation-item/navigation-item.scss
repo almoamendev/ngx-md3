@@ -36,6 +36,7 @@
         position: relative;
         align-items: center;
         justify-content: center;
+        padding: 0.375em 0;
         max-width: 100%;
 
         &::before {
@@ -117,13 +118,15 @@
     }
 
     .md3-badge-container {
+        flex: 0 0 auto;
         position: absolute;
-        min-height: 0.875em;
-        min-width: 0.875em;
         top: 0.5em;
         inset-inline-start: 50%;
+        display: inline-flex;
         align-items: start;
         justify-content: end;
+        min-height: 0.875em;
+        min-width: 0.875em;
         z-index: 3;
     }
 

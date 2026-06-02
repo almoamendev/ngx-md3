@@ -82,7 +82,6 @@
                 }
 
                 .md3-item-container {
-                    padding: 0.375em 0;
                     width: 100%;
                 }
             }
@@ -254,13 +253,15 @@
                             padding-inline: 0;
                         }
 
-                        .md3-badge-container.md3-small {
-                            position: absolute;
-                            height: 1.875em;
-                            width: 1.625em;
-                            z-index: 3;
-                            align-items: start;
-                            justify-content: end;
+                        .md3-badge-container {
+                            position: relative;
+                            inset: auto;
+
+                            &.md3-small {
+                                position: absolute;
+                                height: 1.875em;
+                                width: 1.625em;
+                            }
                         }
                     }
                 }
