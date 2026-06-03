@@ -20,6 +20,9 @@ type ContainerStyle = 'none' | 'elevated' | 'divider';
             useExisting: NavigationRail,
         },
     ],
+    host: {
+        '[class.md3-expanded]': 'this.expanded()',
+    },
 })
 export class NavigationRail implements ButtonContext {
     private readonly el = inject(ElementRef<HTMLElement>);
@@ -114,14 +117,6 @@ export class NavigationRail implements ButtonContext {
             onCleanup(() => {
                 this.element.classList.remove(expandedClass);
             });
-        });
-
-        effect(() => {
-            if (this.expanded()) {
-                this.element.classList.add('md3-expanded');
-            } else {
-                this.element.classList.remove('md3-expanded');
-            }
         });
     }
 

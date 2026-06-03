@@ -1,5 +1,4 @@
-import { Component, ContentChild, ElementRef, Input, AfterViewInit, effect, signal, computed, contentChild, HostListener } from '@angular/core';
-import { PrimaryAction } from '../primary-action';
+import { AfterViewInit, booleanAttribute, Component, computed, contentChild, ElementRef, HostListener, input } from '@angular/core';
 import { StateComponent } from '../../common/state-component';
 import { Checkbox } from '../../checkbox/checkbox';
 import { RadioButton } from '../../radio-button/radio-button';
@@ -9,47 +8,41 @@ import { RadioButton } from '../../radio-button/radio-button';
     standalone: false,
     templateUrl: './list-item.html',
     styleUrl: './list-item.scss',
+    host: {
+        '[class.md3-selected]': 'isSelected()',
+    },
     hostDirectives: [
         StateComponent
     ],
 })
 export class ListItem implements AfterViewInit {
-    @Input('slots-alignment') slotsAlignment: 'start' | 'center' | 'end' = 'center';
-    @Input() set selected(value: boolean) {
-        this.selectSignal.set(value);
-    }
-    
-    @ContentChild(PrimaryAction) primaryAction?: PrimaryAction;
+    public slotsAlignment = input<'start' | 'center' | 'end'>('center', {
+        alias: 'slots-alignment',
+    });
+    public selected = input<boolean, unknown>(false, {
+        transform: booleanAttribute,
+    });
 
     public isActionTag: boolean = false;
     private isLabelTag: boolean = false;
     private checkbox = contentChild(Checkbox);
     private radioButton = contentChild(RadioButton);
-    private selectSignal = signal<boolean>(false);
-    private selectionControlSignal = computed(() => {
-        if (this.checkbox() || this.radioButton()) {
-            return (this.checkbox()?.state() || this.radioButton()?.state()) === true;
+
+    public isSelected = computed(() => {
+        const checkbox = this.checkbox();
+        const radioButton = this.radioButton();
+
+        if (checkbox || radioButton) {
+            return (checkbox?.state() || radioButton?.state()) === true;
         }
 
-        return this.selectSignal();
+        return this.selected();
     });
 
     constructor(
         private el: ElementRef,
         private state: StateComponent
-    ) {
-        effect(() => {
-            if (this.selectSignal()) {
-                this.element?.classList.add('md3-selected');
-            } else {
-                this.element?.classList.remove('md3-selected');
-            }
-        });
-
-        effect(() => {
-            this.selected = this.selectionControlSignal();
-        });
-    }
+    ) { }
 
     public get element(): HTMLElement {
         return this.el.nativeElement as HTMLElement;

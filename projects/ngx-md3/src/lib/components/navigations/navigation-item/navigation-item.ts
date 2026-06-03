@@ -1,4 +1,4 @@
-import { booleanAttribute, Component, computed, contentChild, contentChildren, effect, ElementRef, HostBinding, inject, input } from '@angular/core';
+import { booleanAttribute, Component, computed, contentChild, contentChildren, ElementRef, HostBinding, inject, input } from '@angular/core';
 import { RouterLinkActive } from '@angular/router';
 import { IconElement } from '../../common/icon-element';
 import { Badge } from '../../common/badge';
@@ -8,6 +8,9 @@ import { Badge } from '../../common/badge';
     imports: [],
     templateUrl: './navigation-item.html',
     styleUrl: './navigation-item.scss',
+    host: {
+        '[class.md3-hide-on-collapse]': 'this.hideOnCollapse()',
+    },
     hostDirectives: [
         RouterLinkActive
     ],
@@ -29,16 +32,6 @@ export class NavigationItem {
 
     @HostBinding('class.md3-active') get active(): boolean {
         return this.routerLinkActive.isActive;
-    }
-
-    constructor() {
-        effect(() => {
-            if (this.hideOnCollapse()) {
-                this.element.classList.add('md3-hide-on-collapse');
-            } else {
-                this.element.classList.remove('md3-hide-on-collapse');
-            }
-        });
     }
 
     public get element(): HTMLElement {

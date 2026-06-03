@@ -1,5 +1,5 @@
 import { CdkPortalOutlet, ComponentPortal } from '@angular/cdk/portal';
-import { AfterContentInit, Component, ComponentRef, effect, ElementRef, inject, Injector, signal, Type, ViewChild } from '@angular/core';
+import { AfterContentInit, Component, ComponentRef, effect, ElementRef, inject, Injector, signal, Type, viewChild } from '@angular/core';
 import { MenuConfig } from '../../interfaces/menu-config.interface';
 import { MENU_CONFIG } from './menu-ref';
 
@@ -13,17 +13,17 @@ import { MENU_CONFIG } from './menu-ref';
     host: {
         'class': 'md3-menu-container',
         'role': 'menu',
+        '[class.md3-visible]': 'isVisible()',
+        '[class.md3-inactive]': '!isActive()',
     },
 })
 export class Menu implements AfterContentInit {
-    @ViewChild(CdkPortalOutlet, { static: true })
-    private readonly portalOutlet!: CdkPortalOutlet;
+    private readonly portalOutlet = viewChild<CdkPortalOutlet>(CdkPortalOutlet);
 
     protected readonly config = inject<MenuConfig>(MENU_CONFIG, { optional: true }) ?? {};
-
-    private menuColors = signal<'standard' | 'vibrant'>('standard');
-    private isVisible = signal<boolean>(false);
-
+    protected menuColors = signal<'standard' | 'vibrant'>('standard');
+    protected isVisible = signal<boolean>(false);
+    
     public isActive = signal<boolean>(true);
     
     public get element(): HTMLElement {
@@ -31,30 +31,16 @@ export class Menu implements AfterContentInit {
     }
 
     constructor(private el: ElementRef) {
-        effect(() => {
+        effect((onCleanup) => {
             const color = this.menuColors();
             this.element.classList.add('md3-' + color);
+
+            onCleanup(() => {
+                this.element.classList.remove('md3-' + color);
+            });
         });
 
-        effect(() => {
-            if (this.isVisible()) {
-                this.element.classList.add('md3-active');
-            } else {
-                this.element.classList.remove('md3-active');
-            }
-        });
-
-        effect(() => {
-            if (this.isActive()) {
-                this.element.classList.remove('md3-inactive');
-            } else {
-                this.element.classList.add('md3-inactive');
-            }
-        });
-
-        if (this.config.menuColors == 'vibrant') {
-            this.setColors('vibrant');
-        }
+        this.menuColors.set(this.config.menuColors ?? 'standard');
     }
 
     ngAfterContentInit(): void {
@@ -66,17 +52,6 @@ export class Menu implements AfterContentInit {
     public showMenu(value: boolean): void {
         this.isVisible.set(value);
     }
-
-    public setColors(value: 'standard' | 'vibrant'): void {
-        this.menuColors.update((current) => {
-            if (value == current) {
-                return current;
-            }
-
-            this.element.classList.remove('md3-' + current);
-            return value;
-        });
-    }
     
     /**
      * The service creates this wrapper first, then calls this method to mount
@@ -85,6 +60,6 @@ export class Menu implements AfterContentInit {
     public attachContent<T>(component: Type<T>, injector: Injector): ComponentRef<T> {
         const portal = new ComponentPortal(component, null, injector);
 
-        return this.portalOutlet.attachComponentPortal(portal);
+        return this.portalOutlet()!.attachComponentPortal(portal);
     }
 }

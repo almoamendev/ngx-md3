@@ -8,6 +8,9 @@ import { MD3_BUTTON_CONTEXT } from '../../../interfaces/button-context.interface
     imports: [],
     templateUrl: './floating-action-button.html',
     styleUrl: './floating-action-button.scss',
+    host: {
+        '[class.md3-extended-fab]': 'effectiveExtended()',
+    },
     hostDirectives: [
         StateComponent
     ],
@@ -46,14 +49,6 @@ export class FloatingActionButton {
             onCleanup(() => {
                 this.element.classList.remove(buttonType);
             });
-        });
-        
-        effect(() => {
-            if (this.effectiveExtended()) {
-                this.element.classList.add('md3-extended-fab');
-            } else {
-                this.element.classList.remove('md3-extended-fab');
-            }
         });
     }
 

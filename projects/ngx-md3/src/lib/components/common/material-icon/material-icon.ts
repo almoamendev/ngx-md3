@@ -4,7 +4,11 @@ import { Component, ElementRef, input, booleanAttribute, effect } from '@angular
     selector: 'md3-icon',
     imports: [],
     templateUrl: './material-icon.html',
-    styleUrl: './material-icon.scss'
+    styleUrl: './material-icon.scss',
+    host: {
+        '[class.md3-filled]': 'isFilled()',
+        '[class.md3-bi-directional]': 'biDirectional()',
+    },
 })
 export class MaterialIcon {
     public iconVersion = input<'MaterialIcons' | 'MaterialSymbols'>('MaterialSymbols', {
@@ -33,22 +37,6 @@ export class MaterialIcon {
             onCleanup(() => {
                 this.element.classList.remove(iconSize);
             });
-        });
-
-        effect(() => {
-            if (this.isFilled()) {
-                this.element.classList.add('md3-filled');
-            } else {
-                this.element.classList.remove('md3-filled');
-            }
-        });
-
-        effect(() => {
-            if (this.biDirectional()) {
-                this.element.classList.add('md3-bi-directional');
-            } else {
-                this.element.classList.remove('md3-bi-directional');
-            }
         });
 
         effect((onCleanup) => {

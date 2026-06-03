@@ -1,11 +1,16 @@
-import { Directive, ElementRef, Input } from '@angular/core';
+import { Directive, ElementRef, input } from '@angular/core';
 
 @Directive({
     selector: '[md3-list-slot]',
-    standalone: false
+    standalone: false,
+    host: {
+        '[attr.md3-list-slot]': 'position()',
+    },
 })
 export class ListSlot {
-    @Input({ alias: 'md3-list-slot', required: true }) position!: 'content' | 'trailing';
+    public position = input.required<'content' | 'trailing'>({
+        alias: 'md3-list-slot',
+    });
 
     constructor(private el: ElementRef) { }
 

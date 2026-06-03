@@ -1,7 +1,10 @@
-import { booleanAttribute, Directive, effect, ElementRef, input } from '@angular/core';
+import { booleanAttribute, Directive, ElementRef, input } from '@angular/core';
 
 @Directive({
     selector: 'md3-badge',
+    host: {
+        '[class.md3-small]': 'isSmall()',
+    },
 })
 export class Badge {
     public isSmall = input<boolean, unknown>(false, {
@@ -10,13 +13,6 @@ export class Badge {
     });
 
     constructor(private el: ElementRef) {
-        effect(() => {
-            if (this.isSmall()) {
-                this.element.classList.add('md3-small');
-            } else {
-                this.element.classList.remove('md3-small');
-            }
-        });
     }
 
     public get element(): HTMLElement {

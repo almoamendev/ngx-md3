@@ -10,6 +10,9 @@ import { MD3_BUTTON_CONTEXT } from '../../../interfaces/button-context.interface
     imports: [],
     templateUrl: './icon-button.html',
     styleUrl: './icon-button.scss',
+    host: {
+        '[class.md3-square]': 'effectiveSquared()',
+    },
     hostDirectives: [
         StateComponent
     ],
@@ -79,14 +82,6 @@ export class IconButton {
             onCleanup(() => {
                 this.element.classList.remove('md3-' + this.effectiveWidth());
             });
-        });
-
-        effect(() => {
-            if (this.effectiveSquared()) {
-                this.element.classList.add('md3-square');
-            } else {
-                this.element.classList.remove('md3-square');
-            }
         });
 
         effect(() => {

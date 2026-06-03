@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, input } from '@angular/core';
 
 @Component({
     selector: 'md3-list-leading',
@@ -7,6 +7,6 @@ import { Component, Input } from '@angular/core';
     styleUrl: './list-leading.scss',
 })
 export class ListLeading {
-    @Input() type: 'icon' | 'avatar' | 'media' | 'selection-input' = 'icon';
-    @Input() size: 'image' | 'small-video' | 'large-video' = 'image';
+    public type = input<'icon' | 'avatar' | 'media' | 'selection-input'>('icon');
+    public size = input<'image' | 'small-video' | 'large-video'>('image');
 }

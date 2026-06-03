@@ -77,7 +77,7 @@
     opacity: 0;
     transform: scaleY(0.8);
     
-    &.md3-active {
+    &.md3-visible {
         opacity: 1;
         transform: scaleY(1);
     }

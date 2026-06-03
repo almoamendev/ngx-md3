@@ -19,6 +19,10 @@ export class ChipAvatar {}
     ],
     templateUrl: './chips.html',
     styleUrl: './chips.scss',
+    host: {
+        '[class.md3-elevated]': 'this.isElevated()',
+        '[class.md3-surface]': 'this.hasSurface() && !this.isElevated()',
+    },
 })
 export class Chips {
     public chipType = input<ChipType>('assist', {
@@ -62,22 +66,6 @@ export class Chips {
             onCleanup(() => {
                 this.element.classList.remove('md3-' + type);
             });
-        });
-
-        effect(() => {
-            if (this.isElevated()) {
-                this.element.classList.add('md3-elevated');
-            } else {
-                this.element.classList.remove('md3-elevated');
-            }
-        });
-
-        effect(() => {
-            if (this.hasSurface() && !this.isElevated()) {
-                this.element.classList.add('md3-surface');
-            } else {
-                this.element.classList.remove('md3-surface');
-            }
         });
     }
 
