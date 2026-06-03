@@ -38,7 +38,8 @@ export class TextField implements ButtonContext {
     private iconElements = contentChildren(IconElement, { descendants: true });
     private iconButtons = contentChildren(IconButton, { descendants: true });
     private controlName = contentChild(FormControlName);
-    private inputStateVersion = signal(0);
+    private controlError = signal(false);
+    private nativeInputError = signal(false);
 
     public formControl = computed<AbstractControl | undefined>(() => {
         if (this.control()) {
@@ -49,22 +50,29 @@ export class TextField implements ButtonContext {
     });
 
     public inputError = computed<boolean>(() => {
-        this.inputStateVersion();
-
         const control = this.formControl();
         if (control) {
-            return control.invalid && (control.touched || control.dirty);
+            this.controlError();
+            return this.hasControlError(control);
         }
 
-        return !(this.input()?.nativeElement.validity.valid ?? true) || this.input()?.nativeElement.ariaInvalid === 'true';
+        const input = this.input()?.nativeElement;
+        if (!input) {
+            return false;
+        }
+
+        this.nativeInputError();
+        return this.hasNativeInputError(input);
     });
 
     public maxLength = computed<number | undefined>(() => {
-        if (!this.inputCounter() || this.inputCounter() === true) {
+        const counter = this.inputCounter();
+
+        if (!counter || counter === true) {
             return undefined;
         }
 
-        return Number(Number(this.inputCounter()).toFixed(0));
+        return Number(Number(counter).toFixed(0));
     });
     public valueLength = signal(0);
     
@@ -79,11 +87,12 @@ export class TextField implements ButtonContext {
             }
 
             const nativeInput = input.nativeElement;
+            const isTextarea = nativeInput.tagName.toLowerCase() === 'textarea';
             
             nativeInput.setAttribute('placeholder', '');
-            this.syncInputState(nativeInput);
+            this.syncNativeInputState(nativeInput);
 
-            if (nativeInput.tagName.toLowerCase() == 'textarea') {
+            if (isTextarea) {
                 nativeInput.setAttribute('rows', '1');
             }
 
@@ -93,9 +102,9 @@ export class TextField implements ButtonContext {
                 fromEvent(nativeInput, 'blur'),
                 fromEvent(nativeInput, 'invalid'),
             ).subscribe(() => {
-                this.syncInputState(nativeInput);
+                this.syncNativeInputState(nativeInput);
 
-                if (nativeInput.tagName.toLowerCase() == 'textarea') {
+                if (isTextarea) {
                     nativeInput.style.height = 'auto';
                     nativeInput.style.height = nativeInput.scrollHeight + 'px';
                 }
@@ -103,7 +112,7 @@ export class TextField implements ButtonContext {
 
             const observer = typeof MutationObserver === 'undefined'
                 ? undefined
-                : new MutationObserver(() => this.syncInputState(nativeInput));
+                : new MutationObserver(() => this.syncNativeInputState(nativeInput));
             observer?.observe(nativeInput, {
                 attributes: true,
                 attributeFilter: ['aria-invalid', 'disabled', 'maxlength', 'minlength', 'pattern', 'required'],
@@ -118,14 +127,13 @@ export class TextField implements ButtonContext {
         effect((onCleanup) => {
             const control = this.formControl();
             if (!control) {
+                this.controlError.set(false);
                 return;
             }
 
-            const controlEvents = merge(
-                control.statusChanges,
-                control.valueChanges,
-                control.events,
-            ).subscribe(() => this.bumpInputState());
+            this.syncControlError(control);
+
+            const controlEvents = control.events.subscribe(() => this.syncControlError(control));
 
             onCleanup(() => controlEvents.unsubscribe());
         });
@@ -144,20 +152,35 @@ export class TextField implements ButtonContext {
         });
 
         effect(() => {
-            if (this.inputError()) {
-                this.input()?.nativeElement.setAttribute('aria-invalid', 'true');
-            } else {
-                this.input()?.nativeElement.setAttribute('aria-invalid', 'false');
-            }
+            this.syncAriaInvalidAttribute(this.input()?.nativeElement);
         });
     }
 
-    private syncInputState(input: HTMLInputElement): void {
+    private syncNativeInputState(input: HTMLInputElement): void {
         this.valueLength.set(input.value.length);
-        this.bumpInputState();
+        this.nativeInputError.set(this.hasNativeInputError(input));
     }
 
-    private bumpInputState(): void {
-        this.inputStateVersion.update((version) => version + 1);
+    private syncControlError(control: AbstractControl): void {
+        this.controlError.set(this.hasControlError(control));
+    }
+
+    private hasNativeInputError(input: HTMLInputElement): boolean {
+        return !input.validity.valid || input.ariaInvalid === 'true';
+    }
+
+    private hasControlError(control: AbstractControl): boolean {
+        return control.invalid && (control.touched || control.dirty);
+    }
+
+    private syncAriaInvalidAttribute(input: HTMLInputElement | undefined): void {
+        if (!input) {
+            return;
+        }
+
+        const value = this.inputError() ? 'true' : 'false';
+        if (input.getAttribute('aria-invalid') !== value) {
+            input.setAttribute('aria-invalid', value);
+        }
     }
 }
