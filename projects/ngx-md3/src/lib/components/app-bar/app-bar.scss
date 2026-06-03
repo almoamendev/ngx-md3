@@ -1,0 +1,134 @@
+:host {
+    --app-bar-container-color: rgb(var(--md-scheme-surface));
+    --app-bar-foreground-color: rgb(var(--md-scheme-on-surface));
+    --app-bar-height: 4em;
+    --app-bar-title-inset: 1rem;
+    --app-bar-row-height: 4em;
+
+    display: block;
+    min-inline-size: 0;
+    background-color: var(--app-bar-container-color);
+    color: var(--app-bar-foreground-color);
+    transition: background-color var(--md-motion-standard-fast-effects-duration) var(--md-motion-standard-fast-effects-easing),
+                box-shadow var(--md-motion-standard-fast-effects-duration) var(--md-motion-standard-fast-effects-easing);
+
+    .md3-app-bar-container {
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr) auto;
+        grid-template-rows: var(--app-bar-row-height) minmax(0, calc(var(--app-bar-height) - var(--app-bar-row-height))) auto;
+        min-block-size: var(--app-bar-height);
+        inline-size: 100%;
+        background-color: inherit;
+        color: inherit;
+    }
+
+    .md3-app-bar-navigation,
+    .md3-app-bar-actions {
+        grid-row: 1;
+        z-index: 1;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.25em;
+        min-inline-size: 0;
+        block-size: var(--app-bar-row-height);
+
+        &:empty {
+            display: none;
+        }
+
+        ::ng-deep [md3-icon-button] {
+            flex: 0 0 auto;
+        }
+    }
+
+    .md3-app-bar-navigation {
+        grid-column: 1;
+        justify-self: start;
+        padding-inline-start: 0.25em;
+    }
+
+    .md3-app-bar-actions {
+        grid-column: 3;
+        justify-self: end;
+        padding-inline-end: 0.25em;
+    }
+
+    .md3-app-bar-title {
+        grid-column: 2;
+        grid-row: 1;
+        align-self: center;
+        min-inline-size: 0;
+        padding-inline: var(--app-bar-title-inset);
+        color: inherit;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+
+        ::ng-deep * {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+    }
+
+    .md3-app-bar-bottom {
+        grid-column: 1 / -1;
+        grid-row: 3;
+        min-inline-size: 0;
+
+        &:empty {
+            display: none;
+        }
+    }
+
+    &.md3-elevated {
+        --app-bar-container-color: rgb(var(--md-scheme-surface-container));
+
+        box-shadow: var(--md-shadow-2dp);
+    }
+
+    &.md3-center-aligned {
+        .md3-app-bar-title {
+            grid-column: 1 / -1;
+            justify-self: stretch;
+            text-align: center;
+            padding-inline: 4em;
+        }
+    }
+
+    &.md3-medium,
+    &.md3-large {
+        .md3-app-bar-title {
+            grid-column: 1 / -1;
+            grid-row: 2;
+            align-self: end;
+            padding-inline: 1.5rem;
+            white-space: normal;
+            overflow-wrap: anywhere;
+
+            ::ng-deep * {
+                white-space: normal;
+            }
+        }
+    }
+
+    &.md3-medium {
+        --app-bar-height: 7em;
+
+        .md3-app-bar-title {
+            padding-block-end: 1rem;
+            font-size: 1.5rem;
+            line-height: 1.333333em;
+        }
+    }
+
+    &.md3-large {
+        --app-bar-height: 9.5em;
+
+        .md3-app-bar-title {
+            padding-block-end: 1.75rem;
+            font-size: 1.75rem;
+            line-height: 1.285714em;
+        }
+    }
+}

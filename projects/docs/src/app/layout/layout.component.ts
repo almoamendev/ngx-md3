@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterLink, RouterOutlet } from "@angular/router";
-import { NavigationBarModule, NavigationRailModule, ScaffoldModule } from '@vip9008/ngx-md3';
+import { AppBarModule, NavigationBarModule, NavigationRailModule, ScaffoldModule } from '@vip9008/ngx-md3';
 
 @Component({
     selector: 'app-layout',
@@ -8,6 +8,7 @@ import { NavigationBarModule, NavigationRailModule, ScaffoldModule } from '@vip9
         RouterLink,
         RouterOutlet,
         ScaffoldModule,
+        AppBarModule,
         NavigationRailModule,
         NavigationBarModule,
     ],

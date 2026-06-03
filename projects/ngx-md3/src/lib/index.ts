@@ -76,6 +76,10 @@ export * from './components/loading-and-progress/loading-indicator/loading-indic
 export * from './components/loading-and-progress/linear-progress-indicator/linear-progress-indicator';
 export * from './components/loading-and-progress/circular-progress-indicator/circular-progress-indicator';
 
+// app bar
+export * from './components/app-bar/app-bar';
+export * from './components/app-bar/app-bar-module';
+
 // navigations
 export * from './components/navigations/navigation-item/navigation-item';
 export * from './components/navigations/navigation-group/navigation-group';
