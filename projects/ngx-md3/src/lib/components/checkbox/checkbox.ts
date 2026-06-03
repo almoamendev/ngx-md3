@@ -1,10 +1,9 @@
-import { AfterContentInit, Component, ContentChild, DestroyRef, effect, ElementRef, input, Input, signal, viewChild, ViewChild } from '@angular/core';
-import { StateComponent } from '../common/state-component';
+import { Component, computed, contentChild, effect, input, signal, Signal, viewChild } from '@angular/core';
+import { AbstractControl, FormControlName } from '@angular/forms';
+import { fromEvent } from 'rxjs';
 import { InputElement } from '../common/input-element';
 import { MaterialIcon } from '../common/material-icon/material-icon';
-import { fromEvent } from 'rxjs';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { AbstractControl, FormControlName } from '@angular/forms';
+import { StateComponent } from '../common/state-component';
 
 @Component({
     selector: 'md3-checkbox',
@@ -15,59 +14,114 @@ import { AbstractControl, FormControlName } from '@angular/forms';
     templateUrl: './checkbox.html',
     styleUrl: './checkbox.scss',
 })
-export class Checkbox implements AfterContentInit {
-    @Input() control?: AbstractControl;
+export class Checkbox {
+    public control = input<AbstractControl | undefined>(undefined, {
+        alias: 'control',
+    });
 
     private stateComponent = viewChild<StateComponent>(StateComponent);
+    private input = contentChild(InputElement);
+    private controlName = contentChild(FormControlName);
+    private controlError = signal(false);
+    private nativeInputError = signal(false);
 
-    @ContentChild(InputElement) input?: InputElement;
-    @ContentChild(FormControlName) controlName?: FormControlName;
-    
     public disableStateLayer = input<boolean>(false, {
         alias: 'disable-state-layer'
     });
-    
+
     public checkboxIcon: 'check_small' | 'check_indeterminate_small' = 'check_small';
     public hasError: boolean = false;
     public state = signal<boolean | null>(false);
 
-    constructor(
-        private el: ElementRef<HTMLElement>,
-        private destroyRef: DestroyRef
-    ) {
+    public formControl = computed<AbstractControl | undefined>(() => this.control() ?? this.controlName()?.control);
+
+    private inputError = computed<boolean>(() => {
+        const control = this.formControl();
+        if (control) {
+            this.controlError();
+            return this.hasControlError(control);
+        }
+
+        const input = this.input()?.nativeElement;
+        if (!input) {
+            return false;
+        }
+
+        this.nativeInputError();
+        return this.hasNativeInputError(input);
+    });
+
+    constructor() {
         effect(() => {
-            if (this.disableStateLayer()) {
-                this.stateComponent()?.setStateLayer(false);
-            } else {
-                this.stateComponent()?.setStateLayer(true);
+            this.stateComponent()?.setStateLayer(!this.disableStateLayer());
+        });
+
+        effect((onCleanup) => {
+            const input = this.input()?.nativeElement;
+            if (!input) {
+                return;
             }
-        })
+
+            this.syncInitialState(input);
+            this.syncNativeInputState(input);
+
+            const inputEvents = fromEvent(input, 'change').subscribe(() => {
+                this.syncStateFromInput(input);
+                this.syncControlFromState(this.state());
+                this.syncNativeInputState(input);
+            });
+
+            const observer = typeof MutationObserver === 'undefined'
+                ? undefined
+                : new MutationObserver(() => {
+                    if (!this.formControl()) {
+                        this.syncStateFromInput(input);
+                    }
+
+                    this.syncNativeInputState(input);
+                });
+            observer?.observe(input, {
+                attributes: true,
+                attributeFilter: ['aria-invalid', 'checked', 'disabled', 'required'],
+            });
+
+            onCleanup(() => {
+                inputEvents.unsubscribe();
+                observer?.disconnect();
+            });
+        });
+
+        effect((onCleanup) => {
+            const control = this.formControl();
+            if (!control) {
+                this.controlError.set(false);
+                return;
+            }
+
+            this.syncStateFromControl(control);
+            this.syncControlError(control);
+
+            const controlEvents = control.events.subscribe(() => {
+                this.syncStateFromControl(control);
+                this.syncControlError(control);
+            });
+
+            onCleanup(() => controlEvents.unsubscribe());
+        });
+
+        effect(() => {
+            this.syncAriaInvalidAttribute(this.input()?.nativeElement);
+        });
     }
 
-    public get formControl(): AbstractControl | undefined {
-        if (this.control) {
-            return this.control;
+    private syncInitialState(input: HTMLInputElement): void {
+        const control = this.formControl();
+        if (control) {
+            this.syncStateFromControl(control);
+            return;
         }
 
-        return this.controlName?.control;
-    }
-
-    private get inputError(): boolean {
-        if (this.formControl) {
-            return this.formControl?.invalid && (this.formControl?.touched || this.formControl?.dirty);
-        }
-
-        return !(this.input?.nativeElement.validity.valid ?? true) || this.input?.nativeElement.ariaInvalid === 'true';
-    }
-
-    private updateInputValidity() {
-        this.hasError = this.inputError;
-
-        if (this.hasError) {
-            this.input?.nativeElement.setAttribute('aria-invalid', 'true');
-        } else {
-            this.input?.nativeElement.setAttribute('aria-invalid', 'false');
-        }
+        this.syncStateFromInput(input);
     }
 
     private updateState(state: boolean | null = false): void {
@@ -78,85 +132,69 @@ export class Checkbox implements AfterContentInit {
         this.state.set(state);
     }
 
-    private syncStateFromInput(): void {
-        if (!this.input?.nativeElement) {
-            return;
-        }
-
-        if (this.input.nativeElement.indeterminate) {
-            this.updateState(null);
-            return;
-        }
-
-        this.updateState(this.input.nativeElement.checked);
+    private syncStateFromInput(input: HTMLInputElement): void {
+        this.updateState(input.indeterminate ? null : input.checked);
     }
 
     private syncInputFromState(state: boolean | null = false): void {
-        if (!this.input?.nativeElement) {
+        const input = this.input()?.nativeElement;
+        if (!input) {
             return;
         }
 
-        this.input.nativeElement.indeterminate = state === null;
-        this.input.nativeElement.checked = state === true;
+        const indeterminate = state === null;
+        const checked = state === true;
+
+        if (input.indeterminate !== indeterminate) {
+            input.indeterminate = indeterminate;
+        }
+
+        if (input.checked !== checked) {
+            input.checked = checked;
+        }
     }
 
     private syncControlFromState(state: boolean | null = false): void {
-        if (!this.formControl || this.formControl.value === state) {
+        const control = this.formControl();
+        if (!control || control.value === state) {
             return;
         }
 
-        this.formControl.setValue(state);
+        control.setValue(state);
     }
 
-    private syncStateFromControl(): void {
-        if (!this.formControl) {
-            return;
-        }
-
-        let controlState = this.formControl.value === null
+    private syncStateFromControl(control: AbstractControl): void {
+        const controlState = control.value === null
             ? null
-            : this.formControl.value === true;
+            : control.value === true;
 
         this.updateState(controlState);
         this.syncInputFromState(controlState);
     }
 
-    ngAfterContentInit(): void {
-        if (this.input?.nativeElement) {
-            fromEvent(this.input.nativeElement, 'change').pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
-                this.syncStateFromInput();
-                this.syncControlFromState(this.state());
-                this.updateInputValidity();
-            });
-        }
-
-        if (this.formControl) {
-            this.syncStateFromControl();
-        } else {
-            this.syncStateFromInput();
-        }
-
-        this.updateInputValidity();
-
-        this.formControl?.statusChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
-            this.syncStateFromControl();
-            this.updateInputValidity();
-        });
-
-        this.formControl?.valueChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
-            this.syncStateFromControl();
-            this.updateInputValidity();
-        });
+    private syncNativeInputState(input: HTMLInputElement): void {
+        this.nativeInputError.set(this.hasNativeInputError(input));
     }
 
-    private setState(state: boolean | null = false) {
-        if (this.input?.nativeElement) {
-            this.input.nativeElement.indeterminate = state === null;
-            this.input.nativeElement.checked = state === true;
-            this.input.nativeElement.dispatchEvent(new Event('change'));
-        }
-
-        this.updateState(state);
-        this.syncControlFromState(state);
+    private syncControlError(control: AbstractControl): void {
+        this.controlError.set(this.hasControlError(control));
     }
+
+    private hasNativeInputError(input: HTMLInputElement): boolean {
+        return !input.validity.valid || input.ariaInvalid === 'true';
+    }
+
+    private hasControlError(control: AbstractControl): boolean {
+        return control.invalid && (control.touched || control.dirty);
+    }
+
+    private syncAriaInvalidAttribute(input: HTMLInputElement | undefined): void {
+        const value = this.inputError() ? 'true' : 'false';
+        this.hasError = value === 'true';
+
+        if (input && input.getAttribute('aria-invalid') !== value) {
+            input.setAttribute('aria-invalid', value);
+        }
+    }
+
 }

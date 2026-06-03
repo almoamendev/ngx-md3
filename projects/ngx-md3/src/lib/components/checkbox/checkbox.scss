@@ -57,6 +57,7 @@
         margin: 0;
         padding: 0;
         opacity: 0;
+        cursor: pointer;
 
         &:hover {
             & + .md3-checkbox-container {
@@ -135,6 +136,8 @@
         }
 
         &:disabled {
+            cursor: default;
+
             & + .md3-checkbox-container {
                 .md3-checkbox-icon {
                     --checkbox-color: rgb(var(--md-scheme-on-surface));

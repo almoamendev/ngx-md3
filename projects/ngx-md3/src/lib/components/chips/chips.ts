@@ -50,7 +50,7 @@ export class Chips {
     public leading = computed(() => this.iconElements().find((icon) => icon.iconType === 'leading'));
     public trailing = computed(() => this.iconElements().find((icon) => icon.iconType === 'trailing'));
     public isSelectable = computed(() => this.chipType() != 'assist');
-    public showCheckIcon = computed(() => !this.leading && this.chipType() == 'filter');
+    public showCheckIcon = computed(() => !this.leading() && this.chipType() == 'filter');
     public hasAvatar = computed(() => this.avatar() != undefined && this.chipType() == 'input');
     public hasRemove = computed(() => this.chipType() == 'input');
 

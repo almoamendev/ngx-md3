@@ -83,6 +83,7 @@
         margin: 0;
         padding: 0;
         opacity: 0;
+        cursor: pointer;
 
         & + .md3-track-container {
             .md3-state-layer {
@@ -199,6 +200,8 @@
         }
 
         &:disabled {
+            cursor: default;
+
             & + .md3-track-container {
                 --track-color: rgb(var(--md-scheme-surface-container-highest));
                 --track-outline-color: rgb(var(--md-scheme-on-surface));

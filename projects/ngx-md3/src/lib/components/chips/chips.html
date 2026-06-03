@@ -25,7 +25,7 @@
 <ng-template #trailingContent>
     <ng-content select="[md3-icon-element=trailing]"></ng-content>
 
-    @if (hasRemove() && !trailing) {
+    @if (hasRemove() && !trailing()) {
         <md3-icon [icon-size]="18">close</md3-icon>
     }
 </ng-template>
