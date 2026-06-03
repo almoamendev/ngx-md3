@@ -1,9 +1,8 @@
-import { Component, computed, contentChild, contentChildren, DestroyRef, effect, ElementRef, input, signal, Signal, viewChild } from '@angular/core';
+import { Component, computed, contentChild, contentChildren, effect, ElementRef, input, signal, Signal, viewChild } from '@angular/core';
 import { InputElement } from '../common/input-element';
 import { IconElement } from '../common/icon-element';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { AbstractControl, FormControlName } from '@angular/forms';
-import { fromEvent } from 'rxjs';
+import { fromEvent, merge } from 'rxjs';
 import { IconButton } from '../buttons/icon-button/icon-button';
 import { ButtonContext, MD3_BUTTON_CONTEXT } from '../../interfaces/button-context.interface';
 import { ButtonSize } from '../../types/button-size.type';
@@ -39,6 +38,7 @@ export class TextField implements ButtonContext {
     private iconElements = contentChildren(IconElement, { descendants: true });
     private iconButtons = contentChildren(IconButton, { descendants: true });
     private controlName = contentChild(FormControlName);
+    private inputStateVersion = signal(0);
 
     public formControl = computed<AbstractControl | undefined>(() => {
         if (this.control()) {
@@ -49,8 +49,11 @@ export class TextField implements ButtonContext {
     });
 
     public inputError = computed<boolean>(() => {
-        if (this.formControl()) {
-            return this.formControl()!.invalid && (this.formControl()!.touched || this.formControl()!.dirty);
+        this.inputStateVersion();
+
+        const control = this.formControl();
+        if (control) {
+            return control.invalid && (control.touched || control.dirty);
         }
 
         return !(this.input()?.nativeElement.validity.valid ?? true) || this.input()?.nativeElement.ariaInvalid === 'true';
@@ -63,33 +66,68 @@ export class TextField implements ButtonContext {
 
         return Number(Number(this.inputCounter()).toFixed(0));
     });
-    public valueLength: number = 0;
+    public valueLength = signal(0);
     
     // context values
     buttonContextSize: Signal<ButtonSize> = signal('small');
 
-    constructor(private destroyRef: DestroyRef) {
-        effect(() => {
+    constructor() {
+        effect((onCleanup) => {
             const input = this.input();
             if (!input) {
                 return;
             }
-            
-            this.input()?.nativeElement.setAttribute('placeholder', '');
-            this.valueLength = this.input()?.nativeElement.value.length ?? 0;
 
-            if (this.input()?.nativeElement.tagName.toLowerCase() == 'textarea') {
-                this.input()?.nativeElement.setAttribute('rows', '1');
+            const nativeInput = input.nativeElement;
+            
+            nativeInput.setAttribute('placeholder', '');
+            this.syncInputState(nativeInput);
+
+            if (nativeInput.tagName.toLowerCase() == 'textarea') {
+                nativeInput.setAttribute('rows', '1');
             }
 
-            fromEvent(this.input()!.nativeElement, 'input').pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
-                this.valueLength = this.input()?.nativeElement.value.length ?? 0;
+            const inputEvents = merge(
+                fromEvent(nativeInput, 'input'),
+                fromEvent(nativeInput, 'change'),
+                fromEvent(nativeInput, 'blur'),
+                fromEvent(nativeInput, 'invalid'),
+            ).subscribe(() => {
+                this.syncInputState(nativeInput);
 
-                if (this.input()?.nativeElement.tagName.toLowerCase() == 'textarea') {
-                    this.input()!.nativeElement.style.height = 'auto';
-                    this.input()!.nativeElement.style.height = this.input()!.nativeElement.scrollHeight + 'px';
+                if (nativeInput.tagName.toLowerCase() == 'textarea') {
+                    nativeInput.style.height = 'auto';
+                    nativeInput.style.height = nativeInput.scrollHeight + 'px';
                 }
             });
+
+            const observer = typeof MutationObserver === 'undefined'
+                ? undefined
+                : new MutationObserver(() => this.syncInputState(nativeInput));
+            observer?.observe(nativeInput, {
+                attributes: true,
+                attributeFilter: ['aria-invalid', 'disabled', 'maxlength', 'minlength', 'pattern', 'required'],
+            });
+
+            onCleanup(() => {
+                inputEvents.unsubscribe();
+                observer?.disconnect();
+            });
+        });
+
+        effect((onCleanup) => {
+            const control = this.formControl();
+            if (!control) {
+                return;
+            }
+
+            const controlEvents = merge(
+                control.statusChanges,
+                control.valueChanges,
+                control.events,
+            ).subscribe(() => this.bumpInputState());
+
+            onCleanup(() => controlEvents.unsubscribe());
         });
 
         effect(() => {
@@ -112,5 +150,14 @@ export class TextField implements ButtonContext {
                 this.input()?.nativeElement.setAttribute('aria-invalid', 'false');
             }
         });
+    }
+
+    private syncInputState(input: HTMLInputElement): void {
+        this.valueLength.set(input.value.length);
+        this.bumpInputState();
+    }
+
+    private bumpInputState(): void {
+        this.inputStateVersion.update((version) => version + 1);
     }
 }
