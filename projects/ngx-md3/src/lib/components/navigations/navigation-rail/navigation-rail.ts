@@ -70,8 +70,8 @@ export class NavigationRail implements ButtonContext {
     private menuIcons = contentChildren<IconElement>(IconElement);
     private floatingActionButton = contentChild<FloatingActionButton>(FloatingActionButton);
 
-    public menuExpandIcon = computed(() => this.menuIcons().find((icon) => icon.iconType == 'expand'));
-    public menuCollapseIcon = computed(() => this.menuIcons().find((icon) => icon.iconType == 'collapse'));
+    public menuExpandIcon = computed(() => this.menuIcons().find((icon) => icon.iconType() == 'expand'));
+    public menuCollapseIcon = computed(() => this.menuIcons().find((icon) => icon.iconType() == 'collapse'));
     public hasFab = computed(() => !!this.floatingActionButton());
     
     // context values

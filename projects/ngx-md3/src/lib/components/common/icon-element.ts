@@ -1,4 +1,4 @@
-import { Directive, ElementRef, Input } from '@angular/core';
+import { Directive, ElementRef, input } from '@angular/core';
 
 @Directive({
     selector: '[md3-icon-element]',
@@ -7,7 +7,9 @@ import { Directive, ElementRef, Input } from '@angular/core';
     }
 })
 export class IconElement {
-    @Input('md3-icon-element') iconType?: string;
+    public iconType = input<string | null>(null, {
+        alias: 'md3-icon-element',
+    });
 
     constructor(private el: ElementRef) { }
 

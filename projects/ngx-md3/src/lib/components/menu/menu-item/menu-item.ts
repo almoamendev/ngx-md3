@@ -41,11 +41,11 @@ export class MenuItem {
     private iconElements = contentChildren(IconElement);
     
     public get leading(): IconElement | undefined {
-        return this.iconElements().find((icon) => icon.iconType === 'leading');
+        return this.iconElements().find((icon) => icon.iconType() === 'leading');
     }
 
     public get trailing(): IconElement | undefined {
-        return this.iconElements().find((icon) => icon.iconType === 'trailing');
+        return this.iconElements().find((icon) => icon.iconType() === 'trailing');
     }
 
     public get showLeadingIcon(): boolean {

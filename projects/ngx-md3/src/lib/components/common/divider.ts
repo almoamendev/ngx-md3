@@ -1,8 +1,10 @@
-import { Directive, Input } from '@angular/core';
+import { Directive, input } from '@angular/core';
 
 @Directive({
     selector: 'md3-divider'
 })
 export class Divider {
-    @Input('type') type?: string;
+    public dividerType = input<string | null>(null, {
+        alias: 'type',
+    });
 }

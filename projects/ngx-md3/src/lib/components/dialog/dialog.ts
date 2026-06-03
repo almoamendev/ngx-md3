@@ -1,4 +1,4 @@
-import { AfterContentInit, Component, ComponentRef, inject, Injector, signal, Type, ViewChild, ViewEncapsulation } from '@angular/core';
+import { AfterContentInit, Component, ComponentRef, inject, Injector, signal, Type, viewChild } from '@angular/core';
 import { ComponentPortal, CdkPortalOutlet } from '@angular/cdk/portal';
 import { DIALOG_CONFIG } from './dialog-ref';
 import { DialogConfig } from '../../interfaces/dialog-config.interface';
@@ -12,8 +12,7 @@ import { DialogConfig } from '../../interfaces/dialog-config.interface';
     styleUrl: './dialog.scss',
 })
 export class Dialog implements AfterContentInit {
-    @ViewChild(CdkPortalOutlet, { static: true })
-    private readonly portalOutlet!: CdkPortalOutlet;
+    private readonly portalOutlet = viewChild<CdkPortalOutlet>(CdkPortalOutlet);
 
     public isActive = signal<boolean>(false);
 
@@ -36,6 +35,6 @@ export class Dialog implements AfterContentInit {
     public attachContent<T>(component: Type<T>, injector: Injector): ComponentRef<T> {
         const portal = new ComponentPortal(component, null, injector);
 
-        return this.portalOutlet.attachComponentPortal(portal);
+        return this.portalOutlet()!.attachComponentPortal(portal);
     }
 }
