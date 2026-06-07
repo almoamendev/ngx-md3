@@ -2,7 +2,7 @@ import { booleanAttribute, Component, input, Signal, signal } from '@angular/cor
 import { ButtonContext, MD3_BUTTON_CONTEXT } from '../../interfaces/button-context.interface';
 import { ButtonSize } from '../../types/button-size.type';
 
-export type AppBarType = 'small' | 'center-aligned' | 'medium' | 'large';
+export type AppBarType = 'small' | 'medium' | 'large';
 
 @Component({
     standalone: false,
@@ -17,7 +17,6 @@ export type AppBarType = 'small' | 'center-aligned' | 'medium' | 'large';
     ],
     host: {
         role: 'banner',
-        '[attr.app-bar-type]': 'appBarType()',
         '[class.md3-small]': "appBarType() === 'small'",
         '[class.md3-center-aligned]': "appBarType() === 'center-aligned'",
         '[class.md3-medium]': "appBarType() === 'medium'",
@@ -27,11 +26,16 @@ export type AppBarType = 'small' | 'center-aligned' | 'medium' | 'large';
 })
 export class AppBar implements ButtonContext {
     public appBarType = input<AppBarType>('small', {
-        alias: 'app-bar-type',
+        alias: 'bar-type',
     });
     
     public elevated = input<boolean, unknown>(false, {
         alias: 'elevated',
+        transform: booleanAttribute,
+    });
+    
+    public centerAligned = input<boolean, unknown>(false, {
+        alias: 'center-aligned',
         transform: booleanAttribute,
     });
 

@@ -1,17 +1,23 @@
 <md3-scaffold>
-    <md3-app-bar app-bar-type="center-aligned" elevated md3-scaffold-bar="top">
-        <button md3-icon-button md3-app-bar-navigation aria-label="Menu">
-            <md3-icon md3-icon-element>menu</md3-icon>
-        </button>
+    <md3-app-bar bar-type="small" elevated center-aligned md3-scaffold-bar="top">
+        <div md3-app-bar-leading>
+            <button md3-icon-button button-type="standard">
+                <md3-icon md3-icon-element>arrow_back</md3-icon>
+            </button>
+        </div>
 
         <span md3-app-bar-title>Inbox</span>
 
-        <button md3-icon-button md3-app-bar-action aria-label="Search">
-            <md3-icon md3-icon-element>search</md3-icon>
-        </button>
-        <button md3-icon-button md3-app-bar-action aria-label="Search">
-            <md3-icon md3-icon-element>search</md3-icon>
-        </button>
+        <div md3-app-bar-trailing>
+            <button md3-icon-button button-type="standard">
+                <md3-icon md3-icon-element>search</md3-icon>
+            </button>
+        </div>
+        <div md3-app-bar-trailing>
+            <button md3-icon-button button-type="standard">
+                <md3-icon md3-icon-element>event</md3-icon>
+            </button>
+        </div>
     </md3-app-bar>
 
     <md3-navigation-rail md3-scaffold-rail="leading">

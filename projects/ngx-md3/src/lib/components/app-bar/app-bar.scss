@@ -9,8 +9,7 @@
     min-inline-size: 0;
     background-color: var(--app-bar-container-color);
     color: var(--app-bar-foreground-color);
-    transition: background-color var(--md-motion-standard-fast-effects-duration) var(--md-motion-standard-fast-effects-easing),
-                box-shadow var(--md-motion-standard-fast-effects-duration) var(--md-motion-standard-fast-effects-easing);
+    transition: all var(--md-motion-standard-fast-effects-duration) var(--md-motion-standard-fast-effects-easing);
 
     .md3-app-bar-container {
         display: grid;
@@ -20,54 +19,68 @@
         inline-size: 100%;
         background-color: inherit;
         color: inherit;
-    }
 
-    .md3-app-bar-navigation,
-    .md3-app-bar-actions {
-        grid-row: 1;
-        z-index: 1;
-        display: inline-flex;
-        align-items: center;
-        gap: 0.25em;
-        min-inline-size: 0;
-        block-size: var(--app-bar-row-height);
-
-        &:empty {
-            display: none;
+        .md3-app-bar-leading,
+        .md3-app-bar-trailing {
+            grid-row: 1;
+            z-index: 1;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25em;
+            min-inline-size: 0;
+            block-size: var(--app-bar-row-height);
+    
+            &:empty {
+                display: none;
+            }
+    
+            ::ng-deep [md3-app-bar-leading],
+            ::ng-deep [md3-app-bar-trailing] {
+                flex: 0 0 auto;
+                height: 3em;
+                min-width: 3em;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+            }
         }
 
-        ::ng-deep [md3-icon-button] {
-            flex: 0 0 auto;
+        .md3-app-bar-leading {
+            grid-column: 1;
+            justify-self: start;
+            padding-inline-start: 0.25em;
         }
-    }
 
-    .md3-app-bar-navigation {
-        grid-column: 1;
-        justify-self: start;
-        padding-inline-start: 0.25em;
-    }
-
-    .md3-app-bar-actions {
-        grid-column: 3;
-        justify-self: end;
-        padding-inline-end: 0.25em;
-    }
-
-    .md3-app-bar-title {
-        grid-column: 2;
-        grid-row: 1;
-        align-self: center;
-        min-inline-size: 0;
-        padding-inline: var(--app-bar-title-inset);
-        color: inherit;
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-
-        ::ng-deep * {
+        .md3-app-bar-trailing {
+            grid-column: 3;
+            justify-self: end;
+            padding-inline-end: 0.25em;
+        }
+    
+        .md3-app-bar-title {
+            grid-column: 2;
+            grid-row: 1;
+            align-self: center;
+            min-inline-size: 0;
+            padding-inline: var(--app-bar-title-inset);
+            color: inherit;
             overflow: hidden;
             white-space: nowrap;
             text-overflow: ellipsis;
+            pointer-events: none;
+
+            &.md3-center {
+                grid-column: 1 / -1;
+                justify-self: stretch;
+                text-align: center;
+            }
+    
+            ::ng-deep [md3-app-bar-title] {
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                pointer-events: all;
+            }
         }
     }
 
@@ -85,15 +98,6 @@
         --app-bar-container-color: rgb(var(--md-scheme-surface-container));
 
         box-shadow: var(--md-shadow-2dp);
-    }
-
-    &.md3-center-aligned {
-        .md3-app-bar-title {
-            grid-column: 1 / -1;
-            justify-self: stretch;
-            text-align: center;
-            padding-inline: 4em;
-        }
     }
 
     &.md3-medium,

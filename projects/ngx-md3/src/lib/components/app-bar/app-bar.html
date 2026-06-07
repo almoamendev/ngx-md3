@@ -1,14 +1,14 @@
 <div class="md3-app-bar-container">
-    <div class="md3-app-bar-navigation">
-        <ng-content select="[md3-app-bar-navigation]"></ng-content>
+    <div class="md3-app-bar-leading">
+        <ng-content select="[md3-app-bar-leading]"></ng-content>
     </div>
 
-    <div class="md3-app-bar-title" md3-type-title="large">
+    <div class="md3-app-bar-title" [class.md3-center]="centerAligned()" md3-type-title="large">
         <ng-content select="[md3-app-bar-title]"></ng-content>
     </div>
 
-    <div class="md3-app-bar-actions">
-        <ng-content select="[md3-app-bar-action]"></ng-content>
+    <div class="md3-app-bar-trailing">
+        <ng-content select="[md3-app-bar-trailing]"></ng-content>
     </div>
 
     <div class="md3-app-bar-bottom">
