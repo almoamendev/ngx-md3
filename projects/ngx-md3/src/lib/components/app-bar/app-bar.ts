@@ -1,6 +1,7 @@
-import { booleanAttribute, Component, input, Signal, signal } from '@angular/core';
+import { booleanAttribute, Component, computed, contentChild, input, Signal, signal } from '@angular/core';
 import { ButtonContext, MD3_BUTTON_CONTEXT } from '../../interfaces/button-context.interface';
 import { ButtonSize } from '../../types/button-size.type';
+import { Avatar } from '../common/avatar';
 
 export type AppBarType = 'small' | 'medium' | 'large';
 
@@ -18,7 +19,6 @@ export type AppBarType = 'small' | 'medium' | 'large';
     host: {
         role: 'banner',
         '[class.md3-small]': "appBarType() === 'small'",
-        '[class.md3-center-aligned]': "appBarType() === 'center-aligned'",
         '[class.md3-medium]': "appBarType() === 'medium'",
         '[class.md3-large]': "appBarType() === 'large'",
         '[class.md3-elevated]': 'elevated()',
@@ -39,5 +39,10 @@ export class AppBar implements ButtonContext {
         transform: booleanAttribute,
     });
 
+    private avatar = contentChild(Avatar);
+
+    public hasAvatar = computed(() => !!this.avatar());
+
+    // button context
     public buttonContextSize: Signal<ButtonSize> = signal('small');
 }

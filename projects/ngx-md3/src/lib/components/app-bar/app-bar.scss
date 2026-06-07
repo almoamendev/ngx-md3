@@ -1,14 +1,15 @@
 :host {
-    --app-bar-container-color: rgb(var(--md-scheme-surface));
-    --app-bar-foreground-color: rgb(var(--md-scheme-on-surface));
+    --background-color: rgb(var(--md-scheme-surface));
+    --foreground-color: rgb(var(--md-scheme-on-surface));
+    --foreground-secondary: rgb(var(--md-scheme-on-surface-variant));
     --app-bar-height: 4em;
     --app-bar-title-inset: 1rem;
     --app-bar-row-height: 4em;
 
     display: block;
     min-inline-size: 0;
-    background-color: var(--app-bar-container-color);
-    color: var(--app-bar-foreground-color);
+    background-color: var(--background-color);
+    color: var(--foreground-color);
     transition: all var(--md-motion-standard-fast-effects-duration) var(--md-motion-standard-fast-effects-easing);
 
     .md3-app-bar-container {
@@ -33,7 +34,8 @@
             &:empty {
                 display: none;
             }
-    
+            
+            .md3-app-bar-avatar,
             ::ng-deep [md3-app-bar-leading],
             ::ng-deep [md3-app-bar-trailing] {
                 flex: 0 0 auto;
@@ -49,12 +51,61 @@
             grid-column: 1;
             justify-self: start;
             padding-inline-start: 0.25em;
+
+            ::ng-deep [md3-app-bar-leading] {
+                color: var(--foreground-color);
+
+                .md3-standard[md3-icon-button] {
+                    --foreground-color: var(--foreground-color);
+                }
+            }
         }
 
         .md3-app-bar-trailing {
             grid-column: 3;
             justify-self: end;
             padding-inline-end: 0.25em;
+            
+            ::ng-deep [md3-app-bar-trailing] {
+                color: var(--foreground-secondary);
+
+                .md3-standard[md3-icon-button] {
+                    --foreground-color: var(--foreground-secondary);
+                }
+            }
+            
+            ::ng-deep [md3-avatar] {
+                flex: 0 0 2em;
+                height: 2em;
+                width: 2em;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                overflow: hidden;
+                border-radius: 2em;
+                background-color: rgb(var(--md-scheme-on-primary-container));
+                color: rgb(var(--md-scheme-primary-container));
+                border: none;
+                padding: 0;
+                margin: 0;
+                text-decoration: none;
+                font-size: 1em;
+                position: relative;
+                user-select: none;
+                cursor: default;
+            }
+
+            ::ng-deep button[md3-avatar],
+            ::ng-deep a[md3-avatar] {
+                cursor: pointer;
+
+                &::before {
+                    content: '';
+                    position: absolute;
+                    height: 3em;
+                    width: 3em;
+                }
+            }
         }
     
         .md3-app-bar-title {
@@ -95,7 +146,7 @@
     }
 
     &.md3-elevated {
-        --app-bar-container-color: rgb(var(--md-scheme-surface-container));
+        --background-color: rgb(var(--md-scheme-surface-container));
 
         box-shadow: var(--md-shadow-2dp);
     }

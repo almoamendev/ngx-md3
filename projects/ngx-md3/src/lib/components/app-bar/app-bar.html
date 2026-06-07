@@ -9,6 +9,11 @@
 
     <div class="md3-app-bar-trailing">
         <ng-content select="[md3-app-bar-trailing]"></ng-content>
+        @if (hasAvatar()) {
+            <div class="md3-app-bar-avatar">
+                <ng-content select="[md3-avatar]"></ng-content>
+            </div>
+        }
     </div>
 
     <div class="md3-app-bar-bottom">

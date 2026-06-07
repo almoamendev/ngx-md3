@@ -36,6 +36,7 @@ export * from './components/common/icon-element';
 export * from './components/common/material-icon/material-icon';
 export * from './components/common/divider';
 export * from './components/common/badge';
+export * from './components/common/avatar';
 
 // buttons
 export * from './components/buttons/button/button';
