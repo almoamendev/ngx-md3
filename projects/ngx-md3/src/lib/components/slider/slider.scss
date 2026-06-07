@@ -51,9 +51,6 @@
                 --icon-size: 1.5em;
 
                 margin-top: -0.75em;
-                font-size: 1.5em;
-                height: 1.5em;
-                width: 1.5em;
             }
         }
     }
@@ -67,8 +64,6 @@
                 --icon-size: 2em;
 
                 margin-top: -1em;
-                height: 2em;
-                width: 2em;
             }
         }
     }
@@ -117,8 +112,8 @@
                         top: 50%;
                         font-size: 1em !important;
                         margin-top: -0.75em;
-                        height: 1.5em;
-                        width: 1.5em;
+                        height: var(--icon-size);
+                        width: var(--icon-size);
                         color: var(--slider-active-track-on-color);
     
                         ::ng-deep [md3-icon-element] {
