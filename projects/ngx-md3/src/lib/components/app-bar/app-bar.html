@@ -3,9 +3,16 @@
         <ng-content select="[md3-app-bar-leading]"></ng-content>
     </div>
 
-    <div class="md3-app-bar-title" [class.md3-center]="centerAligned()" md3-type-title="large">
-        <ng-content select="[md3-app-bar-title]"></ng-content>
-    </div>
+    @if (appBarType() == 'small') {
+        <div class="md3-app-bar-title" [class.md3-center]="centerAligned()">
+            @if (title()?.length) {
+                <div md3-type-title="large">{{ title() }}</div>
+            }
+            @if (subtitle()?.length) {
+                <div md3-type-body="small" emphasized>{{ subtitle() }}</div>
+            }
+        </div>
+    }
 
     <div class="md3-app-bar-trailing">
         <ng-content select="[md3-app-bar-trailing]"></ng-content>
@@ -16,7 +23,24 @@
         }
     </div>
 
-    <div class="md3-app-bar-bottom">
-        <ng-content select="[md3-app-bar-bottom]"></ng-content>
-    </div>
+    @if (title() || subtitle()) {
+        <div class="md3-app-bar-bottom" [class.md3-center]="centerAligned()">
+            @if (appBarType() == 'medium') {
+                @if (title()?.length) {
+                    <div md3-type-headline="medium">{{ title() }}</div>
+                }
+                @if (subtitle()?.length) {
+                    <div md3-type-title="small">{{ subtitle() }}</div>
+                }
+            }
+            @if (appBarType() == 'large') {
+                @if (title()?.length) {
+                    <div md3-type-display="small">{{ title() }}</div>
+                }
+                @if (subtitle()?.length) {
+                    <div md3-type-title="medium">{{ subtitle() }}</div>
+                }
+            }
+        </div>
+    }
 </div>

@@ -25,6 +25,14 @@ export type AppBarType = 'small' | 'medium' | 'large';
     },
 })
 export class AppBar implements ButtonContext {
+    public title = input<string | null>(null, {
+        alias: 'bar-title',
+    });
+
+    public subtitle = input<string | null>(null, {
+        alias: 'bar-subtitle',
+    });
+
     public appBarType = input<AppBarType>('small', {
         alias: 'bar-type',
     });

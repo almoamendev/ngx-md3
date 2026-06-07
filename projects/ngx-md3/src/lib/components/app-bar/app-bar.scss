@@ -2,9 +2,6 @@
     --background-color: rgb(var(--md-scheme-surface));
     --foreground-color: rgb(var(--md-scheme-on-surface));
     --foreground-secondary: rgb(var(--md-scheme-on-surface-variant));
-    --app-bar-height: 4em;
-    --app-bar-title-inset: 1rem;
-    --app-bar-row-height: 4em;
 
     display: block;
     min-inline-size: 0;
@@ -15,8 +12,8 @@
     .md3-app-bar-container {
         display: grid;
         grid-template-columns: auto minmax(0, 1fr) auto;
-        grid-template-rows: var(--app-bar-row-height) minmax(0, calc(var(--app-bar-height) - var(--app-bar-row-height))) auto;
-        min-block-size: var(--app-bar-height);
+        grid-template-rows: 4em auto auto;
+        min-block-size: 4em;
         inline-size: 100%;
         background-color: inherit;
         color: inherit;
@@ -29,7 +26,7 @@
             align-items: center;
             gap: 0.25em;
             min-inline-size: 0;
-            block-size: var(--app-bar-row-height);
+            block-size: 4em;
     
             &:empty {
                 display: none;
@@ -113,7 +110,6 @@
             grid-row: 1;
             align-self: center;
             min-inline-size: 0;
-            padding-inline: var(--app-bar-title-inset);
             color: inherit;
             overflow: hidden;
             white-space: nowrap;
@@ -133,57 +129,49 @@
                 pointer-events: all;
             }
         }
-    }
-
-    .md3-app-bar-bottom {
-        grid-column: 1 / -1;
-        grid-row: 3;
-        min-inline-size: 0;
-
-        &:empty {
-            display: none;
-        }
-    }
-
-    &.md3-elevated {
-        --background-color: rgb(var(--md-scheme-surface-container));
-
-        box-shadow: var(--md-shadow-2dp);
-    }
-
-    &.md3-medium,
-    &.md3-large {
-        .md3-app-bar-title {
+        
+        .md3-app-bar-bottom {
             grid-column: 1 / -1;
             grid-row: 2;
-            align-self: end;
-            padding-inline: 1.5rem;
-            white-space: normal;
-            overflow-wrap: anywhere;
-
-            ::ng-deep * {
-                white-space: normal;
+            min-inline-size: 0;
+            padding-bottom: 0.75em;
+            padding-inline-start: 1em;
+            padding-inline-end: 0.25em;
+    
+            &:empty {
+                display: none;
             }
+
+            &.md3-center {
+                text-align: center;
+                padding-inline: 1em;
+            }
+        }
+    
+        &.md3-elevated {
+            --background-color: rgb(var(--md-scheme-surface-container));
+    
+            box-shadow: var(--md-shadow-3dp);
         }
     }
 
     &.md3-medium {
-        --app-bar-height: 7em;
-
-        .md3-app-bar-title {
-            padding-block-end: 1rem;
-            font-size: 1.5rem;
-            line-height: 1.333333em;
+        .md3-app-bar-container {
+            .md3-app-bar-bottom {
+                [md3-type-title=small] {
+                    margin-top: 0.285715em;
+                }
+            }
         }
     }
 
     &.md3-large {
-        --app-bar-height: 9.5em;
-
-        .md3-app-bar-title {
-            padding-block-end: 1.75rem;
-            font-size: 1.75rem;
-            line-height: 1.285714em;
+        .md3-app-bar-container {
+            .md3-app-bar-bottom {
+                [md3-type-title=medium] {
+                    margin-top: 0.5em;
+                }
+            }
         }
     }
 }
