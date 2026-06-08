@@ -2,7 +2,7 @@ import { DOCUMENT } from '@angular/common';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { computed, inject, Injectable, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { fromEvent, map, startWith } from 'rxjs';
+import { fromEvent, map, startWith, Subscription } from 'rxjs';
 import { ViewportWidth } from '../types/viewport-width.type';
 import { ViewportHeight } from '../types/viewport-height.type';
 
@@ -28,6 +28,11 @@ export class LayoutService {
         'medium': '(min-height: 30em) and (max-height: 56.249em)',
         'expanded': '(min-height: 56.25em)'
     } as const;
+
+    private mainPaneSub?: Subscription;
+
+    readonly mainScrollTop = signal<number>(0);
+    readonly mainIsScrolled = computed<boolean>(() => this.mainScrollTop() > 0);
 
     public readonly viewport = toSignal(
         fromEvent(window, 'resize').pipe(
@@ -122,5 +127,32 @@ export class LayoutService {
     public setDirection(direction: 'ltr' | 'rtl'): void {
         this.document.documentElement.dir = direction;
         this.direction.set(direction);
+    }
+
+    public registerMainPane(element: HTMLElement): void {
+        this.mainPaneSub?.unsubscribe();
+
+        const update = () => {
+            const scrollTop = element.scrollTop;
+
+            this.mainScrollTop.set(scrollTop);
+        };
+
+        update();
+
+        this.mainPaneSub = new Subscription();
+
+        element.addEventListener('scroll', update, { passive: true });
+
+        this.mainPaneSub.add(() => {
+            element.removeEventListener('scroll', update);
+        });
+    }
+
+    public unregisterMainPane(element: HTMLElement): void {
+        this.mainPaneSub?.unsubscribe();
+        this.mainPaneSub = undefined;
+
+        this.mainScrollTop.set(0);
     }
 }

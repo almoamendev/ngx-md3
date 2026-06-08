@@ -2,12 +2,14 @@
     --background-color: rgb(var(--md-scheme-surface));
     --foreground-color: rgb(var(--md-scheme-on-surface));
     --foreground-secondary: rgb(var(--md-scheme-on-surface-variant));
+    --elevation: var(--md-shadow-0dp);
 
     display: block;
     min-inline-size: 0;
     background-color: var(--background-color);
     color: var(--foreground-color);
-    transition: all var(--md-motion-standard-fast-effects-duration) var(--md-motion-standard-fast-effects-easing);
+    box-shadow: var(--elevation);
+    transition: all var(--md-motion-standard-default-effects-duration) var(--md-motion-standard-default-effects-easing);
 
     .md3-app-bar-container {
         display: grid;
@@ -147,12 +149,11 @@
                 padding-inline: 1em;
             }
         }
+    }
     
-        &.md3-elevated {
-            --background-color: rgb(var(--md-scheme-surface-container));
-    
-            box-shadow: var(--md-shadow-3dp);
-        }
+    &.md3-scrolled {
+        --background-color: rgb(var(--md-scheme-surface-container));
+        --elevation: var(--md-shadow-3dp);
     }
 
     &.md3-medium {
