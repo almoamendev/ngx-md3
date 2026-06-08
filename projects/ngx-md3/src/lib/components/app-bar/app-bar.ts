@@ -3,8 +3,9 @@ import { ButtonContext, MD3_BUTTON_CONTEXT } from '../../interfaces/button-conte
 import { ButtonSize } from '../../types/button-size.type';
 import { Avatar } from '../common/avatar';
 import { LayoutService } from '../../foundations/layout.service';
+import { AppBarLogo } from './app-bar-logo';
 
-export type AppBarType = 'small' | 'medium' | 'large';
+export type AppBarType = 'small' | 'medium' | 'large' | 'search';
 
 @Component({
     standalone: false,
@@ -40,8 +41,10 @@ export class AppBar implements ButtonContext {
         transform: booleanAttribute,
     });
 
+    private logo = contentChild(AppBarLogo);
     private avatar = contentChild(Avatar);
 
+    public hasLogo = computed(() => !!this.logo());
     public hasAvatar = computed(() => !!this.avatar());
 
     public mainIsScrolled = computed(() => this.layout.mainIsScrolled());

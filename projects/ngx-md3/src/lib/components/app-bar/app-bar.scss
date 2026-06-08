@@ -76,14 +76,16 @@
             }
             
             ::ng-deep [md3-avatar] {
+                --border-radius: 1em;
+                --border-size: 0em;
+
                 flex: 0 0 2em;
                 height: 2em;
                 width: 2em;
                 display: inline-flex;
                 align-items: center;
                 justify-content: center;
-                overflow: hidden;
-                border-radius: 2em;
+                border-radius: var(--border-radius);
                 background-color: rgb(var(--md-scheme-on-primary-container));
                 color: rgb(var(--md-scheme-primary-container));
                 border: none;
@@ -98,6 +100,11 @@
 
             ::ng-deep button[md3-avatar],
             ::ng-deep a[md3-avatar] {
+                --state-color: var(--md-scheme-on-primary);
+                --outline-color: rgb(var(--md-scheme-secondary));
+                --outline-width: 0.1875em;
+                --outline-offset: -0.125em;
+
                 cursor: pointer;
 
                 &::before {
@@ -105,6 +112,40 @@
                     position: absolute;
                     height: 3em;
                     width: 3em;
+                }
+            }
+        }
+    
+        .md3-app-bar-logo {
+            grid-column: 2;
+            grid-row: 1;
+            align-self: center;
+            display: flex;
+            justify-content: start;
+            min-inline-size: 0;
+            overflow: hidden;
+            height: 3em;
+
+            &.md3-center {
+                grid-column: 1 / -1;
+                justify-self: stretch;
+                text-align: center;
+                justify-content: center;
+            }
+    
+            ::ng-deep [md3-app-bar-logo] {
+                flex: 0 1 auto;
+                max-height: 100%;
+                max-width: 100%;
+                display: inline;
+
+                & > * {
+                    display: inline;
+                    max-height: 100%;
+                    max-width: 100%;
+                    width: auto;
+                    height: auto;
+                    object-fit: contain;
                 }
             }
         }
@@ -120,14 +161,22 @@
             text-overflow: ellipsis;
             pointer-events: none;
             transition: all var(--md-motion-standard-default-effects-duration) var(--md-motion-standard-default-effects-easing);
-            transform-origin: bottom;
             transform: scale(0);
             opacity: 0;
+
+            &:dir(ltr) {
+                transform-origin: bottom left;
+            }
+
+            &:dir(rtl) {
+                transform-origin: bottom right;
+            }
 
             &.md3-center {
                 grid-column: 1 / -1;
                 justify-self: stretch;
                 text-align: center;
+                transform-origin: bottom center;
             }
     
             ::ng-deep [md3-app-bar-title] {

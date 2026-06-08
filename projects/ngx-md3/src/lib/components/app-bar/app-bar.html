@@ -3,14 +3,21 @@
         <ng-content select="[md3-app-bar-leading]"></ng-content>
     </div>
 
-    <div class="md3-app-bar-title" [class.md3-center]="centerAligned()">
-        @if (title()?.length) {
-            <div md3-type-title="large">{{ title() }}</div>
-        }
-        @if (subtitle()?.length) {
-            <div md3-type-body="small" emphasized>{{ subtitle() }}</div>
-        }
-    </div>
+    @if (appBarType() == 'search') {
+    } @else if (hasLogo()) {
+        <div class="md3-app-bar-logo" [class.md3-center]="centerAligned()">
+            <ng-content select="[md3-app-bar-logo]"></ng-content>
+        </div>
+    } @else if (title() || subtitle()) {
+        <div class="md3-app-bar-title" [class.md3-center]="centerAligned()">
+            @if (title()?.length) {
+                <div md3-type-title="large">{{ title() }}</div>
+            }
+            @if (subtitle()?.length) {
+                <div md3-type-body="small" emphasized>{{ subtitle() }}</div>
+            }
+        </div>
+    }
 
     <div class="md3-app-bar-trailing">
         <ng-content select="[md3-app-bar-trailing]"></ng-content>

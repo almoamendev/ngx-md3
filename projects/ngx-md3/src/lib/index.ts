@@ -79,6 +79,7 @@ export * from './components/loading-and-progress/circular-progress-indicator/cir
 
 // app bar
 export * from './components/app-bar/app-bar';
+export * from './components/app-bar/app-bar-logo';
 export * from './components/app-bar/app-bar-module';
 
 // navigations

@@ -8,10 +8,12 @@ import { TypeBody } from '../../styles/typography/type-body';
 import { TypeHeadline } from '../../styles/typography/type-headline';
 import { TypeDisplay } from '../../styles/typography/type-display';
 import { Avatar } from '../common/avatar';
+import { AppBarLogo } from './app-bar-logo';
 
 @NgModule({
     declarations: [
         AppBar,
+        AppBarLogo,
     ],
     imports: [
         IconButton,
@@ -25,6 +27,7 @@ import { Avatar } from '../common/avatar';
     ],
     exports: [
         AppBar,
+        AppBarLogo,
         IconButton,
         IconElement,
         MaterialIcon,
