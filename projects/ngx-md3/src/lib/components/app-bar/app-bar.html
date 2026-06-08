@@ -3,16 +3,14 @@
         <ng-content select="[md3-app-bar-leading]"></ng-content>
     </div>
 
-    @if (appBarType() == 'small') {
-        <div class="md3-app-bar-title" [class.md3-center]="centerAligned()">
-            @if (title()?.length) {
-                <div md3-type-title="large">{{ title() }}</div>
-            }
-            @if (subtitle()?.length) {
-                <div md3-type-body="small" emphasized>{{ subtitle() }}</div>
-            }
-        </div>
-    }
+    <div class="md3-app-bar-title" [class.md3-center]="centerAligned()">
+        @if (title()?.length) {
+            <div md3-type-title="large">{{ title() }}</div>
+        }
+        @if (subtitle()?.length) {
+            <div md3-type-body="small" emphasized>{{ subtitle() }}</div>
+        }
+    </div>
 
     <div class="md3-app-bar-trailing">
         <ng-content select="[md3-app-bar-trailing]"></ng-content>

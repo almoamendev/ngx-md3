@@ -73,14 +73,71 @@ export class AppBar implements ButtonContext {
         });
 
         effect(() => {
+            const collapse = this.bottomCollapse();
+
             this.element.style.setProperty(
                 '--app-bar-bottom-collapse',
-                `${this.bottomCollapse()}px`
+                `${collapse}px`
+            );
+            this.element.style.setProperty(
+                '--app-bar-bottom-opacity',
+                this.getBottomOpacity(collapse).toString()
+            );
+            this.element.classList.toggle(
+                'md3-collapsed',
+                this.isBottomCollapsed(collapse)
             );
         });
     }
 
     public get element(): HTMLElement {
         return this.el.nativeElement as HTMLElement;
+    }
+
+    private getBottomOpacity(collapse: number): number {
+        const type = this.appBarType();
+
+        if (type !== 'medium' && type !== 'large') {
+            return 1;
+        }
+
+        const expandedHeight = this.getBottomExpandedHeight();
+
+        if (!expandedHeight) {
+            return 1;
+        }
+
+        return Math.max(0, Math.min(1, 1 - (collapse / expandedHeight)));
+    }
+
+    private isBottomCollapsed(collapse: number): boolean {
+        const type = this.appBarType();
+
+        if (type !== 'medium' && type !== 'large') {
+            return false;
+        }
+
+        if (!this.title()?.length && !this.subtitle()?.length) {
+            return false;
+        }
+
+        const expandedHeight = this.getBottomExpandedHeight();
+
+        return expandedHeight > 0 && collapse >= expandedHeight;
+    }
+
+    private getBottomExpandedHeight(): number {
+        const fontSize = Number.parseFloat(getComputedStyle(this.element).fontSize) || 16;
+        const hasSubtitle = !!this.subtitle()?.length;
+
+        if (this.appBarType() === 'medium') {
+            return (hasSubtitle ? 4.5 : 3) * fontSize;
+        }
+
+        if (this.appBarType() === 'large') {
+            return (hasSubtitle ? 5.5 : 3.5) * fontSize;
+        }
+
+        return 0;
     }
 }

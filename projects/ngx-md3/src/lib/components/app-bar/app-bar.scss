@@ -4,6 +4,7 @@
     --foreground-secondary: rgb(var(--md-scheme-on-surface-variant));
     --elevation: var(--md-shadow-0dp);
     --app-bar-bottom-collapse: 0px;
+    --app-bar-bottom-opacity: 1;
 
     display: block;
     min-inline-size: 0;
@@ -118,6 +119,10 @@
             white-space: nowrap;
             text-overflow: ellipsis;
             pointer-events: none;
+            transition: all var(--md-motion-standard-default-effects-duration) var(--md-motion-standard-default-effects-easing);
+            transform-origin: bottom;
+            transform: scale(0);
+            opacity: 0;
 
             &.md3-center {
                 grid-column: 1 / -1;
@@ -141,7 +146,7 @@
             min-inline-size: 0;
             min-block-size: 0;
             overflow: hidden;
-            will-change: block-size;
+            transition: all var(--md-motion-standard-default-effects-duration) var(--md-motion-standard-default-effects-easing);
     
             &:empty {
                 display: none;
@@ -151,6 +156,8 @@
                 padding-bottom: 0.75em;
                 padding-inline-start: 1em;
                 padding-inline-end: 0.25em;
+                opacity: var(--app-bar-bottom-opacity);
+                transition: all var(--md-motion-standard-default-effects-duration) var(--md-motion-standard-default-effects-easing);
             }
 
             &.md3-center .md3-app-bar-bottom-content {
@@ -163,6 +170,15 @@
     &.md3-scrolled {
         --background-color: rgb(var(--md-scheme-surface-container));
         --elevation: var(--md-shadow-3dp);
+    }
+
+    &.md3-small, &.md3-collapsed {
+        .md3-app-bar-container {
+            .md3-app-bar-title {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
     }
 
     &.md3-medium {
