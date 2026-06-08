@@ -3,6 +3,7 @@
     --foreground-color: rgb(var(--md-scheme-on-surface));
     --foreground-secondary: rgb(var(--md-scheme-on-surface-variant));
     --elevation: var(--md-shadow-0dp);
+    --app-bar-bottom-collapse: 0px;
 
     display: block;
     min-inline-size: 0;
@@ -133,18 +134,26 @@
         }
         
         .md3-app-bar-bottom {
+            --app-bar-bottom-expanded-block-size: auto;
+
             grid-column: 1 / -1;
             grid-row: 2;
             min-inline-size: 0;
-            padding-bottom: 0.75em;
-            padding-inline-start: 1em;
-            padding-inline-end: 0.25em;
+            min-block-size: 0;
+            overflow: hidden;
+            will-change: block-size;
     
             &:empty {
                 display: none;
             }
 
-            &.md3-center {
+            .md3-app-bar-bottom-content {
+                padding-bottom: 0.75em;
+                padding-inline-start: 1em;
+                padding-inline-end: 0.25em;
+            }
+
+            &.md3-center .md3-app-bar-bottom-content {
                 text-align: center;
                 padding-inline: 1em;
             }
@@ -159,7 +168,15 @@
     &.md3-medium {
         .md3-app-bar-container {
             .md3-app-bar-bottom {
-                [md3-type-title=small] {
+                --app-bar-bottom-expanded-block-size: 3em;
+
+                block-size: max(0px, calc(var(--app-bar-bottom-expanded-block-size) - var(--app-bar-bottom-collapse)));
+
+                &:has([md3-type-title=small]) {
+                    --app-bar-bottom-expanded-block-size: 4.5em;
+                }
+
+                .md3-app-bar-bottom-content [md3-type-title=small] {
                     margin-top: 0.285715em;
                 }
             }
@@ -169,7 +186,15 @@
     &.md3-large {
         .md3-app-bar-container {
             .md3-app-bar-bottom {
-                [md3-type-title=medium] {
+                --app-bar-bottom-expanded-block-size: 3.5em;
+
+                block-size: max(0px, calc(var(--app-bar-bottom-expanded-block-size) - var(--app-bar-bottom-collapse)));
+
+                &:has([md3-type-title=medium]) {
+                    --app-bar-bottom-expanded-block-size: 5.5em;
+                }
+
+                .md3-app-bar-bottom-content [md3-type-title=medium] {
                     margin-top: 0.5em;
                 }
             }

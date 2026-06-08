@@ -45,6 +45,15 @@ export class AppBar implements ButtonContext {
     public hasAvatar = computed(() => !!this.avatar());
 
     public mainIsScrolled = computed(() => this.layout.mainIsScrolled());
+    private bottomCollapse = computed(() => {
+        const type = this.appBarType();
+
+        if (type !== 'medium' && type !== 'large') {
+            return 0;
+        }
+
+        return Math.max(0, this.layout.mainScrollTop());
+    });
 
     // button context
     public buttonContextSize: Signal<ButtonSize> = signal('small');
@@ -54,11 +63,20 @@ export class AppBar implements ButtonContext {
         private layout: LayoutService
     ) {
         effect((onCleanup) => {
-            this.element.classList.add('md3-' + this.appBarType());
+            const type = this.appBarType();
+
+            this.element.classList.add('md3-' + type);
 
             onCleanup(() => {
-                this.element.classList.remove('md3-' + this.appBarType());
+                this.element.classList.remove('md3-' + type);
             });
+        });
+
+        effect(() => {
+            this.element.style.setProperty(
+                '--app-bar-bottom-collapse',
+                `${this.bottomCollapse()}px`
+            );
         });
     }
 
