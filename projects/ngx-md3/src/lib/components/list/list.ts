@@ -12,18 +12,20 @@ export class List {
 
     constructor(private el: ElementRef) {
         effect((onCleanup) => {
-            this.element.classList.add('md3-' + this.variant());
+            const variant = 'md3-' + this.variant();
+            this.element.classList.add(variant);
 
             onCleanup(() => {
-                this.element.classList.remove('md3-' + this.variant());
+                this.element.classList.remove(variant);
             });
         });
 
         effect((onCleanup) => {
-            this.element.classList.add('md3-' + this.type());
+            const type = 'md3-' + this.type();
+            this.element.classList.add(type);
 
             onCleanup(() => {
-                this.element.classList.remove('md3-' + this.type());
+                this.element.classList.remove(type);
             });
         });
     }

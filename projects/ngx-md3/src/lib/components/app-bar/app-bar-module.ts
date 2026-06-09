@@ -9,6 +9,7 @@ import { TypeHeadline } from '../../styles/typography/type-headline';
 import { TypeDisplay } from '../../styles/typography/type-display';
 import { Avatar } from '../common/avatar';
 import { AppBarLogo } from './app-bar-logo';
+import { InputElement } from '../common/input-element';
 
 @NgModule({
     declarations: [
@@ -24,6 +25,7 @@ import { AppBarLogo } from './app-bar-logo';
         TypeHeadline,
         TypeDisplay,
         Avatar,
+        InputElement,
     ],
     exports: [
         AppBar,
@@ -32,6 +34,7 @@ import { AppBarLogo } from './app-bar-logo';
         IconElement,
         MaterialIcon,
         Avatar,
+        InputElement,
     ],
 })
 export class AppBarModule { }

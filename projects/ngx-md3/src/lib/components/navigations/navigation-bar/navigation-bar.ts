@@ -22,13 +22,11 @@ export class NavigationBar {
 
     constructor() {
         effect((onCleanup) => {
-            const layout = this.resolvedLayout();
-            const layoutClass = 'md3-layout-' + layout;
-
-            this.element.classList.add(layoutClass);
+            const layout = 'md3-layout-' + this.resolvedLayout();
+            this.element.classList.add(layout);
 
             onCleanup(() => {
-                this.element.classList.remove(layoutClass);
+                this.element.classList.remove(layout);
             });
         });
     }

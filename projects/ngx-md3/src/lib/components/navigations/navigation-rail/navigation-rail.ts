@@ -98,24 +98,20 @@ export class NavigationRail implements ButtonContext {
         });
 
         effect((onCleanup) => {
-            const collapsed = this.resolvedCollapsedLayout();
-            const collapsedClass = 'md3-collapsed-' + collapsed;
-
-            this.element.classList.add(collapsedClass);
+            const collapsed = 'md3-collapsed-' + this.resolvedCollapsedLayout();
+            this.element.classList.add(collapsed);
 
             onCleanup(() => {
-                this.element.classList.remove(collapsedClass);
+                this.element.classList.remove(collapsed);
             });
         });
         
         effect((onCleanup) => {
-            const expanded = this.resolvedExpandedLayout();
-            const expandedClass = 'md3-expanded-' + expanded;
-
-            this.element.classList.add(expandedClass);
+            const expanded = 'md3-expanded-' +  this.resolvedExpandedLayout();
+            this.element.classList.add(expanded);
 
             onCleanup(() => {
-                this.element.classList.remove(expandedClass);
+                this.element.classList.remove(expanded);
             });
         });
     }

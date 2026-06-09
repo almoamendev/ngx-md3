@@ -46,18 +46,20 @@ export class SplitButton implements ButtonContext {
 
     constructor(private el: ElementRef) {
         effect((onCleanup) => {
-            this.element.classList.add('md3-' + this.buttonSize());
+            const size = 'md3-' + this.buttonSize();
+            this.element.classList.add(size);
 
             onCleanup(() => {
-                this.element.classList.remove('md3-' + this.buttonSize());
+                this.element.classList.remove(size);
             });
         });
 
         effect((onCleanup) => {
-            this.element.classList.add('md3-' + this.buttonType());
+            const type = 'md3-' + this.buttonType();
+            this.element.classList.add(type);
 
             onCleanup(() => {
-                this.element.classList.remove('md3-' + this.buttonType());
+                this.element.classList.remove(type);
             });
         });
         

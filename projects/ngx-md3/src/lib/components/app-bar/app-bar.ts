@@ -47,7 +47,7 @@ export class AppBar implements ButtonContext {
     public hasLogo = computed(() => !!this.logo());
     public hasAvatar = computed(() => !!this.avatar());
 
-    public mainIsScrolled = computed(() => this.layout.mainIsScrolled());
+    public mainIsScrolled = computed(() => this.layoutService.mainIsScrolled());
     private bottomCollapse = computed(() => {
         const type = this.appBarType();
 
@@ -55,7 +55,7 @@ export class AppBar implements ButtonContext {
             return 0;
         }
 
-        return Math.max(0, this.layout.mainScrollTop());
+        return Math.max(0, this.layoutService.mainScrollTop());
     });
 
     // button context
@@ -63,7 +63,7 @@ export class AppBar implements ButtonContext {
 
     constructor(
         private el: ElementRef,
-        private layout: LayoutService
+        private layoutService: LayoutService
     ) {
         effect((onCleanup) => {
             const type = this.appBarType();
@@ -72,6 +72,15 @@ export class AppBar implements ButtonContext {
 
             onCleanup(() => {
                 this.element.classList.remove('md3-' + type);
+            });
+        });
+
+        effect((onCleanup) => {
+            const width = this.layoutService.widthClass();
+            this.element.classList.add('md3-layout-' + width);
+
+            onCleanup(() => {
+                this.element.classList.remove('md3-layout-' + width);
             });
         });
 

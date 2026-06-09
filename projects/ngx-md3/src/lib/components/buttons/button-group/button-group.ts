@@ -52,19 +52,20 @@ export class ButtonGroup implements ButtonContext {
 
     constructor(private el: ElementRef) {
         effect((onCleanup) => {
-            const size = this.buttonSize();
-            this.element.classList.add('md3-' + size);
+            const size = 'md3-' + this.buttonSize();
+            this.element.classList.add(size);
 
             onCleanup(() => {
-                this.element.classList.remove('md3-' + this.buttonSize());
+                this.element.classList.remove(size);
             });
         });
 
         effect((onCleanup) => {
-            this.element.classList.add('md3-' + this.groupType());
+            const groupType = 'md3-' + this.groupType();
+            this.element.classList.add(groupType);
 
             onCleanup(() => {
-                this.element.classList.remove('md3-' + this.groupType());
+                this.element.classList.remove(groupType);
             });
         });
 

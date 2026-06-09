@@ -60,11 +60,11 @@ export class Chips {
 
     constructor(private el: ElementRef) {
         effect((onCleanup) => {
-            const type = this.chipType();
-            this.element.classList.add('md3-' + type);
+            const type = 'md3-' + this.chipType();
+            this.element.classList.add(type);
 
             onCleanup(() => {
-                this.element.classList.remove('md3-' + type);
+                this.element.classList.remove(type);
             });
         });
     }

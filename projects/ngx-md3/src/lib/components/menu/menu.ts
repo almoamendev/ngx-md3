@@ -32,11 +32,11 @@ export class Menu implements AfterContentInit {
 
     constructor(private el: ElementRef) {
         effect((onCleanup) => {
-            const color = this.menuColors();
-            this.element.classList.add('md3-' + color);
+            const color = 'md3-' + this.menuColors();
+            this.element.classList.add(color);
 
             onCleanup(() => {
-                this.element.classList.remove('md3-' + color);
+                this.element.classList.remove(color);
             });
         });
 

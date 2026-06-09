@@ -61,26 +61,29 @@ export class IconButton {
 
     constructor(private el: ElementRef) {
         effect((onCleanup) => {
-            this.element.classList.add('md3-' + this.effectiveSize());
+            const size = 'md3-' + this.effectiveSize();
+            this.element.classList.add(size);
 
             onCleanup(() => {
-                this.element.classList.remove('md3-' + this.effectiveSize());
+                this.element.classList.remove(size);
             });
         });
 
         effect((onCleanup) => {
-            this.element.classList.add('md3-' + this.effectiveType());
+            const type = 'md3-' + this.effectiveType();
+            this.element.classList.add(type);
 
             onCleanup(() => {
-                this.element.classList.remove('md3-' + this.effectiveType());
+                this.element.classList.remove(type);
             });
         });
 
         effect((onCleanup) => {
-            this.element.classList.add('md3-' + this.effectiveWidth());
+            const width = 'md3-' + this.effectiveWidth();
+            this.element.classList.add(width);
 
             onCleanup(() => {
-                this.element.classList.remove('md3-' + this.effectiveWidth());
+                this.element.classList.remove(width);
             });
         });
 

@@ -116,6 +116,17 @@
             }
         }
     
+        .md3-app-bar-search {
+            grid-column: 2;
+            grid-row: 1;
+            align-self: center;
+            display: flex;
+            justify-content: start;
+            min-inline-size: 0;
+            overflow: hidden;
+            height: 3em;
+        }
+    
         .md3-app-bar-logo {
             grid-column: 2;
             grid-row: 1;

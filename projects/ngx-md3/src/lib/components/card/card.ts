@@ -20,10 +20,11 @@ export class Card {
 
     constructor(private el: ElementRef) {
         effect((onCleanup) => {
-            this.element.classList.add('md3-' + this.cardType());
+            const type = 'md3-' + this.cardType();
+            this.element.classList.add(type);
 
             onCleanup(() => {
-                this.element.classList.remove('md3-' + this.cardType());
+                this.element.classList.remove(type);
             });
         });
     }

@@ -4,6 +4,9 @@
     </div>
 
     @if (appBarType() == 'search') {
+        <div class="md3-app-bar-search">
+            <ng-content select="[md3-input-element]"></ng-content>
+        </div>
     } @else if (hasLogo()) {
         <div class="md3-app-bar-logo" [class.md3-center]="centerAligned()">
             <ng-content select="[md3-app-bar-logo]"></ng-content>
