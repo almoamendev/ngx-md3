@@ -29,7 +29,6 @@
         color: rgb(var(--md-scheme-on-surface));
         height: 100%;
         max-width: 6em;
-        transition: all var(--md-motion-standard-default-spatial-duration) var(--md-motion-standard-default-spatial-easing);
         
         .md3-nav-header {
             display: flex;
@@ -89,9 +88,7 @@
     }
 
     &.md3-style-elevated {
-        .md3-nav-container {
-            box-shadow: var(--md-shadow-1dp);
-        }
+        box-shadow: var(--md-shadow-1dp);
     }
 
     &.md3-style-divider {
