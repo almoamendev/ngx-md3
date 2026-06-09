@@ -347,4 +347,14 @@
             }
         }
     }
+
+    &.md3-scrolling-down {
+        &.md3-auto-hide {
+            max-height: 0;
+
+            .md3-app-bar-container {
+                opacity: 0;
+            }
+        }
+    }
 }

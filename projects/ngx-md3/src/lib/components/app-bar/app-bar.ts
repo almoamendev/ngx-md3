@@ -21,6 +21,8 @@ export type AppBarType = 'small' | 'medium' | 'large' | 'search';
     host: {
         role: 'banner',
         '[class.md3-scrolled]': 'mainIsScrolled()',
+        '[class.md3-auto-hide]': 'autoHide()',
+        '[class.md3-scrolling-down]': 'isScrollingDown()',
     },
 })
 export class AppBar implements ButtonContext {
@@ -41,6 +43,11 @@ export class AppBar implements ButtonContext {
         transform: booleanAttribute,
     });
 
+    public autoHide = input<boolean, unknown>(false, {
+        alias: 'auto-hide',
+        transform: booleanAttribute,
+    });
+
     private logo = contentChild(AppBarLogo);
     private avatar = contentChild(Avatar);
 
@@ -48,14 +55,36 @@ export class AppBar implements ButtonContext {
     public hasAvatar = computed(() => !!this.avatar());
 
     public mainIsScrolled = computed(() => this.layoutService.mainIsScrolled());
-    private bottomCollapse = computed(() => {
+    public isScrollingDown = signal<boolean>(false);
+
+    private scrollPosition = 0;
+    private bottomExpandedHeight = computed(() => {
         const type = this.appBarType();
 
-        if (type !== 'medium' && type !== 'large') {
+        if (!this.hasCollapsibleBottom(type)) {
             return 0;
         }
 
-        return Math.max(0, this.layoutService.mainScrollTop());
+        this.layoutService.viewport();
+
+        const fontSize = this.getHostFontSize();
+        const hasSubtitle = !!this.subtitle()?.length;
+
+        if (type === 'medium') {
+            return (hasSubtitle ? 4.5 : 3) * fontSize;
+        }
+
+        return (hasSubtitle ? 5.5 : 3.5) * fontSize;
+    });
+
+    private bottomCollapse = computed(() => {
+        const expandedHeight = this.bottomExpandedHeight();
+
+        if (!expandedHeight) {
+            return 0;
+        }
+
+        return Math.min(expandedHeight, Math.max(0, this.layoutService.mainScrollTop()));
     });
 
     // button context
@@ -65,6 +94,8 @@ export class AppBar implements ButtonContext {
         private el: ElementRef,
         private layoutService: LayoutService
     ) {
+        this.scrollPosition = this.layoutService.mainScrollTop();
+
         effect((onCleanup) => {
             const type = 'md3-' + this.appBarType();
 
@@ -85,7 +116,12 @@ export class AppBar implements ButtonContext {
         });
 
         effect(() => {
+            this.updateScrollDirection(this.layoutService.mainScrollTop());
+        });
+
+        effect(() => {
             const collapse = this.bottomCollapse();
+            const expandedHeight = this.bottomExpandedHeight();
 
             this.element.style.setProperty(
                 '--app-bar-bottom-collapse',
@@ -93,11 +129,11 @@ export class AppBar implements ButtonContext {
             );
             this.element.style.setProperty(
                 '--app-bar-bottom-opacity',
-                this.getBottomOpacity(collapse).toString()
+                this.getBottomOpacity(collapse, expandedHeight).toString()
             );
             this.element.classList.toggle(
                 'md3-collapsed',
-                this.isBottomCollapsed(collapse)
+                this.isBottomCollapsed(collapse, expandedHeight)
             );
         });
     }
@@ -106,15 +142,7 @@ export class AppBar implements ButtonContext {
         return this.el.nativeElement as HTMLElement;
     }
 
-    private getBottomOpacity(collapse: number): number {
-        const type = this.appBarType();
-
-        if (type !== 'medium' && type !== 'large') {
-            return 1;
-        }
-
-        const expandedHeight = this.getBottomExpandedHeight();
-
+    private getBottomOpacity(collapse: number, expandedHeight: number): number {
         if (!expandedHeight) {
             return 1;
         }
@@ -122,34 +150,36 @@ export class AppBar implements ButtonContext {
         return Math.max(0, Math.min(1, 1 - (collapse / expandedHeight)));
     }
 
-    private isBottomCollapsed(collapse: number): boolean {
-        const type = this.appBarType();
-
-        if (type !== 'medium' && type !== 'large') {
-            return false;
-        }
-
-        if (!this.title()?.length && !this.subtitle()?.length) {
-            return false;
-        }
-
-        const expandedHeight = this.getBottomExpandedHeight();
-
+    private isBottomCollapsed(collapse: number, expandedHeight: number): boolean {
         return expandedHeight > 0 && collapse >= expandedHeight;
     }
 
-    private getBottomExpandedHeight(): number {
-        const fontSize = Number.parseFloat(getComputedStyle(this.element).fontSize) || 16;
-        const hasSubtitle = !!this.subtitle()?.length;
-
-        if (this.appBarType() === 'medium') {
-            return (hasSubtitle ? 4.5 : 3) * fontSize;
+    private updateScrollDirection(scrollTop: number): void {
+        if (scrollTop === this.scrollPosition) {
+            return;
         }
 
-        if (this.appBarType() === 'large') {
-            return (hasSubtitle ? 5.5 : 3.5) * fontSize;
+        const defaultBarHeight = this.getHostFontSize() * 4;
+        const scrollOffset = scrollTop - this.scrollPosition;
+
+        if (Math.abs(scrollOffset) <= defaultBarHeight) {
+            return;
         }
 
-        return 0;
+        this.isScrollingDown.set(scrollOffset > 0);
+        this.scrollPosition = scrollTop;
+    }
+
+    private hasCollapsibleBottom(type: AppBarType): boolean {
+        return (type === 'medium' || type === 'large') &&
+            (!!this.title()?.length || !!this.subtitle()?.length);
+    }
+
+    private getHostFontSize(): number {
+        if (typeof getComputedStyle === 'undefined') {
+            return 16;
+        }
+
+        return Number.parseFloat(getComputedStyle(this.element).fontSize) || 16;
     }
 }
