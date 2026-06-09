@@ -66,21 +66,21 @@ export class AppBar implements ButtonContext {
         private layoutService: LayoutService
     ) {
         effect((onCleanup) => {
-            const type = this.appBarType();
+            const type = 'md3-' + this.appBarType();
 
-            this.element.classList.add('md3-' + type);
+            this.element.classList.add(type);
 
             onCleanup(() => {
-                this.element.classList.remove('md3-' + type);
+                this.element.classList.remove(type);
             });
         });
 
         effect((onCleanup) => {
-            const width = this.layoutService.widthClass();
-            this.element.classList.add('md3-layout-' + width);
+            const width = 'md3-layout-' + this.layoutService.widthClass();
+            this.element.classList.add(width);
 
             onCleanup(() => {
-                this.element.classList.remove('md3-layout-' + width);
+                this.element.classList.remove(width);
             });
         });
 
