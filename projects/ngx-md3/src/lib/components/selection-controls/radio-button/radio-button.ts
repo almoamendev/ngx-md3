@@ -1,8 +1,8 @@
 import { Component, computed, contentChild, effect, input, signal, viewChild } from '@angular/core';
 import { AbstractControl, FormControlName } from '@angular/forms';
 import { fromEvent } from 'rxjs';
-import { InputElement } from '../common/input-element';
-import { StateComponent } from '../common/state-component';
+import { InputElement } from '../../common/input-element';
+import { StateComponent } from '../../common/state-component';
 
 @Component({
     selector: 'md3-radio-button',

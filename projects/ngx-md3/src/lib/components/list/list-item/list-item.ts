@@ -1,7 +1,7 @@
 import { AfterViewInit, booleanAttribute, Component, computed, contentChild, ElementRef, HostListener, input } from '@angular/core';
 import { StateComponent } from '../../common/state-component';
-import { Checkbox } from '../../checkbox/checkbox';
-import { RadioButton } from '../../radio-button/radio-button';
+import { Checkbox } from '../../selection-controls/checkbox/checkbox';
+import { RadioButton } from '../../selection-controls/radio-button/radio-button';
 
 @Component({
     selector: 'md3-list-item, label[md3-list-item], button[md3-list-item], a[md3-list-item]',

@@ -1,20 +1,18 @@
-import { Component, computed, contentChild, effect, input, signal, Signal, viewChild } from '@angular/core';
+import { Component, computed, contentChild, effect, input, signal, viewChild } from '@angular/core';
 import { AbstractControl, FormControlName } from '@angular/forms';
 import { fromEvent } from 'rxjs';
-import { InputElement } from '../common/input-element';
-import { MaterialIcon } from '../common/material-icon/material-icon';
-import { StateComponent } from '../common/state-component';
+import { InputElement } from '../../common/input-element';
+import { StateComponent } from '../../common/state-component';
 
 @Component({
-    selector: 'md3-checkbox',
+    selector: 'md3-switch',
     imports: [
-        MaterialIcon,
-        StateComponent,
+        StateComponent
     ],
-    templateUrl: './checkbox.html',
-    styleUrl: './checkbox.scss',
+    templateUrl: './switch.html',
+    styleUrl: './switch.scss',
 })
-export class Checkbox {
+export class Switch {
     public control = input<AbstractControl | undefined>(undefined, {
         alias: 'control',
     });
@@ -29,9 +27,8 @@ export class Checkbox {
         alias: 'disable-state-layer'
     });
 
-    public checkboxIcon: 'check_small' | 'check_indeterminate_small' = 'check_small';
     public hasError: boolean = false;
-    public state = signal<boolean | null>(false);
+    public state = signal<boolean>(false);
 
     public formControl = computed<AbstractControl | undefined>(() => this.control() ?? this.controlName()?.control);
 
@@ -62,6 +59,7 @@ export class Checkbox {
                 return;
             }
 
+            input.setAttribute('role', 'switch');
             this.syncInitialState(input);
             this.syncNativeInputState(input);
 
@@ -124,37 +122,22 @@ export class Checkbox {
         this.syncStateFromInput(input);
     }
 
-    private updateState(state: boolean | null = false): void {
-        this.checkboxIcon = state === null
-            ? 'check_indeterminate_small'
-            : 'check_small';
-
+    private updateState(state: boolean = false): void {
         this.state.set(state);
     }
 
     private syncStateFromInput(input: HTMLInputElement): void {
-        this.updateState(input.indeterminate ? null : input.checked);
+        this.updateState(input.checked);
     }
 
-    private syncInputFromState(state: boolean | null = false): void {
+    private syncInputFromState(state: boolean = false): void {
         const input = this.input()?.nativeElement;
-        if (!input) {
-            return;
-        }
-
-        const indeterminate = state === null;
-        const checked = state === true;
-
-        if (input.indeterminate !== indeterminate) {
-            input.indeterminate = indeterminate;
-        }
-
-        if (input.checked !== checked) {
-            input.checked = checked;
+        if (input && input.checked !== state) {
+            input.checked = state;
         }
     }
 
-    private syncControlFromState(state: boolean | null = false): void {
+    private syncControlFromState(state: boolean = false): void {
         const control = this.formControl();
         if (!control || control.value === state) {
             return;
@@ -164,9 +147,7 @@ export class Checkbox {
     }
 
     private syncStateFromControl(control: AbstractControl): void {
-        const controlState = control.value === null
-            ? null
-            : control.value === true;
+        const controlState = control.value === true;
 
         this.updateState(controlState);
         this.syncInputFromState(controlState);
@@ -196,5 +177,4 @@ export class Checkbox {
             input.setAttribute('aria-invalid', value);
         }
     }
-
 }

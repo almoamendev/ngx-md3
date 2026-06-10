@@ -57,6 +57,11 @@
             grid-column: 1;
             justify-self: start;
             padding-inline-start: 0.25em;
+            min-width: 1em;
+
+            &:empty {
+                display: inline-flex;
+            }
 
             ::ng-deep [md3-app-bar-leading] {
                 color: var(--foreground-color);

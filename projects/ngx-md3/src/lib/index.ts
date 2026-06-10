@@ -52,14 +52,11 @@ export * from './components/card/card';
 // chips
 export * from './components/chips/chips';
 
-// checkboxes
-export * from './components/checkbox/checkbox';
-
-// switches
-export * from './components/switch/switch';
-
-// radio buttons
-export * from './components/radio-button/radio-button';
+// selection controls
+export * from './components/selection-controls/checkbox/checkbox';
+export * from './components/selection-controls/radio-button/radio-button';
+export * from './components/selection-controls/switch/switch';
+export * from './components/selection-controls/selection-controls-module';
 
 // sliders
 export * from './components/slider/slider';
