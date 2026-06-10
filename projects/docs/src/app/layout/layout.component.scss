@@ -1,0 +1,34 @@
+:host {
+    main {
+        padding: 0 1em;
+        position: relative;
+        display: grid;
+
+        .main-content {
+            grid-area: 1 / 1;
+            position: relative;
+            z-index: 0;
+            background-color: rgb(var(--md-scheme-surface-container));
+        }
+        
+        .surface-frame {
+            grid-area: 1 / 1;
+            position: sticky;
+            inset: 1em;
+            height: calc(100vh - 6em);
+            border-radius: 1em;
+            pointer-events: none;
+            z-index: 1;
+            box-shadow: 0 0 0 2em var(--background-color);
+
+            // &::after {
+            //     content: '';
+            //     display: block;
+            //     position: absolute;
+            //     inset: 0;
+            //     box-shadow: var(--md-shadow-1dp);
+            //     border-radius: inherit;
+            // }
+        }
+    }
+}

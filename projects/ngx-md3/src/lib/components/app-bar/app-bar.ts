@@ -6,6 +6,7 @@ import { LayoutService } from '../../foundations/layout.service';
 import { AppBarLogo } from './app-bar-logo';
 
 export type AppBarType = 'small' | 'medium' | 'large' | 'search';
+export type AppBarScrollingStyle = 'none' | 'transparent' | 'elevate';
 
 @Component({
     standalone: false,
@@ -37,14 +38,18 @@ export class AppBar implements ButtonContext {
     public appBarType = input<AppBarType>('small', {
         alias: 'bar-type',
     });
-    
-    public centerAligned = input<boolean, unknown>(false, {
-        alias: 'center-aligned',
-        transform: booleanAttribute,
+
+    public appBarScrollingStyle = input<AppBarScrollingStyle>('elevate', {
+        alias: 'scroll-style',
     });
 
     public autoHide = input<boolean, unknown>(false, {
         alias: 'auto-hide',
+        transform: booleanAttribute,
+    });
+    
+    public centerAligned = input<boolean, unknown>(false, {
+        alias: 'center-aligned',
         transform: booleanAttribute,
     });
 
@@ -103,6 +108,16 @@ export class AppBar implements ButtonContext {
 
             onCleanup(() => {
                 this.element.classList.remove(type);
+            });
+        });
+
+        effect((onCleanup) => {
+            const scrollingStyle = 'md3-scroll-style-' + this.appBarScrollingStyle();
+
+            this.element.classList.add(scrollingStyle);
+
+            onCleanup(() => {
+                this.element.classList.remove(scrollingStyle);
             });
         });
 

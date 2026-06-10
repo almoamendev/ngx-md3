@@ -33,12 +33,15 @@
         }
     
         [md3-scaffold-pane] {
+            --background-color: rgb(var(--md-scheme-surface));
+            --foreground-color: rgb(var(--md-scheme-on-surface));
+
             grid-area: content;
             min-width: 0em;
             min-height: 0em;
             overflow: auto;
-            color: rgb(var(--md-scheme-on-surface));
-            background-color: rgb(var(--md-scheme-surface));
+            background-color: var(--background-color);
+            color: var(--foreground-color);
             z-index: 1;
         }
     
