@@ -13,7 +13,7 @@
 
     ::ng-deep {
         [md3-scaffold-bar="top"] {
-            grid-area: "top";
+            grid-area: top;
             justify-self: stretch;
             align-self: stretch;
             min-width: 0em;
@@ -23,7 +23,7 @@
         }
     
         [md3-scaffold-rail="leading"] {
-            grid-area: "start";
+            grid-area: start;
             justify-self: stretch;
             align-self: stretch;
             min-width: 0em;
@@ -33,7 +33,7 @@
         }
     
         [md3-scaffold-rail="trailing"] {
-            grid-area: "end";
+            grid-area: end;
             justify-self: stretch;
             align-self: stretch;
             min-width: 0em;
@@ -43,7 +43,7 @@
         }
     
         [md3-scaffold-bar="bottom"] {
-            grid-area: "bottom";
+            grid-area: bottom;
             justify-self: stretch;
             align-self: stretch;
             min-width: 0em;
@@ -81,15 +81,15 @@
             }
 
             [md3-scaffold-pane="start"] {
-                grid-area: "start";
+                grid-area: start;
             }
         
             [md3-scaffold-pane="end"] {
-                grid-area: "end";
+                grid-area: end;
             }
 
             [md3-scaffold-pane="main"] {
-                grid-area: "main";
+                grid-area: main;
             }
         }
     }
