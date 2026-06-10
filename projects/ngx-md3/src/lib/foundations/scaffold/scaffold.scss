@@ -35,6 +35,8 @@
             min-width: 0em;
             min-height: 0em;
             overflow: auto;
+            color: rgb(var(--md-scheme-on-surface));
+            background-color: rgb(var(--md-scheme-surface));
         }
     
         [md3-scaffold-rail=trailing] {
