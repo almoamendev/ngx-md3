@@ -19,6 +19,7 @@
             min-width: 0em;
             min-height: 0em;
             overflow: hidden;
+            z-index: 2;
         }
     
         [md3-scaffold-rail=leading] {
@@ -28,6 +29,7 @@
             min-width: 0em;
             min-height: 0em;
             overflow: hidden;
+            z-index: 3;
         }
     
         [md3-scaffold-pane] {
@@ -37,6 +39,7 @@
             overflow: auto;
             color: rgb(var(--md-scheme-on-surface));
             background-color: rgb(var(--md-scheme-surface));
+            z-index: 1;
         }
     
         [md3-scaffold-rail=trailing] {
@@ -46,6 +49,7 @@
             min-width: 0em;
             min-height: 0em;
             overflow: hidden;
+            z-index: 3;
         }
     
         [md3-scaffold-bar=bottom] {
@@ -55,6 +59,7 @@
             min-width: 0em;
             min-height: 0em;
             overflow: hidden;
+            z-index: 2;
         }
     }
 }

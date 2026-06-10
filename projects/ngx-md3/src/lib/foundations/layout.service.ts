@@ -128,7 +128,9 @@ export class LayoutService {
 
     constructor() {
         effect(() => {
-            this.document.body.classList.toggle('md-scheme-dark', this.darkMode());
+            const darkMode = this.darkMode();
+            this.document.body.classList.toggle('md-scheme-dark', darkMode);
+            this.document.body.classList.toggle('md-scheme-light', !darkMode);
         });
     }
 

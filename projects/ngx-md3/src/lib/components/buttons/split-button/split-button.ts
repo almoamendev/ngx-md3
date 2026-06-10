@@ -75,11 +75,7 @@ export class SplitButton implements ButtonContext {
                     return;
                 }
 
-                if (this.flipTrailingIcon()) {
-                    iconButton?.element.classList.add('md3-flip-icon');
-                } else {
-                    iconButton?.element.classList.remove('md3-flip-icon');
-                }
+                this.element.classList.toggle('md3-flip-icon', this.flipTrailingIcon());
             });
         });
     }

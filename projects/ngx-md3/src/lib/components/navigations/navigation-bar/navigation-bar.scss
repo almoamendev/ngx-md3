@@ -1,12 +1,13 @@
 :host {
     background-color: rgb(var(--md-scheme-surface-container));
 
+    box-shadow: var(--md-shadow-3dp);
+
     .md3-navigation-container {
         display: flex;
         align-items: center;
         justify-content: center;
         height: 4em;
-        box-shadow: var(--md-shadow-3dp);
         
         .md3-menu-container {
             display: grid;

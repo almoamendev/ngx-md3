@@ -92,12 +92,7 @@ export class IconButton {
 
             if (toggle) {
                 this.element.classList.add('md3-toggle');
-
-                if (this.isSelected()) {
-                    this.element.classList.add('md3-selected');
-                } else {
-                    this.element.classList.remove('md3-selected');
-                }
+                this.element.classList.toggle('md3-selected', this.isSelected() ?? false);
             } else {
                 this.element.classList.remove('md3-toggle', 'md3-selected');
             }
