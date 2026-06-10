@@ -12,8 +12,8 @@
     grid-template-rows: auto minmax(0, 1fr) auto;
 
     ::ng-deep {
-        [md3-scaffold-bar=top] {
-            grid-area: top;
+        [md3-scaffold-bar="top"] {
+            grid-area: "top";
             justify-self: stretch;
             align-self: stretch;
             min-width: 0em;
@@ -22,8 +22,8 @@
             z-index: 2;
         }
     
-        [md3-scaffold-rail=leading] {
-            grid-area: start;
+        [md3-scaffold-rail="leading"] {
+            grid-area: "start";
             justify-self: stretch;
             align-self: stretch;
             min-width: 0em;
@@ -32,37 +32,65 @@
             z-index: 3;
         }
     
-        [md3-scaffold-pane] {
-            --background-color: rgb(var(--md-scheme-surface));
-            --foreground-color: rgb(var(--md-scheme-on-surface));
+        [md3-scaffold-rail="trailing"] {
+            grid-area: "end";
+            justify-self: stretch;
+            align-self: stretch;
+            min-width: 0em;
+            min-height: 0em;
+            overflow: hidden;
+            z-index: 3;
+        }
+    
+        [md3-scaffold-bar="bottom"] {
+            grid-area: "bottom";
+            justify-self: stretch;
+            align-self: stretch;
+            min-width: 0em;
+            min-height: 0em;
+            overflow: hidden;
+            z-index: 2;
+        }
+    }
 
-            grid-area: content;
-            min-width: 0em;
-            min-height: 0em;
-            overflow: auto;
-            background-color: var(--background-color);
-            color: var(--foreground-color);
-            z-index: 1;
-        }
-    
-        [md3-scaffold-rail=trailing] {
-            grid-area: end;
-            justify-self: stretch;
-            align-self: stretch;
-            min-width: 0em;
-            min-height: 0em;
-            overflow: hidden;
-            z-index: 3;
-        }
-    
-        [md3-scaffold-bar=bottom] {
-            grid-area: bottom;
-            justify-self: stretch;
-            align-self: stretch;
-            min-width: 0em;
-            min-height: 0em;
-            overflow: hidden;
-            z-index: 2;
+    .md3-panes-container {
+        --background-color: rgb(var(--md-scheme-surface));
+        --foreground-color: rgb(var(--md-scheme-on-surface));
+
+        grid-area: content;
+        min-width: 0em;
+        min-height: 0em;
+        overflow: hidden;
+        background-color: var(--background-color);
+        color: var(--foreground-color);
+        z-index: 1;
+
+        display: grid;
+        grid-template-areas: "start main end";
+        grid-template-columns: auto minmax(0, 1fr) auto;
+        grid-template-rows: minmax(0, 1fr);
+
+        ::ng-deep {
+            [md3-scaffold-pane] {
+                justify-self: stretch;
+                align-self: stretch;
+                min-width: 0em;
+                min-height: 0em;
+                height: 100%;
+                overflow: auto;
+            }
+
+            [md3-scaffold-pane="start"] {
+                grid-area: "start";
+            }
+        
+            [md3-scaffold-pane="end"] {
+                grid-area: "end";
+            }
+
+            [md3-scaffold-pane="main"] {
+                grid-area: "main";
+            }
         }
     }
 }
