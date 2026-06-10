@@ -1,5 +1,4 @@
-import { Component, Inject } from '@angular/core';
-import { LayoutService } from '../layout.service';
+import { Component } from '@angular/core';
 
 @Component({
     standalone: false,
@@ -8,5 +7,4 @@ import { LayoutService } from '../layout.service';
     styleUrl: './scaffold.scss',
 })
 export class Scaffold {
-    private layoutService = Inject(LayoutService);
 }

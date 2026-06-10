@@ -1,6 +1,6 @@
 import { DOCUMENT } from '@angular/common';
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { computed, inject, Injectable, signal } from '@angular/core';
+import { computed, effect, inject, Injectable, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { fromEvent, map, startWith, Subscription } from 'rxjs';
 import { ViewportWidth } from '../types/viewport-width.type';
@@ -123,6 +123,14 @@ export class LayoutService {
                 return 'standard-drawer';
         }
     });
+
+    public darkMode = signal<boolean>(true);
+
+    constructor() {
+        effect(() => {
+            this.document.body.classList.toggle('md-scheme-dark', this.darkMode());
+        });
+    }
 
     public setDirection(direction: 'ltr' | 'rtl'): void {
         this.document.documentElement.dir = direction;
