@@ -477,3 +477,18 @@ md3-badge {
         max-height: 0.375em;
     }
 }
+
+.md3-scrollable {
+    scrollbar-width: thin; /* Firefox */
+    scrollbar-color: rgb(var(--md-scheme-outline-variant)) transparent;
+
+    /* Chromium / Safari */
+    &::-webkit-scrollbar {
+        width: 0.5rem;
+        height: 0.5rem;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: transparent;
+    }
+}

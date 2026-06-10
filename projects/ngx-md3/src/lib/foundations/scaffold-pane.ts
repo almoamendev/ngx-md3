@@ -4,6 +4,9 @@ import { LayoutService } from './layout.service';
 
 @Directive({
     selector: '[md3-scaffold-pane]',
+    host: {
+        class: 'md3-scrollable',
+    },
     hostDirectives: [
         CdkScrollable,
     ],
