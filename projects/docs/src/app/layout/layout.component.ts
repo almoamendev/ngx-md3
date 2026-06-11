@@ -37,7 +37,7 @@ export class LayoutComponent {
 
     public openComponentsMenu(): void {
         const ref = this.sheetsService.openSideSheet(ComponentsMenu, {
-            side: 'start',
+            side: 'end',
             // data: { title: 'First sheet' },
             bindDataToInputs: true,
         });
