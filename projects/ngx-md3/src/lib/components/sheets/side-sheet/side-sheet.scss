@@ -1,35 +1,45 @@
 :host {
+    --background-color: rgb(var(--md-scheme-surface-container-low));
+    --foreground-color: rgb(var(--md-scheme-on-surface));
+    --border-radius: var(--md-border-radius-large);
+    --elevation: var(--md-shadow-3dp);
+
     display: block;
-    inline-size: min(25em, 100vw);
-    block-size: 100%;
-    min-block-size: 0;
-    overflow: auto;
-    background-color: rgb(var(--md-scheme-surface-container-low));
-    color: rgb(var(--md-scheme-on-surface));
-    box-shadow: var(--md-shadow-3dp);
+    max-width: 25em;
+    min-width: 25vw;
+    height: 100%;
+    min-height: 0;
+    overflow: hidden;
+    background-color: var(--background-color);
+    color: var(--foreground-color);
+    box-shadow: var(--elevation);
     z-index: 1;
     opacity: 0;
-    transition: transform var(--md-motion-expressive-default-spatial-duration) var(--md-motion-expressive-default-spatial-easing),
+    transform: translateX(var(--hidden-offset, 100%));
+    transition: all var(--md-motion-expressive-default-spatial-duration) var(--md-motion-expressive-default-spatial-easing),
         opacity var(--md-motion-expressive-default-effects-duration) var(--md-motion-expressive-default-effects-easing);
 
     &.md3-hidden {
-        display: none;
+        opacity: 0;
+        transform: translateX(var(--hidden-offset, 100%));
     }
 
     &.md3-start {
-        border-start-end-radius: var(--md-border-radius-large);
-        border-end-end-radius: var(--md-border-radius-large);
-        transform: translateX(-1.5em);
+        --hidden-offset: -100%;
+
+        border-start-end-radius: var(--border-radius);
+        border-end-end-radius: var(--border-radius);
     }
 
     &.md3-end {
-        border-start-start-radius: var(--md-border-radius-large);
-        border-end-start-radius: var(--md-border-radius-large);
-        transform: translateX(1.5em);
+        --hidden-offset: 100%;
+
+        border-start-start-radius: var(--border-radius);
+        border-end-start-radius: var(--border-radius);
     }
 
     &.md3-active {
         opacity: 1;
-        transform: translateX(0);
+        transform: translateX(0%);
     }
 }
