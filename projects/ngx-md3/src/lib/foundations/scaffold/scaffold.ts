@@ -9,8 +9,8 @@ import { SheetsService } from '../../components/sheets/sheets.service';
     styleUrl: './scaffold.scss',
 })
 export class Scaffold implements AfterViewInit, OnDestroy {
-    private startOutlet = viewChild<CdkPortalOutlet>('startOutlet');
-    private endOutlet = viewChild<CdkPortalOutlet>('endOutlet');
+    private startOutlet = viewChild('startOutlet', { read: CdkPortalOutlet });
+    private endOutlet = viewChild('endOutlet', { read: CdkPortalOutlet });
     private sheets = inject(SheetsService);
 
     ngAfterViewInit(): void {
