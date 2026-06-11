@@ -2,11 +2,14 @@ import { ComponentRef, InjectionToken, Injector, Type, ViewContainerRef } from '
 import { Observable, Subject } from 'rxjs';
 
 export type SideSheetSide = 'start' | 'end';
+export type SideSheetType = 'default' | 'standard' | 'modal';
 
 export interface SideSheetConfig<D = unknown> {
-    side?: SideSheetSide;
     data?: D;
     bindDataToInputs?: boolean;
+    side?: SideSheetSide;
+    type?: SideSheetType;
+    inset?: boolean;
     closeExisting?: boolean;
     viewContainerRef?: ViewContainerRef;
     injector?: Injector;

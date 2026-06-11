@@ -1,6 +1,6 @@
 import { CdkPortalOutlet, ComponentPortal } from '@angular/cdk/portal';
-import { AfterContentInit, Component, ComponentRef, ElementRef, inject, Injector, signal, Type, ViewChild } from '@angular/core';
-import { SIDE_SHEET_CONFIG, SideSheetConfig, SideSheetSide } from './side-sheet-ref';
+import { AfterContentInit, Component, ComponentRef, effect, ElementRef, inject, Injector, signal, Type, ViewChild } from '@angular/core';
+import { SIDE_SHEET_CONFIG, SideSheetConfig, SideSheetSide, SideSheetType } from './side-sheet-ref';
 
 @Component({
     selector: 'md3-side-sheet',
@@ -14,6 +14,7 @@ import { SIDE_SHEET_CONFIG, SideSheetConfig, SideSheetSide } from './side-sheet-
         '[class.md3-hidden]': 'isHidden()',
         '[class.md3-start]': 'side() === "start"',
         '[class.md3-end]': 'side() === "end"',
+        '[class.md3-inset]': 'isInset()',
     },
 })
 export class SideSheet implements AfterContentInit {
@@ -25,8 +26,18 @@ export class SideSheet implements AfterContentInit {
     public readonly isActive = signal<boolean>(false);
     public readonly isHidden = signal<boolean>(false);
     public readonly side = signal<SideSheetSide>(this.config.side ?? 'end');
+    public readonly sheetType = signal<SideSheetType>(this.config.type ?? 'default');
+    public readonly isInset = signal<boolean>(this.config.inset ?? false);
 
     constructor(private el: ElementRef<HTMLElement>) {
+        effect((onCleanUp) => {
+            const type = 'md3-style-' + this.sheetType();
+            this.element.classList.add(type);
+
+            onCleanUp(() => {
+                this.element.classList.remove(type);
+            });
+        });
     }
 
     public get element(): HTMLElement {
