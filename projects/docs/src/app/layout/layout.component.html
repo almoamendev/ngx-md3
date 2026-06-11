@@ -45,7 +45,7 @@
             Label
         </button>
 
-        <button type="button" md3-nav-item>
+        <button type="button" md3-nav-item (click)="openComponentsMenu()">
             <md3-icon md3-icon-element>add_circle</md3-icon>
             <md3-icon md3-icon-element="active" filled>add_circle</md3-icon>
             Components
@@ -90,9 +90,9 @@
         </button>
     </md3-navigation-bar> -->
 
-    <div md3-scaffold-pane="start">
+    <!-- <div md3-scaffold-pane="start">
         Start pane
-    </div>
+    </div> -->
 
     <main md3-scaffold-pane="main">
         <div class="main-content">
@@ -107,9 +107,9 @@
                     <li><a routerLink="components/chips">Chips</a></li>
                 </ul>
                 <ul>
-                    <li><a routerLink="components/checkboxes">Checkboxes</a></li>
-                    <li><a routerLink="components/switches">Switches</a></li>
-                    <li><a routerLink="components/radio-buttons">Radio Buttons</a></li>
+                    <li><a routerLink="components/selection-controls/checkboxes">Checkboxes</a></li>
+                    <li><a routerLink="components/selection-controls/switches">Switches</a></li>
+                    <li><a routerLink="components/selection-controls/radio-buttons">Radio Buttons</a></li>
                     <li><a routerLink="components/sliders">Sliders</a></li>
                 </ul>
                 <ul>

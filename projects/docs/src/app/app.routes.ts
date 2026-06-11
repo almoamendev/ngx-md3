@@ -11,9 +11,9 @@ import { TextFieldsComponent } from './components/text-fields/text-fields.compon
 import { CheckboxesComponent } from './components/checkboxes/checkboxes.component';
 import { TypographyComponent } from './styles/typography/typography.component';
 import { ListsComponent } from './components/lists/lists.component';
-import { RadioButtonsComponent } from './components/radio-buttons/radio-buttons.component';
-import { SlidersComponent } from './components/sliders/sliders.component';
-import { SwitchesComponent } from './components/switches/switches.component';
+import { RadioButtonsComponent } from './components/selection-controls/radio-buttons/radio-buttons.component';
+import { SlidersComponent } from './components/selection-controls/sliders/sliders.component';
+import { SwitchesComponent } from './components/selection-controls/switches/switches.component';
 import { ButtonGroupsComponent } from './components/buttons/button-groups/button-groups.component';
 import { DialogsComponent } from './components/dialogs/dialogs.component';
 import { ChipsComponent } from './components/chips/chips.component';
@@ -72,8 +72,21 @@ export const routes: Routes = [
                         component: ChipsComponent,
                     },
                     {
-                        path: 'checkboxes',
-                        component: CheckboxesComponent,
+                        path: 'selection-controls',
+                        children: [
+                            {
+                                path: 'checkboxes',
+                                component: CheckboxesComponent,
+                            },
+                            {
+                                path: 'switches',
+                                component: SwitchesComponent,
+                            },
+                            {
+                                path: 'radio-buttons',
+                                component: RadioButtonsComponent,
+                            },
+                        ],
                     },
                     {
                         path: 'dialogs',
@@ -87,14 +100,6 @@ export const routes: Routes = [
                                 component: NavigationRailComponent,
                             },
                         ],
-                    },
-                    {
-                        path: 'switches',
-                        component: SwitchesComponent,
-                    },
-                    {
-                        path: 'radio-buttons',
-                        component: RadioButtonsComponent,
                     },
                     {
                         path: 'sliders',

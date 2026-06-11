@@ -106,3 +106,8 @@ export * from './components/menu/menu';
 export * from './components/menu/menu.service';
 export * from './components/menu/menu-group/menu-group';
 export * from './components/menu/menu-item/menu-item';
+
+// sheets
+export * from './components/sheets/sheets.service';
+export * from './components/sheets/side-sheet/side-sheet';
+export * from './components/sheets/side-sheet/side-sheet-ref';

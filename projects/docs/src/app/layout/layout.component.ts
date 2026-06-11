@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { RouterLink, RouterOutlet } from "@angular/router";
-import { AppBarModule, IconElement, InputElement, LayoutService, MaterialIcon, NavigationBarModule, NavigationRailModule, ScaffoldModule, Switch } from '@vip9008/ngx-md3';
+import { AppBarModule, IconElement, InputElement, LayoutService, MaterialIcon, NavigationBarModule, NavigationRailModule, ScaffoldModule, SheetsService, Switch } from '@vip9008/ngx-md3';
 import { FormControl } from '@angular/forms';
+import { ComponentsMenu } from './components-menu/components-menu';
 
 @Component({
     selector: 'app-layout',
@@ -24,12 +25,25 @@ export class LayoutComponent {
     public darkModeControl: FormControl = new FormControl<boolean>(false);
 
     constructor(
-        private layoutService: LayoutService
+        private layoutService: LayoutService,
+        private sheetsService: SheetsService
     ) {
         this.darkModeControl.setValue(this.layoutService.darkMode());
 
         this.darkModeControl.registerOnChange(() => {
             this.layoutService.darkMode.set(this.darkModeControl.value);
+        });
+    }
+
+    public openComponentsMenu(): void {
+        const ref = this.sheetsService.openSideSheet(ComponentsMenu, {
+            side: 'start',
+            data: { title: 'First sheet' },
+            bindDataToInputs: true,
+        });
+
+        ref.afterClosed().subscribe((result) => {
+            console.log('sheet closed:', result);
         });
     }
 }

@@ -1,0 +1,35 @@
+:host {
+    display: block;
+    inline-size: min(25em, 100vw);
+    block-size: 100%;
+    min-block-size: 0;
+    overflow: auto;
+    background-color: rgb(var(--md-scheme-surface-container-low));
+    color: rgb(var(--md-scheme-on-surface));
+    box-shadow: var(--md-shadow-3dp);
+    z-index: 1;
+    opacity: 0;
+    transition: transform var(--md-motion-expressive-default-spatial-duration) var(--md-motion-expressive-default-spatial-easing),
+        opacity var(--md-motion-expressive-default-effects-duration) var(--md-motion-expressive-default-effects-easing);
+
+    &.md3-hidden {
+        display: none;
+    }
+
+    &.md3-start {
+        border-start-end-radius: var(--md-border-radius-large);
+        border-end-end-radius: var(--md-border-radius-large);
+        transform: translateX(-1.5em);
+    }
+
+    &.md3-end {
+        border-start-start-radius: var(--md-border-radius-large);
+        border-end-start-radius: var(--md-border-radius-large);
+        transform: translateX(1.5em);
+    }
+
+    &.md3-active {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
