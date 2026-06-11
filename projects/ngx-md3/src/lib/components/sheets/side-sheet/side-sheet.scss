@@ -3,6 +3,7 @@
     --foreground-color: rgb(var(--md-scheme-on-surface));
     --border-radius: var(--md-border-radius-large);
     --elevation: var(--md-shadow-3dp);
+    --hidden-offset: 80%;
 
     display: block;
     max-width: 25em;
@@ -15,24 +16,23 @@
     box-shadow: var(--elevation);
     z-index: 1;
     opacity: 0;
-    transform: translateX(var(--hidden-offset, 100%));
-    transition: all var(--md-motion-expressive-default-spatial-duration) var(--md-motion-expressive-default-spatial-easing),
-        opacity var(--md-motion-expressive-default-effects-duration) var(--md-motion-expressive-default-effects-easing);
+    transform: translateX(var(--hidden-offset));
+    transition: all var(--md-motion-standard-default-spatial-duration) var(--md-motion-standard-default-spatial-easing);
 
     &.md3-hidden {
         opacity: 0;
-        transform: translateX(var(--hidden-offset, 100%));
+        transform: translateX(var(--hidden-offset));
     }
 
     &.md3-start {
-        --hidden-offset: -100%;
+        --hidden-offset: -80%;
 
         border-start-end-radius: var(--border-radius);
         border-end-end-radius: var(--border-radius);
     }
 
     &.md3-end {
-        --hidden-offset: 100%;
+        --hidden-offset: 80%;
 
         border-start-start-radius: var(--border-radius);
         border-end-start-radius: var(--border-radius);
