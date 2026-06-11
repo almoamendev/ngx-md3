@@ -3,6 +3,7 @@ import { Scaffold } from './scaffold';
 import { ScaffoldBar } from '../scaffold-bar';
 import { ScaffoldRail } from '../scaffold-rail';
 import { ScaffoldPane } from '../scaffold-pane';
+import { CdkPortalOutlet } from '@angular/cdk/portal';
 
 @NgModule({
     declarations: [
@@ -12,6 +13,7 @@ import { ScaffoldPane } from '../scaffold-pane';
         ScaffoldBar,
         ScaffoldRail,
         ScaffoldPane,
+        CdkPortalOutlet,
     ],
     exports: [
         Scaffold,

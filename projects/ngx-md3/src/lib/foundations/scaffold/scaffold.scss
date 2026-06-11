@@ -70,26 +70,24 @@
         grid-template-columns: auto minmax(0, 1fr) auto;
         grid-template-rows: minmax(0, 1fr);
 
-        ::ng-deep {
-            [md3-scaffold-pane] {
-                justify-self: stretch;
-                align-self: stretch;
-                min-width: 0em;
-                min-height: 0em;
-                height: 100%;
-                overflow: auto;
-            }
+        .md3-pane {
+            justify-self: stretch;
+            align-self: stretch;
+            min-width: 0em;
+            min-height: 0em;
+            height: 100%;
+            overflow: hidden;
 
-            [md3-scaffold-pane="start"] {
+            &.md3-pane-start {
                 grid-area: start;
             }
-        
-            [md3-scaffold-pane="end"] {
-                grid-area: end;
+
+            &.md3-pane-main {
+                grid-area: main;
             }
 
-            [md3-scaffold-pane="main"] {
-                grid-area: main;
+            &.md3-pane-end {
+                grid-area: end;
             }
         }
     }
