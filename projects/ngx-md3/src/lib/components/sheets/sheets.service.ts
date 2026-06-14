@@ -97,10 +97,6 @@ export class SheetsService {
             injector,
         );
 
-        sheetComponentRef.instance.side.set(sheetConfig.side);
-        sheetComponentRef.instance.sheetType.set(sheetConfig.type);
-        sheetComponentRef.instance.isInset.set(sheetConfig.inset);
-
         sheetRef.attachSheetComponentRef(sheetComponentRef);
         this.bindDataToInputs(contentComponentRef, sheetConfig);
         sheetRef.componentInstance = contentComponentRef.instance;

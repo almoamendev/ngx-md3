@@ -38,8 +38,8 @@ export class LayoutComponent {
     public openComponentsMenu(): void {
         const ref = this.sheetsService.openSideSheet(ComponentsMenu, <SideSheetConfig>{
             // data: { title: 'First sheet' },
-            side: 'end',
-            type: 'standard',
+            side: 'start',
+            type: 'default',
             inset: true,
             closeExisting: true,
             bindDataToInputs: true,
