@@ -1,7 +1,8 @@
 import { CdkPortalOutlet, ComponentPortal } from '@angular/cdk/portal';
-import { AfterContentInit, Component, ComponentRef, effect, ElementRef, inject, Injector, signal, Type, ViewChild } from '@angular/core';
+import { AfterContentInit, Component, ComponentRef, computed, effect, ElementRef, inject, Injector, signal, Type, ViewChild } from '@angular/core';
 import { SIDE_SHEET_CONFIG, SideSheetRef } from './side-sheet-ref';
 import { SideSheetConfig, SideSheetSide, SideSheetType } from '../../../interfaces/side-sheet-config.interface';
+import { LayoutService } from '../../../foundations/layout.service';
 
 @Component({
     selector: 'md3-side-sheet',
@@ -32,12 +33,20 @@ export class SideSheet implements AfterContentInit {
     public readonly sheetType = signal<SideSheetType>(this.config.type ?? 'default');
     public readonly isInset = signal<boolean>(this.config.inset ?? false);
     public readonly showDivider = signal<boolean>(this.config.divider ?? false);
+    private readonly resolvedSheetType = computed<SideSheetType>(() => {
+        if (this.layoutService.isMedium()) {
+            return 'modal';
+        }
+        
+        return this.sheetType();
+    });
 
     constructor(
+        private layoutService: LayoutService,
         private el: ElementRef<HTMLElement>
     ) {
         effect((onCleanUp) => {
-            const type = 'md3-style-' + this.sheetType();
+            const type = 'md3-style-' + this.resolvedSheetType();
             this.element.classList.add(type);
 
             onCleanUp(() => {

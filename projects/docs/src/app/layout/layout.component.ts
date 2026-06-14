@@ -39,8 +39,8 @@ export class LayoutComponent {
         const ref = this.sheetsService.openSideSheet(ComponentsMenu, <SideSheetConfig>{
             // data: { title: 'First sheet' },
             side: 'start',
-            type: 'modal',
-            inset: true,
+            type: 'standard',
+            inset: false,
             closeExisting: true,
             bindDataToInputs: true,
         });

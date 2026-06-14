@@ -1,6 +1,7 @@
 import { ComponentRef, InjectionToken, Type } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { SideSheetConfig, SideSheetContainer, SideSheetSide } from '../../../interfaces/side-sheet-config.interface';
+import { SideSheetConfig, SideSheetContainer, SideSheetSide, SideSheetType } from '../../../interfaces/side-sheet-config.interface';
+import { SideSheet } from './side-sheet';
 
 export const SIDE_SHEET_DATA = new InjectionToken<unknown>('MD3_SIDE_SHEET_DATA');
 export const SIDE_SHEET_CONFIG = new InjectionToken<SideSheetConfig>('MD3_SIDE_SHEET_CONFIG');
@@ -12,7 +13,7 @@ export class SideSheetRef<T = unknown, R = unknown> {
     private readonly closed = new Subject<R | undefined>();
     private isClosed = false;
     private isHidden = false;
-    private sheetComponentRef?: ComponentRef<SideSheetContainer>;
+    private sheetComponentRef?: ComponentRef<SideSheet>;
 
     public componentInstance?: T;
     public sheetInstance?: SideSheetContainer;
@@ -23,9 +24,25 @@ export class SideSheetRef<T = unknown, R = unknown> {
     ) {
     }
 
-    public attachSheetComponentRef(sheetComponentRef: ComponentRef<SideSheetContainer>): void {
+    public attachSheetComponentRef(sheetComponentRef: ComponentRef<SideSheet>): void {
         this.sheetComponentRef = sheetComponentRef;
-        this.sheetInstance = sheetComponentRef.instance;
+        this.sheetInstance = sheetComponentRef.instance as SideSheetContainer;
+    }
+
+    public setSide(side: SideSheetSide): void {
+        this.sheetComponentRef?.instance?.side.set(side);
+    }
+
+    public setSheetType(type: SideSheetType): void {
+        this.sheetComponentRef?.instance?.sheetType.set(type);
+    }
+
+    public setInset(isInset: boolean): void {
+        this.sheetComponentRef?.instance?.isInset.set(isInset);
+    }
+
+    public setDivider(showDivider: boolean): void {
+        this.sheetComponentRef?.instance?.showDivider.set(showDivider);
     }
 
     public hide(): void {

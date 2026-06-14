@@ -55,7 +55,7 @@ export class NavigationRail implements ButtonContext {
     });
 
     private readonly resolvedCollapsedLayout = computed<CollapsedLayout>(() => {
-        if (this.layoutService.widthClass() === 'compact') {
+        if (this.layoutService.isCompact()) {
             return 'hidden';
         }
 
@@ -63,7 +63,7 @@ export class NavigationRail implements ButtonContext {
     });
 
     private readonly resolvedExpandedLayout = computed<ExpandedLayout>(() => {
-        if (this.layoutService.widthClass() === 'compact') {
+        if (this.layoutService.isCompact()) {
             return 'modal';
         }
 
