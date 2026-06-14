@@ -1,6 +1,6 @@
 import { CdkPortalOutlet, ComponentPortal } from '@angular/cdk/portal';
 import { AfterContentInit, Component, ComponentRef, effect, ElementRef, inject, Injector, signal, Type, ViewChild } from '@angular/core';
-import { SIDE_SHEET_CONFIG } from './side-sheet-ref';
+import { SIDE_SHEET_CONFIG, SideSheetRef } from './side-sheet-ref';
 import { SideSheetConfig, SideSheetSide, SideSheetType } from '../../../interfaces/side-sheet-config.interface';
 
 @Component({
@@ -24,6 +24,7 @@ export class SideSheet implements AfterContentInit {
     private readonly portalOutlet!: CdkPortalOutlet;
 
     protected readonly config = inject<SideSheetConfig>(SIDE_SHEET_CONFIG, { optional: true }) ?? {};
+    private readonly sideSheetRef = inject<SideSheetRef>(SideSheetRef, { optional: true });
 
     public readonly isActive = signal<boolean>(false);
     public readonly isHidden = signal<boolean>(false);
@@ -61,6 +62,10 @@ export class SideSheet implements AfterContentInit {
 
     public setHidden(value: boolean): void {
         this.isHidden.set(value);
+    }
+
+    public close(): void {
+        this.sideSheetRef?.close();
     }
 
     public attachContent<T>(component: Type<T>, injector: Injector): ComponentRef<T> {
