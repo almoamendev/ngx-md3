@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IconButton, SideSheetHeader, IconElement, MaterialIcon } from '@vip9008/ngx-md3';
+import { IconButton, SideSheetHeader, IconElement, MaterialIcon, SideSheetRef } from '@vip9008/ngx-md3';
 
 @Component({
     selector: 'app-components-menu',
@@ -13,5 +13,12 @@ import { IconButton, SideSheetHeader, IconElement, MaterialIcon } from '@vip9008
     styleUrl: './components-menu.scss',
 })
 export class ComponentsMenu {
+    constructor(
+        private sideSheetRef: SideSheetRef<ComponentsMenu>
+    ) {
+    }
 
+    public close(): void {
+        this.sideSheetRef.close();
+    }
 }

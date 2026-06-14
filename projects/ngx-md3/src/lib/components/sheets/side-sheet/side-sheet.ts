@@ -32,7 +32,9 @@ export class SideSheet implements AfterContentInit {
     public readonly isInset = signal<boolean>(this.config.inset ?? false);
     public readonly showDivider = signal<boolean>(this.config.divider ?? false);
 
-    constructor(private el: ElementRef<HTMLElement>) {
+    constructor(
+        private el: ElementRef<HTMLElement>
+    ) {
         effect((onCleanUp) => {
             const type = 'md3-style-' + this.sheetType();
             this.element.classList.add(type);
