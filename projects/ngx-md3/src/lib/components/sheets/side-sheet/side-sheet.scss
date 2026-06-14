@@ -5,31 +5,26 @@
     --elevation: var(--md-shadow-0dp);
     --hidden-offset: 80%;
 
-    display: block;
+    display: flex;
+    flex-direction: column;
     position: relative;
     max-width: 25em;
     min-width: 16em;
     height: 100%;
     min-height: 0;
     overflow: hidden;
-    background-color: var(--background-color);
-    color: var(--foreground-color);
-    box-shadow: var(--elevation);
+    pointer-events: none;
     z-index: 1;
     opacity: 0;
     transform: translateX(var(--hidden-offset));
     transition: all var(--md-motion-standard-default-spatial-duration) var(--md-motion-standard-default-spatial-easing);
 
-    &.md3-show-divider::before {
-        content: '';
-        position: absolute;
-        height: 100%;
-        width: 0.0625em;
-        top: 0;
-        bottom: 0;
-        opacity: 0;
-        background-color: rgb(var(--md-scheme-outline));
-        pointer-events: none;        
+    .md3-side-sheet-container {
+        flex: 1 1 auto;
+        pointer-events: all;
+        background-color: var(--background-color);
+        color: var(--foreground-color);
+        box-shadow: var(--elevation);
     }
 
     &.md3-hidden {
@@ -37,13 +32,38 @@
         transform: translateX(var(--hidden-offset));
     }
 
+    &.md3-active {
+        opacity: 1;
+        transform: translateX(0%);
+    }
+
+    &.md3-show-divider {
+        .md3-side-sheet-container::before {
+            content: '';
+            position: absolute;
+            height: 100%;
+            width: 0.0625em;
+            top: 0;
+            bottom: 0;
+            opacity: 0;
+            background-color: rgb(var(--md-scheme-outline));
+            pointer-events: none;        
+        }
+    }
+
     &.md3-start {
         --hidden-offset: -80%;
 
-        border-start-end-radius: var(--border-radius);
-        border-end-end-radius: var(--border-radius);
+        &.md3-style-modal {
+            inset-inline-start: 0;
+        }
 
-        &.md3-show-divider::before {
+        .md3-side-sheet-container {
+            border-start-end-radius: var(--border-radius);
+            border-end-end-radius: var(--border-radius);
+        }
+
+        &.md3-show-divider .md3-side-sheet-container::before {
             inset-inline-end: 0;
         }
     }
@@ -51,43 +71,52 @@
     &.md3-end {
         --hidden-offset: 80%;
 
-        border-start-start-radius: var(--border-radius);
-        border-end-start-radius: var(--border-radius);
+        &.md3-style-modal {
+            inset-inline-end: 0;
+        }
+        .md3-side-sheet-container {
+            border-start-start-radius: var(--border-radius);
+            border-end-start-radius: var(--border-radius);
+        }
 
-        &.md3-show-divider::before {
+        &.md3-show-divider .md3-side-sheet-container::before {
             inset-inline-start: 0;
         }
     }
 
-    &.md3-active {
-        opacity: 1;
-        transform: translateX(0%);
-    }
-
     &.md3-style-standard {
-        --background-color: rgb(var(--md-scheme-surface));
-        --border-radius: 0em;
+        .md3-side-sheet-container {
+            --background-color: rgb(var(--md-scheme-surface));
+            --border-radius: 0em;
+        }
 
-        &.md3-show-divider::before {
+        &.md3-show-divider .md3-side-sheet-container::before {
             opacity: 1;
         }
     }
 
     &.md3-style-default {
         &.md3-inset {
-            margin: 1em;
-            border-radius: var(--border-radius);
-            height: calc(100% - 2em);
+            .md3-side-sheet-container {
+                margin: 1em;
+                border-radius: var(--border-radius);
+            }
         }
     }
 
     &.md3-style-modal {
         --elevation: var(--md-shadow-1dp);
 
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        z-index: 4;
+
         &.md3-inset {
-            margin: 1em;
-            border-radius: var(--border-radius);
-            height: calc(100% - 2em);
+            .md3-side-sheet-container {
+                margin: 1em;
+                border-radius: var(--border-radius);
+            }
         }
     }
 }

@@ -63,7 +63,6 @@
         overflow: hidden;
         background-color: var(--background-color);
         color: var(--foreground-color);
-        z-index: 1;
 
         display: grid;
         grid-template-areas: "start main end";
@@ -83,7 +82,9 @@
             }
 
             &.md3-pane-main {
+                position: relative;
                 grid-area: main;
+                z-index: 1;
             }
 
             &.md3-pane-end {
