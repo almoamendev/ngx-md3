@@ -1,6 +1,5 @@
 import { Component, ComponentRef, Injector, inputBinding, Type, ViewChild, ViewContainerRef } from '@angular/core';
 import { SideSheet } from './side-sheet';
-import { SideSheetConfig } from './side-sheet-ref';
 
 export interface SideSheetStackItem<T> {
     sheetComponentRef: ComponentRef<SideSheet>;

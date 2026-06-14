@@ -14,6 +14,7 @@ export * from './types/chip-type.type';
 // interfaces
 export * from './interfaces/dialog-config.interface';
 export * from './interfaces/menu-config.interface';
+export * from './interfaces/side-sheet-config.interface';
 
 // typography
 export * from './styles/typography/type-display';

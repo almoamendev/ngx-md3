@@ -5,11 +5,9 @@ import {
     SIDE_SHEET_COMPONENT,
     SIDE_SHEET_CONFIG,
     SIDE_SHEET_DATA,
-    SideSheetConfig,
     SideSheetRef,
-    SideSheetSide,
-    SideSheetType,
 } from './side-sheet/side-sheet-ref';
+import { SideSheetConfig, SideSheetSide, SideSheetType } from '../../interfaces/side-sheet-config.interface';
 
 interface ResolvedSideSheetConfig<D = unknown> extends SideSheetConfig<D> {
     data: D | undefined;
@@ -17,6 +15,7 @@ interface ResolvedSideSheetConfig<D = unknown> extends SideSheetConfig<D> {
     side: SideSheetSide;
     type: SideSheetType;
     inset: boolean;
+    divider: boolean;
     closeExisting: boolean;
     injector: Injector;
 }
@@ -116,6 +115,7 @@ export class SheetsService {
             side: config.side ?? 'end',
             type: config.type ?? 'default',
             inset: config.inset ?? false,
+            divider: config.divider ?? false,
             closeExisting: config.closeExisting ?? false,
             viewContainerRef: config.viewContainerRef,
             injector: config.injector ?? this.injector,

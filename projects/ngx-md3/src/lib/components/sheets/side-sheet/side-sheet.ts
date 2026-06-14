@@ -1,6 +1,7 @@
 import { CdkPortalOutlet, ComponentPortal } from '@angular/cdk/portal';
 import { AfterContentInit, Component, ComponentRef, effect, ElementRef, inject, Injector, signal, Type, ViewChild } from '@angular/core';
-import { SIDE_SHEET_CONFIG, SideSheetConfig, SideSheetSide, SideSheetType } from './side-sheet-ref';
+import { SIDE_SHEET_CONFIG } from './side-sheet-ref';
+import { SideSheetConfig, SideSheetSide, SideSheetType } from '../../../interfaces/side-sheet-config.interface';
 
 @Component({
     selector: 'md3-side-sheet',
@@ -15,6 +16,7 @@ import { SIDE_SHEET_CONFIG, SideSheetConfig, SideSheetSide, SideSheetType } from
         '[class.md3-start]': 'side() === "start"',
         '[class.md3-end]': 'side() === "end"',
         '[class.md3-inset]': 'isInset()',
+        '[class.md3-show-divider]': 'showDivider()',
     },
 })
 export class SideSheet implements AfterContentInit {
@@ -28,6 +30,7 @@ export class SideSheet implements AfterContentInit {
     public readonly side = signal<SideSheetSide>(this.config.side ?? 'end');
     public readonly sheetType = signal<SideSheetType>(this.config.type ?? 'default');
     public readonly isInset = signal<boolean>(this.config.inset ?? false);
+    public readonly showDivider = signal<boolean>(this.config.divider ?? false);
 
     constructor(private el: ElementRef<HTMLElement>) {
         effect((onCleanUp) => {

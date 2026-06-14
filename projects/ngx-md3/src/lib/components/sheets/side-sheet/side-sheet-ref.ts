@@ -1,25 +1,6 @@
-import { ComponentRef, InjectionToken, Injector, Type, ViewContainerRef } from '@angular/core';
+import { ComponentRef, InjectionToken, Type } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-
-export type SideSheetSide = 'start' | 'end';
-export type SideSheetType = 'default' | 'standard' | 'modal';
-
-export interface SideSheetConfig<D = unknown> {
-    data?: D;
-    bindDataToInputs?: boolean;
-    side?: SideSheetSide;
-    type?: SideSheetType;
-    inset?: boolean;
-    closeExisting?: boolean;
-    viewContainerRef?: ViewContainerRef;
-    injector?: Injector;
-}
-
-export interface SideSheetContainer {
-    element: HTMLElement;
-    showSheet(value: boolean): void;
-    setHidden(value: boolean): void;
-}
+import { SideSheetConfig, SideSheetContainer, SideSheetSide } from '../../../interfaces/side-sheet-config.interface';
 
 export const SIDE_SHEET_DATA = new InjectionToken<unknown>('MD3_SIDE_SHEET_DATA');
 export const SIDE_SHEET_CONFIG = new InjectionToken<SideSheetConfig>('MD3_SIDE_SHEET_CONFIG');
