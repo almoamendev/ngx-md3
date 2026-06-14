@@ -1,7 +1,6 @@
 import { booleanAttribute, Component, ElementRef, inject, input } from '@angular/core';
 
 @Component({
-    standalone: false,
     selector: 'md3-nav-group',
     templateUrl: './navigation-group.html',
     styleUrl: './navigation-group.scss',

@@ -12,9 +12,9 @@ import { Badge } from '../../common/badge';
 @NgModule({
     declarations: [
         NavigationRail,
-        NavigationGroup,
     ],
     imports: [
+        NavigationGroup,
         NavigationItem,
         IconButton,
         IconElement,

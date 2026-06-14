@@ -13,6 +13,8 @@ import { IconButton, SideSheetHeader, IconElement, MaterialIcon, SideSheetRef } 
     styleUrl: './components-menu.scss',
 })
 export class ComponentsMenu {
+    public id: string = 'components';
+
     constructor(
         private sideSheetRef: SideSheetRef<ComponentsMenu>
     ) {
