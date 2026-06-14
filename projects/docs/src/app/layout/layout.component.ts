@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterLink, RouterOutlet } from "@angular/router";
-import { AppBarModule, IconElement, InputElement, LayoutService, MaterialIcon, NavigationBarModule, NavigationRailModule, ScaffoldModule, SheetsService, Switch } from '@vip9008/ngx-md3';
+import { AppBarModule, IconElement, InputElement, LayoutService, MaterialIcon, NavigationBarModule, NavigationRailModule, ScaffoldModule, SheetsService, SideSheetConfig, Switch } from '@vip9008/ngx-md3';
 import { FormControl } from '@angular/forms';
 import { ComponentsMenu } from './components-menu/components-menu';
 
@@ -36,9 +36,12 @@ export class LayoutComponent {
     }
 
     public openComponentsMenu(): void {
-        const ref = this.sheetsService.openSideSheet(ComponentsMenu, {
-            side: 'end',
+        const ref = this.sheetsService.openSideSheet(ComponentsMenu, <SideSheetConfig>{
             // data: { title: 'First sheet' },
+            side: 'end',
+            type: 'standard',
+            inset: true,
+            closeExisting: true,
             bindDataToInputs: true,
         });
 

@@ -8,12 +8,15 @@ import {
     SideSheetConfig,
     SideSheetRef,
     SideSheetSide,
+    SideSheetType,
 } from './side-sheet/side-sheet-ref';
 
 interface ResolvedSideSheetConfig<D = unknown> extends SideSheetConfig<D> {
-    side: SideSheetSide;
     data: D | undefined;
     bindDataToInputs: boolean;
+    side: SideSheetSide;
+    type: SideSheetType;
+    inset: boolean;
     closeExisting: boolean;
     injector: Injector;
 }
@@ -94,6 +97,10 @@ export class SheetsService {
             injector,
         );
 
+        sheetComponentRef.instance.side.set(sheetConfig.side);
+        sheetComponentRef.instance.sheetType.set(sheetConfig.type);
+        sheetComponentRef.instance.isInset.set(sheetConfig.inset);
+
         sheetRef.attachSheetComponentRef(sheetComponentRef);
         this.bindDataToInputs(contentComponentRef, sheetConfig);
         sheetRef.componentInstance = contentComponentRef.instance;
@@ -108,9 +115,11 @@ export class SheetsService {
 
     private mergeConfig<D>(config: SideSheetConfig<D>): ResolvedSideSheetConfig<D> {
         return {
-            side: config.side ?? 'end',
             data: config.data,
             bindDataToInputs: config.bindDataToInputs ?? false,
+            side: config.side ?? 'end',
+            type: config.type ?? 'default',
+            inset: config.inset ?? false,
             closeExisting: config.closeExisting ?? false,
             viewContainerRef: config.viewContainerRef,
             injector: config.injector ?? this.injector,
