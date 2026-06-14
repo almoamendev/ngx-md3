@@ -65,20 +65,20 @@
             opacity: 0;
             background-color: var(--state-color);
         }
+    }
 
-        .md3-label {
-            font-size: 0.75em;
-            font-weight: 500;
-            line-height: 1.333333em;
-            letter-spacing: 0.041667em;
-            padding-inline: 0.666667em;
-            white-space: normal;
-            overflow: hidden;
-            z-index: 2;
-            max-width: 100%;
-            max-height: 2.666667em;
-            color: var(--label-color);
-        }
+    .md3-label {
+        font-size: 0.75em;
+        font-weight: 500;
+        line-height: 1.333333em;
+        letter-spacing: 0.041667em;
+        padding-inline: 0.666667em;
+        white-space: normal;
+        overflow: hidden;
+        z-index: 2;
+        max-width: 100%;
+        max-height: 2.666667em;
+        color: var(--label-color);
     }
 
     &:hover .md3-item-container::after {

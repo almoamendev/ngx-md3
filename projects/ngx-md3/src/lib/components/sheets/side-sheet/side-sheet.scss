@@ -149,4 +149,50 @@
             }
         }
     }
+
+    ::ng-deep md3-nav-group {
+        [md3-nav-item] {
+            padding-inline: 1.25em;
+            margin-bottom: 0.5em;
+            
+            .md3-item-container {
+                padding: 0 1em;
+                flex-direction: row;
+                align-items: center;
+                justify-content: start;
+                width: fit-content;
+                height: 3.5em;
+                
+                &::before, &::after {
+                    inset: 0;
+                    height: auto;
+                    width: auto;
+                    border-radius: 1.75em;
+                }
+
+                .md3-icon-container {
+                    padding: 0;
+                }
+
+                .md3-label {
+                    font-size: 0.875em;
+                    line-height: 1.428571em;
+                    letter-spacing: 0.007143em;
+                    max-height: 2.857143em;
+                    padding-inline: 0;
+                }
+
+                .md3-badge-container {
+                    position: relative;
+                    inset: auto;
+
+                    &.md3-small {
+                        position: absolute;
+                        height: 1.875em;
+                        width: 1.625em;
+                    }
+                }
+            }
+        }
+    }
 }

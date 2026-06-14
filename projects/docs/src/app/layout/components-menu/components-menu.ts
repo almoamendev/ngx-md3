@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
-import { IconButton, SideSheetHeader, IconElement, MaterialIcon, SideSheetRef } from '@vip9008/ngx-md3';
+import { RouterLink } from '@angular/router';
+import { IconButton, SideSheetHeader, IconElement, MaterialIcon, SideSheetRef, NavigationGroup, NavigationItem } from '@vip9008/ngx-md3';
 
 @Component({
     selector: 'app-components-menu',
     imports: [
-        SideSheetHeader,
-        IconButton,
-        IconElement,
-        MaterialIcon,
+        RouterLink,
+        NavigationGroup,
+        NavigationItem,
     ],
     templateUrl: './components-menu.html',
     styleUrl: './components-menu.scss',

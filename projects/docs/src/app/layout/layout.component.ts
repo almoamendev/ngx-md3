@@ -27,7 +27,7 @@ export class LayoutComponent {
     private navSheetsConfig: SideSheetConfig = {
         // data: { title: 'First sheet' },
         side: 'start',
-        type: 'standard',
+        type: 'default',
         inset: false,
         closeExisting: true,
         bindDataToInputs: true,
