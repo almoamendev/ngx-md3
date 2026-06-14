@@ -48,15 +48,14 @@ export class LayoutComponent {
 
     public openComponentsMenu(): void {
         const isCurrentSheet: boolean = (this.currentSheet?.componentInstance as ComponentsMenu)?.id == 'components';
-        
+
         this.currentSheet?.close();
-        this.currentSheet = undefined;
 
         if (!isCurrentSheet) {
             this.currentSheet = this.sheetsService.openSideSheet(ComponentsMenu, this.navSheetsConfig);
-            // this.currentSheet.afterClosed().subscribe((result) => {
-            //     console.log('sheet closed:', result);
-            // });
+            this.currentSheet.afterClosed().subscribe((_) => {
+                this.currentSheet = undefined;
+            });
         }
     }
 }
