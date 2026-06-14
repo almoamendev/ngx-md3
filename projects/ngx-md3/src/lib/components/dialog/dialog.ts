@@ -23,9 +23,9 @@ export class Dialog implements AfterContentInit {
     }
 
     ngAfterContentInit(): void {
-        setTimeout(() => {
+        requestAnimationFrame(() => {
             this.isActive.set(true);
-        }, 10);
+        });
     }
 
     /**

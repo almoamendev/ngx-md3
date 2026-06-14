@@ -44,9 +44,9 @@ export class Menu implements AfterContentInit {
     }
 
     ngAfterContentInit(): void {
-        setTimeout(() => {
+        requestAnimationFrame(() => {
             this.showMenu(true);
-        }, 10);
+        });
     }
 
     public showMenu(value: boolean): void {
