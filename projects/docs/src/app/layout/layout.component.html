@@ -45,7 +45,7 @@
             Label
         </button>
 
-        <button type="button" md3-nav-item (click)="openComponentsMenu()">
+        <button type="button" md3-nav-item (click)="openComponentsMenu()" [class.md3-active]="currentGroup() == groupType.COMPONENTS">
             <md3-icon md3-icon-element>add_circle</md3-icon>
             <md3-icon md3-icon-element="active" filled>add_circle</md3-icon>
             Components
@@ -102,17 +102,8 @@
                 </ul>
                 <ul>
                     <li><a routerLink="components/cards">Cards</a></li>
-                </ul>
-                <ul>
                     <li><a routerLink="components/chips">Chips</a></li>
-                </ul>
-                <ul>
-                    <li><a routerLink="components/selection-controls/checkboxes">Checkboxes</a></li>
-                    <li><a routerLink="components/selection-controls/switches">Switches</a></li>
-                    <li><a routerLink="components/selection-controls/radio-buttons">Radio Buttons</a></li>
                     <li><a routerLink="components/sliders">Sliders</a></li>
-                </ul>
-                <ul>
                     <li><a routerLink="components/lists">Lists</a></li>
                 </ul>
                 <ul>
@@ -121,15 +112,9 @@
                 </ul>
                 <ul>
                     <li><a routerLink="components/menus">Menus</a></li>
-                </ul>
-                <ul>
                     <li><a routerLink="components/navigations/navigation-rail">Navigation rail</a></li>
-                </ul>
-                <ul>
-                    <li><a routerLink="components/text-fields">Text fields</a></li>
-                </ul>
-                <ul>
                     <li><a routerLink="components/dialogs">Dialogs</a></li>
+                    <li><a routerLink="components/text-fields">Text fields</a></li>
                 </ul>
             </section>
     

@@ -5,6 +5,10 @@ import { IconButton, SideSheetHeader, IconElement, MaterialIcon, SideSheetRef, N
 @Component({
     selector: 'app-components-menu',
     imports: [
+        SideSheetHeader,
+        IconButton,
+        IconElement,
+        MaterialIcon,
         RouterLink,
         NavigationGroup,
         NavigationItem,
@@ -13,8 +17,6 @@ import { IconButton, SideSheetHeader, IconElement, MaterialIcon, SideSheetRef, N
     styleUrl: './components-menu.scss',
 })
 export class ComponentsMenu {
-    public id: string = 'components';
-
     constructor(
         private sideSheetRef: SideSheetRef<ComponentsMenu>
     ) {

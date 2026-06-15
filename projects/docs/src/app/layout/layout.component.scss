@@ -11,11 +11,11 @@
         grid-template-columns: minmax(0, 1fr);
 
         &::before {
+            grid-area: 1 / 1;
             content: "";
             display: block;
             position: sticky;
             inset: 0;
-            height: 100dvh;
             background-color: rgb(var(--md-scheme-surface-container));
         }
 

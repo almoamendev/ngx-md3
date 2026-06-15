@@ -1,8 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { RouterLink, RouterOutlet } from "@angular/router";
 import { AppBarModule, IconElement, InputElement, LayoutService, MaterialIcon, NavigationBarModule, NavigationRailModule, ScaffoldModule, SheetsService, SideSheetConfig, SideSheetRef, Switch } from '@vip9008/ngx-md3';
 import { FormControl } from '@angular/forms';
 import { ComponentsMenu } from './components-menu/components-menu';
+
+enum NavigationGroupLink {
+    COMPONENTS = 'components',
+}
 
 @Component({
     selector: 'app-layout',
@@ -28,12 +32,15 @@ export class LayoutComponent {
         // data: { title: 'First sheet' },
         side: 'start',
         type: 'default',
-        inset: false,
+        inset: true,
         closeExisting: true,
         bindDataToInputs: true,
     }
 
     private currentSheet: SideSheetRef | undefined;
+
+    public currentGroup = signal<NavigationGroupLink | null>(null);
+    public groupType = NavigationGroupLink;
 
     constructor(
         private layoutService: LayoutService,
@@ -47,15 +54,21 @@ export class LayoutComponent {
     }
 
     public openComponentsMenu(): void {
-        const isCurrentSheet: boolean = (this.currentSheet?.componentInstance as ComponentsMenu)?.id == 'components';
+        const isCurrentGroup: boolean = this.currentGroup() == NavigationGroupLink.COMPONENTS;
 
         this.currentSheet?.close();
 
-        if (!isCurrentSheet) {
+        if (!isCurrentGroup) {
             this.currentSheet = this.sheetsService.openSideSheet(ComponentsMenu, this.navSheetsConfig);
+            this.currentGroup.set(NavigationGroupLink.COMPONENTS);
             this.currentSheet.afterClosed().subscribe((_) => {
-                this.currentSheet = undefined;
+                this.closeCurrentSheet();
             });
         }
+    }
+
+    private closeCurrentSheet(): void {
+        this.currentSheet = undefined;
+        this.currentGroup.set(null);
     }
 }
