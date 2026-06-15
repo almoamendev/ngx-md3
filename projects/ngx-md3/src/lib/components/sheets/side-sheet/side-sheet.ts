@@ -34,7 +34,7 @@ export class SideSheet implements AfterContentInit {
     public readonly isInset = signal<boolean>(this.config.inset ?? false);
     public readonly showDivider = signal<boolean>(this.config.divider ?? false);
     private readonly resolvedSheetType = computed<SideSheetType>(() => {
-        if (this.layoutService.isMedium()) {
+        if (this.layoutService.isMedium() || this.layoutService.isCompact()) {
             return 'modal';
         }
         
