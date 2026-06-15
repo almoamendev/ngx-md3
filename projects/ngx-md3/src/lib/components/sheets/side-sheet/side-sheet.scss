@@ -5,10 +5,9 @@
     --elevation: var(--md-shadow-0dp);
     --hidden-offset: 80%;
 
-    display: flex;
-    flex-direction: column;
     position: relative;
     height: 100%;
+    width: 100%;
     min-height: 0;
     pointer-events: none;
     z-index: 1;
@@ -31,6 +30,8 @@
         position: relative;
         max-width: 25em;
         min-width: 16em;
+        height: 100%;
+        overflow: hidden;
         pointer-events: all;
         background-color: var(--background-color);
         color: var(--foreground-color);
@@ -38,6 +39,14 @@
         opacity: 0;
         transform: translateX(var(--hidden-offset));
         transition: all var(--md-motion-standard-default-spatial-duration) var(--md-motion-standard-default-spatial-easing);
+
+        & > ::ng-deep * {
+            display: grid;
+            grid-template-areas: "header" "body" "actions";
+            grid-template-rows: auto minmax(0, 1fr) auto;
+            height: 100%;
+            overflow: hidden;
+        }
     }
 
     &.md3-hidden {
@@ -116,8 +125,9 @@
 
     &.md3-style-default {
         &.md3-inset {
+            padding: 1em;
+
             .md3-side-sheet-container {
-                margin: 1em;
                 border-radius: var(--border-radius);
             }
         }
@@ -143,8 +153,9 @@
         }
 
         &.md3-inset {
+            padding: 1em;
+
             .md3-side-sheet-container {
-                margin: 1em;
                 border-radius: var(--border-radius);
             }
         }

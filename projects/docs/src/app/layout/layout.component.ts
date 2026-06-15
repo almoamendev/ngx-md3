@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { RouterLink, RouterOutlet } from "@angular/router";
+import { RouterOutlet } from "@angular/router";
 import { AppBarModule, IconElement, InputElement, LayoutService, MaterialIcon, NavigationBarModule, NavigationRailModule, ScaffoldModule, SheetsService, SideSheetConfig, SideSheetRef, Switch } from '@vip9008/ngx-md3';
 import { FormControl } from '@angular/forms';
 import { ComponentsMenu } from './components-menu/components-menu';
@@ -11,7 +11,6 @@ enum NavigationGroupLink {
 @Component({
     selector: 'app-layout',
     imports: [
-        RouterLink,
         RouterOutlet,
         ScaffoldModule,
         AppBarModule,

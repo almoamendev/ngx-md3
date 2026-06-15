@@ -112,3 +112,4 @@ export * from './components/menu/menu-item/menu-item';
 export * from './components/sheets/side-sheet/side-sheet-ref';
 export * from './components/sheets/sheets.service';
 export * from './components/sheets/side-sheet-header/side-sheet-header';
+export * from './components/sheets/side-sheet-body/side-sheet-body';

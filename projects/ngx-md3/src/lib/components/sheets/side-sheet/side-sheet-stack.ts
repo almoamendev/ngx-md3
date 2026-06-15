@@ -12,9 +12,9 @@ export interface SideSheetStackItem<T> {
     styles: [`
         :host {
             display: grid;
-            min-inline-size: 0;
-            min-block-size: 0;
-            block-size: 100%;
+            min-width: 0;
+            min-height: 0;
+            height: 100%;
         }
 
         :host ::ng-deep md3-side-sheet {
