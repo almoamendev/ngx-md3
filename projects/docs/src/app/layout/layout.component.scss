@@ -13,7 +13,7 @@
         .md3-pane.md3-pane-start {
             md3-side-sheet-stack {
                 md3-side-sheet.md3-inset {
-                    padding-inline-end: 0em;
+                    padding-inline-end: 0.5em;
                 }
             }
         }
@@ -21,7 +21,7 @@
         .md3-pane.md3-pane-end {
             md3-side-sheet-stack {
                 md3-side-sheet.md3-inset {
-                    padding-inline-start: 0em;
+                    padding-inline-start: 0.5em;
                 }
             }
         }
@@ -33,7 +33,7 @@
         height: 100%;
         overflow-x: hidden;
         overflow-y: auto;
-        padding: 1em;
+        padding: 1em 0.5em;
         position: relative;
         display: grid;
         grid-template-columns: minmax(0, 1fr);

@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { Button, ButtonGroupModule, SheetsService } from '@vip9008/ngx-md3';
+import { Component, OnDestroy } from '@angular/core';
+import { Button, ButtonGroupModule, SheetsService, SideSheetRef } from '@vip9008/ngx-md3';
 import { ButtonGroupConfig } from './button-group-config/button-group-config';
 
 @Component({
@@ -11,14 +11,16 @@ import { ButtonGroupConfig } from './button-group-config/button-group-config';
     templateUrl: './button-groups.component.html',
     styleUrl: './button-groups.component.scss',
 })
-export class ButtonGroupsComponent {
+export class ButtonGroupsComponent implements OnDestroy {
+    private configSheet: SideSheetRef<ButtonGroupConfig> | undefined;
+
     constructor(
         private sheetsService: SheetsService,
     ) {
     }
     
     public openConfig(): void {
-        const ref = this.sheetsService.openSideSheet(ButtonGroupConfig, {
+        this.configSheet = this.sheetsService.openSideSheet(ButtonGroupConfig, {
             // data: { title: 'First sheet' },
             side: 'end',
             type: 'default',
@@ -27,7 +29,11 @@ export class ButtonGroupsComponent {
             bindDataToInputs: true,
         });
 
-        ref.afterClosed().subscribe((_) => {
-        });
+        // this.configSheet.afterClosed().subscribe((_) => {
+        // });
+    }
+
+    ngOnDestroy(): void {
+        this.configSheet?.close();
     }
 }
