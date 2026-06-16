@@ -1,6 +1,6 @@
-import { Component, effect, signal } from '@angular/core';
+import { Component, computed, effect, signal } from '@angular/core';
 import { NavigationEnd, Router, RouterOutlet } from "@angular/router";
-import { AppBarModule, IconElement, InputElement, LayoutService, MaterialIcon, NavigationBarModule, NavigationRailModule, ScaffoldModule, SheetsService, SideSheetConfig, SideSheetRef, Switch } from '@vip9008/ngx-md3';
+import { AppBarModule, IconElement, InputElement, LayoutService, MaterialIcon, NavigationBarModule, NavigationRailModule, ScaffoldModule, SheetsService, SideSheetConfig, SideSheetRef, SideSheetType, Switch } from '@vip9008/ngx-md3';
 import { FormControl } from '@angular/forms';
 import { ComponentsMenu } from './components-menu/components-menu';
 import { filter } from 'rxjs';
@@ -33,7 +33,7 @@ export class LayoutComponent {
     private navSheetsConfig: SideSheetConfig = {
         // data: { title: 'First sheet' },
         side: 'start',
-        type: 'default',
+        // type: 'default',
         inset: true,
         closeExisting: true,
         bindDataToInputs: true,
@@ -43,6 +43,13 @@ export class LayoutComponent {
 
     public currentGroup = signal<NavigationGroupLink | null>(null);
     public groupType = NavigationGroupLink;
+    public navSheetStyle = computed<SideSheetType>(() => {
+        if (this.layoutService.isLarge() || this.layoutService.isExtraLarge()) {
+            return 'default';
+        }
+
+        return 'modal';
+    });
 
     constructor(
         private layoutService: LayoutService,
@@ -56,12 +63,16 @@ export class LayoutComponent {
         });
 
         effect(() => {
-            if (this.layoutService.isMedium()) {
+            const type = this.navSheetStyle();
+            if (type == 'modal') {
                 this.currentSheet?.close();
             }
 
+            this.currentSheet?.setSheetType(type);
+        });
+
+        effect(() => {
             if (this.layoutService.isCompact()) {
-                this.currentSheet?.close();
                 this.showMenuBtn.set(true);
             } else {
                 this.expandedRail.set(false);
@@ -83,6 +94,7 @@ export class LayoutComponent {
         this.currentSheet?.close();
 
         if (!isCurrentGroup) {
+            this.navSheetsConfig.type = this.navSheetStyle();
             this.currentSheet = this.sheetsService.openSideSheet(ComponentsMenu, this.navSheetsConfig);
             this.currentGroup.set(NavigationGroupLink.COMPONENTS);
             this.currentSheet.afterClosed().subscribe((_) => {

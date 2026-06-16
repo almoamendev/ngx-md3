@@ -17,6 +17,14 @@
                 }
             }
         }
+        
+        .md3-pane.md3-pane-end {
+            md3-side-sheet-stack {
+                md3-side-sheet.md3-inset {
+                    padding-inline-start: 0em;
+                }
+            }
+        }
     }
 
     main {
