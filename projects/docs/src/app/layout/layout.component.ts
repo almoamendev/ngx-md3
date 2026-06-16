@@ -56,7 +56,12 @@ export class LayoutComponent {
         });
 
         effect(() => {
+            if (this.layoutService.isMedium()) {
+                this.currentSheet?.close();
+            }
+
             if (this.layoutService.isCompact()) {
+                this.currentSheet?.close();
                 this.showMenuBtn.set(true);
             } else {
                 this.expandedRail.set(false);
