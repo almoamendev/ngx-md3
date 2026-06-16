@@ -13,7 +13,7 @@ import { IconButton, SideSheetHeader, IconElement, MaterialIcon, SideSheetRef, N
         RouterLink,
         NavigationGroup,
         NavigationItem,
-        Divider
+        Divider,
     ],
     templateUrl: './components-menu.html',
     styleUrl: './components-menu.scss',
