@@ -159,6 +159,12 @@
                 border-radius: var(--border-radius);
             }
         }
+
+        &.md3-end {
+            .md3-side-sheet-container {
+                margin-inline-start: auto;
+            }
+        }
     }
 
     ::ng-deep md3-nav-group {

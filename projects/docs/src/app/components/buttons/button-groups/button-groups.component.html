@@ -2,6 +2,23 @@
 
 <button md3-button (click)="openConfig()">Config</button>
 
+<md3-card class="component-container" card-type="outlined" style="min-height: 16em;">
+    <md3-button-group [button-size]="buttonSize()" [group-type]="groupType()" selection="none">
+        <button md3-button>
+            <md3-icon md3-icon-element>star</md3-icon>
+            label
+        </button>
+        <button md3-button [selected]="true">
+            <md3-icon md3-icon-element>star</md3-icon>
+            label
+        </button>
+        <button md3-button [selected]="true">
+            <md3-icon md3-icon-element>star</md3-icon>
+            label
+        </button>
+    </md3-button-group>
+</md3-card>
+
 <ul>
     <li>@Input() button-size: 'x-small' | 'small' | 'medium' | 'large' | 'x-large' = 'small';</li>
     <li>@Input() group-type: 'standard' | 'connected' = 'standard';</li>

@@ -1,4 +1,4 @@
-import { Component, computed, contentChild, effect, input, signal, viewChild } from '@angular/core';
+import { booleanAttribute, Component, computed, contentChild, effect, input, signal, viewChild } from '@angular/core';
 import { AbstractControl, FormControlName } from '@angular/forms';
 import { fromEvent } from 'rxjs';
 import { InputElement } from '../../common/input-element';
@@ -22,9 +22,10 @@ export class Switch {
     private controlName = contentChild(FormControlName);
     private controlError = signal(false);
     private nativeInputError = signal(false);
-
-    public disableStateLayer = input<boolean>(false, {
-        alias: 'disable-state-layer'
+    
+    public disableStateLayer = input<boolean, unknown>(false, {
+        alias: 'disable-state-layer',
+        transform: booleanAttribute
     });
 
     public hasError: boolean = false;
