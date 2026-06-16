@@ -81,8 +81,11 @@ export class LayoutComponent {
         });
 
         this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(() => {
-            if (this.layoutService.isCompact()) {
+            if (this.navSheetStyle() == 'modal') {
                 this.currentSheet?.close();
+            }
+
+            if (this.layoutService.isCompact()) {
                 this.expandedRail.set(false);
             }
         });
