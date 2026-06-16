@@ -3,10 +3,6 @@
     width: 6em;
     transition: all var(--md-motion-standard-default-spatial-duration) var(--md-motion-standard-default-spatial-easing);
 
-    .md3-hidden {
-        display: none;
-    }
-
     .md3-nav-scrim {
         position: fixed;
         inset: 0;
@@ -38,6 +34,10 @@
             padding-inline: 1.25em;
             margin-bottom: 2.5em;
             width: 100%;
+
+            &.md3-hidden {
+                display: none;
+            }
             
             .md3-menu-button {
                 margin: 0.5em;
@@ -126,16 +126,16 @@
             max-width: 0em;
 
             .md3-nav-header {
-                .md3-menu-button {
-                    position: fixed;
-                    top: 2.75em;
-                    inset-inline-start: 1.25em;
-                    z-index: 400;
+                // .md3-menu-button {
+                //     position: fixed;
+                //     top: 2.75em;
+                //     inset-inline-start: 1.25em;
+                //     z-index: 400;
 
-                    & + ::ng-deep [md3-fab] {
-                        margin-top: 4em;
-                    }
-                }
+                //     & + ::ng-deep [md3-fab] {
+                //         margin-top: 4em;
+                //     }
+                // }
     
                 ::ng-deep [md3-fab] {
                     opacity: 0;

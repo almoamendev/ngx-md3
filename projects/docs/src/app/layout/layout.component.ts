@@ -1,8 +1,9 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from "@angular/router";
+import { Component, effect, signal } from '@angular/core';
+import { NavigationEnd, Router, RouterOutlet } from "@angular/router";
 import { AppBarModule, IconElement, InputElement, LayoutService, MaterialIcon, NavigationBarModule, NavigationRailModule, ScaffoldModule, SheetsService, SideSheetConfig, SideSheetRef, Switch } from '@vip9008/ngx-md3';
 import { FormControl } from '@angular/forms';
 import { ComponentsMenu } from './components-menu/components-menu';
+import { filter } from 'rxjs';
 
 enum NavigationGroupLink {
     COMPONENTS = 'components',
@@ -25,6 +26,8 @@ enum NavigationGroupLink {
     styleUrl: './layout.component.scss',
 })
 export class LayoutComponent {
+    public expandedRail = signal<boolean>(false);
+    public showMenuBtn = signal<boolean>(false);
     public darkModeControl: FormControl = new FormControl<boolean>(false);
 
     private navSheetsConfig: SideSheetConfig = {
@@ -43,12 +46,29 @@ export class LayoutComponent {
 
     constructor(
         private layoutService: LayoutService,
-        private sheetsService: SheetsService
+        private sheetsService: SheetsService,
+        private router: Router,
     ) {
         this.darkModeControl.setValue(this.layoutService.darkMode());
 
         this.darkModeControl.registerOnChange(() => {
             this.layoutService.darkMode.set(this.darkModeControl.value);
+        });
+
+        effect(() => {
+            if (this.layoutService.isCompact()) {
+                this.showMenuBtn.set(true);
+            } else {
+                this.expandedRail.set(false);
+                this.showMenuBtn.set(false);
+            }
+        });
+
+        this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(() => {
+            if (this.layoutService.isCompact()) {
+                this.currentSheet?.close();
+                this.expandedRail.set(false);
+            }
         });
     }
 
@@ -61,12 +81,12 @@ export class LayoutComponent {
             this.currentSheet = this.sheetsService.openSideSheet(ComponentsMenu, this.navSheetsConfig);
             this.currentGroup.set(NavigationGroupLink.COMPONENTS);
             this.currentSheet.afterClosed().subscribe((_) => {
-                this.closeCurrentSheet();
+                this.cleanCurrentSheet();
             });
         }
     }
 
-    private closeCurrentSheet(): void {
+    private cleanCurrentSheet(): void {
         this.currentSheet = undefined;
         this.currentGroup.set(null);
     }

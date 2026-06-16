@@ -1,5 +1,5 @@
 <md3-scaffold>
-    <md3-app-bar md3-scaffold-bar="top" bar-type="small" scroll-style="none" bar-title="Material Design 3" bar-subtitle="Angular">
+    <md3-app-bar md3-scaffold-bar="top" bar-type="small" scroll-style="none" bar-title="Material Design 3" bar-subtitle="Angular" [class.menu-button]="showMenuBtn()">
         <!-- <a href="google.com" md3-app-bar-logo><img  src="https://media.wired.com/photos/5926ffe47034dc5f91bed4e8/master/pass/google-logo.jpg"></a> -->
 
         <!-- <input type="text" md3-input-element placeholder="Search products" />
@@ -16,7 +16,7 @@
 
         <!-- <div md3-app-bar-leading>
             <button md3-icon-button button-type="standard">
-                <md3-icon md3-icon-element>event</md3-icon>
+                <md3-icon md3-icon-element bi-directional>menu</md3-icon>
             </button>
         </div> -->
 
@@ -39,11 +39,11 @@
         </button> -->
     </md3-app-bar>
 
-    <md3-navigation-rail md3-scaffold-rail="leading">
-        <button type="button" md3-fab>
+    <md3-navigation-rail md3-scaffold-rail="leading" [class.menu-button]="showMenuBtn()" [hide-menu-button]="!showMenuBtn()" [(expanded)]="expandedRail">
+        <!-- <button type="button" md3-fab>
             <md3-icon md3-icon-element>edit</md3-icon>
             Label
-        </button>
+        </button> -->
 
         <button type="button" md3-nav-item (click)="openComponentsMenu()" [class.md3-active]="currentGroup() == groupType.COMPONENTS">
             <md3-icon md3-icon-element>add_circle</md3-icon>

@@ -1,4 +1,14 @@
 :host {
+    md3-app-bar.menu-button {
+        padding-inline-start: 4.5em;
+    }
+
+    md3-navigation-rail.menu-button {
+        ::ng-deep .md3-nav-container {
+            padding-top: 0.25em !important;
+        }
+    }
+
     main {
         min-width: 0;
         min-height: 0;
