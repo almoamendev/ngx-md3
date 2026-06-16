@@ -9,6 +9,16 @@
         }
     }
 
+    ::ng-deep .md3-panes-container {
+        .md3-pane.md3-pane-start {
+            md3-side-sheet-stack {
+                md3-side-sheet.md3-inset {
+                    padding-inline-end: 0em;
+                }
+            }
+        }
+    }
+
     main {
         min-width: 0;
         min-height: 0;
@@ -26,7 +36,7 @@
             display: block;
             position: sticky;
             inset: 0;
-            background-color: rgb(var(--md-scheme-surface-container));
+            background-color: rgb(var(--md-scheme-surface-container-low));
         }
 
         .main-content {
