@@ -14,12 +14,10 @@
 </figure>
 
 <app-playground>
-    <div actions>
-        <button class="config-button" md3-icon-button button-type="tonal" button-squared [selected]="configOpen()"
-            (click)="openConfig()">
-            <md3-icon md3-icon-element>settings</md3-icon>
-        </button>
-    </div>
+    <button action-item md3-icon-button button-type="tonal" button-squared [selected]="configOpen()"
+        (click)="openConfig()">
+        <md3-icon md3-icon-element>settings</md3-icon>
+    </button>
     
     <md3-button-group [button-size]="buttonSize()" [group-type]="groupType()" [selection]="selection()">
         <button md3-button>
