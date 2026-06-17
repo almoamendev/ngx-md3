@@ -1,5 +1,5 @@
 import { Component, OnDestroy, signal } from '@angular/core';
-import { Button, ButtonGroupModule, ButtonGroupType, ButtonSize, Card, SheetsService, SideSheetRef } from '@vip9008/ngx-md3';
+import { Button, ButtonGroupModule, ButtonGroupSelection, ButtonGroupType, ButtonSize, Card, SheetsService, SideSheetRef } from '@vip9008/ngx-md3';
 import { ButtonGroupConfig } from './button-group-config/button-group-config';
 
 @Component({
@@ -17,6 +17,7 @@ export class ButtonGroupsComponent implements OnDestroy {
 
     public buttonSize = signal<ButtonSize>('small');
     public groupType = signal<ButtonGroupType>('standard');
+    public selection = signal<ButtonGroupSelection>('none');
 
     constructor(
         private sheetsService: SheetsService,
@@ -52,6 +53,11 @@ export class ButtonGroupsComponent implements OnDestroy {
         this.configSheet?.componentInstance?.isConntected.setValue(this.groupType() == 'connected');
         this.configSheet?.componentInstance?.isConntected.registerOnChange(() => {
             this.groupType.set(this.configSheet?.componentInstance?.isConntected.value ? 'connected' : 'standard');
+        });
+
+        this.configSheet?.componentInstance?.selectionType.setValue(this.selection());
+        this.configSheet?.componentInstance?.selectionType.registerOnChange(() => {
+            this.selection.set(this.configSheet?.componentInstance?.selectionType.value);
         });
     }
 }

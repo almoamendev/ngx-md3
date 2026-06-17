@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { ButtonSize, Checkbox, IconButton, IconElement, InputElement, ListModule, MaterialIcon, RadioButton, SideSheetBody, SideSheetHeader, SideSheetRef, TypeBody } from '@vip9008/ngx-md3';
+import { ButtonGroupSelection, ButtonSize, Checkbox, IconButton, IconElement, InputElement, ListModule, MaterialIcon, RadioButton, SideSheetBody, SideSheetHeader, SideSheetRef, TypeBody } from '@vip9008/ngx-md3';
 
 @Component({
     selector: 'app-button-group-config',
@@ -22,6 +22,7 @@ import { ButtonSize, Checkbox, IconButton, IconElement, InputElement, ListModule
 export class ButtonGroupConfig {
     public buttonSize: FormControl = new FormControl<ButtonSize>('small');
     public isConntected: FormControl = new FormControl<boolean>(false);
+    public selectionType: FormControl = new FormControl<ButtonGroupSelection>('none');
 
     constructor(
         private sideSheetRef: SideSheetRef<ButtonGroupConfig>

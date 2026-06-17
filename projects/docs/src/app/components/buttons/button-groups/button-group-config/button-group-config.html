@@ -59,4 +59,32 @@
             <div md3-list-slot="content">Connected</div>
         </label>
     </md3-list>
+    
+    <div md3-type-body="large">Selection</div>
+    <md3-list type="segmented">
+        <label md3-list-item slots-alignment="center">
+            <md3-list-leading type="selection-input">
+                <md3-radio-button disable-state-layer [control]="selectionType">
+                    <input type="radio" md3-input-element name="selection-type" value="none">
+                </md3-radio-button>
+            </md3-list-leading>
+            <div md3-list-slot="content">None</div>
+        </label>
+        <label md3-list-item slots-alignment="center">
+            <md3-list-leading type="selection-input">
+                <md3-radio-button disable-state-layer [control]="selectionType">
+                    <input type="radio" md3-input-element name="selection-type" value="single">
+                </md3-radio-button>
+            </md3-list-leading>
+            <div md3-list-slot="content">Single</div>
+        </label>
+        <label md3-list-item slots-alignment="center">
+            <md3-list-leading type="selection-input">
+                <md3-radio-button disable-state-layer [control]="selectionType">
+                    <input type="radio" md3-input-element name="selection-type" value="multiple">
+                </md3-radio-button>
+            </md3-list-leading>
+            <div md3-list-slot="content">Multiple</div>
+        </label>
+    </md3-list>
 </md3-side-sheet-body>

@@ -3,16 +3,16 @@
 <button md3-button (click)="openConfig()">Config</button>
 
 <md3-card class="component-container" card-type="outlined" style="min-height: 16em;">
-    <md3-button-group [button-size]="buttonSize()" [group-type]="groupType()" selection="none">
+    <md3-button-group [button-size]="buttonSize()" [group-type]="groupType()" [selection]="selection()">
         <button md3-button>
             <md3-icon md3-icon-element>star</md3-icon>
             label
         </button>
-        <button md3-button [selected]="true">
+        <button md3-button>
             <md3-icon md3-icon-element>star</md3-icon>
             label
         </button>
-        <button md3-button [selected]="true">
+        <button md3-button>
             <md3-icon md3-icon-element>star</md3-icon>
             label
         </button>
