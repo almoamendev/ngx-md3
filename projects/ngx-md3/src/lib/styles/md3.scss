@@ -112,7 +112,7 @@ body {
         border-end-end-radius: calc(var(--border-bottom-end-r) + var(--outline-width, 0.1875em) + (var(--outline-offset, -0.125em) * -1));
     }
 
-    .md3-state-layer {
+    > .md3-state-layer {
         --ripple-w: 288%;
         --ripple-x: 50%;
         --ripple-y: 50%;
