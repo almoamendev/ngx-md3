@@ -1,8 +1,6 @@
 <h1>Button groups</h1>
 
-<button md3-button (click)="openConfig()">Config</button>
-
-<md3-card class="component-container" card-type="outlined" style="min-height: 16em;">
+<md3-card class="component-container" card-type="outlined">
     <md3-button-group [button-size]="buttonSize()" [group-type]="groupType()" [selection]="selection()">
         <button md3-button>
             <md3-icon md3-icon-element>star</md3-icon>
@@ -17,6 +15,40 @@
             label
         </button>
     </md3-button-group>
+
+    <md3-button-group [button-size]="buttonSize()" [group-type]="groupType()" [selection]="selection()">
+        <button md3-icon-button>
+            <md3-icon md3-icon-element>bluetooth</md3-icon>
+        </button>
+        <button md3-icon-button>
+            <md3-icon md3-icon-element>alarm</md3-icon>
+        </button>
+        <button md3-icon-button>
+            <md3-icon md3-icon-element>link</md3-icon>
+        </button>
+        <button md3-icon-button>
+            <md3-icon md3-icon-element>wifi</md3-icon>
+        </button>
+    </md3-button-group>
+
+    <md3-button-group [button-size]="buttonSize()" [group-type]="groupType()" [selection]="selection()">
+        <button md3-icon-button button-type="tonal" button-width="narrow">
+            <md3-icon md3-icon-element>bluetooth</md3-icon>
+        </button>
+        <button md3-icon-button button-type="outlined" button-squared>
+            <md3-icon md3-icon-element>alarm</md3-icon>
+        </button>
+        <button md3-icon-button button-type="filled" button-width="wide">
+            <md3-icon md3-icon-element>link</md3-icon>
+        </button>
+        <button md3-icon-button button-type="standard" button-squared>
+            <md3-icon md3-icon-element>wifi</md3-icon>
+        </button>
+    </md3-button-group>
+
+    <button class="config-button" md3-icon-button button-type="tonal" button-squared [selected]="configOpen()" (click)="openConfig()">
+        <md3-icon md3-icon-element>settings</md3-icon>
+    </button>
 </md3-card>
 
 <ul>
@@ -24,82 +56,3 @@
     <li>@Input() group-type: 'standard' | 'connected' = 'standard';</li>
     <li>@Input() selection: 'none' | 'single' | 'multiple' = 'none';</li>
 </ul>
-
-<div style="margin-bottom: 1rem;">
-    <md3-button-group selection="multiple">
-        <button md3-button>
-            <md3-icon md3-icon-element>person</md3-icon>
-            Default (left)
-        </button>
-        <button md3-button [selected]="true">
-            <md3-icon md3-icon-element>person</md3-icon>
-            Default (center)
-        </button>
-        <button md3-button>
-            <md3-icon md3-icon-element>person</md3-icon>
-            Default (right)
-        </button>
-    </md3-button-group>
-</div>
-
-<div style="margin-bottom: 1rem;">
-    <md3-button-group selection="single">
-        <button md3-button button-type="tonal">
-            <md3-icon md3-icon-element>person</md3-icon>
-            Default (left)
-        </button>
-        <button md3-button button-type="tonal" [selected]="true">
-            <md3-icon md3-icon-element>person</md3-icon>
-            Default (center)
-        </button>
-        <button md3-button button-type="tonal">
-            <md3-icon md3-icon-element>person</md3-icon>
-            Default (right)
-        </button>
-    </md3-button-group>
-</div>
-
-<div style="margin-bottom: 1rem;">
-    <md3-button-group button-size="medium">
-        <button md3-icon-button button-type="outlined" [button-squared]="true">
-            <md3-icon md3-icon-element>person</md3-icon>
-        </button>
-        <button md3-icon-button button-type="outlined" [button-squared]="true">
-            <md3-icon md3-icon-element>person</md3-icon>
-        </button>
-        <button md3-icon-button button-type="outlined" [button-squared]="true">
-            <md3-icon md3-icon-element>person</md3-icon>
-        </button>
-    </md3-button-group>
-</div>
-
-<div style="margin-bottom: 1rem;">
-    <md3-button-group group-type="connected">
-        <button md3-button>
-            <md3-icon md3-icon-element>person</md3-icon>
-            Default (left)
-        </button>
-        <button md3-button>
-            <md3-icon md3-icon-element>person</md3-icon>
-            Default (center)
-        </button>
-        <button md3-button>
-            <md3-icon md3-icon-element>person</md3-icon>
-            Default (right)
-        </button>
-    </md3-button-group>
-</div>
-
-<div style="margin-bottom: 1rem;">
-    <md3-button-group button-size="medium" group-type="connected" selection="multiple">
-        <button md3-icon-button [button-squared]="true">
-            <md3-icon md3-icon-element>person</md3-icon>
-        </button>
-        <button md3-icon-button [button-squared]="true" [selected]="true">
-            <md3-icon md3-icon-element>person</md3-icon>
-        </button>
-        <button md3-icon-button [button-squared]="true">
-            <md3-icon md3-icon-element>person</md3-icon>
-        </button>
-    </md3-button-group>
-</div>

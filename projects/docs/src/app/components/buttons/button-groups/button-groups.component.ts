@@ -1,4 +1,4 @@
-import { Component, OnDestroy, signal } from '@angular/core';
+import { Component, computed, OnDestroy, signal } from '@angular/core';
 import { Button, ButtonGroupModule, ButtonGroupSelection, ButtonGroupType, ButtonSize, Card, SheetsService, SideSheetRef } from '@vip9008/ngx-md3';
 import { ButtonGroupConfig } from './button-group-config/button-group-config';
 
@@ -14,6 +14,7 @@ import { ButtonGroupConfig } from './button-group-config/button-group-config';
 })
 export class ButtonGroupsComponent implements OnDestroy {
     private configSheet: SideSheetRef<ButtonGroupConfig> | undefined;
+    public configOpen = signal(false);
 
     public buttonSize = signal<ButtonSize>('small');
     public groupType = signal<ButtonGroupType>('standard');
@@ -25,6 +26,11 @@ export class ButtonGroupsComponent implements OnDestroy {
     }
     
     public openConfig(): void {
+        if (this.configOpen()) {
+            this.configSheet?.close();
+            return;
+        }
+
         this.configSheet = this.sheetsService.openSideSheet(ButtonGroupConfig, {
             // data: { title: 'First sheet' },
             side: 'end',
@@ -33,11 +39,14 @@ export class ButtonGroupsComponent implements OnDestroy {
             closeExisting: true,
             bindDataToInputs: true,
         });
+        this.configOpen.set(true);
 
         this.registerConfigEvents();
 
-        // this.configSheet.afterClosed().subscribe((_) => {
-        // });
+        this.configSheet.afterClosed().subscribe((_) => {
+            this.configSheet = undefined;
+            this.configOpen.set(false);
+        });
     }
 
     ngOnDestroy(): void {
