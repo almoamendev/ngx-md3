@@ -1,6 +1,7 @@
-import { Component, computed, OnDestroy, signal } from '@angular/core';
+import { Component, OnDestroy, signal } from '@angular/core';
 import { Button, ButtonGroupModule, ButtonGroupSelection, ButtonGroupType, ButtonSize, Card, SheetsService, SideSheetRef } from '@vip9008/ngx-md3';
 import { ButtonGroupConfig } from './button-group-config/button-group-config';
+import { Playground } from '../../playground/playground';
 
 @Component({
     selector: 'app-button-groups',
@@ -8,6 +9,7 @@ import { ButtonGroupConfig } from './button-group-config/button-group-config';
         Button,
         ButtonGroupModule,
         Card,
+        Playground,
     ],
     templateUrl: './button-groups.component.html',
     styleUrl: './button-groups.component.scss',
@@ -24,7 +26,7 @@ export class ButtonGroupsComponent implements OnDestroy {
         private sheetsService: SheetsService,
     ) {
     }
-    
+
     public openConfig(): void {
         if (this.configOpen()) {
             this.configSheet?.close();

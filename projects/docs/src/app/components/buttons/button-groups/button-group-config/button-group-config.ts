@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { ButtonGroupSelection, ButtonSize, Checkbox, IconButton, IconElement, InputElement, ListModule, MaterialIcon, RadioButton, SideSheetBody, SideSheetHeader, SideSheetRef, TypeBody } from '@vip9008/ngx-md3';
+import { ButtonGroupSelection, ButtonSize, Checkbox, IconButton, IconElement, InputElement, MaterialIcon, RadioButton, SideSheetBody, SideSheetHeader, SideSheetRef, StateComponent, TypeBody, TypeLabel } from '@vip9008/ngx-md3';
 
 @Component({
     selector: 'app-button-group-config',
@@ -10,11 +10,12 @@ import { ButtonGroupSelection, ButtonSize, Checkbox, IconButton, IconElement, In
         IconButton,
         MaterialIcon,
         IconElement,
-        ListModule,
         Checkbox,
         RadioButton,
         InputElement,
-        TypeBody
+        StateComponent,
+        TypeBody,
+        TypeLabel,
     ],
     templateUrl: './button-group-config.html',
     styleUrl: './button-group-config.scss',

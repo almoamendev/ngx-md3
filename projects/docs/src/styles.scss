@@ -1,19 +1,62 @@
 @forward 'md3.scss';
 
-md3-card.component-container {
-    padding: 3em 1.5em;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 3em;
-    position: relative;
-    min-height: 20em;
+ol {
+    padding-inline-start: 0;
+    list-style: none;
+    counter-reset: item;
 
-    button.config-button {
-        position: absolute;
-        top: 0.25em;
-        inset-inline-end: 0.25em;
+    li {
+        display: flex;
+        align-items: center;
+        margin-top: 0.25em;
+        margin-bottom: 1.25em;
+        margin-inline-start: 2.25em;
+        counter-increment: item;
+        color: rgb(var(--md-scheme-on-surface-variant));
+
+        &::before {
+            display: block;
+            width: 1.5em;
+            height: 2em;
+            margin-inline-end: 0.625em;
+            margin-inline-start: -2.25em;
+            border-radius: 0.75em;
+            background: rgb(var(--md-scheme-inverse-surface));
+            color: rgb(var(--md-scheme-inverse-on-surface));
+            font-weight: 500;
+            line-height: 2em;
+            text-align: center;
+            content: counter(item, decimal);
+        }
+    }
+}
+
+.title-actions {
+    display: flex;
+    gap: 1em;
+    align-items: center;
+
+    .actions, [actions] {
+        display: flex;
+        gap: 0.5em;
+        align-items: center;
+        margin-inline-start: auto;
+    }
+}
+
+figure.component-image {
+    padding: 0;
+    margin: 1.5em 0 4em;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1em;
+
+    img {
+        display: block;
+        max-width: 100%;
+        width: 48em;
+        height: auto;
     }
 }
 
@@ -22,6 +65,28 @@ md3-side-sheet-body.md3-component-config {
 
     [md3-type-body="large"] {
         padding: 0 1em;
+    }
+
+    .controls-list {
+        display: flex;
+        flex-direction: column;
+        margin: 0.5em 0 1em;
+
+        label.md3-state-component {
+            --state-color: var(--md-scheme-on-surface);
+            --border-radius: 0.5em;
+            --border-size: 0em;
+            --outline-color: rgb(var(--md-scheme-secondary));
+            --outline-width: 0.1875em;
+            --outline-offset: -0.125em;
+
+            display: flex;
+            min-height: 3em;
+            align-items: center;
+            padding: 0 0.5em;
+            gap: 0.5em;
+            border-radius: var(--border-radius);
+        }
     }
 
     md3-list {

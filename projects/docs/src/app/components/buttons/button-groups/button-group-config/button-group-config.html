@@ -5,86 +5,68 @@
 </md3-side-sheet-header>
 <md3-side-sheet-body class="md3-component-config">
     <div md3-type-body="large">Size</div>
-    <md3-list type="segmented">
-        <label md3-list-item slots-alignment="center">
-            <md3-list-leading type="selection-input">
-                <md3-radio-button disable-state-layer [control]="buttonSize">
-                    <input type="radio" md3-input-element name="button-size" value="x-small">
-                </md3-radio-button>
-            </md3-list-leading>
-            <div md3-list-slot="content">X-Small</div>
+    <div class="controls-list">
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="buttonSize">
+                <input type="radio" md3-input-element name="button-size" value="x-small">
+            </md3-radio-button>
+            <div md3-type-label="large">X-Small</div>
         </label>
-        <label md3-list-item slots-alignment="center">
-            <md3-list-leading type="selection-input">
-                <md3-radio-button disable-state-layer [control]="buttonSize">
-                    <input type="radio" md3-input-element name="button-size" value="small">
-                </md3-radio-button>
-            </md3-list-leading>
-            <div md3-list-slot="content">Small</div>
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="buttonSize">
+                <input type="radio" md3-input-element name="button-size" value="small">
+            </md3-radio-button>
+            <div md3-type-label="large">Small</div>
         </label>
-        <label md3-list-item slots-alignment="center">
-            <md3-list-leading type="selection-input">
-                <md3-radio-button disable-state-layer [control]="buttonSize">
-                    <input type="radio" md3-input-element name="button-size" value="medium">
-                </md3-radio-button>
-            </md3-list-leading>
-            <div md3-list-slot="content">Medium</div>
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="buttonSize">
+                <input type="radio" md3-input-element name="button-size" value="medium">
+            </md3-radio-button>
+            <div md3-type-label="large">Medium</div>
         </label>
-        <label md3-list-item slots-alignment="center">
-            <md3-list-leading type="selection-input">
-                <md3-radio-button disable-state-layer [control]="buttonSize">
-                    <input type="radio" md3-input-element name="button-size" value="large">
-                </md3-radio-button>
-            </md3-list-leading>
-            <div md3-list-slot="content">Large</div>
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="buttonSize">
+                <input type="radio" md3-input-element name="button-size" value="large">
+            </md3-radio-button>
+            <div md3-type-label="large">Large</div>
         </label>
-        <label md3-list-item slots-alignment="center">
-            <md3-list-leading type="selection-input">
-                <md3-radio-button disable-state-layer [control]="buttonSize">
-                    <input type="radio" md3-input-element name="button-size" value="x-large">
-                </md3-radio-button>
-            </md3-list-leading>
-            <div md3-list-slot="content">X-Large</div>
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="buttonSize">
+                <input type="radio" md3-input-element name="button-size" value="x-large">
+            </md3-radio-button>
+            <div md3-type-label="large">X-Large</div>
         </label>
-    </md3-list>
+    </div>
 
-    <div md3-type-body="large">Size</div>
-    <md3-list type="segmented">
-        <label md3-list-item slots-alignment="center">
-            <md3-list-leading type="selection-input">
-                <md3-checkbox disable-state-layer [control]="isConntected">
-                    <input type="checkbox" md3-input-element name="group-type">
-                </md3-checkbox>
-            </md3-list-leading>
-            <div md3-list-slot="content">Connected</div>
+    <div md3-type-body="large">Type</div>
+    <div class="controls-list">
+        <label md3-state-component tabindex="0">
+            <md3-checkbox disable-state-layer [control]="isConntected">
+                <input type="checkbox" md3-input-element name="group-type">
+            </md3-checkbox>
+            <div md3-type-label="large">Connected</div>
         </label>
-    </md3-list>
-    
+    </div>
+
     <div md3-type-body="large">Selection</div>
-    <md3-list type="segmented">
-        <label md3-list-item slots-alignment="center">
-            <md3-list-leading type="selection-input">
-                <md3-radio-button disable-state-layer [control]="selectionType">
-                    <input type="radio" md3-input-element name="selection-type" value="none">
-                </md3-radio-button>
-            </md3-list-leading>
-            <div md3-list-slot="content">None</div>
+    <div class="controls-list">
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="selectionType">
+                <input type="radio" md3-input-element name="selection-type" value="none">
+            </md3-radio-button>
+            <div md3-type-label="large">None</div>
         </label>
-        <label md3-list-item slots-alignment="center">
-            <md3-list-leading type="selection-input">
-                <md3-radio-button disable-state-layer [control]="selectionType">
-                    <input type="radio" md3-input-element name="selection-type" value="single">
-                </md3-radio-button>
-            </md3-list-leading>
-            <div md3-list-slot="content">Single</div>
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="selectionType">
+                <input type="radio" md3-input-element name="selection-type" value="single">
+            </md3-radio-button>
+            <div md3-type-label="large">Single</div>
         </label>
-        <label md3-list-item slots-alignment="center">
-            <md3-list-leading type="selection-input">
-                <md3-radio-button disable-state-layer [control]="selectionType">
-                    <input type="radio" md3-input-element name="selection-type" value="multiple">
-                </md3-radio-button>
-            </md3-list-leading>
-            <div md3-list-slot="content">Multiple</div>
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="selectionType">
+                <input type="radio" md3-input-element name="selection-type" value="multiple">
+            </md3-radio-button>
+            <div md3-type-label="large">Multiple</div>
         </label>
-    </md3-list>
+    </div>
 </md3-side-sheet-body>

@@ -1,6 +1,26 @@
 <h1>Button groups</h1>
 
-<md3-card class="component-container" card-type="outlined">
+<figure class="component-image">
+    <img src="/img/md3-button-group.png" />
+    <ol>
+        <li>Extra small</li>
+        <li>Small</li>
+        <li>Medium</li>
+        <li>Large</li>
+        <li>Extra large</li>
+        <li>Single-select and multi-select</li>
+        <li>Round and square</li>
+    </ol>
+</figure>
+
+<app-playground>
+    <div actions>
+        <button class="config-button" md3-icon-button button-type="tonal" button-squared [selected]="configOpen()"
+            (click)="openConfig()">
+            <md3-icon md3-icon-element>settings</md3-icon>
+        </button>
+    </div>
+    
     <md3-button-group [button-size]="buttonSize()" [group-type]="groupType()" [selection]="selection()">
         <button md3-button>
             <md3-icon md3-icon-element>star</md3-icon>
@@ -39,11 +59,7 @@
             <md3-icon md3-icon-element>link</md3-icon>
         </button>
     </md3-button-group>
-
-    <button class="config-button" md3-icon-button button-type="tonal" button-squared [selected]="configOpen()" (click)="openConfig()">
-        <md3-icon md3-icon-element>settings</md3-icon>
-    </button>
-</md3-card>
+</app-playground>
 
 <ul>
     <li>@Input() button-size: 'x-small' | 'small' | 'medium' | 'large' | 'x-large' = 'small';</li>
