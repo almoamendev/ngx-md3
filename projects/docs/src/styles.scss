@@ -31,6 +31,35 @@ ol {
     }
 }
 
+.table-container {
+    overflow-x: auto;
+    margin-bottom: 2em;
+
+    table {
+        min-width: 100%;
+        border-collapse: collapse;
+
+        thead {
+            color: rgb(var(--md-scheme-on-surface));
+
+            th {
+                padding: 0.5em 0;
+                text-align: start;
+                border-bottom: solid 0.0625em rgb(var(--md-scheme-outline));
+            }
+        }
+
+        tbody {
+            color: rgb(var(--md-scheme-on-surface-variant));
+
+            td {
+                padding: 0.5em 0;
+                text-align: start;
+            }
+        }
+    }
+}
+
 .title-actions {
     display: flex;
     gap: 1em;

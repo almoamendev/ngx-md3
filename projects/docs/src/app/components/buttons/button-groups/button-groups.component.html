@@ -59,8 +59,33 @@
     </md3-button-group>
 </app-playground>
 
-<ul>
-    <li>@Input() button-size: 'x-small' | 'small' | 'medium' | 'large' | 'x-large' = 'small';</li>
-    <li>@Input() group-type: 'standard' | 'connected' = 'standard';</li>
-    <li>@Input() selection: 'none' | 'single' | 'multiple' = 'none';</li>
-</ul>
+<h2>API</h2>
+
+<div class="table-container md3-scrollable">
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Default</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>button-size</td>
+                <td [innerText]="'InputSignal<ButtonSize>'"></td>
+                <td>'small'</td>
+            </tr>
+            <tr>
+                <td>group-type</td>
+                <td [innerText]="'InputSignal<ButtonGroupType>'"></td>
+                <td>'standard'</td>
+            </tr>
+            <tr>
+                <td>selection</td>
+                <td [innerText]="'InputSignal<ButtonGroupSelection>'"></td>
+                <td>'none'</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
