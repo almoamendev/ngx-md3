@@ -93,7 +93,7 @@
     </table>
 </div> -->
 
-<div [innerHTML]="apiImport"></div>
-<div [innerHTML]="apiData"></div>
-<div [innerHTML]="apiTypes"></div>
-<div [innerHTML]="apiUsage"></div>
+<app-shiki [code]="apiImport"></app-shiki>
+<app-shiki [code]="apiData"></app-shiki>
+<app-shiki [code]="apiTypes"></app-shiki>
+<app-shiki [code]="apiUsage" language="html"></app-shiki>

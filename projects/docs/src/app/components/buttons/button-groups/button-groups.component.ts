@@ -2,8 +2,7 @@ import { Component, OnDestroy, signal } from '@angular/core';
 import { Button, ButtonGroupModule, ButtonGroupSelection, ButtonGroupType, ButtonSize, SheetsService, SideSheetRef } from '@vip9008/ngx-md3';
 import { ButtonGroupConfig } from './button-group-config/button-group-config';
 import { Playground } from '../../playground/playground';
-import { codeToHtml } from 'shiki'
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { Shiki } from '../../shiki/shiki';
 
 @Component({
     selector: 'app-button-groups',
@@ -11,6 +10,7 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
         Button,
         ButtonGroupModule,
         Playground,
+        Shiki,
     ],
     templateUrl: './button-groups.component.html',
     styleUrl: './button-groups.component.scss',
@@ -23,10 +23,10 @@ export class ButtonGroupsComponent implements OnDestroy {
     public groupType = signal<ButtonGroupType>('standard');
     public selection = signal<ButtonGroupSelection>('none');
 
-    public apiImport: SafeHtml = `// Component imports
+    public apiImport: string = `// Component imports
 import { ButtonGroupModule } from '@vip9008/ngx-md3';`;
 
-    public apiData: SafeHtml = `// Inputs
+    public apiData: string = `// Inputs
 public buttonSize: InputSignal<ButtonSize> = input<ButtonSize>('small', {
     alias: 'button-size',
 });
@@ -37,12 +37,12 @@ public groupSelection: InputSignal<ButtonGroupSelection> = input<ButtonGroupSele
     alias: 'selection',
 });`;
 
-    public apiTypes: SafeHtml = `// Types
+    public apiTypes: string = `// Types
 type ButtonSize = 'x-small' | 'small' | 'medium' | 'large' | 'x-large';
 type ButtonGroupType = 'standard' | 'connected';
 type ButtonGroupSelection = 'none' | 'single' | 'multiple';`;
 
-    public apiUsage: SafeHtml = `<!-- Component usage -->
+    public apiUsage: string = `<!-- Component usage -->
 <md3-button-group button-size="small" group-type="standard" selection="none">
     <!-- button -->
     <button md3-button>
@@ -63,44 +63,7 @@ type ButtonGroupSelection = 'none' | 'single' | 'multiple';`;
 
     constructor(
         private sheetsService: SheetsService,
-        private sanitizer: DomSanitizer,
     ) {
-        // this.apiData.forEach(async (item) => {
-        //     const code = item.type;
-        //     item.type = this.sanitizer.bypassSecurityTrustHtml(await codeToHtml(code as string, {
-        //         lang: 'typescript',
-        //         theme: 'material-theme-ocean',
-        //     }));
-        //     console.log(item.type);
-        // });
-
-        codeToHtml(this.apiImport as string, {
-            lang: 'typescript',
-            theme: 'material-theme-ocean',
-        }).then((html) => {
-            this.apiImport = this.sanitizer.bypassSecurityTrustHtml(html);
-        });
-
-        codeToHtml(this.apiData as string, {
-            lang: 'typescript',
-            theme: 'material-theme-ocean',
-        }).then((html) => {
-            this.apiData = this.sanitizer.bypassSecurityTrustHtml(html);
-        });
-
-        codeToHtml(this.apiTypes as string, {
-            lang: 'typescript',
-            theme: 'material-theme-ocean',
-        }).then((html) => {
-            this.apiTypes = this.sanitizer.bypassSecurityTrustHtml(html);
-        });
-
-        codeToHtml(this.apiUsage as string, {
-            lang: 'html',
-            theme: 'material-theme-ocean',
-        }).then((html) => {
-            this.apiUsage = this.sanitizer.bypassSecurityTrustHtml(html);
-        });
     }
 
     public openConfig(): void {
