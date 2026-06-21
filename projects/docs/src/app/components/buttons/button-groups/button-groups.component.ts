@@ -1,14 +1,15 @@
 import { Component, OnDestroy, signal } from '@angular/core';
-import { Button, ButtonGroupModule, ButtonGroupSelection, ButtonGroupType, ButtonSize, Card, SheetsService, SideSheetRef } from '@vip9008/ngx-md3';
+import { Button, ButtonGroupModule, ButtonGroupSelection, ButtonGroupType, ButtonSize, SheetsService, SideSheetRef } from '@vip9008/ngx-md3';
 import { ButtonGroupConfig } from './button-group-config/button-group-config';
 import { Playground } from '../../playground/playground';
+import { codeToHtml } from 'shiki'
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Component({
     selector: 'app-button-groups',
     imports: [
         Button,
         ButtonGroupModule,
-        Card,
         Playground,
     ],
     templateUrl: './button-groups.component.html',
@@ -21,10 +22,40 @@ export class ButtonGroupsComponent implements OnDestroy {
     public buttonSize = signal<ButtonSize>('small');
     public groupType = signal<ButtonGroupType>('standard');
     public selection = signal<ButtonGroupSelection>('none');
+    public apiData: {
+        name: string,
+        type: string,
+        default: string,
+    }[] = [
+        {
+            name: 'button-size',
+            type: 'InputSignal<ButtonSize>',
+            default: '"small"',
+        },
+        {
+            name: 'group-type',
+            type: 'InputSignal<ButtonGroupType>',
+            default: '"standard"',
+        },
+        {
+            name: 'selection',
+            type: 'InputSignal<ButtonGroupSelection>',
+            default: '"none"',
+        },
+    ];
 
     constructor(
         private sheetsService: SheetsService,
+        private sanitizer: DomSanitizer,
     ) {
+        // this.apiData.forEach(async (item) => {
+        //     const code = item.type;
+        //     item.type = this.sanitizer.bypassSecurityTrustHtml(await codeToHtml(code as string, {
+        //         lang: 'typescript',
+        //         theme: 'material-theme-ocean',
+        //     }));
+        //     console.log(item.type);
+        // });
     }
 
     public openConfig(): void {

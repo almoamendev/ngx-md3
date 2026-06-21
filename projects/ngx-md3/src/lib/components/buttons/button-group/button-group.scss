@@ -22,7 +22,7 @@
 
         &:active {
             z-index: 3;
-            padding-inline: calc(var(--inline-padding) - var(--border-size) + 0.25em);
+            padding-inline: calc(var(--inline-padding) + 0.25em);
             margin-inline: -0.25em;
         }
     }

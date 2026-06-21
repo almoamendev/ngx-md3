@@ -71,21 +71,13 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>button-size</td>
-                <td [innerText]="'InputSignal<ButtonSize>'"></td>
-                <td>'small'</td>
-            </tr>
-            <tr>
-                <td>group-type</td>
-                <td [innerText]="'InputSignal<ButtonGroupType>'"></td>
-                <td>'standard'</td>
-            </tr>
-            <tr>
-                <td>selection</td>
-                <td [innerText]="'InputSignal<ButtonGroupSelection>'"></td>
-                <td>'none'</td>
-            </tr>
+            @for (item of apiData; track item.name) {
+                <tr>
+                    <td>{{ item.name }}</td>
+                    <td [innerText]="item.type"></td>
+                    <td>{{ item.default }}</td>
+                </tr>
+            }
         </tbody>
     </table>
 </div>
