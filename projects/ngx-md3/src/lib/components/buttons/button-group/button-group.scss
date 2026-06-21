@@ -22,12 +22,17 @@
 
         &:active {
             z-index: 3;
-            padding-inline: calc(var(--inline-padding) + 0.25em);
-            margin-inline: -0.25em;
         }
     }
 
     &.md3-standard {
+        ::ng-deep [md3-button], ::ng-deep [md3-icon-button] {
+            &:active {
+                padding-inline: calc(var(--inline-padding) + 0.25em);
+                margin-inline: -0.25em;
+            }
+        }
+
         &.md3-x-small {
             --button-group-gap: 1.125em;
         }

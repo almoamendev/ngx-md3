@@ -45,6 +45,19 @@
             <md3-icon md3-icon-element>link</md3-icon>
         </button>
     </md3-button-group>
+    
+    <md3-button-group [button-size]="buttonSize()" [group-type]="groupType()" [selection]="selection()">
+        <button md3-button>
+            <md3-icon md3-icon-element>bluetooth</md3-icon>
+            Bluetooth
+        </button>
+        <button md3-icon-button>
+            <md3-icon md3-icon-element>alarm</md3-icon>
+        </button>
+        <button md3-icon-button>
+            <md3-icon md3-icon-element>link</md3-icon>
+        </button>
+    </md3-button-group>
 
     <md3-button-group [button-size]="buttonSize()" [group-type]="groupType()" [selection]="selection()">
         <button md3-icon-button button-type="tonal" button-width="narrow">
@@ -61,7 +74,7 @@
 
 <h2>API</h2>
 
-<div class="table-container md3-scrollable">
+<!-- <div class="table-container md3-scrollable">
     <table>
         <thead>
             <tr>
@@ -71,13 +84,16 @@
             </tr>
         </thead>
         <tbody>
-            @for (item of apiData; track item.name) {
-                <tr>
-                    <td>{{ item.name }}</td>
-                    <td [innerText]="item.type"></td>
-                    <td>{{ item.default }}</td>
-                </tr>
-            }
+            <tr>
+                <td>Name</td>
+                <td>Type</td>
+                <td>Default</td>
+            </tr>
         </tbody>
     </table>
-</div>
+</div> -->
+
+<div [innerHTML]="apiImport"></div>
+<div [innerHTML]="apiData"></div>
+<div [innerHTML]="apiTypes"></div>
+<div [innerHTML]="apiUsage"></div>

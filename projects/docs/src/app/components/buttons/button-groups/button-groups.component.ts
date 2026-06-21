@@ -22,27 +22,44 @@ export class ButtonGroupsComponent implements OnDestroy {
     public buttonSize = signal<ButtonSize>('small');
     public groupType = signal<ButtonGroupType>('standard');
     public selection = signal<ButtonGroupSelection>('none');
-    public apiData: {
-        name: string,
-        type: string,
-        default: string,
-    }[] = [
-        {
-            name: 'button-size',
-            type: 'InputSignal<ButtonSize>',
-            default: '"small"',
-        },
-        {
-            name: 'group-type',
-            type: 'InputSignal<ButtonGroupType>',
-            default: '"standard"',
-        },
-        {
-            name: 'selection',
-            type: 'InputSignal<ButtonGroupSelection>',
-            default: '"none"',
-        },
-    ];
+
+    public apiImport: SafeHtml = `// Component imports
+import { ButtonGroupModule } from '@vip9008/ngx-md3';`;
+
+    public apiData: SafeHtml = `// Inputs
+public buttonSize: InputSignal<ButtonSize> = input<ButtonSize>('small', {
+    alias: 'button-size',
+});
+public groupType: InputSignal<ButtonGroupType> = input<ButtonGroupType>('standard', {
+    alias: 'group-type',
+});
+public groupSelection: InputSignal<ButtonGroupSelection> = input<ButtonGroupSelection>('none', {
+    alias: 'selection',
+});`;
+
+    public apiTypes: SafeHtml = `// Types
+type ButtonSize = 'x-small' | 'small' | 'medium' | 'large' | 'x-large';
+type ButtonGroupType = 'standard' | 'connected';
+type ButtonGroupSelection = 'none' | 'single' | 'multiple';`;
+
+    public apiUsage: SafeHtml = `<!-- Component usage -->
+<md3-button-group button-size="small" group-type="standard" selection="none">
+    <!-- button -->
+    <button md3-button>
+        <md3-icon md3-icon-element>bluetooth</md3-icon>
+        Bluetooth
+    </button>
+    .
+    .
+    .
+    <!-- icon button -->
+    <button md3-icon-button>
+        <md3-icon md3-icon-element>alarm</md3-icon>
+    </button>
+    .
+    .
+    .
+</md3-button-group>`;
 
     constructor(
         private sheetsService: SheetsService,
@@ -56,6 +73,34 @@ export class ButtonGroupsComponent implements OnDestroy {
         //     }));
         //     console.log(item.type);
         // });
+
+        codeToHtml(this.apiImport as string, {
+            lang: 'typescript',
+            theme: 'material-theme-ocean',
+        }).then((html) => {
+            this.apiImport = this.sanitizer.bypassSecurityTrustHtml(html);
+        });
+
+        codeToHtml(this.apiData as string, {
+            lang: 'typescript',
+            theme: 'material-theme-ocean',
+        }).then((html) => {
+            this.apiData = this.sanitizer.bypassSecurityTrustHtml(html);
+        });
+
+        codeToHtml(this.apiTypes as string, {
+            lang: 'typescript',
+            theme: 'material-theme-ocean',
+        }).then((html) => {
+            this.apiTypes = this.sanitizer.bypassSecurityTrustHtml(html);
+        });
+
+        codeToHtml(this.apiUsage as string, {
+            lang: 'html',
+            theme: 'material-theme-ocean',
+        }).then((html) => {
+            this.apiUsage = this.sanitizer.bypassSecurityTrustHtml(html);
+        });
     }
 
     public openConfig(): void {

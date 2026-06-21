@@ -122,3 +122,21 @@ md3-side-sheet-body.md3-component-config {
         margin: 1em 0;
     }
 }
+
+pre {
+    padding: 1em 1.25em;
+    border-radius: 0.5em;
+    overflow: auto;
+    scrollbar-width: thin; /* Firefox */
+    scrollbar-color: rgb(var(--md-scheme-outline-variant)) transparent;
+
+    /* Chromium / Safari */
+    &::-webkit-scrollbar {
+        width: 0.5rem;
+        height: 0.5rem;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: transparent;
+    }
+}

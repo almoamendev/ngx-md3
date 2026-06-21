@@ -1,4 +1,4 @@
-import { Component, contentChildren, effect, ElementRef, HostListener, input, Signal } from '@angular/core';
+import { Component, contentChildren, effect, ElementRef, HostListener, input, InputSignal, Signal } from '@angular/core';
 import { Button } from '../button/button';
 import { IconButton } from '../icon-button/icon-button';
 import { ButtonSize } from '../../../types/button-size.type';
@@ -34,13 +34,13 @@ export class ButtonGroup implements ButtonContext {
         }
     }
     
-    public buttonSize = input<ButtonSize>('small', {
+    public buttonSize: InputSignal<ButtonSize> = input<ButtonSize>('small', {
         alias: 'button-size',
     });
-    public groupType = input<ButtonGroupType>('standard', {
+    public groupType: InputSignal<ButtonGroupType> = input<ButtonGroupType>('standard', {
         alias: 'group-type',
     });
-    public groupSelection = input<ButtonGroupSelection>('none', {
+    public groupSelection: InputSignal<ButtonGroupSelection> = input<ButtonGroupSelection>('none', {
         alias: 'selection',
     });
 
