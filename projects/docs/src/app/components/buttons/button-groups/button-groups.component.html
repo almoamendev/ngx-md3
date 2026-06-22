@@ -52,14 +52,14 @@
     </md3-button-group>
     
     <md3-button-group [button-size]="buttonSize()" [group-type]="groupType()" [selection]="selection()">
-        <button md3-button>
+        <button md3-button button-squared>
             <md3-icon md3-icon-element>bluetooth</md3-icon>
             Bluetooth
         </button>
-        <button md3-icon-button>
+        <button md3-icon-button button-squared>
             <md3-icon md3-icon-element>alarm</md3-icon>
         </button>
-        <button md3-icon-button>
+        <button md3-icon-button button-squared>
             <md3-icon md3-icon-element>link</md3-icon>
         </button>
     </md3-button-group>
@@ -92,7 +92,7 @@
             <tr>
                 <td>
                     button-size
-                    <div md3-type-body="small">Sets the size for every button in the group.</div>
+                    <p md3-type-body="small">Sets the size for every button in the group.</p>
                 </td>
                 <td>'x-small' | 'small' | 'medium' | 'large' | 'x-large'</td>
                 <td>'small'</td>
@@ -100,7 +100,7 @@
             <tr>
                 <td>
                     group-type
-                    <div md3-type-body="small">Controls whether buttons are spaced as separate controls or visually connected.</div>
+                    <p md3-type-body="small">Controls whether buttons are spaced as separate controls or visually connected.</p>
                 </td>
                 <td>'standard' | 'connected'</td>
                 <td>'standard'</td>
@@ -108,7 +108,7 @@
             <tr>
                 <td>
                     selection
-                    <div md3-type-body="small">Controls whether buttons behave as non-selectable, single-select, or multi-select items.</div>
+                    <p md3-type-body="small">Controls whether buttons behave as non-selectable, single-select, or multi-select items.</p>
                 </td>
                 <td>'none' | 'single' | 'multiple'</td>
                 <td>'none'</td>
