@@ -1,7 +1,12 @@
 <h1>Button groups</h1>
 
+<p>
+    Button groups arrange related text and icon buttons together. They can be standard or connected, and can support no
+    selection, single selection, or multiple selection.
+</p>
+
 <figure class="component-image">
-    <img src="/img/md3-button-group.png" />
+    <img src="/img/md3-button-group.png" alt="Material Design button group variants" />
     <ol>
         <li>Extra small</li>
         <li>Small</li>
@@ -74,7 +79,7 @@
 
 <h2>API</h2>
 
-<!-- <div class="table-container md3-scrollable">
+<div class="table-container md3-scrollable">
     <table>
         <thead>
             <tr>
@@ -85,13 +90,32 @@
         </thead>
         <tbody>
             <tr>
-                <td>Name</td>
-                <td>Type</td>
-                <td>Default</td>
+                <td>
+                    button-size
+                    <div md3-type-body="small">Sets the size for every button in the group.</div>
+                </td>
+                <td>'x-small' | 'small' | 'medium' | 'large' | 'x-large'</td>
+                <td>'small'</td>
+            </tr>
+            <tr>
+                <td>
+                    group-type
+                    <div md3-type-body="small">Controls whether buttons are spaced as separate controls or visually connected.</div>
+                </td>
+                <td>'standard' | 'connected'</td>
+                <td>'standard'</td>
+            </tr>
+            <tr>
+                <td>
+                    selection
+                    <div md3-type-body="small">Controls whether buttons behave as non-selectable, single-select, or multi-select items.</div>
+                </td>
+                <td>'none' | 'single' | 'multiple'</td>
+                <td>'none'</td>
             </tr>
         </tbody>
     </table>
-</div> -->
+</div>
 
 <app-shiki [code]="apiImport"></app-shiki>
 <app-shiki [code]="apiData"></app-shiki>

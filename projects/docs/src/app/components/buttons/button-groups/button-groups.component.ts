@@ -1,5 +1,5 @@
 import { Component, OnDestroy, signal } from '@angular/core';
-import { Button, ButtonGroupModule, ButtonGroupSelection, ButtonGroupType, ButtonSize, SheetsService, SideSheetRef } from '@vip9008/ngx-md3';
+import { Button, ButtonGroupModule, ButtonGroupSelection, ButtonGroupType, ButtonSize, SheetsService, SideSheetRef, TypeBody } from '@vip9008/ngx-md3';
 import { ButtonGroupConfig } from './button-group-config/button-group-config';
 import { Playground } from '../../playground/playground';
 import { Shiki } from '../../shiki/shiki';
@@ -11,6 +11,7 @@ import { Shiki } from '../../shiki/shiki';
         ButtonGroupModule,
         Playground,
         Shiki,
+        TypeBody
     ],
     templateUrl: './button-groups.component.html',
     styleUrl: './button-groups.component.scss',
@@ -38,6 +39,8 @@ public groupSelection: InputSignal<ButtonGroupSelection> = input<ButtonGroupSele
 });`;
 
     public apiTypes: string = `// Types
+import { ButtonSize, ButtonGroupType, ButtonGroupSelection } from '@vip9008/ngx-md3';
+
 type ButtonSize = 'x-small' | 'small' | 'medium' | 'large' | 'x-large';
 type ButtonGroupType = 'standard' | 'connected';
 type ButtonGroupSelection = 'none' | 'single' | 'multiple';`;
