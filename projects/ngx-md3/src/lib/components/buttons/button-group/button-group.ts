@@ -8,7 +8,6 @@ import { ButtonContext, MD3_BUTTON_CONTEXT } from '../../../interfaces/button-co
 
 @Component({
     selector: 'md3-button-group',
-    standalone: false,
     templateUrl: './button-group.html',
     styleUrl: './button-group.scss',
     host: {

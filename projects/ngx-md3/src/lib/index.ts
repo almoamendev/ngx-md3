@@ -45,7 +45,6 @@ export * from './components/buttons/floating-action-button/floating-action-butto
 export * from './components/buttons/icon-button/icon-button';
 export * from './components/buttons/split-button/split-button';
 export * from './components/buttons/button-group/button-group';
-export * from './components/buttons/button-group/button-group-module';
 
 // cards
 export * from './components/card/card';
