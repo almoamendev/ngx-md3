@@ -3,6 +3,7 @@ import { Button, ButtonGroup, ButtonGroupSelection, ButtonGroupType, ButtonSize,
 import { ButtonGroupConfig } from './button-group-config/button-group-config';
 import { Playground } from '../../playground/playground';
 import { Shiki } from '../../shiki/shiki';
+import { RouterLink } from "@angular/router";
 
 @Component({
     selector: 'app-button-groups',
@@ -15,7 +16,8 @@ import { Shiki } from '../../shiki/shiki';
         Divider,
         Playground,
         Shiki,
-        TypeBody
+        TypeBody,
+        RouterLink
     ],
     templateUrl: './button-groups.component.html',
     styleUrl: './button-groups.component.scss',
