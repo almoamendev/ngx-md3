@@ -4,6 +4,15 @@
     </button>
 </md3-side-sheet-header>
 <md3-side-sheet-body class="md3-component-config">
+    <div class="controls-list">
+        <label md3-state-component tabindex="0">
+            <div md3-type-label="large">Show icon</div>
+            <md3-switch disable-state-layer [control]="showIcon">
+                <input type="checkbox" md3-input-element name="show-icon">
+            </md3-switch>
+        </label>
+    </div>
+
     <div md3-type-body="large">Size</div>
     <div class="controls-list">
         <label md3-state-component tabindex="0">
@@ -37,7 +46,6 @@
             <div md3-type-label="large">X-Large</div>
         </label>
     </div>
-
     
     <div md3-type-body="large">Type</div>
     <div class="controls-list">

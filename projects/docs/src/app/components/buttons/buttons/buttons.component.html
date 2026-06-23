@@ -21,7 +21,9 @@
     </button>
 
     <button md3-button [button-size]="buttonSize()" [button-type]="buttonType()" [button-squared]="isSquared()" [selected]="isSelected()">
-        <md3-icon md3-icon-element>shopping_cart</md3-icon>
+        @if (showIcon()) {
+            <md3-icon md3-icon-element>shopping_cart</md3-icon>
+        }
         Add to cart
     </button>
 </app-playground>

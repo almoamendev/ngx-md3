@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { ButtonSize, ButtonType, Checkbox, IconButton, IconElement, InputElement, MaterialIcon, RadioButton, SideSheetBody, SideSheetHeader, SideSheetRef, StateComponent, TypeBody, TypeLabel } from '@vip9008/ngx-md3';
+import { ButtonSize, ButtonType, Checkbox, IconButton, IconElement, InputElement, MaterialIcon, RadioButton, SideSheetBody, SideSheetHeader, SideSheetRef, StateComponent, Switch, TypeBody, TypeLabel } from '@vip9008/ngx-md3';
 
 @Component({
     selector: 'app-button-config',
@@ -10,6 +10,7 @@ import { ButtonSize, ButtonType, Checkbox, IconButton, IconElement, InputElement
         IconButton,
         MaterialIcon,
         IconElement,
+        Switch,
         Checkbox,
         RadioButton,
         InputElement,
@@ -21,6 +22,7 @@ import { ButtonSize, ButtonType, Checkbox, IconButton, IconElement, InputElement
     styleUrl: './button-config.scss',
 })
 export class ButtonConfig {
+    public showIcon: FormControl = new FormControl<boolean>(true);
     public buttonSize: FormControl = new FormControl<ButtonSize>('small');
     public buttonType: FormControl = new FormControl<ButtonType>('filled');
     public isSquared: FormControl = new FormControl<boolean>(false);

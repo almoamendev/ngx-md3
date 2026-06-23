@@ -22,6 +22,7 @@ export class ButtonsComponent {
     private configSheet: SideSheetRef<ButtonConfig> | undefined;
     public configOpen = signal(false);
 
+    public showIcon = signal<boolean>(true);
     public buttonSize = signal<ButtonSize>('small');
     public buttonType = signal<ButtonType>('filled');
     public isSquared = signal<boolean>(false);
@@ -107,6 +108,11 @@ type ButtonType = 'elevated' | 'filled' | 'tonal' | 'outlined' | 'text';`;
     }
 
     private registerConfigEvents() {
+        this.configSheet?.componentInstance?.showIcon.setValue(this.showIcon());
+        this.configSheet?.componentInstance?.showIcon.registerOnChange(() => {
+            this.showIcon.set(this.configSheet?.componentInstance?.showIcon.value);
+        });
+
         this.configSheet?.componentInstance?.buttonSize.setValue(this.buttonSize());
         this.configSheet?.componentInstance?.buttonSize.registerOnChange(() => {
             this.buttonSize.set(this.configSheet?.componentInstance?.buttonSize.value);

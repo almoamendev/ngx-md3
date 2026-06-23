@@ -115,6 +115,10 @@ md3-side-sheet-body.md3-component-config {
             padding: 0 0.5em;
             gap: 0.5em;
             border-radius: var(--border-radius);
+
+            [md3-type-label] {
+                flex: 1 1 auto;
+            }
         }
     }
 
