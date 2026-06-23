@@ -64,7 +64,7 @@ type ButtonType = 'elevated' | 'filled' | 'tonal' | 'outlined' | 'text';`;
 </button>
 <a href="" md3-button>
     ...
-</button>
+</a>
 
 <!-- no icon -->
 <button md3-button button-size="small" button-type="filled" [button-squared]="false" [selected]="null">

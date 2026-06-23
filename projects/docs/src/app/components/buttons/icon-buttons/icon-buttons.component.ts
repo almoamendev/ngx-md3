@@ -67,7 +67,7 @@ type IconButtonWidth = 'default' | 'narrow' | 'wide';`;
 </button>
 <a href="" md3-icon-button>
     ...
-</button>
+</a>
 
 <!-- using material icons -->
 <button md3-icon-button button-size="small" button-type="filled" button-width="default" button-squared [selected]="null">
