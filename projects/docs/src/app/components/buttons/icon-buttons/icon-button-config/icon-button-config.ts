@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { ButtonSize, ButtonType, IconButton, IconElement, InputElement, MaterialIcon, RadioButton, SideSheetBody, SideSheetHeader, SideSheetRef, StateComponent, Switch, TypeBody, TypeLabel } from '@vip9008/ngx-md3';
+import { ButtonSize, IconButton, IconButtonType, IconButtonWidth, IconElement, InputElement, MaterialIcon, RadioButton, SideSheetBody, SideSheetHeader, SideSheetRef, StateComponent, Switch, TypeBody, TypeLabel } from '@vip9008/ngx-md3';
 
 @Component({
-    selector: 'app-button-config',
+    selector: 'app-icon-button-config',
     imports: [
         SideSheetHeader,
         SideSheetBody,
@@ -17,18 +17,18 @@ import { ButtonSize, ButtonType, IconButton, IconElement, InputElement, Material
         TypeBody,
         TypeLabel,
     ],
-    templateUrl: './button-config.html',
-    styleUrl: './button-config.scss',
+    templateUrl: './icon-button-config.html',
+    styleUrl: './icon-button-config.scss',
 })
-export class ButtonConfig {
-    public showIcon: FormControl = new FormControl<boolean>(true);
+export class IconButtonConfig {
     public buttonSize: FormControl = new FormControl<ButtonSize>('small');
-    public buttonType: FormControl = new FormControl<ButtonType>('filled');
+    public buttonType: FormControl = new FormControl<IconButtonType>('filled');
+    public buttonWidth: FormControl = new FormControl<IconButtonWidth>('default');
     public isSquared: FormControl = new FormControl<boolean>(false);
     public isSelected: FormControl = new FormControl<'none' | 'toggle'>('none');
 
     constructor(
-        private sideSheetRef: SideSheetRef<ButtonConfig>
+        private sideSheetRef: SideSheetRef<IconButtonConfig>
     ) {
     }
 

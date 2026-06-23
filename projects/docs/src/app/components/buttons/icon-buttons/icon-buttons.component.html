@@ -1,189 +1,112 @@
 <h1>Floating Action Buttons</h1>
 
+<p>
+    Icon buttons help people take actions with a single tap
+</p>
+
+<figure class="component-image">
+    <img src="/img/md3-icon-button.png" alt="Material Design button configurations" />
+    <ol>
+        <li>Five sizes</li>
+        <li>Two shapes</li>
+        <li>Four color styles</li>
+        <li>Three widths</li>
+    </ol>
+</figure>
+
+<app-playground>
+    <button action-item md3-icon-button button-type="tonal" button-squared [selected]="configOpen()"
+        (click)="openConfig()">
+        <md3-icon md3-icon-element>settings</md3-icon>
+    </button>
+
+    <button md3-icon-button [button-size]="buttonSize()" [button-type]="buttonType()" [button-width]="buttonWidth()" [button-squared]="isSquared()" [selected]="isSelected()">
+        <md3-icon md3-icon-element>person</md3-icon>
+    </button>
+</app-playground>
+
+<h2>API</h2>
+
+<div class="table-container md3-scrollable">
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 50%;">Name</th>
+                <th>Type</th>
+                <th>Default</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <i>button-size</i>
+                    <p md3-type-body="small">Sets the button size.</p>
+                </td>
+                <td>
+                    input&lt;ButtonSize&gt;
+                    <p md3-type-body="small">x-small, small, medium, large, x-large</p>
+                </td>
+                <td>small</td>
+            </tr>
+            <tr>
+                <td>
+                    button-type
+                    <p md3-type-body="small">Sets the style type of the button.</p>
+                </td>
+                <td>
+                    input&lt;IconButtonType&gt;
+                    <p md3-type-body="small">filled, tonal, outlined, standard</p>
+                </td>
+                <td>filled</td>
+            </tr>
+            <tr>
+                <td>
+                    button-width
+                    <p md3-type-body="small">Sets the width of the button.</p>
+                </td>
+                <td>
+                    input&lt;IconButtonWidth&gt;
+                    <p md3-type-body="small">default, narrow, wide</p>
+                </td>
+                <td>default</td>
+            </tr>
+            <tr>
+                <td>
+                    button-squared
+                    <p md3-type-body="small">Controls button shape.</p>
+                </td>
+                <td>input&lt;boolean&gt;</td>
+                <td>false</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>selected</i>
+                    <p md3-type-body="small">Button selection state.</p>
+                </td>
+                <td>
+                    model&lt;boolean, null&gt;
+                </td>
+                <td>null</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<app-shiki [code]="apiImport"></app-shiki>
+<app-shiki [code]="apiData"></app-shiki>
+<app-shiki [code]="apiTypes"></app-shiki>
+<app-shiki [code]="apiUsage" language="html"></app-shiki>
 <ul>
-    <li>@Input() button-size: 'x-small' | 'small' | 'medium' | 'large' | 'x-large' = 'small';</li>
-    <li>@Input() button-type: 'filled' | 'tonal' | 'outlined' | 'standard' = 'filled';</li>
-    <li>@Input() button-width: 'default' | 'narrow' | 'wide' = 'default';</li>
-    <li>@Input() button-squared: boolean = false;</li>
-    <li>@Input() selected: boolean | null = null;</li>
+    <li>When using a custom icon. always add <code>md3-icon-element</code> directive to the icon element.</li>
+    <li>
+        Custom icon size should follow Material 3 guidelines:
+        <ul>
+            <li>x-small: 20dp</li>
+            <li>small: 24dp</li>
+            <li>medium: 24dp</li>
+            <li>large: 32dp</li>
+            <li>x-large: 40dp</li>
+        </ul>
+        Default md3-icon-element css style will set <code>font-size</code>, <code>width</code>, and <code>height</code> to the correct size;
+    </li>
 </ul>
-
-<div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
-    <button md3-icon-button>
-        <md3-icon md3-icon-element>person</md3-icon>
-    </button>
-    <button md3-icon-button button-width="narrow">
-        <md3-icon md3-icon-element>person</md3-icon>
-    </button>
-    <button md3-icon-button button-width="wide">
-        <md3-icon md3-icon-element>person</md3-icon>
-    </button>
-    <button md3-icon-button [button-squared]="true">
-        <md3-icon md3-icon-element>person</md3-icon>
-    </button>
-</div>
-
-<div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
-    <button md3-icon-button [selected]="false">
-        <md3-icon md3-icon-element>person</md3-icon>
-    </button>
-    <button md3-icon-button button-width="narrow" [selected]="false">
-        <md3-icon md3-icon-element>person</md3-icon>
-    </button>
-    <button md3-icon-button button-width="wide" [selected]="false">
-        <md3-icon md3-icon-element>person</md3-icon>
-    </button>
-    <button md3-icon-button [button-squared]="true" [selected]="false">
-        <md3-icon md3-icon-element>person</md3-icon>
-    </button>
-</div>
-
-<div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
-    <button md3-icon-button button-size="x-small">
-        <md3-icon md3-icon-element>person</md3-icon>
-    </button>
-    <button md3-icon-button button-size="x-small" button-width="narrow">
-        <md3-icon md3-icon-element>person</md3-icon>
-    </button>
-    <button md3-icon-button button-size="x-small" button-width="wide">
-        <md3-icon md3-icon-element>person</md3-icon>
-    </button>
-    <button md3-icon-button button-size="x-small" [button-squared]="true">
-        <md3-icon md3-icon-element>person</md3-icon>
-    </button>
-</div>
-
-<div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
-    <button md3-icon-button button-size="x-small" [selected]="false">
-        <md3-icon md3-icon-element>person</md3-icon>
-    </button>
-    <button md3-icon-button button-size="x-small" button-width="narrow" [selected]="false">
-        <md3-icon md3-icon-element>person</md3-icon>
-    </button>
-    <button md3-icon-button button-size="x-small" button-width="wide" [selected]="false">
-        <md3-icon md3-icon-element>person</md3-icon>
-    </button>
-    <button md3-icon-button button-size="x-small" [button-squared]="true" [selected]="false">
-        <md3-icon md3-icon-element>person</md3-icon>
-    </button>
-</div>
-
-<div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
-    <button md3-icon-button button-size="medium">
-        <md3-icon md3-icon-element>person</md3-icon>
-    </button>
-    <button md3-icon-button button-size="medium" button-width="narrow">
-        <md3-icon md3-icon-element>person</md3-icon>
-    </button>
-    <button md3-icon-button button-size="medium" button-width="wide">
-        <md3-icon md3-icon-element>person</md3-icon>
-    </button>
-    <button md3-icon-button button-size="medium" [button-squared]="true">
-        <md3-icon md3-icon-element>person</md3-icon>
-    </button>
-</div>
-
-<div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
-    <button md3-icon-button button-size="medium" [selected]="false">
-        <md3-icon md3-icon-element>person</md3-icon>
-    </button>
-    <button md3-icon-button button-size="medium" button-width="narrow" [selected]="false">
-        <md3-icon md3-icon-element>person</md3-icon>
-    </button>
-    <button md3-icon-button button-size="medium" button-width="wide" [selected]="false">
-        <md3-icon md3-icon-element>person</md3-icon>
-    </button>
-    <button md3-icon-button button-size="medium" [button-squared]="true" [selected]="false">
-        <md3-icon md3-icon-element>person</md3-icon>
-    </button>
-</div>
-
-<div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
-    <button md3-icon-button button-size="large">
-        <md3-icon md3-icon-element>person</md3-icon>
-    </button>
-    <button md3-icon-button button-size="large" button-width="narrow">
-        <md3-icon md3-icon-element>person</md3-icon>
-    </button>
-    <button md3-icon-button button-size="large" button-width="wide">
-        <md3-icon md3-icon-element>person</md3-icon>
-    </button>
-    <button md3-icon-button button-size="large" [button-squared]="true">
-        <md3-icon md3-icon-element>person</md3-icon>
-    </button>
-</div>
-
-<div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
-    <button md3-icon-button button-size="large" [selected]="false">
-        <md3-icon md3-icon-element>person</md3-icon>
-    </button>
-    <button md3-icon-button button-size="large" button-width="narrow" [selected]="false">
-        <md3-icon md3-icon-element>person</md3-icon>
-    </button>
-    <button md3-icon-button button-size="large" button-width="wide" [selected]="false">
-        <md3-icon md3-icon-element>person</md3-icon>
-    </button>
-    <button md3-icon-button button-size="large" [button-squared]="true" [selected]="false">
-        <md3-icon md3-icon-element>person</md3-icon>
-    </button>
-</div>
-
-<div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
-    <button md3-icon-button button-size="x-large">
-        <md3-icon md3-icon-element>person</md3-icon>
-    </button>
-    <button md3-icon-button button-size="x-large" button-width="narrow">
-        <md3-icon md3-icon-element>person</md3-icon>
-    </button>
-    <button md3-icon-button button-size="x-large" button-width="wide">
-        <md3-icon md3-icon-element>person</md3-icon>
-    </button>
-    <button md3-icon-button button-size="x-large" [button-squared]="true">
-        <md3-icon md3-icon-element>person</md3-icon>
-    </button>
-</div>
-
-<div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
-    <button md3-icon-button button-size="x-large" [selected]="false">
-        <md3-icon md3-icon-element>person</md3-icon>
-    </button>
-    <button md3-icon-button button-size="x-large" button-width="narrow" [selected]="false">
-        <md3-icon md3-icon-element>person</md3-icon>
-    </button>
-    <button md3-icon-button button-size="x-large" button-width="wide" [selected]="false">
-        <md3-icon md3-icon-element>person</md3-icon>
-    </button>
-    <button md3-icon-button button-size="x-large" [button-squared]="true" [selected]="false">
-        <md3-icon md3-icon-element>person</md3-icon>
-    </button>
-</div>
-
-<div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
-    <button md3-icon-button button-type="filled">
-        <md3-icon md3-icon-element>person</md3-icon>
-    </button>
-    <button md3-icon-button button-type="tonal">
-        <md3-icon md3-icon-element>person</md3-icon>
-    </button>
-    <button md3-icon-button button-type="outlined">
-        <md3-icon md3-icon-element>person</md3-icon>
-    </button>
-    <button md3-icon-button button-type="standard">
-        <md3-icon md3-icon-element>person</md3-icon>
-    </button>
-</div>
-
-<div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
-    <button md3-icon-button button-type="filled" [selected]="false">
-        <md3-icon md3-icon-element>person</md3-icon>
-    </button>
-    <button md3-icon-button button-type="tonal" [selected]="false">
-        <md3-icon md3-icon-element>person</md3-icon>
-    </button>
-    <button md3-icon-button button-type="outlined" [selected]="false">
-        <md3-icon md3-icon-element>person</md3-icon>
-    </button>
-    <button md3-icon-button button-type="standard" [selected]="false">
-        <md3-icon md3-icon-element>person</md3-icon>
-    </button>
-</div>

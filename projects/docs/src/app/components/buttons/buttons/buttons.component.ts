@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, OnDestroy, signal } from '@angular/core';
 import { Button, ButtonSize, ButtonType, IconButton, IconElement, MaterialIcon, SheetsService, SideSheetRef, TypeBody } from '@vip9008/ngx-md3';
 import { Playground } from '../../playground/playground';
 import { Shiki } from '../../shiki/shiki';
@@ -18,7 +18,7 @@ import { ButtonConfig } from './button-config/button-config';
     templateUrl: './buttons.component.html',
     styleUrl: './buttons.component.scss',
 })
-export class ButtonsComponent {
+export class ButtonsComponent implements OnDestroy {
     private configSheet: SideSheetRef<ButtonConfig> | undefined;
     public configOpen = signal(false);
 
@@ -57,6 +57,15 @@ type ButtonSize = 'x-small' | 'small' | 'medium' | 'large' | 'x-large';
 type ButtonType = 'elevated' | 'filled' | 'tonal' | 'outlined' | 'text';`;
 
     public apiUsage: string = `<!-- Component usage -->
+
+<!-- md3-button can be used on <button> or <a> -->
+<button md3-button>
+    ...
+</button>
+<a href="" md3-button>
+    ...
+</button>
+
 <!-- no icon -->
 <button md3-button button-size="small" button-type="filled" [button-squared]="false" [selected]="null">
     Bluetooth

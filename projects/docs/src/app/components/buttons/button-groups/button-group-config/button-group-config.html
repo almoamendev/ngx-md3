@@ -37,14 +37,13 @@
             <div md3-type-label="large">X-Large</div>
         </label>
     </div>
-
-    <div md3-type-body="large">Type</div>
+    
     <div class="controls-list">
         <label md3-state-component tabindex="0">
-            <md3-checkbox disable-state-layer [control]="isConntected">
-                <input type="checkbox" md3-input-element name="group-type">
-            </md3-checkbox>
-            <div md3-type-label="large">Connected</div>
+            <div md3-type-label="large">Connected style</div>
+            <md3-switch disable-state-layer [control]="isConntected">
+                <input type="checkbox" md3-input-element name="button-squared">
+            </md3-switch>
         </label>
     </div>
 
