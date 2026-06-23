@@ -1,81 +1,102 @@
 <h1>Buttons</h1>
 
+<p>
+    Buttons prompt most actions in a UI.
+</p>
+
+<figure class="component-image">
+    <img src="/img/md3-button.png" alt="Material Design button configurations" />
+    <ol>
+        <li>Size</li>
+        <li>Shape</li>
+        <li>Color</li>
+        <li>Small button padding</li>
+    </ol>
+</figure>
+
+<app-playground>
+    <button action-item md3-icon-button button-type="tonal" button-squared [selected]="configOpen()"
+        (click)="openConfig()">
+        <md3-icon md3-icon-element>settings</md3-icon>
+    </button>
+
+    <button md3-button [button-size]="buttonSize()" [button-type]="buttonType()" [button-squared]="isSquared()" [selected]="isSelected()">
+        <md3-icon md3-icon-element>shopping_cart</md3-icon>
+        Add to cart
+    </button>
+</app-playground>
+
+<h2>API</h2>
+
+<div class="table-container md3-scrollable">
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 50%;">Name</th>
+                <th>Type</th>
+                <th>Default</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <i>button-size</i>
+                    <p md3-type-body="small">Sets the button size.</p>
+                </td>
+                <td>
+                    input&lt;ButtonSize&gt;
+                    <p md3-type-body="small">x-small, small, medium, large, x-large</p>
+                </td>
+                <td>small</td>
+            </tr>
+            <tr>
+                <td>
+                    button-type
+                    <p md3-type-body="small">Sets the style type of the button.</p>
+                </td>
+                <td>
+                    input&lt;ButtonType&gt;
+                    <p md3-type-body="small">filled, tonal, outlined, elevated, text</p>
+                </td>
+                <td>filled</td>
+            </tr>
+            <tr>
+                <td>
+                    button-squared
+                    <p md3-type-body="small">Controls button shape.</p>
+                </td>
+                <td>input&lt;boolean&gt;</td>
+                <td>false</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>selected</i>
+                    <p md3-type-body="small">Button selection state.</p>
+                </td>
+                <td>
+                    model&lt;boolean, null&gt;
+                </td>
+                <td>null</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<app-shiki [code]="apiImport"></app-shiki>
+<app-shiki [code]="apiData"></app-shiki>
+<app-shiki [code]="apiTypes"></app-shiki>
+<app-shiki [code]="apiUsage" language="html"></app-shiki>
 <ul>
-    <li>@Input() button-size: 'x-small' | 'small' | 'medium' | 'large' | 'x-large' = 'small';</li>
-    <li>@Input() button-type: 'elevated' | 'filled' | 'tonal' | 'outlined' | 'text' = 'filled';</li>
-    <li>@Input() button-squared: boolean = false;</li>
-    <li>@Input() selected: boolean | null = null;</li>
+    <li>When using a custom icon. always add <code>md3-icon-element</code> directive to the icon element.</li>
+    <li>
+        Custom icon size should follow Material 3 guidelines:
+        <ul>
+            <li>x-small: 20dp</li>
+            <li>small: 20dp</li>
+            <li>medium: 24dp</li>
+            <li>large: 32dp</li>
+            <li>x-large: 40dp</li>
+        </ul>
+        Default css style will set <code>font-size</code>, <code>width</code>, and <code>height</code> to the correct size;
+    </li>
 </ul>
-
-<div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
-    <button md3-button>Default</button>
-    <button md3-button [button-squared]="true">Square button</button>
-    <button md3-button>
-        <md3-icon md3-icon-element>person</md3-icon>
-        Default (icon)
-    </button>
-    <button md3-button [button-squared]="true">
-        <md3-icon md3-icon-element>person</md3-icon>
-        Square button (icon)
-    </button>
-</div>
-
-<div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
-    <button md3-button button-type="elevated">Elevated</button>
-    <button md3-button button-type="elevated" [selected]="false">Toggle</button>
-    <button md3-button button-type="elevated" [button-squared]="true" [selected]="false">Toggle (square)</button>
-</div>
-
-<div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
-    <button md3-button button-type="filled">Filled</button>
-    <button md3-button button-type="filled" [selected]="false">Toggle</button>
-    <button md3-button button-type="filled" [button-squared]="true" [selected]="false">Toggle (square)</button>
-</div>
-
-<div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
-    <button md3-button button-type="tonal">Tonal</button>
-    <button md3-button button-type="tonal" [selected]="false">Toggle</button>
-    <button md3-button button-type="tonal" [button-squared]="true" [selected]="false">Toggle (square)</button>
-</div>
-
-<div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
-    <button md3-button button-type="outlined">Outlined</button>
-    <button md3-button button-type="outlined" [selected]="false">Toggle</button>
-    <button md3-button button-type="outlined" [button-squared]="true" [selected]="false">Toggle (square)</button>
-</div>
-
-<div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
-    <button md3-button button-type="text">Text</button>
-</div>
-
-<div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
-    <button md3-button button-size="x-small">x-small</button>
-    <button md3-button button-size="small">small</button>
-    <button md3-button button-size="medium">medium</button>
-    <button md3-button button-size="large">large</button>
-    <button md3-button button-size="x-large">x-large</button>
-</div>
-
-<div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
-    <button md3-button button-size="x-small" [selected]="false">x-small</button>
-    <button md3-button button-size="small" [selected]="false">small</button>
-    <button md3-button button-size="medium" [selected]="false">medium</button>
-    <button md3-button button-size="large" [selected]="false">large</button>
-    <button md3-button button-size="x-large" [selected]="false">x-large</button>
-</div>
-
-<div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
-    <button md3-button [button-squared]="true" button-size="x-small">x-small</button>
-    <button md3-button [button-squared]="true" button-size="small">small</button>
-    <button md3-button [button-squared]="true" button-size="medium">medium</button>
-    <button md3-button [button-squared]="true" button-size="large">large</button>
-    <button md3-button [button-squared]="true" button-size="x-large">x-large</button>
-</div>
-
-<div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
-    <button md3-button [button-squared]="true" button-size="x-small" [selected]="false">x-small</button>
-    <button md3-button [button-squared]="true" button-size="small" [selected]="false">small</button>
-    <button md3-button [button-squared]="true" button-size="medium" [selected]="false">medium</button>
-    <button md3-button [button-squared]="true" button-size="large" [selected]="false">large</button>
-    <button md3-button [button-squared]="true" button-size="x-large" [selected]="false">x-large</button>
-</div>

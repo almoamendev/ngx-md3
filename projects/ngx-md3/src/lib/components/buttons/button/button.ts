@@ -5,7 +5,7 @@ import { ButtonType } from '../../../types/button-type.type';
 import { MD3_BUTTON_CONTEXT } from '../../../interfaces/button-context.interface';
 
 @Component({
-    selector: 'button[md3-button]',
+    selector: 'button[md3-button], a[md3-button]',
     imports: [],
     templateUrl: './button.html',
     styleUrl: './button.scss',
@@ -19,7 +19,7 @@ import { MD3_BUTTON_CONTEXT } from '../../../interfaces/button-context.interface
 export class Button {
     private context = inject(MD3_BUTTON_CONTEXT, { optional: true });
     
-    @HostListener('click', ['$event']) onClick(event: PointerEvent): void {
+    @HostListener('click', ['$event']) onClick(event: Event): void {
         if (this.isSelected() === null) {
             return;
         }

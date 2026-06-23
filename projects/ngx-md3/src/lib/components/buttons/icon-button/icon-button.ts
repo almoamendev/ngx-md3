@@ -6,7 +6,7 @@ import { IconButtonWidth } from '../../../types/icon-button-width.type';
 import { MD3_BUTTON_CONTEXT } from '../../../interfaces/button-context.interface';
 
 @Component({
-    selector: 'button[md3-icon-button]',
+    selector: 'button[md3-icon-button], a[md3-icon-button]',
     imports: [],
     templateUrl: './icon-button.html',
     styleUrl: './icon-button.scss',
@@ -20,7 +20,7 @@ import { MD3_BUTTON_CONTEXT } from '../../../interfaces/button-context.interface
 export class IconButton {
     private context = inject(MD3_BUTTON_CONTEXT, { optional: true });
     
-    @HostListener('click', ['$event']) onClick(event: PointerEvent): void {
+    @HostListener('click', ['$event']) onClick(event: Event): void {
         if (this.isSelected() === null) {
             return;
         }

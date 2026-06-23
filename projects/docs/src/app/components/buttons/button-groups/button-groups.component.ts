@@ -17,7 +17,7 @@ import { RouterLink } from "@angular/router";
         Playground,
         Shiki,
         TypeBody,
-        RouterLink
+        RouterLink,
     ],
     templateUrl: './button-groups.component.html',
     styleUrl: './button-groups.component.scss',
