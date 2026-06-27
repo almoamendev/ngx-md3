@@ -54,7 +54,7 @@ type FabType = 'tonal-primary' | 'tonal-secondary' | 'tonal-tertiary' | 'primary
 
     public apiUsage: string = `<!-- Component usage -->
 
-<!-- md3-button can be used on <button> or <a> -->
+<!-- md3-fab can be used on <button> or <a> -->
 <button md3-fab>
     ...
 </button>
