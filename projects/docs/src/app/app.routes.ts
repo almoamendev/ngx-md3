@@ -8,11 +8,11 @@ import { LoadingIndicatorsComponent } from './components/loading-and-progress/lo
 import { ProgressIndicatorsComponent } from './components/loading-and-progress/progress-indicators/progress-indicators.component';
 import { CardsComponent } from './components/cards/cards.component';
 import { TextFieldsComponent } from './components/text-fields/text-fields.component';
-import { CheckboxesComponent } from './components/checkboxes/checkboxes.component';
+import { CheckboxesComponent } from './components/selection-controls/checkboxes/checkboxes.component';
 import { TypographyComponent } from './styles/typography/typography.component';
 import { ListsComponent } from './components/lists/lists.component';
 import { RadioButtonsComponent } from './components/selection-controls/radio-buttons/radio-buttons.component';
-import { SlidersComponent } from './components/selection-controls/sliders/sliders.component';
+import { SlidersComponent } from './components/sliders/sliders.component';
 import { SwitchesComponent } from './components/selection-controls/switches/switches.component';
 import { ButtonGroupsComponent } from './components/buttons/button-groups/button-groups.component';
 import { DialogsComponent } from './components/dialogs/dialogs.component';

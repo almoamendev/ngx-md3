@@ -62,14 +62,14 @@ type SplitButtonType = 'elevated' | 'filled' | 'tonal' | 'outlined';`;
 
 <!-- split button with main action: icon button -->
 <md3-split-button button-size="small" button-type="filled" [flip-trailing-icon]="true">
-    <!-- main action mut have md3-main-action attribute -->
+    <!-- main action must have md3-main-action attribute -->
     <button md3-icon-button md3-main-action>...</button>
     <button md3-icon-button>...</button>
 </md3-split-button>
 
 <!-- split button with main action: button -->
 <md3-split-button button-size="small" button-type="filled" [flip-trailing-icon]="true">
-    <!-- main action mut have md3-main-action attribute -->
+    <!-- main action must have md3-main-action attribute -->
     <button md3-button md3-main-action>...</button>
     <button md3-icon-button>...</button>
 </md3-split-button>`;
