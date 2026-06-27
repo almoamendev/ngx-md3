@@ -12,7 +12,7 @@
     ::ng-deep .md3-panes-container {
         .md3-pane.md3-pane-start {
             md3-side-sheet-stack {
-                md3-side-sheet.md3-inset {
+                md3-side-sheet.md3-style-default.md3-inset {
                     padding-inline-end: 0.5em;
                 }
             }
@@ -20,7 +20,7 @@
         
         .md3-pane.md3-pane-end {
             md3-side-sheet-stack {
-                md3-side-sheet.md3-inset {
+                md3-side-sheet.md3-style-default.md3-inset {
                     padding-inline-start: 0.5em;
                 }
             }
