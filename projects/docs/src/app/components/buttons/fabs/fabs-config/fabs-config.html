@@ -1,0 +1,86 @@
+<md3-side-sheet-header title="Configurations">
+    <button type="button" md3-icon-button trailing button-type="standard" (click)="close()">
+        <md3-icon md3-icon-element>close</md3-icon>
+    </button>
+</md3-side-sheet-header>
+<md3-side-sheet-body class="md3-component-config">
+    <div class="controls-list">
+        <label md3-state-component tabindex="0">
+            <div md3-type-label="large">Show icon</div>
+            <md3-switch disable-state-layer [control]="showIcon">
+                <input type="checkbox" md3-input-element name="show-icon">
+            </md3-switch>
+        </label>
+    </div>
+    
+    <div class="controls-list">
+        <label md3-state-component tabindex="0">
+            <div md3-type-label="large">Extended Fab</div>
+            <md3-switch disable-state-layer [control]="isExtended">
+                <input type="checkbox" md3-input-element name="button-squared">
+            </md3-switch>
+        </label>
+    </div>
+
+    <div md3-type-body="large">Size</div>
+    <div class="controls-list">
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="buttonSize">
+                <input type="radio" md3-input-element name="button-size" value="small">
+            </md3-radio-button>
+            <div md3-type-label="large">Small</div>
+        </label>
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="buttonSize">
+                <input type="radio" md3-input-element name="button-size" value="medium">
+            </md3-radio-button>
+            <div md3-type-label="large">Medium</div>
+        </label>
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="buttonSize">
+                <input type="radio" md3-input-element name="button-size" value="large">
+            </md3-radio-button>
+            <div md3-type-label="large">Large</div>
+        </label>
+    </div>
+    
+    <div md3-type-body="large">Type</div>
+    <div class="controls-list">
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="buttonType">
+                <input type="radio" md3-input-element name="button-type" value="tonal-primary">
+            </md3-radio-button>
+            <div md3-type-label="large">Tonal primary</div>
+        </label>
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="buttonType">
+                <input type="radio" md3-input-element name="button-type" value="tonal-secondary">
+            </md3-radio-button>
+            <div md3-type-label="large">Tonal secondary</div>
+        </label>
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="buttonType">
+                <input type="radio" md3-input-element name="button-type" value="tonal-tertiary">
+            </md3-radio-button>
+            <div md3-type-label="large">Tonal tertiary</div>
+        </label>
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="buttonType">
+                <input type="radio" md3-input-element name="button-type" value="primary">
+            </md3-radio-button>
+            <div md3-type-label="large">Primary</div>
+        </label>
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="buttonType">
+                <input type="radio" md3-input-element name="button-type" value="secondary">
+            </md3-radio-button>
+            <div md3-type-label="large">Secondary</div>
+        </label>
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="buttonType">
+                <input type="radio" md3-input-element name="button-type" value="tertiary">
+            </md3-radio-button>
+            <div md3-type-label="large">Tertiary</div>
+        </label>
+    </div>
+</md3-side-sheet-body>

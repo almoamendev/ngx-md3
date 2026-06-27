@@ -1,52 +1,94 @@
 <h1>Floating Action Buttons</h1>
 
+<p>
+    Floating action buttons (FABs) help people take primary actions.
+</p>
+
+<figure class="component-image">
+    <img src="/img/md3-fab.png" alt="Material Design button configurations" />
+    <ol>
+        <li>Primary container & On primary container (default)</li>
+        <li>Secondary container & On secondary container</li>
+        <li>Tertiary container & On tertiary container</li>
+        <li>Primary & On primary</li>
+        <li>Secondary & On secondary</li>
+        <li>Tertiary & On tertiary</li>
+    </ol>
+</figure>
+
+<app-playground>
+    <button action-item md3-icon-button button-type="tonal" button-squared [selected]="configOpen()"
+        (click)="openConfig()">
+        <md3-icon md3-icon-element>settings</md3-icon>
+    </button>
+
+    <button md3-fab [button-size]="buttonSize()" [button-type]="buttonType()" [extended]="isExtended()">
+        @if (showIcon()) {
+            <md3-icon md3-icon-element>edit</md3-icon>
+        }
+        Compose
+    </button>
+</app-playground>
+
+<h2>API</h2>
+
+<div class="table-container md3-scrollable">
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 50%;">Name</th>
+                <th>Type</th>
+                <th>Default</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <i>button-size</i>
+                    <p md3-type-body="small">Sets the button size.</p>
+                </td>
+                <td>
+                    input&lt;FabSize&gt;
+                    <p md3-type-body="small">small, medium, large</p>
+                </td>
+                <td>small</td>
+            </tr>
+            <tr>
+                <td>
+                    button-type
+                    <p md3-type-body="small">Sets the style type of the button.</p>
+                </td>
+                <td>
+                    input&lt;FabType&gt;
+                    <p md3-type-body="small">tonal-primary, tonal-secondary, tonal-tertiary, primary, secondary, tertiary</p>
+                </td>
+                <td>tonal-primary</td>
+            </tr>
+            <tr>
+                <td>
+                    extended
+                    <p md3-type-body="small">Show or hide button's label.</p>
+                </td>
+                <td>input&lt;boolean&gt;</td>
+                <td>false</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<app-shiki [code]="apiImport"></app-shiki>
+<app-shiki [code]="apiData"></app-shiki>
+<app-shiki [code]="apiTypes"></app-shiki>
+<app-shiki [code]="apiUsage" language="html"></app-shiki>
 <ul>
-    <li>@Input() button-size: 'small' | 'medium' | 'large' = 'small';</li>
-    <li>@Input() button-type: 'tonal-primary' | 'tonal-secondary' | 'tonal-tertiary' | 'primary' | 'secondary' | 'tertiary' = 'tonal-primary';</li>
-    <li>@Input() extended: boolean = false;</li>
+    <li>When using a custom icon. always add <code>md3-icon-element</code> directive to the icon element.</li>
+    <li>
+        Custom icon size should follow Material 3 guidelines:
+        <ul>
+            <li>small: 24dp</li>
+            <li>medium: 28dp</li>
+            <li>large: 36dp</li>
+        </ul>
+        Default md3-icon-element css style will set <code>font-size</code>, <code>width</code>, and <code>height</code> to the correct size;
+    </li>
 </ul>
-
-<div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1rem;">
-    <button md3-fab button-size="small">
-        <md3-icon md3-icon-element>person</md3-icon>
-    </button>
-    <button md3-fab button-size="medium">
-        <md3-icon md3-icon-element>person</md3-icon>
-    </button>
-    <button md3-fab button-size="large">
-        <md3-icon md3-icon-element>person</md3-icon>
-    </button>
-    <button md3-fab button-size="small" [extended]="true">
-        <md3-icon md3-icon-element>person</md3-icon>
-        Extended button
-    </button>
-    <button md3-fab button-size="medium" [extended]="true">
-        <md3-icon md3-icon-element>person</md3-icon>
-        Extended button
-    </button>
-    <button md3-fab button-size="large" [extended]="true">
-        <md3-icon md3-icon-element>person</md3-icon>
-        Extended button
-    </button>
-</div>
-
-<div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1rem;">
-    <button md3-fab button-type="tonal-primary" [extended]="true">
-        Tonal primary
-    </button>
-    <button md3-fab button-type="tonal-secondary" [extended]="true">
-        Tonal secondary
-    </button>
-    <button md3-fab button-type="tonal-tertiary" [extended]="true">
-        Tonal tertiary
-    </button>
-    <button md3-fab button-type="primary" [extended]="true">
-        Primary
-    </button>
-    <button md3-fab button-type="secondary" [extended]="true">
-        Secondary
-    </button>
-    <button md3-fab button-type="tertiary" [extended]="true">
-        Tertiary
-    </button>
-</div>

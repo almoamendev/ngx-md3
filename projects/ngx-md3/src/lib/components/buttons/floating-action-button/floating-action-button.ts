@@ -2,9 +2,10 @@ import { booleanAttribute, Component, computed, effect, ElementRef, inject, inpu
 import { StateComponent } from '../../common/state-component';
 import { FabType } from '../../../types/fab-type.type';
 import { MD3_BUTTON_CONTEXT } from '../../../interfaces/button-context.interface';
+import { FabSize } from '../../../types/fab-size.type';
 
 @Component({
-    selector: 'button[md3-fab]',
+    selector: 'button[md3-fab], a[md3-fab]',
     imports: [],
     templateUrl: './floating-action-button.html',
     styleUrl: './floating-action-button.scss',
@@ -18,7 +19,7 @@ import { MD3_BUTTON_CONTEXT } from '../../../interfaces/button-context.interface
 export class FloatingActionButton {
     private context = inject(MD3_BUTTON_CONTEXT, { optional: true });
     
-    public buttonSize = input<'small' | 'medium' | 'large'>('small', {
+    public buttonSize = input<FabSize>('small', {
         alias: 'button-size',
     });
     public buttonType = input<FabType>('tonal-primary', {
