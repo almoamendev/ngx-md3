@@ -60,22 +60,19 @@ type SplitButtonType = 'elevated' | 'filled' | 'tonal' | 'outlined';`;
 
     public apiUsage: string = `<!-- Component usage -->
 
-<!-- no icon -->
-<button md3-button button-size="small" button-type="filled" [button-squared]="false" [selected]="null">
-    Bluetooth
-</button>
+<!-- split button with main action: icon button -->
+<md3-split-button button-size="small" button-type="filled" [flip-trailing-icon]="true">
+    <!-- main action mut have md3-main-action attribute -->
+    <button md3-icon-button md3-main-action>...</button>
+    <button md3-icon-button>...</button>
+</md3-split-button>
 
-<!-- using material icons -->
-<button md3-button button-size="small" button-type="filled" button-squared [selected]="null">
-    <md3-icon md3-icon-element>bluetooth</md3-icon>
-    Bluetooth
-</button>
-
-<!-- using custom icon -->
-<button md3-button button-size="small" button-type="filled" [button-squared]="true" [selected]="null">
-    <your-custom-icon-element md3-icon-element></your-custom-icon-element>
-    Bluetooth
-</button>`;
+<!-- split button with main action: button -->
+<md3-split-button button-size="small" button-type="filled" [flip-trailing-icon]="true">
+    <!-- main action mut have md3-main-action attribute -->
+    <button md3-button md3-main-action>...</button>
+    <button md3-icon-button>...</button>
+</md3-split-button>`;
     
     constructor(
         private menuService: MenuService,
