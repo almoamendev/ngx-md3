@@ -75,7 +75,7 @@ export class SplitButton implements ButtonContext {
                     return;
                 }
 
-                this.element.classList.toggle('md3-flip-icon', this.flipTrailingIcon());
+                iconButton.element.classList.toggle('md3-flip-icon', this.flipTrailingIcon());
             });
         });
     }

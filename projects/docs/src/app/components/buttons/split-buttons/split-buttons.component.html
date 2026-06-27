@@ -1,9 +1,233 @@
 <h1>Split buttons</h1>
 
+<p>
+    Split buttons open a menu to give people more options related to an action.
+</p>
+
+<figure class="component-image">
+    <img src="/img/md3-split-button.png" alt="Material Design split button configurations" />
+    <ol>
+        <li>Color configurations: Elevated, filled, tonal, outlined</li>
+        <li>Size configurations: XS, S, M, L, XL</li>
+    </ol>
+</figure>
+
+<app-playground>
+    <button action-item md3-icon-button button-type="tonal" button-squared [selected]="configOpen()"
+        (click)="openConfig()">
+        <md3-icon md3-icon-element>settings</md3-icon>
+    </button>
+
+    <md3-split-button [button-size]="buttonSize()" [button-type]="buttonType()" [flip-trailing-icon]="flipTrailingIcon()">
+        @if (primaryButton() == 'icon') {
+            <button md3-icon-button md3-main-action>
+                <md3-icon md3-icon-element>edit</md3-icon>
+            </button>
+        } @else {
+            <button md3-button>
+                <md3-icon md3-icon-element>edit</md3-icon>
+                Compose
+            </button>
+        }
+        <button md3-icon-button (click)="openMenu($event)">
+            <md3-icon md3-icon-element>keyboard_arrow_down</md3-icon>
+        </button>
+    </md3-split-button>
+</app-playground>
+
+<h2>API</h2>
+
+<div class="table-container md3-scrollable">
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 50%;">Name</th>
+                <th>Type</th>
+                <th>Default</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td colspan="3">
+                    <h3>SplitButton</h3>
+                    <md3-divider></md3-divider>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <i>button-size</i>
+                    <p md3-type-body="small">Sets the buttons size.</p>
+                </td>
+                <td>
+                    input&lt;ButtonSize&gt;
+                    <p md3-type-body="small">x-small, small, medium, large, x-large</p>
+                </td>
+                <td style="white-space: nowrap;">small</td>
+            </tr>
+            <tr>
+                <td>
+                    button-type
+                    <p md3-type-body="small">Sets the style type of the buttons.</p>
+                </td>
+                <td>
+                    input&lt;SplitButtonType&gt;
+                    <p md3-type-body="small">filled, tonal, outlined, elevated</p>
+                </td>
+                <td style="white-space: nowrap;">filled</td>
+            </tr>
+            <tr>
+                <td>
+                    flip-trailing-icon
+                    <p md3-type-body="small">Flip trailing icon upside down when menu is open.</p>
+                </td>
+                <td>input&lt;boolean&gt;</td>
+                <td style="white-space: nowrap;">true</td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <h3><a routerLink="/components/buttons/buttons">Button</a></h3>
+                    <md3-divider></md3-divider>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <i>
+                        <span style="text-decoration: line-through;">button-size</span>
+                        (overridden)
+                    </i>
+                    <p md3-type-body="small">Sets the button size. this option is overridden by split button.</p>
+                </td>
+                <td>
+                    input&lt;ButtonSize&gt;
+                    <p md3-type-body="small">x-small, small, medium, large, x-large</p>
+                </td>
+                <td style="white-space: nowrap;">small</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>
+                        <span style="text-decoration: line-through;">button-type</span>
+                        (overridden)
+                    </i>
+                    <p md3-type-body="small">Sets the style type of the button. this option is overridden by split button.</p>
+                </td>
+                <td>
+                    input&lt;ButtonType&gt;
+                    <p md3-type-body="small">filled, tonal, outlined, elevated, text</p>
+                </td>
+                <td style="white-space: nowrap;">filled</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>
+                        <span style="text-decoration: line-through;">button-squared</span>
+                        (overridden)
+                    </i>
+                    <p md3-type-body="small">Controls button shape.</p>
+                </td>
+                <td>input&lt;boolean&gt;</td>
+                <td style="white-space: nowrap;">false</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>selected</i>
+                    <p md3-type-body="small">Button selection state.</p>
+                </td>
+                <td>
+                    model&lt;boolean, null&gt;
+                </td>
+                <td style="white-space: nowrap;">null</td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <h3><a routerLink="/components/buttons/icon-buttons">IconButton</a></h3>
+                    <md3-divider></md3-divider>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <i>
+                        <span style="text-decoration: line-through;">button-size</span>
+                        (overridden)
+                    </i>
+                    <p md3-type-body="small">Sets the icon button size. this option is overridden by split button.</p>
+                </td>
+                <td>
+                    input&lt;ButtonSize&gt;
+                    <p md3-type-body="small">x-small, small, medium, large, x-large</p>
+                </td>
+                <td style="white-space: nowrap;">small</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>
+                        <span style="text-decoration: line-through;">button-type</span>
+                        (overridden)
+                    </i>
+                    <p md3-type-body="small">Sets the style type of the icon button. this option is overridden by split button.</p>
+                </td>
+                <td>
+                    input&lt;IconButtonType&gt;
+                    <p md3-type-body="small">standard, filled, tonal, outlined</p>
+                </td>
+                <td style="white-space: nowrap;">filled</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>
+                        <span style="text-decoration: line-through;">button-width</span>
+                        (overridden)
+                    </i>
+                    <p md3-type-body="small">Sets the width of the icon button. this option is overridden by split button.</p>
+                </td>
+                <td>
+                    input&lt;IconButtonWidth&gt;
+                    <p md3-type-body="small">default, narrow, wide</p>
+                </td>
+                <td style="white-space: nowrap;">default</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>
+                        <span style="text-decoration: line-through;">button-squared</span>
+                        (overridden)
+                    </i>
+                    <p md3-type-body="small">Controls icon button shape. this option is overridden by split button.</p>
+                </td>
+                <td>input&lt;boolean&gt;</td>
+                <td style="white-space: nowrap;">false</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>selected</i>
+                    <p md3-type-body="small">Button selection state.</p>
+                </td>
+                <td>
+                    model&lt;boolean, null&gt;
+                </td>
+                <td style="white-space: nowrap;">null</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<app-shiki [code]="apiImport"></app-shiki>
+<app-shiki [code]="apiData"></app-shiki>
+<app-shiki [code]="apiTypes"></app-shiki>
+<app-shiki [code]="apiUsage" language="html"></app-shiki>
 <ul>
-    <li>@Input() button-size: 'x-small' | 'small' | 'medium' | 'large' | 'x-large' = 'small';</li>
-    <li>@Input() button-type: 'elevated' | 'filled' | 'tonal' | 'outlined' = 'filled';</li>
-    <li>@Input() flip-trailing-icon: boolean = true;</li>
+    <li>When using a custom icon. always add <code>md3-icon-element</code> directive to the icon element.</li>
+    <li>
+        Custom icon size should follow Material 3 guidelines:
+        <ul>
+            <li>x-small: 20dp</li>
+            <li>small: 20dp</li>
+            <li>medium: 24dp</li>
+            <li>large: 32dp</li>
+            <li>x-large: 40dp</li>
+        </ul>
+        Default md3-icon-element css style will set <code>font-size</code>, <code>width</code>, and <code>height</code> to the correct size;
+    </li>
 </ul>
 
 <div style="display: flex; gap: 1em; margin-bottom: 1em; flex-wrap: wrap;">
