@@ -26,7 +26,6 @@ export class CheckboxConfig {
     constructor(
         private sideSheetRef: SideSheetRef<CheckboxConfig>
     ) {
-        this.disableStateLayer.disable();
     }
 
     public close(): void {
