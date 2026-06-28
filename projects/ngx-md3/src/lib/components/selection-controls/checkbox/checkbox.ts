@@ -30,11 +30,11 @@ export class Checkbox {
         transform: booleanAttribute
     });
 
-    public checkboxIcon: 'check_small' | 'check_indeterminate_small' = 'check_small';
-    public hasError: boolean = false;
-    public state = signal<boolean | null>(false);
+    protected checkboxIcon: 'check_small' | 'check_indeterminate_small' = 'check_small';
+    protected hasError: boolean = false;
+    protected state = signal<boolean | null>(false);
 
-    public formControl = computed<AbstractControl | undefined>(() => this.control() ?? this.controlName()?.control);
+    protected formControl = computed<AbstractControl | undefined>(() => this.control() ?? this.controlName()?.control);
 
     private inputError = computed<boolean>(() => {
         const control = this.formControl();

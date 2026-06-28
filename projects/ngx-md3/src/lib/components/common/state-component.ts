@@ -63,6 +63,7 @@ export class StateComponent implements OnInit {
     private disable(): void {
         this.el.nativeElement.classList.remove('md3-state-component');
         this.stateLayer?.remove();
+        this.stateLayer = undefined;
     }
 
     @HostListener('pointerdown', ['$event'])

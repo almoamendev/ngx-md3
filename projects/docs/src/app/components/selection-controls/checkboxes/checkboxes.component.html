@@ -1,20 +1,61 @@
 <h1>Checkboxes</h1>
 
-<ul>
-    <li>@Input() disable-state-layer: boolean = false;</li>
-</ul>
+<p>
+    Checkboxes let users select one or more items from a list, or turn an item on or off.
+</p>
 
-<div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
-    <md3-checkbox>
-        <input type="checkbox" md3-input-element>
+<figure class="component-image">
+    <img src="/img/md3-checkbox.png" alt="Material Design button configurations" />
+    <ol>
+        <li>Checkbox</li>
+        <li>State-layer</li>
+        <li>Icon</li>
+    </ol>
+</figure>
+
+<app-playground>
+    <button action-item md3-icon-button button-type="tonal" button-squared [selected]="configOpen()"
+        (click)="openConfig()">
+        <md3-icon md3-icon-element>settings</md3-icon>
+    </button>
+
+    <md3-checkbox [disable-state-layer]="disableStateLayer()">
+        <input type="checkbox" md3-input-element [disabled]="disable()" [aria-invalid]="setError()">
     </md3-checkbox>
-    <md3-checkbox>
-        <input type="checkbox" md3-input-element aria-invalid="true">
-    </md3-checkbox>
-    <md3-checkbox>
-        <input type="checkbox" md3-input-element disabled>
-    </md3-checkbox>
-    <md3-checkbox>
-        <input type="checkbox" md3-input-element disabled checked>
-    </md3-checkbox>
+</app-playground>
+
+<h2>API</h2>
+
+<div class="table-container md3-scrollable">
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 50%;">Name</th>
+                <th>Type</th>
+                <th>Default</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    control
+                    <p md3-type-body="small">Input form control object (see angular forms and form controls).</p>
+                </td>
+                <td>input&lt;AbstractControl&gt;</td>
+                <td style="white-space: nowrap;">undefined</td>
+            </tr>
+            <tr>
+                <td>
+                    disable-state-layer
+                    <p md3-type-body="small">Disable checkbox state layer.</p>
+                </td>
+                <td>input&lt;boolean&gt;</td>
+                <td style="white-space: nowrap;">false</td>
+            </tr>
+        </tbody>
+    </table>
 </div>
+
+<app-shiki [code]="apiImport"></app-shiki>
+<app-shiki [code]="apiData"></app-shiki>
+<app-shiki [code]="apiUsage" language="html"></app-shiki>
