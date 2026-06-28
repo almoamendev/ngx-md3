@@ -28,7 +28,6 @@ export class RadioButton {
         transform: booleanAttribute
     });
 
-    public hasError: boolean = false;
     public state = signal<boolean>(false);
 
     public formControl = computed<AbstractControl | undefined>(() => this.control() ?? this.controlName()?.control);
@@ -106,10 +105,12 @@ export class RadioButton {
 
             this.syncStateFromControl(control);
             this.syncControlError(control);
+            this.syncInputDisabledState(control);
 
             const controlEvents = control.events.subscribe(() => {
                 this.syncStateFromControl(control);
                 this.syncControlError(control);
+                this.syncInputDisabledState(control);
             });
 
             onCleanup(() => controlEvents.unsubscribe());
@@ -183,6 +184,13 @@ export class RadioButton {
         this.controlError.set(this.hasControlError(control));
     }
 
+    private syncInputDisabledState(control: AbstractControl): void {
+        const input = this.input()?.nativeElement;
+        if (input && input.disabled !== control.disabled) {
+            input.disabled = control.disabled;
+        }
+    }
+
     private hasNativeInputError(input: HTMLInputElement): boolean {
         return !input.validity.valid || input.ariaInvalid === 'true';
     }
@@ -193,8 +201,6 @@ export class RadioButton {
 
     private syncAriaInvalidAttribute(input: HTMLInputElement | undefined): void {
         const value = this.inputError() ? 'true' : 'false';
-        this.hasError = value === 'true';
-
         if (input && input.getAttribute('aria-invalid') !== value) {
             input.setAttribute('aria-invalid', value);
         }

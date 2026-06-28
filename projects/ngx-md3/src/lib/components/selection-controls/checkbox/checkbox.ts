@@ -31,8 +31,7 @@ export class Checkbox {
     });
 
     protected checkboxIcon: 'check_small' | 'check_indeterminate_small' = 'check_small';
-    protected hasError: boolean = false;
-    protected state = signal<boolean | null>(false);
+    public state = signal<boolean | null>(false);
 
     protected formControl = computed<AbstractControl | undefined>(() => this.control() ?? this.controlName()?.control);
 
@@ -101,10 +100,12 @@ export class Checkbox {
 
             this.syncStateFromControl(control);
             this.syncControlError(control);
+            this.syncInputDisabledState(control);
 
             const controlEvents = control.events.subscribe(() => {
                 this.syncStateFromControl(control);
                 this.syncControlError(control);
+                this.syncInputDisabledState(control);
             });
 
             onCleanup(() => controlEvents.unsubscribe());
@@ -181,6 +182,13 @@ export class Checkbox {
         this.controlError.set(this.hasControlError(control));
     }
 
+    private syncInputDisabledState(control: AbstractControl): void {
+        const input = this.input()?.nativeElement;
+        if (input && input.disabled !== control.disabled) {
+            input.disabled = control.disabled;
+        }
+    }
+
     private hasNativeInputError(input: HTMLInputElement): boolean {
         return !input.validity.valid || input.ariaInvalid === 'true';
     }
@@ -191,8 +199,6 @@ export class Checkbox {
 
     private syncAriaInvalidAttribute(input: HTMLInputElement | undefined): void {
         const value = this.inputError() ? 'true' : 'false';
-        this.hasError = value === 'true';
-
         if (input && input.getAttribute('aria-invalid') !== value) {
             input.setAttribute('aria-invalid', value);
         }
