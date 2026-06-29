@@ -1,0 +1,41 @@
+<md3-side-sheet-header title="Configurations">
+    <button type="button" md3-icon-button trailing button-type="standard" (click)="close()">
+        <md3-icon md3-icon-element>close</md3-icon>
+    </button>
+</md3-side-sheet-header>
+<md3-side-sheet-body class="md3-component-config">
+    <div class="controls-list">
+        <label md3-state-component tabindex="0">
+            <div md3-type-label="large">Disable state layer</div>
+            <md3-switch disable-state-layer [control]="disableStateLayer">
+                <input type="checkbox" md3-input-element name="disable-state-layer">
+            </md3-switch>
+        </label>
+        <label md3-state-component tabindex="0">
+            <div md3-type-label="large">Disable input</div>
+            <md3-switch disable-state-layer [control]="disable">
+                <input type="checkbox" md3-input-element name="disable-input">
+            </md3-switch>
+        </label>
+
+        <h1 md3-type-body="large" emphasized>Icons</h1>
+        <label md3-state-component tabindex="0">
+            <div md3-type-label="large">Single icon</div>
+            <md3-switch disable-state-layer [control]="singleIcon">
+                <input type="checkbox" md3-input-element name="single-icon">
+            </md3-switch>
+        </label>
+        <label md3-state-component tabindex="0">
+            <div md3-type-label="large">Unselected icon</div>
+            <md3-switch disable-state-layer [control]="unselectedIcon">
+                <input type="checkbox" md3-input-element name="unselected-icon">
+            </md3-switch>
+        </label>
+        <label md3-state-component tabindex="0">
+            <div md3-type-label="large">Selected icon</div>
+            <md3-switch disable-state-layer [control]="selectedIcon">
+                <input type="checkbox" md3-input-element name="selected-icon">
+            </md3-switch>
+        </label>
+    </div>
+</md3-side-sheet-body>

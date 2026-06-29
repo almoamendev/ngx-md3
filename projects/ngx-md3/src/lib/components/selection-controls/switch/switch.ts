@@ -30,7 +30,7 @@ export class Switch {
 
     public state = signal<boolean>(false);
 
-    public formControl = computed<AbstractControl | undefined>(() => this.control() ?? this.controlName()?.control);
+    protected formControl = computed<AbstractControl | undefined>(() => this.control() ?? this.controlName()?.control);
 
     private inputError = computed<boolean>(() => {
         const control = this.formControl();

@@ -1,38 +1,76 @@
-<div style="display: flex; gap: 1rem;">
-    <md3-switch>
-        <input md3-input-element type="checkbox" />
-    </md3-switch>
+<h1>Switches</h1>
 
-    <md3-switch>
-        <input md3-input-element type="checkbox" />
-        <md3-icon md3-icon-element>volume_up</md3-icon>
-    </md3-switch>
+<p>
+    Switches toggle the selection of an item on and off.
+</p>
 
-    <md3-switch>
-        <input md3-input-element type="checkbox" />
-        <md3-icon md3-icon-element="unselected">close</md3-icon>
-    </md3-switch>
+<figure class="component-image">
+    <img src="/img/md3-switch.png" alt="Material Design switch configurations" />
+    <ol>
+        <li>Without icons</li>
+        <li>Icon on selected switch</li>
+        <li>Icon on selected and unselected switch</li>
+    </ol>
+</figure>
 
-    <md3-switch>
-        <input md3-input-element type="checkbox" />
-        <md3-icon md3-icon-element="selected">check</md3-icon>
-    </md3-switch>
+<app-playground>
+    <button action-item md3-icon-button button-type="tonal" button-squared [selected]="configOpen()"
+        (click)="openConfig()">
+        <md3-icon md3-icon-element>settings</md3-icon>
+    </button>
 
-    <md3-switch>
-        <input md3-input-element type="checkbox" />
-        <md3-icon md3-icon-element="unselected">close</md3-icon>
-        <md3-icon md3-icon-element="selected">check</md3-icon>
+    <md3-switch [disable-state-layer]="disableStateLayer()">
+        <input type="checkbox" md3-input-element [disabled]="disable()">
+        @if (singleIcon()) {
+            <md3-icon md3-icon-element>volume_up</md3-icon>
+        }
+        @if (unselectedIcon()) {
+            <md3-icon md3-icon-element="unselected">close</md3-icon>
+        }
+        @if (selectedIcon()) {
+            <md3-icon md3-icon-element="selected">check</md3-icon>
+        }
     </md3-switch>
+</app-playground>
 
-    <md3-switch>
-        <input md3-input-element type="checkbox" disabled />
-        <md3-icon md3-icon-element="unselected">close</md3-icon>
-        <md3-icon md3-icon-element="selected">check</md3-icon>
-    </md3-switch>
+<h2>API</h2>
 
-    <md3-switch>
-        <input md3-input-element type="checkbox" disabled checked />
-        <md3-icon md3-icon-element="unselected">close</md3-icon>
-        <md3-icon md3-icon-element="selected">check</md3-icon>
-    </md3-switch>
+<div class="table-container md3-scrollable">
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 50%;">Name</th>
+                <th>Type</th>
+                <th>Default</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    control
+                    <p md3-type-body="small">Input form control object (see angular forms and form controls).</p>
+                </td>
+                <td>input&lt;AbstractControl&gt;</td>
+                <td style="white-space: nowrap;">undefined</td>
+            </tr>
+            <tr>
+                <td>
+                    disable-state-layer
+                    <p md3-type-body="small">Disable switch state layer.</p>
+                </td>
+                <td>input&lt;boolean&gt;</td>
+                <td style="white-space: nowrap;">false</td>
+            </tr>
+        </tbody>
+    </table>
 </div>
+
+<app-shiki [code]="apiImport"></app-shiki>
+<app-shiki [code]="apiData"></app-shiki>
+<app-shiki [code]="apiUsage" language="html"></app-shiki>
+<ul>
+    <li>Switch input element must have <code>md3-input-element</code> directive.</li>
+    <li>The component will be disabled when either the input element or the control is disabled.</li>
+    <li>When using a custom icon. always add <code>md3-icon-element</code> directive to the icon element and it must be of size 16dp.</li>
+    <li>Default md3-icon-element css style will set <code>font-size</code>, <code>width</code>, and <code>height</code> to the correct size.</li>
+</ul>
