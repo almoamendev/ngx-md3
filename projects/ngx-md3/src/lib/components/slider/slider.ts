@@ -23,7 +23,7 @@ export class Slider implements AfterContentInit {
     @ContentChild(InputElement) input?: InputElement;
     @ContentChild(FormControlName) controlName?: FormControlName;
 
-    public readonly showValueLabel = input<boolean>(false, {
+    public showValueLabel = input<boolean>(false, {
         alias: 'show-value-label'
     });
 
