@@ -1,7 +1,6 @@
-import { AfterContentInit, Component, ContentChild, DestroyRef, effect, ElementRef, input, Input, signal } from '@angular/core';
+import { Component, computed, contentChild, effect, ElementRef, input, signal } from '@angular/core';
 import { AbstractControl, FormControlName } from '@angular/forms';
-import { fromEvent } from 'rxjs';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { fromEvent, merge } from 'rxjs';
 import { InputElement } from '../common/input-element';
 import { TypeBody } from '../../styles/typography/type-body';
 import { SliderSize } from '../../types/slider-size.type';
@@ -14,14 +13,16 @@ import { SliderSize } from '../../types/slider-size.type';
     templateUrl: './slider.html',
     styleUrl: './slider.scss',
 })
-export class Slider implements AfterContentInit {
-    @Input() control?: AbstractControl;
+export class Slider {
+    public control = input<AbstractControl | undefined>(undefined, {
+        alias: 'control',
+    });
     public sliderSize = input<SliderSize>('x-small', {
         alias: 'slider-size',
     });
 
-    @ContentChild(InputElement) input?: InputElement;
-    @ContentChild(FormControlName) controlName?: FormControlName;
+    private input = contentChild<InputElement>(InputElement);
+    private controlName = contentChild<FormControlName>(FormControlName);
 
     public showValueLabel = input<boolean>(false, {
         alias: 'show-value-label'
@@ -33,10 +34,9 @@ export class Slider implements AfterContentInit {
     public max = signal<number>(100);
     public progress = signal<number>(0);
 
-    constructor(
-        private el: ElementRef<HTMLElement>,
-        private destroyRef: DestroyRef
-    ) {
+    protected formControl = computed<AbstractControl | undefined>(() => this.control() ?? this.controlName()?.control);
+
+    constructor(private el: ElementRef<HTMLElement>) {
         effect((onCleanup) => {
             const size = 'md3-' + this.sliderSize();
             this.element.classList.add(size);
@@ -49,36 +49,81 @@ export class Slider implements AfterContentInit {
         effect(() => {
             this.element.style.setProperty('--slider-progress', `${this.progress()}%`);
         });
+
+        effect((onCleanup) => {
+            const input = this.input()?.nativeElement;
+            if (!input) {
+                return;
+            }
+
+            this.syncInitialState(input);
+            this.updateInputValidity();
+
+            const inputEvents = merge(
+                fromEvent(input, 'input'),
+                fromEvent(input, 'change'),
+            ).subscribe(() => {
+                this.syncStateFromInput(input);
+                this.syncControlFromState(this.value());
+                this.updateInputValidity();
+            });
+
+            onCleanup(() => inputEvents.unsubscribe());
+        });
+
+        effect((onCleanup) => {
+            const control = this.formControl();
+            if (!control) {
+                return;
+            }
+
+            this.syncStateFromControl(control);
+            this.syncInputDisabledState(control);
+            this.updateInputValidity();
+
+            const controlEvents = control.events.subscribe(() => {
+                this.syncStateFromControl(control);
+                this.syncInputDisabledState(control);
+                this.updateInputValidity();
+            });
+
+            onCleanup(() => controlEvents.unsubscribe());
+        });
     }
 
     public get element(): HTMLElement {
         return this.el.nativeElement;
     }
 
-    public get formControl(): AbstractControl | undefined {
-        if (this.control) {
-            return this.control;
-        }
-
-        return this.controlName?.control;
-    }
-
     private get inputError(): boolean {
-        if (this.formControl) {
-            return this.formControl.invalid && (this.formControl.touched || this.formControl.dirty);
+        const control = this.formControl();
+        if (control) {
+            return control.invalid && (control.touched || control.dirty);
         }
 
-        return !(this.input?.nativeElement.validity.valid ?? true) || this.input?.nativeElement.ariaInvalid === 'true';
+        const input = this.input()?.nativeElement;
+        return !(input?.validity.valid ?? true) || input?.ariaInvalid === 'true';
     }
 
     private updateInputValidity(): void {
+        const input = this.input()?.nativeElement;
         this.hasError = this.inputError;
 
         if (this.hasError) {
-            this.input?.nativeElement.setAttribute('aria-invalid', 'true');
+            input?.setAttribute('aria-invalid', 'true');
         } else {
-            this.input?.nativeElement.setAttribute('aria-invalid', 'false');
+            input?.setAttribute('aria-invalid', 'false');
         }
+    }
+
+    private syncInitialState(input: HTMLInputElement): void {
+        const control = this.formControl();
+        if (control) {
+            this.syncStateFromControl(control);
+            return;
+        }
+
+        this.syncStateFromInput(input);
     }
 
     private updateState(value: number = 0): void {
@@ -94,90 +139,61 @@ export class Slider implements AfterContentInit {
         this.progress.set(Math.min(100, Math.max(0, progress)));
     }
 
-    private syncLimitsFromInput(): void {
-        if (!this.input?.nativeElement) {
+    private syncLimitsFromInput(input: HTMLInputElement | undefined = this.input()?.nativeElement): void {
+        if (!input) {
             return;
         }
 
-        let min = this.input.nativeElement.min === ''
+        let min = input.min === ''
             ? 0
-            : Number(this.input.nativeElement.min);
-        let max = this.input.nativeElement.max === ''
+            : Number(input.min);
+        let max = input.max === ''
             ? 100
-            : Number(this.input.nativeElement.max);
+            : Number(input.max);
 
         this.min.set(Number.isFinite(min) ? min : 0);
         this.max.set(Number.isFinite(max) ? max : 100);
     }
 
-    private syncStateFromInput(): void {
-        if (!this.input?.nativeElement) {
+    private syncStateFromInput(input: HTMLInputElement | undefined = this.input()?.nativeElement): void {
+        if (!input) {
             return;
         }
 
-        this.syncLimitsFromInput();
-        this.updateState(this.input.nativeElement.valueAsNumber);
+        this.syncLimitsFromInput(input);
+        this.updateState(input.valueAsNumber);
     }
 
     private syncInputFromState(value: number = 0): void {
-        if (!this.input?.nativeElement) {
+        const input = this.input()?.nativeElement;
+        if (!input) {
             return;
         }
 
-        this.input.nativeElement.valueAsNumber = value;
+        input.valueAsNumber = value;
     }
 
     private syncControlFromState(value: number = 0): void {
-        if (!this.formControl || this.formControl.value === value) {
+        const control = this.formControl();
+        if (!control || control.value === value) {
             return;
         }
 
-        this.formControl.setValue(value);
+        control.setValue(value);
     }
 
-    private syncStateFromControl(): void {
-        if (!this.formControl) {
-            return;
-        }
-
-        let controlValue = Number(this.formControl.value ?? this.min());
+    private syncStateFromControl(control: AbstractControl): void {
+        let controlValue = Number(control.value ?? this.min());
 
         this.syncLimitsFromInput();
         this.updateState(controlValue);
         this.syncInputFromState(controlValue);
     }
 
-    ngAfterContentInit(): void {
-        if (this.input?.nativeElement) {
-            fromEvent(this.input.nativeElement, 'input').pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
-                this.syncStateFromInput();
-                this.syncControlFromState(this.value());
-                this.updateInputValidity();
-            });
-
-            fromEvent(this.input.nativeElement, 'change').pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
-                this.syncStateFromInput();
-                this.syncControlFromState(this.value());
-                this.updateInputValidity();
-            });
+    private syncInputDisabledState(control: AbstractControl): void {
+        const input = this.input()?.nativeElement;
+        if (input && input.disabled !== control.disabled) {
+            input.disabled = control.disabled;
         }
-
-        if (this.formControl) {
-            this.syncStateFromControl();
-        } else {
-            this.syncStateFromInput();
-        }
-
-        this.updateInputValidity();
-
-        this.formControl?.statusChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
-            this.syncStateFromControl();
-            this.updateInputValidity();
-        });
-
-        this.formControl?.valueChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
-            this.syncStateFromControl();
-            this.updateInputValidity();
-        });
     }
 }
