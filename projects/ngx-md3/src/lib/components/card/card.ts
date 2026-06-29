@@ -1,5 +1,6 @@
-import { AfterViewInit, booleanAttribute, Component, effect, ElementRef, input } from '@angular/core';
+import { AfterViewInit, booleanAttribute, Component, effect, ElementRef, input, signal } from '@angular/core';
 import { StateComponent } from '../common/state-component';
+import { CardType } from '../../types/card-type.type';
 
 @Component({
     selector: 'md3-card, button[md3-card], a[md3-card]',
@@ -14,7 +15,7 @@ import { StateComponent } from '../common/state-component';
     ],
 })
 export class Card implements AfterViewInit {
-    public cardType = input<'elevated' | 'filled' | 'outlined'>('elevated', {
+    public cardType = input<CardType>('elevated', {
         alias: 'card-type',
     });
 
@@ -23,7 +24,7 @@ export class Card implements AfterViewInit {
         transform: booleanAttribute,
     });
 
-    private isActionTag: boolean = false;
+    private isActionTag = signal<boolean>(false);
 
     constructor(
         private el: ElementRef,
@@ -39,11 +40,11 @@ export class Card implements AfterViewInit {
         });
 
         effect(() => {
-            if (this.isInteractive() || this.isActionTag) {
+            if (this.isInteractive() || this.isActionTag()) {
                 this.element.classList.add('md3-interactive');
                 this.state.setStateLayer(true);
 
-                if (!this.isActionTag) {
+                if (!this.isActionTag()) {
                     this.element.setAttribute('tabindex', '0');
                 }
             } else {
@@ -60,6 +61,6 @@ export class Card implements AfterViewInit {
 
     ngAfterViewInit(): void {
         const tagName = this.element.tagName.toLowerCase();
-        this.isActionTag = tagName != 'md3-card';
+        this.isActionTag.set(tagName != 'md3-card');
     }
 }

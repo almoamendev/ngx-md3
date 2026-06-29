@@ -11,6 +11,11 @@
     font-size: 1rem;
     border-radius: 0.75em;
     display: block;
+    width: 100%;
+    text-align: start;
+    padding: 0;
+    border: none;
+    text-decoration: none;
     background-color: var(--background-color);
     color: var(--foreground-color);
     box-shadow: var(--md-shadow-1dp);

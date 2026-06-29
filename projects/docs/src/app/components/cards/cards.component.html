@@ -1,15 +1,67 @@
 <h1>Cards</h1>
 
-<ul>
-    <li>@Input() card-type: 'elevated' | 'filled' | 'outlined' = 'elevated';</li>
-</ul>
+<p>
+    Cards display content and actions about a single subject.
+</p>
 
-<md3-card card-type="elevated" style="margin-bottom: 1rem;">
-    <p style="margin: 0; padding: 2rem 2rem;">Elevated</p>
-</md3-card>
-<md3-card card-type="filled" style="margin-bottom: 1rem;">
-    <p style="margin: 0; padding: 2rem 2rem;">Filled</p>
-</md3-card>
-<md3-card card-type="outlined" style="margin-bottom: 1rem;">
-    <p style="margin: 0; padding: 2rem 2rem;">Outlined</p>
-</md3-card>
+<figure class="component-image">
+    <img src="/img/md3-card.png" alt="Material Design button configurations" />
+    <ol>
+        <li>Elevated card</li>
+        <li>Filled card</li>
+        <li>Outlined card</li>
+    </ol>
+</figure>
+
+<app-playground>
+    <button action-item md3-icon-button button-type="tonal" button-squared [selected]="configOpen()"
+        (click)="openConfig()">
+        <md3-icon md3-icon-element>settings</md3-icon>
+    </button>
+
+    <md3-card [card-type]="cardType()" [interactive]="interactive()" style="max-width: 20em;">
+        <div style="padding: 1.5em 2em; text-align: center; text-transform: capitalize;">{{ cardType() }}</div>
+    </md3-card>
+</app-playground>
+
+<h2>API</h2>
+
+<div class="table-container md3-scrollable">
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 50%;">Name</th>
+                <th>Type</th>
+                <th>Default</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <i>card-type</i>
+                    <p md3-type-body="small">Sets the card style.</p>
+                </td>
+                <td>
+                    input&lt;CardType&gt;
+                    <p md3-type-body="small">elevated, filled, outlined</p>
+                </td>
+                <td style="white-space: nowrap;">elevated</td>
+            </tr>
+            <tr>
+                <td>
+                    interactive
+                    <p md3-type-body="small">Activates state layer if the card is not &lt;button&gt or &lt;a&gt</p>
+                </td>
+                <td>
+                    input&lt;boolean&gt;
+                </td>
+                <td style="white-space: nowrap;">false</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<app-shiki [code]="apiImport"></app-shiki>
+<app-shiki [code]="apiData"></app-shiki>
+<app-shiki [code]="apiTypes"></app-shiki>
+<app-shiki [code]="apiUsage" language="html"></app-shiki>
