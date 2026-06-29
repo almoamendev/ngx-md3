@@ -1,0 +1,36 @@
+<md3-side-sheet-header title="Configurations">
+    <button type="button" md3-icon-button trailing button-type="standard" (click)="close()">
+        <md3-icon md3-icon-element>close</md3-icon>
+    </button>
+</md3-side-sheet-header>
+<md3-side-sheet-body class="md3-component-config">
+    <div class="controls-list">
+        <label md3-state-component tabindex="0">
+            <div md3-type-label="large">Indeterminate</div>
+            <md3-switch disable-state-layer [control]="indeterminate">
+                <input type="checkbox" md3-input-element name="indeterminate">
+            </md3-switch>
+        </label>
+    </div>
+
+    <div md3-type-body="large">Thickness</div>
+    <div class="controls-list">
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="thickness">
+                <input type="radio" md3-input-element name="thickness" value="4" checked>
+            </md3-radio-button>
+            <div md3-type-label="large">4dp</div>
+        </label>
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="thickness">
+                <input type="radio" md3-input-element name="thickness" value="8">
+            </md3-radio-button>
+            <div md3-type-label="large">8dp</div>
+        </label>
+    </div>
+
+    <div md3-type-body="large">Progress %</div>
+    <md3-slider [show-value-label]="true" [control]="progress">
+        <input type="range" md3-input-element min="0" max="100" name="progress">
+    </md3-slider>
+</md3-side-sheet-body>

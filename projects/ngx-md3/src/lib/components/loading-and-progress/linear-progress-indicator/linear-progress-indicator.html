@@ -1,7 +1,7 @@
-<div class="md3-linear-indicator" [class.md3-thickness-8dp]="thickness == 8" [class.md3-indeterminate]="indeterminate" [style.--progress]="progress + '%'">
+<div class="md3-linear-indicator" [class.md3-thickness-8dp]="thickness() == 8" [class.md3-indeterminate]="indeterminate()" [style.--progress]="progressValue() + '%'">
     <div class="md3-track"></div>
     <div class="md3-active-indicator"></div>
-    @if (indeterminate) {
+    @if (indeterminate()) {
         <div class="md3-track-secondary"></div>
         <div class="md3-active-indicator-secondary"></div>
     }

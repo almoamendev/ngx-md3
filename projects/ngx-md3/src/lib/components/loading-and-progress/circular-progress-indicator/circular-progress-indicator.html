@@ -1,4 +1,4 @@
-<div class="md3-indicator-container" [class.md3-thickness-8dp]="thickness == 8" [class.md3-indeterminate]="indeterminate" [style.--progress]="progress">
+<div class="md3-indicator-container" [class.md3-thickness-8dp]="thickness() == 8" [class.md3-indeterminate]="indeterminate()" [style.--progress]="progressValue()">
     <svg class="md3-circlar-indicator">
         <circle class="md3-track" pathLength="100"></circle>
         <circle class="md3-active-indicator" pathLength="100"></circle>
