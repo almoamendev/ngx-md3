@@ -1,21 +1,71 @@
 <h1>Radio buttons</h1>
 
-<ul>
-    <li>@Input() disable-state-layer: boolean = false;</li>
-    <li>@Input() control?: AbstractControl;</li>
-</ul>
+<p>
+    Radio buttons let people select one option from a set of options.
+</p>
 
-<div class="radio-demo-row">
-    <md3-radio-button>
-        <input type="radio" name="radio-demo-state" md3-input-element checked>
-    </md3-radio-button>
-    <md3-radio-button>
-        <input type="radio" name="radio-demo-state" md3-input-element aria-invalid="true">
-    </md3-radio-button>
-    <md3-radio-button>
-        <input type="radio" name="radio-demo-disabled" md3-input-element disabled>
-    </md3-radio-button>
-    <md3-radio-button>
-        <input type="radio" name="radio-demo-disabled" md3-input-element disabled checked>
-    </md3-radio-button>
+<figure class="component-image">
+    <img src="/img/md3-radio-button.png" alt="Material Design radio buttons" />
+    <ol>
+        <li>Selected</li>
+        <li>Unselected</li>
+    </ol>
+</figure>
+
+<app-playground>
+    <button action-item md3-icon-button button-type="tonal" button-squared [selected]="configOpen()"
+        (click)="openConfig()">
+        <md3-icon md3-icon-element>settings</md3-icon>
+    </button>
+
+    <div style="display: flex; gap: 2em;">
+        <md3-radio-button [disable-state-layer]="disableStateLayer()">
+            <input type="radio" md3-input-element name="radio-demo-state" value="1" [disabled]="disable()" [aria-invalid]="setError()" checked>
+        </md3-radio-button>
+        <md3-radio-button [disable-state-layer]="disableStateLayer()">
+            <input type="radio" md3-input-element name="radio-demo-state" value="2" [disabled]="disable()" [aria-invalid]="setError()">
+        </md3-radio-button>
+    </div>
+</app-playground>
+
+<h2>API</h2>
+
+<div class="table-container md3-scrollable">
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 50%;">Name</th>
+                <th>Type</th>
+                <th>Default</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    control
+                    <p md3-type-body="small">Input form control object (see angular forms and form controls).</p>
+                </td>
+                <td>input&lt;AbstractControl&gt;</td>
+                <td style="white-space: nowrap;">undefined</td>
+            </tr>
+            <tr>
+                <td>
+                    disable-state-layer
+                    <p md3-type-body="small">Disable radio button state layer.</p>
+                </td>
+                <td>input&lt;boolean&gt;</td>
+                <td style="white-space: nowrap;">false</td>
+            </tr>
+        </tbody>
+    </table>
 </div>
+
+<app-shiki [code]="apiImport"></app-shiki>
+<app-shiki [code]="apiData"></app-shiki>
+<app-shiki [code]="apiUsage" language="html"></app-shiki>
+<ul>
+    <li>Radio button input element must have <code>md3-input-element</code> directive.</li>
+    <li>The component will be disabled when either the input element or the control is disabled.</li>
+    <li>When using a control object. the component will show error state when the control has errors.</li>
+    <li>When using the component with html input tag only (no controls). you can set error state by adding <code>aria-invalid="true"</code> to the input element</li>
+</ul>
