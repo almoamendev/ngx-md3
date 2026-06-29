@@ -92,9 +92,9 @@ public progress = input<number>(0);`;
             this.indeterminate.set(this.configSheet?.componentInstance?.indeterminate.value);
         });
 
-        // this.configSheet?.componentInstance?.thickness.setValue(this.thickness());
+        this.configSheet?.componentInstance?.thickness.setValue(this.thickness().toString());
         this.configSheet?.componentInstance?.thickness.registerOnChange(() => {
-            this.thickness.set(this.configSheet?.componentInstance?.thickness.value);
+            this.thickness.set(Number(this.configSheet?.componentInstance?.thickness.value) as 4 | 8);
         });
 
         this.configSheet?.componentInstance?.progress.setValue(this.progress());

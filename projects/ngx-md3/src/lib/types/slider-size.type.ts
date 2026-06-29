@@ -1,0 +1,1 @@
+export type SliderSize = 'x-small' | 'small' | 'medium' | 'large' | 'x-large';

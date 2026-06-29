@@ -4,6 +4,7 @@ import { fromEvent } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { InputElement } from '../common/input-element';
 import { TypeBody } from '../../styles/typography/type-body';
+import { SliderSize } from '../../types/slider-size.type';
 
 @Component({
     selector: 'md3-slider',
@@ -12,13 +13,12 @@ import { TypeBody } from '../../styles/typography/type-body';
     ],
     templateUrl: './slider.html',
     styleUrl: './slider.scss',
-    host: {
-        '[class]': '"md3-" + sliderSize'
-    }
 })
 export class Slider implements AfterContentInit {
     @Input() control?: AbstractControl;
-    @Input('slider-size') sliderSize: 'x-small' | 'small' | 'medium' | 'large' | 'x-large' = 'x-small';
+    public sliderSize = input<SliderSize>('x-small', {
+        alias: 'slider-size',
+    });
 
     @ContentChild(InputElement) input?: InputElement;
     @ContentChild(FormControlName) controlName?: FormControlName;
@@ -37,6 +37,15 @@ export class Slider implements AfterContentInit {
         private el: ElementRef<HTMLElement>,
         private destroyRef: DestroyRef
     ) {
+        effect((onCleanup) => {
+            const size = 'md3-' + this.sliderSize();
+            this.element.classList.add(size);
+
+            onCleanup(() => {
+                this.element.classList.remove(size);
+            });
+        });
+
         effect(() => {
             this.element.style.setProperty('--slider-progress', `${this.progress()}%`);
         });

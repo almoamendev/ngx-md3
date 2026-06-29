@@ -22,7 +22,7 @@ import { IconButton, IconElement, InputElement, MaterialIcon, RadioButton, SideS
 })
 export class ProgressConfig {
     public indeterminate: FormControl = new FormControl<boolean>(false);
-    public thickness: FormControl = new FormControl<4 | 8>(4);
+    public thickness: FormControl = new FormControl<string>('4');
     public progress: FormControl = new FormControl<number>(0);
 
     constructor(

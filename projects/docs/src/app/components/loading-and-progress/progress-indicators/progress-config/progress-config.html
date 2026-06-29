@@ -17,7 +17,7 @@
     <div class="controls-list">
         <label md3-state-component tabindex="0">
             <md3-radio-button disable-state-layer [control]="thickness">
-                <input type="radio" md3-input-element name="thickness" value="4" checked>
+                <input type="radio" md3-input-element name="thickness" value="4">
             </md3-radio-button>
             <div md3-type-label="large">4dp</div>
         </label>
@@ -29,8 +29,13 @@
         </label>
     </div>
 
-    <div md3-type-body="large">Progress %</div>
-    <md3-slider [show-value-label]="true" [control]="progress">
-        <input type="range" md3-input-element min="0" max="100" name="progress">
-    </md3-slider>
+    <div md3-type-body="large">Progress</div>
+    <div class="controls-list">
+        <div style="padding: 0 1em;">
+            <md3-slider slider-size="medium" [control]="progress">
+                <md3-icon md3-icon-element>percent</md3-icon>
+                <input type="range" md3-input-element min="0" max="100" name="progress">
+            </md3-slider>
+        </div>
+    </div>
 </md3-side-sheet-body>
