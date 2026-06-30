@@ -27,7 +27,6 @@ export class Slider {
     private input = contentChild<InputElement>(InputElement);
     private controlName = contentChild<FormControlName>(FormControlName);
 
-    public hasError: boolean = false;
     public value = signal<number>(0);
     public min = signal<number>(0);
     public max = signal<number>(100);
@@ -56,7 +55,6 @@ export class Slider {
             }
 
             this.syncInitialState(input);
-            this.updateInputValidity();
 
             const inputEvents = merge(
                 fromEvent(input, 'input'),
@@ -64,7 +62,6 @@ export class Slider {
             ).subscribe(() => {
                 this.syncStateFromInput(input);
                 this.syncControlFromState(this.value());
-                this.updateInputValidity();
             });
 
             onCleanup(() => inputEvents.unsubscribe());
@@ -78,12 +75,10 @@ export class Slider {
 
             this.syncStateFromControl(control);
             this.syncInputDisabledState(control);
-            this.updateInputValidity();
 
             const controlEvents = control.events.subscribe(() => {
                 this.syncStateFromControl(control);
                 this.syncInputDisabledState(control);
-                this.updateInputValidity();
             });
 
             onCleanup(() => controlEvents.unsubscribe());
@@ -92,27 +87,6 @@ export class Slider {
 
     public get element(): HTMLElement {
         return this.el.nativeElement;
-    }
-
-    private get inputError(): boolean {
-        const control = this.formControl();
-        if (control) {
-            return control.invalid && (control.touched || control.dirty);
-        }
-
-        const input = this.input()?.nativeElement;
-        return !(input?.validity.valid ?? true) || input?.ariaInvalid === 'true';
-    }
-
-    private updateInputValidity(): void {
-        const input = this.input()?.nativeElement;
-        this.hasError = this.inputError;
-
-        if (this.hasError) {
-            input?.setAttribute('aria-invalid', 'true');
-        } else {
-            input?.setAttribute('aria-invalid', 'false');
-        }
     }
 
     private syncInitialState(input: HTMLInputElement): void {
