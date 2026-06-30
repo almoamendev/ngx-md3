@@ -4,6 +4,144 @@
     Chips help people enter information, make selections, filter content, or trigger actions.
 </p>
 
+<figure class="component-image">
+    <img src="/img/md3-assist-chip.png" alt="Material Design button configurations" />
+    <ol>
+        <li>Container</li>
+        <li>Label text</li>
+        <li>Leading icon</li>
+    </ol>
+</figure>
+
+<figure class="component-image">
+    <img src="/img/md3-filter-chip.png" alt="Material Design button configurations" />
+    <ol>
+        <li>Container</li>
+        <li>Label text</li>
+        <li>Leading icon</li>
+        <li>Trailing icon</li>
+    </ol>
+</figure>
+
+<figure class="component-image">
+    <img src="/img/md3-input-chip.png" alt="Material Design button configurations" />
+    <ol>
+        <li>Container</li>
+        <li>Label text</li>
+        <li>Trailing icon</li>
+        <li>Leading icon</li>
+    </ol>
+</figure>
+
+<figure class="component-image">
+    <img src="/img/md3-suggestion-chip.png" alt="Material Design button configurations" />
+    <ol>
+        <li>Container</li>
+        <li>Label text</li>
+    </ol>
+</figure>
+
+<app-playground>
+    <button action-item md3-icon-button button-type="tonal" button-squared [selected]="configOpen()"
+        (click)="openConfig()">
+        <md3-icon md3-icon-element>settings</md3-icon>
+    </button>
+
+    @if (chipType() == 'assist') {
+        <button md3-chip [chip-type]="chipType()" [surface]="hasSurface()" [elevated]="isElevated()" [disabled]="disabled()">
+            <md3-icon md3-icon-element="leading">event</md3-icon>
+            <span style="text-transform: capitalize;">{{ chipType() }} chip</span>
+        </button>
+    }
+
+    @if (chipType() == 'filter') {
+        <button md3-chip [chip-type]="chipType()" [surface]="hasSurface()" [elevated]="isElevated()" [disabled]="disabled()">
+            <md3-icon md3-icon-element="leading">event</md3-icon>
+            <span style="text-transform: capitalize;">{{ chipType() }} chip</span>
+        </button>
+    }
+
+    @if (chipType() == 'input') {
+        <button md3-chip [chip-type]="chipType()" [surface]="hasSurface()" [elevated]="isElevated()" [disabled]="disabled()">
+            <md3-icon md3-icon-element="leading">event</md3-icon>
+            <span style="text-transform: capitalize;">{{ chipType() }} chip</span>
+        </button>
+    }
+
+    @if (chipType() == 'suggestion') {
+        <button md3-chip [chip-type]="chipType()" [surface]="hasSurface()" [elevated]="isElevated()" [disabled]="disabled()">
+            <md3-icon md3-icon-element="leading">event</md3-icon>
+            <span style="text-transform: capitalize;">{{ chipType() }} chip</span>
+        </button>
+    }
+</app-playground>
+
+<h2>API</h2>
+
+<div class="table-container md3-scrollable">
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 50%;">Name</th>
+                <th>Type</th>
+                <th>Default</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <i>chip-type</i>
+                    <p md3-type-body="small">Sets the chip size.</p>
+                </td>
+                <td>
+                    input&lt;ChipType&gt;
+                    <p md3-type-body="small">assist, filter, input, suggestion</p>
+                </td>
+                <td style="white-space: nowrap;">assist</td>
+            </tr>
+            <tr>
+                <td>
+                    surface
+                    <p md3-type-body="small">Set container color. if false container will be transparent.</p>
+                </td>
+                <td>
+                    input&lt;boolean&gt;
+                </td>
+                <td style="white-space: nowrap;">false</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>elevated</i>
+                    <p md3-type-body="small">Elevate the chip.</p>
+                </td>
+                <td>
+                    model&lt;boolean&gt;
+                </td>
+                <td style="white-space: nowrap;">false</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<app-shiki [code]="apiImport"></app-shiki>
+<app-shiki [code]="apiData"></app-shiki>
+<app-shiki [code]="apiTypes"></app-shiki>
+<app-shiki [code]="apiUsage" language="html"></app-shiki>
+<ul>
+    <li>When using a custom icon. always add <code>md3-icon-element</code> directive to the icon element.</li>
+    <li>
+        Custom icon size should follow Material 3 guidelines:
+        <ul>
+            <li>x-small: 20dp</li>
+            <li>small: 20dp</li>
+            <li>medium: 24dp</li>
+            <li>large: 32dp</li>
+            <li>x-large: 40dp</li>
+        </ul>
+        Default md3-icon-element css style will set <code>font-size</code>, <code>width</code>, and <code>height</code> to the correct size.
+    </li>
+</ul>
+
 <section>
     <h2>Assist chips</h2>
 

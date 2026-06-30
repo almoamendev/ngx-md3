@@ -27,6 +27,7 @@ export class ChipsComponent implements OnDestroy {
     public chipType = signal<ChipType>('assist');
     public hasSurface = signal<boolean>(false);
     public isElevated = signal<boolean>(false);
+    public disabled = signal<boolean>(false);
 
     public apiImport: string = `// Component imports
 import {
@@ -60,10 +61,10 @@ type ChipType = 'assist' | 'filter' | 'input' | 'suggestion';`;
 
     public apiUsage: string = `<!-- Component usage -->
 
-<!-- md3-icon-button can be used on <button> or <a> -->
-<button md3-icon-button>
-    ...
-</button>`;
+<!-- md3-chip can be used on <button>, <a>, <label> -->
+<button md3-chip>...</button>
+<a md3-chip>...</a>
+<label md3-chip>...</label>`;
     
     constructor(
         private sheetsService: SheetsService,
