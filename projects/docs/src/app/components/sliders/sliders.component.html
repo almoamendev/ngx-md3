@@ -22,7 +22,7 @@
     <div style="max-width: 32em; width: 100%; text-align: center;">
         <md3-slider [slider-size]="sliderSize()" [show-value-label]="showValueLabel()">
             @if (showIcon()) {
-                <md3-icon md3-icon-element>volume_up</md3-icon>
+                <md3-icon md3-icon-element bi-directional>volume_up</md3-icon>
             }
             <input type="range" min="0" max="100" step="1" md3-input-element [disabled]="disable()">
         </md3-slider>
@@ -82,8 +82,8 @@
         Custom icon size should follow Material 3 guidelines:
         <ul>
             <li>medium: 24dp</li>
-            <li>large: 32dp</li>
-            <li>x-large: 40dp</li>
+            <li>large: 24dp</li>
+            <li>x-large: 32dp</li>
         </ul>
         Default md3-icon-element css style will set <code>font-size</code>, <code>width</code>, and <code>height</code> to the correct size.
     </li>
