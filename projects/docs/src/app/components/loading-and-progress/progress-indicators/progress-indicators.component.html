@@ -19,11 +19,8 @@
         <md3-icon md3-icon-element>settings</md3-icon>
     </button>
 
-    <div style="max-width: 32em; width: 100%;">
-        <h2>Circular indicators</h2>
-        <md3-circular-progress-indicator [indeterminate]="indeterminate()" [thickness]="thickness()" [progress]="progress()"></md3-circular-progress-indicator>
-    
-        <h2>Linear indicators</h2>
+    <div style="max-width: 32em; width: 100%; text-align: center;">
+        <md3-circular-progress-indicator [indeterminate]="indeterminate()" [thickness]="thickness()" [progress]="progress()" style="margin-bottom: 1em;"></md3-circular-progress-indicator>
         <md3-linear-progress-indicator [indeterminate]="indeterminate()" [thickness]="thickness()" [progress]="progress()"></md3-linear-progress-indicator>
     </div>
 </app-playground>
