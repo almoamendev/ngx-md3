@@ -1,11 +1,8 @@
 <h1>Chips</h1>
 
-<ul>
-    <li>@Input() chip-type: 'assist' | 'filter' | 'input' | 'suggestion' = 'assist';</li>
-    <li>@Input() surface: boolean = false;</li>
-    <li>@Input() elevated: boolean = false;</li>
-    <li>@Output() on-chip-remove = () => {{ '{}' }};</li>
-</ul>
+<p>
+    Chips help people enter information, make selections, filter content, or trigger actions.
+</p>
 
 <section>
     <h2>Assist chips</h2>
@@ -80,21 +77,6 @@
 </section>
 <section>
     <h2>Input chips</h2>
-
-    <div style="display: flex; gap: 1em; flex-wrap: wrap;">
-        @for (item of inputChips; track $index) {
-            <label md3-chip chip-type="input" (on-remove)="removeChip($index)">
-                <input type="checkbox" md3-input-element>
-                {{ item }}
-            </label>
-        }
-    </div>
-
-    <md3-text-field label="Add Chips" type="outlined">
-        <input md3-input-element type="text" (keydown.enter)="addChip($event)">
-        <div md3-supporting-text>Press enter to add input chip</div>
-    </md3-text-field>
-
     <div style="display: flex; gap: 1em; flex-wrap: wrap;">
         <label md3-chip chip-type="input">
             <input type="checkbox" md3-input-element>
