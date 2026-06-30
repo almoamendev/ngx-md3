@@ -10,6 +10,7 @@ export * from './types/button-group-type.type';
 export * from './types/button-group-selection.type';
 export * from './types/fab-size.type';
 export * from './types/fab-type.type';
+export * from './types/slider-size.type';
 export * from './types/dialog-role.type';
 export * from './types/chip-type.type';
 

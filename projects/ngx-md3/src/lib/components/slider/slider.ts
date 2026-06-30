@@ -20,13 +20,12 @@ export class Slider {
     public sliderSize = input<SliderSize>('x-small', {
         alias: 'slider-size',
     });
-
-    private input = contentChild<InputElement>(InputElement);
-    private controlName = contentChild<FormControlName>(FormControlName);
-
     public showValueLabel = input<boolean>(false, {
         alias: 'show-value-label'
     });
+
+    private input = contentChild<InputElement>(InputElement);
+    private controlName = contentChild<FormControlName>(FormControlName);
 
     public hasError: boolean = false;
     public value = signal<number>(0);

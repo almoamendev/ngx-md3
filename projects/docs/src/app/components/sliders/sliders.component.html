@@ -1,57 +1,90 @@
 <h1>Sliders</h1>
 
+<p>
+    Sliders allow users to make selections from a range of values.
+</p>
+
+<figure class="component-image">
+    <img src="/img/md3-slider.png" alt="Material Design slider" />
+    <ol>
+        <li>Inset icon</li>
+        <li>Stops</li>
+        <li>Value indicator</li>
+    </ol>
+</figure>
+
+<app-playground>
+    <button action-item md3-icon-button button-type="tonal" button-squared [selected]="configOpen()"
+        (click)="openConfig()">
+        <md3-icon md3-icon-element>settings</md3-icon>
+    </button>
+
+    <div style="max-width: 32em; width: 100%; text-align: center;">
+        <md3-slider [slider-size]="sliderSize()" [show-value-label]="showValueLabel()">
+            @if (showIcon()) {
+                <md3-icon md3-icon-element>volume_up</md3-icon>
+            }
+            <input type="range" min="0" max="100" step="1" md3-input-element [disabled]="disable()">
+        </md3-slider>
+    </div>
+</app-playground>
+
+<h2>API</h2>
+
+<div class="table-container md3-scrollable">
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 50%;">Name</th>
+                <th>Type</th>
+                <th>Default</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    control
+                    <p md3-type-body="small">Input form control object (see angular forms and form controls).</p>
+                </td>
+                <td>input&lt;AbstractControl&gt;</td>
+                <td style="white-space: nowrap;">undefined</td>
+            </tr>
+            <tr>
+                <td>
+                    slider-size
+                    <p md3-type-body="small">Set slider size.</p>
+                </td>
+                <td>
+                    input&lt;SliderSize&gt;
+                    <p md3-type-body="small">x-small, small, medium, large, x-large</p>
+                </td>
+                <td style="white-space: nowrap;">x-small</td>
+            </tr>
+            <tr>
+                <td>
+                    show-value-label
+                    <p md3-type-body="small">Show input value when active.</p>
+                </td>
+                <td>input&lt;boolean&gt;</td>
+                <td style="white-space: nowrap;">false</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<app-shiki [code]="apiImport"></app-shiki>
+<app-shiki [code]="apiData"></app-shiki>
+<app-shiki [code]="apiTypes"></app-shiki>
+<app-shiki [code]="apiUsage" language="html"></app-shiki>
 <ul>
-    <li>@Input() control?: AbstractControl;</li>
-    <li>@Input('slider-size') sliderSize: 'x-small' | 'small' | 'medium' | 'large' | 'x-large' = 'x-small';</li>
+    <li>When using a custom icon. always add <code>md3-icon-element</code> directive to the icon element.</li>
+    <li>
+        Custom icon size should follow Material 3 guidelines:
+        <ul>
+            <li>medium: 24dp</li>
+            <li>large: 32dp</li>
+            <li>x-large: 40dp</li>
+        </ul>
+        Default md3-icon-element css style will set <code>font-size</code>, <code>width</code>, and <code>height</code> to the correct size.
+    </li>
 </ul>
-
-<md3-slider [show-value-label]="true" style="margin-bottom: 2rem;">
-    <input type="range" min="0" max="200" value="40" md3-input-element>
-</md3-slider>
-
-<md3-slider [show-value-label]="true" slider-size="small" style="margin-bottom: 2rem;">
-    <input type="range" min="0" max="200" value="40" md3-input-element>
-</md3-slider>
-
-<md3-slider [show-value-label]="true" slider-size="medium" style="margin-bottom: 2rem;">
-    <input type="range" min="0" max="200" value="40" md3-input-element>
-</md3-slider>
-
-<md3-slider [show-value-label]="true" slider-size="large" style="margin-bottom: 2rem;">
-    <input type="range" min="0" max="200" value="40" md3-input-element>
-</md3-slider>
-
-<md3-slider [show-value-label]="true" slider-size="x-large" style="margin-bottom: 2rem;">
-    <input type="range" min="0" max="200" value="40" md3-input-element>
-</md3-slider>
-
-<md3-slider [show-value-label]="true" style="margin-bottom: 2rem;">
-    <input type="range" min="0" max="200" value="40" md3-input-element disabled>
-</md3-slider>
-
-<md3-divider style="margin-bottom: 2rem;"></md3-divider>
-
-<md3-slider [show-value-label]="true" style="margin-bottom: 2rem;">
-    <md3-icon md3-icon-element>volume_up</md3-icon>
-    <input type="range" min="0" max="200" value="40" md3-input-element>
-</md3-slider>
-
-<md3-slider [show-value-label]="true" slider-size="small" style="margin-bottom: 2rem;">
-    <md3-icon md3-icon-element>volume_up</md3-icon>
-    <input type="range" min="0" max="200" value="40" md3-input-element>
-</md3-slider>
-
-<md3-slider [show-value-label]="true" slider-size="medium" style="margin-bottom: 2rem;">
-    <md3-icon md3-icon-element>volume_up</md3-icon>
-    <input type="range" min="0" max="200" value="40" md3-input-element>
-</md3-slider>
-
-<md3-slider [show-value-label]="true" slider-size="large" style="margin-bottom: 2rem;">
-    <md3-icon md3-icon-element>volume_up</md3-icon>
-    <input type="range" min="0" max="200" value="40" md3-input-element>
-</md3-slider>
-
-<md3-slider [show-value-label]="true" slider-size="x-large" style="margin-bottom: 2rem;">
-    <md3-icon md3-icon-element>volume_up</md3-icon>
-    <input type="range" min="0" max="200" value="40" md3-input-element>
-</md3-slider>
