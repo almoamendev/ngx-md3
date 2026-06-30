@@ -246,6 +246,7 @@
 
             & ~ .md3-slider-container {
                 --slider-active-track-color: rgb(var(--md-scheme-on-surface));
+                --slider-active-track-on-color: rgb(var(--md-scheme-inverse-on-surface));
                 --slider-track-color: rgb(var(--md-scheme-on-surface));
                 --slider-handle-color: rgb(var(--md-scheme-on-surface));
                 

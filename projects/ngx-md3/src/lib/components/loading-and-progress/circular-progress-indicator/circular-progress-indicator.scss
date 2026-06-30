@@ -25,6 +25,7 @@
         display: block;
         width: var(--size);
         height: var(--size);
+        shape-rendering: geometricprecision;
     }
     
     .md3-track,

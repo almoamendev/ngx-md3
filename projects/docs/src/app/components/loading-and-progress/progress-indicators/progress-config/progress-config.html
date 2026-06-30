@@ -32,10 +32,11 @@
     <div md3-type-body="large">Progress</div>
     <div class="controls-list">
         <div style="padding: 0 1em;">
-            <md3-slider slider-size="medium" [control]="progress">
+            <md3-slider slider-size="x-small" [control]="progress">
                 <md3-icon md3-icon-element>percent</md3-icon>
-                <input type="range" md3-input-element min="0" max="100" name="progress">
+                <input type="range" md3-input-element min="0" max="100" step="1" name="progress">
             </md3-slider>
+            <div md3-type-label="small" style="text-align: end;">{{ progress.value }}%</div>
         </div>
     </div>
 </md3-side-sheet-body>
