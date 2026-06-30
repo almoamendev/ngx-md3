@@ -1,11 +1,60 @@
 <h1>Loading indicators</h1>
 
-<ul>
-    <li>@Input() contained: boolean = false;</li>
-    <li>@Input() size: number = 48;</li>
-</ul>
+<p>
+    Loading indicators show the progress of a process for a short wait time.
+</p>
 
-<div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
-    <md3-loading-indicator></md3-loading-indicator>
-    <md3-loading-indicator [contained]="true"></md3-loading-indicator>
+<figure class="component-image">
+    <img src="/img/md3-loading-indicator.png" alt="Material Design loading indicator" />
+    <ol>
+        <li>Default</li>
+        <li>Contained</li>
+    </ol>
+</figure>
+
+<app-playground>
+    <button action-item md3-icon-button button-type="tonal" button-squared [selected]="configOpen()"
+        (click)="openConfig()">
+        <md3-icon md3-icon-element>settings</md3-icon>
+    </button>
+
+    <div style="min-height: 15em; max-height: 15em;overflow: hidden; display: flex; align-items: center; justify-content: center;">
+        <md3-loading-indicator [contained]="contained()" [size]="size()"></md3-loading-indicator>
+    </div>
+</app-playground>
+
+<h2>API</h2>
+
+<div class="table-container md3-scrollable">
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 50%;">Name</th>
+                <th>Type</th>
+                <th>Default</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    contained
+                    <p md3-type-body="small">Shows loading indicator container.</p>
+                </td>
+                <td>input&lt;boolean&gt;</td>
+                <td style="white-space: nowrap;">false</td>
+            </tr>
+            <tr>
+                <td>
+                    size
+                    <p md3-type-body="small">Loading indicator size. min: 24, max: 240.</p>
+                </td>
+                <td>input&lt;number&gt;</td>
+                <td style="white-space: nowrap;">48</td>
+            </tr>
+        </tbody>
+    </table>
 </div>
+
+<app-shiki [code]="apiImport"></app-shiki>
+<app-shiki [code]="apiData"></app-shiki>
+<app-shiki [code]="apiUsage" language="html"></app-shiki>

@@ -1,0 +1,25 @@
+<md3-side-sheet-header title="Configurations">
+    <button type="button" md3-icon-button trailing button-type="standard" (click)="close()">
+        <md3-icon md3-icon-element>close</md3-icon>
+    </button>
+</md3-side-sheet-header>
+<md3-side-sheet-body class="md3-component-config">
+    <div class="controls-list">
+        <label md3-state-component tabindex="0">
+            <div md3-type-label="large">Contained</div>
+            <md3-switch disable-state-layer [control]="contained">
+                <input type="checkbox" md3-input-element name="contained">
+            </md3-switch>
+        </label>
+    </div>
+
+    <div md3-type-body="large">Indicator size</div>
+    <div class="controls-list">
+        <div style="padding: 0 1em;">
+            <md3-slider slider-size="x-small" [control]="size">
+                <input type="range" md3-input-element min="24" max="240" step="8" name="size">
+            </md3-slider>
+            <div md3-type-label="small" style="text-align: end;">{{ size.value }}</div>
+        </div>
+    </div>
+</md3-side-sheet-body>
