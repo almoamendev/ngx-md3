@@ -1,0 +1,1 @@
+export type ChipStyle = 'default' | 'surface' | 'elevated';

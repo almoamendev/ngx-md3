@@ -3,7 +3,7 @@ import { MaterialIcon } from '../common/material-icon/material-icon';
 import { StateComponent } from '../common/state-component';
 import { ChipType } from '../../types/chip-type.type';
 import { IconElement } from '../common/icon-element';
-import { NgTemplateOutlet } from '@angular/common';
+import { ChipStyle } from '../../types/chip-style.type';
 
 @Directive({
     selector: '[md3-chip-avatar]'
@@ -19,14 +19,14 @@ export class ChipAvatar {}
     ],
     templateUrl: './chips.html',
     styleUrl: './chips.scss',
-    host: {
-        '[class.md3-elevated]': 'this.isElevated()',
-        '[class.md3-surface]': 'this.hasSurface() && !this.isElevated()',
-    },
 })
 export class Chips {
     public chipType = input<ChipType>('assist', {
         alias: 'chip-type',
+    });
+
+    public chipStyle = input<ChipStyle>('default', {
+        alias: 'chip-style',
     });
 
     public trailingFunction = output<void>({
@@ -65,6 +65,15 @@ export class Chips {
 
             onCleanup(() => {
                 this.element.classList.remove(type);
+            });
+        });
+
+        effect((onCleanup) => {
+            const style = 'md3-' + this.chipStyle();
+            this.element.classList.add(style);
+
+            onCleanup(() => {
+                this.element.classList.remove(style);
             });
         });
     }

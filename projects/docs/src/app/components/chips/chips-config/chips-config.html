@@ -4,21 +4,6 @@
     </button>
 </md3-side-sheet-header>
 <md3-side-sheet-body class="md3-component-config">
-    <div class="controls-list">
-        <label md3-state-component tabindex="0">
-            <div md3-type-label="large">Surface color</div>
-            <md3-switch disable-state-layer [control]="hasSurface">
-                <input type="checkbox" md3-input-element name="has-surface">
-            </md3-switch>
-        </label>
-        <label md3-state-component tabindex="0">
-            <div md3-type-label="large">Elevate chip</div>
-            <md3-switch disable-state-layer [control]="isElevated">
-                <input type="checkbox" md3-input-element name="elevate-chip">
-            </md3-switch>
-        </label>
-    </div>
-    
     <div md3-type-body="large">Type</div>
     <div class="controls-list">
         <label md3-state-component tabindex="0">
@@ -65,6 +50,28 @@
             <md3-switch disable-state-layer [control]="trailingIcon">
                 <input type="checkbox" md3-input-element name="trailing-icon">
             </md3-switch>
+        </label>
+    </div>
+
+    <div md3-type-body="large">Style</div>
+    <div class="controls-list">
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="chipStyle">
+                <input type="radio" md3-input-element name="chip-style" value="default">
+            </md3-radio-button>
+            <div md3-type-label="large">Default</div>
+        </label>
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="chipStyle">
+                <input type="radio" md3-input-element name="chip-style" value="surface">
+            </md3-radio-button>
+            <div md3-type-label="large">Surface</div>
+        </label>
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="chipStyle">
+                <input type="radio" md3-input-element name="chip-style" value="elevated">
+            </md3-radio-button>
+            <div md3-type-label="large">Elevated</div>
         </label>
     </div>
         

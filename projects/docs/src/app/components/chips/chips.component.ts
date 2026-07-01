@@ -1,5 +1,5 @@
 import { Component, effect, OnDestroy, signal } from '@angular/core';
-import { ChipAvatar, Chips, ChipType, IconButton, IconElement, InputElement, MaterialIcon, SheetsService, SideSheetRef, TextFieldModule, TypeBody } from '@vip9008/ngx-md3';
+import { ChipAvatar, Chips, ChipStyle, ChipType, IconButton, IconElement, InputElement, MaterialIcon, SheetsService, SideSheetRef, TextFieldModule, TypeBody } from '@vip9008/ngx-md3';
 import { Playground } from '../playground/playground';
 import { Shiki } from '../shiki/shiki';
 import { ChipsConfig } from './chips-config/chips-config';
@@ -25,8 +25,7 @@ export class ChipsComponent implements OnDestroy {
     public configOpen = signal(false);
 
     public chipType = signal<ChipType>('assist');
-    public hasSurface = signal<boolean>(false);
-    public isElevated = signal<boolean>(false);
+    public chipStyle = signal<ChipStyle>('default');
     public disabled = signal<boolean>(false);
     public leadingIcon = signal<boolean>(false);
     public trailingIcon = signal<boolean>(false);
@@ -48,19 +47,15 @@ public trailingFunction = output<void>({
 public chipType = input<ChipType>('assist', {
     alias: 'chip-type',
 });
-public hasSurface = input<boolean, unknown>(false, {
-    alias: 'surface',
-    transform: booleanAttribute,
-});
-public isElevated = input<boolean, unknown>(false, {
-    alias: 'elevated',
-    transform: booleanAttribute,
+public chipStyle = input<ChipStyle>('default', {
+    alias: 'chip-style',
 });`;
 
     public apiTypes: string = `// Types
-import { ChipType } from '@vip9008/ngx-md3';
+import { ChipType, ChipStyle } from '@vip9008/ngx-md3';
 
-type ChipType = 'assist' | 'filter' | 'input' | 'suggestion';`;
+type ChipType = 'assist' | 'filter' | 'input' | 'suggestion';
+type ChipStyle = 'default' | 'surface' | 'elevated';`;
 
     public apiUsage: string = `<!-- Component usage -->
 
@@ -123,14 +118,9 @@ type ChipType = 'assist' | 'filter' | 'input' | 'suggestion';`;
             this.chipType.set(this.configSheet?.componentInstance?.chipType.value);
         });
 
-        this.configSheet?.componentInstance?.hasSurface.setValue(this.hasSurface());
-        this.configSheet?.componentInstance?.hasSurface.registerOnChange(() => {
-            this.hasSurface.set(this.configSheet?.componentInstance?.hasSurface.value);
-        });
-
-        this.configSheet?.componentInstance?.isElevated.setValue(this.isElevated());
-        this.configSheet?.componentInstance?.isElevated.registerOnChange(() => {
-            this.isElevated.set(this.configSheet?.componentInstance?.isElevated.value);
+        this.configSheet?.componentInstance?.chipStyle.setValue(this.chipStyle());
+        this.configSheet?.componentInstance?.chipStyle.registerOnChange(() => {
+            this.chipStyle.set(this.configSheet?.componentInstance?.chipStyle.value);
         });
 
         this.configSheet?.componentInstance?.disabled.setValue(this.disabled());
@@ -168,6 +158,7 @@ type ChipType = 'assist' | 'filter' | 'input' | 'suggestion';`;
                 break;
             case 'filter':
                 this.configSheet?.componentInstance?.leadingIcon.disable();
+                this.configSheet?.componentInstance?.avatar.disable();
                 this.configSheet?.componentInstance?.trailingIcon.enable();
 
                 this.configSheet?.componentInstance?.leadingIcon.setValue(false);
@@ -175,6 +166,7 @@ type ChipType = 'assist' | 'filter' | 'input' | 'suggestion';`;
                 break;
             case 'input':
                 this.configSheet?.componentInstance?.leadingIcon.enable();
+                this.configSheet?.componentInstance?.avatar.enable();
                 this.configSheet?.componentInstance?.trailingIcon.disable();
 
                 this.configSheet?.componentInstance?.leadingIcon.setValue(true);
@@ -190,7 +182,7 @@ type ChipType = 'assist' | 'filter' | 'input' | 'suggestion';`;
                 break;
         }
 
-        this.configSheet?.componentInstance?.avatar.disable();
+        this.configSheet?.componentInstance?.avatar.setValue(false);
     }
 }
 

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { ChipType, IconButton, IconElement, InputElement, MaterialIcon, RadioButton, SideSheetBody, SideSheetHeader, SideSheetRef, StateComponent, Switch, TypeLabel } from '@vip9008/ngx-md3';
+import { ChipStyle, ChipType, IconButton, IconElement, InputElement, MaterialIcon, RadioButton, SideSheetBody, SideSheetHeader, SideSheetRef, StateComponent, Switch, TypeLabel } from '@vip9008/ngx-md3';
 
 @Component({
     selector: 'app-chips-config',
@@ -21,8 +21,7 @@ import { ChipType, IconButton, IconElement, InputElement, MaterialIcon, RadioBut
 })
 export class ChipsConfig {
     public chipType: FormControl = new FormControl<ChipType>('assist');
-    public hasSurface: FormControl = new FormControl<boolean>(false);
-    public isElevated: FormControl = new FormControl<boolean>(false);
+    public chipStyle: FormControl = new FormControl<ChipStyle>('default');
     public disabled: FormControl = new FormControl<boolean>(false);
     public leadingIcon: FormControl = new FormControl<boolean>(false);
     public avatar: FormControl = new FormControl<boolean>(false);
