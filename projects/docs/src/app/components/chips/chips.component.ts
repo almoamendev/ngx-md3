@@ -28,6 +28,9 @@ export class ChipsComponent implements OnDestroy {
     public hasSurface = signal<boolean>(false);
     public isElevated = signal<boolean>(false);
     public disabled = signal<boolean>(false);
+    public leadingIcon = signal<boolean>(true);
+    public trailingIcon = signal<boolean>(true);
+    public avatar = signal<boolean>(false);
 
     public apiImport: string = `// Component imports
 import {
@@ -118,6 +121,21 @@ type ChipType = 'assist' | 'filter' | 'input' | 'suggestion';`;
         this.configSheet?.componentInstance?.disabled.setValue(this.disabled());
         this.configSheet?.componentInstance?.disabled.registerOnChange(() => {
             this.disabled.set(this.configSheet?.componentInstance?.disabled.value);
+        });
+
+        this.configSheet?.componentInstance?.leadingIcon.setValue(this.leadingIcon());
+        this.configSheet?.componentInstance?.leadingIcon.registerOnChange(() => {
+            this.leadingIcon.set(this.configSheet?.componentInstance?.leadingIcon.value);
+        });
+
+        this.configSheet?.componentInstance?.trailingIcon.setValue(this.trailingIcon());
+        this.configSheet?.componentInstance?.trailingIcon.registerOnChange(() => {
+            this.trailingIcon.set(this.configSheet?.componentInstance?.trailingIcon.value);
+        });
+
+        this.configSheet?.componentInstance?.avatar.setValue(this.avatar());
+        this.configSheet?.componentInstance?.avatar.registerOnChange(() => {
+            this.avatar.set(this.configSheet?.componentInstance?.avatar.value);
         });
     }
 }
