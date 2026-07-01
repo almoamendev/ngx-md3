@@ -100,31 +100,25 @@ type ChipType = 'assist' | 'filter' | 'input' | 'suggestion';`;
     }
 
     private registerConfigEvents() {
-        // this.configSheet?.componentInstance?.buttonSize.setValue(this.buttonSize());
-        // this.configSheet?.componentInstance?.buttonSize.registerOnChange(() => {
-        //     this.buttonSize.set(this.configSheet?.componentInstance?.buttonSize.value);
-        // });
+        this.configSheet?.componentInstance?.chipType.setValue(this.chipType());
+        this.configSheet?.componentInstance?.chipType.registerOnChange(() => {
+            this.chipType.set(this.configSheet?.componentInstance?.chipType.value);
+        });
 
-        // this.configSheet?.componentInstance?.buttonType.setValue(this.buttonType());
-        // this.configSheet?.componentInstance?.buttonType.registerOnChange(() => {
-        //     this.buttonType.set(this.configSheet?.componentInstance?.buttonType.value);
-        // });
+        this.configSheet?.componentInstance?.hasSurface.setValue(this.hasSurface());
+        this.configSheet?.componentInstance?.hasSurface.registerOnChange(() => {
+            this.hasSurface.set(this.configSheet?.componentInstance?.hasSurface.value);
+        });
 
-        // this.configSheet?.componentInstance?.buttonWidth.setValue(this.buttonWidth());
-        // this.configSheet?.componentInstance?.buttonWidth.registerOnChange(() => {
-        //     this.buttonWidth.set(this.configSheet?.componentInstance?.buttonWidth.value);
-        // });
+        this.configSheet?.componentInstance?.isElevated.setValue(this.isElevated());
+        this.configSheet?.componentInstance?.isElevated.registerOnChange(() => {
+            this.isElevated.set(this.configSheet?.componentInstance?.isElevated.value);
+        });
 
-        // this.configSheet?.componentInstance?.isSquared.setValue(this.isSquared());
-        // this.configSheet?.componentInstance?.isSquared.registerOnChange(() => {
-        //     this.isSquared.set(this.configSheet?.componentInstance?.isSquared.value);
-        // });
-
-        // this.configSheet?.componentInstance?.isSelected.setValue(this.isSelected() === null ? 'none' : 'toggle');
-        // this.configSheet?.componentInstance?.isSelected.registerOnChange(() => {
-        //     const selection = this.configSheet?.componentInstance?.isSelected.value;
-        //     this.isSelected.set(selection == 'none' ? null : false);
-        // });
+        this.configSheet?.componentInstance?.disabled.setValue(this.disabled());
+        this.configSheet?.componentInstance?.disabled.registerOnChange(() => {
+            this.disabled.set(this.configSheet?.componentInstance?.disabled.value);
+        });
     }
 }
 

@@ -49,29 +49,30 @@
 
     @if (chipType() == 'assist') {
         <button md3-chip [chip-type]="chipType()" [surface]="hasSurface()" [elevated]="isElevated()" [disabled]="disabled()">
-            <md3-icon md3-icon-element="leading">event</md3-icon>
-            <span style="text-transform: capitalize;">{{ chipType() }} chip</span>
+            <md3-icon md3-icon-element="leading">local_taxi</md3-icon>
+            <span>{{ chipType() }} chip</span>
         </button>
     }
 
     @if (chipType() == 'filter') {
-        <button md3-chip [chip-type]="chipType()" [surface]="hasSurface()" [elevated]="isElevated()" [disabled]="disabled()">
-            <md3-icon md3-icon-element="leading">event</md3-icon>
-            <span style="text-transform: capitalize;">{{ chipType() }} chip</span>
-        </button>
+        <label md3-chip [chip-type]="chipType()" [surface]="hasSurface()" [elevated]="isElevated()">
+            <input type="checkbox" md3-input-element [disabled]="disabled()">
+            <span>{{ chipType() }} chip</span>
+        </label>
     }
 
     @if (chipType() == 'input') {
-        <button md3-chip [chip-type]="chipType()" [surface]="hasSurface()" [elevated]="isElevated()" [disabled]="disabled()">
-            <md3-icon md3-icon-element="leading">event</md3-icon>
-            <span style="text-transform: capitalize;">{{ chipType() }} chip</span>
-        </button>
+        <label md3-chip [chip-type]="chipType()" [surface]="hasSurface()" [elevated]="isElevated()">
+            <input type="checkbox" md3-input-element [disabled]="disabled()">
+            <!-- <md3-icon md3-icon-element="leading">image</md3-icon> -->
+            <md3-icon md3-chip-avatar>person</md3-icon>
+            <span>{{ chipType() }} chip</span>
+        </label>
     }
 
     @if (chipType() == 'suggestion') {
         <button md3-chip [chip-type]="chipType()" [surface]="hasSurface()" [elevated]="isElevated()" [disabled]="disabled()">
-            <md3-icon md3-icon-element="leading">event</md3-icon>
-            <span style="text-transform: capitalize;">{{ chipType() }} chip</span>
+            <span>{{ chipType() }} chip</span>
         </button>
     }
 </app-playground>
@@ -141,141 +142,3 @@
         Default md3-icon-element css style will set <code>font-size</code>, <code>width</code>, and <code>height</code> to the correct size.
     </li>
 </ul>
-
-<section>
-    <h2>Assist chips</h2>
-
-    <div style="display: flex; gap: 1em; flex-wrap: wrap;">
-        <button md3-chip chip-type="assist">
-            <md3-icon md3-icon-element="leading">event</md3-icon>
-            Add to calendar
-        </button>
-        <button md3-chip chip-type="assist" disabled>
-            <md3-icon md3-icon-element="leading">event</md3-icon>
-            Add to calendar
-        </button>
-        <button md3-chip chip-type="assist" surface>
-            <md3-icon md3-icon-element="leading">event</md3-icon>
-            Add to calendar
-        </button>
-        <button md3-chip chip-type="assist" surface disabled>
-            <md3-icon md3-icon-element="leading">event</md3-icon>
-            Add to calendar
-        </button>
-        <button md3-chip chip-type="assist" elevated>
-            <md3-icon md3-icon-element="leading">notifications</md3-icon>
-            Set reminder
-        </button>
-        <button md3-chip chip-type="assist" elevated disabled>
-            <md3-icon md3-icon-element="leading">notifications</md3-icon>
-            Set reminder
-        </button>
-    </div>
-</section>
-<section>
-    <h2>Filter chips</h2>
-
-    <div style="display: flex; gap: 1em; flex-wrap: wrap;">
-        <label md3-chip chip-type="filter">
-            <input type="checkbox" md3-input-element>
-            Vegetarian
-        </label>
-        <label md3-chip chip-type="filter">
-            <input type="checkbox" md3-input-element checked>
-            Breakfast
-        </label>
-        <label md3-chip chip-type="filter">
-            <input type="checkbox" md3-input-element disabled>
-            Open now
-        </label>
-        <label md3-chip chip-type="filter">
-            <input type="checkbox" md3-input-element disabled checked>
-            Disabled
-        </label>
-    </div>
-    
-    <div style="display: flex; gap: 1em; flex-wrap: wrap;">
-        <label md3-chip chip-type="filter" elevated>
-            <input type="checkbox" md3-input-element>
-            Vegetarian
-        </label>
-        <label md3-chip chip-type="filter" elevated>
-            <input type="checkbox" md3-input-element checked>
-            Breakfast
-        </label>
-        <label md3-chip chip-type="filter" elevated>
-            <input type="checkbox" md3-input-element disabled>
-            Open now
-        </label>
-        <label md3-chip chip-type="filter" elevated>
-            <input type="checkbox" md3-input-element disabled checked>
-            Disabled
-        </label>
-    </div>
-</section>
-<section>
-    <h2>Input chips</h2>
-    <div style="display: flex; gap: 1em; flex-wrap: wrap;">
-        <label md3-chip chip-type="input">
-            <input type="checkbox" md3-input-element>
-            Material
-        </label>
-        <label md3-chip chip-type="input">
-            <input type="checkbox" md3-input-element disabled>
-            Add to calendar
-        </label>
-        <label md3-chip chip-type="input">
-            <input type="checkbox" md3-input-element checked disabled>
-            <md3-icon md3-icon-element="leading">notifications</md3-icon>
-            Set reminder
-        </label>
-        <label md3-chip chip-type="input">
-            <input type="checkbox" md3-input-element disabled>
-            <md3-icon md3-chip-avatar>person</md3-icon>
-            Contact number
-        </label>
-    </div>
-
-    <div style="display: flex; gap: 1em; flex-wrap: wrap;">
-        <label md3-chip chip-type="input" elevated>
-            <input type="checkbox" md3-input-element>
-            Material
-        </label>
-        <label md3-chip chip-type="input" elevated>
-            <input type="checkbox" md3-input-element disabled>
-            Add to calendar
-        </label>
-        <label md3-chip chip-type="input" elevated>
-            <input type="checkbox" md3-input-element checked disabled>
-            <md3-icon md3-icon-element="leading">notifications</md3-icon>
-            Set reminder
-        </label>
-        <label md3-chip chip-type="input" elevated>
-            <input type="checkbox" md3-input-element disabled>
-            <md3-icon md3-chip-avatar>person</md3-icon>
-            Contact number
-        </label>
-    </div>
-</section>
-
-<section>
-    <h2>Suggestion chips</h2>
-
-    <div style="display: flex; gap: 1em; flex-wrap: wrap;">
-        <button md3-chip chip-type="suggestion">
-            Vegetarian
-        </button>
-        <button md3-chip chip-type="filter">
-            <md3-icon md3-icon-element="leading">notifications</md3-icon>
-            Breakfast
-            <md3-icon md3-icon-element="trailing">person</md3-icon>
-        </button>
-        <button md3-chip chip-type="suggestion">
-            <md3-icon md3-chip-avatar>person</md3-icon>
-            Open now
-        </button>
-        <button md3-chip chip-type="suggestion" disabled>
-            Disabled
-        </button>
-    </div>
-</section>

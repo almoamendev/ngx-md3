@@ -6,12 +6,12 @@ import { IconElement } from '../common/icon-element';
 import { NgTemplateOutlet } from '@angular/common';
 
 @Directive({
-    selector: 'button[md3-chip-avatar], a[md3-chip-avatar], label[md3-chip-avatar]'
+    selector: '[md3-chip-avatar]'
 })
 export class ChipAvatar {}
 
 @Component({
-    selector: 'md3-chip, button[md3-chip], a[md3-chip], label[md3-chip]',
+    selector: 'button[md3-chip], a[md3-chip], label[md3-chip]',
     imports: [
         NgTemplateOutlet,
         StateComponent,
