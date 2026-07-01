@@ -11,21 +11,25 @@
     <div class="md3-chip-label">
         <ng-content></ng-content>
     </div>
-    @if (hasRemove()) {
-        <button class="md3-chip-trailing" md3-state-component (click)="onRemoveClick($event)">
-            <ng-container [ngTemplateOutlet]="trailingContent"></ng-container>
+    @if (hasRemove() || trailing()) {
+        <button class="md3-chip-trailing" md3-state-component [class.has-icon]="trailing()" (click)="onTrailingClick($event)">
+            <ng-content select="[md3-icon-element=trailing]"></ng-content>
+
+            @if (hasRemove() && !trailing()) {
+                <md3-icon [icon-size]="18">close</md3-icon>
+            }
         </button>
-    } @else {
+    <!-- } @else {
         <div class="md3-chip-trailing" [class.has-icon]="trailing()">
             <ng-container [ngTemplateOutlet]="trailingContent"></ng-container>
-        </div>
+        </div> -->
     }
 </div>
 
-<ng-template #trailingContent>
+<!-- <ng-template #trailingContent>
     <ng-content select="[md3-icon-element=trailing]"></ng-content>
 
     @if (hasRemove() && !trailing()) {
         <md3-icon [icon-size]="18">close</md3-icon>
     }
-</ng-template>
+</ng-template> -->

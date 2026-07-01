@@ -49,6 +49,27 @@
         
     <div class="controls-list">
         <label md3-state-component tabindex="0">
+            <div md3-type-label="large">Leading icon</div>
+            <md3-switch disable-state-layer [control]="leadingIcon">
+                <input type="checkbox" md3-input-element name="leading-icon">
+            </md3-switch>
+        </label>
+        <label md3-state-component tabindex="0">
+            <div md3-type-label="large">Avatar</div>
+            <md3-switch disable-state-layer [control]="avatar">
+                <input type="checkbox" md3-input-element name="avatar">
+            </md3-switch>
+        </label>
+        <label md3-state-component tabindex="0">
+            <div md3-type-label="large">Trailing icon</div>
+            <md3-switch disable-state-layer [control]="trailingIcon">
+                <input type="checkbox" md3-input-element name="trailing-icon">
+            </md3-switch>
+        </label>
+    </div>
+        
+    <div class="controls-list">
+        <label md3-state-component tabindex="0">
             <div md3-type-label="large">Disable chip</div>
             <md3-switch disable-state-layer [control]="disabled">
                 <input type="checkbox" md3-input-element name="disable-chip">

@@ -131,6 +131,21 @@
                     opacity: 1;
                     transform: scale(1);
                     width: 1.125em;
+                    position: relative;
+                    border: none;
+                    background-color: transparent;
+                    border-radius: 100%;
+                    cursor: pointer;
+                    z-index: 10;
+
+                    &::before {
+                        content: '';
+                        display: block;
+                        position: absolute;
+                        height: 3em;
+                        width: 3em;
+                        border-radius: 100%;
+                    }
                 }
             }
         }

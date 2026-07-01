@@ -24,9 +24,9 @@ export class ChipsConfig {
     public hasSurface: FormControl = new FormControl<boolean>(false);
     public isElevated: FormControl = new FormControl<boolean>(false);
     public disabled: FormControl = new FormControl<boolean>(false);
-    public leadingIcon: FormControl = new FormControl<boolean>(true);
-    public trailingIcon: FormControl = new FormControl<boolean>(false);
+    public leadingIcon: FormControl = new FormControl<boolean>(false);
     public avatar: FormControl = new FormControl<boolean>(false);
+    public trailingIcon: FormControl = new FormControl<boolean>(false);
 
     constructor(
         private sideSheetRef: SideSheetRef<ChipsConfig>

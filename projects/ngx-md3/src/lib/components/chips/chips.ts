@@ -13,7 +13,7 @@ export class ChipAvatar {}
 @Component({
     selector: 'button[md3-chip], a[md3-chip], label[md3-chip]',
     imports: [
-        NgTemplateOutlet,
+        // NgTemplateOutlet,
         StateComponent,
         MaterialIcon,
     ],
@@ -29,13 +29,13 @@ export class Chips {
         alias: 'chip-type',
     });
 
-    public removeFunction = output<void>({
-        alias: 'on-remove',
+    public trailingFunction = output<void>({
+        alias: 'on-trailing',
     });
 
-    protected onRemoveClick(event: Event): void {
+    protected onTrailingClick(event: Event): void {
         event.stopPropagation();
-        this.removeFunction.emit();
+        this.trailingFunction.emit();
     }
 
     private avatar = contentChild(ChipAvatar);

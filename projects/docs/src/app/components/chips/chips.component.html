@@ -49,7 +49,9 @@
 
     @if (chipType() == 'assist') {
         <button md3-chip [chip-type]="chipType()" [surface]="hasSurface()" [elevated]="isElevated()" [disabled]="disabled()">
-            <md3-icon md3-icon-element="leading">local_taxi</md3-icon>
+            @if (leadingIcon()) {
+                <md3-icon md3-icon-element="leading">local_taxi</md3-icon>
+            }
             <span>{{ chipType() }} chip</span>
         </button>
     }
@@ -58,14 +60,21 @@
         <label md3-chip [chip-type]="chipType()" [surface]="hasSurface()" [elevated]="isElevated()">
             <input type="checkbox" md3-input-element [disabled]="disabled()">
             <span>{{ chipType() }} chip</span>
+            @if (trailingIcon()) {
+                <md3-icon md3-icon-element="trailing">arrow_drop_down</md3-icon>
+            }
         </label>
     }
 
     @if (chipType() == 'input') {
         <label md3-chip [chip-type]="chipType()" [surface]="hasSurface()" [elevated]="isElevated()">
             <input type="checkbox" md3-input-element [disabled]="disabled()">
-            <!-- <md3-icon md3-icon-element="leading">image</md3-icon> -->
-            <md3-icon md3-chip-avatar>person</md3-icon>
+            @if (leadingIcon()) {
+                <md3-icon md3-icon-element="leading">image</md3-icon>
+            }
+            @if (avatar()) {
+                <md3-icon md3-chip-avatar>person</md3-icon>
+            }
             <span>{{ chipType() }} chip</span>
         </label>
     }
@@ -89,6 +98,16 @@
             </tr>
         </thead>
         <tbody>
+            <tr>
+                <td>
+                    <i>on-trailing</i>
+                    <p md3-type-body="small">Emits trailing icon click event.</p>
+                </td>
+                <td>
+                    output&lt;void&gt;
+                </td>
+                <td style="white-space: nowrap;">undefined</td>
+            </tr>
             <tr>
                 <td>
                     <i>chip-type</i>

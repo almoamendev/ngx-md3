@@ -1,4 +1,4 @@
-import { Component, OnDestroy, signal } from '@angular/core';
+import { Component, effect, OnDestroy, signal } from '@angular/core';
 import { ChipAvatar, Chips, ChipType, IconButton, IconElement, InputElement, MaterialIcon, SheetsService, SideSheetRef, TextFieldModule, TypeBody } from '@vip9008/ngx-md3';
 import { Playground } from '../playground/playground';
 import { Shiki } from '../shiki/shiki';
@@ -28,8 +28,8 @@ export class ChipsComponent implements OnDestroy {
     public hasSurface = signal<boolean>(false);
     public isElevated = signal<boolean>(false);
     public disabled = signal<boolean>(false);
-    public leadingIcon = signal<boolean>(true);
-    public trailingIcon = signal<boolean>(true);
+    public leadingIcon = signal<boolean>(false);
+    public trailingIcon = signal<boolean>(false);
     public avatar = signal<boolean>(false);
 
     public apiImport: string = `// Component imports
@@ -42,8 +42,8 @@ import {
 } from '@vip9008/ngx-md3';`;
 
     public apiData: string = `// Inputs & outputs
-public removeFunction = output<void>({
-    alias: 'on-remove',
+public trailingFunction = output<void>({
+    alias: 'on-trailing',
 });
 public chipType = input<ChipType>('assist', {
     alias: 'chip-type',
@@ -72,6 +72,21 @@ type ChipType = 'assist' | 'filter' | 'input' | 'suggestion';`;
     constructor(
         private sheetsService: SheetsService,
     ) {
+        effect(() => {
+            this.filterIcons();
+        });
+
+        effect(() => {
+            if (this.leadingIcon()) {
+                this.configSheet?.componentInstance?.avatar.setValue(false);
+            }
+        });
+        
+        effect(() => {
+            if (this.avatar()) {
+                this.configSheet?.componentInstance?.leadingIcon.setValue(false);
+            }
+        });
     }
 
     public openConfig(): void {
@@ -137,6 +152,45 @@ type ChipType = 'assist' | 'filter' | 'input' | 'suggestion';`;
         this.configSheet?.componentInstance?.avatar.registerOnChange(() => {
             this.avatar.set(this.configSheet?.componentInstance?.avatar.value);
         });
+
+        this.filterIcons();
+    }
+
+    private filterIcons() {
+        switch(this.chipType()) {
+            case 'assist':
+                this.configSheet?.componentInstance?.leadingIcon.enable();
+                this.configSheet?.componentInstance?.avatar.disable();
+                this.configSheet?.componentInstance?.trailingIcon.disable();
+
+                this.configSheet?.componentInstance?.leadingIcon.setValue(true);
+                this.configSheet?.componentInstance?.trailingIcon.setValue(false);
+                break;
+            case 'filter':
+                this.configSheet?.componentInstance?.leadingIcon.disable();
+                this.configSheet?.componentInstance?.trailingIcon.enable();
+
+                this.configSheet?.componentInstance?.leadingIcon.setValue(false);
+                this.configSheet?.componentInstance?.trailingIcon.setValue(false);
+                break;
+            case 'input':
+                this.configSheet?.componentInstance?.leadingIcon.enable();
+                this.configSheet?.componentInstance?.trailingIcon.disable();
+
+                this.configSheet?.componentInstance?.leadingIcon.setValue(true);
+                this.configSheet?.componentInstance?.trailingIcon.setValue(true);
+                break;
+            case 'suggestion':
+                this.configSheet?.componentInstance?.leadingIcon.disable();
+                this.configSheet?.componentInstance?.avatar.disable();
+                this.configSheet?.componentInstance?.trailingIcon.disable();
+
+                this.configSheet?.componentInstance?.leadingIcon.setValue(false);
+                this.configSheet?.componentInstance?.trailingIcon.setValue(false);
+                break;
+        }
+
+        this.configSheet?.componentInstance?.avatar.disable();
     }
 }
 
