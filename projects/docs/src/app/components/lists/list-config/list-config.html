@@ -1,1 +1,38 @@
-<p>list-config works!</p>
+<md3-side-sheet-header title="Configurations">
+    <button type="button" md3-icon-button trailing button-type="standard" (click)="close()">
+        <md3-icon md3-icon-element>close</md3-icon>
+    </button>
+</md3-side-sheet-header>
+<md3-side-sheet-body class="md3-component-config">
+    <div md3-type-body="large">List variant</div>
+    <div class="controls-list">
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="listVariant">
+                <input type="radio" md3-input-element name="list-variant" value="expressive">
+            </md3-radio-button>
+            <div md3-type-label="large">Expressive</div>
+        </label>
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="listVariant">
+                <input type="radio" md3-input-element name="list-variant" value="baseline">
+            </md3-radio-button>
+            <div md3-type-label="large">Baseline</div>
+        </label>
+    </div>
+
+    <div md3-type-body="large">List type</div>
+    <div class="controls-list">
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="listType">
+                <input type="radio" md3-input-element name="list-type" value="standard">
+            </md3-radio-button>
+            <div md3-type-label="large">Standard</div>
+        </label>
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="listType">
+                <input type="radio" md3-input-element name="list-type" value="segmented">
+            </md3-radio-button>
+            <div md3-type-label="large">Segmented</div>
+        </label>
+    </div>
+</md3-side-sheet-body>

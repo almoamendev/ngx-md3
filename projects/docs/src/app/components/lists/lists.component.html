@@ -18,6 +18,29 @@
         (click)="openConfig()">
         <md3-icon md3-icon-element>settings</md3-icon>
     </button>
+
+    <md3-list style="width: 20em; max-width: 100%;" [variant]="listVariant()" [type]="listType()">
+        <md3-list-item [slots-alignment]="itemSlotsAlignment()" [selected]="itemSelected()">
+            <md3-list-leading [type]="leadingType()" [size]="leadingSize()">
+                <md3-icon>person</md3-icon>
+            </md3-list-leading>
+            <div md3-list-slot="content">
+                Icon
+                <div md3-type-body="small" color="on-surface-variant" emphasized>Icon</div>
+            </div>
+            <div md3-list-slot="trailing">+100</div>
+        </md3-list-item>
+        <md3-list-item [slots-alignment]="itemSlotsAlignment()" [selected]="itemSelected()">
+            <md3-list-leading [type]="leadingType()" [size]="leadingSize()">
+                <md3-icon>person</md3-icon>
+            </md3-list-leading>
+            <div md3-list-slot="content">
+                Icon
+                <div md3-type-body="small" color="on-surface-variant" emphasized>Icon</div>
+            </div>
+            <div md3-list-slot="trailing">+100</div>
+        </md3-list-item>
+    </md3-list>
 </app-playground>
 
 <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
