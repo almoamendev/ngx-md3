@@ -5,7 +5,6 @@ import { RadioButton } from '../../selection-controls/radio-button/radio-button'
 
 @Component({
     selector: 'md3-list-item, label[md3-list-item], button[md3-list-item], a[md3-list-item]',
-    standalone: false,
     templateUrl: './list-item.html',
     styleUrl: './list-item.scss',
     host: {

@@ -12,13 +12,13 @@ import { PrimaryAction } from './primary-action';
 
 @NgModule({
     declarations: [
+    ],
+    imports: [
         List,
         ListItem,
         ListSlot,
         ListLeading,
         PrimaryAction,
-    ],
-    imports: [
         MaterialIcon,
         IconButton,
         IconElement,

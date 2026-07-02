@@ -1,0 +1,1 @@
+export type ListLeadingSize = 'image' | 'small-video' | 'large-video';

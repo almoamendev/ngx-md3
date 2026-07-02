@@ -2,7 +2,6 @@ import { Directive, ElementRef, input } from '@angular/core';
 
 @Directive({
     selector: '[md3-list-slot]',
-    standalone: false,
     host: {
         '[attr.md3-list-slot]': 'position()',
     },

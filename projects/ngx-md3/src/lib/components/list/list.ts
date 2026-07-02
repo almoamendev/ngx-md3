@@ -2,7 +2,6 @@ import { Component, effect, ElementRef, input } from '@angular/core';
 
 @Component({
     selector: 'md3-list',
-    standalone: false,
     templateUrl: './list.html',
     styleUrl: './list.scss',
 })

@@ -14,6 +14,8 @@ export * from './types/slider-size.type';
 export * from './types/dialog-role.type';
 export * from './types/chip-type.type';
 export * from './types/chip-style.type';
+export * from './types/list-leading-type.type';
+export * from './types/list-leading-size.type';
 
 // interfaces
 export * from './interfaces/dialog-config.interface';
