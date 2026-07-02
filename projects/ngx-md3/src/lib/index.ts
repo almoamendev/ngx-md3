@@ -62,7 +62,6 @@ export * from './components/chips/chips';
 export * from './components/selection-controls/checkbox/checkbox';
 export * from './components/selection-controls/radio-button/radio-button';
 export * from './components/selection-controls/switch/switch';
-export * from './components/selection-controls/selection-controls-module';
 
 // sliders
 export * from './components/slider/slider';
@@ -73,7 +72,6 @@ export * from './components/list/list-item/list-item';
 export * from './components/list/list-leading/list-leading';
 export * from './components/list/list-slot';
 export * from './components/list/primary-action';
-export * from './components/list/list-module';
 
 // loading and progress
 export * from './components/loading-and-progress/loading-indicator/loading-indicator';

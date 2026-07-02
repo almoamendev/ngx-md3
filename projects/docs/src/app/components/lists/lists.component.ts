@@ -1,10 +1,17 @@
 import { Component } from '@angular/core';
-import { Checkbox, Divider, InputElement, ListModule, RadioButton, TypeBody } from '@vip9008/ngx-md3';
+import { Checkbox, Divider, IconButton, IconElement, InputElement, List, ListItem, ListLeading, ListSlot, MaterialIcon, PrimaryAction, RadioButton, TypeBody } from '@vip9008/ngx-md3';
 
 @Component({
     selector: 'app-lists',
     imports: [
-        ListModule,
+        List,
+        ListItem,
+        ListSlot,
+        ListLeading,
+        PrimaryAction,
+        MaterialIcon,
+        IconButton,
+        IconElement,
         Checkbox,
         RadioButton,
         InputElement,
