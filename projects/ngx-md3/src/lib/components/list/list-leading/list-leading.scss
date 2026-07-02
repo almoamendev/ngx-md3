@@ -11,6 +11,8 @@
         min-height: 1em;
         width: 1em;
         height: 1em;
+        line-height: 1em;
+        text-align: center;
         color: rgb(var(--md-scheme-on-surface-variant));
 
         md3-icon {
@@ -27,6 +29,8 @@
         min-height: 2.5em;
         width: 2.5em;
         height: 2.5em;
+        line-height: 2.5em;
+        text-align: center;
         background-color: rgb(var(--md-scheme-primary-container));
         color: rgb(var(--md-scheme-on-primary-container));
         border-radius: 2.5em;
@@ -38,6 +42,8 @@
         min-height: 3.5em;
         width: 3.5em;
         height: 3.5em;
+        line-height: 3.5em;
+        text-align: center;
         border-radius: 0.5em;
 
         &[size=small-video] {
@@ -45,6 +51,8 @@
             min-height: 3.5em;
             width: 6.25em;
             height: 3.5em;
+            line-height: 3.5em;
+            text-align: center;
             border-radius: var(--leading-media-radius, 0em);
         }
 
@@ -53,6 +61,8 @@
             min-height: 4em;
             width: 7.125em;
             height: 4em;
+            line-height: 4em;
+            text-align: center;
             border-radius: var(--leading-media-radius, 0em);
         }
 
@@ -72,5 +82,14 @@
         min-height: 2.5em;
         width: 2.5em;
         height: 2.5em;
+        line-height: 2.5em;
+        text-align: center;
+    }
+
+    ::ng-deep > * {
+        display: block;
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
     }
 }
