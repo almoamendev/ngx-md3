@@ -1,33 +1,24 @@
 <h1>Lists</h1>
 
-<h3>md3-list options</h3>
-<ul>
-    <li>@Input() variant: 'expressive' | 'baseline' = 'expressive';</li>
-    <li>@Input() type: 'standard' | 'segmented' = 'standard';</li>
-</ul>
+<p>
+    Button groups arrange related text and icon buttons together. They can be standard or connected, and can support no
+    selection, single selection, or multiple selection.
+</p>
 
-<h3>md3-list-item options</h3>
-<ul>
-    <li>@Input() slots-alignment: 'start' | 'center' | 'end' = 'center';</li>
-    <li>@Input() selected: boolean = false;</li>
-</ul>
+<figure class="component-image">
+    <img src="/img/md3-list.png" alt="Material Design list styles" />
+    <ol>
+        <li>Standard</li>
+        <li>Segmented</li>
+    </ol>
+</figure>
 
-<h3>md3-list-item options</h3>
-<ul>
-    <li>@Input() slots-alignment: 'start' | 'center' | 'end' = 'center';</li>
-    <li>@Input() selected: boolean = false;</li>
-</ul>
-
-<h3>md3-list-leading options</h3>
-<ul>
-    <li>@Input() type: 'icon' | 'avatar' | 'media' = 'icon';</li>
-    <li>@Input() size: 'image' | 'small-video' | 'large-video' = 'image';</li>
-</ul>
-
-<h3>md3-list-slot options</h3>
-<ul>
-    <li>@Input({{'{ required: true }'}}) md3-list-slot: 'content' | 'trailing';</li>
-</ul>
+<app-playground>
+    <button action-item md3-icon-button button-type="tonal" button-squared [selected]="configOpen()"
+        (click)="openConfig()">
+        <md3-icon md3-icon-element>settings</md3-icon>
+    </button>
+</app-playground>
 
 <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
     <md3-list style="flex: 1 1 auto;">
