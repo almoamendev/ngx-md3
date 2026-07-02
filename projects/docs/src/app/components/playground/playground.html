@@ -13,6 +13,7 @@
 <md3-card class="md3-scrollable" card-type="outlined" [dir]="rtl() ? 'rtl' : 'ltr'" [ngClass]="{
     'md-scheme-light': !darkMode(),
     'md-scheme-dark': darkMode(),
+    'bg-variant': backgroundVariant(),
 }">
     <ng-content></ng-content>
 </md3-card>

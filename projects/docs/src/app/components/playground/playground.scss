@@ -13,6 +13,11 @@
         min-height: 20em;
         overflow: auto;
 
+        &.bg-variant {
+            --background-color: rgb(var(--md-scheme-surface-container-high));
+            background-color: var(--background-color);
+        }
+
         button.config-button {
             position: absolute;
             top: 0.25em;

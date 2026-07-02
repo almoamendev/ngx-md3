@@ -18,6 +18,9 @@ import { Button, Card, IconButton, IconElement, MaterialIcon } from '@vip9008/ng
 export class Playground {
     public title = input<string>('Playground');
     public darkMode = signal<boolean>(true);
+    public backgroundVariant = input<boolean>(false, {
+        alias: 'bg-variant',
+    });
     public rtl = signal<boolean>(false);
 
     public toggleDarkMode() {
