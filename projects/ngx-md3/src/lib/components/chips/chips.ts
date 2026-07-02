@@ -13,7 +13,6 @@ export class ChipAvatar {}
 @Component({
     selector: 'button[md3-chip], a[md3-chip], label[md3-chip]',
     imports: [
-        // NgTemplateOutlet,
         StateComponent,
         MaterialIcon,
     ],

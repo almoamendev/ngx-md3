@@ -81,14 +81,17 @@
 <app-shiki [code]="apiTypes"></app-shiki>
 <app-shiki [code]="apiUsage" language="html"></app-shiki>
 <ul>
-    <li>When using a custom icon. always add <code>md3-icon-element</code> directive to the icon element.</li>
+    <li>When using a custom icon, always apply the <code>md3-icon-element</code> directive to the icon element.</li>
     <li>
-        Custom icon size should follow Material 3 guidelines:
+        <div>
+            Custom icons should follow the Material 3 recommended size:
+        </div>
         <ul>
             <li>small: 24dp</li>
             <li>medium: 28dp</li>
             <li>large: 36dp</li>
         </ul>
-        Default md3-icon-element css style will set <code>font-size</code>, <code>width</code>, and <code>height</code> to the correct size.
+        The default <code>md3-icon-element</code> styles automatically set the appropriate
+        <code>font-size</code>, <code>width</code>, and <code>height</code> values.
     </li>
 </ul>

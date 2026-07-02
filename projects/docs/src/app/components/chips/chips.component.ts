@@ -62,7 +62,51 @@ type ChipStyle = 'default' | 'surface' | 'elevated';`;
 <!-- md3-chip can be used on <button>, <a>, <label> -->
 <button md3-chip>...</button>
 <a md3-chip>...</a>
-<label md3-chip>...</label>`;
+<label md3-chip>...</label>
+
+<!-- assist chips -->
+<button md3-chip chip-type="assist" chip-style="default">
+    <!-- optional icon -->
+    <md3-icon md3-icon-element="leading">local_taxi</md3-icon>
+    <span>Assist chip</span>
+</button>
+<button md3-chip chip-type="assist" chip-style="default">
+    <!-- custom icon: 18dp -->
+    <your-custom-icon-element md3-icon-element="leading"></your-custom-icon-element>
+    <span>Assist chip</span>
+</button>
+
+<!-- filter chips -->
+<label md3-chip chip-type="filter" chip-style="default" on-trailing="trailingFun()">
+    <!-- checkbox or radio input to control selection -->
+    <input type="checkbox" md3-input-element>
+    <span>Filter chip</span>
+    <!-- optional -->
+    <md3-icon md3-icon-element="trailing">arrow_drop_down</md3-icon>
+</label>
+<label md3-chip chip-type="filter" chip-style="default" on-trailing="trailingFun()">
+    <!-- checkbox or radio input to control selection -->
+    <input type="checkbox" md3-input-element>
+    <span>Filter chip</span>
+    <!-- custom icon: 18dp -->
+    <your-custom-icon-element md3-icon-element="trailing"></your-custom-icon-element>
+</label>
+
+<!-- input chips -->
+<button md3-chip chip-type="input" chip-style="default" on-trailing="trailingFun()">
+    <!-- optional icon or avatar -->
+    <md3-icon md3-icon-element="leading">image</md3-icon>
+    <!-- avatar size: 24dp -->
+    <your-avatar-element md3-chip-avatar>person</your-avatar-element>
+    <span>Input chip</span>
+    <!-- optional trailing icon. default to x -->
+    <md3-icon md3-icon-element="trailing">close</md3-icon>
+</button>
+
+<!-- suggestion chips -->
+<button md3-chip chip-type="suggestion" chip-style="default">
+    <span>Suggestion chip</span>
+</button>`;
     
     constructor(
         private sheetsService: SheetsService,
