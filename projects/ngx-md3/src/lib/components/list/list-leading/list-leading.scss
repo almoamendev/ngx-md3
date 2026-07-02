@@ -32,17 +32,6 @@
         border-radius: 2.5em;
     }
 
-    &[type=selection-input] {
-        font-size: 1em;
-        line-height: 1.5em;
-        font-weight: 500;
-        letter-spacing: 0.009375em;
-        min-width: 2.5em;
-        min-height: 2.5em;
-        width: 2.5em;
-        height: 2.5em;
-    }
-
     &[type=media] {
         font-size: 1em;
         min-width: 3.5em;
@@ -72,5 +61,16 @@
             height: inherit;
             object-fit: cover;
         }
+    }
+
+    &[type=selection-input] {
+        font-size: 1em;
+        line-height: 1.5em;
+        font-weight: 500;
+        letter-spacing: 0.009375em;
+        min-width: 2.5em;
+        min-height: 2.5em;
+        width: 2.5em;
+        height: 2.5em;
     }
 }
