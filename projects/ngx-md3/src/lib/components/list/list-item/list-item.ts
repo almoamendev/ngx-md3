@@ -1,7 +1,16 @@
-import { AfterViewInit, booleanAttribute, Component, computed, contentChild, effect, ElementRef, HostListener, input } from '@angular/core';
+import { AfterViewInit, booleanAttribute, Component, computed, contentChild, Directive, effect, ElementRef, HostListener, input } from '@angular/core';
 import { StateComponent } from '../../common/state-component';
 import { Checkbox } from '../../selection-controls/checkbox/checkbox';
 import { RadioButton } from '../../selection-controls/radio-button/radio-button';
+
+@Directive({
+    selector: 'button[md3-item-primary-action], a[md3-item-primary-action]',
+    hostDirectives: [
+        StateComponent
+    ],
+})
+export class ListItemPrimaryAction {
+}
 
 @Component({
     selector: 'md3-list-item, label[md3-list-item], button[md3-list-item], a[md3-list-item]',

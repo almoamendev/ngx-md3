@@ -1,5 +1,5 @@
 import { Component, computed, effect, OnDestroy, signal } from '@angular/core';
-import { Checkbox, Divider, IconButton, IconElement, InputElement, List, ListItem, ListLeading, ListLeadingSize, ListLeadingType, ListSlot, MaterialIcon, PrimaryAction, RadioButton, SheetsService, SideSheetRef, Switch, TypeBody } from '@vip9008/ngx-md3';
+import { Checkbox, Divider, IconButton, IconElement, InputElement, List, ListItem, ListItemPrimaryAction, ListLeading, ListLeadingSize, ListLeadingType, ListSlot, MaterialIcon, RadioButton, SheetsService, SideSheetRef, Switch, TypeBody } from '@vip9008/ngx-md3';
 import { Playground } from '../playground/playground';
 import { Shiki } from '../shiki/shiki';
 import { ListConfig } from './list-config/list-config';
@@ -11,7 +11,7 @@ import { ListConfig } from './list-config/list-config';
         ListItem,
         ListSlot,
         ListLeading,
-        PrimaryAction,
+        ListItemPrimaryAction,
         MaterialIcon,
         IconButton,
         IconElement,
@@ -39,6 +39,7 @@ export class ListsComponent implements OnDestroy {
     public listType = signal<'standard' | 'segmented'>('standard');
 
     // md3-list-item options
+    public itemPrimaryAction = signal<boolean>(false);
     public itemSlotsAlignment = signal<'start' | 'center' | 'end'>('center');
     public itemSelected = signal<boolean>(false);
     public itemInput = signal<'checkbox' | 'radio' | 'switch'>('checkbox');
@@ -114,6 +115,10 @@ type ButtonGroupSelection = 'none' | 'single' | 'multiple';`;
         });
 
         effect(() => {
+            this.itemInit();
+        });
+
+        effect(() => {
             this.leadingItemInit();
         });
     }
@@ -151,6 +156,14 @@ type ButtonGroupSelection = 'none' | 'single' | 'multiple';`;
             this.configSheet?.componentInstance?.listType.disable();
         } else {
             this.configSheet?.componentInstance?.listType.enable();
+        }
+    }
+
+    private itemInit() {
+        if (this.isSelectionInput()) {
+            this.configSheet?.componentInstance?.itemPrimaryAction.disable();
+        } else {
+            this.configSheet?.componentInstance?.itemPrimaryAction.enable();
         }
     }
 
@@ -196,6 +209,10 @@ type ButtonGroupSelection = 'none' | 'single' | 'multiple';`;
         });
         
         // md3-list-item options
+        this.configSheet?.componentInstance?.itemPrimaryAction.setValue(this.itemPrimaryAction());
+        this.configSheet?.componentInstance?.itemPrimaryAction.registerOnChange(() => {
+            this.itemPrimaryAction.set(this.configSheet?.componentInstance?.itemPrimaryAction.value);
+        });
         this.configSheet?.componentInstance?.itemSlotsAlignment.setValue(this.itemSlotsAlignment());
         this.configSheet?.componentInstance?.itemSlotsAlignment.registerOnChange(() => {
             this.itemSlotsAlignment.set(this.configSheet?.componentInstance?.itemSlotsAlignment.value);
@@ -203,6 +220,10 @@ type ButtonGroupSelection = 'none' | 'single' | 'multiple';`;
         this.configSheet?.componentInstance?.itemSelected.setValue(this.itemSelected());
         this.configSheet?.componentInstance?.itemSelected.registerOnChange(() => {
             this.itemSelected.set(this.configSheet?.componentInstance?.itemSelected.value);
+        });
+        this.configSheet?.componentInstance?.itemInput.setValue(this.itemInput());
+        this.configSheet?.componentInstance?.itemInput.registerOnChange(() => {
+            this.itemInput.set(this.configSheet?.componentInstance?.itemInput.value);
         });
         
         // md3-list-leading options
@@ -218,12 +239,9 @@ type ButtonGroupSelection = 'none' | 'single' | 'multiple';`;
         this.configSheet?.componentInstance?.leadingSize.registerOnChange(() => {
             this.leadingSize.set(this.configSheet?.componentInstance?.leadingSize.value);
         });
-        this.configSheet?.componentInstance?.itemInput.setValue(this.itemInput());
-        this.configSheet?.componentInstance?.itemInput.registerOnChange(() => {
-            this.itemInput.set(this.configSheet?.componentInstance?.itemInput.value);
-        });
 
         this.listVariantInit();
+        this.itemInit();
         this.leadingItemInit();
     }
 }

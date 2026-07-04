@@ -26,6 +26,7 @@ export class ListConfig {
     public listType: FormControl = new FormControl<'standard' | 'segmented'>('standard');
 
     // md3-list-item options
+    public itemPrimaryAction: FormControl = new FormControl<boolean>(false);
     public itemSlotsAlignment: FormControl = new FormControl<'start' | 'center' | 'end'>('center');
     public itemSelected: FormControl = new FormControl<boolean>(false);
     public itemInput: FormControl = new FormControl<'checkbox' | 'radio' | 'switch'>('checkbox');

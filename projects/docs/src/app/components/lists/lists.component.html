@@ -75,6 +75,9 @@
         </label>
     } @else {
         <md3-list-item [slots-alignment]="itemSlotsAlignment()" [selected]="itemSelected()">
+            @if (itemPrimaryAction()) {
+                <button md3-item-primary-action></button>
+            }
             @if (leadingItem()) {
             <md3-list-leading [type]="leadingType()" [size]="leadingSize()">
                 @switch (leadingType()) {
@@ -97,6 +100,9 @@
             <div md3-list-slot="trailing">+100</div>
         </md3-list-item>
         <md3-list-item [slots-alignment]="itemSlotsAlignment()">
+            @if (itemPrimaryAction()) {
+                <button md3-item-primary-action></button>
+            }
             @if (leadingItem()) {
             <md3-list-leading [type]="leadingType()" [size]="leadingSize()">
                 @switch (leadingType()) {
@@ -250,7 +256,7 @@
             <div md3-list-slot="trailing"></div>
         </md3-list-item>
         <md3-list-item>
-            <button md3-primary-action></button>
+            <button md3-item-primary-action></button>
             <md3-list-leading type="media">
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9zOGcuI9vSzATrKTCoudSLSY36LWLrtU-xA&s">
             </md3-list-leading>
@@ -316,14 +322,14 @@
     </md3-list>
     <md3-list style="flex: 1 1 auto;">
         <md3-list-item>
-            <button type="button" md3-primary-action></button>
+            <button type="button" md3-item-primary-action></button>
             <md3-list-leading type="avatar">
                 <span>A</span>
             </md3-list-leading>
             <div md3-list-slot="content">Primary-action: Enabled</div>
         </md3-list-item>
         <md3-list-item>
-            <button type="button" md3-primary-action disabled></button>
+            <button type="button" md3-item-primary-action disabled></button>
             <md3-list-leading type="avatar">
                 <span>A</span>
             </md3-list-leading>
@@ -365,7 +371,7 @@
             <div md3-list-slot="content">Selected</div>
         </button>
         <md3-list-item [selected]="true">
-            <button type="button" md3-primary-action></button>
+            <button type="button" md3-item-primary-action></button>
             <md3-list-leading type="avatar">
                 <span>A</span>
             </md3-list-leading>
@@ -378,7 +384,7 @@
             <div md3-list-slot="content">Selected</div>
         </button>
         <md3-list-item [selected]="true">
-            <button type="button" md3-primary-action disabled></button>
+            <button type="button" md3-item-primary-action disabled></button>
             <md3-list-leading type="avatar">
                 <span>A</span>
             </md3-list-leading>
