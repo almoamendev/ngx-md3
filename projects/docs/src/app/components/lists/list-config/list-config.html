@@ -35,4 +35,120 @@
             <div md3-type-label="large">Segmented</div>
         </label>
     </div>
+
+    <div md3-type-body="large">Slots alignment</div>
+    <div class="controls-list">
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="itemSlotsAlignment">
+                <input type="radio" md3-input-element name="item-slots-alignment" value="start">
+            </md3-radio-button>
+            <div md3-type-label="large">Start</div>
+        </label>
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="itemSlotsAlignment">
+                <input type="radio" md3-input-element name="item-slots-alignment" value="center">
+            </md3-radio-button>
+            <div md3-type-label="large">Center</div>
+        </label>
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="itemSlotsAlignment">
+                <input type="radio" md3-input-element name="item-slots-alignment" value="end">
+            </md3-radio-button>
+            <div md3-type-label="large">End</div>
+        </label>
+    </div>
+
+    <div class="controls-list">
+        <label md3-state-component tabindex="0">
+            <div md3-type-label="large">Toggle selection</div>
+            <md3-switch disable-state-layer [control]="itemSelected">
+                <input type="checkbox" md3-input-element name="item-selected">
+            </md3-switch>
+        </label>
+    </div>
+
+    <md3-divider></md3-divider>
+
+    <div class="controls-list">
+        <label md3-state-component tabindex="0">
+            <div md3-type-label="large">Leading slot</div>
+            <md3-switch disable-state-layer [control]="leadingItem">
+                <input type="checkbox" md3-input-element name="leading-slot">
+            </md3-switch>
+        </label>
+    </div>
+
+    <div md3-type-body="large">Leading slot type</div>
+    <div class="controls-list">
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="leadingType">
+                <input type="radio" md3-input-element name="leading-slot-type" value="icon">
+            </md3-radio-button>
+            <div md3-type-label="large">Icon</div>
+        </label>
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="leadingType">
+                <input type="radio" md3-input-element name="leading-slot-type" value="avatar">
+            </md3-radio-button>
+            <div md3-type-label="large">Avatar</div>
+        </label>
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="leadingType">
+                <input type="radio" md3-input-element name="leading-slot-type" value="media">
+            </md3-radio-button>
+            <div md3-type-label="large">Media</div>
+        </label>
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="leadingType">
+                <input type="radio" md3-input-element name="leading-slot-type" value="selection-input">
+            </md3-radio-button>
+            <div md3-type-label="large">Selection input</div>
+        </label>
+    </div>
+
+    <div md3-type-body="large">Leading slot size</div>
+    <div class="controls-list">
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="leadingSize">
+                <input type="radio" md3-input-element name="leading-slot-size" value="image">
+            </md3-radio-button>
+            <div md3-type-label="large">Image</div>
+        </label>
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="leadingSize">
+                <input type="radio" md3-input-element name="leading-slot-size" value="small-video">
+            </md3-radio-button>
+            <div md3-type-label="large">Small video</div>
+        </label>
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="leadingSize">
+                <input type="radio" md3-input-element name="leading-slot-size" value="large-video">
+            </md3-radio-button>
+            <div md3-type-label="large">Large video</div>
+        </label>
+    </div>
+
+    <md3-divider></md3-divider>
+
+    <div md3-type-body="large">List item input</div>
+    <div class="controls-list">
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="itemInput">
+                <input type="radio" md3-input-element name="item-input-type" value="checkbox">
+            </md3-radio-button>
+            <div md3-type-label="large">Checkbox</div>
+        </label>
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="itemInput">
+                <input type="radio" md3-input-element name="item-input-type" value="radio">
+            </md3-radio-button>
+            <div md3-type-label="large">Radio buttons</div>
+        </label>
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="itemInput">
+                <input type="radio" md3-input-element name="item-input-type" value="switch">
+            </md3-radio-button>
+            <div md3-type-label="large">Switch</div>
+        </label>
+    </div>
 </md3-side-sheet-body>

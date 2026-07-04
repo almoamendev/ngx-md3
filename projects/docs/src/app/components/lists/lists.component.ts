@@ -1,5 +1,5 @@
-import { Component, effect, OnDestroy, signal } from '@angular/core';
-import { Checkbox, Divider, IconButton, IconElement, InputElement, List, ListItem, ListLeading, ListLeadingSize, ListLeadingType, ListSlot, MaterialIcon, PrimaryAction, RadioButton, SheetsService, SideSheetRef, TypeBody } from '@vip9008/ngx-md3';
+import { Component, computed, effect, OnDestroy, signal } from '@angular/core';
+import { Checkbox, Divider, IconButton, IconElement, InputElement, List, ListItem, ListLeading, ListLeadingSize, ListLeadingType, ListSlot, MaterialIcon, PrimaryAction, RadioButton, SheetsService, SideSheetRef, Switch, TypeBody } from '@vip9008/ngx-md3';
 import { Playground } from '../playground/playground';
 import { Shiki } from '../shiki/shiki';
 import { ListConfig } from './list-config/list-config';
@@ -17,6 +17,7 @@ import { ListConfig } from './list-config/list-config';
         IconElement,
         Checkbox,
         RadioButton,
+        Switch,
         InputElement,
         IconButton,
         MaterialIcon,
@@ -40,10 +41,17 @@ export class ListsComponent implements OnDestroy {
     // md3-list-item options
     public itemSlotsAlignment = signal<'start' | 'center' | 'end'>('center');
     public itemSelected = signal<boolean>(false);
+    public itemInput = signal<'checkbox' | 'radio' | 'switch'>('checkbox');
 
     // md3-list-leading options
+    public leadingItem = signal<boolean>(true);
     public leadingType = signal<ListLeadingType>('icon');
     public leadingSize = signal<ListLeadingSize>('image');
+
+    // md3-list-slot="trailing" options
+    public trailingItem = signal<boolean>(true);
+
+    public isSelectionInput = computed<boolean>(() => this.leadingItem() && this.leadingType() == 'selection-input');
 
     public apiImport: string = `// Component imports
 import {
@@ -102,11 +110,11 @@ type ButtonGroupSelection = 'none' | 'single' | 'multiple';`;
         private sheetsService: SheetsService,
     ) {
         effect(() => {
-            if (this.listVariant() == 'baseline') {
-                this.configSheet?.componentInstance?.listType.disable();
-            } else {
-                this.configSheet?.componentInstance?.listType.enable();
-            }
+            this.listVariantInit();
+        });
+
+        effect(() => {
+            this.leadingItemInit();
         });
     }
     
@@ -138,6 +146,44 @@ type ButtonGroupSelection = 'none' | 'single' | 'multiple';`;
         this.configSheet?.close();
     }
 
+    private listVariantInit() {
+        if (this.listVariant() == 'baseline') {
+            this.configSheet?.componentInstance?.listType.disable();
+        } else {
+            this.configSheet?.componentInstance?.listType.enable();
+        }
+    }
+
+    private leadingItemInit() {
+        const visible = this.leadingItem();
+        if (visible) {
+            this.configSheet?.componentInstance?.leadingType.enable();
+            this.leadingTypeInit();
+        } else {
+            this.configSheet?.componentInstance?.leadingType.disable();
+            this.configSheet?.componentInstance?.leadingSize.disable();
+            this.configSheet?.componentInstance?.itemSelected.enable();
+            this.configSheet?.componentInstance?.itemInput.disable();
+        }
+    }
+
+    private leadingTypeInit() {
+        const type = this.leadingType();
+        if (type == 'media') {
+            this.configSheet?.componentInstance?.leadingSize.enable();
+        } else {
+            this.configSheet?.componentInstance?.leadingSize.disable();
+        }
+
+        if (type == 'selection-input') {
+            this.configSheet?.componentInstance?.itemSelected.disable();
+            this.configSheet?.componentInstance?.itemInput.enable();
+        } else {
+            this.configSheet?.componentInstance?.itemSelected.enable();
+            this.configSheet?.componentInstance?.itemInput.disable();
+        }
+    }
+
     private registerConfigEvents() {
         // md3-list options
         this.configSheet?.componentInstance?.listVariant.setValue(this.listVariant());
@@ -160,6 +206,10 @@ type ButtonGroupSelection = 'none' | 'single' | 'multiple';`;
         });
         
         // md3-list-leading options
+        this.configSheet?.componentInstance?.leadingItem.setValue(this.leadingItem());
+        this.configSheet?.componentInstance?.leadingItem.registerOnChange(() => {
+            this.leadingItem.set(this.configSheet?.componentInstance?.leadingItem.value);
+        });
         this.configSheet?.componentInstance?.leadingType.setValue(this.leadingType());
         this.configSheet?.componentInstance?.leadingType.registerOnChange(() => {
             this.leadingType.set(this.configSheet?.componentInstance?.leadingType.value);
@@ -168,5 +218,12 @@ type ButtonGroupSelection = 'none' | 'single' | 'multiple';`;
         this.configSheet?.componentInstance?.leadingSize.registerOnChange(() => {
             this.leadingSize.set(this.configSheet?.componentInstance?.leadingSize.value);
         });
+        this.configSheet?.componentInstance?.itemInput.setValue(this.itemInput());
+        this.configSheet?.componentInstance?.itemInput.registerOnChange(() => {
+            this.itemInput.set(this.configSheet?.componentInstance?.itemInput.value);
+        });
+
+        this.listVariantInit();
+        this.leadingItemInit();
     }
 }

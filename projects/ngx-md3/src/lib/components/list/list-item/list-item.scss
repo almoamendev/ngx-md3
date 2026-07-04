@@ -34,15 +34,15 @@
         z-index: 3;
     }
 
-    &[slots-alignment=start] {
+    &.md3-slots-alignment-start {
         align-items: start;
     }
     
-    &[slots-alignment=center] {
+    &.md3-slots-alignment-center {
         align-items: center;
     }
 
-    &[slots-alignment=end] {
+    &.md3-slots-alignment-end {
         align-items: end;
     }
 

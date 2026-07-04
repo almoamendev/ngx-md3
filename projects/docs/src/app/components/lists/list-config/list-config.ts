@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { IconButton, IconElement, InputElement, ListLeadingSize, ListLeadingType, MaterialIcon, RadioButton, SideSheetBody, SideSheetHeader, SideSheetRef, StateComponent, Switch, TypeLabel } from '@vip9008/ngx-md3';
+import { IconButton, IconElement, InputElement, ListLeadingSize, ListLeadingType, MaterialIcon, RadioButton, SideSheetBody, SideSheetHeader, SideSheetRef, StateComponent, Switch, TypeLabel, Divider } from '@vip9008/ngx-md3';
 
 @Component({
     selector: 'app-list-config',
@@ -15,6 +15,7 @@ import { IconButton, IconElement, InputElement, ListLeadingSize, ListLeadingType
         InputElement,
         StateComponent,
         TypeLabel,
+        Divider
     ],
     templateUrl: './list-config.html',
     styleUrl: './list-config.scss',
@@ -27,8 +28,10 @@ export class ListConfig {
     // md3-list-item options
     public itemSlotsAlignment: FormControl = new FormControl<'start' | 'center' | 'end'>('center');
     public itemSelected: FormControl = new FormControl<boolean>(false);
+    public itemInput: FormControl = new FormControl<'checkbox' | 'radio' | 'switch'>('checkbox');
 
     // md3-list-leading options
+    public leadingItem: FormControl = new FormControl<boolean>(true);
     public leadingType: FormControl = new FormControl<ListLeadingType>('icon');
     public leadingSize: FormControl = new FormControl<ListLeadingSize>('image');
 

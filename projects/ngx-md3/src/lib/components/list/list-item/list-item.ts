@@ -1,4 +1,4 @@
-import { AfterViewInit, booleanAttribute, Component, computed, contentChild, ElementRef, HostListener, input } from '@angular/core';
+import { AfterViewInit, booleanAttribute, Component, computed, contentChild, effect, ElementRef, HostListener, input } from '@angular/core';
 import { StateComponent } from '../../common/state-component';
 import { Checkbox } from '../../selection-controls/checkbox/checkbox';
 import { RadioButton } from '../../selection-controls/radio-button/radio-button';
@@ -41,7 +41,16 @@ export class ListItem implements AfterViewInit {
     constructor(
         private el: ElementRef,
         private state: StateComponent
-    ) { }
+    ) {
+        effect((onCleanup) => {
+            const alignment = 'md3-slots-alignment-' + this.slotsAlignment();
+            this.element.classList.add(alignment);
+
+            onCleanup(() => {
+                this.element.classList.remove(alignment);
+            });
+        });
+    }
 
     public get element(): HTMLElement {
         return this.el.nativeElement as HTMLElement;

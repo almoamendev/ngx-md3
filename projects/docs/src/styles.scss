@@ -124,6 +124,10 @@ md3-side-sheet-body.md3-component-config {
         }
     }
 
+    & > md3-divider {
+        margin-bottom: 1em;
+    }
+
     md3-list {
         margin: 1em 0;
     }
