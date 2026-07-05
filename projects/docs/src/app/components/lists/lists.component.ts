@@ -19,7 +19,6 @@ import { ListConfig } from './list-config/list-config';
         RadioButton,
         Switch,
         InputElement,
-        IconButton,
         MaterialIcon,
         IconElement,
         Divider,
@@ -72,53 +71,47 @@ import {
     List,
     ListItem,
     ListSlot,
-    ListLeading,
-    PrimaryAction,
-    MaterialIcon,
-    IconButton,
-    IconElement,
-    Checkbox,
-    RadioButton,
-    InputElement,
-    IconButton,
+    ListLeading, // optional
+    ListItemPrimaryAction, // optional
+    MaterialIcon, // optional
+    IconButton, // optional
+    IconElement, // optional
+    Checkbox, // optional
+    RadioButton, // optional
+    InputElement, // optional
 } from '@vip9008/ngx-md3';`;
 
     public apiData: string = `// Inputs
-public buttonSize: InputSignal<ButtonSize> = input<ButtonSize>('small', {
-    alias: 'button-size',
+
+// md3-list
+public variant = input<'expressive' | 'baseline'>('expressive');
+public type = input<'standard' | 'segmented'>('standard');
+
+// md3-list-item
+public slotsAlignment = input<'start' | 'center' | 'end'>('center', {
+    alias: 'slots-alignment',
 });
-public groupType: InputSignal<ButtonGroupType> = input<ButtonGroupType>('standard', {
-    alias: 'group-type',
+public selected = input<boolean, unknown>(false, {
+    transform: booleanAttribute,
 });
-public groupSelection: InputSignal<ButtonGroupSelection> = input<ButtonGroupSelection>('none', {
-    alias: 'selection',
+
+// md3-list-leading
+public type = input<ListLeadingType>('icon');
+public size = input<ListLeadingSize>('image');
+
+// md3-list-slot
+public position = input.required<'content' | 'trailing'>({
+    alias: 'md3-list-slot',
 });`;
 
     public apiTypes: string = `// Types
-import { ButtonSize, ButtonGroupType, ButtonGroupSelection } from '@vip9008/ngx-md3';
+import { ListLeadingType, ListLeadingSize } from '@vip9008/ngx-md3';
 
-type ButtonSize = 'x-small' | 'small' | 'medium' | 'large' | 'x-large';
-type ButtonGroupType = 'standard' | 'connected';
-type ButtonGroupSelection = 'none' | 'single' | 'multiple';`;
+type ListLeadingType = 'icon' | 'avatar' | 'media' | 'selection-input';
+type ListLeadingSize = 'image' | 'small-video' | 'large-video';`;
 
     public apiUsage: string = `<!-- Component usage -->
-<md3-button-group button-size="small" group-type="standard" selection="none">
-    <!-- button -->
-    <button md3-button>
-        <md3-icon md3-icon-element>bluetooth</md3-icon>
-        Bluetooth
-    </button>
-    .
-    .
-    .
-    <!-- icon button -->
-    <button md3-icon-button>
-        <md3-icon md3-icon-element>alarm</md3-icon>
-    </button>
-    .
-    .
-    .
-</md3-button-group>`;
+`;
 
     constructor(
         private sheetsService: SheetsService,

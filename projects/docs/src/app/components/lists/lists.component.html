@@ -1,8 +1,7 @@
 <h1>Lists</h1>
 
 <p>
-    Button groups arrange related text and icon buttons together. They can be standard or connected, and can support no
-    selection, single selection, or multiple selection.
+    Lists are continuous, vertical indexes of text and imagesd.
 </p>
 
 <figure class="component-image">
@@ -271,3 +270,61 @@
     }
     </md3-list>
 </app-playground>
+
+<h2>API</h2>
+
+<div class="table-container md3-scrollable">
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 50%;">Name</th>
+                <th>Type</th>
+                <th>Default</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td colspan="3">
+                    <h3>ButtonGroup</h3>
+                    <md3-divider></md3-divider>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    button-size
+                    <p md3-type-body="small">Sets the size for every button in the group. this option will override individual button size.</p>
+                </td>
+                <td>
+                    input&lt;ButtonSize&gt;
+                    <p md3-type-body="small">x-small, small, medium, large, x-large</p>
+                </td>
+                <td style="white-space: nowrap;">small</td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <h3><a routerLink="/components/buttons/icon-buttons">IconButton</a></h3>
+                    <md3-divider></md3-divider>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <i>
+                        <span style="text-decoration: line-through;">button-size</span>
+                        (overridden)
+                    </i>
+                    <p md3-type-body="small">Sets the icon button size. this option is overridden by button group</p>
+                </td>
+                <td>
+                    input&lt;ButtonSize&gt;
+                    <p md3-type-body="small">x-small, small, medium, large, x-large</p>
+                </td>
+                <td style="white-space: nowrap;">small</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<app-shiki [code]="apiImport"></app-shiki>
+<app-shiki [code]="apiData"></app-shiki>
+<app-shiki [code]="apiTypes"></app-shiki>
+<app-shiki [code]="apiUsage" language="html"></app-shiki>
