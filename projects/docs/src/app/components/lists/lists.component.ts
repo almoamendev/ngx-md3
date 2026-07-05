@@ -39,6 +39,7 @@ export class ListsComponent implements OnDestroy {
     public listType = signal<'standard' | 'segmented'>('standard');
 
     // md3-list-item options
+    public supportingText = signal<boolean>(true);
     public itemPrimaryAction = signal<boolean>(false);
     public itemSlotsAlignment = signal<'start' | 'center' | 'end'>('center');
     public itemSelected = signal<boolean>(false);
@@ -48,13 +49,21 @@ export class ListsComponent implements OnDestroy {
     public leadingItem = signal<boolean>(true);
     public leadingType = signal<ListLeadingType>('icon');
     public leadingSize = signal<ListLeadingSize>('image');
+    public leadingInput = signal<boolean>(false);
 
     // md3-list-slot="trailing" options
     public trailingItem = signal<boolean>(true);
     public trailingType = signal<string>('text');
+    public trailingInput = signal<boolean>(false);
 
+    public isLeadingInput = computed<boolean>(() => {
+        return this.leadingItem() && this.leadingInput();
+    });
+    public isTrailingInput = computed<boolean>(() => {
+        return this.trailingItem() && this.trailingInput();
+    });
     public isSelectionInput = computed<boolean>(() => {
-        return (this.leadingItem() && this.leadingType() == 'selection-input') || (this.trailingItem() && this.trailingType() == 'selection-input');
+        return this.isLeadingInput() || this.isTrailingInput();
     });
 
     public apiImport: string = `// Component imports
@@ -124,6 +133,22 @@ type ButtonGroupSelection = 'none' | 'single' | 'multiple';`;
         effect(() => {
             this.leadingItemInit();
         });
+
+        effect(() => {
+            this.trailingItemInit();
+        })
+
+        effect(() => {
+            if (this.leadingInput()) {
+                this.configSheet?.componentInstance?.trailingInput.setValue(false);
+            }
+        });
+
+        effect(() => {
+            if (this.trailingInput()) {
+                this.configSheet?.componentInstance?.leadingInput.setValue(false);
+            }
+        });
     }
     
     public openConfig(): void {
@@ -164,9 +189,11 @@ type ButtonGroupSelection = 'none' | 'single' | 'multiple';`;
 
     private itemInit() {
         if (this.isSelectionInput()) {
+            this.configSheet?.componentInstance?.itemSelected.disable();
             this.configSheet?.componentInstance?.itemPrimaryAction.disable();
             this.configSheet?.componentInstance?.itemInput.enable();
         } else {
+            this.configSheet?.componentInstance?.itemSelected.enable();
             this.configSheet?.componentInstance?.itemPrimaryAction.enable();
             this.configSheet?.componentInstance?.itemInput.disable();
         }
@@ -175,38 +202,42 @@ type ButtonGroupSelection = 'none' | 'single' | 'multiple';`;
     private leadingItemInit() {
         const visible = this.leadingItem();
         if (visible) {
+            this.configSheet?.componentInstance?.leadingInput.enable();
+
+            if (this.leadingInput()) {
+                this.configSheet?.componentInstance?.leadingType.disable();
+                this.configSheet?.componentInstance?.leadingSize.disable();
+                return;
+            }
+
             this.configSheet?.componentInstance?.leadingType.enable();
-            this.leadingTypeInit();
+            if (this.leadingType() == 'media') {
+                this.configSheet?.componentInstance?.leadingSize.enable();
+            } else {
+                this.configSheet?.componentInstance?.leadingSize.disable();
+            }
         } else {
             this.configSheet?.componentInstance?.leadingType.disable();
             this.configSheet?.componentInstance?.leadingSize.disable();
             this.configSheet?.componentInstance?.itemSelected.enable();
             this.configSheet?.componentInstance?.itemInput.disable();
-        }
-    }
-
-    private leadingTypeInit() {
-        const type = this.leadingType();
-        if (type == 'media') {
-            this.configSheet?.componentInstance?.leadingSize.enable();
-        } else {
-            this.configSheet?.componentInstance?.leadingSize.disable();
-        }
-
-        if (type == 'selection-input') {
-            this.configSheet?.componentInstance?.itemSelected.disable();
-        } else {
-            this.configSheet?.componentInstance?.itemSelected.enable();
+            this.configSheet?.componentInstance?.leadingInput.disable();
         }
     }
 
     private trailingItemInit() {
         const visible = this.trailingItem();
         if (visible) {
+            if (this.trailingInput()) {
+                this.configSheet?.componentInstance?.trailingType.disable();
+                return;
+            }
+
+            this.configSheet?.componentInstance?.trailingInput.enable();
             this.configSheet?.componentInstance?.trailingType.enable();
         } else {
+            this.configSheet?.componentInstance?.trailingInput.disable();
             this.configSheet?.componentInstance?.trailingType.disable();
-            this.configSheet?.componentInstance?.itemSelected.enable();
         }
     }
 
@@ -222,6 +253,10 @@ type ButtonGroupSelection = 'none' | 'single' | 'multiple';`;
         });
         
         // md3-list-item options
+        this.configSheet?.componentInstance?.supportingText.setValue(this.supportingText());
+        this.configSheet?.componentInstance?.supportingText.registerOnChange(() => {
+            this.supportingText.set(this.configSheet?.componentInstance?.supportingText.value);
+        });
         this.configSheet?.componentInstance?.itemPrimaryAction.setValue(this.itemPrimaryAction());
         this.configSheet?.componentInstance?.itemPrimaryAction.registerOnChange(() => {
             this.itemPrimaryAction.set(this.configSheet?.componentInstance?.itemPrimaryAction.value);
@@ -244,6 +279,10 @@ type ButtonGroupSelection = 'none' | 'single' | 'multiple';`;
         this.configSheet?.componentInstance?.leadingItem.registerOnChange(() => {
             this.leadingItem.set(this.configSheet?.componentInstance?.leadingItem.value);
         });
+        this.configSheet?.componentInstance?.leadingInput.setValue(this.leadingInput());
+        this.configSheet?.componentInstance?.leadingInput.registerOnChange(() => {
+            this.leadingInput.set(this.configSheet?.componentInstance?.leadingInput.value);
+        });
         this.configSheet?.componentInstance?.leadingType.setValue(this.leadingType());
         this.configSheet?.componentInstance?.leadingType.registerOnChange(() => {
             this.leadingType.set(this.configSheet?.componentInstance?.leadingType.value);
@@ -258,6 +297,10 @@ type ButtonGroupSelection = 'none' | 'single' | 'multiple';`;
         this.configSheet?.componentInstance?.trailingItem.registerOnChange(() => {
             this.trailingItem.set(this.configSheet?.componentInstance?.trailingItem.value);
         });
+        this.configSheet?.componentInstance?.trailingInput.setValue(this.trailingInput());
+        this.configSheet?.componentInstance?.trailingInput.registerOnChange(() => {
+            this.trailingInput.set(this.configSheet?.componentInstance?.trailingInput.value);
+        });
         this.configSheet?.componentInstance?.trailingType.setValue(this.trailingType());
         this.configSheet?.componentInstance?.trailingType.registerOnChange(() => {
             this.trailingType.set(this.configSheet?.componentInstance?.trailingType.value);
@@ -266,5 +309,6 @@ type ButtonGroupSelection = 'none' | 'single' | 'multiple';`;
         this.listVariantInit();
         this.itemInit();
         this.leadingItemInit();
+        this.trailingItemInit();
     }
 }

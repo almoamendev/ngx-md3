@@ -26,6 +26,7 @@ export class ListConfig {
     public listType: FormControl = new FormControl<'standard' | 'segmented'>('standard');
 
     // md3-list-item options
+    public supportingText: FormControl = new FormControl<boolean>(true);
     public itemPrimaryAction: FormControl = new FormControl<boolean>(false);
     public itemSlotsAlignment: FormControl = new FormControl<'start' | 'center' | 'end'>('center');
     public itemSelected: FormControl = new FormControl<boolean>(false);
@@ -35,10 +36,12 @@ export class ListConfig {
     public leadingItem: FormControl = new FormControl<boolean>(true);
     public leadingType: FormControl = new FormControl<ListLeadingType>('icon');
     public leadingSize: FormControl = new FormControl<ListLeadingSize>('image');
+    public leadingInput: FormControl = new FormControl<boolean>(false);
     
     // md3-list-slot="trailing" options
     public trailingItem: FormControl = new FormControl<boolean>(true);
     public trailingType: FormControl = new FormControl<string>('text');
+    public trailingInput: FormControl = new FormControl<boolean>(false);
 
     constructor(
         private sideSheetRef: SideSheetRef<ListConfig>

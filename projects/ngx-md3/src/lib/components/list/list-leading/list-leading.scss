@@ -72,7 +72,8 @@
             border-radius: var(--leading-media-radius, 0em);
         }
 
-        & > * {
+        & > ::ng-deep * {
+            display: block;
             width: inherit;
             height: inherit;
             object-fit: cover;
