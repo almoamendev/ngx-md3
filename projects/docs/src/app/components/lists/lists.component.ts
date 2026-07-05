@@ -40,6 +40,7 @@ export class ListsComponent implements OnDestroy {
 
     // md3-list-item options
     public supportingText = signal<boolean>(true);
+    public itemDisabled = signal<boolean>(false);
     public itemPrimaryAction = signal<boolean>(false);
     public itemSlotsAlignment = signal<'start' | 'center' | 'end'>('center');
     public itemSelected = signal<boolean>(false);
@@ -188,7 +189,9 @@ type ButtonGroupSelection = 'none' | 'single' | 'multiple';`;
     }
 
     private itemInit() {
-        if (this.isSelectionInput()) {
+        const input = this.isSelectionInput();
+        const primary = this.itemPrimaryAction();
+        if (input) {
             this.configSheet?.componentInstance?.itemSelected.disable();
             this.configSheet?.componentInstance?.itemPrimaryAction.disable();
             this.configSheet?.componentInstance?.itemInput.enable();
@@ -196,6 +199,12 @@ type ButtonGroupSelection = 'none' | 'single' | 'multiple';`;
             this.configSheet?.componentInstance?.itemSelected.enable();
             this.configSheet?.componentInstance?.itemPrimaryAction.enable();
             this.configSheet?.componentInstance?.itemInput.disable();
+        }
+
+        if (input || primary) {
+            this.configSheet?.componentInstance?.itemDisabled.enable();
+        } else {
+            this.configSheet?.componentInstance?.itemDisabled.disable();
         }
     }
 
@@ -256,6 +265,10 @@ type ButtonGroupSelection = 'none' | 'single' | 'multiple';`;
         this.configSheet?.componentInstance?.supportingText.setValue(this.supportingText());
         this.configSheet?.componentInstance?.supportingText.registerOnChange(() => {
             this.supportingText.set(this.configSheet?.componentInstance?.supportingText.value);
+        });
+        this.configSheet?.componentInstance?.itemDisabled.setValue(this.itemDisabled());
+        this.configSheet?.componentInstance?.itemDisabled.registerOnChange(() => {
+            this.itemDisabled.set(this.configSheet?.componentInstance?.itemDisabled.value);
         });
         this.configSheet?.componentInstance?.itemPrimaryAction.setValue(this.itemPrimaryAction());
         this.configSheet?.componentInstance?.itemPrimaryAction.registerOnChange(() => {

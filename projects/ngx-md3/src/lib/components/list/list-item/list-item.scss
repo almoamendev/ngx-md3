@@ -80,6 +80,8 @@
         &.md3-disabled, &:disabled {
             --background-color: transparent;
             --state-color: var(--md-scheme-on-surface);
+            
+            cursor: default !important;
 
             &, & ~ * {
                 --foreground-color: rgb(var(--md-scheme-on-surface));
@@ -95,6 +97,7 @@
         --foreground-color: rgb(var(--md-scheme-on-surface));
         --border-radius: 0.75em;
 
+        cursor: default !important;
         opacity: 0.38;
     }
 

@@ -51,6 +51,9 @@ export class Checkbox {
         return this.hasNativeInputError(input);
     });
 
+    private inputDisabledState = signal<boolean>(false);
+    public isDisabled = computed<boolean>(() => this.inputDisabledState());
+
     constructor() {
         effect(() => {
             this.stateComponent()?.setStateLayer(!this.disableStateLayer());
@@ -176,6 +179,7 @@ export class Checkbox {
 
     private syncNativeInputState(input: HTMLInputElement): void {
         this.nativeInputError.set(this.hasNativeInputError(input));
+        this.inputDisabledState.set(input.disabled);
     }
 
     private syncControlError(control: AbstractControl): void {

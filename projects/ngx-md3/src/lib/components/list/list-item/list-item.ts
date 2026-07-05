@@ -2,6 +2,7 @@ import { AfterViewInit, booleanAttribute, Component, computed, contentChild, Dir
 import { StateComponent } from '../../common/state-component';
 import { Checkbox } from '../../selection-controls/checkbox/checkbox';
 import { RadioButton } from '../../selection-controls/radio-button/radio-button';
+import { Switch } from '../../selection-controls/switch/switch';
 
 @Directive({
     selector: 'button[md3-item-primary-action], a[md3-item-primary-action]',
@@ -38,6 +39,7 @@ export class ListItem implements AfterViewInit {
     private isLabelTag: boolean = false;
     private checkbox = contentChild(Checkbox);
     private radioButton = contentChild(RadioButton);
+    private switch = contentChild(Switch);
 
     public isSelected = computed(() => {
         const checkbox = this.checkbox();
@@ -48,6 +50,10 @@ export class ListItem implements AfterViewInit {
         }
 
         return this.selected();
+    });
+
+    public isInputDisabled = computed(() => {
+        return this.checkbox()?.isDisabled() || this.radioButton()?.isDisabled() || this.switch()?.isDisabled();
     });
 
     constructor(
@@ -61,6 +67,16 @@ export class ListItem implements AfterViewInit {
             onCleanup(() => {
                 this.element.classList.remove(alignment);
             });
+        });
+
+        effect(() => {
+            if (this.isInputDisabled()) {
+                this.state.setStateLayer(false);
+                this.element.classList.add('md3-disabled');
+            } else {
+                this.state.setStateLayer(true);
+                this.element.classList.remove('md3-disabled');
+            }
         });
     }
 

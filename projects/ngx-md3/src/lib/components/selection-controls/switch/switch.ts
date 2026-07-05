@@ -48,6 +48,12 @@ export class Switch {
         return this.hasNativeInputError(input);
     });
 
+    private inputDisabledState = signal<boolean>(false);
+    public isDisabled = computed<boolean>(() => {
+        console.log('Switch disabled');
+        return this.inputDisabledState();
+    });
+
     constructor() {
         effect(() => {
             this.stateComponent()?.setStateLayer(!this.disableStateLayer());
@@ -157,6 +163,7 @@ export class Switch {
 
     private syncNativeInputState(input: HTMLInputElement): void {
         this.nativeInputError.set(this.hasNativeInputError(input));
+        this.inputDisabledState.set(input.disabled);
     }
 
     private syncControlError(control: AbstractControl): void {

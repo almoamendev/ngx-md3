@@ -28,17 +28,17 @@
                         @switch (itemInput()) {
                             @case ('checkbox') {
                                 <md3-checkbox [disable-state-layer]="true">
-                                    <input type="checkbox" md3-input-element name="playground-checkbox">
+                                    <input type="checkbox" md3-input-element name="playground-checkbox" [disabled]="itemDisabled()">
                                 </md3-checkbox>
                             }
                             @case ('radio') {
                                 <md3-radio-button [disable-state-layer]="true">
-                                    <input type="radio" md3-input-element name="playground-radio" checked>
+                                    <input type="radio" md3-input-element name="playground-radio" checked [disabled]="itemDisabled()">
                                 </md3-radio-button>
                             }
                             @case ('switch') {
                                 <md3-switch [disable-state-layer]="true">
-                                    <input type="checkbox" md3-input-element name="playground-switch">
+                                    <input type="checkbox" md3-input-element name="playground-switch" [disabled]="itemDisabled()">
                                 </md3-switch>
                             }
                         }
@@ -69,17 +69,17 @@
                         @switch (itemInput()) {
                             @case ('checkbox') {
                                 <md3-checkbox [disable-state-layer]="true">
-                                    <input type="checkbox" md3-input-element name="playground-checkbox">
+                                    <input type="checkbox" md3-input-element name="playground-checkbox" [disabled]="itemDisabled()">
                                 </md3-checkbox>
                             }
                             @case ('radio') {
                                 <md3-radio-button [disable-state-layer]="true">
-                                    <input type="radio" md3-input-element name="playground-radio" checked>
+                                    <input type="radio" md3-input-element name="playground-radio" checked [disabled]="itemDisabled()">
                                 </md3-radio-button>
                             }
                             @case ('switch') {
                                 <md3-switch [disable-state-layer]="true">
-                                    <input type="checkbox" md3-input-element name="playground-switch">
+                                    <input type="checkbox" md3-input-element name="playground-switch" [disabled]="itemDisabled()">
                                 </md3-switch>
                             }
                         }
@@ -108,17 +108,17 @@
                         @switch (itemInput()) {
                             @case ('checkbox') {
                                 <md3-checkbox [disable-state-layer]="true">
-                                    <input type="checkbox" md3-input-element name="playground-checkbox">
+                                    <input type="checkbox" md3-input-element name="playground-checkbox" [disabled]="itemDisabled()">
                                 </md3-checkbox>
                             }
                             @case ('radio') {
                                 <md3-radio-button [disable-state-layer]="true">
-                                    <input type="radio" md3-input-element name="playground-radio">
+                                    <input type="radio" md3-input-element name="playground-radio" [disabled]="itemDisabled()">
                                 </md3-radio-button>
                             }
                             @case ('switch') {
                                 <md3-switch [disable-state-layer]="true">
-                                    <input type="checkbox" md3-input-element name="playground-switch">
+                                    <input type="checkbox" md3-input-element name="playground-switch" [disabled]="itemDisabled()">
                                 </md3-switch>
                             }
                         }
@@ -149,17 +149,17 @@
                         @switch (itemInput()) {
                             @case ('checkbox') {
                                 <md3-checkbox [disable-state-layer]="true">
-                                    <input type="checkbox" md3-input-element name="playground-checkbox">
+                                    <input type="checkbox" md3-input-element name="playground-checkbox" [disabled]="itemDisabled()">
                                 </md3-checkbox>
                             }
                             @case ('radio') {
                                 <md3-radio-button [disable-state-layer]="true">
-                                    <input type="radio" md3-input-element name="playground-radio">
+                                    <input type="radio" md3-input-element name="playground-radio" [disabled]="itemDisabled()">
                                 </md3-radio-button>
                             }
                             @case ('switch') {
                                 <md3-switch [disable-state-layer]="true">
-                                    <input type="checkbox" md3-input-element name="playground-switch">
+                                    <input type="checkbox" md3-input-element name="playground-switch" [disabled]="itemDisabled()">
                                 </md3-switch>
                             }
                         }
@@ -184,7 +184,7 @@
     } @else {
         <md3-list-item [slots-alignment]="itemSlotsAlignment()" [selected]="itemSelected()">
             @if (itemPrimaryAction()) {
-                <button md3-item-primary-action></button>
+                <button md3-item-primary-action [disabled]="itemDisabled()"></button>
             }
             @if (leadingItem()) {
                 <md3-list-leading [type]="leadingType()" [size]="leadingSize()">
@@ -227,7 +227,7 @@
         </md3-list-item>
         <md3-list-item [slots-alignment]="itemSlotsAlignment()">
             @if (itemPrimaryAction()) {
-                <button md3-item-primary-action></button>
+                <button md3-item-primary-action [disabled]="itemDisabled()"></button>
             }
             @if (leadingItem()) {
                 <md3-list-leading [type]="leadingType()" [size]="leadingSize()">
@@ -271,268 +271,3 @@
     }
     </md3-list>
 </app-playground>
-
-<div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
-    <md3-list style="flex: 1 1 auto;">
-        <md3-list-item slots-alignment="start">
-            <md3-list-leading type="icon">
-                <md3-icon>person</md3-icon>
-            </md3-list-leading>
-            <div md3-list-slot="content">
-                Icon
-                <div md3-type-body="small" color="on-surface-variant" emphasized>Icon</div>
-            </div>
-            <div md3-list-slot="trailing">+100</div>
-        </md3-list-item>
-        <md3-list-item>
-            <md3-list-leading type="avatar">
-                <span>A</span>
-            </md3-list-leading>
-            <div md3-list-slot="content">Avatar</div>
-            <div md3-list-slot="trailing">
-                <md3-icon>chevron_right</md3-icon>
-            </div>
-        </md3-list-item>
-        <md3-list-item>
-            <md3-list-leading type="media">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9zOGcuI9vSzATrKTCoudSLSY36LWLrtU-xA&s">
-            </md3-list-leading>
-            <div md3-list-slot="content">Media = image</div>
-            <div md3-list-slot="trailing">
-                <button md3-icon-button button-type="standard" button-width="narrow">
-                    <md3-icon md3-icon-element>person</md3-icon>
-                </button>
-            </div>
-        </md3-list-item>
-        <md3-list-item>
-            <md3-list-leading type="media" size="small-video">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9zOGcuI9vSzATrKTCoudSLSY36LWLrtU-xA&s">
-            </md3-list-leading>
-            <div md3-list-slot="content">Media = small video</div>
-            <div md3-list-slot="trailing"></div>
-        </md3-list-item>
-        <md3-list-item>
-            <md3-list-leading type="media" size="large-video">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9zOGcuI9vSzATrKTCoudSLSY36LWLrtU-xA&s">
-            </md3-list-leading>
-            <div md3-list-slot="content">Media = large video</div>
-            <div md3-list-slot="trailing"></div>
-        </md3-list-item>
-    </md3-list>
-    <md3-list type="segmented" style="flex: 1 1 auto;">
-        <md3-list-item>
-            <md3-list-leading type="icon">
-                <md3-icon>person</md3-icon>
-            </md3-list-leading>
-            <div md3-list-slot="content">Icon</div>
-            <div md3-list-slot="trailing"></div>
-        </md3-list-item>
-        <md3-list-item>
-            <md3-list-leading type="avatar">
-                <span>A</span>
-            </md3-list-leading>
-            <div md3-list-slot="content">Avatar</div>
-            <div md3-list-slot="trailing"></div>
-        </md3-list-item>
-        <md3-list-item>
-            <md3-list-leading type="media">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9zOGcuI9vSzATrKTCoudSLSY36LWLrtU-xA&s">
-            </md3-list-leading>
-            <div md3-list-slot="content">Media = image</div>
-            <div md3-list-slot="trailing"></div>
-        </md3-list-item>
-        <md3-list-item>
-            <md3-list-leading type="media" size="small-video">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9zOGcuI9vSzATrKTCoudSLSY36LWLrtU-xA&s">
-            </md3-list-leading>
-            <div md3-list-slot="content">Media = small video</div>
-            <div md3-list-slot="trailing"></div>
-        </md3-list-item>
-        <md3-list-item>
-            <md3-list-leading type="media" size="large-video">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9zOGcuI9vSzATrKTCoudSLSY36LWLrtU-xA&s">
-            </md3-list-leading>
-            <div md3-list-slot="content">Media = large video</div>
-            <div md3-list-slot="trailing"></div>
-        </md3-list-item>
-        <button md3-list-item>
-            <md3-list-leading type="media" size="large-video">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9zOGcuI9vSzATrKTCoudSLSY36LWLrtU-xA&s">
-            </md3-list-leading>
-            <div md3-list-slot="content">Interactive -> primary action</div>
-            <div md3-list-slot="trailing"></div>
-        </button>
-    </md3-list>
-    <md3-list variant="baseline" style="flex: 1 1 auto;">
-        <md3-list-item>
-            <md3-list-leading type="icon">
-                <md3-icon>person</md3-icon>
-            </md3-list-leading>
-            <div md3-list-slot="content">Icon</div>
-            <div md3-list-slot="trailing"></div>
-        </md3-list-item>
-        <md3-list-item>
-            <md3-list-leading type="avatar">
-                <span>A</span>
-            </md3-list-leading>
-            <div md3-list-slot="content">Avatar</div>
-            <div md3-list-slot="trailing"></div>
-        </md3-list-item>
-        <md3-list-item>
-            <md3-list-leading type="media">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9zOGcuI9vSzATrKTCoudSLSY36LWLrtU-xA&s">
-            </md3-list-leading>
-            <div md3-list-slot="content">Media = image</div>
-            <div md3-list-slot="trailing"></div>
-        </md3-list-item>
-        <md3-list-item>
-            <md3-list-leading type="media" size="small-video">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9zOGcuI9vSzATrKTCoudSLSY36LWLrtU-xA&s">
-            </md3-list-leading>
-            <div md3-list-slot="content">Media = small video</div>
-            <div md3-list-slot="trailing"></div>
-        </md3-list-item>
-        <md3-list-item>
-            <md3-list-leading type="media" size="large-video">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9zOGcuI9vSzATrKTCoudSLSY36LWLrtU-xA&s">
-            </md3-list-leading>
-            <div md3-list-slot="content">Media = large video</div>
-            <div md3-list-slot="trailing"></div>
-        </md3-list-item>
-        <md3-list-item>
-            <button md3-item-primary-action></button>
-            <md3-list-leading type="media">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9zOGcuI9vSzATrKTCoudSLSY36LWLrtU-xA&s">
-            </md3-list-leading>
-            <div md3-list-slot="content">Primary + secondary actions</div>
-            <div md3-list-slot="trailing">
-                <button md3-icon-button button-type="standard" button-width="narrow">
-                    <md3-icon md3-icon-element>person</md3-icon>
-                </button>
-            </div>
-        </md3-list-item>
-    </md3-list>
-</div>
-<md3-divider></md3-divider>
-<div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
-    <md3-list style="flex: 1 1 auto;">
-        <button type="button" md3-list-item>
-            <md3-list-leading type="avatar">
-                <span>A</span>
-            </md3-list-leading>
-            <div md3-list-slot="content">Enabled</div>
-        </button>
-        <button type="button" md3-list-item disabled>
-            <md3-list-leading type="avatar">
-                <span>A</span>
-            </md3-list-leading>
-            <div md3-list-slot="content">Disabled</div>
-        </button>
-        
-        <label md3-list-item slots-alignment="center">
-            <md3-list-leading type="media" size="large-video">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9zOGcuI9vSzATrKTCoudSLSY36LWLrtU-xA&s">
-            </md3-list-leading>
-            <div md3-list-slot="content">Media = large video (Checkbox)</div>
-            <div md3-list-slot="trailing">
-                <md3-checkbox [disable-state-layer]="true">
-                    <input type="checkbox" md3-input-element>
-                </md3-checkbox>
-            </div>
-        </label>
-        
-        <label md3-list-item slots-alignment="center">
-            <md3-list-leading type="media" size="large-video">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9zOGcuI9vSzATrKTCoudSLSY36LWLrtU-xA&s">
-            </md3-list-leading>
-            <div md3-list-slot="content">Media = large video (Radio)</div>
-            <div md3-list-slot="trailing">
-                <md3-radio-button [disable-state-layer]="true">
-                    <input type="radio" md3-input-element name="radio1" checked>
-                </md3-radio-button>
-            </div>
-        </label>
-        <label md3-list-item slots-alignment="center">
-            <md3-list-leading type="media" size="large-video">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9zOGcuI9vSzATrKTCoudSLSY36LWLrtU-xA&s">
-            </md3-list-leading>
-            <div md3-list-slot="content">Media = large video (Radio)</div>
-            <div md3-list-slot="trailing">
-                <md3-radio-button [disable-state-layer]="true">
-                    <input type="radio" md3-input-element name="radio1">
-                </md3-radio-button>
-            </div>
-        </label>
-    </md3-list>
-    <md3-list style="flex: 1 1 auto;">
-        <md3-list-item>
-            <button type="button" md3-item-primary-action></button>
-            <md3-list-leading type="avatar">
-                <span>A</span>
-            </md3-list-leading>
-            <div md3-list-slot="content">Primary-action: Enabled</div>
-        </md3-list-item>
-        <md3-list-item>
-            <button type="button" md3-item-primary-action disabled></button>
-            <md3-list-leading type="avatar">
-                <span>A</span>
-            </md3-list-leading>
-            <div md3-list-slot="content">Primary-action: Disabled</div>
-        </md3-list-item>
-        <label md3-list-item slots-alignment="center">
-            <md3-list-leading type="selection-input">
-                <md3-checkbox [disable-state-layer]="true">
-                    <input type="checkbox" md3-input-element>
-                </md3-checkbox>
-            </md3-list-leading>
-            <div md3-list-slot="content">Selection input = Checkbox</div>
-        </label>
-        
-        <label md3-list-item slots-alignment="center">
-            <md3-list-leading type="selection-input">
-                <md3-radio-button [disable-state-layer]="true">
-                    <input type="radio" md3-input-element name="radio2" checked>
-                </md3-radio-button>
-            </md3-list-leading>
-            <div md3-list-slot="content">Selection input = Radio</div>
-            <div md3-list-slot="trailing">
-            </div>
-        </label>
-        <label md3-list-item slots-alignment="center">
-            <md3-list-leading type="selection-input">
-                <md3-radio-button [disable-state-layer]="true">
-                    <input type="radio" md3-input-element name="radio2" checked>
-                </md3-radio-button>
-            </md3-list-leading>
-            <div md3-list-slot="content">Selection input = Radio</div>
-        </label>
-    </md3-list>
-    <md3-list style="flex: 1 1 auto;">
-        <button type="button" md3-list-item [selected]="true">
-            <md3-list-leading type="avatar">
-                <span>A</span>
-            </md3-list-leading>
-            <div md3-list-slot="content">Selected</div>
-        </button>
-        <md3-list-item [selected]="true">
-            <button type="button" md3-item-primary-action></button>
-            <md3-list-leading type="avatar">
-                <span>A</span>
-            </md3-list-leading>
-            <div md3-list-slot="content">Primary-action: Selected</div>
-        </md3-list-item>
-        <button type="button" md3-list-item [selected]="true" disabled>
-            <md3-list-leading type="avatar">
-                <span>A</span>
-            </md3-list-leading>
-            <div md3-list-slot="content">Selected</div>
-        </button>
-        <md3-list-item [selected]="true">
-            <button type="button" md3-item-primary-action disabled></button>
-            <md3-list-leading type="avatar">
-                <span>A</span>
-            </md3-list-leading>
-            <div md3-list-slot="content">Primary-action: Selected</div>
-        </md3-list-item>
-    </md3-list>
-</div>

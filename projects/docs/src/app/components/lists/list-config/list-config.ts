@@ -27,6 +27,7 @@ export class ListConfig {
 
     // md3-list-item options
     public supportingText: FormControl = new FormControl<boolean>(true);
+    public itemDisabled: FormControl = new FormControl<boolean>(false);
     public itemPrimaryAction: FormControl = new FormControl<boolean>(false);
     public itemSlotsAlignment: FormControl = new FormControl<'start' | 'center' | 'end'>('center');
     public itemSelected: FormControl = new FormControl<boolean>(false);
