@@ -5,6 +5,9 @@ import { RadioButton } from '../../selection-controls/radio-button/radio-button'
 
 @Directive({
     selector: 'button[md3-item-primary-action], a[md3-item-primary-action]',
+    host: {
+        'class': 'md3-item-primary-action',
+    },
     hostDirectives: [
         StateComponent
     ],

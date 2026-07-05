@@ -23,21 +23,35 @@
     @if (isSelectionInput()) {
         <label md3-list-item [slots-alignment]="itemSlotsAlignment()" [selected]="itemSelected()">
             <md3-list-leading [type]="leadingType()" [size]="leadingSize()">
-                @switch (itemInput()) {
-                    @case ('checkbox') {
-                        <md3-checkbox [disable-state-layer]="true">
-                            <input type="checkbox" md3-input-element name="playground-checkbox">
-                        </md3-checkbox>
+                @if (leadingType() == 'selection-input') {
+                    @switch (itemInput()) {
+                        @case ('checkbox') {
+                            <md3-checkbox [disable-state-layer]="true">
+                                <input type="checkbox" md3-input-element name="playground-checkbox">
+                            </md3-checkbox>
+                        }
+                        @case ('radio') {
+                            <md3-radio-button [disable-state-layer]="true">
+                                <input type="radio" md3-input-element name="playground-radio" checked>
+                            </md3-radio-button>
+                        }
+                        @case ('switch') {
+                            <md3-switch [disable-state-layer]="true">
+                                <input type="checkbox" md3-input-element name="playground-switch">
+                            </md3-switch>
+                        }
                     }
-                    @case ('radio') {
-                        <md3-radio-button [disable-state-layer]="true">
-                            <input type="radio" md3-input-element name="playground-radio" checked>
-                        </md3-radio-button>
-                    }
-                    @case ('switch') {
-                        <md3-switch [disable-state-layer]="true">
-                            <input type="checkbox" md3-input-element name="playground-switch">
-                        </md3-switch>
+                } @else {
+                    @switch (leadingType()) {
+                        @case ('icon') {
+                            <md3-icon>person</md3-icon>
+                        }
+                        @case ('avatar') {
+                            <span>A</span>
+                        }
+                        @case ('media') {
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9zOGcuI9vSzATrKTCoudSLSY36LWLrtU-xA&s">
+                        }
                     }
                 }
             </md3-list-leading>
@@ -45,25 +59,72 @@
                 First item
                 <div md3-type-body="small" color="on-surface-variant" emphasized>Icon</div>
             </div>
-            <div md3-list-slot="trailing">+100</div>
+            <div md3-list-slot="trailing">
+                @switch (trailingType()) {
+                    @case ('text') {
+                        <span>99+</span>
+                    }
+                    @case ('icon') {
+                        <md3-icon bi-directional>chevron_right</md3-icon>
+                    }
+                    @case ('button') {
+                        <button md3-icon-button button-type="standard" button-width="narrow">
+                            <md3-icon md3-icon-element>edit</md3-icon>
+                        </button>
+                    }
+                    @case ('selection-input') {
+                        @switch (itemInput()) {
+                            @case ('checkbox') {
+                                <md3-checkbox [disable-state-layer]="true">
+                                    <input type="checkbox" md3-input-element name="playground-checkbox">
+                                </md3-checkbox>
+                            }
+                            @case ('radio') {
+                                <md3-radio-button [disable-state-layer]="true">
+                                    <input type="radio" md3-input-element name="playground-radio" checked>
+                                </md3-radio-button>
+                            }
+                            @case ('switch') {
+                                <md3-switch [disable-state-layer]="true">
+                                    <input type="checkbox" md3-input-element name="playground-switch">
+                                </md3-switch>
+                            }
+                        }
+                    }
+                }
+            </div>
         </label>
         <label md3-list-item [slots-alignment]="itemSlotsAlignment()">
             <md3-list-leading [type]="leadingType()" [size]="leadingSize()">
-                @switch (itemInput()) {
-                    @case ('checkbox') {
-                        <md3-checkbox [disable-state-layer]="true">
-                            <input type="checkbox" md3-input-element name="playground-checkbox">
-                        </md3-checkbox>
+                @if (leadingType() == 'selection-input') {
+                    @switch (itemInput()) {
+                        @case ('checkbox') {
+                            <md3-checkbox [disable-state-layer]="true">
+                                <input type="checkbox" md3-input-element name="playground-checkbox">
+                            </md3-checkbox>
+                        }
+                        @case ('radio') {
+                            <md3-radio-button [disable-state-layer]="true">
+                                <input type="radio" md3-input-element name="playground-radio">
+                            </md3-radio-button>
+                        }
+                        @case ('switch') {
+                            <md3-switch [disable-state-layer]="true">
+                                <input type="checkbox" md3-input-element name="playground-switch">
+                            </md3-switch>
+                        }
                     }
-                    @case ('radio') {
-                        <md3-radio-button [disable-state-layer]="true">
-                            <input type="radio" md3-input-element name="playground-radio">
-                        </md3-radio-button>
-                    }
-                    @case ('switch') {
-                        <md3-switch [disable-state-layer]="true">
-                            <input type="checkbox" md3-input-element name="playground-switch">
-                        </md3-switch>
+                } @else {
+                    @switch (leadingType()) {
+                        @case ('icon') {
+                            <md3-icon>person</md3-icon>
+                        }
+                        @case ('avatar') {
+                            <span>A</span>
+                        }
+                        @case ('media') {
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9zOGcuI9vSzATrKTCoudSLSY36LWLrtU-xA&s">
+                        }
                     }
                 }
             </md3-list-leading>
@@ -71,7 +132,40 @@
                 Second item
                 <div md3-type-body="small" color="on-surface-variant" emphasized>Icon</div>
             </div>
-            <div md3-list-slot="trailing">+100</div>
+            <div md3-list-slot="trailing">
+                @switch (trailingType()) {
+                    @case ('text') {
+                        <span>99+</span>
+                    }
+                    @case ('icon') {
+                        <md3-icon bi-directional>chevron_right</md3-icon>
+                    }
+                    @case ('button') {
+                        <button md3-icon-button button-type="standard" button-width="narrow">
+                            <md3-icon md3-icon-element>edit</md3-icon>
+                        </button>
+                    }
+                    @case ('selection-input') {
+                        @switch (itemInput()) {
+                            @case ('checkbox') {
+                                <md3-checkbox [disable-state-layer]="true">
+                                    <input type="checkbox" md3-input-element name="playground-checkbox">
+                                </md3-checkbox>
+                            }
+                            @case ('radio') {
+                                <md3-radio-button [disable-state-layer]="true">
+                                    <input type="radio" md3-input-element name="playground-radio" checked>
+                                </md3-radio-button>
+                            }
+                            @case ('switch') {
+                                <md3-switch [disable-state-layer]="true">
+                                    <input type="checkbox" md3-input-element name="playground-switch">
+                                </md3-switch>
+                            }
+                        }
+                    }
+                }
+            </div>
         </label>
     } @else {
         <md3-list-item [slots-alignment]="itemSlotsAlignment()" [selected]="itemSelected()">
@@ -97,7 +191,21 @@
                 First item
                 <div md3-type-body="small" color="on-surface-variant" emphasized>Icon</div>
             </div>
-            <div md3-list-slot="trailing">+100</div>
+            <div md3-list-slot="trailing">
+                @switch (trailingType()) {
+                    @case ('text') {
+                        <span>99+</span>
+                    }
+                    @case ('icon') {
+                        <md3-icon bi-directional>chevron_right</md3-icon>
+                    }
+                    @case ('button') {
+                        <button md3-icon-button button-type="standard" button-width="narrow">
+                            <md3-icon md3-icon-element>edit</md3-icon>
+                        </button>
+                    }
+                }
+            </div>
         </md3-list-item>
         <md3-list-item [slots-alignment]="itemSlotsAlignment()">
             @if (itemPrimaryAction()) {
@@ -122,7 +230,21 @@
                 Second item
                 <div md3-type-body="small" color="on-surface-variant" emphasized>Icon</div>
             </div>
-            <div md3-list-slot="trailing">+100</div>
+            <div md3-list-slot="trailing">
+                @switch (trailingType()) {
+                    @case ('text') {
+                        <span>99+</span>
+                    }
+                    @case ('icon') {
+                        <md3-icon bi-directional>chevron_right</md3-icon>
+                    }
+                    @case ('button') {
+                        <button md3-icon-button button-type="standard" button-width="narrow">
+                            <md3-icon md3-icon-element>edit</md3-icon>
+                        </button>
+                    }
+                }
+            </div>
         </md3-list-item>
     }
     </md3-list>

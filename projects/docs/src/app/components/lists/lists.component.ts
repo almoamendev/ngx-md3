@@ -51,8 +51,11 @@ export class ListsComponent implements OnDestroy {
 
     // md3-list-slot="trailing" options
     public trailingItem = signal<boolean>(true);
+    public trailingType = signal<string>('text');
 
-    public isSelectionInput = computed<boolean>(() => this.leadingItem() && this.leadingType() == 'selection-input');
+    public isSelectionInput = computed<boolean>(() => {
+        return (this.leadingItem() && this.leadingType() == 'selection-input') || (this.trailingItem() && this.trailingType() == 'selection-input');
+    });
 
     public apiImport: string = `// Component imports
 import {
@@ -162,8 +165,10 @@ type ButtonGroupSelection = 'none' | 'single' | 'multiple';`;
     private itemInit() {
         if (this.isSelectionInput()) {
             this.configSheet?.componentInstance?.itemPrimaryAction.disable();
+            this.configSheet?.componentInstance?.itemInput.enable();
         } else {
             this.configSheet?.componentInstance?.itemPrimaryAction.enable();
+            this.configSheet?.componentInstance?.itemInput.disable();
         }
     }
 
@@ -190,10 +195,18 @@ type ButtonGroupSelection = 'none' | 'single' | 'multiple';`;
 
         if (type == 'selection-input') {
             this.configSheet?.componentInstance?.itemSelected.disable();
-            this.configSheet?.componentInstance?.itemInput.enable();
         } else {
             this.configSheet?.componentInstance?.itemSelected.enable();
-            this.configSheet?.componentInstance?.itemInput.disable();
+        }
+    }
+
+    private trailingItemInit() {
+        const visible = this.trailingItem();
+        if (visible) {
+            this.configSheet?.componentInstance?.trailingType.enable();
+        } else {
+            this.configSheet?.componentInstance?.trailingType.disable();
+            this.configSheet?.componentInstance?.itemSelected.enable();
         }
     }
 
@@ -238,6 +251,16 @@ type ButtonGroupSelection = 'none' | 'single' | 'multiple';`;
         this.configSheet?.componentInstance?.leadingSize.setValue(this.leadingSize());
         this.configSheet?.componentInstance?.leadingSize.registerOnChange(() => {
             this.leadingSize.set(this.configSheet?.componentInstance?.leadingSize.value);
+        });
+
+        // md3-list-slot="trailing" options
+        this.configSheet?.componentInstance?.trailingItem.setValue(this.trailingItem());
+        this.configSheet?.componentInstance?.trailingItem.registerOnChange(() => {
+            this.trailingItem.set(this.configSheet?.componentInstance?.trailingItem.value);
+        });
+        this.configSheet?.componentInstance?.trailingType.setValue(this.trailingType());
+        this.configSheet?.componentInstance?.trailingType.registerOnChange(() => {
+            this.trailingType.set(this.configSheet?.componentInstance?.trailingType.value);
         });
 
         this.listVariantInit();

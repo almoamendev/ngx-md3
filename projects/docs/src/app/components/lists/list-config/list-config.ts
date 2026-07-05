@@ -35,6 +35,10 @@ export class ListConfig {
     public leadingItem: FormControl = new FormControl<boolean>(true);
     public leadingType: FormControl = new FormControl<ListLeadingType>('icon');
     public leadingSize: FormControl = new FormControl<ListLeadingSize>('image');
+    
+    // md3-list-slot="trailing" options
+    public trailingItem: FormControl = new FormControl<boolean>(true);
+    public trailingType: FormControl = new FormControl<string>('text');
 
     constructor(
         private sideSheetRef: SideSheetRef<ListConfig>
