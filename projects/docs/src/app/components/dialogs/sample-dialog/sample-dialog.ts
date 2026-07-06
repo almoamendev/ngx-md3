@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, input, Input } from '@angular/core';
 import { Button, DialogActions, DialogBody, DialogHeader, DialogRef, IconElement, MaterialIcon } from '@vip9008/ngx-md3';
 
 @Component({
@@ -15,7 +15,7 @@ import { Button, DialogActions, DialogBody, DialogHeader, DialogRef, IconElement
     styleUrl: './sample-dialog.scss',
 })
 export class SampleDialog {
-    @Input() showIcon: boolean = true;
+    public showIcon = input<boolean>(true);
 
     constructor(
         private readonly dialogRef: DialogRef<SampleDialog, boolean>

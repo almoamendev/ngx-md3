@@ -1,4 +1,27 @@
 <h1>Dialogs</h1>
 
-<button type="button" md3-button (click)="sampleDialog()">Open dialog</button>
-<button type="button" md3-button (click)="sampleDialog(false, false)">Open dialog (with icon)</button>
+<p>
+    Dialogs provide important prompts in a user flow.
+</p>
+
+<figure class="component-image">
+    <img src="/img/md3-dialog.png" alt="Material Design dialog" />
+    <ol>
+        <li>Container</li>
+        <li>Icon (optional) </li>
+        <li>Headline (optional)</li>
+        <li>Supporting text </li>
+        <li>Divider (optional) </li>
+        <li>Button label text</li>
+        <li>Scrim</li>
+    </ol>
+</figure>
+
+<app-playground hide-direction hide-theme>
+    <button action-item md3-icon-button button-type="tonal" button-squared [selected]="configOpen()"
+        (click)="openConfig()">
+        <md3-icon md3-icon-element>settings</md3-icon>
+    </button>
+
+    <button type="button" md3-button (click)="sampleDialog()">Open sample dialog</button>
+</app-playground>

@@ -1,12 +1,16 @@
 <div class="title-actions">
     <h2>{{ title() }}</h2>
     <div class="actions">
-        <button md3-button button-type="tonal" button-squared [selected]="rtl()" (click)="toggleRtl()">
-            {{ rtl() ? 'RTL' : 'LTR' }}
-        </button>
-        <button md3-icon-button button-type="tonal" button-squared [selected]="!darkMode()" (click)="toggleDarkMode()">
-            <md3-icon md3-icon-element>{{ darkMode() ? 'dark_mode' : 'light_mode' }}</md3-icon>
-        </button>
+        @if (!hideDirection()) {
+            <button md3-button button-type="tonal" button-squared [selected]="rtl()" (click)="toggleRtl()">
+                {{ rtl() ? 'RTL' : 'LTR' }}
+            </button>
+        }
+        @if (!hideTheme()) {
+            <button md3-icon-button button-type="tonal" button-squared [selected]="!darkMode()" (click)="toggleDarkMode()">
+                <md3-icon md3-icon-element>{{ darkMode() ? 'dark_mode' : 'light_mode' }}</md3-icon>
+            </button>
+        }
         <ng-content select="[action-item]"></ng-content>
     </div>
 </div>

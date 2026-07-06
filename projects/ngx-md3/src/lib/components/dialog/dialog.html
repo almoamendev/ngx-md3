@@ -1,6 +1,9 @@
 <section
     class="md3-dialog-container"
     [class.md3-active]="isActive()"
+    [class.md-scheme-dark]="config.scheme == 'dark'"
+    [class.md-scheme-light]="config.scheme == 'light'"
+    [attr.dir]="config.direction ?? null"
     tabindex="-1"
     [attr.role]="role"
     [attr.aria-modal]="true"

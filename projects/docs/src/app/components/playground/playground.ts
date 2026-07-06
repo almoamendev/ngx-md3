@@ -1,5 +1,5 @@
 import { NgClass } from '@angular/common';
-import { Component, input, signal } from '@angular/core';
+import { booleanAttribute, Component, input, signal } from '@angular/core';
 import { Button, Card, IconButton, IconElement, MaterialIcon } from '@vip9008/ngx-md3';
 
 @Component({
@@ -22,6 +22,15 @@ export class Playground {
         alias: 'bg-variant',
     });
     public rtl = signal<boolean>(false);
+
+    public hideDirection = input<boolean, unknown>(false, {
+        alias: 'hide-direction',
+        transform: booleanAttribute,
+    });
+    public hideTheme = input<boolean, unknown>(false, {
+        alias: 'hide-theme',
+        transform: booleanAttribute,
+    });
 
     public toggleDarkMode() {
         this.darkMode.update((mode) => !mode);

@@ -15,6 +15,8 @@ interface ResolvedDialogConfig<D = unknown> extends DialogConfig<D> {
     ariaLabel: string;
     ariaLabelledBy: string;
     ariaDescribedBy: string;
+    scheme: 'inherit' | 'dark' | 'light';
+    direction: null | 'ltr' | 'rtl';
     viewContainerRef?: ViewContainerRef;
     injector: Injector;
 }
@@ -69,6 +71,8 @@ export class DialogService {
             ariaLabel: config.ariaLabel ?? '',
             ariaLabelledBy: config.ariaLabelledBy ?? '',
             ariaDescribedBy: config.ariaDescribedBy ?? '',
+            scheme: config.scheme ?? 'inherit',
+            direction: config.direction ?? 'inherit',
             viewContainerRef: config.viewContainerRef,
             injector: config.injector ?? this.injector,
         };

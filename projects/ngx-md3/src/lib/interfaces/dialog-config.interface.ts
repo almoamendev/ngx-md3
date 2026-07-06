@@ -19,6 +19,8 @@ export interface DialogConfig<D = unknown> {
     ariaLabel?: string;
     ariaLabelledBy?: string;
     ariaDescribedBy?: string;
+    scheme?: 'inherit' | 'dark' | 'light';
+    direction?: null | 'ltr' | 'rtl';
 
     /**
      * Optional Angular context for the dynamic component. Passing a
