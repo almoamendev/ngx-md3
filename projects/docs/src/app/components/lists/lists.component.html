@@ -285,40 +285,91 @@
         <tbody>
             <tr>
                 <td colspan="3">
-                    <h3>ButtonGroup</h3>
+                    <h3>List</h3>
                     <md3-divider></md3-divider>
                 </td>
             </tr>
             <tr>
                 <td>
-                    button-size
-                    <p md3-type-body="small">Sets the size for every button in the group. this option will override individual button size.</p>
+                    variant
+                    <p md3-type-body="small">Sets the list style variant.</p>
                 </td>
                 <td>
-                    input&lt;ButtonSize&gt;
-                    <p md3-type-body="small">x-small, small, medium, large, x-large</p>
+                    input&lt;'expressive' | 'baseline'&gt;
                 </td>
-                <td style="white-space: nowrap;">small</td>
+                <td style="white-space: nowrap;">expressive</td>
+            </tr>
+            <tr>
+                <td>
+                    type
+                    <p md3-type-body="small">Sets the list item margins. only works with expressive variant.</p>
+                </td>
+                <td>
+                    input&lt;'standard' | 'segmented'&gt;
+                </td>
+                <td style="white-space: nowrap;">standard</td>
             </tr>
             <tr>
                 <td colspan="3">
-                    <h3><a routerLink="/components/buttons/icon-buttons">IconButton</a></h3>
+                    <h3>ListItem</h3>
                     <md3-divider></md3-divider>
                 </td>
             </tr>
             <tr>
                 <td>
                     <i>
-                        <span style="text-decoration: line-through;">button-size</span>
-                        (overridden)
+                        slots-alignment
                     </i>
-                    <p md3-type-body="small">Sets the icon button size. this option is overridden by button group</p>
+                    <p md3-type-body="small">Sets the list item slots vertical alignment.</p>
                 </td>
                 <td>
-                    input&lt;ButtonSize&gt;
-                    <p md3-type-body="small">x-small, small, medium, large, x-large</p>
+                    input&lt;'start' | 'center' | 'end'&gt;
                 </td>
-                <td style="white-space: nowrap;">small</td>
+                <td style="white-space: nowrap;">center</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>
+                        selected
+                    </i>
+                    <p md3-type-body="small">List item selected state. when using selection input, the input controls selection state.</p>
+                </td>
+                <td>
+                    input&lt;boolean&gt;
+                </td>
+                <td style="white-space: nowrap;">false</td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <h3>ListLeading</h3>
+                    <md3-divider></md3-divider>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <i>
+                        type
+                    </i>
+                    <p md3-type-body="small">List item leading slot type.</p>
+                </td>
+                <td>
+                    input&lt;ListLeadingType&gt;
+                    <p md3-type-body="small">icon, avatar, media, selection-input</p>
+                </td>
+                <td style="white-space: nowrap;">icon</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>
+                        size
+                    </i>
+                    <p md3-type-body="small">List item leading media size (for media type only).</p>
+                </td>
+                <td>
+                    input&lt;ListLeadingSize&gt;
+                    <p md3-type-body="small">image, small-video, large-video</p>
+                </td>
+                <td style="white-space: nowrap;">image</td>
             </tr>
         </tbody>
     </table>
@@ -328,3 +379,10 @@
 <app-shiki [code]="apiData"></app-shiki>
 <app-shiki [code]="apiTypes"></app-shiki>
 <app-shiki [code]="apiUsage" language="html"></app-shiki>
+<ul>
+    <li>When using primary and secondary actions. it is recommended to use regular list item with <code>md3-item-primary-action</code> inside to separate both actions entirely.</li>
+    <li>When using label tag as list item with selection input. it is recommended to disable input state layer.</li>
+    <li>Icons in leading or trailing slots should be 24dp.</li>
+    <li>Media inside leading slot can be an image or video in any available media size.</li>
+    <li><code>md3-icon-button</code> can ba used inside trailing slot.</li>
+</ul>

@@ -111,6 +111,49 @@ type ListLeadingType = 'icon' | 'avatar' | 'media' | 'selection-input';
 type ListLeadingSize = 'image' | 'small-video' | 'large-video';`;
 
     public apiUsage: string = `<!-- Component usage -->
+
+<!-- md3-list-item can be used as <md3-list-item>, <label[md3-list-item]>, <button[md3-list-item]> or <a[md3-list-item]> -->
+<md3-list variant="expressive" type="standard">
+    <md3-list-item>...</md3-list-item>
+    <label md3-list-item>...</label>
+    <button md3-list-item>...</button>
+    <a md3-list-item>...</a>
+</md3-list>
+
+<md3-list variant="expressive" type="standard">
+    <!-- regular list item -->
+    <md3-list-item slots-alignment="center" [selected]="false">
+        <button md3-item-primary-action></button> <!-- optional -->
+        <md3-list-leading type="..." size="...">...</md3-list-leading> <!-- optional -->
+        <div md3-list-slot="content">
+            Label
+            <div md3-type-body="small" color="on-surface-variant">Supporting text</div> <!-- optional -->
+        </div>
+        <div md3-list-slot="trailing">...</div> <!-- optional -->
+    </md3-list-item>
+
+    <!-- list item with selection input -->
+    <label md3-list-item>
+        <md3-list-leading type="selection-input">
+            <!-- md3-checkbox, md3-radio-button or md3-switch -->
+            <md3-checkbox [disable-state-layer]="true">
+                <input type="checkbox" md3-input-element>
+            </md3-checkbox>
+        </md3-list-leading>
+        <div md3-list-slot="content">Label</div>
+        <div md3-list-slot="trailing">...</div> <!-- optional -->
+    </label>
+    <label md3-list-item>
+        <md3-list-leading type="..." size="...">...</md3-list-leading> <!-- optional -->
+        <div md3-list-slot="content">Label</div>
+        <div md3-list-slot="trailing">
+            <!-- md3-checkbox, md3-radio-button or md3-switch -->
+            <md3-checkbox [disable-state-layer]="true">
+                <input type="checkbox" md3-input-element>
+            </md3-checkbox>
+        </div>
+    </label>
+</md3-list>
 `;
 
     constructor(
