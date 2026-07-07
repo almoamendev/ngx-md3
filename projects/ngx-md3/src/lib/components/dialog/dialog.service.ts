@@ -72,7 +72,7 @@ export class DialogService {
             ariaLabelledBy: config.ariaLabelledBy ?? '',
             ariaDescribedBy: config.ariaDescribedBy ?? '',
             scheme: config.scheme ?? 'inherit',
-            direction: config.direction ?? 'inherit',
+            direction: config.direction ?? null,
             viewContainerRef: config.viewContainerRef,
             injector: config.injector ?? this.injector,
         };
