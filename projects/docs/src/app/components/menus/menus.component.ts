@@ -24,7 +24,10 @@ export class MenusComponent implements OnDestroy {
     private configSheet: SideSheetRef<MenuConfig> | undefined;
     public configOpen = signal(false);
 
-    public showIcon = signal<boolean>(true);
+    public vibrant = signal<boolean>(false);
+    public overlapTrigger = signal<boolean>(false);
+    public xPosition = signal<'start' | 'end' | 'before' | 'after'>('start');
+    public yPosition = signal<'above' | 'below'>('below');
 
     public apiImport: string = `// Component imports
 import {
@@ -44,8 +47,17 @@ private menuService: MenuService = inject(MenuService);
 // menu reference: can injected inside menu component
 private menuRef: MenuRef = inject(MenuRef<YourMenuComponent, YourMenuResults>);
 
-// open menu
-const menuRef: MenuRef = menuService.open(YourMenuComponent, <MenuConfig>{...});
+// open menu anchored to a click event, element or point
+const menuRef: MenuRef = menuService.open(YourMenuComponent, <MenuConfig>{
+    origin: event,
+    xPosition: 'start',
+    yPosition: 'below',
+});
+
+// open a sub menu anchored beside its parent item
+const subMenuRef: MenuRef = menuService.openSubMenu(YourMenuComponent, <MenuConfig>{
+    origin: event,
+});
 
 // close menu
 menuRef.close(youMenuResult);
@@ -60,8 +72,8 @@ import { MenuConfig, MenuRef } from '@vip9008/ngx-md3';
 
 interface MenuConfig<D = unknown> {
     /**
-     * Optional data passed to the component opened inside the dialog.
-     * The dynamic component can read it by injecting DIALOG_DATA.
+     * Optional data passed to the component opened inside the menu.
+     * The dynamic component can read it by injecting MENU_DATA.
      * @default {}
      */
     data?: D;
@@ -74,36 +86,60 @@ interface MenuConfig<D = unknown> {
     bindDataToInputs?: boolean;
 
     /**
-     * When enabled, dialog won't close on scrim click
+     * Menu surface color scheme.
+     * @default standard
+     */
+    menuColors?: 'standard' | 'vibrant';
+
+    /**
+     * Element or point the menu should open from. If omitted, the service uses
+     * the currently focused element, which usually is the trigger button.
+     */
+    origin?: MenuPositionOrigin;
+
+    /**
+     * Horizontal alignment against the origin.
+     * start/end align edges, before/after place the menu beside the origin (used for sub menus).
+     * @default start
+     */
+    xPosition?: 'start' | 'end' | 'before' | 'after' | 'center';
+
+    /**
+     * Vertical alignment against the origin.
+     * @default below
+     */
+    yPosition?: 'above' | 'below' | 'center';
+
+    /**
+     * Keep the menu on top of the trigger instead of opening outside it.
      * @default false
      */
-    disableCloseEvents?: boolean;
-    
+    overlapTrigger?: boolean;
+
     /**
-     * Dialog html role attribute
-     * @default dialog
+     * Additional pixel offsets from the resolved connected position.
+     * @default 0 / 4
      */
-    role?: DialogRole;
-    
+    offsetX?: number;
+    offsetY?: number;
+
     /**
-     * Dialog html aria attributes
-     * @default null
+     * Distance in pixels the menu should keep from the viewport edge.
+     * Values below 0.5em are raised to 0.5em.
      */
-    ariaLabel?: string;
-    ariaLabelledBy?: string;
-    ariaDescribedBy?: string;
-    
+    viewportMargin?: number;
+
     /**
-     * Dialog scheme colors
-     * @default inherit
+     * Custom CDK connected positions. When provided, these replace the default
+     * Material-style fallback positions.
      */
-    scheme?: 'inherit' | 'dark' | 'light';
-    
+    positions?: ConnectedPosition[];
+
     /**
-     * Dialog direction. when null the direction will depends on default page direction.
-     * @default null
+     * How the menu reacts when the page scrolls.
+     * @default reposition
      */
-    direction?: null | 'ltr' | 'rtl';
+    scrollStrategy?: 'reposition' | 'block' | 'close' | 'noop';
 
     /**
      * Optional Angular context for the dynamic component.
@@ -112,70 +148,75 @@ interface MenuConfig<D = unknown> {
     viewContainerRef?: ViewContainerRef;
 
     /**
-     * Optional Angular injector used when creating the dialog component.
+     * Optional Angular injector used when creating the menu component.
      */
     injector?: Injector;
 }
-    
+
 class MenuRef<T = unknown, R = unknown> {
     /**
-     * Filled by DialogService after the user component is attached.
-     * This instance is the Material 3 dialog which will host the user component.
+     * Filled by MenuService after the user component is attached.
+     * This instance is the Material 3 menu which will host the user component.
      */
-    public dialogInstance?: Dialog;
+    public menuInstance?: Menu;
 
     /**
-     * Filled by DialogService after the user component is attached.
+     * Filled by MenuService after the user component is attached.
      * The instance here lets callers imperatively update inputs when that is useful.
      */
     public componentInstance?: T;
 
     /**
-     * Close the dialog with optional result
+     * Close the menu with optional result
      */
     public close(result?: R): void;
 
     /**
-     * After dialog close observable. optional result will emit after dialog is closed
+     * After menu close observable. optional result will emit after menu is closed
      */
     public afterClosed(): Observable<R | undefined>;
 }`;
 
     public apiUsage: string = `<!-- Component usage -->
 
-<!-- optional dialog header seaction -->
-<md3-dialog-header>
-    <!-- optional header icon (custom icons can be used by adding md3-icon-element directive) -->
-    <md3-icon md3-icon-element>chat_info</md3-icon>
-    <!-- header title -->
-    <span>Basic dialog title</span>
-</md3-dialog-header>
+<md3-menu-group>
+    <button md3-menu-item label="Item 1"></button>
+    <button md3-menu-item label="Item 2"></button>
+</md3-menu-group>
 
-<!-- optional dialog body section -->
-<md3-dialog-body>...</md3-dialog-body>
+<!-- leading/trailing icons, badge and a sub menu trigger -->
+<md3-menu-group>
+    <button md3-menu-item (click)="openSubMenu($event)" label="Rename">
+        <md3-icon md3-icon-element="leading">edit</md3-icon>
+        <md3-badge>New</md3-badge>
+        <md3-icon md3-icon-element="trailing">arrow_right</md3-icon>
+    </button>
+    <button md3-menu-item label="Copy" trailing-text="⌘+C">
+        <md3-icon md3-icon-element="leading">content_copy</md3-icon>
+    </button>
+    <button md3-menu-item disabled label="Delete (disabled)">
+        <md3-icon md3-icon-element="leading">delete</md3-icon>
+    </button>
+</md3-menu-group>
 
-<!-- optional dialog actions -->
-<md3-dialog-actions>
-    <button type="button" md3-button button-type="text">Action 1</button>
-    <button type="button" md3-button button-type="text">Action 2</button>
-</md3-dialog-actions>`;
-    
+<!-- selectable items (checkbox affordance) -->
+<md3-menu-group>
+    <button md3-menu-item [selected]="true" label="Show ruler"></button>
+    <button md3-menu-item [selected]="false" label="Show minimap"></button>
+</md3-menu-group>`;
+
     constructor(
         private sheetsService: SheetsService,
         private menuService: MenuService
     ) {}
 
-    public sampleMenu(
-        event: MouseEvent,
-        vibrant: boolean = false,
-        xPosition: 'start' | 'end' | 'before' | 'after' = 'start',
-        yPosition: 'above' | 'below' = 'below',
-    ) {
+    public sampleMenu(event: MouseEvent) {
         const ref = this.menuService.open(SmapleMenu, {
             origin: event,
-            xPosition,
-            yPosition,
-            menuColors: vibrant ? 'vibrant' : 'standard',
+            xPosition: this.xPosition(),
+            yPosition: this.yPosition(),
+            overlapTrigger: this.overlapTrigger(),
+            menuColors: this.vibrant() ? 'vibrant' : 'standard',
         });
 
         ref.afterClosed().subscribe((result) => {
@@ -190,7 +231,6 @@ class MenuRef<T = unknown, R = unknown> {
         }
 
         this.configSheet = this.sheetsService.openSideSheet(MenuConfig, {
-            // data: { title: 'First sheet' },
             side: 'end',
             type: 'default',
             inset: true,
@@ -212,9 +252,24 @@ class MenuRef<T = unknown, R = unknown> {
     }
 
     private registerConfigEvents() {
-        // this.configSheet?.componentInstance?.showIcon.setValue(this.showIcon());
-        // this.configSheet?.componentInstance?.showIcon.registerOnChange(() => {
-        //     this.showIcon.set(this.configSheet?.componentInstance?.showIcon.value);
-        // });
+        this.configSheet?.componentInstance?.vibrant.setValue(this.vibrant());
+        this.configSheet?.componentInstance?.vibrant.registerOnChange(() => {
+            this.vibrant.set(this.configSheet?.componentInstance?.vibrant.value);
+        });
+
+        this.configSheet?.componentInstance?.overlapTrigger.setValue(this.overlapTrigger());
+        this.configSheet?.componentInstance?.overlapTrigger.registerOnChange(() => {
+            this.overlapTrigger.set(this.configSheet?.componentInstance?.overlapTrigger.value);
+        });
+
+        this.configSheet?.componentInstance?.xPosition.setValue(this.xPosition());
+        this.configSheet?.componentInstance?.xPosition.registerOnChange(() => {
+            this.xPosition.set(this.configSheet?.componentInstance?.xPosition.value);
+        });
+
+        this.configSheet?.componentInstance?.yPosition.setValue(this.yPosition());
+        this.configSheet?.componentInstance?.yPosition.registerOnChange(() => {
+            this.yPosition.set(this.configSheet?.componentInstance?.yPosition.value);
+        });
     }
 }

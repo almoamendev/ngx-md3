@@ -106,6 +106,7 @@ export * from './components/dialog/dialog-actions/dialog-actions';
 
 // menus
 export * from './components/menu/menu';
+export * from './components/menu/menu-ref';
 export * from './components/menu/menu.service';
 export * from './components/menu/menu-group/menu-group';
 export * from './components/menu/menu-item/menu-item';

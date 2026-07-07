@@ -34,43 +34,166 @@
         </thead>
         <tbody>
             <tr>
-                <td>
-                    <i>button-size</i>
-                    <p md3-type-body="small">Sets the button size.</p>
+                <td colspan="3">
+                    <h3>interface MenuConfig&lt;D = unknown&gt;</h3>
+                    <md3-divider></md3-divider>
                 </td>
-                <td>
-                    input&lt;ButtonSize&gt;
-                    <p md3-type-body="small">x-small, small, medium, large, x-large</p>
-                </td>
-                <td style="white-space: nowrap;">small</td>
             </tr>
             <tr>
                 <td>
-                    button-type
-                    <p md3-type-body="small">Sets the style type of the button.</p>
+                    <i>data?</i>
+                    <p md3-type-body="small">Optional data passed to the component opened inside the menu.</p>
                 </td>
-                <td>
-                    input&lt;ButtonType&gt;
-                    <p md3-type-body="small">filled, tonal, outlined, elevated, text</p>
-                </td>
-                <td style="white-space: nowrap;">filled</td>
+                <td>D = unknown</td>
+                <td style="white-space: nowrap;">{{ '{}' }}</td>
             </tr>
             <tr>
                 <td>
-                    button-squared
-                    <p md3-type-body="small">Controls button shape.</p>
+                    bindDataToInputs?
+                    <p md3-type-body="small">When enabled, object keys from data are also assigned to matching inputs.</p>
                 </td>
-                <td>input&lt;boolean&gt;</td>
+                <td>boolean</td>
                 <td style="white-space: nowrap;">false</td>
             </tr>
             <tr>
                 <td>
-                    <i>selected</i>
-                    <p md3-type-body="small">Button selection state.</p>
+                    <i>menuColors?</i>
+                    <p md3-type-body="small">Menu surface color scheme.</p>
                 </td>
                 <td>
-                    model&lt;boolean, null&gt;
+                    string
+                    <p md3-type-body="small">standard, vibrant</p>
                 </td>
+                <td style="white-space: nowrap;">standard</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>origin?</i>
+                    <p md3-type-body="small">Element or point the menu should open from. Defaults to the currently focused element.</p>
+                </td>
+                <td>
+                    MenuPositionOrigin
+                    <p md3-type-body="small">Element, ElementRef, MouseEvent</p>
+                </td>
+                <td style="white-space: nowrap;">focused element</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>xPosition?</i>
+                    <p md3-type-body="small">Horizontal alignment against the origin. before/after are used to open sub menus beside the parent item.</p>
+                </td>
+                <td>
+                    MenuPositionX
+                    <p md3-type-body="small">start, end, before, after, center</p>
+                </td>
+                <td style="white-space: nowrap;">start</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>yPosition?</i>
+                    <p md3-type-body="small">Vertical alignment against the origin.</p>
+                </td>
+                <td>
+                    MenuPositionY
+                    <p md3-type-body="small">above, below, center</p>
+                </td>
+                <td style="white-space: nowrap;">below</td>
+            </tr>
+            <tr>
+                <td>
+                    overlapTrigger?
+                    <p md3-type-body="small">Keep the menu on top of the trigger instead of opening outside it.</p>
+                </td>
+                <td>boolean</td>
+                <td style="white-space: nowrap;">false</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>offsetX?, offsetY?</i>
+                    <p md3-type-body="small">Additional pixel offsets from the resolved connected position.</p>
+                </td>
+                <td>number</td>
+                <td style="white-space: nowrap;">0, 4</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>viewportMargin?</i>
+                    <p md3-type-body="small">Distance in pixels the menu should keep from the viewport edge. Values below 0.5em are raised to 0.5em.</p>
+                </td>
+                <td>number</td>
+                <td style="white-space: nowrap;">0.5em</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>positions?</i>
+                    <p md3-type-body="small">Custom CDK connected positions. When provided, these replace the default fallback positions.</p>
+                </td>
+                <td>ConnectedPosition[]</td>
+                <td style="white-space: nowrap;">undefined</td>
+            </tr>
+            <tr>
+                <td>
+                    scrollStrategy?
+                    <p md3-type-body="small">How the menu reacts when the page scrolls.</p>
+                </td>
+                <td>
+                    MenuScrollStrategy
+                    <p md3-type-body="small">reposition, block, close, noop</p>
+                </td>
+                <td style="white-space: nowrap;">reposition</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>viewContainerRef?</i>
+                    <p md3-type-body="small">Optional Angular context for the dynamic component.</p>
+                </td>
+                <td>ViewContainerRef</td>
+                <td style="white-space: nowrap;">ViewContainerRef</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>injector?</i>
+                    <p md3-type-body="small">Optional Angular injector used when creating the menu component.</p>
+                </td>
+                <td>Injector</td>
+                <td style="white-space: nowrap;">Injector</td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <h3>MenuItem</h3>
+                    <md3-divider></md3-divider>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <i>label</i>
+                    <p md3-type-body="small">Menu item label text.</p>
+                </td>
+                <td>input&lt;string&gt;</td>
+                <td style="white-space: nowrap;">''</td>
+            </tr>
+            <tr>
+                <td>
+                    supporting-text
+                    <p md3-type-body="small">Optional secondary line shown under the label.</p>
+                </td>
+                <td>input&lt;string | null&gt;</td>
+                <td style="white-space: nowrap;">null</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>trailing-text</i>
+                    <p md3-type-body="small">Optional trailing text, e.g. a keyboard shortcut.</p>
+                </td>
+                <td>input&lt;string | null&gt;</td>
+                <td style="white-space: nowrap;">null</td>
+            </tr>
+            <tr>
+                <td>
+                    selected
+                    <p md3-type-body="small">When set to a boolean, the item becomes checkable and shows a leading checkmark. Leave null for a plain action item.</p>
+                </td>
+                <td>model&lt;boolean, null&gt;</td>
                 <td style="white-space: nowrap;">null</td>
             </tr>
         </tbody>
@@ -82,6 +205,8 @@
 <app-shiki [code]="apiTypes"></app-shiki>
 <app-shiki [code]="apiUsage" language="html"></app-shiki>
 <ul>
-    <li>Dialogs are custom components injected in the page using dialog service.</li>
-    <li>When creating your custom dialog component. you can optionaly use <code>md3-dialog-header</code>, <code>md3-dialog-body</code> and <code>md3-dialog-actions</code></li>
+    <li>Menus are custom components injected in the page using the menu service, anchored to a trigger element, click event or point.</li>
+    <li>Group related menu items with <code>md3-menu-group</code>. Consecutive groups render with a gap; add a <code>md3-divider</code> between items instead of a new group to get a divider.</li>
+    <li>Each menu item is a <code>button[md3-menu-item]</code> or <code>a[md3-menu-item]</code>, and can optionally project a leading icon (<code>md3-icon-element="leading"</code>), a trailing icon (<code>md3-icon-element="trailing"</code>) and a <code>md3-badge</code>.</li>
+    <li>Use <code>menuService.openSubMenu()</code> from a menu item's click handler to open a nested menu positioned beside its parent item.</li>
 </ul>
