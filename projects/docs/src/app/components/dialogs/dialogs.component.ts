@@ -1,5 +1,5 @@
 import { Component, OnDestroy, signal } from '@angular/core';
-import { Button, DialogService, IconButton, IconElement, MaterialIcon, SheetsService, SideSheetRef, TypeBody } from '@vip9008/ngx-md3';
+import { Button, DialogService, Divider, IconButton, IconElement, MaterialIcon, SheetsService, SideSheetRef, TypeBody } from '@vip9008/ngx-md3';
 import { SampleDialog } from './sample-dialog/sample-dialog';
 import { Playground } from '../playground/playground';
 import { Shiki } from '../shiki/shiki';
@@ -13,6 +13,7 @@ import { DialogConfig } from './dialog-config/dialog-config';
         MaterialIcon,
         IconElement,
         Playground,
+        Divider,
         Shiki,
         TypeBody,
     ],

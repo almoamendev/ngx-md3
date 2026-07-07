@@ -1,7 +1,87 @@
 <h1>Menus</h1>
 
-<button type="button" md3-button (click)="sampleMenu($event)">Open menu (standard)</button>
-<button type="button" md3-button (click)="sampleMenu($event, true)">Open menu (vibrant)</button>
-<button type="button" md3-button (click)="sampleMenu($event, false, 'end')">Open aligned end</button>
-<button type="button" md3-button (click)="sampleMenu($event, false, 'after')">Open after trigger</button>
-<button type="button" md3-button (click)="sampleMenu($event, false, 'start', 'above')">Open above</button>
+<p>
+    Menus display a list of choices on a temporary surface.
+</p>
+
+<figure class="component-image">
+    <img src="/img/md3-menu.png" alt="Material Design menu" />
+    <ol>
+        <li>Vertical menu with gap</li>
+        <li>Vertical menu with divider</li>
+    </ol>
+</figure>
+
+<app-playground hide-direction hide-theme>
+    <button action-item md3-icon-button button-type="tonal" button-squared [selected]="configOpen()"
+        (click)="openConfig()">
+        <md3-icon md3-icon-element>settings</md3-icon>
+    </button>
+
+    <button type="button" md3-button (click)="sampleMenu($event)">Open sample menu</button>
+</app-playground>
+
+<h2>API</h2>
+
+<div class="table-container md3-scrollable">
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 50%;">Name</th>
+                <th>Type</th>
+                <th>Default</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <i>button-size</i>
+                    <p md3-type-body="small">Sets the button size.</p>
+                </td>
+                <td>
+                    input&lt;ButtonSize&gt;
+                    <p md3-type-body="small">x-small, small, medium, large, x-large</p>
+                </td>
+                <td style="white-space: nowrap;">small</td>
+            </tr>
+            <tr>
+                <td>
+                    button-type
+                    <p md3-type-body="small">Sets the style type of the button.</p>
+                </td>
+                <td>
+                    input&lt;ButtonType&gt;
+                    <p md3-type-body="small">filled, tonal, outlined, elevated, text</p>
+                </td>
+                <td style="white-space: nowrap;">filled</td>
+            </tr>
+            <tr>
+                <td>
+                    button-squared
+                    <p md3-type-body="small">Controls button shape.</p>
+                </td>
+                <td>input&lt;boolean&gt;</td>
+                <td style="white-space: nowrap;">false</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>selected</i>
+                    <p md3-type-body="small">Button selection state.</p>
+                </td>
+                <td>
+                    model&lt;boolean, null&gt;
+                </td>
+                <td style="white-space: nowrap;">null</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<app-shiki [code]="apiImport"></app-shiki>
+<app-shiki [code]="apiData"></app-shiki>
+<app-shiki [code]="apiTypes"></app-shiki>
+<app-shiki [code]="apiUsage" language="html"></app-shiki>
+<ul>
+    <li>Dialogs are custom components injected in the page using dialog service.</li>
+    <li>When creating your custom dialog component. you can optionaly use <code>md3-dialog-header</code>, <code>md3-dialog-body</code> and <code>md3-dialog-actions</code></li>
+</ul>
