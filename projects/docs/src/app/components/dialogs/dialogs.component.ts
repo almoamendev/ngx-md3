@@ -78,7 +78,7 @@ interface DialogConfig<D = unknown> {
     bindDataToInputs?: boolean;
 
     /**
-     * When enabled, dialog won't close on scrim click
+     * When enabled, dialog won't close on scrim click or Escape key
      * @default false
      */
     disableCloseEvents?: boolean;

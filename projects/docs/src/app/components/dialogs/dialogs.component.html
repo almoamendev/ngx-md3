@@ -63,7 +63,7 @@
             <tr>
                 <td>
                     disableCloseEvents?
-                    <p md3-type-body="small">When enabled, dialog won't close on scrim click.</p>
+                    <p md3-type-body="small">When enabled, dialog won't close on scrim click or Escape key.</p>
                 </td>
                 <td>boolean</td>
                 <td style="white-space: nowrap;">false</td>
@@ -152,4 +152,6 @@
 <ul>
     <li>Dialogs are custom components injected in the page using dialog service.</li>
     <li>When creating your custom dialog component. you can optionaly use <code>md3-dialog-header</code>, <code>md3-dialog-body</code> and <code>md3-dialog-actions</code></li>
+    <li>On open, focus moves to the first focusable element inside the dialog (or the dialog surface itself if none is found). On close, focus returns to the element that triggered the dialog.</li>
+    <li>Unless <code>disableCloseEvents</code> is set, clicking the scrim or pressing Escape closes the dialog with no result.</li>
 </ul>
