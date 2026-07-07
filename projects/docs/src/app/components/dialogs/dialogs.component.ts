@@ -181,9 +181,9 @@ class DialogRef<T = unknown, R = unknown> {
             direction: this.direction(),
         });
 
-        ref.afterClosed().subscribe((result) => {
-            console.log("Dialog closed, results:: ", result);
-        });
+        // ref.afterClosed().subscribe((result) => {
+        //     console.log("Dialog closed, results:: ", result);
+        // });
     }
 
     public openConfig(): void {

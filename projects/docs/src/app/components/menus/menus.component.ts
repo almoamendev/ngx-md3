@@ -219,9 +219,9 @@ class MenuRef<T = unknown, R = unknown> {
             menuColors: this.vibrant() ? 'vibrant' : 'standard',
         });
 
-        ref.afterClosed().subscribe((result) => {
-            console.log('Menu closed, results:: ', result);
-        });
+        // ref.afterClosed().subscribe((result) => {
+        //     console.log('Menu closed, results:: ', result);
+        // });
     }
 
     public openConfig(): void {
