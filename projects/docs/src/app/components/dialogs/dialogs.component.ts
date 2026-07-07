@@ -180,10 +180,6 @@ class DialogRef<T = unknown, R = unknown> {
             scheme: this.darkMode() ? 'dark' : 'light',
             direction: this.direction(),
         });
-
-        // ref.afterClosed().subscribe((result) => {
-        //     console.log("Dialog closed, results:: ", result);
-        // });
     }
 
     public openConfig(): void {
