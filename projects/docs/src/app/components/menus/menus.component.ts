@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, OnDestroy, signal } from '@angular/core';
 import { Button, Divider, IconButton, IconElement, MaterialIcon, MenuService, SheetsService, SideSheetRef, TypeBody } from '@vip9008/ngx-md3';
 import { SmapleMenu } from './smaple-menu/smaple-menu';
 import { Playground } from '../playground/playground';
@@ -20,7 +20,7 @@ import { MenuConfig } from './menu-config/menu-config';
     templateUrl: './menus.component.html',
     styleUrl: './menus.component.scss',
 })
-export class MenusComponent {
+export class MenusComponent implements OnDestroy {
     private configSheet: SideSheetRef<MenuConfig> | undefined;
     public configOpen = signal(false);
 
@@ -28,39 +28,37 @@ export class MenusComponent {
 
     public apiImport: string = `// Component imports
 import {
-    DialogService,
-    DialogHeader, // optional
+    MenuService,
+    MenuGroup,
+    MenuItem,
     IconElement, // optional
     MaterialIcon, // optional
-    DialogBody, // optional
-    DialogActions, // optional
-    Button, // optional
+    Badge, // optional
 } from '@vip9008/ngx-md3';`;
 
-    public apiData: string = `// using dialog service
+    public apiData: string = `// using menu service
 
-// dialog service
-private dialogService: DialogService = inject(DialogService);
+// menu service
+private menuService: MenuService = inject(MenuService);
 
-// dialog reference: can injected inside dialog component
-private dialogRef: DialogRef = inject(DialogRef<YourDialogComponent, YourDialogResults>);
+// menu reference: can injected inside menu component
+private menuRef: MenuRef = inject(MenuRef<YourMenuComponent, YourMenuResults>);
 
-// open dialog
-const dialogRef: DialogRef = dialogService.open(YourDialogComponent, <DialogConfig>{...});
+// open menu
+const menuRef: MenuRef = menuService.open(YourMenuComponent, <MenuConfig>{...});
 
-// close dialog
-dialogRef.close(youDialogResult);
+// close menu
+menuRef.close(youMenuResult);
 
 // after close
-dialogRef.afterClosed().subscribe((result: YourDialogResults) => {
-    // optional: result when closing the dialog
-});
-`;
+menuRef.afterClosed().subscribe((result: YourMenuResults) => {
+    // optional: result when closing the menu
+});`;
 
     public apiTypes: string = `// Types
-import { DialogConfig, DialogRef } from '@vip9008/ngx-md3';
+import { MenuConfig, MenuRef } from '@vip9008/ngx-md3';
 
-interface DialogConfig<D = unknown> {
+interface MenuConfig<D = unknown> {
     /**
      * Optional data passed to the component opened inside the dialog.
      * The dynamic component can read it by injecting DIALOG_DATA.
@@ -119,7 +117,7 @@ interface DialogConfig<D = unknown> {
     injector?: Injector;
 }
     
-class DialogRef<T = unknown, R = unknown> {
+class MenuRef<T = unknown, R = unknown> {
     /**
      * Filled by DialogService after the user component is attached.
      * This instance is the Material 3 dialog which will host the user component.
@@ -184,39 +182,39 @@ class DialogRef<T = unknown, R = unknown> {
             console.log('Menu closed, results:: ', result);
         });
     }
-    
-        public openConfig(): void {
-            if (this.configOpen()) {
-                this.configSheet?.close();
-                return;
-            }
-    
-            this.configSheet = this.sheetsService.openSideSheet(MenuConfig, {
-                // data: { title: 'First sheet' },
-                side: 'end',
-                type: 'default',
-                inset: true,
-                closeExisting: true,
-                bindDataToInputs: true,
-            });
-            this.configOpen.set(true);
-    
-            this.registerConfigEvents();
-    
-            this.configSheet.afterClosed().subscribe((_) => {
-                this.configSheet = undefined;
-                this.configOpen.set(false);
-            });
-        }
-    
-        ngOnDestroy(): void {
+
+    public openConfig(): void {
+        if (this.configOpen()) {
             this.configSheet?.close();
+            return;
         }
-    
-        private registerConfigEvents() {
-            // this.configSheet?.componentInstance?.showIcon.setValue(this.showIcon());
-            // this.configSheet?.componentInstance?.showIcon.registerOnChange(() => {
-            //     this.showIcon.set(this.configSheet?.componentInstance?.showIcon.value);
-            // });
-        }
+
+        this.configSheet = this.sheetsService.openSideSheet(MenuConfig, {
+            // data: { title: 'First sheet' },
+            side: 'end',
+            type: 'default',
+            inset: true,
+            closeExisting: true,
+            bindDataToInputs: true,
+        });
+        this.configOpen.set(true);
+
+        this.registerConfigEvents();
+
+        this.configSheet.afterClosed().subscribe((_) => {
+            this.configSheet = undefined;
+            this.configOpen.set(false);
+        });
+    }
+
+    ngOnDestroy(): void {
+        this.configSheet?.close();
+    }
+
+    private registerConfigEvents() {
+        // this.configSheet?.componentInstance?.showIcon.setValue(this.showIcon());
+        // this.configSheet?.componentInstance?.showIcon.registerOnChange(() => {
+        //     this.showIcon.set(this.configSheet?.componentInstance?.showIcon.value);
+        // });
+    }
 }

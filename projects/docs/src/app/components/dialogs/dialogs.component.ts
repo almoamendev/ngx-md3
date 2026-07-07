@@ -57,8 +57,7 @@ dialogRef.close(youDialogResult);
 // after close
 dialogRef.afterClosed().subscribe((result: YourDialogResults) => {
     // optional: result when closing the dialog
-});
-`;
+});`;
 
     public apiTypes: string = `// Types
 import { DialogConfig, DialogRef } from '@vip9008/ngx-md3';
