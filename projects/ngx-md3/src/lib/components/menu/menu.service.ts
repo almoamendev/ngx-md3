@@ -348,7 +348,7 @@ export class MenuService {
         }
 
         if (config.overlapTrigger) {
-            const anchorY = config.yPosition === 'above' ? originRect.top : originRect.bottom;
+            const anchorY = config.yPosition === 'above' ? originRect.bottom : originRect.top;
 
             return anchorY < overlayRect.top - tolerance
                 || anchorY > overlayRect.bottom + tolerance;
@@ -452,8 +452,8 @@ export class MenuService {
         switch (position) {
             case 'above':
                 return {
-                    originY: 'top',
-                    overlayY: overlapTrigger ? 'top' : 'bottom',
+                    originY: overlapTrigger ? 'bottom' : 'top',
+                    overlayY: 'bottom',
                 };
 
             case 'center':
@@ -465,8 +465,8 @@ export class MenuService {
             case 'below':
             default:
                 return {
-                    originY: 'bottom',
-                    overlayY: overlapTrigger ? 'bottom' : 'top',
+                    originY: overlapTrigger ? 'top' : 'bottom',
+                    overlayY: 'top',
                 };
         }
     }
