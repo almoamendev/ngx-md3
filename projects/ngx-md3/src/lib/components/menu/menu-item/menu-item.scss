@@ -23,7 +23,7 @@
     &:focus {
         z-index: 1;
 
-        .md3-menu-item-container:after {
+        &:not(:hover) .md3-menu-item-container:after {
             opacity: 1;
         }
     }
