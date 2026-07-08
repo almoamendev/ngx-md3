@@ -4,8 +4,10 @@ import { AppBarModule, IconElement, InputElement, LayoutService, MaterialIcon, N
 import { FormControl } from '@angular/forms';
 import { ComponentsMenu } from './components-menu/components-menu';
 import { filter } from 'rxjs';
+import { FoundationsMenu } from './foundations-menu/foundations-menu';
 
 enum NavigationGroupLink {
+    FOUNDATIONS = 'foundations',
     COMPONENTS = 'components',
 }
 
@@ -91,15 +93,24 @@ export class LayoutComponent {
         });
     }
 
-    public openComponentsMenu(): void {
-        const isCurrentGroup: boolean = this.currentGroup() == NavigationGroupLink.COMPONENTS;
+    private getMenu(group: NavigationGroupLink): any {
+        switch(group) {
+            case NavigationGroupLink.COMPONENTS: return ComponentsMenu;
+            case NavigationGroupLink.FOUNDATIONS: return FoundationsMenu;
+        }
+    }
+
+    public openMenu(group: NavigationGroupLink): void {
+        const isCurrentGroup: boolean = this.currentGroup() == group;
 
         this.currentSheet?.close();
 
-        if (!isCurrentGroup) {
+        const menu = this.getMenu(group);
+
+        if (!isCurrentGroup && menu) {
             this.navSheetsConfig.type = this.navSheetStyle();
-            this.currentSheet = this.sheetsService.openSideSheet(ComponentsMenu, this.navSheetsConfig);
-            this.currentGroup.set(NavigationGroupLink.COMPONENTS);
+            this.currentSheet = this.sheetsService.openSideSheet(menu, this.navSheetsConfig);
+            this.currentGroup.set(group);
             this.currentSheet.afterClosed().subscribe((_) => {
                 this.cleanCurrentSheet();
             });

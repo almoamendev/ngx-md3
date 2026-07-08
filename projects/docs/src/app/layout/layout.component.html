@@ -45,11 +45,18 @@
             Label
         </button> -->
 
-        <button type="button" md3-nav-item (click)="openComponentsMenu()" [class.md3-active]="currentGroup() == groupType.COMPONENTS">
+        <button type="button" md3-nav-item (click)="openMenu(groupType.FOUNDATIONS)" [class.md3-active]="currentGroup() == groupType.FOUNDATIONS">
+            <md3-icon md3-icon-element>book</md3-icon>
+            <md3-icon md3-icon-element="active" filled>book</md3-icon>
+            Foundations
+        </button>
+
+        <button type="button" md3-nav-item (click)="openMenu(groupType.COMPONENTS)" [class.md3-active]="currentGroup() == groupType.COMPONENTS">
             <md3-icon md3-icon-element>add_circle</md3-icon>
             <md3-icon md3-icon-element="active" filled>add_circle</md3-icon>
             Components
         </button>
+
         <!-- <md3-nav-group label="Components" hide-on-collapse>
             <a routerLink="components/buttons/button-groups" md3-nav-item>
                 Button groups
