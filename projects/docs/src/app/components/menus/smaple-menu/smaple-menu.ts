@@ -1,13 +1,14 @@
 import { Component, input } from '@angular/core';
-import { Badge, IconElement, MaterialIcon, MenuGroup, MenuItem, MenuService } from '@vip9008/ngx-md3';
+import { Badge, Divider, IconElement, MaterialIcon, MenuGroup, MenuItem, MenuService } from '@vip9008/ngx-md3';
 
 @Component({
     selector: 'app-smaple-menu',
     imports: [
-        IconElement,
-        MaterialIcon,
         MenuGroup,
         MenuItem,
+        Divider,
+        IconElement,
+        MaterialIcon,
         Badge,
     ],
     templateUrl: './smaple-menu.html',

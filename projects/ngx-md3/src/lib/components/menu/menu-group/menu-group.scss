@@ -18,6 +18,10 @@
         border-end-end-radius: var(--border-radius);
     }
 
+    ::ng-deep md3-divider {
+        margin: 0.125em 0.5em;
+    }
+
     ::ng-deep [md3-menu-item] {
         &:first-child .md3-menu-item-container {
             border-start-start-radius: 0.75em;
