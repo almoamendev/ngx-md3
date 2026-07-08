@@ -15,6 +15,9 @@ import { MENU_CONFIG } from './menu-ref';
         'role': 'menu',
         '[class.md3-visible]': 'isVisible()',
         '[class.md3-inactive]': '!isActive()',
+        '[class.md-scheme-dark]': 'scheme() == "dark"',
+        '[class.md-scheme-light]': 'scheme() == "light"',
+        '[dir]': 'direction()',
     },
 })
 export class Menu implements AfterContentInit {
@@ -23,6 +26,8 @@ export class Menu implements AfterContentInit {
     protected readonly config = inject<MenuConfig>(MENU_CONFIG, { optional: true }) ?? {};
     protected menuColors = signal<'standard' | 'vibrant'>('standard');
     protected isVisible = signal<boolean>(false);
+    protected scheme = signal<'inherit' | 'dark' | 'light'>('inherit');
+    protected direction = signal<null | 'ltr' | 'rtl'>(null);
     
     public isActive = signal<boolean>(true);
     
@@ -41,6 +46,8 @@ export class Menu implements AfterContentInit {
         });
 
         this.menuColors.set(this.config.menuColors ?? 'standard');
+        this.scheme.set(this.config.scheme ?? 'inherit');
+        this.direction.set(this.config.direction ?? null);
     }
 
     ngAfterContentInit(): void {

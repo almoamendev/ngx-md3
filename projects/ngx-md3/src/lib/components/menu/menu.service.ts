@@ -26,6 +26,8 @@ interface ResolvedMenuConfig<D = unknown> extends MenuConfig<D> {
     viewportMargin: number;
     positions?: ConnectedPosition[];
     scrollStrategy: MenuScrollStrategy;
+    scheme: 'inherit' | 'dark' | 'light';
+    direction: null | 'ltr' | 'rtl';
     viewContainerRef?: ViewContainerRef;
     injector: Injector;
 }
@@ -106,6 +108,8 @@ export class MenuService {
             overlapTrigger: config.overlapTrigger ?? true,
             offsetX,
             offsetY,
+            scheme: config.scheme ?? 'inherit',
+            direction: config.direction ?? null,
         };
 
         return this.open<T, D, R>(component, subMenuConfig);
@@ -127,6 +131,8 @@ export class MenuService {
             viewportMargin,
             positions: config.positions,
             scrollStrategy: config.scrollStrategy ?? 'reposition',
+            scheme: config.scheme ?? 'inherit',
+            direction: config.direction ?? null,
             viewContainerRef: config.viewContainerRef,
             injector: config.injector ?? this.injector,
         };

@@ -72,12 +72,9 @@ body {
     overflow-y: auto;
     margin: 0;
     padding: 0;
-
-    &, .md-scheme-light, .md-scheme-dark {
-        color: rgb(var(--md-scheme-on-surface));
-        background-color: rgb(var(--md-scheme-surface));
-        border-color: rgb(var(--md-scheme-outline-variant));
-    }
+    color: rgb(var(--md-scheme-on-surface));
+    background-color: rgb(var(--md-scheme-surface));
+    border-color: rgb(var(--md-scheme-outline-variant));
 
     * {
         -webkit-tap-highlight-color: rgba(0, 0, 0, 0);

@@ -28,6 +28,8 @@ export class MenusComponent implements OnDestroy {
     public overlapTrigger = signal<boolean>(false);
     public xPosition = signal<'start' | 'end' | 'before' | 'after'>('start');
     public yPosition = signal<'above' | 'below'>('below');
+    public darkMode = signal<boolean>(true);
+    public direction = signal<'ltr' | 'rtl'>('ltr');
 
     public apiImport: string = `// Component imports
 import {
@@ -140,6 +142,18 @@ interface MenuConfig<D = unknown> {
      * @default reposition
      */
     scrollStrategy?: 'reposition' | 'block' | 'close' | 'noop';
+    
+    /**
+     * Menu scheme colors
+     * @default inherit
+     */
+    scheme?: 'inherit' | 'dark' | 'light';
+    
+    /**
+     * Menu direction. when null the direction will depends on default page direction.
+     * @default null
+     */
+    direction?: null | 'ltr' | 'rtl';
 
     /**
      * Optional Angular context for the dynamic component.
@@ -217,6 +231,8 @@ class MenuRef<T = unknown, R = unknown> {
             yPosition: this.yPosition(),
             overlapTrigger: this.overlapTrigger(),
             menuColors: this.vibrant() ? 'vibrant' : 'standard',
+            scheme: this.darkMode() ? 'dark' : 'light',
+            direction: this.direction(),
         });
 
         // ref.afterClosed().subscribe((result) => {
@@ -270,6 +286,16 @@ class MenuRef<T = unknown, R = unknown> {
         this.configSheet?.componentInstance?.yPosition.setValue(this.yPosition());
         this.configSheet?.componentInstance?.yPosition.registerOnChange(() => {
             this.yPosition.set(this.configSheet?.componentInstance?.yPosition.value);
+        });
+
+        this.configSheet?.componentInstance?.darkMode.setValue(this.darkMode());
+        this.configSheet?.componentInstance?.darkMode.registerOnChange(() => {
+            this.darkMode.set(this.configSheet?.componentInstance?.darkMode.value);
+        });
+
+        this.configSheet?.componentInstance?.direction.setValue(this.direction());
+        this.configSheet?.componentInstance?.direction.registerOnChange(() => {
+            this.direction.set(this.configSheet?.componentInstance?.direction.value);
         });
     }
 }

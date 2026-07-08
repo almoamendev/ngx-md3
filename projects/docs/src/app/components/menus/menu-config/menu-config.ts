@@ -25,6 +25,8 @@ export class MenuConfig {
     public overlapTrigger: FormControl = new FormControl<boolean>(false);
     public xPosition: FormControl = new FormControl<'start' | 'end' | 'before' | 'after'>('start');
     public yPosition: FormControl = new FormControl<'above' | 'below'>('below');
+    public darkMode: FormControl = new FormControl<boolean>(true);
+    public direction: FormControl = new FormControl<'ltr' | 'rtl'>('ltr');
 
     constructor(
         private sideSheetRef: SideSheetRef<MenuConfig>

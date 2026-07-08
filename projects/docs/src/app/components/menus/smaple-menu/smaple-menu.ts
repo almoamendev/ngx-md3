@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { Badge, IconElement, MaterialIcon, MenuGroup, MenuItem, MenuService } from '@vip9008/ngx-md3';
 
 @Component({
@@ -14,7 +14,7 @@ import { Badge, IconElement, MaterialIcon, MenuGroup, MenuItem, MenuService } fr
     styleUrl: './smaple-menu.scss',
 })
 export class SmapleMenu {
-    @Input() simple: boolean = false;
+    public simple = input<boolean>(false);
     
     constructor(
         private menuService: MenuService

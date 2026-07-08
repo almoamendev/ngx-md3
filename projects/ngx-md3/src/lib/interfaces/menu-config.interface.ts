@@ -64,11 +64,27 @@ export interface MenuConfig<D = unknown> {
      * How the menu reacts when the page scrolls.
      */
     scrollStrategy?: MenuScrollStrategy;
-
+    
+    /**
+     * Menu scheme colors
+     * @default inherit
+     */
+    scheme?: 'inherit' | 'dark' | 'light';
+    
+    /**
+     * Menu direction. when null the direction will depends on default page direction.
+     * @default null
+     */
+    direction?: null | 'ltr' | 'rtl';
+    
     /**
      * Optional Angular context for the dynamic component. Passing a
      * ViewContainerRef keeps dependency lookup close to the caller.
      */
     viewContainerRef?: ViewContainerRef;
+
+    /**
+     * Optional Angular injector used when creating the menu component.
+     */
     injector?: Injector;
 }
