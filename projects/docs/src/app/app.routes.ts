@@ -20,6 +20,7 @@ import { ChipsComponent } from './components/chips/chips.component';
 import { MenusComponent } from './components/menus/menus.component';
 import { SplitButtonsComponent } from './components/buttons/split-buttons/split-buttons.component';
 import { NavigationRailComponent } from './components/navigations/navigation-rail/navigation-rail.component';
+import { ScaffoldComponent } from './foundations/scaffold/scaffold.component';
 
 export const routes: Routes = [
     {
@@ -32,6 +33,15 @@ export const routes: Routes = [
                     {
                         path: 'typography',
                         component: TypographyComponent,
+                    },
+                ],
+            },
+            {
+                path: 'foundations',
+                children: [
+                    {
+                        path: 'scaffold',
+                        component: ScaffoldComponent,
                     },
                 ],
             },
@@ -130,11 +140,11 @@ export const routes: Routes = [
                         path: 'text-fields',
                         component: TextFieldsComponent,
                     },
-                    {
-                        path: '**',
-                        component: ErrorComponent
-                    },
                 ],
+            },
+            {
+                path: '**',
+                component: ErrorComponent
             },
         ],
     },

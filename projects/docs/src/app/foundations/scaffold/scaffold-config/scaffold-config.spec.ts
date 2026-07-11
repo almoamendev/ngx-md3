@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { Scaffold } from './scaffold';
+import { ScaffoldConfig } from './scaffold-config';
 
-describe('Scaffold', () => {
-  let component: Scaffold;
-  let fixture: ComponentFixture<Scaffold>;
+describe('ScaffoldConfig', () => {
+  let component: ScaffoldConfig;
+  let fixture: ComponentFixture<ScaffoldConfig>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Scaffold]
+      imports: [ScaffoldConfig]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(Scaffold);
+    fixture = TestBed.createComponent(ScaffoldConfig);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

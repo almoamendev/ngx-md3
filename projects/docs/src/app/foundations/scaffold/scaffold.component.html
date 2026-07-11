@@ -1,0 +1,161 @@
+<h1>Scaffold</h1>
+
+<p>
+    The scaffold is the top-level layout foundation of an app. It arranges a top bar, a bottom bar, a leading rail,
+    a trailing rail, and up to three panes (start, main, end) around the viewport using CSS grid, so every other
+    layout piece — app bars, navigation rails, navigation bars, drawers — has a fixed place to project into.
+</p>
+
+<figure class="component-image">
+    <img src="/img/md3-scaffold.png" alt="Material Design scaffold" />
+    <ol>
+        <li>Safety region</li>
+        <li>Bar</li>
+        <li>Pane</li>
+        <li>Rail</li>
+    </ol>
+</figure>
+
+<app-playground hide-direction hide-theme>
+    <button action-item md3-icon-button button-type="tonal" button-squared [selected]="configOpen()"
+        (click)="openConfig()">
+        <md3-icon md3-icon-element>settings</md3-icon>
+    </button>
+
+    <div class="scaffold-demo">
+        @if (showTopBar()) {
+            <div class="demo-region demo-bar-top">
+                <span md3-type-body="small">md3-scaffold-bar="top"</span>
+            </div>
+        }
+
+        @if (showLeadingRail()) {
+            <div class="demo-region demo-rail-leading">
+                <span md3-type-body="small">md3-scaffold-rail="leading"</span>
+            </div>
+        }
+
+        <div class="demo-content">
+            @if (showStartPane()) {
+                <div class="demo-region demo-pane-start">
+                    <span md3-type-body="small">md3-scaffold-pane="start"</span>
+                </div>
+            }
+
+            <div class="demo-region demo-pane-main">
+                <span md3-type-body="small">md3-scaffold-pane="main"</span>
+            </div>
+
+            @if (showEndPane()) {
+                <div class="demo-region demo-pane-end">
+                    <span md3-type-body="small">md3-scaffold-pane="end"</span>
+                </div>
+            }
+        </div>
+
+        @if (showTrailingRail()) {
+            <div class="demo-region demo-rail-trailing">
+                <span md3-type-body="small">md3-scaffold-rail="trailing"</span>
+            </div>
+        }
+
+        @if (showBottomBar()) {
+            <div class="demo-region demo-bar-bottom">
+                <span md3-type-body="small">md3-scaffold-bar="bottom"</span>
+            </div>
+        }
+    </div>
+</app-playground>
+
+<h2>API</h2>
+
+<div class="table-container md3-scrollable">
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 50%;">Name</th>
+                <th>Type</th>
+                <th>Default</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td colspan="3">
+                    <h3>md3-scaffold</h3>
+                    <p md3-type-body="small">
+                        Root layout container. Takes up the full viewport (100dvh) and has no inputs — every region
+                        is provided by projecting content marked with the directives below.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <h3>md3-scaffold-bar</h3>
+                    <p md3-type-body="small">
+                        Marks projected content as the top or bottom bar (e.g. <code>md3-app-bar</code>,
+                        <code>md3-navigation-bar</code>).
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <i>md3-scaffold-bar</i>
+                    <p md3-type-body="small">Which bar region the content occupies.</p>
+                </td>
+                <td>
+                    input.required&lt;'top' | 'bottom'&gt;
+                </td>
+                <td style="white-space: nowrap;">required</td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <h3>md3-scaffold-rail</h3>
+                    <p md3-type-body="small">
+                        Marks projected content as the leading or trailing rail (e.g. <code>md3-navigation-rail</code>,
+                        a drawer).
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <i>md3-scaffold-rail</i>
+                    <p md3-type-body="small">Which rail region the content occupies.</p>
+                </td>
+                <td>
+                    input.required&lt;'leading' | 'trailing'&gt;
+                </td>
+                <td style="white-space: nowrap;">required</td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <h3>md3-scaffold-pane</h3>
+                    <p md3-type-body="small">
+                        Marks projected content as one of the three content panes, laid out start / main / end.
+                        The main pane is where routed content usually lives.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <i>md3-scaffold-pane</i>
+                    <p md3-type-body="small">Which pane the content occupies.</p>
+                </td>
+                <td>
+                    input.required&lt;'main' | 'start' | 'end'&gt;
+                </td>
+                <td style="white-space: nowrap;">required</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<app-shiki [code]="apiImport"></app-shiki>
+<app-shiki [code]="apiData"></app-shiki>
+<app-shiki [code]="apiUsage" language="html"></app-shiki>
+<ul>
+    <li><code>md3-scaffold</code> is meant to be used once, as the root of your app's layout.</li>
+    <li>Content order inside <code>md3-scaffold</code> does not matter — placement is driven entirely by the region attributes, not document order.</li>
+    <li>Bars and rails are optional: a region with nothing projected into it simply collapses, and the panes grid grows to fill the remaining space.</li>
+    <li>The <code>main</code> pane automatically registers with <code>LayoutService</code>, which exposes its scroll position as the <code>mainScrollTop</code> / <code>mainIsScrolled</code> signals — handy for elevating an app bar once the user scrolls.</li>
+    <li>The <code>start</code> and <code>end</code> panes double as portal outlets for <code>SheetsService</code>: side sheets opened with <code>side: 'start'</code> or <code>side: 'end'</code> render into the matching pane when it is present.</li>
+</ul>

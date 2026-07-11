@@ -1,7 +1,20 @@
 {
   "permissions": {
     "allow": [
-      "Bash(npx tsc *)"
+      "Bash(npx tsc *)",
+      "Bash(node_modules/.bin/ng generate *)",
+      "Bash(find / -maxdepth 4 -iname \"node\" -type f)",
+      "Read(//usr/local/bin/**)",
+      "Bash(mkdir -p /root/www/ngx-md3/projects/docs/src/app/foundations/scaffold/scaffold-config)",
+      "Bash(dpkg -l)",
+      "Read(//usr/lib/**)",
+      "Read(//root/**)",
+      "Bash(/root/.vscode-server/bin/4fe60c8b1cdac1c4c174f2fb180d0d758272d713/node --version)",
+      "Bash(timeout 240 /root/.vscode-server/bin/4fe60c8b1cdac1c4c174f2fb180d0d758272d713/node node_modules/typescript/bin/tsc -p projects/docs/tsconfig.app.json --noEmit)",
+      "Bash(echo \"EXIT: $?\")"
+    ],
+    "additionalDirectories": [
+      "/root/www/ngx-md3/projects/docs/src/app/foundations/scaffold"
     ]
   }
 }
