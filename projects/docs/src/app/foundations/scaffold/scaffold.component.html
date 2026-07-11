@@ -22,48 +22,50 @@
         <md3-icon md3-icon-element>settings</md3-icon>
     </button>
 
-    <div class="scaffold-demo">
-        @if (showTopBar()) {
-            <div class="demo-region demo-bar-top">
-                <span md3-type-body="small">md3-scaffold-bar="top"</span>
-            </div>
-        }
-
-        @if (showLeadingRail()) {
-            <div class="demo-region demo-rail-leading">
-                <span md3-type-body="small">md3-scaffold-rail="leading"</span>
-            </div>
-        }
-
-        <div class="demo-content">
-            @if (showStartPane()) {
-                <div class="demo-region demo-pane-start">
-                    <span md3-type-body="small">md3-scaffold-pane="start"</span>
+    <div class="scaffold-container">
+        <div class="scaffold-demo">
+            @if (showTopBar()) {
+                <div class="demo-region demo-bar-top">
+                    <span md3-type-body="small">md3-scaffold-bar="top"</span>
                 </div>
             }
 
-            <div class="demo-region demo-pane-main">
-                <span md3-type-body="small">md3-scaffold-pane="main"</span>
+            @if (showLeadingRail()) {
+                <div class="demo-region demo-rail-leading">
+                    <span md3-type-body="small">md3-scaffold-rail="leading"</span>
+                </div>
+            }
+
+            <div class="demo-content">
+                @if (showStartPane()) {
+                    <div class="demo-region demo-pane-start">
+                        <span md3-type-body="small">md3-scaffold-pane="start"</span>
+                    </div>
+                }
+
+                <div class="demo-region demo-pane-main">
+                    <span md3-type-body="small">md3-scaffold-pane="main"</span>
+                </div>
+
+                @if (showEndPane()) {
+                    <div class="demo-region demo-pane-end">
+                        <span md3-type-body="small">md3-scaffold-pane="end"</span>
+                    </div>
+                }
             </div>
 
-            @if (showEndPane()) {
-                <div class="demo-region demo-pane-end">
-                    <span md3-type-body="small">md3-scaffold-pane="end"</span>
+            @if (showTrailingRail()) {
+                <div class="demo-region demo-rail-trailing">
+                    <span md3-type-body="small">md3-scaffold-rail="trailing"</span>
+                </div>
+            }
+
+            @if (showBottomBar()) {
+                <div class="demo-region demo-bar-bottom">
+                    <span md3-type-body="small">md3-scaffold-bar="bottom"</span>
                 </div>
             }
         </div>
-
-        @if (showTrailingRail()) {
-            <div class="demo-region demo-rail-trailing">
-                <span md3-type-body="small">md3-scaffold-rail="trailing"</span>
-            </div>
-        }
-
-        @if (showBottomBar()) {
-            <div class="demo-region demo-bar-bottom">
-                <span md3-type-body="small">md3-scaffold-bar="bottom"</span>
-            </div>
-        }
     </div>
 </app-playground>
 
