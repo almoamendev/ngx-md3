@@ -1,6 +1,6 @@
 import { Component, computed, effect, signal } from '@angular/core';
 import { NavigationEnd, Router, RouterOutlet } from "@angular/router";
-import { AppBarModule, IconElement, InputElement, LayoutService, MaterialIcon, NavigationBarModule, NavigationRailModule, ScaffoldModule, SheetsService, SideSheetConfig, SideSheetRef, SideSheetType, Switch } from '@vip9008/ngx-md3';
+import { AppBarModule, IconElement, InputElement, LayoutService, MaterialIcon, NavigationBarModule, NavigationRailModule, Scaffold, ScaffoldBar, ScaffoldPane, ScaffoldRail, SheetsService, SideSheetConfig, SideSheetRef, SideSheetType, Switch } from '@vip9008/ngx-md3';
 import { FormControl } from '@angular/forms';
 import { ComponentsMenu } from './components-menu/components-menu';
 import { filter } from 'rxjs';
@@ -15,7 +15,10 @@ enum NavigationGroupLink {
     selector: 'app-layout',
     imports: [
         RouterOutlet,
-        ScaffoldModule,
+        Scaffold,
+        ScaffoldBar,
+        ScaffoldRail,
+        ScaffoldPane,
         AppBarModule,
         NavigationRailModule,
         NavigationBarModule,

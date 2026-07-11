@@ -3,8 +3,10 @@ import { AfterViewInit, Component, inject, OnDestroy, viewChild } from '@angular
 import { SheetsService } from '../../components/sheets/sheets.service';
 
 @Component({
-    standalone: false,
     selector: 'md3-scaffold',
+    imports: [
+        CdkPortalOutlet,
+    ],
     templateUrl: './scaffold.html',
     styleUrl: './scaffold.scss',
 })

@@ -5,7 +5,7 @@ import { booleanAttribute, Component, ElementRef, inject, input } from '@angular
     templateUrl: './navigation-group.html',
     styleUrl: './navigation-group.scss',
     host: {
-        '[class.md3-hide-on-collapse]': 'this.hideOnCollapse()',
+        '[class.md3-hide-on-collapse]': 'hideOnCollapse()',
     },
 })
 export class NavigationGroup {

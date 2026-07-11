@@ -30,7 +30,10 @@ export class ScaffoldComponent implements OnDestroy {
 
     public apiImport: string = `// Component imports
 import {
-    ScaffoldModule, // Scaffold, ScaffoldBar, ScaffoldRail, ScaffoldPane
+    Scaffold,
+    ScaffoldBar, // optional
+    ScaffoldRail, // optional
+    ScaffoldPane, // recommended: always project main content pane
 } from '@vip9008/ngx-md3';`;
 
     public apiData: string = `// md3-scaffold-bar

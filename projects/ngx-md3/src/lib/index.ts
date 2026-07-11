@@ -35,7 +35,6 @@ export * from './foundations/scaffold/scaffold';
 export * from './foundations/scaffold-bar';
 export * from './foundations/scaffold-rail';
 export * from './foundations/scaffold-pane';
-export * from './foundations/scaffold/scaffold-module';
 
 // common components and directives
 export * from './components/common/state-component';

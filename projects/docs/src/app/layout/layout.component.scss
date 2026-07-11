@@ -6,6 +6,12 @@
     md3-navigation-rail.menu-button {
         ::ng-deep .md3-nav-container {
             padding-top: 0.25em !important;
+
+            .md3-nav-header {
+                .md3-menu-button {
+                    margin: 0.5em 0 !important;
+                }
+            }
         }
     }
 
