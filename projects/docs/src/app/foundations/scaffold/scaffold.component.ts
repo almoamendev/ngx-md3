@@ -1,5 +1,5 @@
 import { Component, OnDestroy, signal } from '@angular/core';
-import { IconButton, IconElement, MaterialIcon, SheetsService, SideSheetRef, TypeBody, Grid, GridItem } from '@vip9008/ngx-md3';
+import { IconButton, IconElement, MaterialIcon, SheetsService, SideSheetRef, TypeBody } from '@vip9008/ngx-md3';
 import { Playground } from '../../components/playground/playground';
 import { Shiki } from '../../components/shiki/shiki';
 import { ScaffoldConfig } from './scaffold-config/scaffold-config';
@@ -13,8 +13,6 @@ import { ScaffoldConfig } from './scaffold-config/scaffold-config';
         Playground,
         Shiki,
         TypeBody,
-        Grid,
-        GridItem
     ],
     templateUrl: './scaffold.component.html',
     styleUrl: './scaffold.component.scss',
