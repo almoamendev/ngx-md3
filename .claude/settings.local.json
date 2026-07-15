@@ -11,7 +11,8 @@
       "Read(//root/**)",
       "Bash(/root/.vscode-server/bin/4fe60c8b1cdac1c4c174f2fb180d0d758272d713/node --version)",
       "Bash(timeout 240 /root/.vscode-server/bin/4fe60c8b1cdac1c4c174f2fb180d0d758272d713/node node_modules/typescript/bin/tsc -p projects/docs/tsconfig.app.json --noEmit)",
-      "Bash(echo \"EXIT: $?\")"
+      "Bash(echo \"EXIT: $?\")",
+      "WebSearch"
     ],
     "additionalDirectories": [
       "/root/www/ngx-md3/projects/docs/src/app/foundations/scaffold"

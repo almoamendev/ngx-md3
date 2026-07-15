@@ -14,6 +14,7 @@
 @import './tokens/md-elevation.scss';
 @import './tokens/md-motion.scss';
 @import './tokens/md-border-radius.scss';
+@import './tokens/md-grid.scss';
 
 @-ms-viewport {
     width: device-width;
@@ -488,4 +489,19 @@ md3-badge {
     &::-webkit-scrollbar-track {
         background: transparent;
     }
+}
+
+.md3-grid {
+    display: grid;
+    box-sizing: border-box;
+    width: 100%;
+    grid-template-columns: repeat(var(--md-grid-columns), minmax(0em, 1fr));
+    column-gap: var(--md-grid-gutter);
+    row-gap: var(--md-grid-gutter);
+    padding-inline: var(--md-grid-margin);
+}
+
+.md3-grid-item {
+    min-width: 0em;
+    min-height: 0em;
 }

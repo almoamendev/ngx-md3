@@ -1,0 +1,24 @@
+// Responsive layout grid tokens (columns, margin, gutter).
+// Breakpoints mirror LayoutService.widthQueries — keep both in sync.
+:root {
+    // compact: <600dp
+    --md-grid-columns: 4;
+    --md-grid-margin: 1em; // 16dp
+    --md-grid-gutter: 1em; // 16dp
+}
+
+@media (min-width: 37.5em) and (max-width: 52.499em) { // medium: 600-839dp
+    :root {
+        --md-grid-columns: 8;
+        --md-grid-margin: 1.5em; // 24dp
+        --md-grid-gutter: 1.5em; // 24dp
+    }
+}
+
+@media (min-width: 52.5em) { // expanded, large, extra-large: >=840dp
+    :root {
+        --md-grid-columns: 12;
+        --md-grid-margin: 1.5em; // 24dp
+        --md-grid-gutter: 1.5em; // 24dp
+    }
+}
