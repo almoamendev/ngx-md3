@@ -7,7 +7,7 @@
     --md-grid-gutter: 1em; // 16dp
 }
 
-@media (min-width: 37.5em) and (max-width: 52.499em) { // medium: 600-839dp
+@media (min-width: 37.5em) and (max-width: 74.999em) { // medium, expanded: 600-1199dp
     :root {
         --md-grid-columns: 8;
         --md-grid-margin: 1.5em; // 24dp
@@ -15,7 +15,7 @@
     }
 }
 
-@media (min-width: 52.5em) { // expanded, large, extra-large: >=840dp
+@media (min-width: 75em) { // large, extra-large: >=1200dp
     :root {
         --md-grid-columns: 12;
         --md-grid-margin: 1.5em; // 24dp

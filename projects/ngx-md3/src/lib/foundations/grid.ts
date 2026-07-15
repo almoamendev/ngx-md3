@@ -5,7 +5,7 @@ import { ViewportWidth } from '../types/viewport-width.type';
 const GRID_COLUMNS_BY_WIDTH: Record<ViewportWidth, number> = {
     'compact': 4,
     'medium': 8,
-    'expanded': 12,
+    'expanded': 8,
     'large': 12,
     'extra-large': 12,
 };

@@ -1,0 +1,17 @@
+.grid-demo {
+    width: 100%;
+    padding-block: 1em;
+    border-radius: 1em;
+    background-color: rgb(var(--md-scheme-surface-container-high));
+}
+
+.grid-demo-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 4em;
+    border-radius: 0.5em;
+    background-color: rgb(var(--md-scheme-primary-container));
+    color: rgb(var(--md-scheme-on-primary-container));
+    font-family: monospace;
+}
