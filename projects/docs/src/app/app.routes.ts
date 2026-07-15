@@ -21,6 +21,7 @@ import { MenusComponent } from './components/menus/menus.component';
 import { SplitButtonsComponent } from './components/buttons/split-buttons/split-buttons.component';
 import { NavigationRailComponent } from './components/navigations/navigation-rail/navigation-rail.component';
 import { ScaffoldComponent } from './foundations/scaffold/scaffold.component';
+import { GridsComponent } from './foundations/grids/grids.component';
 
 export const routes: Routes = [
     {
@@ -42,6 +43,10 @@ export const routes: Routes = [
                     {
                         path: 'scaffold',
                         component: ScaffoldComponent,
+                    },
+                    {
+                        path: 'grids',
+                        component: GridsComponent,
                     },
                 ],
             },
