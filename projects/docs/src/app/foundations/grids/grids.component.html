@@ -16,9 +16,13 @@
 </figure>
 
 <app-playground hide-direction>
-    <span action-item md3-type-body="small">{{ layout.widthClass() }} window</span>
-    
-    <md3-grid class="grid-demo">
+    <button action-item md3-icon-button button-type="tonal" button-squared [selected]="configOpen()"
+        (click)="openConfig()">
+        <md3-icon md3-icon-element>settings</md3-icon>
+    </button>
+
+    <div md3-type-headline="small">{{ statusLabel() }}</div>
+    <md3-grid class="grid-demo" [cols]="cols()">
         <md3-grid-item class="grid-demo-item">1</md3-grid-item>
         <md3-grid-item col-span="2" class="grid-demo-item">2</md3-grid-item>
         <md3-grid-item class="grid-demo-item">1</md3-grid-item>
@@ -43,15 +47,29 @@
             <tr>
                 <td colspan="3">
                     <h3>md3-grid</h3>
+                    <md3-divider></md3-divider>
                     <p md3-type-body="small">
                         Grid container. Sets <code>display: grid</code> and derives its column count from
-                        <code>LayoutService.widthClass()</code> — no inputs of its own.
+                        <code>LayoutService.widthClass()</code> unless overridden.
                     </p>
                 </td>
             </tr>
             <tr>
+                <td>
+                    <i>cols</i>
+                    <p md3-type-body="small">
+                        Forces the column count instead of deriving it from the current window size class.
+                    </p>
+                </td>
+                <td>
+                    input&lt;number | undefined&gt;
+                </td>
+                <td style="white-space: nowrap;">undefined</td>
+            </tr>
+            <tr>
                 <td colspan="3">
                     <h3>md3-grid-item</h3>
+                    <md3-divider></md3-divider>
                     <p md3-type-body="small">
                         Marks a child of <code>md3-grid</code> and, optionally, spans it across multiple columns.
                     </p>
@@ -78,6 +96,7 @@
 <app-shiki [code]="apiUsage" language="html"></app-shiki>
 <ul>
     <li>Column count comes from the same window size classes used across the library (<code>LayoutService.widthClass()</code>): compact = 4, medium/expanded = 8, large/extra-large = 12.</li>
+    <li>Use the gear icon above the demo to force a column count and preview compact/medium-expanded/large-extra-large without resizing the window, or bind <code>[cols]</code> yourself the same way.</li>
     <li>Margin (outer padding) and gutter (gap between columns) are exposed as the <code>--md-grid-margin</code> / <code>--md-grid-gutter</code> CSS custom properties, set per breakpoint in <code>md-grid.scss</code> — override them on <code>[md3-grid]</code> to customize spacing without touching the directive.</li>
     <li><code>col-span</code> is not clamped to the current column count — a large span on a narrow, low-column breakpoint will overflow into implicit grid tracks rather than shrink.</li>
 </ul>

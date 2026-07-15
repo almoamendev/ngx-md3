@@ -20,7 +20,6 @@ import { ListConfig } from './list-config/list-config';
         Switch,
         InputElement,
         MaterialIcon,
-        IconElement,
         Divider,
         Playground,
         Shiki,

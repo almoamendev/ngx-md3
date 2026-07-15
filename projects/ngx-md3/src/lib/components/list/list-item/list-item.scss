@@ -16,6 +16,10 @@
     position: relative;
     z-index: 1;
 
+    &.md3-state-component {
+        cursor: pointer;
+    }
+
     &:has(.md3-item-primary-action) {
         background-color: transparent;
     }

@@ -102,25 +102,31 @@ md3-side-sheet-body.md3-component-config {
         flex-direction: column;
         margin: 0.5em 0 1em;
 
-        label.md3-state-component {
-            --state-color: var(--md-scheme-on-surface);
-            --border-radius: 0.5em;
-            --border-size: 0em;
-            --outline-color: rgb(var(--md-scheme-secondary));
-            --outline-width: 0.1875em;
-            --outline-offset: -0.125em;
-
-            display: flex;
-            min-height: 3em;
-            align-items: center;
-            padding: 0 0.5em;
-            border-radius: var(--border-radius);
-
-            [md3-type-label] {
-                flex: 1 1 auto;
+        &:not(.list-items-container) {
+            label.md3-state-component {
+                --state-color: var(--md-scheme-on-surface);
+                --border-radius: 0.5em;
+                --border-size: 0em;
+                --outline-color: rgb(var(--md-scheme-secondary));
+                --outline-width: 0.1875em;
+                --outline-offset: -0.125em;
+    
+                display: flex;
+                min-height: 3em;
+                align-items: center;
                 padding: 0 0.5em;
-                color: rgb(var(--md-scheme-on-surface-variant));
+                border-radius: var(--border-radius);
+    
+                [md3-type-label] {
+                    flex: 1 1 auto;
+                    padding: 0 0.5em;
+                    color: rgb(var(--md-scheme-on-surface-variant));
+                }
             }
+        }
+
+        &.list-items-container {
+            gap: 0.25em;
         }
     }
 

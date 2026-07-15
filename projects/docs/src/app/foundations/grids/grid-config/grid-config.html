@@ -1,1 +1,54 @@
-<p>grid-config works!</p>
+<md3-side-sheet-header title="Configurations">
+    <button type="button" md3-icon-button trailing button-type="standard" (click)="close()">
+        <md3-icon md3-icon-element>close</md3-icon>
+    </button>
+</md3-side-sheet-header>
+<md3-side-sheet-body class="md3-component-config">
+    <div md3-type-body="large">Simulate screen size</div>
+    <div class="controls-list list-items-container">
+        <label md3-list-item>
+            <div md3-list-slot="content">
+                Auto
+                <div md3-type-body="small" color="on-surface-variant">window size</div>
+            </div>
+            <div md3-list-slot="trailing">
+                <md3-radio-button [control]="columns" disable-state-layer>
+                    <input type="radio" md3-input-element name="grid-columns" value="auto">
+                </md3-radio-button>
+            </div>
+        </label>
+        <label md3-list-item>
+            <div md3-list-slot="content">
+                Compact
+                <div md3-type-body="small" color="on-surface-variant">4 columns</div>
+            </div>
+            <div md3-list-slot="trailing">
+                <md3-radio-button [control]="columns" disable-state-layer>
+                    <input type="radio" md3-input-element name="grid-columns" value="4">
+                </md3-radio-button>
+            </div>
+        </label>
+        <label md3-list-item>
+            <div md3-list-slot="content">
+                Medium / Expanded
+                <div md3-type-body="small" color="on-surface-variant">8 columns</div>
+            </div>
+            <div md3-list-slot="trailing">
+                <md3-radio-button [control]="columns" disable-state-layer>
+                    <input type="radio" md3-input-element name="grid-columns" value="8">
+                </md3-radio-button>
+            </div>
+        </label>
+        <label md3-list-item>
+            <div md3-list-slot="content">
+                Large / Extra-large
+                <div md3-type-body="small" color="on-surface-variant">12 columns</div>
+            </div>
+            <div md3-list-slot="trailing">
+                <md3-radio-button [control]="columns" disable-state-layer>
+                    <input type="radio" md3-input-element name="grid-columns" value="12">
+                </md3-radio-button>
+            </div>
+        </label>
+    </div>
+</md3-side-sheet-body>

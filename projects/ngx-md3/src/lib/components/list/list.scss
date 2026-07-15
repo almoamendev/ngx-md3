@@ -27,12 +27,6 @@
             gap: 0.125em;
         }
 
-        ::ng-deep label[md3-list-item],
-        ::ng-deep button[md3-list-item],
-        ::ng-deep a[md3-list-item] {
-            cursor: pointer;
-        }
-
         ::ng-deep md3-list-item, ::ng-deep [md3-list-item] {
             &.md3-state-component:first-child, &:first-child [md3-primary-action] {
                 --border-top-start-r: 1em;
