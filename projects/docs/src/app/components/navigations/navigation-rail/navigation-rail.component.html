@@ -33,7 +33,7 @@
             @if (badge() != 'none') {
                 <md3-badge [small]="badge() == 'dot'">
                     @if (badge() == 'count') {
-                        9
+                        1
                     }
                 </md3-badge>
             }
@@ -45,6 +45,13 @@
         <md3-nav-group label="Library" hide-on-collapse>
             <button type="button" md3-nav-item [class.md3-active]="activeItem() == 'favorites'"
                 (click)="activeItem.set('favorites')">
+                @if (badge() != 'none') {
+                    <md3-badge [small]="badge() == 'dot'">
+                        @if (badge() == 'count') {
+                            999+
+                        }
+                    </md3-badge>
+                }
                 <md3-icon md3-icon-element>favorite</md3-icon>
                 <md3-icon md3-icon-element="active" filled>favorite</md3-icon>
                 Favorites
