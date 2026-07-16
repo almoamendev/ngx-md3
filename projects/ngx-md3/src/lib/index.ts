@@ -39,6 +39,7 @@ export * from './foundations/grid';
 export * from './foundations/grid-item';
 
 // common components and directives
+export * from './components/common/input-element';
 export * from './components/common/state-component';
 export * from './components/common/icon-element';
 export * from './components/common/material-icon/material-icon';
@@ -92,10 +93,8 @@ export * from './components/navigations/navigation-bar/navigation-bar';
 export * from './components/navigations/navigation-bar/navigation-bar-module';
 
 // text fields
-export * from './components/common/input-element';
 export * from './components/text-field/text-field';
 export * from './components/text-field/supporting-text';
-export * from './components/text-field/text-field-module';
 
 // dialogs
 export * from './components/dialog/dialog';

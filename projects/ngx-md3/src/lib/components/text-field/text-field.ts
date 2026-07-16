@@ -6,10 +6,13 @@ import { fromEvent, merge } from 'rxjs';
 import { IconButton } from '../buttons/icon-button/icon-button';
 import { ButtonContext, MD3_BUTTON_CONTEXT } from '../../interfaces/button-context.interface';
 import { ButtonSize } from '../../types/button-size.type';
+import { NgClass } from '@angular/common';
 
 @Component({
-    standalone: false,
     selector: 'md3-text-field',
+    imports: [
+        NgClass,
+    ],
     templateUrl: './text-field.html',
     styleUrl: './text-field.scss',
     providers: [
