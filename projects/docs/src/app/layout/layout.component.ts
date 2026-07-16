@@ -5,10 +5,12 @@ import { FormControl } from '@angular/forms';
 import { ComponentsMenu } from './components-menu/components-menu';
 import { filter } from 'rxjs';
 import { FoundationsMenu } from './foundations-menu/foundations-menu';
+import { StylesMenu } from './styles-menu/styles-menu';
 
 enum NavigationGroupLink {
     FOUNDATIONS = 'foundations',
     COMPONENTS = 'components',
+    STYLES = 'styles',
 }
 
 @Component({
@@ -98,8 +100,9 @@ export class LayoutComponent {
 
     private getMenu(group: NavigationGroupLink): any {
         switch(group) {
-            case NavigationGroupLink.COMPONENTS: return ComponentsMenu;
             case NavigationGroupLink.FOUNDATIONS: return FoundationsMenu;
+            case NavigationGroupLink.STYLES: return StylesMenu;
+            case NavigationGroupLink.COMPONENTS: return ComponentsMenu;
         }
     }
 
