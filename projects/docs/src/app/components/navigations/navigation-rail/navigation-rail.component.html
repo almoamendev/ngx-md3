@@ -11,3 +11,216 @@
         <li>Expanded navigation rail</li>
     </ol>
 </figure>
+
+<app-playground [bg-variant]="true">
+    <button action-item md3-icon-button button-type="tonal" button-squared [selected]="configOpen()"
+        (click)="openConfig()">
+        <md3-icon md3-icon-element>settings</md3-icon>
+    </button>
+
+    <md3-navigation-rail [(expanded)]="expanded" [hide-menu-button]="hideMenuButton()"
+        [full-width-indicator]="fullWidthIndicator()" [container-style]="containerStyle()"
+        [collapsed-layout]="collapsedLayout()" [expanded-layout]="expandedLayout()">
+        @if (showFab()) {
+            <button type="button" md3-fab extended>
+                <md3-icon md3-icon-element>edit</md3-icon>
+                Compose
+            </button>
+        }
+
+        <button type="button" md3-nav-item [class.md3-active]="activeItem() == 'home'"
+            (click)="activeItem.set('home')">
+            @if (badge() != 'none') {
+                <md3-badge [small]="badge() == 'dot'">
+                    @if (badge() == 'count') {
+                        9
+                    }
+                </md3-badge>
+            }
+            <md3-icon md3-icon-element>home</md3-icon>
+            <md3-icon md3-icon-element="active" filled>home</md3-icon>
+            Home
+        </button>
+
+        <md3-nav-group label="Library" hide-on-collapse>
+            <button type="button" md3-nav-item [class.md3-active]="activeItem() == 'favorites'"
+                (click)="activeItem.set('favorites')">
+                <md3-icon md3-icon-element>favorite</md3-icon>
+                <md3-icon md3-icon-element="active" filled>favorite</md3-icon>
+                Favorites
+            </button>
+            <button type="button" md3-nav-item [class.md3-active]="activeItem() == 'settings'"
+                (click)="activeItem.set('settings')">
+                <md3-icon md3-icon-element>settings</md3-icon>
+                <md3-icon md3-icon-element="active" filled>settings</md3-icon>
+                Settings
+            </button>
+        </md3-nav-group>
+    </md3-navigation-rail>
+</app-playground>
+
+<h2>API</h2>
+
+<div class="table-container md3-scrollable">
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 50%;">Name</th>
+                <th>Type</th>
+                <th>Default</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td colspan="3">
+                    <h3>NavigationRail</h3>
+                    <md3-divider></md3-divider>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <i>expanded</i>
+                    <p md3-type-body="small">Controls the expanded/collapsed state. Two-way bindable.</p>
+                </td>
+                <td>model&lt;boolean&gt;</td>
+                <td style="white-space: nowrap;">false</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>hide-menu-button</i>
+                    <p md3-type-body="small">Hides the built-in expand/collapse menu button.</p>
+                </td>
+                <td>input&lt;boolean&gt;</td>
+                <td style="white-space: nowrap;">false</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>full-width-indicator</i>
+                    <p md3-type-body="small">Stretches the active state indicator to the full item width (expanded state only).</p>
+                </td>
+                <td>input&lt;boolean&gt;</td>
+                <td style="white-space: nowrap;">false</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>container-style</i>
+                    <p md3-type-body="small">Sets the rail container style.</p>
+                </td>
+                <td>
+                    input&lt;ContainerStyle&gt;
+                    <p md3-type-body="small">none, elevated, divider</p>
+                </td>
+                <td style="white-space: nowrap;">none</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>collapsed-layout</i>
+                    <p md3-type-body="small">Sets the layout used while collapsed.</p>
+                </td>
+                <td>
+                    input&lt;CollapsedLayout&gt;
+                    <p md3-type-body="small">compact, narrow, hidden</p>
+                </td>
+                <td style="white-space: nowrap;">compact</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>expanded-layout</i>
+                    <p md3-type-body="small">Sets the layout used while expanded.</p>
+                </td>
+                <td>
+                    input&lt;ExpandedLayout&gt;
+                    <p md3-type-body="small">standard, modal</p>
+                </td>
+                <td style="white-space: nowrap;">standard</td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <h3>NavigationGroup</h3>
+                    <md3-divider></md3-divider>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <i>label</i>
+                    <p md3-type-body="small">Sets the group label text.</p>
+                </td>
+                <td>input&lt;string&gt;</td>
+                <td style="white-space: nowrap;">undefined</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>hide-on-collapse</i>
+                    <p md3-type-body="small">Hides the group entirely while the rail is collapsed, instead of just hiding its label.</p>
+                </td>
+                <td>input&lt;boolean&gt;</td>
+                <td style="white-space: nowrap;">false</td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <h3>NavigationItem</h3>
+                    <md3-divider></md3-divider>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <i>hide-on-collapse</i>
+                    <p md3-type-body="small">Hides the item entirely while the rail is collapsed.</p>
+                </td>
+                <td>input&lt;boolean&gt;</td>
+                <td style="white-space: nowrap;">false</td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <h3>Badge</h3>
+                    <md3-divider></md3-divider>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <i>small</i>
+                    <p md3-type-body="small">Shows a small dot badge instead of a labeled badge.</p>
+                </td>
+                <td>input&lt;boolean&gt;</td>
+                <td style="white-space: nowrap;">false</td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <h3><a routerLink="/components/buttons/floating-action-buttons">FloatingActionButton</a></h3>
+                    <md3-divider></md3-divider>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <p md3-type-body="small">See the floating action button docs for its full API.</p>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<app-shiki [code]="apiImport"></app-shiki>
+<app-shiki [code]="apiData"></app-shiki>
+<app-shiki [code]="apiTypes"></app-shiki>
+<app-shiki [code]="apiUsage" language="html"></app-shiki>
+<ul>
+    <li>
+        <code>md3-nav-item</code> can be applied to a <code>&lt;button&gt;</code> or an <code>&lt;a&gt;</code>.
+        Combine it with <code>routerLink</code> and <code>routerLinkActive="md3-active"</code> for automatic
+        active-state handling, or toggle the <code>md3-active</code> class manually on a button.
+    </li>
+    <li>
+        Provide a filled variant of the icon with <code>md3-icon-element="active"</code> to swap in when the
+        item becomes active.
+    </li>
+    <li>
+        Use <code>md3-nav-group</code> to group related items under an optional label.
+    </li>
+    <li>
+        A single <code>md3-fab</code> can be placed at the top of the rail, above the navigation items.
+    </li>
+    <li>
+        Custom expand/collapse icons can be provided via <code>md3-icon-element="expand"</code> and
+        <code>md3-icon-element="collapse"</code>; otherwise default menu icons are used.
+    </li>
+</ul>

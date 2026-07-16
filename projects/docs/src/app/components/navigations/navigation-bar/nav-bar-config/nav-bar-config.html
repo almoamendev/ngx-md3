@@ -1,1 +1,28 @@
-<p>nav-bar-config works!</p>
+<md3-side-sheet-header title="Configurations">
+    <button type="button" md3-icon-button trailing button-type="standard" (click)="close()">
+        <md3-icon md3-icon-element>close</md3-icon>
+    </button>
+</md3-side-sheet-header>
+<md3-side-sheet-body class="md3-component-config">
+    <div md3-type-body="large">Badge</div>
+    <div class="controls-list">
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="badge">
+                <input type="radio" md3-input-element name="badge" value="none">
+            </md3-radio-button>
+            <div md3-type-label="large">None</div>
+        </label>
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="badge">
+                <input type="radio" md3-input-element name="badge" value="dot">
+            </md3-radio-button>
+            <div md3-type-label="large">Dot</div>
+        </label>
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="badge">
+                <input type="radio" md3-input-element name="badge" value="count">
+            </md3-radio-button>
+            <div md3-type-label="large">Count</div>
+        </label>
+    </div>
+</md3-side-sheet-body>

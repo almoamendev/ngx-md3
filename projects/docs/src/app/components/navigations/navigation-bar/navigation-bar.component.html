@@ -8,3 +8,109 @@
     <img src="/img/md3-nav-bar.png" alt="Material Design navigation bar" />
     <p>Navigation bar for compact and medium window sizes</p>
 </figure>
+
+<app-playground [bg-variant]="true">
+    <button action-item md3-icon-button button-type="tonal" button-squared [selected]="configOpen()"
+        (click)="openConfig()">
+        <md3-icon md3-icon-element>settings</md3-icon>
+    </button>
+
+    <md3-navigation-bar style="width: 100%;">
+        <button type="button" md3-nav-item [class.md3-active]="activeItem() == 'home'"
+            (click)="activeItem.set('home')">
+            @if (badge() != 'none') {
+                <md3-badge [small]="badge() == 'dot'">
+                    @if (badge() == 'count') {
+                        9
+                    }
+                </md3-badge>
+            }
+            <md3-icon md3-icon-element>home</md3-icon>
+            <md3-icon md3-icon-element="active" filled>home</md3-icon>
+            Home
+        </button>
+        <button type="button" md3-nav-item [class.md3-active]="activeItem() == 'favorites'"
+            (click)="activeItem.set('favorites')">
+            <md3-icon md3-icon-element>favorite</md3-icon>
+            <md3-icon md3-icon-element="active" filled>favorite</md3-icon>
+            Favorites
+        </button>
+        <button type="button" md3-nav-item [class.md3-active]="activeItem() == 'settings'"
+            (click)="activeItem.set('settings')">
+            <md3-icon md3-icon-element>settings</md3-icon>
+            <md3-icon md3-icon-element="active" filled>settings</md3-icon>
+            Settings
+        </button>
+    </md3-navigation-bar>
+</app-playground>
+
+<h2>API</h2>
+
+<div class="table-container md3-scrollable">
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 50%;">Name</th>
+                <th>Type</th>
+                <th>Default</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td colspan="3">
+                    <h3>NavigationBar</h3>
+                    <md3-divider></md3-divider>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <p md3-type-body="small">
+                        No configurable inputs. Its layout switches automatically between a horizontal bar
+                        on medium and expanded window sizes, and a vertical, compact bar on compact window sizes.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <h3><a routerLink="/components/navigations/navigation-rail">NavigationItem</a></h3>
+                    <md3-divider></md3-divider>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <p md3-type-body="small">See the navigation rail docs for its full API.</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <h3><a routerLink="/components/navigations/navigation-rail">Badge</a></h3>
+                    <md3-divider></md3-divider>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <p md3-type-body="small">See the navigation rail docs for its full API.</p>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<app-shiki [code]="apiImport"></app-shiki>
+<app-shiki [code]="apiData"></app-shiki>
+<app-shiki [code]="apiTypes"></app-shiki>
+<app-shiki [code]="apiUsage" language="html"></app-shiki>
+<ul>
+    <li>
+        <code>md3-nav-item</code> can be applied to a <code>&lt;button&gt;</code> or an <code>&lt;a&gt;</code>.
+        Combine it with <code>routerLink</code> and <code>routerLinkActive="md3-active"</code> for automatic
+        active-state handling, or toggle the <code>md3-active</code> class manually on a button.
+    </li>
+    <li>
+        Provide a filled variant of the icon with <code>md3-icon-element="active"</code> to swap in when the
+        item becomes active.
+    </li>
+    <li>
+        Between 3 and 5 destinations are recommended in a navigation bar.
+    </li>
+</ul>

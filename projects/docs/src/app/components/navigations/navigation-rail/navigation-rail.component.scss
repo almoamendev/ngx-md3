@@ -1,0 +1,24 @@
+app-playground {
+    ::ng-deep md3-card {
+        padding: 0 !important;
+        align-items: start !important;
+        justify-content: stretch !important;
+        min-height: 31em !important;
+        overflow: hidden !important;
+    }
+
+    md3-navigation-rail {
+        flex: 0 1 31em !important;
+        height: 31em !important;
+
+        ::ng-deep .md3-nav-container {
+            height: 31em !important;
+        }
+
+        &.md3-expanded-modal {
+            ::ng-deep .md3-nav-scrim, ::ng-deep .md3-nav-container {
+                position: absolute !important;
+            }
+        }
+    }
+}
