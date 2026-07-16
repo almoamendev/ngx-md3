@@ -18,7 +18,7 @@
         <md3-icon md3-icon-element>settings</md3-icon>
     </button>
 
-    <md3-text-field label="Text field" [field-type]="fieldType()" [input-counter]="counter() ? 300 : false"
+    <md3-text-field [label]="textarea() ? 'Text area' : 'Text field'" [field-type]="fieldType()" [input-counter]="counter() ? 120 : false"
         style="width: 20em;">
         @if (leadingIcon()) {
             <md3-icon md3-icon-element="leading">search</md3-icon>
