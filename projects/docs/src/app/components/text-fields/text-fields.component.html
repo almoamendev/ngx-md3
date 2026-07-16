@@ -12,78 +12,110 @@
     </ol>
 </figure>
 
-<!-- <ul>
-    <li>@Input() label?: string;</li>
-    <li>@Input() field-type: 'filled' | 'outlined' = 'filled';</li>
-    <li>@Input() input-counter: boolean | number = false;</li>
-    <li>@Input() control?: AbstractControl;</li>
+<app-playground>
+    <button action-item md3-icon-button button-type="tonal" button-squared [selected]="configOpen()"
+        (click)="openConfig()">
+        <md3-icon md3-icon-element>settings</md3-icon>
+    </button>
+
+    <md3-text-field label="Text field" [field-type]="fieldType()" [input-counter]="counter() ? 300 : false"
+        style="width: 20em;">
+        @if (leadingIcon()) {
+            <md3-icon md3-icon-element="leading">search</md3-icon>
+        }
+        @if (textarea()) {
+            <textarea md3-input-element [disabled]="disabled()"
+                [attr.aria-invalid]="error() ? 'true' : null"></textarea>
+        } @else {
+            <input md3-input-element type="text" [disabled]="disabled()"
+                [attr.aria-invalid]="error() ? 'true' : null">
+        }
+        @if (trailingIcon() == 'icon') {
+            <md3-icon md3-icon-element="trailing">person</md3-icon>
+        }
+        @if (trailingIcon() == 'button') {
+            <button md3-icon-button button-type="standard">
+                <md3-icon md3-icon-element>close</md3-icon>
+            </button>
+        }
+        @if (supportingText()) {
+            <div md3-supporting-text>Supporting text</div>
+        }
+    </md3-text-field>
+</app-playground>
+
+<h2>API</h2>
+
+<div class="table-container md3-scrollable">
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 50%;">Name</th>
+                <th>Type</th>
+                <th>Default</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <i>label</i>
+                    <p md3-type-body="small">Sets the floating label text.</p>
+                </td>
+                <td>input&lt;string | null&gt;</td>
+                <td style="white-space: nowrap;">null</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>field-type</i>
+                    <p md3-type-body="small">Sets the style of the text field.</p>
+                </td>
+                <td>
+                    input&lt;TextFieldType&gt;
+                    <p md3-type-body="small">filled, outlined</p>
+                </td>
+                <td style="white-space: nowrap;">filled</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>input-counter</i>
+                    <p md3-type-body="small">Shows a character counter. Use a number to also set a character limit.</p>
+                </td>
+                <td>input&lt;boolean | number&gt;</td>
+                <td style="white-space: nowrap;">false</td>
+            </tr>
+            <tr>
+                <td>
+                    control
+                    <p md3-type-body="small">Input form control object (see angular forms and form controls).</p>
+                </td>
+                <td>input&lt;AbstractControl&gt;</td>
+                <td style="white-space: nowrap;">undefined</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<app-shiki [code]="apiImport"></app-shiki>
+<app-shiki [code]="apiData"></app-shiki>
+<app-shiki [code]="apiUsage" language="html"></app-shiki>
+<ul>
+    <li>
+        <code>md3-input-element</code> can be applied to either an <code>&lt;input&gt;</code> or a
+        <code>&lt;textarea&gt;</code>. Textareas automatically grow to fit their content.
+    </li>
+    <li>
+        When using a custom icon, always apply the <code>md3-icon-element</code> directive to the icon element.
+        Leading and trailing icons should follow the Material 3 recommended size of 24dp.
+    </li>
+    <li>
+        A trailing <code>md3-icon-element</code> and a trailing <code>md3-icon-button</code> are mutually
+        exclusive slots; use whichever fits the interaction (e.g. a visibility toggle vs. a clear button).
+    </li>
+    <li>
+        The error state is driven by <code>aria-invalid</code> on the native input, or automatically derived
+        from a bound <code>control</code> (invalid and touched/dirty) or a <code>formControlName</code>.
+    </li>
+    <li>
+        Use <code>md3-supporting-text</code> to display helper or error text below the field.
+    </li>
 </ul>
-
-<div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
-    <md3-text-field label="Text field">
-        <input md3-input-element type="text">
-        <div md3-supporting-text>Input only</div>
-    </md3-text-field>
-    <md3-text-field label="Leading icon">
-        <md3-icon md3-icon-element="leading">person</md3-icon>
-        <input md3-input-element type="text">
-        <div md3-supporting-text>Input with leading icon</div>
-    </md3-text-field>
-    <md3-text-field label="Leading and Trailing">
-        <md3-icon md3-icon-element="leading">person</md3-icon>
-        <input md3-input-element type="text">
-        <md3-icon md3-icon-element="trailing">visibility</md3-icon>
-        <div md3-supporting-text>Input with leading & trailing icons</div>
-    </md3-text-field>
-</div>
-
-<div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
-    <md3-text-field label="Text field" field-type="outlined">
-        <input md3-input-element type="text" aria-invalid="true">
-        <div md3-supporting-text>aria-invalid="true"</div>
-    </md3-text-field>
-    <md3-text-field label="Leading icon" field-type="outlined">
-        <md3-icon md3-icon-element="leading">person</md3-icon>
-        <input md3-input-element type="text" aria-invalid="true">
-        <div md3-supporting-text>aria-invalid="true"</div>
-    </md3-text-field>
-    <md3-text-field label="Leading and Trailing" field-type="outlined">
-        <md3-icon md3-icon-element="leading">person</md3-icon>
-        <input md3-input-element type="text" aria-invalid="true">
-        <md3-icon md3-icon-element="trailing">visibility</md3-icon>
-        <div md3-supporting-text>aria-invalid="true"</div>
-    </md3-text-field>
-</div>
-
-<div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
-    <md3-text-field label="Trailing icon">
-        <input md3-input-element type="text">
-        <md3-icon md3-icon-element="trailing">visibility</md3-icon>
-        <div md3-supporting-text>Input with trailing icon</div>
-    </md3-text-field>
-    <md3-text-field label="Trailing button">
-        <input md3-input-element type="text">
-        <button md3-icon-button button-type="standard">
-            <md3-icon md3-icon-element>close</md3-icon>
-        </button>
-        <div md3-supporting-text>Input with trailing icon button</div>
-    </md3-text-field>
-</div>
-
-<div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
-    <md3-text-field label="Text counter" [input-counter]="true">
-        <input md3-input-element type="text">
-        <div md3-supporting-text>Input with counter</div>
-    </md3-text-field>
-    <md3-text-field label="Text counter/limit" [input-counter]="300">
-        <input md3-input-element type="text">
-        <div md3-supporting-text>Input with limited counter</div>
-    </md3-text-field>
-</div>
-
-<div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
-    <md3-text-field label="Textarea" [input-counter]="3000">
-        <textarea md3-input-element></textarea>
-        <div md3-supporting-text>Textarea input and counter</div>
-    </md3-text-field>
-</div> -->

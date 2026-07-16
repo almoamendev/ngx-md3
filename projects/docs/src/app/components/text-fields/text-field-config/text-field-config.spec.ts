@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TectFieldConfig } from './tect-field-config';
+import { TextFieldConfig } from './text-field-config';
 
-describe('TectFieldConfig', () => {
-  let component: TectFieldConfig;
-  let fixture: ComponentFixture<TectFieldConfig>;
+describe('TextFieldConfig', () => {
+  let component: TextFieldConfig;
+  let fixture: ComponentFixture<TextFieldConfig>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TectFieldConfig]
+      imports: [TextFieldConfig]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(TectFieldConfig);
+    fixture = TestBed.createComponent(TextFieldConfig);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
