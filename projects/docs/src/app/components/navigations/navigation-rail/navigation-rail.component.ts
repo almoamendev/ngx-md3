@@ -1,11 +1,17 @@
 import { Component } from '@angular/core';
-import { NavigationRailModule, Button } from '@vip9008/ngx-md3';
+import { Badge, FloatingActionButton, IconButton, IconElement, MaterialIcon, NavigationGroup, NavigationItem, NavigationRail } from '@vip9008/ngx-md3';
 
 @Component({
     selector: 'app-navigation-rail',
     imports: [
-        NavigationRailModule,
-        Button
+        NavigationRail,
+        NavigationGroup,
+        NavigationItem,
+        IconButton,
+        IconElement,
+        MaterialIcon,
+        FloatingActionButton,
+        Badge,
     ],
     templateUrl: './navigation-rail.component.html',
     styleUrl: './navigation-rail.component.scss',

@@ -4,8 +4,9 @@ import { LayoutService } from '../../../foundations/layout.service';
 type NavigationLayout = 'vertical' | 'horizontal';
 
 @Component({
-    standalone: false,
     selector: 'md3-navigation-bar',
+    imports: [
+    ],
     templateUrl: './navigation-bar.html',
     styleUrl: './navigation-bar.scss',
 })

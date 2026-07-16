@@ -4,14 +4,20 @@ import { IconElement } from '../../common/icon-element';
 import { FloatingActionButton } from '../../buttons/floating-action-button/floating-action-button';
 import { ButtonContext, MD3_BUTTON_CONTEXT } from '../../../interfaces/button-context.interface';
 import { ButtonSize } from '../../../types/button-size.type';
+import { IconButton } from '../../buttons/icon-button/icon-button';
+import { MaterialIcon } from '../../common/material-icon/material-icon';
 
 type ExpandedLayout = 'standard' | 'modal';
 type CollapsedLayout = 'compact' | 'narrow' | 'hidden';
 type ContainerStyle = 'none' | 'elevated' | 'divider';
 
 @Component({
-    standalone: false,
     selector: 'md3-navigation-rail',
+    imports: [
+        IconButton,
+        IconElement,
+        MaterialIcon,
+    ],
     templateUrl: './navigation-rail.html',
     styleUrl: './navigation-rail.scss',
     providers: [
