@@ -1,33 +1,13 @@
-<md3-navigation-rail [hide-menu-button]="hideMenuButton">
-    <button type="button" md3-fab>
-        <md3-icon md3-icon-element>edit</md3-icon>
-        Label
-    </button>
+<h1>Navigation rail</h1>
 
-    <button type="button" md3-nav-item class="md3-active">
-        <md3-icon md3-icon-element>inbox</md3-icon>
-        Inbox
-    </button>
-    <a href="javascript: ;" type="button" md3-nav-item>
-        <md3-icon md3-icon-element>outbox</md3-icon>
-        Outbox
-    </a>
-</md3-navigation-rail>
+<p>
+    Navigation rails let people switch between UI views on mid-sized devices.
+</p>
 
-<md3-navigation-rail [hide-menu-button]="hideMenuButton" collapsed-layout="narrow">
-    <button type="button" md3-fab>
-        <md3-icon md3-icon-element>edit</md3-icon>
-        Label
-    </button>
-
-    <button type="button" md3-nav-item class="md3-active">
-        <md3-icon md3-icon-element>inbox</md3-icon>
-        Inbox
-    </button>
-    <a href="javascript: ;" type="button" md3-nav-item>
-        <md3-icon md3-icon-element>outbox</md3-icon>
-        Outbox
-    </a>
-</md3-navigation-rail>
-
-<button md3-button (click)="hideMenuButton = !hideMenuButton">Toggle Menu Button</button>
+<figure class="component-image">
+    <img src="/img/md3-nav-rail.png" alt="Material Design navigation rail" />
+    <ol>
+        <li>Collapsed navigation rail</li>
+        <li>Expanded navigation rail</li>
+    </ol>
+</figure>
