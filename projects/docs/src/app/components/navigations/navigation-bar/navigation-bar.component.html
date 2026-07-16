@@ -29,8 +29,8 @@
             <md3-icon md3-icon-element="active" filled>home</md3-icon>
             Home
         </button>
-        <button type="button" md3-nav-item [class.md3-active]="activeItem() == 'favorites'"
-            (click)="activeItem.set('favorites')">
+        <button type="button" md3-nav-item [class.md3-active]="activeItem() == 'browse'"
+            (click)="activeItem.set('browse')">
             @if (badge() != 'none') {
                 <md3-badge [small]="badge() == 'dot'">
                     @if (badge() == 'count') {
@@ -38,15 +38,15 @@
                     }
                 </md3-badge>
             }
-            <md3-icon md3-icon-element>favorite</md3-icon>
-            <md3-icon md3-icon-element="active" filled>favorite</md3-icon>
-            Favorites
+            <md3-icon md3-icon-element>explore</md3-icon>
+            <md3-icon md3-icon-element="active" filled>explore</md3-icon>
+            Browse
         </button>
-        <button type="button" md3-nav-item [class.md3-active]="activeItem() == 'settings'"
-            (click)="activeItem.set('settings')">
-            <md3-icon md3-icon-element>settings</md3-icon>
-            <md3-icon md3-icon-element="active" filled>settings</md3-icon>
-            Settings
+        <button type="button" md3-nav-item [class.md3-active]="activeItem() == 'radio'"
+            (click)="activeItem.set('radio')">
+            <md3-icon md3-icon-element>radio</md3-icon>
+            <md3-icon md3-icon-element="active" filled>radio</md3-icon>
+            Radio
         </button>
     </md3-navigation-bar>
 </app-playground>
