@@ -1,17 +1,42 @@
-import { Directive, ElementRef, input } from '@angular/core';
+import { booleanAttribute, Directive, effect, ElementRef, input } from '@angular/core';
 import { TextColor } from '../../types/text-color.type';
 import { TextSize } from '../../types/text-size.type';
 
 @Directive({
     selector: 'md3-type-display, [md3-type-display]',
     host: {
-        'class': 'md3-display'
+        'class': 'md3-text-display',
+        '[class.emphasized]': 'emphasized()',
     }
 })
 export class TypeDisplay {
     public size = input<TextSize | undefined>(undefined);
     public color = input<TextColor | undefined>(undefined);
+    public emphasized = input<boolean, unknown>(false, {
+        transform: booleanAttribute,
+    });
 
-    constructor(public element: ElementRef) {
+    constructor(public el: ElementRef) {
+        effect((onCleanup) => {
+            const size = 'md3-text-' + this.size();
+            this.element.classList.add(size);
+
+            onCleanup(() => {
+                this.element.classList.remove(size);
+            });
+        });
+
+        effect((onCleanup) => {
+            const color = 'md3-color-' + this.size();
+            this.element.classList.add(color);
+
+            onCleanup(() => {
+                this.element.classList.remove(color);
+            });
+        });
+    }
+
+    public get element(): HTMLElement {
+        return this.el.nativeElement as HTMLElement;
     }
 }

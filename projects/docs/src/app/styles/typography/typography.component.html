@@ -1,12 +1,13 @@
 <h1>Typography</h1>
 
 <p>
-    The type scale is a set of styles that can be applied to any element via a directive:
-    <code>[md3-type-display]</code>, <code>[md3-type-headline]</code>, <code>[md3-type-title]</code>,
-    <code>[md3-type-body]</code>, and <code>[md3-type-label]</code>. Each takes a <code>large</code>,
-    <code>medium</code>, or <code>small</code> size, and can be further customized with the
-    <code>emphasized</code> and <code>color</code> attributes.
+    Use typography to make content readable and beautiful.
 </p>
+
+<figure class="component-image outlined" style="display: block;">
+    <img src="/img/md3-typography.png" alt="Material Design typography" />
+    <p>M3 has five distinct type styles: display, headline, title, body, and label</p>
+</figure>
 
 <app-playground bg-variant hide-direction>
     <button action-item md3-icon-button button-type="tonal" button-squared [selected]="configOpen()"
@@ -50,7 +51,10 @@
         </thead>
         <tbody>
             <tr>
-                <td>Display</td>
+                <td>
+                    Display
+                    <p md3-type-body size="small">md3-type-display, [md3-type-display]</p>
+                </td>
                 <td>
                     <div class="type-swatch">
                         <div md3-type-display size="large">Ag</div>
@@ -71,7 +75,10 @@
                 </td>
             </tr>
             <tr>
-                <td>Headline</td>
+                <td>
+                    Headline
+                    <p md3-type-body size="small">md3-type-headline, [md3-type-headline]</p>
+                </td>
                 <td>
                     <div class="type-swatch">
                         <div md3-type-headline size="large">Ag</div>
@@ -92,7 +99,10 @@
                 </td>
             </tr>
             <tr>
-                <td>Title</td>
+                <td>
+                    Title
+                    <p md3-type-body size="small">md3-type-title, [md3-type-title]</p>
+                </td>
                 <td>
                     <div class="type-swatch">
                         <div md3-type-title size="large">Ag</div>
@@ -113,7 +123,10 @@
                 </td>
             </tr>
             <tr>
-                <td>Body</td>
+                <td>
+                    Body
+                    <p md3-type-body size="small">md3-type-body, [md3-type-body]</p>
+                </td>
                 <td>
                     <div class="type-swatch">
                         <div md3-type-body size="large">Ag</div>
@@ -134,7 +147,10 @@
                 </td>
             </tr>
             <tr>
-                <td>Label</td>
+                <td>
+                    Label
+                    <p md3-type-body size="small">md3-type-label, [md3-type-label]</p>
+                </td>
                 <td>
                     <div class="type-swatch">
                         <div md3-type-label size="large">Ag</div>
@@ -172,40 +188,8 @@
         <tbody>
             <tr>
                 <td>
-                    <i>md3-type-display</i>
-                    <p md3-type-body size="small">Applies the display type scale.</p>
-                </td>
-                <td>input&lt;TextSize&gt;</td>
-                <td style="white-space: nowrap;">large</td>
-            </tr>
-            <tr>
-                <td>
-                    <i>md3-type-headline</i>
-                    <p md3-type-body size="small">Applies the headline type scale.</p>
-                </td>
-                <td>input&lt;TextSize&gt;</td>
-                <td style="white-space: nowrap;">large</td>
-            </tr>
-            <tr>
-                <td>
-                    <i>md3-type-title</i>
-                    <p md3-type-body size="small">Applies the title type scale.</p>
-                </td>
-                <td>input&lt;TextSize&gt;</td>
-                <td style="white-space: nowrap;">large</td>
-            </tr>
-            <tr>
-                <td>
-                    <i>md3-type-body</i>
-                    <p md3-type-body size="small">Applies the body type scale.</p>
-                </td>
-                <td>input&lt;TextSize&gt;</td>
-                <td style="white-space: nowrap;">large</td>
-            </tr>
-            <tr>
-                <td>
-                    <i>md3-type-label</i>
-                    <p md3-type-body size="small">Applies the label type scale.</p>
+                    <i>size</i>
+                    <p md3-type-body size="small">Shared by all 5 directives. Sets the text size.</p>
                 </td>
                 <td>input&lt;TextSize&gt;</td>
                 <td style="white-space: nowrap;">large</td>

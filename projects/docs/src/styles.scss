@@ -88,6 +88,10 @@ figure.component-image {
         height: auto;
         border-radius: 1em;
     }
+
+    &.outlined img {
+        border: 0.0625em solid rgb(var(--md-scheme-outline-variant));
+    }
 }
 
 md3-side-sheet-body.md3-component-config {

@@ -203,7 +203,7 @@ body {
     }
 }
 
-.md3-display {
+.md3-text-display {
     font-family: "Google Sans", "Roboto", sans-serif;
     font-size: 3.5625rem;
     line-height: 1.122807em;
@@ -213,27 +213,27 @@ body {
     font-optical-sizing: auto;
     font-stretch: 100%;
 
-    &[emphasized] {
+    &.md3-emphasized {
         font-weight: 500;
     }
 
-    &[size=large] {
+    &.md3-text-large {
         font-size: 3.5625rem; // 57pt
         line-height: 1.122807em; // 64pt
     }
 
-    &[size=medium] {
+    &.md3-text-medium {
         font-size: 2.8125rem; // 45pt
         line-height: 1.155556em; // 52pt
     }
 
-    &[size=small] {
+    &.md3-text-small {
         font-size: 2.25rem; // 36pt
         line-height: 1.222222em; // 44pt
     }
 }
 
-.md3-headline {
+.md3-text-headline {
     font-family: "Google Sans", "Roboto", sans-serif;
     font-size: 2rem;
     line-height: 1.25em;
@@ -243,27 +243,27 @@ body {
     font-optical-sizing: auto;
     font-stretch: 100%;
 
-    &[emphasized] {
+    &.md3-emphasized {
         font-weight: 500;
     }
 
-    &[size=large] {
+    &.md3-text-large {
         font-size: 2rem; // 32pt
         line-height: 1.25em; // 40pt
     }
 
-    &[size=medium] {
+    &.md3-text-medium {
         font-size: 1.75rem; // 28pt
         line-height: 1.285714em; // 36pt
     }
 
-    &[size=small] {
+    &.md3-text-small {
         font-size: 1.5rem; // 24pt
         line-height: 1.333333em; // 32pt
     }
 }
 
-.md3-title {
+.md3-text-title {
     font-family: "Google Sans", "Roboto", sans-serif;
     font-size: 1.375rem;
     line-height: 1.272727em;
@@ -273,37 +273,37 @@ body {
     font-optical-sizing: auto;
     font-stretch: 100%;
 
-    &[emphasized] {
+    &.md3-emphasized {
         font-weight: 500;
     }
 
-    &[size=large] {
+    &.md3-text-large {
         font-size: 1.375rem; // 22pt
         line-height: 1.272727em; // 28pt
     }
 
-    &[size=medium] {
+    &.md3-text-medium {
         font-size: 1rem; // 16pt
         line-height: 1.5em; // 24pt
         font-weight: 500;
 
-        &[emphasized] {
+        &.md3-emphasized {
             font-weight: 600;
         }
     }
 
-    &[size=small] {
+    &.md3-text-small {
         font-size: 0.875rem; // 14pt
         line-height: 1.428571em; // 20pt
         font-weight: 500;
 
-        &[emphasized] {
+        &.md3-emphasized {
             font-weight: 600;
         }
     }
 }
 
-.md3-body {
+.md3-text-body {
     font-family: "Google Sans", "Roboto", sans-serif;
     font-size: 1rem;
     line-height: 1.5em;
@@ -313,27 +313,27 @@ body {
     font-optical-sizing: auto;
     font-stretch: 100%;
 
-    &[emphasized] {
+    &.md3-emphasized {
         font-weight: 500;
     }
 
-    &[size=large] {
+    &.md3-text-large {
         font-size: 1rem; // 16pt
         line-height: 1.5em; // 24pt
     }
 
-    &[size=medium] {
+    &.md3-text-medium {
         font-size: 0.875rem; // 14pt
         line-height: 1.428571em; // 20pt
     }
 
-    &[size=small] {
+    &.md3-text-small {
         font-size: 0.75rem; // 12pt
         line-height: 1.333333em; // 16pt
     }
 }
 
-.md3-label {
+.md3-text-label {
     font-family: "Google Sans", "Roboto", sans-serif;
     font-size: 0.875rem;
     line-height: 1.428571em;
@@ -343,97 +343,96 @@ body {
     font-optical-sizing: auto;
     font-stretch: 100%;
 
-    &[emphasized] {
+    &.md3-emphasized {
         font-weight: 700;
     }
 
-    &[size=large] {
+    &.md3-text-large {
         font-size: 0.875rem; // 14pt
         line-height: 1.428571em; // 20pt
     }
 
-    &[size=medium] {
+    &.md3-text-medium {
         font-size: 0.75rem; // 12pt
         line-height: 1.333333em; // 16pt
         letter-spacing: 0.008333em; // 0.1pt
     }
 
-    &[size=small] {
+    &.md3-text-small {
         font-size: 0.6875rem; // 11pt
         line-height: 1.454545em; // 16pt
         letter-spacing: 0.009090em; // 0.1pt
     }
 }
 
-.md3-display, .md3-headline, .md3-title, .md3-body, .md3-label {
+.md3-text-display, .md3-text-headline, .md3-text-title, .md3-text-body, .md3-text-label {
     color: inherit;
 
-    &[color=on-primary] {
+    &.md3-color-on-primary {
         color: rgb(var(--md-scheme-on-primary));
     }
     
-    &[color=on-primary-container] {
+    &.md3-color-on-primary-container {
         color: rgb(var(--md-scheme-on-primary-container));
     }
     
-    &[color=on-secondary] {
+    &.md3-color-on-secondary {
         color: rgb(var(--md-scheme-on-secondary));
     }
     
-    &[color=on-secondary-container] {
+    &.md3-color-on-secondary-container {
         color: rgb(var(--md-scheme-on-secondary-container));
     }
     
-    &[color=on-tertiary] {
+    &.md3-color-on-tertiary {
         color: rgb(var(--md-scheme-on-tertiary));
     }
     
-    &[color=on-tertiary-container] {
+    &.md3-color-on-tertiary-container {
         color: rgb(var(--md-scheme-on-tertiary-container));
     }
     
-    &[color=on-primary-fixed] {
+    &.md3-color-on-primary-fixed {
         color: rgb(var(--md-scheme-on-primary-fixed));
     }
     
-    &[color=on-primary-fixed-variant] {
+    &.md3-color-on-primary-fixed-variant {
         color: rgb(var(--md-scheme-on-primary-fixed-variant));
     }
     
-    &[color=on-secondary-fixed] {
+    &.md3-color-on-secondary-fixed {
         color: rgb(var(--md-scheme-on-secondary-fixed));
     }
     
-    &[color=on-secondary-fixed-variant] {
+    &.md3-color-on-secondary-fixed-variant {
         color: rgb(var(--md-scheme-on-secondary-fixed-variant));
     }
     
-    &[color=on-tertiary-fixed] {
+    &.md3-color-on-tertiary-fixed {
         color: rgb(var(--md-scheme-on-tertiary-fixed));
     }
     
-    &[color=on-tertiary-fixed-variant] {
+    &.md3-color-on-tertiary-fixed-variant {
         color: rgb(var(--md-scheme-on-tertiary-fixed-variant));
     }
     
-    &[color=on-error] {
+    &.md3-color-on-error {
         color: rgb(var(--md-scheme-on-error));
     }
     
-    &[color=on-error-container] {
+    &.md3-color-on-error-container {
         color: rgb(var(--md-scheme-on-error-container));
     }
     
-    &[color=on-surface] {
+    &.md3-color-on-surface {
         color: rgb(var(--md-scheme-on-surface));
     }
     
-    &[color=on-surface-variant] {
+    &.md3-color-on-surface-variant {
         color: rgb(var(--md-scheme-on-surface-variant));
     }
     
-    &[color=inverse-on-surface] {
-     
+    &.md3-color-inverse-on-surface {
         color: rgb(var(--md-scheme-inverse-on-surface));
     }
 }
