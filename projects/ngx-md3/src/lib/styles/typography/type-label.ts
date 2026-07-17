@@ -10,8 +10,8 @@ import { TextSize } from '../../types/text-size.type';
     }
 })
 export class TypeLabel {
-    public size = input<TextSize | undefined>(undefined);
-    public color = input<TextColor | undefined>(undefined);
+    public size = input<TextSize | 'default'>('default');
+    public color = input<TextColor | 'default'>('default');
     public emphasized = input<boolean, unknown>(false, {
         transform: booleanAttribute,
     });
