@@ -23,6 +23,7 @@ import { NavigationRailComponent } from './components/navigations/navigation-rai
 import { ScaffoldComponent } from './foundations/scaffold/scaffold.component';
 import { GridsComponent } from './foundations/grids/grids.component';
 import { NavigationBarComponent } from './components/navigations/navigation-bar/navigation-bar.component';
+import { AppBarComponent } from './components/app-bar/app-bar.component';
 
 export const routes: Routes = [
     {
@@ -54,6 +55,10 @@ export const routes: Routes = [
             {
                 path: 'components',
                 children: [
+                    {
+                        path: 'app-bar',
+                        component: AppBarComponent,
+                    },
                     {
                         path: 'buttons',
                         children: [
