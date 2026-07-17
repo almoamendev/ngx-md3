@@ -22,10 +22,10 @@
     } @else if (title() || subtitle()) {
         <div class="md3-app-bar-title" [class.md3-center]="centerAligned()">
             @if (title()?.length) {
-                <md3-type-title size="large">{{ title() }}</md3-type-title>
+                <div md3-type-title size="large">{{ title() }}</div>
             }
             @if (subtitle()?.length) {
-                <md3-type-body size="small" emphasized>{{ subtitle() }}</md3-type-body>
+                <div md3-type-body size="small" emphasized>{{ subtitle() }}</div>
             }
         </div>
     }

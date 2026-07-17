@@ -27,7 +27,7 @@ export class TypeTitle {
         });
 
         effect((onCleanup) => {
-            const color = 'md3-color-' + this.size();
+            const color = 'md3-color-' + this.color();
             this.element.classList.add(color);
 
             onCleanup(() => {

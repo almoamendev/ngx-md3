@@ -18,19 +18,19 @@
     <div class="type-preview" [style.background-color]="previewBackground()">
         @switch (scale()) {
             @case ('display') {
-                <md3-type-display [attr.size]="size()" [attr.emphasized]="emphasized() ? '' : null" [attr.color]="color() == 'inherit' ? null : color()">The quick brown fox</md3-type-display>
+                <md3-type-display [size]="size()" [emphasized]="emphasized()" [color]="color()">The quick brown fox</md3-type-display>
             }
             @case ('headline') {
-                <md3-type-headline [attr.size]="size()" [attr.emphasized]="emphasized() ? '' : null" [attr.color]="color() == 'inherit' ? null : color()">The quick brown fox</md3-type-headline>
+                <md3-type-headline [size]="size()" [emphasized]="emphasized()" [color]="color()">The quick brown fox</md3-type-headline>
             }
             @case ('title') {
-                <md3-type-title [attr.size]="size()" [attr.emphasized]="emphasized() ? '' : null" [attr.color]="color() == 'inherit' ? null : color()">The quick brown fox</md3-type-title>
+                <md3-type-title [size]="size()" [emphasized]="emphasized()" [color]="color()">The quick brown fox</md3-type-title>
             }
             @case ('body') {
-                <md3-type-body [attr.size]="size()" [attr.emphasized]="emphasized() ? '' : null" [attr.color]="color() == 'inherit' ? null : color()">The quick brown fox</md3-type-body>
+                <md3-type-body [size]="size()" [emphasized]="emphasized()" [color]="color()">The quick brown fox</md3-type-body>
             }
             @case ('label') {
-                <md3-type-label [attr.size]="size()" [attr.emphasized]="emphasized() ? '' : null" [attr.color]="color() == 'inherit' ? null : color()">The quick brown fox</md3-type-label>
+                <md3-type-label [size]="size()" [emphasized]="emphasized()" [color]="color()">The quick brown fox</md3-type-label>
             }
         }
     </div>
@@ -191,7 +191,7 @@
                     <i>size</i>
                     <p md3-type-body size="small">Shared by all 5 directives. Sets the text size.</p>
                 </td>
-                <td>input&lt;TextSize&gt;</td>
+                <td>input&lt;TextSize | 'default'&gt;</td>
                 <td style="white-space: nowrap;">large</td>
             </tr>
             <tr>
@@ -200,15 +200,17 @@
                     <p md3-type-body size="small">Shared by all 5 directives. Sets the text color.</p>
                 </td>
                 <td>
-                    input&lt;TextColor&gt;
+                    input&lt;TextColor | 'default'&gt;
                 </td>
                 <td style="white-space: nowrap;">inherit</td>
             </tr>
             <tr>
-                <td colspan="3">
+                <td>
                     <i>emphasized</i>
-                    <p md3-type-body size="small">Shared by all 5 directives. Increases the font weight. Plain boolean attribute, not a directive input.</p>
+                    <p md3-type-body size="small">Shared by all 5 directives. Increases the font weight.</p>
                 </td>
+                <td>input&lt;boolean&gt;</td>
+                <td style="white-space: nowrap;">false</td>
             </tr>
         </tbody>
     </table>
@@ -224,17 +226,21 @@
         and the type scale directive for its style.
     </li>
     <li>
-        <code>size</code> and <code>color</code> must be set as plain string attributes (e.g.
-        <code>size="small"</code>, <code>color="on-primary"</code>, <code>[attr.size]="size?"</code>, <code>[attr.color]="color?"</code>, <code>[attr.emphasized]="emphasized?"</code>), not property bindings. The
-        directives don't reflect their inputs back onto the element — styling is applied entirely through
-        CSS attribute selectors matching the literal attribute value.
+        <code>size</code>, <code>color</code>, and <code>emphasized</code> are real directive inputs — use
+        plain string attributes (<code>size="small"</code>) or property bindings (<code>[size]="scale()"</code>)
+        interchangeably, both work reactively.
     </li>
     <li>
-        <code>emphasized</code> has no backing directive at all; it's a plain boolean attribute matched
-        directly by CSS.
+        Internally each input toggles a CSS class on the host element (<code>md3-text-large</code>,
+        <code>md3-color-on-primary</code>, <code>md3-emphasized</code>) rather than being read directly by
+        CSS attribute selectors — styling still lives entirely in <code>md3.scss</code>, just keyed off class
+        names instead of attribute values.
     </li>
     <li>
-        Text color defaults to <code>inherit</code> (the parent's color) until a <code>color</code>
-        attribute is set.
+        <code>size</code> and <code>color</code> default to the literal string <code>'default'</code> rather
+        than one of the real size/color values. Since no CSS rule matches <code>.md3-text-default</code>, an
+        unset <code>size</code> renders the same as <code>size="large"</code> (the base class already matches
+        the large variant's font-size/line-height); an unset <code>color</code> renders <code>inherit</code>
+        (the parent's color).
     </li>
 </ul>

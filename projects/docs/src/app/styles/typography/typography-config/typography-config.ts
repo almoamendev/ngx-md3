@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { IconButton, IconElement, InputElement, MaterialIcon, RadioButton, SideSheetBody, SideSheetHeader, SideSheetRef, StateComponent, Switch, TextColor, TypeBody, TypeLabel } from '@vip9008/ngx-md3';
+import { IconButton, IconElement, InputElement, MaterialIcon, RadioButton, SideSheetBody, SideSheetHeader, SideSheetRef, StateComponent, Switch, TextColor, TextSize, TypeBody, TypeLabel } from '@vip9008/ngx-md3';
 
 type TypeScale = 'display' | 'headline' | 'title' | 'body' | 'label';
-type TypeScaleSize = 'large' | 'medium' | 'small';
 
 @Component({
     selector: 'app-typography-config',
@@ -24,10 +23,10 @@ type TypeScaleSize = 'large' | 'medium' | 'small';
     styleUrl: './typography-config.scss',
 })
 export class TypographyConfig {
-    public scale: FormControl = new FormControl<TypeScale>('title');
-    public size: FormControl = new FormControl<TypeScaleSize>('medium');
+    public scale: FormControl = new FormControl<TypeScale>('display');
+    public size: FormControl = new FormControl<TextSize>('large');
     public emphasized: FormControl = new FormControl<boolean>(false);
-    public color: FormControl = new FormControl<TextColor | 'inherit'>('inherit');
+    public color: FormControl = new FormControl<TextColor | 'default'>('default');
 
     constructor(
         private sideSheetRef: SideSheetRef<TypographyConfig>

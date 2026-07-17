@@ -6,7 +6,7 @@ import { TextSize } from '../../types/text-size.type';
     selector: 'md3-type-label, [md3-type-label]',
     host: {
         'class': 'md3-text-label',
-        '[class.emphasized]': 'emphasized()',
+        '[class.md3-emphasized]': 'emphasized()',
     }
 })
 export class TypeLabel {
@@ -27,7 +27,7 @@ export class TypeLabel {
         });
 
         effect((onCleanup) => {
-            const color = 'md3-color-' + this.size();
+            const color = 'md3-color-' + this.color();
             this.element.classList.add(color);
 
             onCleanup(() => {

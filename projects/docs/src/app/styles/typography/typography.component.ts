@@ -27,10 +27,10 @@ export class TypographyComponent implements OnDestroy {
     private configSheet: SideSheetRef<TypographyConfig> | undefined;
     public configOpen = signal(false);
 
-    public scale = signal<TypeScale>('title');
-    public size = signal<TextSize>('medium');
+    public scale = signal<TypeScale>('display');
+    public size = signal<TextSize>('large');
     public emphasized = signal<boolean>(false);
-    public color = signal<TextColor | 'inherit'>('inherit');
+    public color = signal<TextColor | 'default'>('default');
 
     public previewBackground = computed<string | null>(() => {
         switch (this.color()) {
@@ -52,7 +52,7 @@ export class TypographyComponent implements OnDestroy {
         if (this.emphasized()) {
             code += ` emphasized`;
         }
-        if (this.color() !== 'inherit') {
+        if (this.color() !== 'default') {
             code += ` color="${this.color()}"`;
         }
         code += `>...</md3-type-${this.scale()}>`;
@@ -68,12 +68,18 @@ import {
     TypeLabel,
 } from '@vip9008/ngx-md3';`;
 
-    public apiData: string = `// Shared shape across all 5 directives; only the selector differs
-public size = input<TextSize | undefined>(undefined);
-public color = input<TextColor | undefined>(undefined);
+    public apiData: string = `// Shared shape across all 5 directives; only the selector and base class differ
+public size = input<TextSize | 'default'>('default');
+public color = input<TextColor | 'default'>('default');
+public emphasized = input(false, {
+    transform: booleanAttribute,
+});
 
-// "emphasized" has no directive input at all: it's a plain boolean
-// attribute matched directly by CSS, e.g. [emphasized] { font-weight: ...; }`;
+// size and emphasized toggle a CSS class on the host element:
+// size 'large'    -> adds .md3-text-large
+// emphasized true -> adds .md3-emphasized
+// size 'default'  -> adds .md3-text-default, which matches no CSS rule,
+//                    so the element falls back to the base style`;
 
     public apiTypes: string = `// Types
 import { TextSize, TextColor } from '@vip9008/ngx-md3';
@@ -111,7 +117,12 @@ type TextColor = 'on-primary' | 'on-primary-container'
 <div md3-type-label size="large" color="on-primary">Label large</div>
 
 <!-- combined -->
-<div md3-type-headline size="small" emphasized color="on-error">Headline small</div>`;
+<div md3-type-headline size="small" emphasized color="on-error">Headline small</div>
+
+<!-- all three are real inputs, so bindings work too -->
+<div md3-type-body [size]="bodySize()" [emphasized]="isEmphasized()" [color]="bodyColor()">
+    Reactive body text
+</div>`;
 
     constructor(
         private sheetsService: SheetsService,
