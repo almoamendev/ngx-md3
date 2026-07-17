@@ -1,0 +1,111 @@
+<md3-side-sheet-header title="Configurations">
+    <button type="button" md3-icon-button trailing button-type="standard" (click)="close()">
+        <md3-icon md3-icon-element>close</md3-icon>
+    </button>
+</md3-side-sheet-header>
+<md3-side-sheet-body class="md3-component-config">
+    <div md3-type-body="large">Scale</div>
+    <div class="controls-list">
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="scale">
+                <input type="radio" md3-input-element name="type-scale" value="display">
+            </md3-radio-button>
+            <div md3-type-label="large">Display</div>
+        </label>
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="scale">
+                <input type="radio" md3-input-element name="type-scale" value="headline">
+            </md3-radio-button>
+            <div md3-type-label="large">Headline</div>
+        </label>
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="scale">
+                <input type="radio" md3-input-element name="type-scale" value="title">
+            </md3-radio-button>
+            <div md3-type-label="large">Title</div>
+        </label>
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="scale">
+                <input type="radio" md3-input-element name="type-scale" value="body">
+            </md3-radio-button>
+            <div md3-type-label="large">Body</div>
+        </label>
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="scale">
+                <input type="radio" md3-input-element name="type-scale" value="label">
+            </md3-radio-button>
+            <div md3-type-label="large">Label</div>
+        </label>
+    </div>
+
+    <div md3-type-body="large">Size</div>
+    <div class="controls-list">
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="size">
+                <input type="radio" md3-input-element name="type-size" value="large">
+            </md3-radio-button>
+            <div md3-type-label="large">Large</div>
+        </label>
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="size">
+                <input type="radio" md3-input-element name="type-size" value="medium">
+            </md3-radio-button>
+            <div md3-type-label="large">Medium</div>
+        </label>
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="size">
+                <input type="radio" md3-input-element name="type-size" value="small">
+            </md3-radio-button>
+            <div md3-type-label="large">Small</div>
+        </label>
+    </div>
+
+    <div class="controls-list">
+        <label md3-state-component tabindex="0">
+            <div md3-type-label="large">Emphasized</div>
+            <md3-switch disable-state-layer [control]="emphasized">
+                <input type="checkbox" md3-input-element name="emphasized">
+            </md3-switch>
+        </label>
+    </div>
+
+    <div md3-type-body="large">Color</div>
+    <div class="controls-list">
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="color">
+                <input type="radio" md3-input-element name="type-color" value="inherit">
+            </md3-radio-button>
+            <div md3-type-label="large">Inherit</div>
+        </label>
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="color">
+                <input type="radio" md3-input-element name="type-color" value="on-surface-variant">
+            </md3-radio-button>
+            <div md3-type-label="large">On surface variant</div>
+        </label>
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="color">
+                <input type="radio" md3-input-element name="type-color" value="on-primary">
+            </md3-radio-button>
+            <div md3-type-label="large">On primary</div>
+        </label>
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="color">
+                <input type="radio" md3-input-element name="type-color" value="on-secondary">
+            </md3-radio-button>
+            <div md3-type-label="large">On secondary</div>
+        </label>
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="color">
+                <input type="radio" md3-input-element name="type-color" value="on-tertiary">
+            </md3-radio-button>
+            <div md3-type-label="large">On tertiary</div>
+        </label>
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="color">
+                <input type="radio" md3-input-element name="type-color" value="on-error">
+            </md3-radio-button>
+            <div md3-type-label="large">On error</div>
+        </label>
+    </div>
+</md3-side-sheet-body>

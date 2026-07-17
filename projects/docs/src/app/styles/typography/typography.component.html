@@ -1,34 +1,308 @@
 <h1>Typography</h1>
 
+<p>
+    The type scale is a set of styles that can be applied to any element via a directive:
+    <code>[md3-type-display]</code>, <code>[md3-type-headline]</code>, <code>[md3-type-title]</code>,
+    <code>[md3-type-body]</code>, and <code>[md3-type-label]</code>. Each takes a <code>large</code>,
+    <code>medium</code>, or <code>small</code> size, and can be further customized with the
+    <code>emphasized</code> and <code>color</code> attributes.
+</p>
+
+<app-playground>
+    <button action-item md3-icon-button button-type="tonal" button-squared [selected]="configOpen()"
+        (click)="openConfig()">
+        <md3-icon md3-icon-element>settings</md3-icon>
+    </button>
+
+    <div class="type-preview" [style.background-color]="previewBackground()">
+        @switch (scale()) {
+            @case ('display') {
+                @switch (size()) {
+                    @case ('large') {
+                        <div md3-type-display="large" [attr.emphasized]="emphasized() ? '' : null" [attr.color]="color() == 'inherit' ? null : color()">The quick brown fox</div>
+                    }
+                    @case ('medium') {
+                        <div md3-type-display="medium" [attr.emphasized]="emphasized() ? '' : null" [attr.color]="color() == 'inherit' ? null : color()">The quick brown fox</div>
+                    }
+                    @case ('small') {
+                        <div md3-type-display="small" [attr.emphasized]="emphasized() ? '' : null" [attr.color]="color() == 'inherit' ? null : color()">The quick brown fox</div>
+                    }
+                }
+            }
+            @case ('headline') {
+                @switch (size()) {
+                    @case ('large') {
+                        <div md3-type-headline="large" [attr.emphasized]="emphasized() ? '' : null" [attr.color]="color() == 'inherit' ? null : color()">The quick brown fox</div>
+                    }
+                    @case ('medium') {
+                        <div md3-type-headline="medium" [attr.emphasized]="emphasized() ? '' : null" [attr.color]="color() == 'inherit' ? null : color()">The quick brown fox</div>
+                    }
+                    @case ('small') {
+                        <div md3-type-headline="small" [attr.emphasized]="emphasized() ? '' : null" [attr.color]="color() == 'inherit' ? null : color()">The quick brown fox</div>
+                    }
+                }
+            }
+            @case ('title') {
+                @switch (size()) {
+                    @case ('large') {
+                        <div md3-type-title="large" [attr.emphasized]="emphasized() ? '' : null" [attr.color]="color() == 'inherit' ? null : color()">The quick brown fox</div>
+                    }
+                    @case ('medium') {
+                        <div md3-type-title="medium" [attr.emphasized]="emphasized() ? '' : null" [attr.color]="color() == 'inherit' ? null : color()">The quick brown fox</div>
+                    }
+                    @case ('small') {
+                        <div md3-type-title="small" [attr.emphasized]="emphasized() ? '' : null" [attr.color]="color() == 'inherit' ? null : color()">The quick brown fox</div>
+                    }
+                }
+            }
+            @case ('body') {
+                @switch (size()) {
+                    @case ('large') {
+                        <div md3-type-body="large" [attr.emphasized]="emphasized() ? '' : null" [attr.color]="color() == 'inherit' ? null : color()">The quick brown fox</div>
+                    }
+                    @case ('medium') {
+                        <div md3-type-body="medium" [attr.emphasized]="emphasized() ? '' : null" [attr.color]="color() == 'inherit' ? null : color()">The quick brown fox</div>
+                    }
+                    @case ('small') {
+                        <div md3-type-body="small" [attr.emphasized]="emphasized() ? '' : null" [attr.color]="color() == 'inherit' ? null : color()">The quick brown fox</div>
+                    }
+                }
+            }
+            @case ('label') {
+                @switch (size()) {
+                    @case ('large') {
+                        <div md3-type-label="large" [attr.emphasized]="emphasized() ? '' : null" [attr.color]="color() == 'inherit' ? null : color()">The quick brown fox</div>
+                    }
+                    @case ('medium') {
+                        <div md3-type-label="medium" [attr.emphasized]="emphasized() ? '' : null" [attr.color]="color() == 'inherit' ? null : color()">The quick brown fox</div>
+                    }
+                    @case ('small') {
+                        <div md3-type-label="small" [attr.emphasized]="emphasized() ? '' : null" [attr.color]="color() == 'inherit' ? null : color()">The quick brown fox</div>
+                    }
+                }
+            }
+        }
+    </div>
+    <app-shiki [code]="previewCode()" language="html"></app-shiki>
+</app-playground>
+
+<h2>Type scale</h2>
+
+<div class="table-container md3-scrollable">
+    <table>
+        <thead>
+            <tr>
+                <th>Scale</th>
+                <th>Large</th>
+                <th>Medium</th>
+                <th>Small</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Display</td>
+                <td>
+                    <div class="type-swatch">
+                        <div md3-type-display="large">Ag</div>
+                        <div md3-type-label="small" color="on-surface-variant">57 / 64</div>
+                    </div>
+                </td>
+                <td>
+                    <div class="type-swatch">
+                        <div md3-type-display="medium">Ag</div>
+                        <div md3-type-label="small" color="on-surface-variant">45 / 52</div>
+                    </div>
+                </td>
+                <td>
+                    <div class="type-swatch">
+                        <div md3-type-display="small">Ag</div>
+                        <div md3-type-label="small" color="on-surface-variant">36 / 44</div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>Headline</td>
+                <td>
+                    <div class="type-swatch">
+                        <div md3-type-headline="large">Ag</div>
+                        <div md3-type-label="small" color="on-surface-variant">32 / 40</div>
+                    </div>
+                </td>
+                <td>
+                    <div class="type-swatch">
+                        <div md3-type-headline="medium">Ag</div>
+                        <div md3-type-label="small" color="on-surface-variant">28 / 36</div>
+                    </div>
+                </td>
+                <td>
+                    <div class="type-swatch">
+                        <div md3-type-headline="small">Ag</div>
+                        <div md3-type-label="small" color="on-surface-variant">24 / 32</div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>Title</td>
+                <td>
+                    <div class="type-swatch">
+                        <div md3-type-title="large">Ag</div>
+                        <div md3-type-label="small" color="on-surface-variant">22 / 28</div>
+                    </div>
+                </td>
+                <td>
+                    <div class="type-swatch">
+                        <div md3-type-title="medium">Ag</div>
+                        <div md3-type-label="small" color="on-surface-variant">16 / 24</div>
+                    </div>
+                </td>
+                <td>
+                    <div class="type-swatch">
+                        <div md3-type-title="small">Ag</div>
+                        <div md3-type-label="small" color="on-surface-variant">14 / 20</div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>Body</td>
+                <td>
+                    <div class="type-swatch">
+                        <div md3-type-body="large">Ag</div>
+                        <div md3-type-label="small" color="on-surface-variant">16 / 24</div>
+                    </div>
+                </td>
+                <td>
+                    <div class="type-swatch">
+                        <div md3-type-body="medium">Ag</div>
+                        <div md3-type-label="small" color="on-surface-variant">14 / 20</div>
+                    </div>
+                </td>
+                <td>
+                    <div class="type-swatch">
+                        <div md3-type-body="small">Ag</div>
+                        <div md3-type-label="small" color="on-surface-variant">12 / 16</div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>Label</td>
+                <td>
+                    <div class="type-swatch">
+                        <div md3-type-label="large">Ag</div>
+                        <div md3-type-label="small" color="on-surface-variant">14 / 20</div>
+                    </div>
+                </td>
+                <td>
+                    <div class="type-swatch">
+                        <div md3-type-label="medium">Ag</div>
+                        <div md3-type-label="small" color="on-surface-variant">12 / 16</div>
+                    </div>
+                </td>
+                <td>
+                    <div class="type-swatch">
+                        <div md3-type-label="small">Ag</div>
+                        <div md3-type-label="small" color="on-surface-variant">11 / 16</div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<h2>API</h2>
+
+<div class="table-container md3-scrollable">
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 50%;">Name</th>
+                <th>Type</th>
+                <th>Default</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <i>md3-type-display</i>
+                    <p md3-type-body="small">Applies the display type scale.</p>
+                </td>
+                <td>input&lt;'large' | 'medium' | 'small'&gt;</td>
+                <td style="white-space: nowrap;">—</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>md3-type-headline</i>
+                    <p md3-type-body="small">Applies the headline type scale.</p>
+                </td>
+                <td>input&lt;'large' | 'medium' | 'small'&gt;</td>
+                <td style="white-space: nowrap;">—</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>md3-type-title</i>
+                    <p md3-type-body="small">Applies the title type scale.</p>
+                </td>
+                <td>input&lt;'large' | 'medium' | 'small'&gt;</td>
+                <td style="white-space: nowrap;">—</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>md3-type-body</i>
+                    <p md3-type-body="small">Applies the body type scale.</p>
+                </td>
+                <td>input&lt;'large' | 'medium' | 'small'&gt;</td>
+                <td style="white-space: nowrap;">—</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>md3-type-label</i>
+                    <p md3-type-body="small">Applies the label type scale.</p>
+                </td>
+                <td>input&lt;'large' | 'medium' | 'small'&gt;</td>
+                <td style="white-space: nowrap;">—</td>
+            </tr>
+            <tr>
+                <td>
+                    color
+                    <p md3-type-body="small">Shared by all 5 directives. Sets the text color.</p>
+                </td>
+                <td>
+                    input&lt;TextColor&gt;
+                </td>
+                <td style="white-space: nowrap;">inherit</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>emphasized</i>
+                    <p md3-type-body="small">Shared by all 5 directives. Increases the font weight. Plain boolean attribute, not a directive input.</p>
+                </td>
+                <td>boolean attribute</td>
+                <td style="white-space: nowrap;">false</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<app-shiki [code]="apiImport"></app-shiki>
+<app-shiki [code]="apiData"></app-shiki>
+<app-shiki [code]="apiTypes"></app-shiki>
+<app-shiki [code]="apiUsage" language="html"></app-shiki>
 <ul>
-    <li>[md3-type-display]</li>
-    <li>[md3-type-headline]</li>
-    <li>[md3-type-title]</li>
-    <li>[md3-type-body]</li>
-    <li>[md3-type-label]</li>
-    <li>[emphasized] (optional)</li>
+    <li>
+        Every directive can be applied to any element, not just headings — pick the tag for its semantics
+        and the type scale directive for its style.
+    </li>
+    <li>
+        <code>size</code> and <code>color</code> must be set as plain string attributes (e.g.
+        <code>md3-type-body="small"</code>, <code>color="on-primary"</code>), not property bindings. The
+        directives don't reflect their inputs back onto the element — styling is applied entirely through
+        CSS attribute selectors matching the literal attribute value.
+    </li>
+    <li>
+        <code>emphasized</code> has no backing directive at all; it's a plain boolean attribute matched
+        directly by CSS.
+    </li>
+    <li>
+        Text color defaults to <code>inherit</code> (the parent's color) until a <code>color</code>
+        attribute is set.
+    </li>
 </ul>
-
-<h2 md3-type-display="large">Display large</h2>
-<h2 md3-type-display="medium">Display medium</h2>
-<h2 md3-type-display="small">Display small</h2>
-
-<h2 md3-type-display="large" emphasized>Display large (emphasized)</h2>
-<h2 md3-type-display="medium" emphasized>Display medium (emphasized)</h2>
-<h2 md3-type-display="small" emphasized>Display small (emphasized)</h2>
-
-<h2 md3-type-headline="large">Headline large</h2>
-<h2 md3-type-headline="medium">Headline medium</h2>
-<h2 md3-type-headline="small">Headline small</h2>
-
-<h2 md3-type-title="large">Title large</h2>
-<h2 md3-type-title="medium">Title medium</h2>
-<h2 md3-type-title="small">Title small</h2>
-
-<h2 md3-type-body="large">Body large</h2>
-<h2 md3-type-body="medium">Body medium</h2>
-<h2 md3-type-body="small">Body small</h2>
-
-<h2 md3-type-label="large">Label large</h2>
-<h2 md3-type-label="medium">Label medium</h2>
-<h2 md3-type-label="small">Label small</h2>
