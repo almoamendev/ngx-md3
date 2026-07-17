@@ -2,6 +2,9 @@
 
 <p>
     App bars are placed at the top of the screen to help people navigate through a product.
+    <code>md3-app-bar</code> is usually projected into a <code>md3-scaffold</code>'s top bar region
+    (<code>md3-scaffold-bar="top"</code>), and reads its scroll-elevate / auto-hide state from the scaffold's
+    main pane via <code>LayoutService</code> — no extra wiring needed.
 </p>
 
 <figure class="component-image">
@@ -13,3 +16,169 @@
         <li>Large flexible</li>
     </ol>
 </figure>
+
+<app-playground hide-direction>
+    <button action-item md3-icon-button button-type="tonal" button-squared [selected]="configOpen()"
+        (click)="openConfig()">
+        <md3-icon md3-icon-element>settings</md3-icon>
+    </button>
+
+    <div class="app-bar-demo">
+        <md3-app-bar
+            bar-title="Screen title"
+            bar-subtitle="Subtitle"
+            [bar-type]="barType()"
+            [scroll-style]="scrollStyle()"
+            [auto-hide]="autoHide()"
+            [center-aligned]="centerAligned()">
+            @if (barType() === 'search') {
+                <button md3-search-leading md3-icon-button button-type="standard">
+                    <md3-icon md3-icon-element>arrow_back</md3-icon>
+                </button>
+                <input md3-input-element type="text" placeholder="Search">
+                <button md3-search-trailing md3-icon-button button-type="standard">
+                    <md3-icon md3-icon-element>search</md3-icon>
+                </button>
+            } @else {
+                <button md3-app-bar-leading md3-icon-button button-type="standard">
+                    <md3-icon md3-icon-element>menu</md3-icon>
+                </button>
+                <button md3-app-bar-trailing md3-icon-button button-type="standard">
+                    <md3-icon md3-icon-element>search</md3-icon>
+                </button>
+                <button md3-app-bar-trailing md3-icon-button button-type="standard">
+                    <md3-icon md3-icon-element>more_vert</md3-icon>
+                </button>
+            }
+        </md3-app-bar>
+    </div>
+    <p md3-type-body size="small" color="on-surface-variant">
+        This demo bar reads the same <code>LayoutService</code> scroll signal as the rest of the site — scroll
+        this page (not just the demo box) to see "elevate" / "auto-hide" react to the real scroll position.
+    </p>
+</app-playground>
+
+<h2>Content slots</h2>
+
+<div class="table-container md3-scrollable">
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 50%;">Name</th>
+                <th>Renders when</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><i>[md3-app-bar-leading]</i></td>
+                <td>Always. Typically a menu / back icon button.</td>
+            </tr>
+            <tr>
+                <td><i>[md3-app-bar-trailing]</i></td>
+                <td>Always. Typically icon buttons and/or an avatar.</td>
+            </tr>
+            <tr>
+                <td><i>[md3-avatar]</i></td>
+                <td>Placed inside <code>[md3-app-bar-trailing]</code>; gets avatar-specific sizing/styling.</td>
+            </tr>
+            <tr>
+                <td><i>[md3-app-bar-logo]</i></td>
+                <td><code>bar-type</code> is not <code>search</code>, and a logo is projected — takes priority over <code>bar-title</code> / <code>bar-subtitle</code>.</td>
+            </tr>
+            <tr>
+                <td><i>[md3-search-leading]</i>, <code>[md3-input-element]</code>, <i>[md3-search-trailing]</i></td>
+                <td><code>bar-type="search"</code> — replaces the title/logo area with a search field.</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<h2>API</h2>
+
+<div class="table-container md3-scrollable">
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 50%;">Name</th>
+                <th>Type</th>
+                <th>Default</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <i>bar-title</i>
+                    <p md3-type-body size="small">Screen title. Ignored when <code>bar-type="search"</code> or a logo is projected.</p>
+                </td>
+                <td>input&lt;string | null&gt;</td>
+                <td style="white-space: nowrap;">null</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>bar-subtitle</i>
+                    <p md3-type-body size="small">Optional subtitle shown under the title.</p>
+                </td>
+                <td>input&lt;string | null&gt;</td>
+                <td style="white-space: nowrap;">null</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>bar-type</i>
+                    <p md3-type-body size="small">Small stays a fixed height; medium/large grow a second, collapsible row when there's a title or subtitle.</p>
+                </td>
+                <td>input&lt;AppBarType&gt;</td>
+                <td style="white-space: nowrap;">small</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>scroll-style</i>
+                    <p md3-type-body size="small">How the bar reacts once the scaffold's main pane has scrolled.</p>
+                </td>
+                <td>input&lt;AppBarScrollingStyle&gt;</td>
+                <td style="white-space: nowrap;">elevate</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>auto-hide</i>
+                    <p md3-type-body size="small">Slides the bar out of view while scrolling down, back in while scrolling up.</p>
+                </td>
+                <td>input&lt;boolean&gt;</td>
+                <td style="white-space: nowrap;">false</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>center-aligned</i>
+                    <p md3-type-body size="small">Centers the title/logo/search field instead of aligning it to the leading edge.</p>
+                </td>
+                <td>input&lt;boolean&gt;</td>
+                <td style="white-space: nowrap;">false</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<app-shiki [code]="apiImport"></app-shiki>
+<app-shiki [code]="apiData"></app-shiki>
+<app-shiki [code]="apiTypes"></app-shiki>
+<app-shiki [code]="apiUsage" language="html"></app-shiki>
+<ul>
+    <li>
+        <code>AppBar</code> is declared in <code>AppBarModule</code> rather than being standalone, since its
+        template depends on several other directives (typography, icon button, avatar) that would otherwise
+        need to be imported separately.
+    </li>
+    <li>
+        The bottom, collapsible title row only exists for <code>medium</code> / <code>large</code> when there's
+        a <code>bar-title</code> or <code>bar-subtitle</code> — it grows and shrinks based on how far the
+        scaffold's main pane has scrolled, not a fixed height.
+    </li>
+    <li>
+        Content priority for the middle area is: <code>bar-type="search"</code> first, then a projected
+        <code>[md3-app-bar-logo]</code>, then <code>bar-title</code> / <code>bar-subtitle</code>.
+    </li>
+    <li>
+        <code>scroll-style</code> and <code>auto-hide</code> both key off <code>LayoutService.mainScrollTop()</code>,
+        which is populated by whichever element carries <code>md3-scaffold-pane="main"</code> — outside a
+        scaffold, the bar won't react to scrolling at all.
+    </li>
+</ul>
