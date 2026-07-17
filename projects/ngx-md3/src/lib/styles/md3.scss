@@ -273,13 +273,13 @@ body {
     font-optical-sizing: auto;
     font-stretch: 100%;
 
+    &[emphasized] {
+        font-weight: 500;
+    }
+
     &[size=large] {
         font-size: 1.375rem; // 22pt
         line-height: 1.272727em; // 28pt
-
-        &[emphasized] {
-            font-weight: 500;
-        }
     }
 
     &[size=medium] {
