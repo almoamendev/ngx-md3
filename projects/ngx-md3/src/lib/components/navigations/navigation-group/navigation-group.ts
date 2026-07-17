@@ -1,7 +1,11 @@
 import { booleanAttribute, Component, ElementRef, inject, input } from '@angular/core';
+import { TypeLabel } from '../../../../public-api';
 
 @Component({
     selector: 'md3-nav-group',
+    imports: [
+        TypeLabel,
+    ],
     templateUrl: './navigation-group.html',
     styleUrl: './navigation-group.scss',
     host: {

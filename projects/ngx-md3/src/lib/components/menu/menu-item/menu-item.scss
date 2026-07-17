@@ -92,7 +92,7 @@
                 color: var(--menu-item-badge-foreground);
             }
 
-            [md3-type-title=small] {
+            .md3-title[size=small] {
                 margin: 0;
                 padding: 0;
                 white-space: nowrap;
@@ -110,7 +110,7 @@
         .md3-menu-item-content {
             flex: 1 1 auto;
 
-            [md3-type-label=large] {
+            .md3-label[size=large] {
                 display: block;
                 margin: 0;
                 padding: 0;
@@ -121,7 +121,7 @@
                 color: var(--menu-item-label-color);
             }
 
-            [md3-type-body=small] {
+            .md3-body[size=small] {
                 display: block;
                 margin: 0;
                 padding: 0;

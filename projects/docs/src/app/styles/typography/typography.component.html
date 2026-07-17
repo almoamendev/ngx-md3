@@ -17,69 +17,19 @@
     <div class="type-preview" [style.background-color]="previewBackground()">
         @switch (scale()) {
             @case ('display') {
-                @switch (size()) {
-                    @case ('large') {
-                        <div md3-type-display="large" [attr.emphasized]="emphasized() ? '' : null" [attr.color]="color() == 'inherit' ? null : color()">The quick brown fox</div>
-                    }
-                    @case ('medium') {
-                        <div md3-type-display="medium" [attr.emphasized]="emphasized() ? '' : null" [attr.color]="color() == 'inherit' ? null : color()">The quick brown fox</div>
-                    }
-                    @case ('small') {
-                        <div md3-type-display="small" [attr.emphasized]="emphasized() ? '' : null" [attr.color]="color() == 'inherit' ? null : color()">The quick brown fox</div>
-                    }
-                }
+                <md3-type-display [attr.size]="size()" [attr.emphasized]="emphasized() ? '' : null" [attr.color]="color() == 'inherit' ? null : color()">The quick brown fox</md3-type-display>
             }
             @case ('headline') {
-                @switch (size()) {
-                    @case ('large') {
-                        <div md3-type-headline="large" [attr.emphasized]="emphasized() ? '' : null" [attr.color]="color() == 'inherit' ? null : color()">The quick brown fox</div>
-                    }
-                    @case ('medium') {
-                        <div md3-type-headline="medium" [attr.emphasized]="emphasized() ? '' : null" [attr.color]="color() == 'inherit' ? null : color()">The quick brown fox</div>
-                    }
-                    @case ('small') {
-                        <div md3-type-headline="small" [attr.emphasized]="emphasized() ? '' : null" [attr.color]="color() == 'inherit' ? null : color()">The quick brown fox</div>
-                    }
-                }
+                <md3-type-headline [attr.size]="size()" [attr.emphasized]="emphasized() ? '' : null" [attr.color]="color() == 'inherit' ? null : color()">The quick brown fox</md3-type-headline>
             }
             @case ('title') {
-                @switch (size()) {
-                    @case ('large') {
-                        <div md3-type-title="large" [attr.emphasized]="emphasized() ? '' : null" [attr.color]="color() == 'inherit' ? null : color()">The quick brown fox</div>
-                    }
-                    @case ('medium') {
-                        <div md3-type-title="medium" [attr.emphasized]="emphasized() ? '' : null" [attr.color]="color() == 'inherit' ? null : color()">The quick brown fox</div>
-                    }
-                    @case ('small') {
-                        <div md3-type-title="small" [attr.emphasized]="emphasized() ? '' : null" [attr.color]="color() == 'inherit' ? null : color()">The quick brown fox</div>
-                    }
-                }
+                <md3-type-title [attr.size]="size()" [attr.emphasized]="emphasized() ? '' : null" [attr.color]="color() == 'inherit' ? null : color()">The quick brown fox</md3-type-title>
             }
             @case ('body') {
-                @switch (size()) {
-                    @case ('large') {
-                        <div md3-type-body="large" [attr.emphasized]="emphasized() ? '' : null" [attr.color]="color() == 'inherit' ? null : color()">The quick brown fox</div>
-                    }
-                    @case ('medium') {
-                        <div md3-type-body="medium" [attr.emphasized]="emphasized() ? '' : null" [attr.color]="color() == 'inherit' ? null : color()">The quick brown fox</div>
-                    }
-                    @case ('small') {
-                        <div md3-type-body="small" [attr.emphasized]="emphasized() ? '' : null" [attr.color]="color() == 'inherit' ? null : color()">The quick brown fox</div>
-                    }
-                }
+                <md3-type-body [attr.size]="size()" [attr.emphasized]="emphasized() ? '' : null" [attr.color]="color() == 'inherit' ? null : color()">The quick brown fox</md3-type-body>
             }
             @case ('label') {
-                @switch (size()) {
-                    @case ('large') {
-                        <div md3-type-label="large" [attr.emphasized]="emphasized() ? '' : null" [attr.color]="color() == 'inherit' ? null : color()">The quick brown fox</div>
-                    }
-                    @case ('medium') {
-                        <div md3-type-label="medium" [attr.emphasized]="emphasized() ? '' : null" [attr.color]="color() == 'inherit' ? null : color()">The quick brown fox</div>
-                    }
-                    @case ('small') {
-                        <div md3-type-label="small" [attr.emphasized]="emphasized() ? '' : null" [attr.color]="color() == 'inherit' ? null : color()">The quick brown fox</div>
-                    }
-                }
+                <md3-type-label [attr.size]="size()" [attr.emphasized]="emphasized() ? '' : null" [attr.color]="color() == 'inherit' ? null : color()">The quick brown fox</md3-type-label>
             }
         }
     </div>
@@ -93,9 +43,9 @@
         <thead>
             <tr>
                 <th>Scale</th>
-                <th>Large</th>
-                <th>Medium</th>
-                <th>Small</th>
+                <th style="text-align: center;">Large</th>
+                <th style="text-align: center;">Medium</th>
+                <th style="text-align: center;">Small</th>
             </tr>
         </thead>
         <tbody>
@@ -103,20 +53,20 @@
                 <td>Display</td>
                 <td>
                     <div class="type-swatch">
-                        <div md3-type-display="large">Ag</div>
-                        <div md3-type-label="small" color="on-surface-variant">57 / 64</div>
+                        <div md3-type-display size="large">Ag</div>
+                        <div md3-type-label size="small" color="on-surface-variant">57 / 64</div>
                     </div>
                 </td>
                 <td>
                     <div class="type-swatch">
-                        <div md3-type-display="medium">Ag</div>
-                        <div md3-type-label="small" color="on-surface-variant">45 / 52</div>
+                        <div md3-type-display size="medium">Ag</div>
+                        <div md3-type-label size="small" color="on-surface-variant">45 / 52</div>
                     </div>
                 </td>
                 <td>
                     <div class="type-swatch">
-                        <div md3-type-display="small">Ag</div>
-                        <div md3-type-label="small" color="on-surface-variant">36 / 44</div>
+                        <div md3-type-display size="small">Ag</div>
+                        <div md3-type-label size="small" color="on-surface-variant">36 / 44</div>
                     </div>
                 </td>
             </tr>
@@ -124,20 +74,20 @@
                 <td>Headline</td>
                 <td>
                     <div class="type-swatch">
-                        <div md3-type-headline="large">Ag</div>
-                        <div md3-type-label="small" color="on-surface-variant">32 / 40</div>
+                        <div md3-type-headline size="large">Ag</div>
+                        <div md3-type-label size="small" color="on-surface-variant">32 / 40</div>
                     </div>
                 </td>
                 <td>
                     <div class="type-swatch">
-                        <div md3-type-headline="medium">Ag</div>
-                        <div md3-type-label="small" color="on-surface-variant">28 / 36</div>
+                        <div md3-type-headline size="medium">Ag</div>
+                        <div md3-type-label size="small" color="on-surface-variant">28 / 36</div>
                     </div>
                 </td>
                 <td>
                     <div class="type-swatch">
-                        <div md3-type-headline="small">Ag</div>
-                        <div md3-type-label="small" color="on-surface-variant">24 / 32</div>
+                        <div md3-type-headline size="small">Ag</div>
+                        <div md3-type-label size="small" color="on-surface-variant">24 / 32</div>
                     </div>
                 </td>
             </tr>
@@ -145,20 +95,20 @@
                 <td>Title</td>
                 <td>
                     <div class="type-swatch">
-                        <div md3-type-title="large">Ag</div>
-                        <div md3-type-label="small" color="on-surface-variant">22 / 28</div>
+                        <div md3-type-title size="large">Ag</div>
+                        <div md3-type-label size="small" color="on-surface-variant">22 / 28</div>
                     </div>
                 </td>
                 <td>
                     <div class="type-swatch">
-                        <div md3-type-title="medium">Ag</div>
-                        <div md3-type-label="small" color="on-surface-variant">16 / 24</div>
+                        <div md3-type-title size="medium">Ag</div>
+                        <div md3-type-label size="small" color="on-surface-variant">16 / 24</div>
                     </div>
                 </td>
                 <td>
                     <div class="type-swatch">
-                        <div md3-type-title="small">Ag</div>
-                        <div md3-type-label="small" color="on-surface-variant">14 / 20</div>
+                        <div md3-type-title size="small">Ag</div>
+                        <div md3-type-label size="small" color="on-surface-variant">14 / 20</div>
                     </div>
                 </td>
             </tr>
@@ -166,20 +116,20 @@
                 <td>Body</td>
                 <td>
                     <div class="type-swatch">
-                        <div md3-type-body="large">Ag</div>
-                        <div md3-type-label="small" color="on-surface-variant">16 / 24</div>
+                        <div md3-type-body size="large">Ag</div>
+                        <div md3-type-label size="small" color="on-surface-variant">16 / 24</div>
                     </div>
                 </td>
                 <td>
                     <div class="type-swatch">
-                        <div md3-type-body="medium">Ag</div>
-                        <div md3-type-label="small" color="on-surface-variant">14 / 20</div>
+                        <div md3-type-body size="medium">Ag</div>
+                        <div md3-type-label size="small" color="on-surface-variant">14 / 20</div>
                     </div>
                 </td>
                 <td>
                     <div class="type-swatch">
-                        <div md3-type-body="small">Ag</div>
-                        <div md3-type-label="small" color="on-surface-variant">12 / 16</div>
+                        <div md3-type-body size="small">Ag</div>
+                        <div md3-type-label size="small" color="on-surface-variant">12 / 16</div>
                     </div>
                 </td>
             </tr>
@@ -187,20 +137,20 @@
                 <td>Label</td>
                 <td>
                     <div class="type-swatch">
-                        <div md3-type-label="large">Ag</div>
-                        <div md3-type-label="small" color="on-surface-variant">14 / 20</div>
+                        <div md3-type-label size="large">Ag</div>
+                        <div md3-type-label size="small" color="on-surface-variant">14 / 20</div>
                     </div>
                 </td>
                 <td>
                     <div class="type-swatch">
-                        <div md3-type-label="medium">Ag</div>
-                        <div md3-type-label="small" color="on-surface-variant">12 / 16</div>
+                        <div md3-type-label size="medium">Ag</div>
+                        <div md3-type-label size="small" color="on-surface-variant">12 / 16</div>
                     </div>
                 </td>
                 <td>
                     <div class="type-swatch">
-                        <div md3-type-label="small">Ag</div>
-                        <div md3-type-label="small" color="on-surface-variant">11 / 16</div>
+                        <div md3-type-label size="small">Ag</div>
+                        <div md3-type-label size="small" color="on-surface-variant">11 / 16</div>
                     </div>
                 </td>
             </tr>
@@ -223,47 +173,47 @@
             <tr>
                 <td>
                     <i>md3-type-display</i>
-                    <p md3-type-body="small">Applies the display type scale.</p>
+                    <p md3-type-body size="small">Applies the display type scale.</p>
                 </td>
-                <td>input&lt;'large' | 'medium' | 'small'&gt;</td>
-                <td style="white-space: nowrap;">—</td>
+                <td>input&lt;TextSize&gt;</td>
+                <td style="white-space: nowrap;">large</td>
             </tr>
             <tr>
                 <td>
                     <i>md3-type-headline</i>
-                    <p md3-type-body="small">Applies the headline type scale.</p>
+                    <p md3-type-body size="small">Applies the headline type scale.</p>
                 </td>
-                <td>input&lt;'large' | 'medium' | 'small'&gt;</td>
-                <td style="white-space: nowrap;">—</td>
+                <td>input&lt;TextSize&gt;</td>
+                <td style="white-space: nowrap;">large</td>
             </tr>
             <tr>
                 <td>
                     <i>md3-type-title</i>
-                    <p md3-type-body="small">Applies the title type scale.</p>
+                    <p md3-type-body size="small">Applies the title type scale.</p>
                 </td>
-                <td>input&lt;'large' | 'medium' | 'small'&gt;</td>
-                <td style="white-space: nowrap;">—</td>
+                <td>input&lt;TextSize&gt;</td>
+                <td style="white-space: nowrap;">large</td>
             </tr>
             <tr>
                 <td>
                     <i>md3-type-body</i>
-                    <p md3-type-body="small">Applies the body type scale.</p>
+                    <p md3-type-body size="small">Applies the body type scale.</p>
                 </td>
-                <td>input&lt;'large' | 'medium' | 'small'&gt;</td>
-                <td style="white-space: nowrap;">—</td>
+                <td>input&lt;TextSize&gt;</td>
+                <td style="white-space: nowrap;">large</td>
             </tr>
             <tr>
                 <td>
                     <i>md3-type-label</i>
-                    <p md3-type-body="small">Applies the label type scale.</p>
+                    <p md3-type-body size="small">Applies the label type scale.</p>
                 </td>
-                <td>input&lt;'large' | 'medium' | 'small'&gt;</td>
-                <td style="white-space: nowrap;">—</td>
+                <td>input&lt;TextSize&gt;</td>
+                <td style="white-space: nowrap;">large</td>
             </tr>
             <tr>
                 <td>
                     color
-                    <p md3-type-body="small">Shared by all 5 directives. Sets the text color.</p>
+                    <p md3-type-body size="small">Shared by all 5 directives. Sets the text color.</p>
                 </td>
                 <td>
                     input&lt;TextColor&gt;
@@ -271,12 +221,10 @@
                 <td style="white-space: nowrap;">inherit</td>
             </tr>
             <tr>
-                <td>
+                <td colspan="3">
                     <i>emphasized</i>
-                    <p md3-type-body="small">Shared by all 5 directives. Increases the font weight. Plain boolean attribute, not a directive input.</p>
+                    <p md3-type-body size="small">Shared by all 5 directives. Increases the font weight. Plain boolean attribute, not a directive input.</p>
                 </td>
-                <td>boolean attribute</td>
-                <td style="white-space: nowrap;">false</td>
             </tr>
         </tbody>
     </table>
@@ -293,7 +241,7 @@
     </li>
     <li>
         <code>size</code> and <code>color</code> must be set as plain string attributes (e.g.
-        <code>md3-type-body="small"</code>, <code>color="on-primary"</code>), not property bindings. The
+        <code>size="small"</code>, <code>color="on-primary"</code>, <code>[attr.size]="size?"</code>, <code>[attr.color]="color?"</code>, <code>[attr.emphasized]="emphasized?"</code>), not property bindings. The
         directives don't reflect their inputs back onto the element — styling is applied entirely through
         CSS attribute selectors matching the literal attribute value.
     </li>

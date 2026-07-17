@@ -21,7 +21,7 @@
         <md3-icon md3-icon-element>settings</md3-icon>
     </button>
 
-    <div md3-type-headline="small">{{ statusLabel() }}</div>
+    <div md3-type-headline size="small">{{ statusLabel() }}</div>
     <md3-grid class="grid-demo" [cols]="cols()">
         <md3-grid-item class="grid-demo-item">1</md3-grid-item>
         <md3-grid-item col-span="2" class="grid-demo-item">2</md3-grid-item>
@@ -48,7 +48,7 @@
                 <td colspan="3">
                     <h3>md3-grid</h3>
                     <md3-divider></md3-divider>
-                    <p md3-type-body="small">
+                    <p md3-type-body size="small">
                         Grid container. Sets <code>display: grid</code> and derives its column count from
                         <code>LayoutService.widthClass()</code> unless overridden.
                     </p>
@@ -57,7 +57,7 @@
             <tr>
                 <td>
                     <i>cols</i>
-                    <p md3-type-body="small">
+                    <p md3-type-body size="small">
                         Forces the column count instead of deriving it from the current window size class.
                     </p>
                 </td>
@@ -70,7 +70,7 @@
                 <td colspan="3">
                     <h3>md3-grid-item</h3>
                     <md3-divider></md3-divider>
-                    <p md3-type-body="small">
+                    <p md3-type-body size="small">
                         Marks a child of <code>md3-grid</code> and, optionally, spans it across multiple columns.
                     </p>
                 </td>
@@ -78,7 +78,7 @@
             <tr>
                 <td>
                     <i>col-span</i>
-                    <p md3-type-body="small">
+                    <p md3-type-body size="small">
                         Number of columns the item spans, via <code>grid-column: span N</code>.
                     </p>
                 </td>

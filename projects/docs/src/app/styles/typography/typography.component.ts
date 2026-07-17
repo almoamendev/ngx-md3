@@ -1,11 +1,10 @@
 import { Component, computed, OnDestroy, signal } from '@angular/core';
-import { IconButton, IconElement, MaterialIcon, SheetsService, SideSheetRef, TextColor, TypeBody, TypeDisplay, TypeHeadline, TypeLabel, TypeTitle } from '@vip9008/ngx-md3';
+import { IconButton, IconElement, MaterialIcon, SheetsService, SideSheetRef, TextSize, TextColor, TypeBody, TypeDisplay, TypeHeadline, TypeLabel, TypeTitle } from '@vip9008/ngx-md3';
 import { Playground } from '../../components/playground/playground';
 import { Shiki } from '../../components/shiki/shiki';
 import { TypographyConfig } from './typography-config/typography-config';
 
 type TypeScale = 'display' | 'headline' | 'title' | 'body' | 'label';
-type TypeScaleSize = 'large' | 'medium' | 'small';
 
 @Component({
     selector: 'app-typography',
@@ -29,7 +28,7 @@ export class TypographyComponent implements OnDestroy {
     public configOpen = signal(false);
 
     public scale = signal<TypeScale>('title');
-    public size = signal<TypeScaleSize>('medium');
+    public size = signal<TextSize>('medium');
     public emphasized = signal<boolean>(false);
     public color = signal<TextColor | 'inherit'>('inherit');
 
@@ -49,14 +48,14 @@ export class TypographyComponent implements OnDestroy {
     });
 
     public previewCode = computed<string>(() => {
-        let code = `<div md3-type-${this.scale()}="${this.size()}"`;
+        let code = `<md3-type-${this.scale()} size="${this.size()}"`;
         if (this.emphasized()) {
             code += ` emphasized`;
         }
         if (this.color() !== 'inherit') {
             code += ` color="${this.color()}"`;
         }
-        code += `>...</div>`;
+        code += `>...</md3-type-${this.scale()}>`;
         return code;
     });
 
@@ -70,14 +69,16 @@ import {
 } from '@vip9008/ngx-md3';`;
 
     public apiData: string = `// Shared shape across all 5 directives; only the selector differs
-@Input('md3-type-display') size?: 'large' | 'medium' | 'small';
-@Input('color') color?: TextColor;
+public size = input<TextSize | undefined>(undefined);
+public color = input<TextColor | undefined>(undefined);
 
 // "emphasized" has no directive input at all: it's a plain boolean
 // attribute matched directly by CSS, e.g. [emphasized] { font-weight: ...; }`;
 
     public apiTypes: string = `// Types
-import { TextColor } from '@vip9008/ngx-md3';
+import { TextSize, TextColor } from '@vip9008/ngx-md3';
+
+type TextSize = 'large' | 'medium' | 'small';
 
 type TextColor = 'on-primary' | 'on-primary-container'
     | 'on-secondary' | 'on-secondary-container'
@@ -89,22 +90,28 @@ type TextColor = 'on-primary' | 'on-primary-container'
     | 'on-surface' | 'on-surface-variant'
     | 'inverse-on-surface';`;
 
-    public apiUsage: string = `<!-- Component usage -->
+    public apiUsage: string = `<!-- Directive usage -->
+
+<md3-type-display>Display</md3-type-display>
+<md3-type-body>Body</md3-type-body>
+<md3-type-title>Title</md3-type-title>
+<md3-type-label>Label</md3-type-label>
+<md3-type-headline>Headline</md3-type-headline>
 
 <!-- on a heading -->
-<h1 md3-type-display="large">Display large</h1>
+<h1 md3-type-display size="large">Display large</h1>
 
 <!-- on any other element -->
-<div md3-type-body="medium">Body medium</div>
+<div md3-type-body size="medium">Body medium</div>
 
 <!-- emphasized: a higher font-weight variant -->
-<div md3-type-title="medium" emphasized>Title medium (emphasized)</div>
+<div md3-type-title size="medium" emphasized>Title medium (emphasized)</div>
 
 <!-- colored text -->
-<div md3-type-label="large" color="on-primary">Label large</div>
+<div md3-type-label size="large" color="on-primary">Label large</div>
 
 <!-- combined -->
-<div md3-type-headline="small" emphasized color="on-error">Headline small</div>`;
+<div md3-type-headline size="small" emphasized color="on-error">Headline small</div>`;
 
     constructor(
         private sheetsService: SheetsService,

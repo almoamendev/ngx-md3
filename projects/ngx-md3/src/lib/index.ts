@@ -1,4 +1,5 @@
 // types
+export * from './types/text-size.type';
 export * from './types/text-color.type';
 export * from './types/card-type.type';
 export * from './types/button-size.type';

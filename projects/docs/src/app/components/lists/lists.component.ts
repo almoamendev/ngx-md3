@@ -126,7 +126,7 @@ type ListLeadingSize = 'image' | 'small-video' | 'large-video';`;
         <md3-list-leading type="..." size="...">...</md3-list-leading> <!-- optional -->
         <div md3-list-slot="content">
             Label
-            <div md3-type-body="small" color="on-surface-variant">Supporting text</div> <!-- optional -->
+            <div md3-type-body size="small" color="on-surface-variant">Supporting text</div> <!-- optional -->
         </div>
         <div md3-list-slot="trailing">...</div> <!-- optional -->
     </md3-list-item>

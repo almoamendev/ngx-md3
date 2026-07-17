@@ -327,11 +327,11 @@
 
                 block-size: max(0px, calc(var(--app-bar-bottom-expanded-block-size) - var(--app-bar-bottom-collapse)));
 
-                &:has([md3-type-title=small]) {
+                &:has(.md3-title[size=small]) {
                     --app-bar-bottom-expanded-block-size: 4.5em;
                 }
 
-                .md3-app-bar-bottom-content [md3-type-title=small] {
+                .md3-app-bar-bottom-content .md3-title[size=small] {
                     margin-top: 0.285715em;
                 }
             }
@@ -345,11 +345,11 @@
 
                 block-size: max(0px, calc(var(--app-bar-bottom-expanded-block-size) - var(--app-bar-bottom-collapse)));
 
-                &:has([md3-type-title=medium]) {
+                &:has(.md3-title[size=medium]) {
                     --app-bar-bottom-expanded-block-size: 5.5em;
                 }
 
-                .md3-app-bar-bottom-content [md3-type-title=medium] {
+                .md3-app-bar-bottom-content .md3-title[size=medium] {
                     margin-top: 0.5em;
                 }
             }

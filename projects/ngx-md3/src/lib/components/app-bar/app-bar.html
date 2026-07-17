@@ -22,10 +22,10 @@
     } @else if (title() || subtitle()) {
         <div class="md3-app-bar-title" [class.md3-center]="centerAligned()">
             @if (title()?.length) {
-                <div md3-type-title="large">{{ title() }}</div>
+                <md3-type-title size="large">{{ title() }}</md3-type-title>
             }
             @if (subtitle()?.length) {
-                <div md3-type-body="small" emphasized>{{ subtitle() }}</div>
+                <md3-type-body size="small" emphasized>{{ subtitle() }}</md3-type-body>
             }
         </div>
     }
@@ -44,18 +44,18 @@
             <div class="md3-app-bar-bottom-content">
                 @if (appBarType() == 'medium') {
                     @if (title()?.length) {
-                        <div md3-type-headline="medium">{{ title() }}</div>
+                        <md3-type-headline size="medium">{{ title() }}</md3-type-headline>
                     }
                     @if (subtitle()?.length) {
-                        <div md3-type-title="small">{{ subtitle() }}</div>
+                        <md3-type-title size="small">{{ subtitle() }}</md3-type-title>
                     }
                 }
                 @if (appBarType() == 'large') {
                     @if (title()?.length) {
-                        <div md3-type-display="small">{{ title() }}</div>
+                        <md3-type-display size="small">{{ title() }}</md3-type-display>
                     }
                     @if (subtitle()?.length) {
-                        <div md3-type-title="medium">{{ subtitle() }}</div>
+                        <md3-type-title size="medium">{{ subtitle() }}</md3-type-title>
                     }
                 }
             </div>

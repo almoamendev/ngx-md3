@@ -11,16 +11,16 @@
     </div>
 
     <div class="md3-menu-item-content">
-        <div md3-type-label="large">{{ label() }}</div>
+        <md3-type-label size="large">{{ label() }}</md3-type-label>
         @if (supportingText()?.length) {
-            <div md3-type-body="small">{{ supportingText() }}</div>
+            <md3-type-body size="small">{{ supportingText() }}</md3-type-body>
         }
     </div>
 
     <div class="md3-menu-item-trailing">
         <ng-content select="md3-badge"></ng-content>
         @if (trailingText()?.length) {
-            <div md3-type-title="small">{{ trailingText() }}</div>
+            <md3-type-title size="small">{{ trailingText() }}</md3-type-title>
         }
         <ng-content select="[md3-icon-element=trailing]"></ng-content>
     </div>
