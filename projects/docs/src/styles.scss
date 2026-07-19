@@ -97,7 +97,7 @@ figure.component-image {
 md3-side-sheet-body.md3-component-config {
     padding: 0.5em;
 
-    [md3-type-body="large"] {
+    & > .md3-text-body {
         padding: 0 1em;
     }
 

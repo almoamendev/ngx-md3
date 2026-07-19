@@ -1,5 +1,5 @@
 import { Component, OnDestroy, signal } from '@angular/core';
-import { AppBarModule, AppBarScrollingStyle, AppBarType, SheetsService, SideSheetRef } from '@vip9008/ngx-md3';
+import { AppBar, AppBarLogo, AppBarScrollingStyle, AppBarType, Avatar, IconButton, IconElement, InputElement, MaterialIcon, SheetsService, SideSheetRef } from '@vip9008/ngx-md3';
 import { Playground } from '../../components/playground/playground';
 import { Shiki } from '../../components/shiki/shiki';
 import { AppBarConfig } from './app-bar-config/app-bar-config';
@@ -7,9 +7,13 @@ import { AppBarConfig } from './app-bar-config/app-bar-config';
 @Component({
     selector: 'app-app-bar',
     imports: [
-        // AppBarModule already exports AppBar, AppBarLogo, IconButton,
-        // IconElement, MaterialIcon, Avatar, and InputElement
-        AppBarModule,
+        AppBar,
+        AppBarLogo,
+        IconButton,
+        IconElement,
+        MaterialIcon,
+        Avatar,
+        InputElement,
         Playground,
         Shiki,
     ],

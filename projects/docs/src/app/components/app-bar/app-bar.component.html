@@ -1,5 +1,52 @@
 <h1>App bar</h1>
 
+<app-playground bg-variant>
+    <button action-item md3-icon-button button-type="tonal" button-squared [selected]="configOpen()"
+        (click)="openConfig()">
+        <md3-icon md3-icon-element>settings</md3-icon>
+    </button>
+
+    <div class="app-bar-demo">
+        <!-- <button md3-app-bar-logo><img  src="https://media.wired.com/photos/5926ffe47034dc5f91bed4e8/master/pass/google-logo.jpg"></button> -->
+        @if (barType() == 'search') {
+            <md3-app-bar bar-title="Screen title" bar-subtitle="Subtitle" [bar-type]="barType()" [scroll-style]="scrollStyle()" [auto-hide]="autoHide()" [center-aligned]="centerAligned()">
+                <button md3-app-bar-leading md3-icon-button button-type="standard">
+                    <md3-icon md3-icon-element>menu</md3-icon>
+                </button>
+                <!-- <button md3-search-leading md3-icon-button button-type="standard">
+                    <md3-icon md3-icon-element>arrow_back</md3-icon>
+                </button> -->
+                <input md3-input-element type="text" placeholder="Search product">
+                <!-- <button md3-search-trailing md3-icon-button button-type="standard">
+                    <md3-icon md3-icon-element>search</md3-icon>
+                </button> -->
+                <button md3-app-bar-trailing md3-icon-button button-type="standard">
+                    <md3-icon md3-icon-element>settings</md3-icon>
+                </button>
+                <button md3-avatar>
+                    <md3-icon>person</md3-icon>
+                </button>
+            </md3-app-bar>
+        } @else {
+            <md3-app-bar bar-title="Screen title" bar-subtitle="Subtitle" [bar-type]="barType()" [scroll-style]="scrollStyle()" [auto-hide]="autoHide()" [center-aligned]="centerAligned()">
+                <button md3-app-bar-leading md3-icon-button button-type="standard">
+                    <md3-icon md3-icon-element bi-directional>arrow_back</md3-icon>
+                </button>
+                <button md3-app-bar-trailing md3-icon-button button-type="standard">
+                    <md3-icon md3-icon-element>settings</md3-icon>
+                </button>
+                <button md3-avatar>
+                    <md3-icon>person</md3-icon>
+                </button>
+            </md3-app-bar>
+        }
+    </div>
+    <p md3-type-body size="small" color="on-surface-variant">
+        This demo bar reads the same <code>LayoutService</code> scroll signal as the rest of the site — scroll
+        this page (not just the demo box) to see "elevate" / "auto-hide" react to the real scroll position.
+    </p>
+</app-playground>
+
 <p>
     App bars are placed at the top of the screen to help people navigate through a product.
     <code>md3-app-bar</code> is usually projected into a <code>md3-scaffold</code>'s top bar region
@@ -16,47 +63,6 @@
         <li>Large flexible</li>
     </ol>
 </figure>
-
-<app-playground hide-direction>
-    <button action-item md3-icon-button button-type="tonal" button-squared [selected]="configOpen()"
-        (click)="openConfig()">
-        <md3-icon md3-icon-element>settings</md3-icon>
-    </button>
-
-    <div class="app-bar-demo">
-        <md3-app-bar
-            bar-title="Screen title"
-            bar-subtitle="Subtitle"
-            [bar-type]="barType()"
-            [scroll-style]="scrollStyle()"
-            [auto-hide]="autoHide()"
-            [center-aligned]="centerAligned()">
-            @if (barType() === 'search') {
-                <button md3-search-leading md3-icon-button button-type="standard">
-                    <md3-icon md3-icon-element>arrow_back</md3-icon>
-                </button>
-                <input md3-input-element type="text" placeholder="Search">
-                <button md3-search-trailing md3-icon-button button-type="standard">
-                    <md3-icon md3-icon-element>search</md3-icon>
-                </button>
-            } @else {
-                <button md3-app-bar-leading md3-icon-button button-type="standard">
-                    <md3-icon md3-icon-element>menu</md3-icon>
-                </button>
-                <button md3-app-bar-trailing md3-icon-button button-type="standard">
-                    <md3-icon md3-icon-element>search</md3-icon>
-                </button>
-                <button md3-app-bar-trailing md3-icon-button button-type="standard">
-                    <md3-icon md3-icon-element>more_vert</md3-icon>
-                </button>
-            }
-        </md3-app-bar>
-    </div>
-    <p md3-type-body size="small" color="on-surface-variant">
-        This demo bar reads the same <code>LayoutService</code> scroll signal as the rest of the site — scroll
-        this page (not just the demo box) to see "elevate" / "auto-hide" react to the real scroll position.
-    </p>
-</app-playground>
 
 <h2>Content slots</h2>
 

@@ -4,13 +4,18 @@ import { ButtonSize } from '../../types/button-size.type';
 import { Avatar } from '../common/avatar';
 import { LayoutService } from '../../foundations/layout.service';
 import { AppBarLogo } from './app-bar-logo';
+import { TypeDisplay, TypeHeadline, TypeTitle } from '../../../public-api';
 
 export type AppBarType = 'small' | 'medium' | 'large' | 'search';
 export type AppBarScrollingStyle = 'none' | 'transparent' | 'elevate';
 
 @Component({
-    standalone: false,
     selector: 'md3-app-bar',
+    imports: [
+        TypeHeadline,
+        TypeTitle,
+        TypeDisplay,
+    ],
     templateUrl: './app-bar.html',
     styleUrl: './app-bar.scss',
     providers: [

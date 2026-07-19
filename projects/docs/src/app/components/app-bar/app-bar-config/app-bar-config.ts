@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { AppBarScrollingStyle, AppBarType, IconButton, IconElement, InputElement, MaterialIcon, RadioButton, SideSheetBody, SideSheetHeader, SideSheetRef, StateComponent, Switch, TypeLabel } from '@vip9008/ngx-md3';
+import { AppBarScrollingStyle, AppBarType, IconButton, IconElement, InputElement, MaterialIcon, RadioButton, SideSheetBody, SideSheetHeader, SideSheetRef, StateComponent, Switch, TypeBody, TypeLabel } from '@vip9008/ngx-md3';
 
 @Component({
     selector: 'app-app-bar-config',
@@ -15,6 +15,7 @@ import { AppBarScrollingStyle, AppBarType, IconButton, IconElement, InputElement
         InputElement,
         StateComponent,
         TypeLabel,
+        TypeBody,
     ],
     templateUrl: './app-bar-config.html',
     styleUrl: './app-bar-config.scss',
