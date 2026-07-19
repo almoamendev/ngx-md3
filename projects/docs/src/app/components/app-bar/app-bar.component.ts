@@ -30,9 +30,15 @@ export class AppBarComponent implements OnDestroy {
     public centerAligned = signal<boolean>(false);
 
     public apiImport: string = `// Component import
-import { AppBarModule } from '@vip9008/ngx-md3';
-// AppBar is declared in an NgModule (not standalone) because its
-// template depends on several other directives internally`;
+import { 
+    AppBar,
+    AppBarLogo, // optional
+    IconButton, // optional
+    IconElement, // optional
+    MaterialIcon, // optional
+    Avatar, // optional
+    InputElement, // optional
+ } from '@vip9008/ngx-md3';`;
 
     public apiData: string = `public title = input<string | null>(null, {
     alias: 'bar-title',
