@@ -4,7 +4,7 @@
     </div>
 
     @if (appBarType() == 'search') {
-        <div class="md3-app-bar-search">
+        <div class="md3-app-bar-search" [class.md3-center]="centerAligned()">
             <div class="md3-search-container">
                 <div class="md3-leading-buttons">
                     <ng-content select="[md3-search-leading]"></ng-content>

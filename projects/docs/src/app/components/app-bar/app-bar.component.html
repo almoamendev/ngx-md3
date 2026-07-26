@@ -169,11 +169,6 @@
 <app-shiki [code]="apiUsage" language="html"></app-shiki>
 <ul>
     <li>
-        <code>AppBar</code> is declared in <code>AppBarModule</code> rather than being standalone, since its
-        template depends on several other directives (typography, icon button, avatar) that would otherwise
-        need to be imported separately.
-    </li>
-    <li>
         The bottom, collapsible title row only exists for <code>medium</code> / <code>large</code> when there's
         a <code>bar-title</code> or <code>bar-subtitle</code> — it grows and shrinks based on how far the
         scaffold's main pane has scrolled, not a fixed height.

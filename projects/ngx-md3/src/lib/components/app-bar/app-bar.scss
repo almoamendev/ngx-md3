@@ -178,6 +178,14 @@
                     margin: 0 -1.5em;
                 }
             }
+
+            &.md3-center {
+                .md3-search-container {
+                    ::ng-deep [md3-input-element] {
+                        text-align: center;
+                    }
+                }
+            }
         }
     
         .md3-app-bar-logo {
