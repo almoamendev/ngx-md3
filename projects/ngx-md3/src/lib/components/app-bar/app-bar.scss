@@ -291,10 +291,14 @@
     }
     
     &.md3-scrolled {
-        &.md3-md3-scroll-style-elevate {
+        &.md3-scroll-style-elevate {
             --background-color: rgb(var(--md-scheme-surface-container));
             --search-background-color: rgb(var(--md-scheme-surface-container-highest));
             --elevation: var(--md-shadow-3dp);
+        }
+
+        &.md3-scroll-style-transparent {
+            --background-color: transparent;
         }
     }
 
