@@ -30,9 +30,20 @@ export class LayoutService {
     } as const;
 
     private mainPaneSub?: Subscription;
+    private panesContainerResizeObserver?: ResizeObserver;
+    private panesContainerResizeListener?: () => void;
 
     readonly mainScrollTop = signal<number>(0);
     readonly mainIsScrolled = computed<boolean>(() => this.mainScrollTop() > 0);
+
+    /**
+     * Distance, in pixels, between the viewport bottom and the bottom edge of
+     * the scaffold's .md3-panes-container — i.e. whatever the bottom scaffold
+     * bar (nav bar) currently reserves, or 0 when there is none. Overlay-based
+     * components anchored to the viewport bottom (like Snackbar) read this so
+     * they never render lower than the panes container.
+     */
+    readonly bottomInset = signal<number>(0);
 
     public readonly viewport = toSignal(
         fromEvent(window, 'resize').pipe(
@@ -164,5 +175,34 @@ export class LayoutService {
         this.mainPaneSub = undefined;
 
         this.mainScrollTop.set(0);
+    }
+
+    public registerPanesContainer(element: HTMLElement): void {
+        this.unregisterPanesContainer();
+
+        const update = () => {
+            const rect = element.getBoundingClientRect();
+            this.bottomInset.set(Math.max(0, Math.round(window.innerHeight - rect.bottom)));
+        };
+
+        update();
+
+        this.panesContainerResizeObserver = new ResizeObserver(update);
+        this.panesContainerResizeObserver.observe(element);
+
+        this.panesContainerResizeListener = update;
+        window.addEventListener('resize', update, { passive: true });
+    }
+
+    public unregisterPanesContainer(): void {
+        this.panesContainerResizeObserver?.disconnect();
+        this.panesContainerResizeObserver = undefined;
+
+        if (this.panesContainerResizeListener) {
+            window.removeEventListener('resize', this.panesContainerResizeListener);
+            this.panesContainerResizeListener = undefined;
+        }
+
+        this.bottomInset.set(0);
     }
 }

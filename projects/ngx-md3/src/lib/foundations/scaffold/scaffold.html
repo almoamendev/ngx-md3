@@ -1,7 +1,7 @@
 <ng-content select="[md3-scaffold-bar=top]"></ng-content>
 <ng-content select="[md3-scaffold-rail=leading]"></ng-content>
 
-<div class="md3-panes-container">
+<div class="md3-panes-container" #panesContainer>
     <div class="md3-pane md3-pane-start">
         <ng-content select="[md3-scaffold-pane=start]"></ng-content>
         <ng-template #startOutlet cdkPortalOutlet></ng-template>

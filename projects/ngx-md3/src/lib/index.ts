@@ -22,6 +22,7 @@ export * from './types/list-leading-size.type';
 export * from './interfaces/dialog-config.interface';
 export * from './interfaces/menu-config.interface';
 export * from './interfaces/side-sheet-config.interface';
+export * from './interfaces/snackbar-config.interface';
 
 // typography
 export * from './styles/typography/type-display';
@@ -115,3 +116,8 @@ export * from './components/sheets/sheets.service';
 export * from './components/sheets/side-sheet-header/side-sheet-header';
 export * from './components/sheets/side-sheet-body/side-sheet-body';
 export * from './components/sheets/side-sheet-actions/side-sheet-actions';
+
+// snackbar
+export * from './components/snackbar/snackbar';
+export * from './components/snackbar/snackbar-ref';
+export * from './components/snackbar/snackbar.service';

@@ -1,6 +1,7 @@
 import { CdkPortalOutlet } from '@angular/cdk/portal';
-import { AfterViewInit, Component, inject, OnDestroy, viewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, inject, OnDestroy, viewChild } from '@angular/core';
 import { SheetsService } from '../../components/sheets/sheets.service';
+import { LayoutService } from '../layout.service';
 
 @Component({
     selector: 'md3-scaffold',
@@ -13,11 +14,14 @@ import { SheetsService } from '../../components/sheets/sheets.service';
 export class Scaffold implements AfterViewInit, OnDestroy {
     private startOutlet = viewChild('startOutlet', { read: CdkPortalOutlet });
     private endOutlet = viewChild('endOutlet', { read: CdkPortalOutlet });
+    private panesContainer = viewChild<ElementRef<HTMLElement>>('panesContainer');
     private sheets = inject(SheetsService);
+    private layout = inject(LayoutService);
 
     ngAfterViewInit(): void {
         const startOutlet = this.startOutlet();
         const endOutlet = this.endOutlet();
+        const panesContainer = this.panesContainer();
 
         if (startOutlet) {
             this.sheets.registerSideSheetOutlet('start', startOutlet);
@@ -25,6 +29,10 @@ export class Scaffold implements AfterViewInit, OnDestroy {
 
         if (endOutlet) {
             this.sheets.registerSideSheetOutlet('end', endOutlet);
+        }
+
+        if (panesContainer) {
+            this.layout.registerPanesContainer(panesContainer.nativeElement);
         }
     }
 
@@ -39,5 +47,7 @@ export class Scaffold implements AfterViewInit, OnDestroy {
         if (endOutlet) {
             this.sheets.unregisterSideSheetOutlet('end', endOutlet);
         }
+
+        this.layout.unregisterPanesContainer();
     }
 }

@@ -1,0 +1,69 @@
+<md3-side-sheet-header title="Configurations">
+    <button type="button" md3-icon-button trailing button-type="standard" (click)="close()">
+        <md3-icon md3-icon-element>close</md3-icon>
+    </button>
+</md3-side-sheet-header>
+<md3-side-sheet-body class="md3-component-config">
+    <div class="controls-list">
+        <label md3-state-component tabindex="0">
+            <div md3-type-label size="large">Show close icon</div>
+            <md3-switch disable-state-layer [control]="showCloseIcon">
+                <input type="checkbox" md3-input-element name="show-close-icon">
+            </md3-switch>
+        </label>
+        <label md3-state-component tabindex="0">
+            <div md3-type-label size="large">Replace current</div>
+            <md3-switch disable-state-layer [control]="replaceCurrent">
+                <input type="checkbox" md3-input-element name="replace-current">
+            </md3-switch>
+        </label>
+    </div>
+
+    <div md3-type-body size="large">Duration</div>
+    <div class="controls-list">
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="duration">
+                <input type="radio" md3-input-element name="snackbar-duration" value="4000">
+            </md3-radio-button>
+            <div md3-type-label size="large">4 seconds</div>
+        </label>
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="duration">
+                <input type="radio" md3-input-element name="snackbar-duration" value="0">
+            </md3-radio-button>
+            <div md3-type-label size="large">Until dismissed</div>
+        </label>
+    </div>
+
+    <div md3-type-body size="large">Politeness</div>
+    <div class="controls-list">
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="politeness">
+                <input type="radio" md3-input-element name="snackbar-politeness" value="polite">
+            </md3-radio-button>
+            <div md3-type-label size="large">Polite</div>
+        </label>
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="politeness">
+                <input type="radio" md3-input-element name="snackbar-politeness" value="assertive">
+            </md3-radio-button>
+            <div md3-type-label size="large">Assertive</div>
+        </label>
+    </div>
+
+    <div md3-type-body size="large">Direction</div>
+    <div class="controls-list">
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="direction">
+                <input type="radio" md3-input-element name="snackbar-dir" value="ltr">
+            </md3-radio-button>
+            <div md3-type-label size="large">LTR</div>
+        </label>
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="direction">
+                <input type="radio" md3-input-element name="snackbar-dir" value="rtl">
+            </md3-radio-button>
+            <div md3-type-label size="large">RTL</div>
+        </label>
+    </div>
+</md3-side-sheet-body>

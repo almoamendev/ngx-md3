@@ -1,0 +1,37 @@
+import { Component } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { IconButton, IconElement, MaterialIcon, RadioButton, SideSheetBody, SideSheetHeader, SideSheetRef, StateComponent, Switch, TypeBody, TypeLabel } from '@vip9008/ngx-md3';
+
+@Component({
+    selector: 'app-snackbar-config',
+    imports: [
+        SideSheetHeader,
+        SideSheetBody,
+        IconButton,
+        MaterialIcon,
+        IconElement,
+        Switch,
+        RadioButton,
+        StateComponent,
+        TypeBody,
+        TypeLabel,
+    ],
+    templateUrl: './snackbar-config.html',
+    styleUrl: './snackbar-config.scss',
+})
+export class SnackbarConfig {
+    public showCloseIcon: FormControl = new FormControl<boolean>(false);
+    public replaceCurrent: FormControl = new FormControl<boolean>(false);
+    public duration: FormControl = new FormControl<string>('4000');
+    public politeness: FormControl = new FormControl<'polite' | 'assertive'>('polite');
+    public direction: FormControl = new FormControl<'ltr' | 'rtl'>('ltr');
+
+    constructor(
+        private sideSheetRef: SideSheetRef<SnackbarConfig>
+    ) {
+    }
+
+    public close(): void {
+        this.sideSheetRef.close();
+    }
+}

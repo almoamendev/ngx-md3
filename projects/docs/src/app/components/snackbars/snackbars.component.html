@@ -1,0 +1,141 @@
+<h1>Snackbars</h1>
+
+<p>
+    Snackbars show brief, transient messages at the bottom of the screen. Only one snackbar is shown
+    at a time — additional calls made while one is visible wait their turn in a queue.
+</p>
+
+<p md3-type-body size="small">
+    A snackbar is made up of a container, a supporting text message, and either a single text action
+    or a single close icon — never both, since that combination isn't part of the Material Design 3
+    snackbar. It never traps focus and never closes on Escape or a backdrop click, since it isn't modal.
+</p>
+
+<app-playground hide-direction hide-theme>
+    <button action-item md3-icon-button button-type="tonal" button-squared [selected]="configOpen()"
+        (click)="openConfig()">
+        <md3-icon md3-icon-element>settings</md3-icon>
+    </button>
+
+    <button type="button" md3-button (click)="showBasicSnackbar()">Show snackbar</button>
+    <button type="button" md3-button (click)="showActionSnackbar()">Show with action</button>
+    <button type="button" md3-button (click)="showProgressSnackbar()">Show progress</button>
+    <button type="button" md3-button button-type="outlined" (click)="dismissAll()">Dismiss all</button>
+</app-playground>
+
+<!-- Declared here so it can read this component's own progressPercent signal directly. -->
+<ng-template #progressTpl>
+    Uploading… {{ progressPercent() }}%
+    <md3-linear-progress-indicator [progress]="progressPercent()"></md3-linear-progress-indicator>
+</ng-template>
+
+<h2>API</h2>
+
+<div class="table-container md3-scrollable">
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 50%;">Name</th>
+                <th>Type</th>
+                <th>Default</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td colspan="3">
+                    <h3>interface SnackbarConfig&lt;D = unknown&gt;</h3>
+                    <md3-divider></md3-divider>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <i>data?</i>
+                    <p md3-type-body size="small">Context made available to the message when it's a TemplateRef, via NgTemplateOutlet's context. Ignored for plain string messages.</p>
+                </td>
+                <td>D = unknown</td>
+                <td style="white-space: nowrap;">undefined</td>
+            </tr>
+            <tr>
+                <td>
+                    showCloseIcon?
+                    <p md3-type-body size="small">Shows a close icon instead of a text action. Passing both an actionLabel and showCloseIcon: true throws.</p>
+                </td>
+                <td>boolean</td>
+                <td style="white-space: nowrap;">false</td>
+            </tr>
+            <tr>
+                <td>
+                    duration?
+                    <p md3-type-body size="small">Auto-dismiss delay in milliseconds. Pass 0 to disable auto-dismiss.</p>
+                </td>
+                <td>number</td>
+                <td style="white-space: nowrap;">4000</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>politeness?</i>
+                    <p md3-type-body size="small">aria-live politeness and implicit role.</p>
+                </td>
+                <td>
+                    SnackbarPoliteness
+                    <p md3-type-body size="small">polite, assertive</p>
+                </td>
+                <td style="white-space: nowrap;">polite</td>
+            </tr>
+            <tr>
+                <td>
+                    replaceCurrent?
+                    <p md3-type-body size="small">Immediately dismisses whatever is showing and jumps this one to the front of the queue.</p>
+                </td>
+                <td>boolean</td>
+                <td style="white-space: nowrap;">false</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>ariaLabel?</i>
+                    <p md3-type-body size="small">Snackbar html aria-label attribute.</p>
+                </td>
+                <td>string</td>
+                <td style="white-space: nowrap;">null</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>direction?</i>
+                    <p md3-type-body size="small">Snackbar direction.</p>
+                </td>
+                <td>
+                    string?
+                    <p md3-type-body size="small">null, ltr, rtl</p>
+                </td>
+                <td style="white-space: nowrap;">null</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>viewContainerRef?</i>
+                    <p md3-type-body size="small">Optional Angular context for the message TemplateRef.</p>
+                </td>
+                <td>ViewContainerRef</td>
+                <td style="white-space: nowrap;">ViewContainerRef</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>injector?</i>
+                    <p md3-type-body size="small">Optional Angular injector used when creating the snackbar.</p>
+                </td>
+                <td>Injector</td>
+                <td style="white-space: nowrap;">Injector</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<app-shiki [code]="apiImport"></app-shiki>
+<app-shiki [code]="apiData"></app-shiki>
+<app-shiki [code]="apiTypes"></app-shiki>
+<app-shiki [code]="apiUsage" language="html"></app-shiki>
+<ul>
+    <li>Only one snackbar is ever visible. <code>SnackbarService.open()</code> queues additional calls (FIFO) unless <code>replaceCurrent</code> is set, which jumps the queue and dismisses whatever's currently showing.</li>
+    <li>The message can be a plain string, or a <code>TemplateRef</code> for content that needs to keep re-rendering — like the progress example above, which reads this page's own signal directly. The surface, action button, close icon, positioning, and animation are always owned by the snackbar shell; there's no arbitrary custom-component API, since that's how a snackbar stops being a snackbar per Material Design 3.</li>
+    <li>The auto-dismiss timer pauses automatically on hover/focus and resumes when the pointer or focus leaves.</li>
+    <li>Snackbars render full-width at the bottom of the viewport, but never lower than the scaffold's main content area — they sit above a bottom navigation bar automatically when one is present.</li>
+</ul>

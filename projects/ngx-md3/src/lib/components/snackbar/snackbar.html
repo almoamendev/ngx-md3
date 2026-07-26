@@ -1,0 +1,40 @@
+<div
+    class="md3-snackbar-container"
+    [class.md3-active]="isActive()"
+    [attr.dir]="config.direction ?? null"
+    [attr.role]="role"
+    [attr.aria-live]="config.politeness ?? 'polite'"
+    [attr.aria-label]="config.ariaLabel || null">
+    <div class="md3-snackbar-message">
+        @if (isTemplateMessage) {
+            <ng-container *ngTemplateOutlet="templateMessage; context: templateContext"></ng-container>
+        } @else {
+            {{ textMessage }}
+        }
+    </div>
+
+    @if (actionLabel) {
+        <button
+            md3-button
+            button-type="text"
+            button-size="small"
+            class="md3-snackbar-action"
+            type="button"
+            (click)="onActionClick()">
+            {{ actionLabel }}
+        </button>
+    }
+
+    @if (config.showCloseIcon) {
+        <button
+            md3-icon-button
+            button-type="standard"
+            button-size="small"
+            class="md3-snackbar-close"
+            type="button"
+            aria-label="Dismiss"
+            (click)="onCloseClick()">
+            <md3-icon>close</md3-icon>
+        </button>
+    }
+</div>
