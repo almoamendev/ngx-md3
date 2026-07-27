@@ -48,27 +48,27 @@
             opacity: 1;
             transform: translateY(0);
         }
-    }
-
-    .md3-snackbar-message {
-        flex: 1 1 auto;
-        padding: 0.875em 1em;
-        min-width: 0;
-    }
-
-    ::ng-deep {
-        button.md3-snackbar-action {
-            --foreground-color: rgb(var(--md-scheme-inverse-primary)) !important;
-            --state-color: var(--md-scheme-inverse-primary) !important;
-            flex: 0 0 auto;
-            margin-inline-end: 0.5em;
+    
+        .md3-snackbar-message {
+            flex: 1 1 auto;
+            padding: 0.875em 1em;
+            min-width: 0;
         }
-
-        button.md3-snackbar-close {
-            --foreground-color: rgb(var(--md-scheme-inverse-on-surface)) !important;
-            --state-color: var(--md-scheme-inverse-on-surface) !important;
-            flex: 0 0 auto;
-            margin-inline-end: 0.25em;
+    
+        ::ng-deep {
+            button.md3-snackbar-action {
+                --foreground-color: rgb(var(--md-scheme-inverse-primary)) !important;
+                --state-color: var(--md-scheme-inverse-primary) !important;
+                flex: 0 0 auto;
+                margin-inline-end: 0.5em;
+            }
+    
+            button.md3-snackbar-close {
+                --foreground-color: rgb(var(--md-scheme-inverse-on-surface)) !important;
+                --state-color: var(--md-scheme-inverse-on-surface) !important;
+                flex: 0 0 auto;
+                margin-inline-end: 0.25em;
+            }
         }
     }
 }
