@@ -9,7 +9,7 @@
         @if (isTemplateMessage) {
             <ng-container *ngTemplateOutlet="templateMessage; context: templateContext"></ng-container>
         } @else {
-            <md3-type-label size="large">{{ textMessage }}</md3-type-label>
+            <md3-type-body size="medium">{{ textMessage }}</md3-type-body>
         }
     </div>
 
