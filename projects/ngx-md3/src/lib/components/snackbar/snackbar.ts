@@ -6,14 +6,17 @@ import { MaterialIcon } from '../common/material-icon/material-icon';
 import { LayoutService } from '../../foundations/layout.service';
 import { SnackbarConfig } from '../../interfaces/snackbar-config.interface';
 import { SNACKBAR_ACTION_LABEL, SNACKBAR_CONFIG, SNACKBAR_MESSAGE, SnackbarRef } from './snackbar-ref';
+import { IconElement, TypeLabel } from '../../../public-api';
 
 @Component({
     selector: 'md3-snackbar',
     imports: [
         NgTemplateOutlet,
+        TypeLabel,
         Button,
         IconButton,
         MaterialIcon,
+        IconElement,
     ],
     templateUrl: './snackbar.html',
     styleUrl: './snackbar.scss',

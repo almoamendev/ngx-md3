@@ -10,8 +10,9 @@
         inset: auto 0 0 0;
         display: flex;
         justify-content: center;
+        align-self: end;
         pointer-events: none;
-        padding: 1rem;
+        padding: 1em;
 
         &.md3-snackbar-closing {
             pointer-events: none;
@@ -22,8 +23,8 @@
 :host {
     display: block;
     width: 100%;
-    max-width: 42rem; // ~672px, MD3 max snackbar width
-    min-width: 21.5rem; // ~344px, MD3 min snackbar width
+    max-width: 42em; // ~672px, MD3 max snackbar width
+    min-width: 21.5em; // ~344px, MD3 min snackbar width
     pointer-events: auto;
     margin-bottom: var(--md3-snackbar-bottom-inset, 0px);
     transition: margin-bottom var(--md-motion-expressive-default-spatial-duration) var(--md-motion-expressive-default-spatial-easing);
@@ -31,16 +32,16 @@
     .md3-snackbar-container {
         display: flex;
         align-items: center;
-        gap: 0.5rem;
         width: 100%;
+        min-height: 3em;
         box-sizing: border-box;
-        padding: 0.875rem 1rem;
+        padding: 0;
         border-radius: var(--md-border-radius-small);
         background-color: rgb(var(--md-scheme-inverse-surface));
         color: rgb(var(--md-scheme-inverse-on-surface));
         box-shadow: var(--md-shadow-3dp);
         opacity: 0;
-        transform: translateY(0.5rem);
+        transform: translateY(0.5em);
         transition: all var(--md-motion-expressive-default-spatial-duration) var(--md-motion-expressive-default-spatial-easing);
 
         &.md3-active {
@@ -51,6 +52,7 @@
 
     .md3-snackbar-message {
         flex: 1 1 auto;
+        padding: 0.875em 1em;
         min-width: 0;
     }
 
@@ -59,12 +61,14 @@
             --foreground-color: rgb(var(--md-scheme-inverse-primary)) !important;
             --state-color: var(--md-scheme-inverse-primary) !important;
             flex: 0 0 auto;
+            margin-inline-end: 0.5em;
         }
 
         button.md3-snackbar-close {
             --foreground-color: rgb(var(--md-scheme-inverse-on-surface)) !important;
             --state-color: var(--md-scheme-inverse-on-surface) !important;
             flex: 0 0 auto;
+            margin-inline-end: 0.25em;
         }
     }
 }

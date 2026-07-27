@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { IconButton, IconElement, MaterialIcon, RadioButton, SideSheetBody, SideSheetHeader, SideSheetRef, StateComponent, Switch, TypeBody, TypeLabel } from '@vip9008/ngx-md3';
+import { IconButton, IconElement, InputElement, MaterialIcon, RadioButton, SideSheetBody, SideSheetHeader, SideSheetRef, StateComponent, Switch, TypeBody, TypeLabel } from '@vip9008/ngx-md3';
 
 @Component({
     selector: 'app-snackbar-config',
@@ -12,6 +12,7 @@ import { IconButton, IconElement, MaterialIcon, RadioButton, SideSheetBody, Side
         IconElement,
         Switch,
         RadioButton,
+        InputElement,
         StateComponent,
         TypeBody,
         TypeLabel,

@@ -5,11 +5,16 @@
     at a time — additional calls made while one is visible wait their turn in a queue.
 </p>
 
-<p md3-type-body size="small">
-    A snackbar is made up of a container, a supporting text message, and either a single text action
-    or a single close icon — never both, since that combination isn't part of the Material Design 3
-    snackbar. It never traps focus and never closes on Escape or a backdrop click, since it isn't modal.
-</p>
+<figure class="component-image">
+    <img src="/img/md3-snackbar.png" alt="Material Design snackbar" />
+    <ol>
+        <li>Single line</li>
+        <li>Single line with action</li>
+        <li>Two lines</li>
+        <li>Two lines with action</li>
+        <li>Two lines with longer action</li>
+    </ol>
+</figure>
 
 <app-playground hide-direction hide-theme>
     <button action-item md3-icon-button button-type="tonal" button-squared [selected]="configOpen()"
