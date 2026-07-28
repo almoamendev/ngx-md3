@@ -40,6 +40,7 @@ export interface SnackbarConfig<D = unknown> {
     replaceCurrent?: boolean;
 
     ariaLabel?: string;
+    scheme?: 'inherit' | 'dark' | 'light';
     direction?: null | 'ltr' | 'rtl';
     position?: 'start' | 'center' | 'end';
 

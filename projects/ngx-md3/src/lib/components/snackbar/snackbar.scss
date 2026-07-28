@@ -73,6 +73,11 @@
             flex: 1 1 auto;
             padding: 0.875em 1em;
             min-width: 0;
+
+            .md3-text-body {
+                max-height: 2.857143em;
+                overflow: hidden;
+            }
         }
     
         ::ng-deep {

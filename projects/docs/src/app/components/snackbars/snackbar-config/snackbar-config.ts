@@ -25,6 +25,7 @@ export class SnackbarConfig {
     public replaceCurrent: FormControl = new FormControl<boolean>(false);
     public duration: FormControl = new FormControl<string>('4000');
     public politeness: FormControl = new FormControl<'polite' | 'assertive'>('polite');
+    public scheme: FormControl = new FormControl<'inherit' | 'light' | 'dark'>('inherit');
     public direction: FormControl = new FormControl<'ltr' | 'rtl'>('ltr');
     public position: FormControl = new FormControl<'start' | 'center' | 'end'>('start');
 

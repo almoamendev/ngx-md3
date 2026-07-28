@@ -28,6 +28,7 @@ export class SnackbarsComponent implements OnDestroy {
     public replaceCurrent = signal<boolean>(false);
     public duration = signal<number>(4000);
     public politeness = signal<'polite' | 'assertive'>('polite');
+    public scheme = signal<'inherit' | 'light' | 'dark'>('inherit');
     public direction = signal<'ltr' | 'rtl'>('ltr');
     public position = signal<'start' | 'center' | 'end'>('start');
 
@@ -111,10 +112,22 @@ interface SnackbarConfig<D = unknown> {
     ariaLabel?: string;
 
     /**
+     * Snackbar color scheme.
+     * @default inherit
+     */
+    scheme?: 'inherit' | 'dark' | 'light';
+
+    /**
      * Snackbar direction. when null the direction will depend on the page direction.
      * @default null
      */
     direction?: null | 'ltr' | 'rtl';
+
+    /**
+     * Snackbar horizontal placement.
+     * @default start
+     */
+    position?: 'start' | 'center' | 'end';
 
     /**
      * Optional Angular context for the message TemplateRef.
@@ -165,6 +178,7 @@ class SnackbarRef<R = unknown> {
             replaceCurrent: this.replaceCurrent(),
             duration: this.duration(),
             politeness: this.politeness(),
+            scheme: this.scheme(),
             direction: this.direction(),
             position: this.position(),
         });
@@ -175,6 +189,7 @@ class SnackbarRef<R = unknown> {
             replaceCurrent: this.replaceCurrent(),
             duration: this.duration(),
             politeness: this.politeness(),
+            scheme: this.scheme(),
             direction: this.direction(),
             position: this.position(),
         });
@@ -196,6 +211,7 @@ class SnackbarRef<R = unknown> {
 
         this.progressRef = this.snackbarService.open(template, undefined, {
             replaceCurrent: this.replaceCurrent(),
+            scheme: this.scheme(),
             direction: this.direction(),
             position: this.position(),
             duration: 0,
@@ -271,6 +287,11 @@ class SnackbarRef<R = unknown> {
         this.configSheet?.componentInstance?.politeness.setValue(this.politeness());
         this.configSheet?.componentInstance?.politeness.registerOnChange(() => {
             this.politeness.set(this.configSheet?.componentInstance?.politeness.value);
+        });
+
+        this.configSheet?.componentInstance?.scheme.setValue(this.scheme());
+        this.configSheet?.componentInstance?.scheme.registerOnChange(() => {
+            this.scheme.set(this.configSheet?.componentInstance?.scheme.value);
         });
 
         this.configSheet?.componentInstance?.direction.setValue(this.direction());

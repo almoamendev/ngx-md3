@@ -1,4 +1,4 @@
-import { NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet, NgClass } from '@angular/common';
 import { Component, ElementRef, HostListener, OnDestroy, OnInit, TemplateRef, effect, inject, signal } from '@angular/core';
 import { Button } from '../buttons/button/button';
 import { IconButton } from '../buttons/icon-button/icon-button';
@@ -11,6 +11,7 @@ import { IconElement, TypeBody } from '../../../public-api';
 @Component({
     selector: 'md3-snackbar',
     imports: [
+        NgClass,
         NgTemplateOutlet,
         TypeBody,
         Button,

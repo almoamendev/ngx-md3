@@ -13,6 +13,7 @@ interface ResolvedSnackbarConfig extends SnackbarConfig {
     politeness: SnackbarPoliteness;
     replaceCurrent: boolean;
     ariaLabel: string;
+    scheme: 'inherit' | 'dark' | 'light';
     direction: null | 'ltr' | 'rtl';
     position: 'start' | 'center' | 'end';
     injector: Injector;
@@ -139,6 +140,7 @@ export class SnackbarService {
             politeness: config.politeness ?? 'polite',
             replaceCurrent: config.replaceCurrent ?? false,
             ariaLabel: config.ariaLabel ?? '',
+            scheme: config.scheme ?? 'inherit',
             direction: config.direction ?? null,
             position: config.position ?? 'start',
             viewContainerRef: config.viewContainerRef,

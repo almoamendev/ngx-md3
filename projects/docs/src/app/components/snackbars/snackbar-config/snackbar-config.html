@@ -51,6 +51,28 @@
         </label>
     </div>
 
+    <div md3-type-body size="large">Color mode</div>
+    <div class="controls-list">
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="scheme">
+                <input type="radio" md3-input-element name="snackbar-scheme" value="inherit">
+            </md3-radio-button>
+            <div md3-type-label size="large">Inherit</div>
+        </label>
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="scheme">
+                <input type="radio" md3-input-element name="snackbar-scheme" value="light">
+            </md3-radio-button>
+            <div md3-type-label size="large">Light</div>
+        </label>
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="scheme">
+                <input type="radio" md3-input-element name="snackbar-scheme" value="dark">
+            </md3-radio-button>
+            <div md3-type-label size="large">Dark</div>
+        </label>
+    </div>
+
     <div md3-type-body size="large">Position</div>
     <div class="controls-list">
         <label md3-state-component tabindex="0">

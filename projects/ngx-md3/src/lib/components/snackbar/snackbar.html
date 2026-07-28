@@ -1,6 +1,10 @@
 <div
     class="md3-snackbar-container"
     [class.md3-active]="isActive()"
+    [ngClass]="{
+        'md-scheme-light': config.scheme == 'dark',
+        'md-scheme-dark': config.scheme == 'light',
+    }"
     [attr.dir]="config.direction ?? null"
     [attr.role]="role"
     [attr.aria-live]="config.politeness ?? 'polite'"
@@ -9,7 +13,7 @@
         @if (isTemplateMessage) {
             <ng-container *ngTemplateOutlet="templateMessage; context: templateContext"></ng-container>
         } @else {
-            <md3-type-body size="medium">{{ textMessage }}</md3-type-body>
+            <div md3-type-body size="medium">{{ textMessage }}</div>
         }
     </div>
 
