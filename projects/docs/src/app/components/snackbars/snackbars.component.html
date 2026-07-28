@@ -24,6 +24,7 @@
 
     <button type="button" md3-button (click)="showBasicSnackbar()">Show snackbar</button>
     <button type="button" md3-button (click)="showActionSnackbar()">Show with action</button>
+    <button type="button" md3-button (click)="showLongActionSnackbar()">Show with long action</button>
     <button type="button" md3-button (click)="showProgressSnackbar()">Show progress</button>
     <button type="button" md3-button button-type="outlined" (click)="dismissAll()">Dismiss all</button>
 </app-playground>
@@ -64,6 +65,14 @@
                 <td>
                     showCloseIcon?
                     <p md3-type-body size="small">Shows a close icon instead of a text action. Passing both an actionLabel and showCloseIcon: true throws.</p>
+                </td>
+                <td>boolean</td>
+                <td style="white-space: nowrap;">false</td>
+            </tr>
+            <tr>
+                <td>
+                    stackedAction?
+                    <p md3-type-body size="small">Stacks the action below the message on its own line, aligned to the inline-end, instead of sharing a row with the message. Use when the action label is too long to fit beside the message. No effect without an actionLabel.</p>
                 </td>
                 <td>boolean</td>
                 <td style="white-space: nowrap;">false</td>
@@ -164,5 +173,6 @@
     <li>Only one snackbar is ever visible. <code>SnackbarService.open()</code> queues additional calls (FIFO) unless <code>replaceCurrent</code> is set, which jumps the queue and dismisses whatever's currently showing.</li>
     <li>The message can be a plain string, or a <code>TemplateRef</code> for content that needs to keep re-rendering — like the progress example above, which reads this page's own signal directly. The surface, action button, close icon, positioning, and animation are always owned by the snackbar shell; there's no arbitrary custom-component API, since that's how a snackbar stops being a snackbar per Material Design 3.</li>
     <li>The auto-dismiss timer pauses automatically on hover/focus and resumes when the pointer or focus leaves.</li>
+    <li>Set <code>stackedAction: true</code> when the action label is too long to sit comfortably next to the message on one row. The action drops to its own line below the message, aligned to the inline-end — Material Design 3's "long action" layout. It's ignored when there's no <code>actionLabel</code>.</li>
     <li>Snackbars render full-width at the bottom of the viewport, but never lower than the scaffold's main content area — they sit above a bottom navigation bar automatically when one is present.</li>
 </ul>

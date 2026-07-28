@@ -22,6 +22,7 @@ import { IconButton, IconElement, InputElement, MaterialIcon, RadioButton, SideS
 })
 export class SnackbarConfig {
     public showCloseIcon: FormControl = new FormControl<boolean>(false);
+    public stackedAction: FormControl = new FormControl<boolean>(false);
     public replaceCurrent: FormControl = new FormControl<boolean>(false);
     public duration: FormControl = new FormControl<string>('4000');
     public politeness: FormControl = new FormControl<'polite' | 'assertive'>('polite');

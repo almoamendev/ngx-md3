@@ -25,6 +25,7 @@ export class SnackbarsComponent implements OnDestroy {
     public configOpen = signal(false);
 
     public showCloseIcon = signal<boolean>(false);
+    public stackedAction = signal<boolean>(false);
     public replaceCurrent = signal<boolean>(false);
     public duration = signal<number>(4000);
     public politeness = signal<'polite' | 'assertive'>('polite');
@@ -58,6 +59,12 @@ ref.onAction().subscribe(() => {
     // e.g. undo the archive
 });
 
+// when the action label is too long to share a row with the message,
+// stack it below the message instead, aligned to the inline-end
+snackbarService.open('Your item was moved to a folder you no longer have access to', 'Request access', <SnackbarConfig>{
+    stackedAction: true,
+});
+
 // after dismissed (by timeout, action, or manual close), with the reason
 ref.afterDismissed().subscribe(({ reason, result }) => {
     // reason: 'timeout' | 'action' | 'manual'
@@ -86,6 +93,15 @@ interface SnackbarConfig<D = unknown> {
      * @default false
      */
     showCloseIcon?: boolean;
+
+    /**
+     * Stacks the action below the message on its own line, aligned to the
+     * inline-end, instead of sharing a row with the message. Use this when
+     * the action label is too long to comfortably fit beside the message.
+     * Has no effect when there's no actionLabel.
+     * @default false
+     */
+    stackedAction?: boolean;
 
     /**
      * Auto-dismiss delay in milliseconds. Pass 0 to disable auto-dismiss —
@@ -186,6 +202,7 @@ class SnackbarRef<R = unknown> {
 
     public showActionSnackbar(): void {
         const ref = this.snackbarService.open('Conversation archived', 'Undo', {
+            stackedAction: this.stackedAction(),
             replaceCurrent: this.replaceCurrent(),
             duration: this.duration(),
             politeness: this.politeness(),
@@ -196,6 +213,26 @@ class SnackbarRef<R = unknown> {
 
         ref.onAction().subscribe(() => {
             // handle undo here
+        });
+    }
+
+    public showLongActionSnackbar(): void {
+        const ref = this.snackbarService.open(
+            'Your dont\'t have access to the current folder',
+            'Request access',
+            {
+                stackedAction: true,
+                replaceCurrent: this.replaceCurrent(),
+                duration: this.duration(),
+                politeness: this.politeness(),
+                scheme: this.scheme(),
+                direction: this.direction(),
+                position: this.position(),
+            },
+        );
+
+        ref.onAction().subscribe(() => {
+            // handle request-access here
         });
     }
 
@@ -272,6 +309,11 @@ class SnackbarRef<R = unknown> {
         this.configSheet?.componentInstance?.showCloseIcon.setValue(this.showCloseIcon());
         this.configSheet?.componentInstance?.showCloseIcon.registerOnChange(() => {
             this.showCloseIcon.set(this.configSheet?.componentInstance?.showCloseIcon.value);
+        });
+
+        this.configSheet?.componentInstance?.stackedAction.setValue(this.stackedAction());
+        this.configSheet?.componentInstance?.stackedAction.registerOnChange(() => {
+            this.stackedAction.set(this.configSheet?.componentInstance?.stackedAction.value);
         });
 
         this.configSheet?.componentInstance?.replaceCurrent.setValue(this.replaceCurrent());

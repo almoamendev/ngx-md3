@@ -18,6 +18,15 @@ export interface SnackbarConfig<D = unknown> {
     showCloseIcon?: boolean;
 
     /**
+     * Stacks the action below the message on its own line, aligned to the
+     * inline-end, instead of placing it beside the message on one row. Use
+     * this when the action label is too long to comfortably share a line
+     * with the message — Material Design 3's "long action" snackbar layout.
+     * Has no effect when there's no actionLabel.
+     */
+    stackedAction?: boolean;
+
+    /**
      * Auto-dismiss delay in milliseconds. Defaults to 4000. Pass 0 to disable
      * auto-dismiss entirely — the snackbar then stays open until the action,
      * the close icon, SnackbarRef.close(), or SnackbarService.dismiss() is

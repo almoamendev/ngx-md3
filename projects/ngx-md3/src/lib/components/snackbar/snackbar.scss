@@ -68,7 +68,7 @@
             opacity: 1;
             transform: translateY(0);
         }
-    
+
         .md3-snackbar-message {
             flex: 1 1 auto;
             padding: 0.875em 1em;
@@ -79,7 +79,7 @@
                 overflow: hidden;
             }
         }
-    
+
         ::ng-deep {
             button.md3-snackbar-action {
                 --foreground-color: rgb(var(--md-scheme-inverse-primary)) !important;
@@ -87,12 +87,30 @@
                 flex: 0 0 auto;
                 margin-inline-end: 0.5em;
             }
-    
+
             button.md3-snackbar-close {
                 --foreground-color: rgb(var(--md-scheme-inverse-on-surface)) !important;
                 --state-color: var(--md-scheme-inverse-on-surface) !important;
                 flex: 0 0 auto;
                 margin-inline-end: 0.25em;
+            }
+        }
+
+        // "Long action" layout: message on its own row, action dropped below
+        // it on a second row and pushed to the inline-end instead of sharing
+        // a row with the message.
+        &.md3-snackbar-stacked {
+            flex-direction: column;
+            align-items: stretch;
+            min-height: 0;
+
+            .md3-snackbar-message {
+                padding-bottom: 0.5em;
+            }
+
+            ::ng-deep button.md3-snackbar-action {
+                align-self: flex-end;
+                margin: 0 0.5em 0.5em;
             }
         }
     }

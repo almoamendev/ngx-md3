@@ -9,6 +9,7 @@ const DEFAULT_DURATION_MS = 4000;
 
 interface ResolvedSnackbarConfig extends SnackbarConfig {
     showCloseIcon: boolean;
+    stackedAction: boolean;
     duration: number;
     politeness: SnackbarPoliteness;
     replaceCurrent: boolean;
@@ -136,6 +137,7 @@ export class SnackbarService {
         return {
             data: config.data,
             showCloseIcon: config.showCloseIcon ?? false,
+            stackedAction: config.stackedAction ?? false,
             duration: config.duration ?? DEFAULT_DURATION_MS,
             politeness: config.politeness ?? 'polite',
             replaceCurrent: config.replaceCurrent ?? false,

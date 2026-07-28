@@ -1,6 +1,7 @@
 <div
     class="md3-snackbar-container"
     [class.md3-active]="isActive()"
+    [class.md3-snackbar-stacked]="isStacked"
     [ngClass]="{
         'md-scheme-light': config.scheme == 'dark',
         'md-scheme-dark': config.scheme == 'light',

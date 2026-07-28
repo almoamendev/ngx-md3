@@ -52,6 +52,10 @@ export class Snackbar implements OnInit, OnDestroy {
         return this.config.data ?? null;
     }
 
+    protected get isStacked(): boolean {
+        return !!this.config.stackedAction && !!this.actionLabel;
+    }
+
     constructor(private readonly el: ElementRef<HTMLElement>) {
         effect(() => {
             this.el.nativeElement.style.setProperty('--md3-snackbar-bottom-inset', `${this.layout.bottomInset()}px`);
