@@ -9,10 +9,30 @@
         position: absolute;
         inset: auto 0 0 0;
         display: flex;
-        justify-content: center;
         align-self: end;
         pointer-events: none;
         padding: 1em;
+        width: 100%;
+
+        &.md3-position-start {
+            justify-content: start;
+        }
+
+        &.md3-position-center {
+            justify-content: center;
+        }
+
+        &.md3-position-end {
+            justify-content: end;
+        }
+
+        &.md3-direction-ltr {
+            direction: ltr;
+        }
+
+        &.md3-direction-rtl {
+            direction: rtl;
+        }
 
         &.md3-snackbar-closing {
             pointer-events: none;
@@ -22,7 +42,7 @@
 
 :host {
     display: block;
-    width: 100%;
+    width: auto;
     max-width: 42em; // ~672px, MD3 max snackbar width
     min-width: 21.5em; // ~344px, MD3 min snackbar width
     pointer-events: auto;

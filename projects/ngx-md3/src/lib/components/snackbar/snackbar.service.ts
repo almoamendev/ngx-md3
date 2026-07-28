@@ -14,6 +14,7 @@ interface ResolvedSnackbarConfig extends SnackbarConfig {
     replaceCurrent: boolean;
     ariaLabel: string;
     direction: null | 'ltr' | 'rtl';
+    position: 'start' | 'center' | 'end';
     injector: Injector;
 }
 
@@ -100,7 +101,7 @@ export class SnackbarService {
     private show(queued: QueuedSnackbar): void {
         this.active = queued;
 
-        const overlayRef = this.createOverlay();
+        const overlayRef = this.createOverlay(queued.config);
         queued.ref.attachOverlay(overlayRef);
 
         const injector = this.createInjector(queued);
@@ -139,15 +140,21 @@ export class SnackbarService {
             replaceCurrent: config.replaceCurrent ?? false,
             ariaLabel: config.ariaLabel ?? '',
             direction: config.direction ?? null,
+            position: config.position ?? 'start',
             viewContainerRef: config.viewContainerRef,
             injector: config.injector ?? this.injector,
         };
     }
 
-    private createOverlay(): OverlayRef {
+    private createOverlay(config: ResolvedSnackbarConfig): OverlayRef {
+        let panelClass = ['md3-snackbar-panel', 'md3-position-' + config.position];
+        if (config.direction !== null) {
+            panelClass.push('md3-direction-' + config.direction);
+        }
+
         const overlayConfig = new OverlayConfig({
             hasBackdrop: false,
-            panelClass: ['md3-snackbar-panel'],
+            panelClass: panelClass,
             positionStrategy: this.overlay.position().global(),
             scrollStrategy: this.overlay.scrollStrategies.noop(),
         });

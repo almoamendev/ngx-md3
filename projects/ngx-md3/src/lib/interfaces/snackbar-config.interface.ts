@@ -41,6 +41,7 @@ export interface SnackbarConfig<D = unknown> {
 
     ariaLabel?: string;
     direction?: null | 'ltr' | 'rtl';
+    position?: 'start' | 'center' | 'end';
 
     /**
      * Optional Angular context for the message TemplateRef.

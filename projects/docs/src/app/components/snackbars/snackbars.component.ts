@@ -29,6 +29,7 @@ export class SnackbarsComponent implements OnDestroy {
     public duration = signal<number>(4000);
     public politeness = signal<'polite' | 'assertive'>('polite');
     public direction = signal<'ltr' | 'rtl'>('ltr');
+    public position = signal<'start' | 'center' | 'end'>('start');
 
     private progressTemplate = viewChild<TemplateRef<unknown>>('progressTpl');
     public progressPercent = signal<number>(0);
@@ -165,6 +166,7 @@ class SnackbarRef<R = unknown> {
             duration: this.duration(),
             politeness: this.politeness(),
             direction: this.direction(),
+            position: this.position(),
         });
     }
 
@@ -174,6 +176,7 @@ class SnackbarRef<R = unknown> {
             duration: this.duration(),
             politeness: this.politeness(),
             direction: this.direction(),
+            position: this.position(),
         });
 
         ref.onAction().subscribe(() => {
@@ -194,6 +197,7 @@ class SnackbarRef<R = unknown> {
         this.progressRef = this.snackbarService.open(template, undefined, {
             replaceCurrent: this.replaceCurrent(),
             direction: this.direction(),
+            position: this.position(),
             duration: 0,
         });
 
@@ -272,6 +276,11 @@ class SnackbarRef<R = unknown> {
         this.configSheet?.componentInstance?.direction.setValue(this.direction());
         this.configSheet?.componentInstance?.direction.registerOnChange(() => {
             this.direction.set(this.configSheet?.componentInstance?.direction.value);
+        });
+
+        this.configSheet?.componentInstance?.position.setValue(this.position());
+        this.configSheet?.componentInstance?.position.registerOnChange(() => {
+            this.position.set(this.configSheet?.componentInstance?.position.value);
         });
     }
 }

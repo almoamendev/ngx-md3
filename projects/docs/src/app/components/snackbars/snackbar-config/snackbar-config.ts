@@ -26,6 +26,7 @@ export class SnackbarConfig {
     public duration: FormControl = new FormControl<string>('4000');
     public politeness: FormControl = new FormControl<'polite' | 'assertive'>('polite');
     public direction: FormControl = new FormControl<'ltr' | 'rtl'>('ltr');
+    public position: FormControl = new FormControl<'start' | 'center' | 'end'>('start');
 
     constructor(
         private sideSheetRef: SideSheetRef<SnackbarConfig>
