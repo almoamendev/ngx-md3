@@ -79,6 +79,14 @@
             </tr>
             <tr>
                 <td>
+                    <i>onAction?</i>
+                    <p md3-type-body size="small">Called when the action button is clicked — never the close icon. Fires right before the snackbar closes with reason 'action'. Shorthand for <code>ref.onAction().subscribe()</code>.</p>
+                </td>
+                <td>() =&gt; void</td>
+                <td style="white-space: nowrap;">undefined</td>
+            </tr>
+            <tr>
+                <td>
                     duration?
                     <p md3-type-body size="small">Auto-dismiss delay in milliseconds. Pass 0 to disable auto-dismiss.</p>
                 </td>
@@ -174,5 +182,6 @@
     <li>The message can be a plain string, or a <code>TemplateRef</code> for content that needs to keep re-rendering — like the progress example above, which reads this page's own signal directly. The surface, action button, close icon, positioning, and animation are always owned by the snackbar shell; there's no arbitrary custom-component API, since that's how a snackbar stops being a snackbar per Material Design 3.</li>
     <li>The auto-dismiss timer pauses automatically on hover/focus and resumes when the pointer or focus leaves.</li>
     <li>Set <code>stackedAction: true</code> when the action label is too long to sit comfortably next to the message on one row. The action drops to its own line below the message, aligned to the inline-end — Material Design 3's "long action" layout. It's ignored when there's no <code>actionLabel</code>.</li>
+    <li><code>onAction</code> attaches a callback to the action button specifically — it never runs for the close icon, which always just dismisses. Use it instead of <code>ref.onAction().subscribe()</code> when you don't need to keep the ref around.</li>
     <li>Snackbars render full-width at the bottom of the viewport, but never lower than the scaffold's main content area — they sit above a bottom navigation bar automatically when one is present.</li>
 </ul>

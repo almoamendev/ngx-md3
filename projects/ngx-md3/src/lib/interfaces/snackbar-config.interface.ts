@@ -27,6 +27,15 @@ export interface SnackbarConfig<D = unknown> {
     stackedAction?: boolean;
 
     /**
+     * Called when the action button is clicked, right before the snackbar
+     * closes with reason 'action'. Only fires for the action button — never
+     * for the close icon, which always just dismisses. Equivalent to
+     * subscribing to SnackbarRef.onAction(), but handy when you don't want
+     * to hold onto the ref just to react to the click.
+     */
+    onAction?: () => void;
+
+    /**
      * Auto-dismiss delay in milliseconds. Defaults to 4000. Pass 0 to disable
      * auto-dismiss entirely — the snackbar then stays open until the action,
      * the close icon, SnackbarRef.close(), or SnackbarService.dismiss() is

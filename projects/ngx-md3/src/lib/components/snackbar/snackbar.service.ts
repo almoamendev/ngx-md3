@@ -52,6 +52,10 @@ export class SnackbarService {
      * positioning, and animation are always owned by the Snackbar shell —
      * there's no arbitrary custom-component API, since that's how you end up
      * with something that isn't a snackbar anymore per MD3.
+     *
+     * config.onAction, if provided, is called when the action button (never
+     * the close icon) is clicked — an alternative to ref.onAction().subscribe()
+     * for callers that don't want to hold onto the returned ref.
      */
     public open<D = unknown, R = unknown>(
         message: string | TemplateRef<D>,
@@ -75,6 +79,13 @@ export class SnackbarService {
         };
 
         ref.afterDismissed().subscribe(() => this.onDismissed(queued));
+
+        if (snackbarConfig.onAction) {
+            // Only ever fires for the action button — SnackbarRef.actionTriggered
+            // is exclusively raised from the action button's click handler, never
+            // from the close icon, which just closes without emitting.
+            ref.onAction().subscribe(() => snackbarConfig.onAction!());
+        }
 
         if (snackbarConfig.replaceCurrent && this.active) {
             this.queue.unshift(queued);
@@ -138,6 +149,7 @@ export class SnackbarService {
             data: config.data,
             showCloseIcon: config.showCloseIcon ?? false,
             stackedAction: config.stackedAction ?? false,
+            onAction: config.onAction,
             duration: config.duration ?? DEFAULT_DURATION_MS,
             politeness: config.politeness ?? 'polite',
             replaceCurrent: config.replaceCurrent ?? false,

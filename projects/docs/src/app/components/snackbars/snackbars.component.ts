@@ -59,6 +59,14 @@ ref.onAction().subscribe(() => {
     // e.g. undo the archive
 });
 
+// or skip the ref entirely — config.onAction fires only for the action
+// button (never the close icon), right before the snackbar closes
+snackbarService.open('Conversation archived', 'Undo', <SnackbarConfig>{
+    onAction: () => {
+        // e.g. undo the archive
+    },
+});
+
 // when the action label is too long to share a row with the message,
 // stack it below the message instead, aligned to the inline-end
 snackbarService.open('Your item was moved to a folder you no longer have access to', 'Request access', <SnackbarConfig>{
@@ -102,6 +110,14 @@ interface SnackbarConfig<D = unknown> {
      * @default false
      */
     stackedAction?: boolean;
+
+    /**
+     * Called when the action button is clicked — never the close icon,
+     * which always just dismisses. Fires right before the snackbar closes
+     * with reason 'action'. A shorthand for ref.onAction().subscribe() for
+     * callers that don't need to hold onto the ref.
+     */
+    onAction?: () => void;
 
     /**
      * Auto-dismiss delay in milliseconds. Pass 0 to disable auto-dismiss —
@@ -201,7 +217,10 @@ class SnackbarRef<R = unknown> {
     }
 
     public showActionSnackbar(): void {
-        const ref = this.snackbarService.open('Conversation archived', 'Undo', {
+        // config.onAction fires only for the action button, never the close
+        // icon — a shorthand for ref.onAction().subscribe() when you don't
+        // need to hold onto the ref.
+        this.snackbarService.open('Conversation archived', 'Undo', {
             stackedAction: this.stackedAction(),
             replaceCurrent: this.replaceCurrent(),
             duration: this.duration(),
@@ -209,10 +228,10 @@ class SnackbarRef<R = unknown> {
             scheme: this.scheme(),
             direction: this.direction(),
             position: this.position(),
-        });
-
-        ref.onAction().subscribe(() => {
-            // handle undo here
+            onAction: () => {
+                // handle undo here
+                console.log('Undo action clicked');
+            },
         });
     }
 
@@ -228,6 +247,9 @@ class SnackbarRef<R = unknown> {
                 scheme: this.scheme(),
                 direction: this.direction(),
                 position: this.position(),
+                onAction: () => {
+                    console.log('Request access action clicked');
+                }
             },
         );
 
