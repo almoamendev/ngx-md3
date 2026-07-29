@@ -1,59 +1,58 @@
-# NgxMd3Workspace
+# ngx-md3
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.8.
+A standalone, signals-first Angular component library that follows the Material Design 3 spec closely — not a reskin of Material 2, and not a wrapper around Angular Material.
 
-## Development server
+**Docs & live component gallery: https://vip9008.github.io/ngx-md3/**
 
-To start a local development server, run:
+## Why ngx-md3
 
-```bash
-ng serve
-```
+- **Material Design 3** — color, shape, elevation, and motion tokens taken straight from the MD3 spec.
+- **Signals-first** — standalone components built on Angular Signals, with `model()` for real two-way bindings where they matter.
+- **Accessible by default** — correct ARIA roles, states, and keyboard behavior are built into every component, not bolted on afterward.
+- **Plays well with forms** — every input-like component works with Angular Reactive Forms out of the box.
+- **Fully themeable** — swap the entire palette by overriding CSS custom properties, no rebuild required.
+- **Tree-shakeable** — every component is a standalone import; pull in a button without dragging along the rest of the library.
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Quick start
 
 ```bash
-ng generate --help
+npm install @vip9008/ngx-md3
 ```
 
-## Building
+```ts
+import { Component } from '@angular/core';
+import { Button } from '@vip9008/ngx-md3';
 
-To build the project run:
+@Component({
+    selector: 'app-example',
+    imports: [Button],
+    template: `
+        <button md3-button button-type="filled">
+            Get started
+        </button>
+    `,
+})
+export class ExampleComponent {}
+```
+
+Browse the full component catalogue, API references, and live playgrounds at **https://vip9008.github.io/ngx-md3/**.
+
+## Repository layout
+
+This is an Angular CLI workspace with two projects:
+
+- `projects/ngx-md3` — the publishable component library ([`@vip9008/ngx-md3`](https://www.npmjs.com/package/@vip9008/ngx-md3) on npm).
+- `projects/docs` — the documentation site, deployed to GitHub Pages.
+
+## Development
 
 ```bash
-ng build
+ng serve            # run the docs site locally at http://localhost:4200
+ng build ngx-md3    # build the library (required before the docs app can resolve it)
+ng build docs       # build the docs site
+ng test ngx-md3     # run the library's unit tests
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+## License
 
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+MIT © Hussain Almomen — see [LICENSE](./LICENSE).

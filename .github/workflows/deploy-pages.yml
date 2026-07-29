@@ -16,7 +16,50 @@ permissions:
   id-token: write
 
 jobs:
+  check:
+    runs-on: ubuntu-latest
+    outputs:
+      should-deploy: ${{ steps.version-check.outputs.should-deploy }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # Docs only redeploys when the workspace root package.json's version
+      # is bumped — the same "only ship on a version bump" gate the npm
+      # publish workflow uses, just diffed against git history here since
+      # there's no registry to check a "currently deployed" version against.
+      # Manual (workflow_dispatch) runs always build, ignoring this check.
+      - name: Check whether the root package.json version changed
+        id: version-check
+        run: |
+          CURRENT_VERSION=$(node -p "require('./package.json').version")
+
+          if [ "${{ github.event_name }}" != "push" ]; then
+            echo "Manually triggered — building regardless of version."
+            echo "should-deploy=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          if git cat-file -e "${{ github.event.before }}" 2>/dev/null; then
+            PREVIOUS_VERSION=$(git show "${{ github.event.before }}:package.json" | node -p "JSON.parse(require('fs').readFileSync(0, 'utf8')).version" 2>/dev/null || echo "")
+          else
+            PREVIOUS_VERSION=""
+          fi
+
+          echo "Current version:  $CURRENT_VERSION"
+          echo "Previous version: $PREVIOUS_VERSION"
+
+          if [ "$CURRENT_VERSION" = "$PREVIOUS_VERSION" ]; then
+            echo "should-deploy=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "should-deploy=true" >> "$GITHUB_OUTPUT"
+          fi
+
   build:
+    needs: check
+    if: needs.check.outputs.should-deploy == 'true'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
