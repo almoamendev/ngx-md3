@@ -1,6 +1,6 @@
 <md3-scaffold>
     <md3-app-bar md3-scaffold-bar="top" bar-type="small" scroll-style="none" bar-title="Material Design 3" bar-subtitle="Angular" [class.menu-button]="showMenuBtn()">
-        <!-- <a href="google.com" md3-app-bar-logo><img  src="https://media.wired.com/photos/5926ffe47034dc5f91bed4e8/master/pass/google-logo.jpg"></a> -->
+        <!-- <a routerLink="/" md3-app-bar-logo><img src="/favicon.svg"></a> -->
 
         <!-- <input type="text" md3-input-element placeholder="Search products" />
 
@@ -30,6 +30,12 @@
     </md3-app-bar>
 
     <md3-navigation-rail md3-scaffold-rail="leading" [class.menu-button]="showMenuBtn()" [hide-menu-button]="!showMenuBtn()" [(expanded)]="expandedRail">
+        <a routerLink="/home" md3-nav-item>
+            <md3-icon md3-icon-element>home</md3-icon>
+            <md3-icon md3-icon-element="active" filled>home</md3-icon>
+            Home
+        </a>
+
         <button type="button" md3-nav-item (click)="openMenu(groupType.FOUNDATIONS)" [class.md3-active]="currentGroup() == groupType.FOUNDATIONS">
             <md3-icon md3-icon-element>book</md3-icon>
             <md3-icon md3-icon-element="active" filled>book</md3-icon>

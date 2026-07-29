@@ -25,12 +25,17 @@ import { GridsComponent } from './foundations/grids/grids.component';
 import { NavigationBarComponent } from './components/navigations/navigation-bar/navigation-bar.component';
 import { AppBarComponent } from './components/app-bar/app-bar.component';
 import { SnackbarsComponent } from './components/snackbars/snackbars.component';
+import { HomeComponent } from './home/home.component';
 
 export const routes: Routes = [
     {
         path: '',
         component: LayoutComponent,
         children: [
+            {
+                path: 'home',
+                component: HomeComponent,
+            },
             {
                 path: 'styles',
                 children: [
@@ -161,6 +166,11 @@ export const routes: Routes = [
                         component: TextFieldsComponent,
                     },
                 ],
+            },
+            {
+                path: '',
+                redirectTo: '/home',
+                pathMatch: 'full'
             },
             {
                 path: '**',
