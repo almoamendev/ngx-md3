@@ -1,0 +1,57 @@
+name: Publish to npm
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch: {}
+
+concurrency:
+  group: publish-npm
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          registry-url: 'https://registry.npmjs.org'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run library unit tests
+        run: npx ng test ngx-md3 --watch=false --browsers=ChromeHeadless
+
+      - name: Build library
+        run: npx ng build ngx-md3
+
+      - name: Check whether this version needs publishing
+        id: version-check
+        run: |
+          LOCAL_VERSION=$(node -p "require('./dist/ngx-md3/package.json').version")
+          PUBLISHED_VERSION=$(npm view @vip9008/ngx-md3 version 2>/dev/null || echo "none")
+          echo "Local version:     $LOCAL_VERSION"
+          echo "Published version: $PUBLISHED_VERSION"
+          if [ "$LOCAL_VERSION" = "$PUBLISHED_VERSION" ]; then
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Publish to npm
+        if: steps.version-check.outputs.skip == 'false'
+        working-directory: dist/ngx-md3
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
