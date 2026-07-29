@@ -1,8 +1,9 @@
 import { DOCUMENT } from '@angular/common';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { computed, effect, inject, Injectable, signal } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
-import { fromEvent, map, startWith, Subscription } from 'rxjs';
+import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
+import { NavigationEnd, Router } from '@angular/router';
+import { filter, fromEvent, map, startWith, Subscription } from 'rxjs';
 import { ViewportWidth } from '../types/viewport-width.type';
 import { ViewportHeight } from '../types/viewport-height.type';
 
@@ -14,6 +15,9 @@ export type Md3NavigationMode = 'none' | 'navigation-bar' | 'navigation-rail' | 
 export class LayoutService {
     private readonly document = inject(DOCUMENT);
     private readonly breakpointObserver = inject(BreakpointObserver);
+    // Optional — LayoutService (and anything built on Scaffold) shouldn't
+    // hard-require the Router, only benefit from it when it's present.
+    private readonly router = inject(Router, { optional: true });
 
     private readonly widthQueries: Record<ViewportWidth, string> = {
         'compact': '(max-width: 37.499em)', // < 600
@@ -30,6 +34,7 @@ export class LayoutService {
     } as const;
 
     private mainPaneSub?: Subscription;
+    private mainPaneEl?: HTMLElement;
     private panesContainerResizeObserver?: ResizeObserver;
     private panesContainerResizeListener?: () => void;
 
@@ -143,6 +148,17 @@ export class LayoutService {
             this.document.body.classList.toggle('md-scheme-dark', darkMode);
             this.document.body.classList.toggle('md-scheme-light', !darkMode);
         });
+
+        // Reset the scaffold's main pane to the top after every completed
+        // navigation — otherwise a scrolled-down list page leaves the next
+        // page's content scrolled down too, since the pane itself never
+        // remounts on route change.
+        this.router?.events
+            .pipe(
+                filter((event): event is NavigationEnd => event instanceof NavigationEnd),
+                takeUntilDestroyed(),
+            )
+            .subscribe(() => this.scrollMainPaneToTop());
     }
 
     public setDirection(direction: 'ltr' | 'rtl'): void {
@@ -150,8 +166,14 @@ export class LayoutService {
         this.direction.set(direction);
     }
 
+    private scrollMainPaneToTop(): void {
+        this.mainPaneEl?.scrollTo({ top: 0 });
+        this.mainScrollTop.set(0);
+    }
+
     public registerMainPane(element: HTMLElement): void {
         this.mainPaneSub?.unsubscribe();
+        this.mainPaneEl = element;
 
         const update = () => {
             const scrollTop = element.scrollTop;
@@ -173,6 +195,10 @@ export class LayoutService {
     public unregisterMainPane(element: HTMLElement): void {
         this.mainPaneSub?.unsubscribe();
         this.mainPaneSub = undefined;
+
+        if (this.mainPaneEl === element) {
+            this.mainPaneEl = undefined;
+        }
 
         this.mainScrollTop.set(0);
     }
