@@ -1,1 +1,62 @@
-<p>home.component works!</p>
+<section class="home-hero">
+    <figure class="component-image">
+        <img src="md3-home.png" alt="Material Design 3" />
+    </figure>
+
+    <div md3-type-label size="large" color="on-surface-variant" class="home-eyebrow">Material Design 3 for Angular</div>
+    <h1 md3-type-display size="medium" emphasized class="home-title">ngx-md3</h1>
+    <p md3-type-body size="large" color="on-surface-variant" class="home-subtitle">
+        A standalone, signals-first Angular component library that follows the Material Design 3 spec closely —
+        not a reskin of Material 2, and not a wrapper around Angular Material.
+    </p>
+
+    <div class="home-actions">
+        <a md3-button button-type="filled" button-size="large" routerLink="/components/buttons/buttons">
+            Browse components
+        </a>
+        <a md3-button button-type="outlined" button-size="large" href="https://github.com/vip9008/ngx-md3" target="_blank" rel="noopener noreferrer">
+            <md3-icon md3-icon-element>open_in_new</md3-icon>
+            View on GitHub
+        </a>
+    </div>
+
+    <app-shiki [code]="installCode" language="bash"></app-shiki>
+</section>
+
+<section class="home-section">
+    <h2>Why ngx-md3</h2>
+
+    <div class="home-feature-grid">
+        @for (feature of features; track feature.title) {
+            <md3-card card-type="outlined" class="home-feature-card">
+                <md3-icon md3-icon-element [icon-size]="36">{{ feature.icon }}</md3-icon>
+                <div md3-type-title size="small">{{ feature.title }}</div>
+                <p md3-type-body size="small" color="on-surface-variant">{{ feature.description }}</p>
+            </md3-card>
+        }
+    </div>
+</section>
+
+<section class="home-section">
+    <h2>Quick start</h2>
+
+    <p>
+        Every component is a standalone import — bring in only what you use, no NgModule required.
+    </p>
+
+    <app-shiki [code]="quickStartCode"></app-shiki>
+</section>
+
+<section class="home-section">
+    <h2>Explore the library</h2>
+
+    <div class="home-category-grid">
+        @for (category of categories; track category.label) {
+            <a md3-card card-type="elevated" [routerLink]="category.link" class="home-category-card">
+                <md3-icon md3-icon-element [icon-size]="36">{{ category.icon }}</md3-icon>
+                <div md3-type-title size="small">{{ category.label }}</div>
+                <p md3-type-body size="small" color="on-surface-variant">{{ category.description }}</p>
+            </a>
+        }
+    </div>
+</section>
