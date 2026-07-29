@@ -29,6 +29,7 @@ export class SnackbarConfig {
     public scheme: FormControl = new FormControl<'inherit' | 'light' | 'dark'>('inherit');
     public direction: FormControl = new FormControl<'ltr' | 'rtl'>('ltr');
     public position: FormControl = new FormControl<'start' | 'center' | 'end'>('start');
+    public bottomOffset: FormControl = new FormControl<string>('0');
 
     constructor(
         private sideSheetRef: SideSheetRef<SnackbarConfig>

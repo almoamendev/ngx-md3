@@ -63,6 +63,15 @@ export interface SnackbarConfig<D = unknown> {
     position?: 'start' | 'center' | 'end';
 
     /**
+     * Extra space, in pixels, to add below the snackbar on top of the
+     * automatic inset the scaffold already applies to clear a bottom
+     * navigation bar. Use this to clear your own fixed bottom elements —
+     * a custom bottom bar, a FAB, etc. — that the scaffold doesn't know
+     * about. Defaults to 0.
+     */
+    bottomOffset?: number;
+
+    /**
      * Optional Angular context for the message TemplateRef.
      */
     viewContainerRef?: ViewContainerRef;

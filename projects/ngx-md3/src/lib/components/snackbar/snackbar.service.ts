@@ -17,6 +17,7 @@ interface ResolvedSnackbarConfig extends SnackbarConfig {
     scheme: 'inherit' | 'dark' | 'light';
     direction: null | 'ltr' | 'rtl';
     position: 'start' | 'center' | 'end';
+    bottomOffset: number;
     injector: Injector;
 }
 
@@ -157,6 +158,7 @@ export class SnackbarService {
             scheme: config.scheme ?? 'inherit',
             direction: config.direction ?? null,
             position: config.position ?? 'start',
+            bottomOffset: config.bottomOffset ?? 0,
             viewContainerRef: config.viewContainerRef,
             injector: config.injector ?? this.injector,
         };

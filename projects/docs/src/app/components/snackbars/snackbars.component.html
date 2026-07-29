@@ -155,6 +155,14 @@
             </tr>
             <tr>
                 <td>
+                    <i>bottomOffset?</i>
+                    <p md3-type-body size="small">Extra space, in pixels, added below the snackbar on top of the automatic inset that already clears a bottom navigation bar. Use it to clear your own fixed bottom elements — a custom bottom bar, a FAB, etc.</p>
+                </td>
+                <td>number</td>
+                <td style="white-space: nowrap;">0</td>
+            </tr>
+            <tr>
+                <td>
                     <i>viewContainerRef?</i>
                     <p md3-type-body size="small">Optional Angular context for the message TemplateRef.</p>
                 </td>
@@ -184,4 +192,5 @@
     <li>Set <code>stackedAction: true</code> when the action label is too long to sit comfortably next to the message on one row. The action drops to its own line below the message, aligned to the inline-end — Material Design 3's "long action" layout. It's ignored when there's no <code>actionLabel</code>.</li>
     <li><code>onAction</code> attaches a callback to the action button specifically — it never runs for the close icon, which always just dismisses. Use it instead of <code>ref.onAction().subscribe()</code> when you don't need to keep the ref around.</li>
     <li>Snackbars render full-width at the bottom of the viewport, but never lower than the scaffold's main content area — they sit above a bottom navigation bar automatically when one is present.</li>
+    <li>Use <code>bottomOffset</code> to clear your own fixed bottom elements that the scaffold doesn't account for, like a floating action button. It stacks on top of the automatic bottom-nav inset rather than replacing it.</li>
 </ul>

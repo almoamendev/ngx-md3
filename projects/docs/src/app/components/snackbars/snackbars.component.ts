@@ -32,6 +32,7 @@ export class SnackbarsComponent implements OnDestroy {
     public scheme = signal<'inherit' | 'light' | 'dark'>('inherit');
     public direction = signal<'ltr' | 'rtl'>('ltr');
     public position = signal<'start' | 'center' | 'end'>('start');
+    public bottomOffset = signal<number>(0);
 
     private progressTemplate = viewChild<TemplateRef<unknown>>('progressTpl');
     public progressPercent = signal<number>(0);
@@ -71,6 +72,12 @@ snackbarService.open('Conversation archived', 'Undo', <SnackbarConfig>{
 // stack it below the message instead, aligned to the inline-end
 snackbarService.open('Your item was moved to a folder you no longer have access to', 'Request access', <SnackbarConfig>{
     stackedAction: true,
+});
+
+// clear your own fixed bottom element (e.g. a FAB) that the scaffold
+// doesn't know about — added on top of the automatic bottom-nav inset
+snackbarService.open('Saved to drafts', undefined, <SnackbarConfig>{
+    bottomOffset: 96,
 });
 
 // after dismissed (by timeout, action, or manual close), with the reason
@@ -162,6 +169,15 @@ interface SnackbarConfig<D = unknown> {
     position?: 'start' | 'center' | 'end';
 
     /**
+     * Extra space, in pixels, added below the snackbar on top of the
+     * automatic inset already applied to clear a bottom navigation bar.
+     * Use it to clear your own fixed bottom elements — a custom bottom
+     * bar, a FAB, etc.
+     * @default 0
+     */
+    bottomOffset?: number;
+
+    /**
      * Optional Angular context for the message TemplateRef.
      */
     viewContainerRef?: ViewContainerRef;
@@ -213,6 +229,7 @@ class SnackbarRef<R = unknown> {
             scheme: this.scheme(),
             direction: this.direction(),
             position: this.position(),
+            bottomOffset: this.bottomOffset(),
         });
     }
 
@@ -228,6 +245,7 @@ class SnackbarRef<R = unknown> {
             scheme: this.scheme(),
             direction: this.direction(),
             position: this.position(),
+            bottomOffset: this.bottomOffset(),
             onAction: () => {
                 // handle undo here
                 console.log('Undo action clicked');
@@ -247,6 +265,7 @@ class SnackbarRef<R = unknown> {
                 scheme: this.scheme(),
                 direction: this.direction(),
                 position: this.position(),
+                bottomOffset: this.bottomOffset(),
                 onAction: () => {
                     console.log('Request access action clicked');
                 }
@@ -273,6 +292,7 @@ class SnackbarRef<R = unknown> {
             scheme: this.scheme(),
             direction: this.direction(),
             position: this.position(),
+            bottomOffset: this.bottomOffset(),
             duration: 0,
         });
 
@@ -366,6 +386,11 @@ class SnackbarRef<R = unknown> {
         this.configSheet?.componentInstance?.position.setValue(this.position());
         this.configSheet?.componentInstance?.position.registerOnChange(() => {
             this.position.set(this.configSheet?.componentInstance?.position.value);
+        });
+
+        this.configSheet?.componentInstance?.bottomOffset.setValue(String(this.bottomOffset()));
+        this.configSheet?.componentInstance?.bottomOffset.registerOnChange(() => {
+            this.bottomOffset.set(Number(this.configSheet?.componentInstance?.bottomOffset.value));
         });
     }
 }
