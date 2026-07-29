@@ -49,6 +49,10 @@
     margin-bottom: var(--md3-snackbar-bottom-inset, 0px);
     transition: margin-bottom var(--md-motion-expressive-default-spatial-duration) var(--md-motion-expressive-default-spatial-easing);
 
+    &.md3-full-width {
+        width: 100%;
+    }
+
     .md3-snackbar-container {
         display: flex;
         align-items: center;

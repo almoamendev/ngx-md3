@@ -1,5 +1,5 @@
 import { NgTemplateOutlet, NgClass } from '@angular/common';
-import { Component, ElementRef, HostListener, OnDestroy, OnInit, TemplateRef, effect, inject, signal } from '@angular/core';
+import { Component, ElementRef, HostListener, OnDestroy, OnInit, Signal, TemplateRef, effect, inject, signal } from '@angular/core';
 import { Button } from '../buttons/button/button';
 import { IconButton } from '../buttons/icon-button/icon-button';
 import { MaterialIcon } from '../common/material-icon/material-icon';
@@ -59,6 +59,14 @@ export class Snackbar implements OnInit, OnDestroy {
     constructor(private readonly el: ElementRef<HTMLElement>) {
         effect(() => {
             this.el.nativeElement.style.setProperty('--md3-snackbar-bottom-inset', `${this.layout.bottomInset()}px`);
+        });
+
+        effect(() => {
+            if (this.layout.isCompact()) {
+                this.el.nativeElement.classList.add('md3-full-width');
+            } else {
+                this.el.nativeElement.classList.remove('md3-full-width');
+            }
         });
     }
 
