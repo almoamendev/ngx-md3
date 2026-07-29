@@ -1,0 +1,66 @@
+name: Deploy docs to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch: {}
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      # Project Pages site (https://<user>.github.io/ngx-md3/) is served from
+      # a subpath, so routerLinks/asset URLs need that base baked in at build
+      # time. Change this (or drop it) if you switch to a custom domain or a
+      # user/org root page, where the app is served from "/".
+      - name: Build docs
+        run: npx ng build docs --configuration production --base-href /ngx-md3/
+
+      # Angular is a client-side-routed SPA — GitHub Pages has no concept of
+      # that, so a direct hit / refresh on a deep route 404s. Serving
+      # index.html for 404s hands control back to Angular's router, which
+      # then renders the right route from the URL.
+      - name: Add SPA fallback for client-side routing
+        run: cp dist/docs/browser/index.html dist/docs/browser/404.html
+
+      # Stop GitHub Pages from running the output through Jekyll.
+      - name: Disable Jekyll processing
+        run: touch dist/docs/browser/.nojekyll
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist/docs/browser
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
