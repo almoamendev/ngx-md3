@@ -5,7 +5,7 @@
 </p>
 
 <figure class="component-image">
-    <img src="img/md3-checkbox.png" alt="Material Design checkbox elemeents" />
+    <img src="img/md3-checkbox.png" alt="Material Design checkbox elements" />
     <ol>
         <li>Checkbox</li>
         <li>State-layer</li>
@@ -20,7 +20,8 @@
     </button>
 
     <md3-checkbox [disable-state-layer]="disableStateLayer()">
-        <input type="checkbox" md3-input-element [disabled]="disable()" [aria-invalid]="setError()">
+        <input type="checkbox" md3-input-element [disabled]="disable()"
+            [attr.aria-invalid]="setError() ? 'true' : null">
     </md3-checkbox>
 </app-playground>
 
@@ -62,6 +63,6 @@
 <ul>
     <li>Checkbox input element must have <code>md3-input-element</code> directive.</li>
     <li>The component will be disabled when either the input element or the control is disabled.</li>
-    <li>When using a control object. the component will show error state when the control has errors.</li>
-    <li>When using the component with html input tag only (no controls). you can set error state by adding <code>aria-invalid="true"</code> to the input element</li>
+    <li>When using a control object, the component will show the error state when the control has errors.</li>
+    <li>When using the component with an HTML input tag only (no controls), you can set the error state by adding <code>aria-invalid="true"</code> to the input element.</li>
 </ul>

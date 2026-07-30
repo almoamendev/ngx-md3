@@ -76,7 +76,8 @@
         }
     }
 
-    ::ng-deep [md3-icon-element] {
+    & > ::ng-deep [md3-icon-element] {
+        color: inherit !important;
         font-size: 1.25em !important;
         line-height: 1;
         height: 1em !important;

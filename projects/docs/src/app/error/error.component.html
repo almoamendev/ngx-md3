@@ -1,1 +1,20 @@
-<p>error.component works!</p>
+<section class="error-page">
+    <md3-icon md3-icon-element [icon-size]="48">error</md3-icon>
+
+    <h1 md3-type-display size="small">Page not found</h1>
+
+    <p md3-type-body size="large" color="on-surface-variant">
+        The page you're looking for doesn't exist or may have moved.
+    </p>
+
+    <div class="error-actions">
+        <a md3-button button-type="filled" button-size="large" routerLink="/home">
+            <md3-icon md3-icon-element>home</md3-icon>
+            Back to home
+        </a>
+        <a md3-button button-type="outlined" button-size="large" routerLink="/components">
+            <md3-icon md3-icon-element>apps</md3-icon>
+            Browse components
+        </a>
+    </div>
+</section>

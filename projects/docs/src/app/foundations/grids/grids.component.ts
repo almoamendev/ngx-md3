@@ -5,7 +5,7 @@ import { Shiki } from '../../components/shiki/shiki';
 import { GridConfig } from './grid-config/grid-config';
 
 @Component({
-  selector: 'app-grids.component',
+  selector: 'app-grids',
   imports: [
         Grid,
         GridItem,

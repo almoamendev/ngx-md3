@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideRouter } from '@angular/router';
 
 import { ErrorComponent } from './error.component';
 
@@ -8,7 +9,8 @@ describe('ErrorComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ErrorComponent]
+      imports: [ErrorComponent],
+      providers: [provideRouter([])],
     })
     .compileComponents();
 

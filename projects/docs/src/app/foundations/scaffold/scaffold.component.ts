@@ -6,7 +6,7 @@ import { Shiki } from '../../components/shiki/shiki';
 import { ScaffoldConfig } from './scaffold-config/scaffold-config';
 
 @Component({
-  selector: 'app-scaffold.component',
+  selector: 'app-scaffold',
   imports: [
         IconButton,
         MaterialIcon,
