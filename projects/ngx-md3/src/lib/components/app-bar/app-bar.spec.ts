@@ -2,7 +2,6 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LayoutService } from '../../foundations/layout.service';
 import { AppBar } from './app-bar';
-import { AppBarModule } from './app-bar-module';
 
 describe('AppBar', () => {
   let component: AppBar;
@@ -11,7 +10,7 @@ describe('AppBar', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AppBarModule]
+      imports: [AppBar]
     })
     .compileComponents();
 

@@ -3,11 +3,12 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 
-import { TextFieldModule } from './text-field-module';
 import { TextField } from './text-field';
+import { InputElement } from '../common/input-element';
+import { SupportingText } from './supporting-text';
 
 @Component({
-    standalone: false,
+    imports: [TextField, InputElement, SupportingText, ReactiveFormsModule],
     template: `
         <md3-text-field label="Name" [control]="control">
             <input md3-input-element type="text">
@@ -20,7 +21,7 @@ class ControlHost {
 }
 
 @Component({
-    standalone: false,
+    imports: [TextField, InputElement, SupportingText],
     template: `
         <md3-text-field label="Name">
             <input md3-input-element type="text">
@@ -31,7 +32,7 @@ class ControlHost {
 class NativeInputHost { }
 
 @Component({
-    standalone: false,
+    imports: [TextField, InputElement],
     template: `
         <md3-text-field label="Name" [input-counter]="10">
             <input md3-input-element type="text">
@@ -43,14 +44,10 @@ class CounterHost { }
 describe('TextField', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [
+            imports: [
                 ControlHost,
                 NativeInputHost,
                 CounterHost,
-            ],
-            imports: [
-                ReactiveFormsModule,
-                TextFieldModule,
             ],
         }).compileComponents();
     });
