@@ -110,8 +110,10 @@
 <ul>
     <li>
         <code>md3-nav-item</code> can be applied to a <code>&lt;button&gt;</code> or an <code>&lt;a&gt;</code>.
-        Combine it with <code>routerLink</code> and <code>routerLinkActive="md3-active"</code> for automatic
-        active-state handling, or toggle the <code>md3-active</code> class manually on a button.
+        When paired with <code>routerLink</code>, the <code>md3-active</code> class is applied automatically
+        &mdash; no need to add <code>routerLinkActive</code> yourself. See the
+        <a routerLink="/components/navigations/navigation-rail">navigation rail docs</a> for customizing the
+        route match or building a fully custom active condition.
     </li>
     <li>
         Provide a filled variant of the icon with <code>md3-icon-element="active"</code> to swap in when the

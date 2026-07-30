@@ -117,18 +117,17 @@ export class LayoutComponent {
 
     public openMenu(group: NavigationGroupLink): void {
         const isCurrentGroup: boolean = this.currentGroup() == group;
-
-        this.currentSheet?.close();
-
         const menu = this.getMenu(group);
 
         if (!isCurrentGroup && menu) {
             this.navSheetsConfig.type = this.navSheetStyle();
             this.currentSheet = this.sheetsService.openSideSheet(menu, this.navSheetsConfig);
             this.currentGroup.set(group);
-            this.currentSheet.afterClosed().subscribe((_) => {
+            this.currentSheet.afterClosed().subscribe(() => {
                 this.cleanCurrentSheet();
             });
+        } else {
+            this.currentSheet?.close();
         }
     }
 

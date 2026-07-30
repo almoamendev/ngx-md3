@@ -1,4 +1,5 @@
 import { Component, computed, effect, OnDestroy, signal } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { Checkbox, Divider, IconButton, IconElement, InputElement, List, ListItem, ListItemPrimaryAction, ListLeading, ListLeadingSize, ListLeadingType, ListSlot, MaterialIcon, RadioButton, SheetsService, SideSheetRef, Switch, TypeBody } from '@vip9008/ngx-md3';
 import { Playground } from '../playground/playground';
 import { Shiki } from '../shiki/shiki';
@@ -24,6 +25,7 @@ import { ListConfig } from './list-config/list-config';
         Playground,
         Shiki,
         TypeBody,
+        RouterLink,
     ],
     templateUrl: './lists.component.html',
     styleUrl: './lists.component.scss',

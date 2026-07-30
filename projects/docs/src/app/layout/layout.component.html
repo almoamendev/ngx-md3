@@ -33,7 +33,7 @@
     </md3-app-bar>
 
     <md3-navigation-rail md3-scaffold-rail="leading" [class.menu-button]="showMenuBtn()" [hide-menu-button]="!showMenuBtn()" [(expanded)]="expandedRail">
-        <a routerLink="/home" md3-nav-item>
+        <a routerLink="/home" md3-nav-item #homeLink="md3NavItem" [class.md3-active]="homeLink.isRouteActive && currentGroup() == null">
             <md3-icon md3-icon-element>home</md3-icon>
             <md3-icon md3-icon-element="active" filled>home</md3-icon>
             Home

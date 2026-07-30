@@ -5,6 +5,7 @@ import { Badge } from '../../common/badge';
 
 @Component({
     selector: 'button[md3-nav-item], a[md3-nav-item]',
+    exportAs: 'md3NavItem',
     imports: [],
     templateUrl: './navigation-item.html',
     styleUrl: './navigation-item.scss',
@@ -12,7 +13,10 @@ import { Badge } from '../../common/badge';
         '[class.md3-hide-on-collapse]': 'this.hideOnCollapse()',
     },
     hostDirectives: [
-        RouterLinkActive
+        {
+            directive: RouterLinkActive,
+            inputs: ['routerLinkActiveOptions', 'ariaCurrentWhenActive'],
+        }
     ],
 })
 export class NavigationItem {
@@ -30,8 +34,12 @@ export class NavigationItem {
 
     public badge = contentChild<Badge>(Badge);
 
-    @HostBinding('class.md3-active') get active(): boolean {
+    public get isRouteActive(): boolean {
         return this.routerLinkActive.isActive;
+    }
+
+    @HostBinding('class.md3-active') get active(): boolean {
+        return this.isRouteActive;
     }
 
     public get element(): HTMLElement {

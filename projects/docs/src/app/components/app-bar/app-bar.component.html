@@ -49,7 +49,8 @@
 
 <p>
     App bars are placed at the top of the screen to help people navigate through a product.
-    <code>md3-app-bar</code> is usually projected into a <code>md3-scaffold</code>'s top bar region
+    <code>md3-app-bar</code> is usually projected into a
+    <a routerLink="/foundations/scaffold"><code>md3-scaffold</code></a>'s top bar region
     (<code>md3-scaffold-bar="top"</code>), and reads its scroll-elevate / auto-hide state from the scaffold's
     main pane via <code>LayoutService</code> — no extra wiring needed.
 </p>
@@ -180,6 +181,6 @@
     <li>
         <code>scroll-style</code> and <code>auto-hide</code> both key off <code>LayoutService.mainScrollTop()</code>,
         which is populated by whichever element carries <code>md3-scaffold-pane="main"</code> — outside a
-        scaffold, the bar won't react to scrolling at all.
+        <a routerLink="/foundations/scaffold">scaffold</a>, the bar won't react to scrolling at all.
     </li>
 </ul>

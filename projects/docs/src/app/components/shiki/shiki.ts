@@ -1,4 +1,4 @@
-import { Component, effect, input, InputSignal } from '@angular/core';
+import { Component, effect, input, InputSignal, signal } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { BundledLanguage, BundledTheme, codeToHtml } from 'shiki'
 
@@ -21,7 +21,7 @@ export class Shiki {
         alias: 'theme',
     });
 
-    public html: SafeHtml = '';
+    public html = signal<SafeHtml>('');
 
     constructor(private sanitizer: DomSanitizer) {
         effect(() => {
@@ -29,7 +29,7 @@ export class Shiki {
                 lang: this.language(),
                 theme: this.theme(),
             }).then((html) => {
-                this.html = this.sanitizer.bypassSecurityTrustHtml(html);
+                this.html.set(this.sanitizer.bypassSecurityTrustHtml(html));
             });
         });
     }

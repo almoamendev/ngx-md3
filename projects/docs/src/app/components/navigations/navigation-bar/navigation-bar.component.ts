@@ -1,4 +1,5 @@
 import { Component, OnDestroy, signal } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { Badge, Divider, IconButton, IconElement, MaterialIcon, NavigationBar, NavigationItem, SheetsService, SideSheetRef, TypeBody } from '@vip9008/ngx-md3';
 import { Playground } from '../../playground/playground';
 import { Shiki } from '../../shiki/shiki';
@@ -17,6 +18,7 @@ import { NavBarConfig } from './nav-bar-config/nav-bar-config';
         Divider,
         Shiki,
         TypeBody,
+        RouterLink,
     ],
     templateUrl: './navigation-bar.component.html',
     styleUrl: './navigation-bar.component.scss',
@@ -58,10 +60,17 @@ import {
     </button>
 </md3-navigation-bar>
 
-<!-- using RouterLinkActive for automatic active state -->
-<a routerLink="/home" routerLinkActive="md3-active" md3-nav-item>
+<!-- active state is automatic when routerLink is present -->
+<a routerLink="/home" md3-nav-item>
     <md3-icon md3-icon-element>home</md3-icon>
     Home
+</a>
+
+<!-- fully custom active condition, combined with the route match -->
+<a #item="md3NavItem" routerLink="/inbox" md3-nav-item
+    [class.md3-active]="item.isRouteActive && hasUnread()">
+    <md3-icon md3-icon-element>mail</md3-icon>
+    Inbox
 </a>
 
 <!-- item with a badge -->

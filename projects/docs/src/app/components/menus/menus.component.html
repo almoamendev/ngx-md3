@@ -229,7 +229,8 @@
 <ul>
     <li>Menus are custom components injected in the page using the menu service, anchored to a trigger element, click event or point.</li>
     <li>Group related menu items with <code>md3-menu-group</code>. Consecutive groups render with a gap; add a <code>md3-divider</code> between items instead of a new group to get a divider.</li>
-    <li>Each menu item is a <code>button[md3-menu-item]</code> or <code>a[md3-menu-item]</code>, and can optionally project a leading icon (<code>md3-icon-element="leading"</code>), a trailing icon (<code>md3-icon-element="trailing"</code>) and a <code>md3-badge</code>.</li>
+    <li>Each menu item is a <code>button[md3-menu-item]</code> or <code>a[md3-menu-item]</code>, and can optionally project a leading icon (<code>md3-icon-element="leading"</code>), a trailing icon (<code>md3-icon-element="trailing"</code>) and a
+        <a routerLink="/components/navigations/navigation-rail"><code>md3-badge</code></a>.</li>
     <li>Use <code>menuService.openSubMenu()</code> from a menu item's click handler to open a nested menu positioned beside its parent item. Sub menus always resolve <code>xPosition</code> to <code>before</code>/<code>after</code> (anything else falls back to <code>after</code>) and default <code>overlapTrigger</code> to <code>true</code>, unlike a top-level <code>open()</code> call.</li>
     <li>While a menu is open, the trigger element gets a <code>md3-menu-active</code> class, useful for styling the trigger as pressed/active. Focus returns to the trigger after the menu closes.</li>
     <li>Clicking the scrim or pressing Escape always closes the menu (there is no <code>disableCloseEvents</code> option for menus).</li>
