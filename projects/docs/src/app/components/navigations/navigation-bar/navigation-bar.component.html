@@ -79,13 +79,13 @@
             </tr>
             <tr>
                 <td colspan="3">
-                    <h3><a routerLink="/components/navigations/navigation-rail">NavigationItem</a></h3>
+                    <h3><a routerLink="/components/navigations/navigation-item">NavigationItem</a></h3>
                     <md3-divider></md3-divider>
                 </td>
             </tr>
             <tr>
                 <td colspan="3">
-                    <p md3-type-body size="small">See the navigation rail docs for its full API.</p>
+                    <p md3-type-body size="small">See the navigation item docs for its full API.</p>
                 </td>
             </tr>
             <tr>
@@ -111,13 +111,10 @@
     <li>
         <code>md3-nav-item</code> can be applied to a <code>&lt;button&gt;</code> or an <code>&lt;a&gt;</code>.
         When paired with <code>routerLink</code>, the <code>md3-active</code> class is applied automatically
-        &mdash; no need to add <code>routerLinkActive</code> yourself. See the
-        <a routerLink="/components/navigations/navigation-rail">navigation rail docs</a> for customizing the
-        route match or building a fully custom active condition.
-    </li>
-    <li>
-        Provide a filled variant of the icon with <code>md3-icon-element="active"</code> to swap in when the
-        item becomes active.
+        &mdash; no need to add <code>routerLinkActive</code> yourself. Provide a filled variant of the icon
+        with <code>md3-icon-element="active"</code> to swap in when the item becomes active. See the
+        <a routerLink="/components/navigations/navigation-item">navigation item docs</a> for customizing or
+        overriding the active condition.
     </li>
     <li>
         Between 3 and 5 destinations are recommended in a navigation bar.

@@ -23,6 +23,7 @@ import { NavigationRailComponent } from './components/navigations/navigation-rai
 import { ScaffoldComponent } from './foundations/scaffold/scaffold.component';
 import { GridsComponent } from './foundations/grids/grids.component';
 import { NavigationBarComponent } from './components/navigations/navigation-bar/navigation-bar.component';
+import { NavigationItemComponent } from './components/navigations/navigation-item/navigation-item.component';
 import { AppBarComponent } from './components/app-bar/app-bar.component';
 import { SnackbarsComponent } from './components/snackbars/snackbars.component';
 import { HomeComponent } from './home/home.component';
@@ -129,6 +130,10 @@ export const routes: Routes = [
                             {
                                 path: 'navigation-rail',
                                 component: NavigationRailComponent,
+                            },
+                            {
+                                path: 'navigation-item',
+                                component: NavigationItemComponent,
                             },
                         ],
                     },

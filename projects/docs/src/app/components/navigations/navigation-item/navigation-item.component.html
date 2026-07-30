@@ -1,0 +1,90 @@
+<h1>Navigation item</h1>
+
+<p>
+    Navigation items are the individual destinations projected into a
+    <a routerLink="/components/navigations/navigation-bar">navigation bar</a> or a
+    <a routerLink="/components/navigations/navigation-rail">navigation rail</a>. The same <code>md3-nav-item</code>
+    directive works in either — see those pages for how items compose with groups, badges, and a FAB.
+</p>
+
+<figure class="component-image">
+    <img src="img/md3-nav-item.png" alt="Material Design navigation item" />
+</figure>
+
+<h2>API</h2>
+
+<div class="table-container md3-scrollable">
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 50%;">Name</th>
+                <th>Type</th>
+                <th>Default</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <i>hide-on-collapse</i>
+                    <p md3-type-body size="small">Hides the item entirely while the parent rail is collapsed.</p>
+                </td>
+                <td>input&lt;boolean&gt;</td>
+                <td style="white-space: nowrap;">false</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>routerLinkActiveOptions</i>
+                    <p md3-type-body size="small">Forwarded from RouterLinkActive. Controls exact vs. prefix matching for the automatic active state.</p>
+                </td>
+                <td>input&lt;IsActiveMatchOptions | boolean&gt;</td>
+                <td style="white-space: nowrap;">&lbrace; exact: false &rbrace;</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>ariaCurrentWhenActive</i>
+                    <p md3-type-body size="small">Forwarded from RouterLinkActive. Sets aria-current on the item when it's active.</p>
+                </td>
+                <td>input&lt;'page' | 'step' | 'location' | 'date' | 'time' | true | 'false'&gt;</td>
+                <td style="white-space: nowrap;">'page'</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>isRouteActive</i>
+                    <p md3-type-body size="small">Read-only. Reflects RouterLinkActive's match state. Grab it via a template reference (<code>#item="md3NavItem"</code>) to build a custom active condition.</p>
+                </td>
+                <td>boolean (getter)</td>
+                <td style="white-space: nowrap;">&mdash;</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<app-shiki [code]="apiImport"></app-shiki>
+<app-shiki [code]="apiData"></app-shiki>
+<app-shiki [code]="apiTypes"></app-shiki>
+<app-shiki [code]="apiUsage" language="html"></app-shiki>
+<ul>
+    <li>
+        <code>md3-nav-item</code> can be applied to a <code>&lt;button&gt;</code> or an <code>&lt;a&gt;</code>.
+    </li>
+    <li>
+        When paired with <code>routerLink</code>, the <code>md3-active</code> class is applied automatically
+        &mdash; no need to add <code>routerLinkActive</code> yourself. Use <code>routerLinkActiveOptions</code>
+        to customize the route match, or toggle <code>md3-active</code> manually on an item that has no
+        <code>routerLink</code>.
+    </li>
+    <li>
+        For an active condition that isn't purely route-driven, reference the item with
+        <code>#item="md3NavItem"</code> and set <code>[class.md3-active]</code> yourself using
+        <code>item.isRouteActive</code>, e.g. <code>[class.md3-active]="item.isRouteActive && hasUnread()"</code>.
+        This overrides the item's built-in active state.
+    </li>
+    <li>
+        Provide a filled variant of the icon with <code>md3-icon-element="active"</code> to swap in when the
+        item becomes active.
+    </li>
+    <li>
+        <code>hide-on-collapse</code> only has an effect inside a navigation rail, since a navigation bar
+        never collapses.
+    </li>
+</ul>

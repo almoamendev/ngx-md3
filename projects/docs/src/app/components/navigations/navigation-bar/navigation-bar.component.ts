@@ -46,8 +46,8 @@ import {
 
     public apiTypes: string = `// Types
 
-// see NavigationItem and Badge on the navigation rail page
-// for their full API`;
+// see the navigation item and navigation rail pages
+// for the full NavigationItem and Badge API`;
 
     public apiUsage: string = `<!-- Component usage -->
 
@@ -64,13 +64,6 @@ import {
 <a routerLink="/home" md3-nav-item>
     <md3-icon md3-icon-element>home</md3-icon>
     Home
-</a>
-
-<!-- fully custom active condition, combined with the route match -->
-<a #item="md3NavItem" routerLink="/inbox" md3-nav-item
-    [class.md3-active]="item.isRouteActive && hasUnread()">
-    <md3-icon md3-icon-element>mail</md3-icon>
-    Inbox
 </a>
 
 <!-- item with a badge -->

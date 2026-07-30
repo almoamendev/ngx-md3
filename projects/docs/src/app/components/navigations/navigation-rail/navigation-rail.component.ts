@@ -98,19 +98,6 @@ type ExpandedLayout = 'standard' | 'modal';`;
     Home
 </a>
 
-<!-- customize route matching -->
-<a routerLink="/settings" [routerLinkActiveOptions]="{ exact: true }" md3-nav-item>
-    <md3-icon md3-icon-element>settings</md3-icon>
-    Settings
-</a>
-
-<!-- fully custom active condition, combined with the route match -->
-<a #item="md3NavItem" routerLink="/inbox" md3-nav-item
-    [class.md3-active]="item.isRouteActive && hasUnread()">
-    <md3-icon md3-icon-element>mail</md3-icon>
-    Inbox
-</a>
-
 <!-- grouping items -->
 <md3-navigation-rail>
     <md3-nav-group label="Library" hide-on-collapse>
