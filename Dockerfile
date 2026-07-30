@@ -1,7 +1,7 @@
 # ─────────────────────────────────────────────
 #  Angular — md3 (Dev)
 # ─────────────────────────────────────────────
-FROM node:22-alpine
+FROM node:24-alpine
 
 WORKDIR /md3
 ENV PATH="/md3/node_modules/.bin:${PATH}"
