@@ -12,6 +12,7 @@ concurrency:
 
 permissions:
   contents: read
+  id-token: write
 
 jobs:
   publish:
@@ -53,5 +54,3 @@ jobs:
         if: steps.version-check.outputs.skip == 'false'
         working-directory: dist/ngx-md3
         run: npm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
