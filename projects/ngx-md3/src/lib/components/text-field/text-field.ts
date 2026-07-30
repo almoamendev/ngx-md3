@@ -43,6 +43,10 @@ export class TextField implements ButtonContext {
     private controlName = contentChild(FormControlName);
     private controlError = signal(false);
     private nativeInputError = signal(false);
+    // Tracks the last aria-invalid value this component itself wrote, so
+    // hasNativeInputError() can tell a self-authored value apart from one set
+    // externally. See hasNativeInputError() for why that distinction matters.
+    private lastSyncedAriaInvalid: string | null = null;
 
     public formControl = computed<AbstractControl | undefined>(() => {
         if (this.control()) {
@@ -169,7 +173,20 @@ export class TextField implements ButtonContext {
     }
 
     private hasNativeInputError(input: HTMLInputElement): boolean {
-        return !input.validity.valid || input.ariaInvalid === 'true';
+        const ariaInvalid = input.getAttribute('aria-invalid');
+
+        // aria-invalid is also written by syncAriaInvalidAttribute() below,
+        // based on this very computation. Without excluding our own last
+        // write, a validity error that gets flagged once can never clear:
+        // the native 'input'/'change' handler would keep reading back the
+        // (still-true, self-authored) attribute from the previous cycle
+        // before the effect that's about to correct it has had a chance to
+        // run. Comparing against lastSyncedAriaInvalid means only a value
+        // that didn't come from us — i.e. set externally, such as by a
+        // consumer's own validation — counts as an error signal here.
+        const externallyFlaggedInvalid = ariaInvalid === 'true' && ariaInvalid !== this.lastSyncedAriaInvalid;
+
+        return !input.validity.valid || externallyFlaggedInvalid;
     }
 
     private hasControlError(control: AbstractControl): boolean {
@@ -182,6 +199,8 @@ export class TextField implements ButtonContext {
         }
 
         const value = this.inputError() ? 'true' : 'false';
+        this.lastSyncedAriaInvalid = value;
+
         if (input.getAttribute('aria-invalid') !== value) {
             input.setAttribute('aria-invalid', value);
         }
