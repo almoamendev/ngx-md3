@@ -27,6 +27,8 @@ import { NavigationItemComponent } from './components/navigations/navigation-ite
 import { AppBarComponent } from './components/app-bar/app-bar.component';
 import { SnackbarsComponent } from './components/snackbars/snackbars.component';
 import { HomeComponent } from './home/home.component';
+import { BadgesComponent } from './components/badges/badges.component';
+import { ComponentsComponent } from './components/components.component';
 
 export const routes: Routes = [
     {
@@ -63,6 +65,10 @@ export const routes: Routes = [
                 path: 'components',
                 children: [
                     {
+                        path: '',
+                        component: ComponentsComponent,
+                    },
+                    {
                         path: 'app-bar',
                         component: AppBarComponent,
                     },
@@ -90,6 +96,10 @@ export const routes: Routes = [
                                 component: ButtonGroupsComponent,
                             },
                         ],
+                    },
+                    {
+                        path: 'badges',
+                        component: BadgesComponent,
                     },
                     {
                         path: 'cards',

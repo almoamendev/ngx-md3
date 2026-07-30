@@ -1,0 +1,15 @@
+.badge-anchor {
+    position: relative;
+
+    .badge-container {
+        flex: 0 0 auto;
+        position: absolute;
+        top: 0.25em;
+        inset-inline-start: 50%;
+        display: inline-flex;
+        align-items: start;
+        justify-content: end;
+        min-height: 0.875em;
+        min-width: 0.875em;
+    }
+}

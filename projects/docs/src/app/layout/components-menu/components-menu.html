@@ -5,130 +5,24 @@
 </md3-side-sheet-header>
 <md3-side-sheet-body>
     <md3-nav-group>
-        <a routerLink="/components/app-bar" md3-nav-item>
-            <md3-icon md3-icon-element>deployed_code</md3-icon>
-            <md3-icon md3-icon-element="active" filled>deployed_code</md3-icon>
-            App bar
+        <a routerLink="/components" md3-nav-item [routerLinkActiveOptions]="{ exact: true }">
+            <md3-icon md3-icon-element>apps</md3-icon>
+            <md3-icon md3-icon-element="active" filled>apps</md3-icon>
+            All components
+            <md3-badge>{{ componentsCount }}</md3-badge>
         </a>
     </md3-nav-group>
-    <md3-divider></md3-divider>
-    <md3-nav-group label="Navigation">
-        <a routerLink="/components/navigations/navigation-bar" md3-nav-item>
-            <md3-icon md3-icon-element>deployed_code</md3-icon>
-            <md3-icon md3-icon-element="active" filled>deployed_code</md3-icon>
-            Navigation bar
-        </a>
-        <a routerLink="/components/navigations/navigation-rail" md3-nav-item>
-            <md3-icon md3-icon-element>deployed_code</md3-icon>
-            <md3-icon md3-icon-element="active" filled>deployed_code</md3-icon>
-            Navigation rail
-        </a>
-        <a routerLink="/components/navigations/navigation-item" md3-nav-item>
-            <md3-icon md3-icon-element>deployed_code</md3-icon>
-            <md3-icon md3-icon-element="active" filled>deployed_code</md3-icon>
-            Navigation item
-        </a>
-    </md3-nav-group>
-    <md3-divider></md3-divider>
-    <md3-nav-group label="Loading & progress">
-        <a routerLink="/components/loading-and-progress/loading-indicators" md3-nav-item>
-            <md3-icon md3-icon-element>deployed_code</md3-icon>
-            <md3-icon md3-icon-element="active" filled>deployed_code</md3-icon>
-            Loading indicators
-        </a>
-        <a routerLink="/components/loading-and-progress/progress-indicators" md3-nav-item>
-            <md3-icon md3-icon-element>deployed_code</md3-icon>
-            <md3-icon md3-icon-element="active" filled>deployed_code</md3-icon>
-            Progress indicators
-        </a>
-    </md3-nav-group>
-    <md3-divider></md3-divider>
-    <md3-nav-group label="Buttons">
-        <a routerLink="/components/buttons/buttons" md3-nav-item>
-            <md3-icon md3-icon-element>deployed_code</md3-icon>
-            <md3-icon md3-icon-element="active" filled>deployed_code</md3-icon>
-            Buttons
-        </a>
-        <a routerLink="/components/buttons/icon-buttons" md3-nav-item>
-            <md3-icon md3-icon-element>deployed_code</md3-icon>
-            <md3-icon md3-icon-element="active" filled>deployed_code</md3-icon>
-            Icon buttons
-        </a>
-        <a routerLink="/components/buttons/floating-action-buttons" md3-nav-item>
-            <md3-icon md3-icon-element>deployed_code</md3-icon>
-            <md3-icon md3-icon-element="active" filled>deployed_code</md3-icon>
-            FABs
-        </a>
-        <a routerLink="/components/buttons/split-buttons" md3-nav-item>
-            <md3-icon md3-icon-element>deployed_code</md3-icon>
-            <md3-icon md3-icon-element="active" filled>deployed_code</md3-icon>
-            Split buttons
-        </a>
-        <a routerLink="/components/buttons/button-groups" md3-nav-item>
-            <md3-icon md3-icon-element>deployed_code</md3-icon>
-            <md3-icon md3-icon-element="active" filled>deployed_code</md3-icon>
-            Button groups
-        </a>
-    </md3-nav-group>
-    <md3-divider></md3-divider>
-    <md3-nav-group label="Selection controls">
-        <a routerLink="/components/selection-controls/checkboxes" md3-nav-item>
-            <md3-icon md3-icon-element>deployed_code</md3-icon>
-            <md3-icon md3-icon-element="active" filled>deployed_code</md3-icon>
-            Checkboxes
-        </a>
-        <a routerLink="/components/selection-controls/switches" md3-nav-item>
-            <md3-icon md3-icon-element>deployed_code</md3-icon>
-            <md3-icon md3-icon-element="active" filled>deployed_code</md3-icon>
-            Switches
-        </a>
-        <a routerLink="/components/selection-controls/radio-buttons" md3-nav-item>
-            <md3-icon md3-icon-element>deployed_code</md3-icon>
-            <md3-icon md3-icon-element="active" filled>deployed_code</md3-icon>
-            Radio Buttons
-        </a>
-    </md3-nav-group>
-    <md3-divider></md3-divider>
-    <md3-nav-group>
-        <a routerLink="/components/cards" md3-nav-item>
-            <md3-icon md3-icon-element>deployed_code</md3-icon>
-            <md3-icon md3-icon-element="active" filled>deployed_code</md3-icon>
-            Cards
-        </a>
-        <a routerLink="/components/chips" md3-nav-item>
-            <md3-icon md3-icon-element>deployed_code</md3-icon>
-            <md3-icon md3-icon-element="active" filled>deployed_code</md3-icon>
-            Chips
-        </a>
-        <a routerLink="/components/dialogs" md3-nav-item>
-            <md3-icon md3-icon-element>deployed_code</md3-icon>
-            <md3-icon md3-icon-element="active" filled>deployed_code</md3-icon>
-            Dialogs
-        </a>
-        <a routerLink="/components/sliders" md3-nav-item>
-            <md3-icon md3-icon-element>deployed_code</md3-icon>
-            <md3-icon md3-icon-element="active" filled>deployed_code</md3-icon>
-            Sliders
-        </a>
-        <a routerLink="/components/lists" md3-nav-item>
-            <md3-icon md3-icon-element>deployed_code</md3-icon>
-            <md3-icon md3-icon-element="active" filled>deployed_code</md3-icon>
-            Lists
-        </a>
-        <a routerLink="/components/menus" md3-nav-item>
-            <md3-icon md3-icon-element>deployed_code</md3-icon>
-            <md3-icon md3-icon-element="active" filled>deployed_code</md3-icon>
-            Menus
-        </a>
-        <a routerLink="/components/snackbars" md3-nav-item>
-            <md3-icon md3-icon-element>deployed_code</md3-icon>
-            <md3-icon md3-icon-element="active" filled>deployed_code</md3-icon>
-            Snackbars
-        </a>
-        <a routerLink="/components/text-fields" md3-nav-item>
-            <md3-icon md3-icon-element>deployed_code</md3-icon>
-            <md3-icon md3-icon-element="active" filled>deployed_code</md3-icon>
-            Text fields
-        </a>
-    </md3-nav-group>
+
+    @for (section of sections; track section.label) {
+        <md3-divider></md3-divider>
+        <md3-nav-group [label]="section.label">
+            @for (entry of section.entries; track entry.link) {
+                <a [routerLink]="entry.link" md3-nav-item>
+                    <md3-icon md3-icon-element>deployed_code</md3-icon>
+                    <md3-icon md3-icon-element="active" filled>deployed_code</md3-icon>
+                    {{ entry.label }}
+                </a>
+            }
+        </md3-nav-group>
+    }
 </md3-side-sheet-body>

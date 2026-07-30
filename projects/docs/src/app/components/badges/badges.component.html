@@ -1,0 +1,83 @@
+<h1>Badges</h1>
+
+<p>
+    Badges show notifications, counts, or status information on navigation items, icons, and other elements.
+</p>
+
+<figure class="component-image">
+    <img src="img/md3-badge.png" alt="Material Design badge configurations" />
+    <ol>
+        <li>Small badge on a navigation item</li>
+        <li>Large badge on a navigation item</li>
+        <li>Large badge with max characters on a navigation item</li>
+    </ol>
+</figure>
+
+<app-playground>
+    <button action-item md3-icon-button button-type="tonal" button-squared [selected]="configOpen()"
+        (click)="openConfig()">
+        <md3-icon md3-icon-element>settings</md3-icon>
+    </button>
+
+    <button md3-icon-button button-type="standard" class="badge-anchor">
+        <div class="badge-container">
+        @if (badgeType() == 'dot') {
+            <md3-badge small></md3-badge>
+        } @else if (badgeType() == 'text') {
+            <md3-badge>New</md3-badge>
+        } @else {
+            <md3-badge>
+                <span dir="ltr">{{ badgeType() == 'count' ? '1' : '999+' }}</span>
+            </md3-badge>
+        }
+        </div>
+        <md3-icon md3-icon-element>notifications</md3-icon>
+    </button>
+</app-playground>
+
+<h2>API</h2>
+
+<div class="table-container md3-scrollable">
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 50%;">Name</th>
+                <th>Type</th>
+                <th>Default</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <i>small</i>
+                    <p md3-type-body size="small">Renders the badge as a small dot with no visible content, used to indicate that new information is available without a count.</p>
+                </td>
+                <td>input&lt;boolean&gt;</td>
+                <td style="white-space: nowrap;">false</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<app-shiki [code]="apiImport"></app-shiki>
+<app-shiki [code]="apiData"></app-shiki>
+<app-shiki [code]="apiUsage" language="html"></app-shiki>
+<ul>
+    <li>
+        <code>md3-badge</code> is a directive, not a positioned element — it does not anchor itself to
+        sibling content. Wrap the badge and its target (e.g. an icon) in a container with
+        <code>position: relative</code> and position the badge absolutely, as shown in the
+        <a routerLink="/components/navigations/navigation-item"><code>md3-nav-item</code></a> and
+        <a routerLink="/components/menus"><code>md3-menu-item</code></a> components.
+    </li>
+    <li>
+        Content is projected into the badge, so it can hold a count or a short text label such as
+        <code>NEW</code>. Keep labels to a word or two &mdash; the badge grows with its content and has no
+        truncation of its own. Numeric counts should follow the Material guidance of capping large numbers
+        (e.g. <code>999+</code>).
+    </li>
+    <li>
+        Set <code>small</code> to render a dot indicator and omit any projected content, since the small
+        variant hides its content visually.
+    </li>
+</ul>

@@ -1,0 +1,34 @@
+<md3-side-sheet-header title="Configurations">
+    <button type="button" md3-icon-button trailing button-type="standard" (click)="close()">
+        <md3-icon md3-icon-element>close</md3-icon>
+    </button>
+</md3-side-sheet-header>
+<md3-side-sheet-body class="md3-component-config">
+    <div md3-type-body size="large">Style</div>
+    <div class="controls-list">
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="badgeType">
+                <input type="radio" md3-input-element name="badge-type" value="dot">
+            </md3-radio-button>
+            <div md3-type-label size="large">Dot</div>
+        </label>
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="badgeType">
+                <input type="radio" md3-input-element name="badge-type" value="count">
+            </md3-radio-button>
+            <div md3-type-label size="large">Count</div>
+        </label>
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="badgeType">
+                <input type="radio" md3-input-element name="badge-type" value="overflow">
+            </md3-radio-button>
+            <div md3-type-label size="large">Overflow (999+)</div>
+        </label>
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="badgeType">
+                <input type="radio" md3-input-element name="badge-type" value="text">
+            </md3-radio-button>
+            <div md3-type-label size="large">Text (NEW)</div>
+        </label>
+    </div>
+</md3-side-sheet-body>

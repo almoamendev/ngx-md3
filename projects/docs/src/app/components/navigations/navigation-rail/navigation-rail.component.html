@@ -176,17 +176,14 @@
             </tr>
             <tr>
                 <td colspan="3">
-                    <h3>Badge</h3>
+                    <h3><a routerLink="/components/badges">Badge</a></h3>
                     <md3-divider></md3-divider>
                 </td>
             </tr>
             <tr>
-                <td>
-                    <i>small</i>
-                    <p md3-type-body size="small">Shows a small dot badge instead of a labeled badge.</p>
+                <td colspan="3">
+                    <p md3-type-body size="small">See the badges docs for its full API.</p>
                 </td>
-                <td>input&lt;boolean&gt;</td>
-                <td style="white-space: nowrap;">false</td>
             </tr>
             <tr>
                 <td colspan="3">
@@ -218,6 +215,11 @@
     </li>
     <li>
         Use <code>md3-nav-group</code> to group related items under an optional label.
+    </li>
+    <li>
+        Project a <a routerLink="/components/badges"><code>md3-badge</code></a> into an item to show a
+        notification dot or a count. The rail positions it over the item's icon automatically, so no
+        additional styling is needed.
     </li>
     <li>
         A single <code>md3-fab</code> can be placed at the top of the rail, above the navigation items.

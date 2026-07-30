@@ -4,7 +4,8 @@
     Navigation items are the individual destinations projected into a
     <a routerLink="/components/navigations/navigation-bar">navigation bar</a> or a
     <a routerLink="/components/navigations/navigation-rail">navigation rail</a>. The same <code>md3-nav-item</code>
-    directive works in either — see those pages for how items compose with groups, badges, and a FAB.
+    directive works in either — see those pages for how items compose with groups,
+    <a routerLink="/components/badges">badges</a>, and a FAB.
 </p>
 
 <figure class="component-image">
@@ -82,6 +83,11 @@
     <li>
         Provide a filled variant of the icon with <code>md3-icon-element="active"</code> to swap in when the
         item becomes active.
+    </li>
+    <li>
+        A projected <a routerLink="/components/badges"><code>md3-badge</code></a> is placed in the item's
+        badge container and positioned over the icon automatically &mdash; unlike a standalone badge, it
+        needs no wrapper or positioning styles of its own.
     </li>
     <li>
         <code>hide-on-collapse</code> only has an effect inside a navigation rail, since a navigation bar

@@ -1,0 +1,49 @@
+<h1>Components</h1>
+
+<p>
+    Every component in the library, grouped by purpose. {{ total }} components in total &mdash; each one is a
+    standalone import, so you only pull in what you use.
+</p>
+
+<md3-text-field label="Search components" field-type="filled" class="components-search">
+    <md3-icon md3-icon-element="leading">search</md3-icon>
+    <input md3-input-element type="text" autocomplete="off" [value]="query()" (input)="onSearch($event)">
+    @if (query()) {
+        <button type="button" md3-icon-button button-type="standard" aria-label="Clear search"
+            (click)="clearSearch()">
+            <md3-icon md3-icon-element>close</md3-icon>
+        </button>
+    }
+</md3-text-field>
+
+<!--
+    The live region stays mounted so screen readers announce updates as the
+    query changes; a region added at the same time as its content is not
+    reliably announced. Its reserved height also keeps the grid from jumping.
+-->
+<p md3-type-body size="small" color="on-surface-variant" aria-live="polite" class="components-result-count">
+    @if (isFiltering()) {
+        {{ matchCount() }} {{ matchCount() == 1 ? 'component' : 'components' }} matching "{{ query().trim() }}"
+    }
+</p>
+
+@for (section of filteredSections(); track section.label) {
+    <section class="components-section">
+        <h2>{{ section.label }}</h2>
+
+        <div class="components-grid">
+            @for (entry of section.entries; track entry.link) {
+                <a md3-card card-type="outlined" [routerLink]="entry.link" class="components-card">
+                    <md3-icon md3-icon-element [icon-size]="36">{{ entry.icon }}</md3-icon>
+                    <div md3-type-title size="small">{{ entry.label }}</div>
+                    <p md3-type-body size="small" color="on-surface-variant">{{ entry.description }}</p>
+                </a>
+            }
+        </div>
+    </section>
+} @empty {
+    <p class="components-empty">
+        No components match "{{ query().trim() }}". Try a broader term, or
+        <button type="button" class="components-reset" (click)="clearSearch()">clear the search</button>.
+    </p>
+}

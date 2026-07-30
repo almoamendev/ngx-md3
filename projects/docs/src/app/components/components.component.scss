@@ -1,0 +1,49 @@
+.components-search {
+    display: block;
+    width: 100%;
+    margin-block: 1.5em 0.5em;
+}
+
+.components-result-count {
+    margin-block: 0 0.5em;
+    min-height: 1.5em;
+}
+
+.components-section {
+    padding-block: 0.5em 1.5em;
+}
+
+.components-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15em, 1fr));
+    gap: 1em;
+    margin-top: 1em;
+}
+
+.components-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5em;
+    padding: 1.25em;
+    text-decoration: none;
+
+    p {
+        margin: 0;
+    }
+}
+
+.components-empty {
+    padding-block: 1.5em;
+    color: rgb(var(--md-scheme-on-surface-variant));
+}
+
+.components-reset {
+    font: inherit;
+    color: rgb(var(--md-scheme-primary));
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    text-decoration: underline;
+}
