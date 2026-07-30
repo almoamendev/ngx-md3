@@ -8,7 +8,7 @@ describe('ListLeading', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ListLeading]
+      imports: [ListLeading]
     })
     .compileComponents();
 
