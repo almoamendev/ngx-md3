@@ -82,6 +82,10 @@ body {
     }
 }
 
+a {
+    color: rgb(var(--md-scheme-primary));
+}
+
 .md3-state-component {
     position: relative;
     --border-top-start-r: var(--border-radius, 0em);
