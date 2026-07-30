@@ -1,11 +1,16 @@
 import { Component, computed, effect, signal } from '@angular/core';
 import { NavigationEnd, Router, RouterLink, RouterOutlet } from "@angular/router";
-import { AppBar, IconElement, InputElement, LayoutService, MaterialIcon, NavigationItem, NavigationRail, Scaffold, ScaffoldBar, ScaffoldPane, ScaffoldRail, SheetsService, SideSheetConfig, SideSheetRef, SideSheetType, Switch } from '@vip9008/ngx-md3';
+import { AppBar, Badge, IconElement, InputElement, LayoutService, MaterialIcon, NavigationItem, NavigationRail, Scaffold, ScaffoldBar, ScaffoldPane, ScaffoldRail, SheetsService, SideSheetConfig, SideSheetRef, SideSheetType, Switch } from '@vip9008/ngx-md3';
 import { FormControl } from '@angular/forms';
 import { ComponentsMenu } from './components-menu/components-menu';
 import { filter } from 'rxjs';
 import { FoundationsMenu } from './foundations-menu/foundations-menu';
 import { StylesMenu } from './styles-menu/styles-menu';
+
+// The version of the library the docs site is actually showcasing — read
+// straight from its package.json at build time rather than hand-maintained,
+// so it can never drift out of sync with what's really being built/deployed.
+import { version as ngxMd3Version } from '../../../../ngx-md3/package.json';
 
 enum NavigationGroupLink {
     FOUNDATIONS = 'foundations',
@@ -23,6 +28,7 @@ enum NavigationGroupLink {
         ScaffoldRail,
         ScaffoldPane,
         AppBar,
+        Badge,
         Switch,
         InputElement,
         MaterialIcon,
@@ -34,6 +40,8 @@ enum NavigationGroupLink {
     styleUrl: './layout.component.scss',
 })
 export class LayoutComponent {
+    public readonly ngxMd3Version = `v${ngxMd3Version}`;
+
     public expandedRail = signal<boolean>(false);
     public showMenuBtn = signal<boolean>(false);
     public darkModeControl: FormControl = new FormControl<boolean>(false);
