@@ -24,23 +24,19 @@
 
     ::ng-deep [md3-menu-item] {
         &:first-child .md3-menu-item-container {
-            border-start-start-radius: 0.75em;
-            border-start-end-radius: 0.75em;
+            --border-top-start-r: var(--md-border-radius-medium);
+            --border-top-end-r: var(--md-border-radius-medium);
 
-            &::after {
-                border-start-start-radius: 1.125em;
-                border-start-end-radius: 1.125em;
-            }
+            border-start-start-radius: var(--border-top-start-r);
+            border-start-end-radius: var(--border-top-end-r);
         }
 
         &:last-child .md3-menu-item-container {
-            border-end-start-radius: 0.75em;
-            border-end-end-radius: 0.75em;
+            --border-bottom-start-r: var(--md-border-radius-medium);
+            --border-bottom-end-r: var(--md-border-radius-medium);
 
-            &::after {
-                border-end-start-radius: 1.125em;
-                border-end-end-radius: 1.125em;
-            }
+            border-end-start-radius: var(--border-bottom-start-r);
+            border-end-end-radius: var(--border-bottom-end-r);
         }
     }
 }

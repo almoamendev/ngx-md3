@@ -3,7 +3,7 @@
     --foreground-color: rgb(var(--md-scheme-on-surface-variant));
     --border-color: rgb(var(--md-scheme-outline-variant));
     --state-color: var(--md-scheme-on-surface);
-    --border-radius: 0.5em;
+    --border-radius: var(--md-border-radius-small);
     --outline-color: rgb(var(--md-scheme-secondary));
     --outline-width: 0.1875em;
     --outline-offset: -0.125em;
@@ -90,7 +90,7 @@
                 color: rgb(var(--md-scheme-surface-container-low));
                 height: 1.5em;
                 transform: scale(0.8);
-                border-radius: 100%;
+                border-radius: 50%;
                 margin-inline-start: -0.25em;
             }
         }
@@ -128,13 +128,15 @@
         .md3-chip-container {
             .md3-chip-trailing {
                 &.has-icon {
+                    --border-radius: 50%;
+
                     opacity: 1;
                     transform: scale(1);
                     width: 1.125em;
                     position: relative;
                     border: none;
                     background-color: transparent;
-                    border-radius: 100%;
+                    border-radius: var(--border-radius);
                     cursor: pointer;
                     z-index: 10;
 
@@ -144,7 +146,7 @@
                         position: absolute;
                         height: 3em;
                         width: 3em;
-                        border-radius: 100%;
+                        border-radius: var(--border-radius);
                     }
                 }
             }
@@ -176,13 +178,15 @@
             }
 
             .md3-chip-trailing {
+                --border-radius: 50%;
+
                 opacity: 1;
                 transform: scale(1);
                 width: 1.125em;
                 position: relative;
                 border: none;
                 background-color: transparent;
-                border-radius: 100%;
+                border-radius: var(--border-radius);
                 cursor: pointer;
                 z-index: 10;
 
@@ -192,7 +196,7 @@
                     position: absolute;
                     height: 3em;
                     width: 3em;
-                    border-radius: 100%;
+                    border-radius: var(--border-radius);
                 }
             }
         }

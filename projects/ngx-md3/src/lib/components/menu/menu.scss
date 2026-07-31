@@ -45,11 +45,11 @@
 :host {
     --background-color: rgb(var(--md-scheme-surface-container-low));
     --foreground-color: rgb(var(--md-scheme-on-surface));
-    --border-radius: 1em;
+    --border-radius: var(--md-border-radius-large);
     --menu-min-width: 7em;
     --menu-max-width: 17.5em;
 
-    --menu-group-radius: 0.5em;
+    --menu-group-radius: var(--md-border-radius-small);
     --menu-group-shadow: var(--md-shadow-3dp);
     --menu-group-label-color: rgb(var(--md-scheme-on-surface-variant));
     
@@ -58,7 +58,7 @@
     --menu-item-selected-background: rgb(var(--md-scheme-tertiary-container));
     --menu-item-selected-foreground: rgb(var(--md-scheme-on-tertiary-container));
     --menu-item-state-color: var(--md-scheme-on-surface);
-    --menu-item-border-radius: 0.25em;
+    --menu-item-border-radius: var(--md-border-radius-xsmall);
     --menu-item-outline-color: rgb(var(--md-scheme-secondary));
     --menu-item-outline-width: 0.1875em;
     --menu-item-outline-offset: -0.1875em;
@@ -96,7 +96,7 @@
     }
 
     &.md3-inactive {
-        --border-radius: 0.5em;
+        --border-radius: var(--md-border-radius-small);
     }
 
     ::ng-deep md3-menu-group {

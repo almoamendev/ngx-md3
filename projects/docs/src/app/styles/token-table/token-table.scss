@@ -14,7 +14,7 @@ h3 {
 .token-value {
     font-family: 'Roboto Mono', ui-monospace, monospace;
     font-size: 0.875em;
-    white-space: nowrap;
+    white-space: pre;
     vertical-align: middle;
 }
 
@@ -29,16 +29,16 @@ h3 {
 .token-shadow {
     display: block;
     width: 3em;
-    height: 2em;
-    margin: 0.375em;
+    height: 1em;
+    margin: 0 0.375em;
     border-radius: var(--md-border-radius-xsmall);
-    background-color: rgb(var(--md-scheme-surface-container-lowest));
+    background-color: rgb(var(--md-scheme-surface-container-highest));
 }
 
 .token-radius {
     display: block;
-    width: 3em;
-    height: 3em;
+    width: 6em;
+    height: 5em;
     background-color: rgb(var(--md-scheme-primary-container));
     border: 0.0625em solid rgb(var(--md-scheme-outline-variant));
 }

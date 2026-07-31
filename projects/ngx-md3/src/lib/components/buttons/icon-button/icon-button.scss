@@ -52,7 +52,7 @@
     }
 
     &.md3-square {
-        --border-radius: 0.75em;
+        --border-radius: var(--md-border-radius-medium);
     }
 
     &.md3-toggle {
@@ -66,7 +66,7 @@
             --state-color: var(--md-scheme-on-primary);
 
             &:not(:active) {
-                --border-radius: 0.75em;
+                --border-radius: var(--md-border-radius-medium);
     
                 &.md3-square {
                     --border-radius: 2.5em;
@@ -87,11 +87,11 @@
     }
 
     &:not(:disabled):active {
-        --border-radius: 0.5em;
+        --border-radius: var(--md-border-radius-small);
     }
 
     &.md3-x-small {
-        --border-radius: 2em;
+        --border-radius: var(--md-border-radius-xlarge-i);
         --inline-padding: calc(0.375em - var(--border-size));
 
         height: 2em;
@@ -118,19 +118,19 @@
         }
 
         &.md3-square {
-            --border-radius: 0.75em;
+            --border-radius: var(--md-border-radius-medium);
         }
 
         &:not(:active).md3-toggle.md3-selected {
-            --border-radius: 0.75em;
+            --border-radius: var(--md-border-radius-medium);
 
             &.md3-square {
-                --border-radius: 2em;
+                --border-radius: var(--md-border-radius-xlarge-i);
             }
         }
 
         &:not(:disabled):active {
-            --border-radius: 0.5em;
+            --border-radius: var(--md-border-radius-small);
         }
     }
 
@@ -164,11 +164,11 @@
         }
 
         &.md3-square {
-            --border-radius: 1em;
+            --border-radius: var(--md-border-radius-large);
         }
 
         &:not(:active).md3-toggle.md3-selected {
-            --border-radius: 1em;
+            --border-radius: var(--md-border-radius-large);
 
             &.md3-square {
                 --border-radius: 3.5em;
@@ -176,7 +176,7 @@
         }
 
         &:not(:disabled):active {
-            --border-radius: 0.75em;
+            --border-radius: var(--md-border-radius-medium);
         }
     }
 
@@ -199,11 +199,11 @@
         }
 
         &.md3-square {
-            --border-radius: 1.75em;
+            --border-radius: var(--md-border-radius-xlarge);
         }
 
         &:not(:active).md3-toggle.md3-selected {
-            --border-radius: 1.75em;
+            --border-radius: var(--md-border-radius-xlarge);
 
             &.md3-square {
                 --border-radius: 6em;
@@ -211,7 +211,7 @@
         }
 
         &:not(:disabled):active {
-            --border-radius: 1em;
+            --border-radius: var(--md-border-radius-large);
         }
     }
 
@@ -234,11 +234,11 @@
         }
 
         &.md3-square {
-            --border-radius: 1.75em;
+            --border-radius: var(--md-border-radius-xlarge);
         }
 
         &:not(:active).md3-toggle.md3-selected {
-            --border-radius: 1.75em;
+            --border-radius: var(--md-border-radius-xlarge);
 
             &.md3-square {
                 --border-radius: 8.5em;
@@ -246,7 +246,7 @@
         }
 
         &:not(:disabled):active {
-            --border-radius: 1em;
+            --border-radius: var(--md-border-radius-large);
         }
     }
 

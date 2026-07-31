@@ -2,14 +2,14 @@
     --background-color: rgb(var(--md-scheme-surface-container-low));
     --foreground-color: rgb(var(--md-scheme-on-surface));
     --state-color: var(--md-scheme-on-surface);
-    --border-radius: 0.75em;
+    --border-radius: var(--md-border-radius-medium);
     --border-size: 0em;
     --outline-color: rgb(var(--md-scheme-secondary));
     --outline-width: 0.1875em;
     --outline-offset: -0.125em;
 
     font-size: 1rem;
-    border-radius: 0.75em;
+    border-radius: var(--md-border-radius-medium);
     display: block;
     width: 100%;
     text-align: start;

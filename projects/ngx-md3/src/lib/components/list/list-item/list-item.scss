@@ -27,7 +27,7 @@
     &.md3-selected {
         --background-color: rgb(var(--md-scheme-secondary-container));
         --foreground-color: rgb(var(--md-scheme-on-secondary-container));
-        --border-radius: 1em;
+        --border-radius: var(--md-border-radius-large);
     }
 
     &:hover, &:has(.md3-item-primary-action:hover) {
@@ -89,7 +89,7 @@
 
             &, & ~ * {
                 --foreground-color: rgb(var(--md-scheme-on-surface));
-                --border-radius: 0.75em;
+                --border-radius: var(--md-border-radius-medium);
     
                 opacity: 0.38;
             }
@@ -99,7 +99,7 @@
     &.md3-disabled, &:disabled {
         --background-color: transparent;
         --foreground-color: rgb(var(--md-scheme-on-surface));
-        --border-radius: 0.75em;
+        --border-radius: var(--md-border-radius-medium);
 
         cursor: default !important;
         opacity: 0.38;

@@ -1,64 +1,64 @@
 :host {
-    --outer-radius: 1.25em;
-    --inner-radius: 0.25em;
+    --outer-radius: var(--md-border-radius-large-i);
+    --inner-radius: var(--md-border-radius-xsmall);
     --trailing-padding-diff: 0.0625em;
 
     display: inline-flex;
     gap: 0.125em;
 
     &.md3-x-small {
-        --outer-radius: 1em;
+        --outer-radius: var(--md-border-radius-large);
         --trailing-padding-diff: 0.0625em;
 
         ::ng-deep [md3-button], ::ng-deep [md3-icon-button] {
             &:not(:disabled):hover, :not(:disabled):active {
-                --inner-radius: 0.5em;
+                --inner-radius: var(--md-border-radius-small);
             }
         }
     }
 
     &.md3-small {
-        --outer-radius: 1.25em;
+        --outer-radius: var(--md-border-radius-large-i);
         --trailing-padding-diff: 0.0625em;
 
         ::ng-deep [md3-button], ::ng-deep [md3-icon-button] {
             &:not(:disabled):hover, :not(:disabled):active {
-                --inner-radius: 0.75em;
+                --inner-radius: var(--md-border-radius-medium);
             }
         }
     }
 
     &.md3-medium {
-        --outer-radius: 1.75em;
+        --outer-radius: var(--md-border-radius-xlarge);
         --trailing-padding-diff: 0.125em;
 
         ::ng-deep [md3-button], ::ng-deep [md3-icon-button] {
             &:not(:disabled):hover, :not(:disabled):active {
-                --inner-radius: 0.75em;
+                --inner-radius: var(--md-border-radius-medium);
             }
         }
     }
 
     &.md3-large {
-        --outer-radius: 3em;
-        --inner-radius: 0.75em;
+        --outer-radius: var(--md-border-radius-xxlarge);
+        --inner-radius: var(--md-border-radius-medium);
         --trailing-padding-diff: 0.1875em;
 
         ::ng-deep [md3-button], ::ng-deep [md3-icon-button] {
             &:not(:disabled):hover, :not(:disabled):active {
-                --inner-radius: 1.25em;
+                --inner-radius: var(--md-border-radius-large-i);
             }
         }
     }
 
     &.md3-x-large {
         --outer-radius: 4.25em;
-        --inner-radius: 0.75em;
+        --inner-radius: var(--md-border-radius-medium);
         --trailing-padding-diff: 0.375em;
 
         ::ng-deep [md3-button], ::ng-deep [md3-icon-button] {
             &:not(:disabled):hover, :not(:disabled):active {
-                --inner-radius: 1.25em;
+                --inner-radius: var(--md-border-radius-large-i);
             }
         }
     }

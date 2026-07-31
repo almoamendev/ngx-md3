@@ -115,7 +115,7 @@
     &.md3-style-standard {
         .md3-side-sheet-container {
             --background-color: rgb(var(--md-scheme-surface));
-            --border-radius: 0em;
+            --border-radius: var(--md-border-radius-none);
         }
 
         &.md3-show-divider .md3-side-sheet-container::before {
@@ -184,7 +184,7 @@
                     inset: 0;
                     height: auto;
                     width: auto;
-                    border-radius: 1.75em;
+                    border-radius: var(--md-border-radius-xlarge);
                 }
 
                 .md3-icon-container {

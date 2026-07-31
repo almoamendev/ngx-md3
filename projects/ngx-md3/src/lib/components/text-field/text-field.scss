@@ -11,7 +11,7 @@
     .md3-text-field-container {
         display: block;
         position: relative;
-        border-radius: 0.25em 0.25em 0 0;
+        border-radius: var(--md-border-radius-xsmall) var(--md-border-radius-xsmall) 0 0;
         overflow: hidden;
 
         ::ng-deep [md3-icon-element=leading] {
@@ -250,7 +250,7 @@
         &.md3-text-field-outlined {
             --background-color: transparent;
 
-            border-radius: 0.25em;
+            border-radius: var(--md-border-radius-xsmall);
             padding-top: 0.5em;
 
             .md3-text-field-outline {

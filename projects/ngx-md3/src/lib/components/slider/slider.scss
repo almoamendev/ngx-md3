@@ -5,7 +5,7 @@
     --slider-handle-color: rgb(var(--md-scheme-primary));
     --outline-color: rgb(var(--md-scheme-secondary));
     --slider-size: 1em;
-    --border-radius: 0.5em;
+    --border-radius: var(--md-border-radius-small);
     --slider-progress: 0%;
 
     position: relative;
@@ -19,12 +19,12 @@
 
     &.md3-x-small {
         --slider-size: 1em;
-        --border-radius: 0.5em;
+        --border-radius: var(--md-border-radius-small);
     }
 
     &.md3-small {
         --slider-size: 1.5em;
-        --border-radius: 0.5em;
+        --border-radius: var(--md-border-radius-small);
     }
 
     &.md3-x-small, &.md3-small {
@@ -37,12 +37,12 @@
 
     &.md3-medium {
         --slider-size: 2.5em;
-        --border-radius: 0.75em;
+        --border-radius: var(--md-border-radius-medium);
     }
 
     &.md3-large {
         --slider-size: 3.5em;
-        --border-radius: 1em;
+        --border-radius: var(--md-border-radius-large);
     }
 
     &.md3-medium, &.md3-large {
@@ -57,7 +57,7 @@
 
     &.md3-x-large {
         --slider-size: 6em;
-        --border-radius: 1.75em;
+        --border-radius: var(--md-border-radius-xlarge);
         
         .md3-slider-container .md3-slider-track .md3-active-track .md3-track-bar {
             .md3-icon-container {
@@ -147,7 +147,7 @@
                         display: block;
                         height: 0.25em;
                         width: 0.25em;
-                        border-radius: 0.25em;
+                        border-radius: var(--md-border-radius-xsmall);
                         background-color: var(--slider-active-track-color);
                     }
                 }
@@ -179,7 +179,7 @@
                 position: absolute;
                 display: block;
                 inset: -0.5625em -0.1875em;
-                border-radius: 1em;
+                border-radius: var(--md-border-radius-large);
                 border: 0.1875em solid var(--outline-color);
                 pointer-events: none;
                 opacity: 0;

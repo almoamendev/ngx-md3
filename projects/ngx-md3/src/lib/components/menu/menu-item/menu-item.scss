@@ -152,7 +152,7 @@
         &:checked + .md3-menu-item-container {
             --menu-item-label-color: var(--menu-item-selected-foreground);
             --menu-item-supporting-color: var(--menu-item-selected-foreground);
-            --border-radius: 0.75em;
+            --border-radius: var(--md-border-radius-medium);
             
             background-color: var(--menu-item-selected-background);
             

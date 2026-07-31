@@ -236,7 +236,7 @@
                             inset: 0;
                             height: auto;
                             width: auto;
-                            border-radius: 1.75em;
+                            border-radius: var(--md-border-radius-xlarge);
                         }
     
                         .md3-icon-container {
@@ -284,8 +284,8 @@
 
             .md3-nav-container {
                 background-color: rgb(var(--md-scheme-surface-container));
-                border-start-end-radius: 1em;
-                border-end-end-radius: 1em;
+                border-start-end-radius: var(--md-border-radius-large);
+                border-end-end-radius: var(--md-border-radius-large);
                 box-shadow: var(--md-shadow-3dp);
                 width: fit-content;
                 max-width: 22.5em;

@@ -2,7 +2,7 @@
     --background-color: rgb(var(--md-scheme-surface));
     --foreground-color: rgb(var(--md-scheme-on-surface-variant));
     --state-color: var(--md-scheme-on-surface);
-    --border-radius: 0.25em;
+    --border-radius: var(--md-border-radius-xsmall);
     --border-size: 0em;
     --outline-color: rgb(var(--md-scheme-secondary));
     --outline-width: 0.1875em;
@@ -17,7 +17,7 @@
 
     &.md3-expressive {
         --leading-icon-size: 1.25em;
-        --leading-media-radius: 0.5em;
+        --leading-media-radius: var(--md-border-radius-small);
 
         &.md3-standard {
             gap: 0em;
@@ -29,17 +29,17 @@
 
         ::ng-deep md3-list-item, ::ng-deep [md3-list-item] {
             &.md3-state-component:first-child, &:first-child [md3-primary-action] {
-                --border-top-start-r: 1em;
-                --border-top-end-r: 1em;
+                --border-top-start-r: var(--md-border-radius-large);
+                --border-top-end-r: var(--md-border-radius-large);
             }
             
             &.md3-state-component:last-child, &:last-child [md3-primary-action] {
-                --border-bottom-start-r: 1em;
-                --border-bottom-end-r: 1em;
+                --border-bottom-start-r: var(--md-border-radius-large);
+                --border-bottom-end-r: var(--md-border-radius-large);
             }
 
             &.md3-state-component:hover, [md3-primary-action]:hover {
-                --border-radius: 0.75em;
+                --border-radius: var(--md-border-radius-medium);
 
                 --border-top-start-r: var(--border-radius);
                 --border-top-end-r: var(--border-radius);
@@ -48,7 +48,7 @@
             }
 
             &.md3-state-component:focus, [md3-primary-action]:focus {
-                --border-radius: 1em;
+                --border-radius: var(--md-border-radius-large);
 
                 --border-top-start-r: var(--border-radius);
                 --border-top-end-r: var(--border-radius);
@@ -59,7 +59,7 @@
     }
 
     &.md3-baseline {
-        --border-radius: 0em;
+        --border-radius: var(--md-border-radius-none);
         --padding-y: 0.5em;
         --slots-gap: 1em;
 

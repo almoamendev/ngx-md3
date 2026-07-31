@@ -8,7 +8,7 @@
 
     // default (small)
     --fab-height: 3.5em;
-    --border-radius: 1em;
+    --border-radius: var(--md-border-radius-large);
 
     padding: 0 1em;
 
@@ -99,7 +99,7 @@
     
     &.md3-medium {
         --fab-height: 5em;
-        --border-radius: 1.25em;
+        --border-radius: var(--md-border-radius-large-i);
         
         padding: 0 1.625em;
 
@@ -121,7 +121,7 @@
     
     &.md3-large {
         --fab-height: 6em;
-        --border-radius: 1.75em;
+        --border-radius: var(--md-border-radius-xlarge);
     
         padding: 0 1.75em;
 

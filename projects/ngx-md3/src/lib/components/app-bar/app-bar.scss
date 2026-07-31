@@ -87,7 +87,7 @@
             }
             
             ::ng-deep [md3-avatar] {
-                --border-radius: 1em;
+                --border-radius: var(--md-border-radius-large);
                 --border-size: 0em;
 
                 flex: 0 0 2em;

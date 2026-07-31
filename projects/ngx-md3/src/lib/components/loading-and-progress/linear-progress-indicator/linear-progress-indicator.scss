@@ -11,7 +11,7 @@
         position: relative;
         overflow: hidden;
         height: 1em;
-        border-radius: 1em;
+        border-radius: var(--md-border-radius-large);
     
         &.md3-thickness-8dp {
             font-size: 0.5rem;
@@ -23,7 +23,7 @@
             inset-inline-end: 0;
             height: 100%;
             width: calc(100% - var(--progress) - 0.25rem);
-            border-radius: 1em;
+            border-radius: var(--md-border-radius-large);
             background-color: var(--track-color);
             transition: width var(--md-motion-standard-fast-effects-duration) var(--md-motion-standard-fast-effects-easing);
         }
@@ -34,7 +34,7 @@
             inset-inline-start: 0;
             height: 100%;
             width: var(--progress);
-            border-radius: 1em;
+            border-radius: var(--md-border-radius-large);
             background-color: var(--indicator-color);
             transition: width var(--md-motion-standard-fast-effects-duration) var(--md-motion-standard-fast-effects-easing);
         }
@@ -50,7 +50,7 @@
                 inset-inline-start: auto;
                 height: 100%;
                 width: 60%;
-                border-radius: 1em;
+                border-radius: var(--md-border-radius-large);
                 background-color: var(--track-color);
                 transition: width var(--md-motion-standard-fast-effects-duration) var(--md-motion-standard-fast-effects-easing);
                 animation: md3-indeterminate-track-start calc(var(--md-motion-standard-slow-effects-duration) * var(--multiplier)) cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;
@@ -70,7 +70,7 @@
                 inset-inline-start: 0;
                 height: 100%;
                 width: auto;
-                border-radius: 1em;
+                border-radius: var(--md-border-radius-large);
                 background-color: var(--track-color);
                 animation: md3-indeterminate-track-start-short calc(var(--md-motion-standard-slow-effects-duration) * var(--multiplier)) cubic-bezier(0.165, 0.84, 0.44, 1) calc(var(--md-motion-standard-slow-effects-duration) * var(--multiplier) / 2) infinite;
             }
@@ -82,7 +82,7 @@
                 inset-block: 0;
                 height: 100%;
                 width: 0;
-                border-radius: 1em;
+                border-radius: var(--md-border-radius-large);
                 background-color: var(--track-color);
                 transition: width var(--md-motion-standard-fast-effects-duration) var(--md-motion-standard-fast-effects-easing);
                 animation: md3-indeterminate-track-end-short calc(var(--md-motion-standard-slow-effects-duration) * var(--multiplier)) cubic-bezier(0.165, 0.84, 0.44, 1) calc(var(--md-motion-standard-slow-effects-duration) * var(--multiplier) / 2) infinite;
@@ -100,7 +100,7 @@
                 inset-block: 0;
                 height: 100%;
                 width: auto;
-                border-radius: 1em;
+                border-radius: var(--md-border-radius-large);
                 background-color: var(--indicator-color);
                 animation: md3-indeterminate-indicator-short calc(var(--md-motion-standard-slow-effects-duration) * var(--multiplier)) cubic-bezier(0.165, 0.84, 0.44, 1) calc(var(--md-motion-standard-slow-effects-duration) * var(--multiplier) / 2) infinite;
             }

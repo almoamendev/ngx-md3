@@ -5,7 +5,7 @@
     --switch-handle-size: 1em;
     --icon-color: rgb(var(--md-scheme-surface-container-highest));
     --state-color: var(--md-scheme-on-surface);
-    --border-radius: 1em;
+    --border-radius: var(--md-border-radius-large);
     --outline-color: rgb(var(--md-scheme-secondary));
     --outline-width: 0.1875em;
     --outline-offset: -0.125em;
@@ -53,7 +53,7 @@
                     justify-content: center;
                     min-width: var(--switch-handle-size);
                     min-height: var(--switch-handle-size);
-                    border-radius: 100%;
+                    border-radius: 50%;
                     background-color: var(--switch-handle-color);
                     transition: all var(--md-motion-standard-fast-spatial-duration) var(--md-motion-standard-fast-spatial-easing);
     

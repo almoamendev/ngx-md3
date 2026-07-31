@@ -1,6 +1,6 @@
 :host {
     --button-group-gap: 0.75em;
-    --button-inner-radius: 0.5em;
+    --button-inner-radius: var(--md-border-radius-small);
     --outline-width: 0.1875em;
     --outline-offset: -0.125em;
 
@@ -76,51 +76,51 @@
         }
 
         &.md3-x-small {
-            --button-inner-radius: 0.5em;
+            --button-inner-radius: var(--md-border-radius-small);
 
             ::ng-deep [md3-button], ::ng-deep [md3-icon-button] {
                 &:not(:disabled):active {
-                    --button-innter-radius: 0.25em;
+                    --button-inner-radius: var(--md-border-radius-xsmall);
                 }
             }
         }
         
         &.md3-small {
-            --button-inner-radius: 0.5em;
+            --button-inner-radius: var(--md-border-radius-small);
 
             ::ng-deep [md3-button], ::ng-deep [md3-icon-button] {
                 &:not(:disabled):active {
-                    --button-innter-radius: 0.25em;
+                    --button-inner-radius: var(--md-border-radius-xsmall);
                 }
             }
         }
         
         &.md3-medium {
-            --button-inner-radius: 0.5em;
+            --button-inner-radius: var(--md-border-radius-small);
 
             ::ng-deep [md3-button], ::ng-deep [md3-icon-button] {
                 &:not(:disabled):active {
-                    --button-innter-radius: 0.25em;
+                    --button-inner-radius: var(--md-border-radius-xsmall);
                 }
             }
         }
         
         &.md3-large {
-            --button-inner-radius: 1em;
+            --button-inner-radius: var(--md-border-radius-large);
 
             ::ng-deep [md3-button], ::ng-deep [md3-icon-button] {
                 &:not(:disabled):active {
-                    --button-innter-radius: 0.75em;
+                    --button-inner-radius: var(--md-border-radius-medium);
                 }
             }
         }
         
         &.md3-x-large {
-            --button-inner-radius: 1.25em;
+            --button-inner-radius: var(--md-border-radius-large-i);
 
             ::ng-deep [md3-button], ::ng-deep [md3-icon-button] {
                 &:not(:disabled):active {
-                    --button-innter-radius: 1em;
+                    --button-inner-radius: var(--md-border-radius-large);
                 }
             }
         }

@@ -45,7 +45,7 @@
             top: 0.375em;
             height: 2em;
             width: 3.5em;
-            border-radius: 1em;
+            border-radius: var(--md-border-radius-large);
             z-index: 0;
             transition: all var(--md-motion-expressive-default-spatial-duration) var(--md-motion-expressive-default-spatial-easing);
             transform: scale(0);
@@ -58,7 +58,7 @@
             top: 0.375em;
             height: 2em;
             width: 3.5em;
-            border-radius: 1em;
+            border-radius: var(--md-border-radius-large);
             z-index: 1;
             transition: all var(--md-motion-expressive-default-spatial-duration) var(--md-motion-expressive-default-spatial-easing);
             transform: scale(0);

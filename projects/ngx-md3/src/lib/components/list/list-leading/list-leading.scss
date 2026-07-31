@@ -50,7 +50,7 @@
         height: 3.5em;
         line-height: 3.5em;
         text-align: center;
-        border-radius: 0.5em;
+        border-radius: var(--md-border-radius-small);
 
         &.md3-size-small-video {
             min-width: 6.25em;
@@ -59,7 +59,7 @@
             height: 3.5em;
             line-height: 3.5em;
             text-align: center;
-            border-radius: var(--leading-media-radius, 0em);
+            border-radius: var(--leading-media-radius, var(--md-border-radius-none));
         }
 
         &.md3-size-large-video {
@@ -69,7 +69,7 @@
             height: 4em;
             line-height: 4em;
             text-align: center;
-            border-radius: var(--leading-media-radius, 0em);
+            border-radius: var(--leading-media-radius, var(--md-border-radius-none));
         }
 
         & > ::ng-deep * {

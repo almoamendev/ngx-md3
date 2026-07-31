@@ -65,11 +65,11 @@ export class TokenValuesService implements OnDestroy {
             return '';
         }
 
-        let value = view.getComputedStyle(body).getPropertyValue(name).trim();
+        let value = view.getComputedStyle(body).getPropertyValue(name).trim().replaceAll('\n    ', ' ');
         
         if(name.startsWith('--md-shadow')) {
-            console.log('process')
-            value.replaceAll(', rgb', ',<br>rgb');
+            value = value.replaceAll(', rgb', ',\nrgb');
+            console.log(value);
         }
 
         return value;
