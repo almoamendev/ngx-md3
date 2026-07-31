@@ -29,6 +29,12 @@ import { SnackbarsComponent } from './components/snackbars/snackbars.component';
 import { HomeComponent } from './home/home.component';
 import { BadgesComponent } from './components/badges/badges.component';
 import { ComponentsComponent } from './components/components.component';
+import { GettingStartedComponent } from './foundations/getting-started/getting-started.component';
+import { ColorTokensComponent } from './styles/color-tokens/color-tokens.component';
+import { ElevationTokensComponent } from './styles/elevation-tokens/elevation-tokens.component';
+import { ShapeTokensComponent } from './styles/shape-tokens/shape-tokens.component';
+import { MotionTokensComponent } from './styles/motion-tokens/motion-tokens.component';
+import { GridTokensComponent } from './styles/grid-tokens/grid-tokens.component';
 
 export const routes: Routes = [
     {
@@ -46,11 +52,35 @@ export const routes: Routes = [
                         path: 'typography',
                         component: TypographyComponent,
                     },
+                    {
+                        path: 'color',
+                        component: ColorTokensComponent,
+                    },
+                    {
+                        path: 'elevation',
+                        component: ElevationTokensComponent,
+                    },
+                    {
+                        path: 'shape',
+                        component: ShapeTokensComponent,
+                    },
+                    {
+                        path: 'motion',
+                        component: MotionTokensComponent,
+                    },
+                    {
+                        path: 'grid',
+                        component: GridTokensComponent,
+                    },
                 ],
             },
             {
                 path: 'foundations',
                 children: [
+                    {
+                        path: 'getting-started',
+                        component: GettingStartedComponent,
+                    },
                     {
                         path: 'scaffold',
                         component: ScaffoldComponent,

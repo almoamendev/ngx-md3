@@ -1,0 +1,40 @@
+<h1>Color</h1>
+
+<p>
+    The color scheme is {{ total }} roles defined in <code>md-scheme.scss</code>. Roles are named for their job
+    rather than their hue, so a component asks for "primary" and stays correct when the palette changes. Every role
+    is declared twice &mdash; once on <code>:root, .md-scheme-light</code> and once on <code>.md-scheme-dark</code>.
+</p>
+
+<p>
+    Values are <strong>RGB channels</strong>, not finished colors, which is what lets any role be used at partial
+    opacity without a second token per alpha value. A color token is never valid on its own; it always has to be
+    wrapped.
+</p>
+
+<app-shiki [code]="usageCode" language="scss"></app-shiki>
+
+<p>
+    Every <code>on-</code> role is the foreground that meets contrast requirements against the role it names, so
+    pairing them (<code>primary</code> with <code>on-primary</code>, <code>surface</code> with
+    <code>on-surface</code>) keeps text legible in both schemes without any per-scheme logic.
+</p>
+
+<h2>Roles</h2>
+
+<p>
+    The values below are read from this page as you're viewing it, so they reflect the scheme currently applied.
+    Toggle the theme switch in the app bar to see the dark values.
+</p>
+
+<app-token-table [sections]="tokens" preview="color"></app-token-table>
+
+<h2>Overriding</h2>
+
+<p>
+    Redeclare the roles you want after importing <code>md3.scss</code>, using the same selectors so source order
+    decides. Override both blocks &mdash; changing only <code>:root</code> leaves dark mode on the library defaults.
+    See <a routerLink="/foundations/getting-started">getting started</a> for the full setup.
+</p>
+
+<app-shiki [code]="overrideCode" language="scss"></app-shiki>

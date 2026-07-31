@@ -1,0 +1,15 @@
+.callout {
+    margin-block: 1em 1.5em;
+    padding: 1em 1.25em;
+    border-radius: var(--md-border-radius-medium);
+    border-inline-start: 0.25em solid rgb(var(--md-scheme-primary));
+    background-color: rgb(var(--md-scheme-surface-container-lowest));
+
+    p {
+        margin: 0;
+    }
+}
+
+md3-divider {
+    margin-block: 2em 1.5em;
+}

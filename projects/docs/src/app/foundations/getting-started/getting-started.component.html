@@ -1,0 +1,291 @@
+<h1>Getting started</h1>
+
+<p>
+    Install the package, wire up one stylesheet, and import the components you need. Every component is standalone,
+    so there is no module to register &mdash; the only global step is <code>md3.scss</code>, which carries the design
+    tokens the components read at runtime.
+</p>
+
+<h2>Install</h2>
+
+<app-shiki [code]="installCode" language="bash"></app-shiki>
+
+<p>
+    The library declares Angular <strong>22</strong> and <code>&#64;angular/cdk</code> as peer dependencies. The CDK is
+    used for overlays (dialogs, menus, sheets, snackbars) and breakpoint observation, so it must be present in the
+    consuming app.
+</p>
+
+<app-shiki [code]="peerDepsCode" language="bash"></app-shiki>
+
+<h2>Add the stylesheet</h2>
+
+<p>
+    <code>md3.scss</code> is the single global stylesheet. Without it components render unstyled, because every
+    component's own SCSS resolves its colors, radii, shadows and motion from CSS custom properties that this file
+    defines. Import it once, in your app's global stylesheet, before your own rules.
+</p>
+
+<app-shiki [code]="stylesConfigCode" language="jsonc"></app-shiki>
+<app-shiki [code]="stylesImportCode" language="scss"></app-shiki>
+
+<p>
+    The path keeps the library's <code>src/</code> folder because the SCSS ships as a package asset rather than
+    through the package's <code>exports</code> map. If you would rather not repeat it, add the folder to
+    <code>stylePreprocessorOptions.includePaths</code> and import by bare filename &mdash; this is what the
+    documentation site itself does.
+</p>
+
+<app-shiki [code]="includePathsCode" language="jsonc"></app-shiki>
+
+<h3>What the file brings in</h3>
+
+<div class="table-container md3-scrollable">
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 34%;">Part</th>
+                <th>What it does</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><i>Fonts</i></td>
+                <td>
+                    <p md3-type-body size="small">
+                        Google Sans, Roboto and Noto Sans Arabic, plus the Material Icons and Material Symbols
+                        families. Loaded from Google Fonts over the network.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td><i>Token files</i></td>
+                <td>
+                    <p md3-type-body size="small">
+                        The five files under <code>styles/tokens</code>, covered below.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td><i>Base reset</i></td>
+                <td>
+                    <p md3-type-body size="small">
+                        <code>box-sizing: border-box</code> and <code>color: inherit</code> on every element, the
+                        default font stack, and language/direction rules that swap the font for Arabic and apply
+                        <code>direction</code> from the <code>dir</code> attribute.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td><i>Document defaults</i></td>
+                <td>
+                    <p md3-type-body size="small">
+                        <code>html</code> and <code>body</code> sizing, a 16px root font size, and the surface
+                        background and on-surface text color that the rest of the library sits on.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td><i>Element styles</i></td>
+                <td>
+                    <p md3-type-body size="small">
+                        Styles for the directive-only components that have no stylesheet of their own, such as
+                        <a routerLink="/components/badges"><code>md3-badge</code></a> and <code>md3-divider</code>,
+                        and the <code>md3-scrollable</code> helper class.
+                    </p>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<h2>Use a component</h2>
+
+<p>
+    Import the directives you need directly into a standalone component's <code>imports</code> array. Nothing is
+    globally registered, so a button pulls in a button and nothing else.
+</p>
+
+<app-shiki [code]="firstComponentCode"></app-shiki>
+
+<h2>Light and dark schemes</h2>
+
+<p>
+    <code>md-scheme.scss</code> defines the light palette on <code>:root, .md-scheme-light</code> and the dark palette
+    on <code>.md-scheme-dark</code>. Light is therefore the default, and switching schemes means toggling a class
+    &mdash; usually on <code>&lt;body&gt;</code>.
+</p>
+
+<app-shiki [code]="schemeMarkupCode" language="html"></app-shiki>
+
+<p>
+    <code>LayoutService</code> already does this for you. Its <code>darkMode</code> signal writes the
+    <code>md-scheme-dark</code> / <code>md-scheme-light</code> classes onto <code>&lt;body&gt;</code> through an
+    effect, so toggling the theme is a one-line signal update. Note that it defaults to <code>true</code> (dark).
+</p>
+
+<app-shiki [code]="schemeServiceCode"></app-shiki>
+
+<h2>Design tokens</h2>
+
+<p>
+    Every visual constant in the library is a CSS custom property, declared in
+    <code>styles/tokens</code> and pulled in by <code>md3.scss</code>. They are plain custom properties on
+    <code>:root</code>, which means they inherit, cascade, and can be overridden at any level &mdash; globally, per
+    route, or on a single element &mdash; with no rebuild.
+</p>
+
+<div class="table-container md3-scrollable">
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 34%;">File</th>
+                <th>Defines</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <a routerLink="/styles/color"><i>md-scheme.scss</i></a>
+                    <p md3-type-body size="small">Color roles</p>
+                </td>
+                <td>
+                    <p md3-type-body size="small">
+                        <code>--md-scheme-*</code> &mdash; primary, secondary, tertiary and their containers, the
+                        fixed variants, error, the surface ramp, on-surface, outline, inverse, scrim and shadow.
+                        Declared twice: once for light, once for dark.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a routerLink="/styles/elevation"><i>md-elevation.scss</i></a>
+                    <p md3-type-body size="small">Shadows</p>
+                </td>
+                <td>
+                    <p md3-type-body size="small">
+                        <code>--md-shadow-0dp</code>, <code>1dp</code>, <code>3dp</code>, <code>6dp</code>,
+                        <code>8dp</code>, <code>12dp</code> &mdash; each a complete three-layer
+                        <code>box-shadow</code> built on <code>--md-scheme-shadow</code>.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a routerLink="/styles/shape"><i>md-border-radius.scss</i></a>
+                    <p md3-type-body size="small">Shape</p>
+                </td>
+                <td>
+                    <p md3-type-body size="small">
+                        <code>--md-border-radius-none</code> through <code>-xxlarge</code>, plus
+                        <code>-rounded</code> for fully rounded shapes. Values are in <code>em</code>, so they scale
+                        with the element's font size.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a routerLink="/styles/motion"><i>md-motion.scss</i></a>
+                    <p md3-type-body size="small">Duration and easing</p>
+                </td>
+                <td>
+                    <p md3-type-body size="small">
+                        <code>--md-motion-</code> then a set (<code>expressive</code> or <code>standard</code>), a
+                        speed (<code>fast</code>, <code>default</code> or <code>slow</code>), a kind
+                        (<code>spatial</code> or <code>effects</code>) and finally <code>duration</code> or
+                        <code>easing</code> &mdash; for example
+                        <code>--md-motion-standard-default-effects-easing</code>. Spatial tokens are for movement
+                        and size, effects tokens for opacity and color.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a routerLink="/styles/grid"><i>md-grid.scss</i></a>
+                    <p md3-type-body size="small">Layout grid</p>
+                </td>
+                <td>
+                    <p md3-type-body size="small">
+                        <code>--md-grid-columns</code>, <code>--md-grid-margin</code>,
+                        <code>--md-grid-gutter</code> &mdash; redeclared per breakpoint. See
+                        <a routerLink="/foundations/grids">grids</a>.
+                    </p>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<h3>Using tokens in your own styles</h3>
+
+<p>
+    Color tokens hold <strong>RGB channels</strong> (<code>92, 77, 212</code>), not finished colors. That is
+    deliberate: it lets any role be used at partial opacity without a second token for every alpha value. The
+    trade-off is that a color token is never valid on its own &mdash; it always has to be wrapped in
+    <code>rgb()</code>. Every other token family holds a complete value and is used directly.
+</p>
+
+<app-shiki [code]="tokenUsageCode" language="scss"></app-shiki>
+
+<h2>Changing your app's colors</h2>
+
+<p>
+    Redeclare the roles you want to change after importing <code>md3.scss</code>. Because your rule uses the same
+    selectors and comes later in source order, it wins without <code>!important</code> and without forking the
+    library's SCSS. You only need to list the roles you are actually changing; anything you leave out keeps its
+    default.
+</p>
+
+<app-shiki [code]="overrideCode" language="scss"></app-shiki>
+
+<div class="callout">
+    <p md3-type-body size="small">
+        <strong>Override both schemes.</strong> <code>:root</code> and <code>.md-scheme-dark</code> are independent
+        blocks. When the dark class is on <code>&lt;body&gt;</code>, its declarations sit closer to the components
+        than <code>:root</code> on <code>&lt;html&gt;</code>, so they win by inheritance. Overriding only
+        <code>:root</code> produces an app that is branded in light mode and reverts to the library's default purple
+        in dark mode.
+    </p>
+</div>
+
+<p>
+    A full Material palette is generated from a source color &mdash; the tonal values in <code>md-scheme.scss</code>
+    are annotated with the tone they came from (<code>P-40</code>, <code>N-98</code> and so on). To rebrand
+    thoroughly rather than tweak a few roles, generate a scheme with the
+    <a href="https://material-foundation.github.io/material-theme-builder/" target="_blank" rel="noopener noreferrer">Material
+    Theme Builder</a> and convert its hex output to <code>R, G, B</code> channel triplets.
+</p>
+
+<h3>Scoped overrides</h3>
+
+<p>
+    Because tokens are inherited custom properties, the same technique narrows to any subtree. This is the
+    supported way to give one section, dialog or embedded widget its own accent without touching the global scheme.
+</p>
+
+<app-shiki [code]="overrideScopedCode" language="html"></app-shiki>
+<app-shiki [code]="overrideScopedStyleCode" language="scss"></app-shiki>
+
+<md3-divider></md3-divider>
+
+<ul>
+    <li>
+        Import <code>md3.scss</code> exactly once. It declares tokens on <code>:root</code> and includes remote font
+        <code>&#64;import</code>s, both of which are wasteful to duplicate.
+    </li>
+    <li>
+        Override tokens rather than component styles. Every component reads its colors, radii, shadows and motion
+        through these properties, so a token change propagates everywhere consistently &mdash; including to states
+        and variants you would otherwise have to restyle one at a time.
+    </li>
+    <li>
+        Component-level custom properties (<code>--background-color</code>, <code>--foreground-color</code>,
+        <code>--state-color</code> and similar, set on each component's <code>:host</code>) are a second, narrower
+        layer. Set them on an element to restyle that one instance.
+    </li>
+    <li>
+        The fonts load from Google Fonts at runtime. If your app must work offline or ships with a strict
+        <code>Content-Security-Policy</code>, self-host the families and drop the corresponding
+        <code>&#64;import</code> lines.
+    </li>
+</ul>

@@ -1,0 +1,33 @@
+<h1>Elevation</h1>
+
+<p>
+    Elevation separates surfaces along the z-axis. <code>md-elevation.scss</code> defines {{ total }} shadow tokens,
+    each a complete <code>box-shadow</code> value ready to be assigned as-is &mdash; unlike the color tokens, these
+    need no wrapping.
+</p>
+
+<app-shiki [code]="usageCode" language="scss"></app-shiki>
+
+<p>
+    Each token stacks three shadow layers at different opacities to approximate a key light and an ambient light,
+    which is what gives the shadow its soft falloff. All three layers are built from
+    <code>--md-scheme-shadow</code>, so changing that one color role restyles every elevation level at once.
+</p>
+
+<app-shiki [code]="compositionCode" language="scss"></app-shiki>
+
+<h2>Levels</h2>
+
+<p>
+    Note that <code>0dp</code> is a zero-size shadow rather than <code>none</code>. That is deliberate:
+    <code>box-shadow</code> only animates between values with matching layer counts, so keeping a real
+    three-layer value at rest lets a surface transition smoothly into and out of any raised level.
+</p>
+
+<app-token-table [sections]="tokens" preview="shadow"></app-token-table>
+
+<p>
+    Sizes are expressed in <code>em</code>, so a shadow scales with the font size of the element it is applied to
+    rather than staying fixed in pixels. Offsets stay vertical in both text directions, so these tokens need no
+    <a routerLink="/foundations/getting-started">RTL handling</a>.
+</p>

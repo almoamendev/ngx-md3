@@ -1,0 +1,41 @@
+<h1>Grid</h1>
+
+<p>
+    <code>md-grid.scss</code> defines the {{ total }} tokens behind the responsive layout grid. Unlike every other
+    token family, these are redeclared inside media queries, so their values change with the viewport rather than
+    with the color scheme.
+</p>
+
+<app-shiki [code]="breakpointsCode" language="scss"></app-shiki>
+
+<h2>Tokens</h2>
+
+<p>
+    Your window is currently <strong>{{ layout.widthClass() }}</strong>, so the values below are the ones in effect
+    for that size class. Resize the window and they update in place.
+</p>
+
+<app-token-table [sections]="tokens"></app-token-table>
+
+<p>
+    The breakpoints mirror <code>LayoutService.widthClass()</code>, which is what every responsive component in the
+    library reads. The two are kept in sync deliberately: a component that switches layout at
+    <code>expanded</code> and a grid that adds columns at the same point stay aligned, so nothing reflows in two
+    stages.
+</p>
+
+<h2>Using them directly</h2>
+
+<p>
+    The <a routerLink="/foundations/grids"><code>md3-grid</code></a> directive consumes these tokens for you and is
+    the usual way to lay out a page. Read them yourself when you need grid-aligned spacing outside a grid
+    container &mdash; matching a section's horizontal padding to the grid margin, for instance.
+</p>
+
+<app-shiki [code]="usageCode" language="scss"></app-shiki>
+
+<p>
+    Because they are ordinary custom properties, overriding them on a container rescopes the grid for that subtree
+    only. Redeclaring them at <code>:root</code> after importing <code>md3.scss</code> changes the grid globally,
+    though the breakpoints themselves are fixed unless you also replace the media queries.
+</p>

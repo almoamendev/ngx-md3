@@ -1,0 +1,30 @@
+<h1>Shape</h1>
+
+<p>
+    Shape tokens are the corner radii used across the library, defined in <code>md-border-radius.scss</code>.
+    There are {{ total }} of them, and each holds a complete length value that can be assigned directly.
+</p>
+
+<app-shiki [code]="usageCode" language="scss"></app-shiki>
+
+<h2>Scale</h2>
+
+<p>
+    Values are in <code>em</code>, not <code>px</code> or <code>rem</code>, so a radius scales with the font size of
+    the element it is applied to. A button rendered at a larger size gets a proportionally larger corner without
+    needing a different token &mdash; which is how one scale covers every component size.
+</p>
+
+<app-token-table [sections]="tokens" preview="radius"></app-token-table>
+
+<p>
+    The two <code>-i</code> entries are "increased" steps that sit between the named sizes, giving 20dp and 32dp
+    without adding another name to the main scale.
+</p>
+
+<p>
+    <code>--md-border-radius-rounded</code> is <code>calc(100vh + 100vw)</code> rather than a percentage or a large
+    fixed value. CSS clamps a radius that exceeds half the element's size, so any value guaranteed to be bigger than
+    the viewport resolves to a perfect pill on a wide element and a perfect circle on a square one &mdash; without
+    the distortion that <code>border-radius: 50%</code> produces on non-square elements.
+</p>

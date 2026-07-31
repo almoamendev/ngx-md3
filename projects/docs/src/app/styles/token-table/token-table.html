@@ -1,0 +1,61 @@
+@for (section of resolved(); track section.label) {
+    <h3>{{ section.label }}</h3>
+
+    <div class="table-container md3-scrollable">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 50%;">Token</th>
+                    @if (preview() != 'none') {
+                        <th style="width: 6em;">Preview</th>
+                    }
+                    <th>Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (token of section.entries; track token.name) {
+                    <tr>
+                        <td>
+                            <code>{{ token.name }}</code>
+                            <p md3-type-body size="small">
+                                {{ token.description }}
+                                @if (token.tone) {
+                                    <span class="token-tone">Light tone {{ token.tone }}.</span>
+                                }
+                            </p>
+                        </td>
+
+                        @if (preview() != 'none') {
+                            <td>
+                                @switch (preview()) {
+                                    @case ('color') {
+                                        <span class="token-swatch" [style.background-color]="swatch(token.value)"></span>
+                                    }
+                                    @case ('shadow') {
+                                        <span class="token-shadow" [style.box-shadow]="'var(' + token.name + ')'"></span>
+                                    }
+                                    @case ('radius') {
+                                        <span class="token-radius" [style.border-radius]="'var(' + token.name + ')'"></span>
+                                    }
+                                    @case ('motion') {
+                                        <span class="token-motion">
+                                            @if (token.name.endsWith('-easing')) {
+                                                <span class="token-motion-dot"
+                                                    [style.animation-timing-function]="'var(' + token.name + ')'"></span>
+                                            } @else {
+                                                <span class="token-motion-dot token-motion-linear"
+                                                    [style.animation-duration]="'var(' + token.name + ')'"></span>
+                                            }
+                                        </span>
+                                    }
+                                }
+                            </td>
+                        }
+
+                        <td class="token-value">{{ token.value || '—' }}</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}

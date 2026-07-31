@@ -1,0 +1,43 @@
+<h1>Motion</h1>
+
+<p>
+    <code>md-motion.scss</code> defines {{ total }} tokens &mdash; a duration and an easing curve for every
+    combination of set, speed and kind. They always come in pairs: a duration is meaningless without the curve it
+    was tuned against.
+</p>
+
+<app-shiki [code]="namingCode" language="scss"></app-shiki>
+
+<p>
+    <strong>Spatial</strong> tokens are for anything that moves or changes size: transforms, width and height,
+    position. <strong>Effects</strong> tokens are for anything that doesn't: opacity, color, shadow. The split
+    exists because the two read very differently &mdash; spatial curves overshoot slightly to feel physical, while
+    effects curves settle without overshoot, since a color that overshoots just looks like a glitch.
+</p>
+
+<app-shiki [code]="usageCode" language="scss"></app-shiki>
+
+<h2>Sets</h2>
+
+<p>
+    <strong>Expressive</strong> is the default the library's own components use. Its spatial curves are springier,
+    with a pronounced overshoot that makes movement feel responsive. <strong>Standard</strong> is the more
+    restrained alternative &mdash; same durations, curves that ease to their end value without bouncing past it.
+    Use it where motion should stay out of the way, such as dense or data-heavy interfaces.
+</p>
+
+<h2>Speeds</h2>
+
+<p>
+    Pick by the distance travelled, not by importance: <code>fast</code> for small movements within a component,
+    <code>default</code> for most transitions, <code>slow</code> for large or full-screen changes. Effects
+    durations are much shorter than spatial ones at every speed, because a fade needs far less time than a
+    movement to read as deliberate.
+</p>
+
+<app-token-table [sections]="tokens" preview="motion"></app-token-table>
+
+<p>
+    The previews above loop continuously. Easing rows animate at a fixed rate so only the curve differs; duration
+    rows animate linearly so only the timing differs. They are suppressed when the system requests reduced motion.
+</p>

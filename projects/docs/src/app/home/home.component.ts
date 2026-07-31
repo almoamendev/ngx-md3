@@ -69,6 +69,12 @@ export class HomeComponent {
 
     public readonly categories: HomeCategory[] = [
         {
+            icon: 'rocket_launch',
+            label: 'Getting started',
+            description: 'Install, wire up md3.scss, and theme with tokens',
+            link: '/foundations/getting-started',
+        },
+        {
             icon: 'view_quilt',
             label: 'Scaffold',
             description: 'The layout foundation: bars, rails, and panes',

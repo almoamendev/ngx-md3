@@ -1,0 +1,86 @@
+:host {
+    display: block;
+}
+
+h3 {
+    margin-block: 1.5em 0.5em;
+}
+
+.token-tone {
+    display: block;
+    color: rgb(var(--md-scheme-outline));
+}
+
+.token-value {
+    font-family: 'Roboto Mono', ui-monospace, monospace;
+    font-size: 0.875em;
+    white-space: nowrap;
+    vertical-align: middle;
+}
+
+.token-swatch {
+    display: block;
+    width: 3em;
+    height: 2em;
+    border-radius: var(--md-border-radius-xsmall);
+    border: 0.0625em solid rgb(var(--md-scheme-outline-variant));
+}
+
+.token-shadow {
+    display: block;
+    width: 3em;
+    height: 2em;
+    margin: 0.375em;
+    border-radius: var(--md-border-radius-xsmall);
+    background-color: rgb(var(--md-scheme-surface-container-lowest));
+}
+
+.token-radius {
+    display: block;
+    width: 3em;
+    height: 3em;
+    background-color: rgb(var(--md-scheme-primary-container));
+    border: 0.0625em solid rgb(var(--md-scheme-outline-variant));
+}
+
+.token-motion {
+    display: block;
+    position: relative;
+    width: 4em;
+    height: 0.75em;
+    border-radius: var(--md-border-radius-rounded);
+    background-color: rgb(var(--md-scheme-surface-container-highest));
+}
+
+.token-motion-dot {
+    display: block;
+    position: absolute;
+    inset-block: 0;
+    width: 0.75em;
+    border-radius: 50%;
+    background-color: rgb(var(--md-scheme-primary));
+    animation-name: token-motion-demo;
+    animation-duration: 1.2s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+
+    // Duration tokens are previewed at a constant rate, so the only thing
+    // that differs between rows is the duration itself.
+    &.token-motion-linear {
+        animation-timing-function: linear;
+    }
+}
+
+@keyframes token-motion-demo {
+    from { inset-inline-start: 0; }
+    to { inset-inline-start: calc(100% - 0.75em); }
+}
+
+// The previews loop forever, which is exactly the kind of motion this opts
+// people out of.
+@media (prefers-reduced-motion: reduce) {
+    .token-motion-dot {
+        animation: none;
+        inset-inline-start: calc(50% - 0.375em);
+    }
+}

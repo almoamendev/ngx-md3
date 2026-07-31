@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { IconButton, IconElement, MaterialIcon, NavigationGroup, NavigationItem, SideSheetBody, SideSheetHeader, SideSheetRef } from '@vip9008/ngx-md3';
+import { Divider, IconButton, IconElement, MaterialIcon, NavigationGroup, NavigationItem, SideSheetBody, SideSheetHeader, SideSheetRef } from '@vip9008/ngx-md3';
 
 @Component({
     selector: 'app-foundations-menu',
@@ -13,7 +13,7 @@ import { IconButton, IconElement, MaterialIcon, NavigationGroup, NavigationItem,
         RouterLink,
         NavigationGroup,
         NavigationItem,
-        // Divider,
+        Divider,
     ],
     templateUrl: './foundations-menu.html',
     styleUrl: './foundations-menu.scss',
