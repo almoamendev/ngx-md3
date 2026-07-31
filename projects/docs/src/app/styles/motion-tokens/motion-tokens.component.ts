@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TypeDisplay } from '@vip9008/ngx-md3';
 import { TokenTable } from '../token-table/token-table';
 import { Shiki } from '../../components/shiki/shiki';
 import { countTokens, MOTION_TOKENS } from '../tokens.catalog';
@@ -8,6 +9,7 @@ import { countTokens, MOTION_TOKENS } from '../tokens.catalog';
     imports: [
         TokenTable,
         Shiki,
+        TypeDisplay,
     ],
     templateUrl: './motion-tokens.component.html',
     styleUrl: './motion-tokens.component.scss',

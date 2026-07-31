@@ -1,8 +1,9 @@
-<h1>Components</h1>
+<h1 md3-type-display size="large">Components</h1>
 
 <p>
-    Every component in the library, grouped by purpose. {{ total }} components in total &mdash; each one is a
-    standalone import, so you only pull in what you use.
+    Components are interactive building blocks for creating a user interface.
+    They can be organized into categories based on their purpose: Action, containment, communication, navigation, selection, and text input.
+    {{ total }} components in total &mdash; each one is a standalone import, so you only pull in what you use.
 </p>
 
 <md3-text-field label="Search components" field-type="filled" class="components-search">
@@ -29,14 +30,22 @@
 
 @for (section of filteredSections(); track section.label) {
     <section class="components-section">
-        <h2>{{ section.label }}</h2>
+        <h2 md3-type-display size="small">{{ section.label }}</h2>
 
         <div class="components-grid">
             @for (entry of section.entries; track entry.link) {
                 <a md3-card card-type="outlined" [routerLink]="entry.link" class="components-card">
-                    <md3-icon md3-icon-element [icon-size]="36">{{ entry.icon }}</md3-icon>
-                    <div md3-type-title size="small">{{ entry.label }}</div>
-                    <p md3-type-body size="small" color="on-surface-variant">{{ entry.description }}</p>
+                    @if (entry.image) {
+                        <div class="component-image">
+                            <img [src]="'img/components/' + entry.image" [alt]="entry.label">
+                        </div>
+                    } @else {
+                        <md3-icon md3-icon-element [icon-size]="36">{{ entry.icon }}</md3-icon>
+                    }
+                    <div class="component-info">
+                        <div md3-type-title size="large">{{ entry.label }}</div>
+                        <p md3-type-body size="medium" color="on-surface-variant">{{ entry.description }}</p>
+                    </div>
                 </a>
             }
         </div>

@@ -1,5 +1,5 @@
 import { Component, OnDestroy, signal } from '@angular/core';
-import { Button, ButtonSize, ButtonType, IconButton, IconElement, MaterialIcon, SheetsService, SideSheetRef, TypeBody } from '@vip9008/ngx-md3';
+import { Button, ButtonSize, ButtonType, IconButton, IconElement, MaterialIcon, SheetsService, SideSheetRef, TypeBody, TypeDisplay } from '@vip9008/ngx-md3';
 import { Playground } from '../../playground/playground';
 import { Shiki } from '../../shiki/shiki';
 import { ButtonConfig } from './button-config/button-config';
@@ -14,6 +14,7 @@ import { ButtonConfig } from './button-config/button-config';
         Playground,
         Shiki,
         TypeBody,
+        TypeDisplay,
     ],
     templateUrl: './buttons.component.html',
     styleUrl: './buttons.component.scss',

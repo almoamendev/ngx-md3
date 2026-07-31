@@ -1,5 +1,5 @@
 import { Component, OnDestroy, signal } from '@angular/core';
-import { Button, ButtonGroup, ButtonGroupSelection, ButtonGroupType, ButtonSize, Divider, IconButton, IconElement, MaterialIcon, SheetsService, SideSheetRef, TypeBody } from '@vip9008/ngx-md3';
+import { Button, ButtonGroup, ButtonGroupSelection, ButtonGroupType, ButtonSize, Divider, IconButton, IconElement, MaterialIcon, SheetsService, SideSheetRef, TypeBody, TypeDisplay } from '@vip9008/ngx-md3';
 import { ButtonGroupConfig } from './button-group-config/button-group-config';
 import { Playground } from '../../playground/playground';
 import { Shiki } from '../../shiki/shiki';
@@ -17,6 +17,7 @@ import { RouterLink } from "@angular/router";
         Playground,
         Shiki,
         TypeBody,
+        TypeDisplay,
         RouterLink,
     ],
     templateUrl: './button-groups.component.html',

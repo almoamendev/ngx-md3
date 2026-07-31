@@ -1,5 +1,5 @@
 import { Component, effect, OnDestroy, signal } from '@angular/core';
-import { ChipAvatar, Chips, ChipStyle, ChipType, IconButton, IconElement, InputElement, MaterialIcon, SheetsService, SideSheetRef, TypeBody } from '@vip9008/ngx-md3';
+import { ChipAvatar, Chips, ChipStyle, ChipType, IconButton, IconElement, InputElement, MaterialIcon, SheetsService, SideSheetRef, TypeBody, TypeDisplay } from '@vip9008/ngx-md3';
 import { Playground } from '../playground/playground';
 import { Shiki } from '../shiki/shiki';
 import { ChipsConfig } from './chips-config/chips-config';
@@ -16,6 +16,7 @@ import { ChipsConfig } from './chips-config/chips-config';
         Playground,
         Shiki,
         TypeBody,
+        TypeDisplay,
     ],
     templateUrl: './chips.component.html',
     styleUrl: './chips.component.scss',

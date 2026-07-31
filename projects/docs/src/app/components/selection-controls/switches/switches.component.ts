@@ -1,5 +1,5 @@
 import { Component, effect, OnDestroy, signal } from '@angular/core';
-import { IconButton, IconElement, InputElement, MaterialIcon, SheetsService, SideSheetRef, Switch, TypeBody } from '@vip9008/ngx-md3';
+import { IconButton, IconElement, InputElement, MaterialIcon, SheetsService, SideSheetRef, Switch, TypeBody, TypeDisplay } from '@vip9008/ngx-md3';
 import { Playground } from '../../playground/playground';
 import { Shiki } from '../../shiki/shiki';
 import { SwitchConfig } from './switch-config/switch-config';
@@ -15,6 +15,7 @@ import { SwitchConfig } from './switch-config/switch-config';
         Playground,
         Shiki,
         TypeBody,
+        TypeDisplay,
     ],
     templateUrl: './switches.component.html',
     styleUrl: './switches.component.scss',

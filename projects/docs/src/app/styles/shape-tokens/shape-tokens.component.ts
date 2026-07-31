@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TypeDisplay } from '@vip9008/ngx-md3';
 import { TokenTable } from '../token-table/token-table';
 import { Shiki } from '../../components/shiki/shiki';
 import { countTokens, SHAPE_TOKENS } from '../tokens.catalog';
@@ -8,6 +9,7 @@ import { countTokens, SHAPE_TOKENS } from '../tokens.catalog';
     imports: [
         TokenTable,
         Shiki,
+        TypeDisplay,
     ],
     templateUrl: './shape-tokens.component.html',
     styleUrl: './shape-tokens.component.scss',

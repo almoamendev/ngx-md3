@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { TypeDisplay } from '@vip9008/ngx-md3';
 import { Shiki } from '../../shiki/shiki';
 
 @Component({
     selector: 'app-navigation-item',
     imports: [
         Shiki,
+        TypeDisplay,
         RouterLink,
     ],
     templateUrl: './navigation-item.component.html',

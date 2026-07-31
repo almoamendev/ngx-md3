@@ -1,10 +1,17 @@
 .error-page {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     gap: 0.75em;
     padding-block: 2em;
-    max-width: 36em;
+
+    .illustration {
+        height: 24em;
+
+        svg {
+            height: 100%;
+        }
+    }
 
     md3-icon {
         color: rgb(var(--md-scheme-on-surface-variant));

@@ -1,5 +1,5 @@
 import { Component, OnDestroy, signal } from '@angular/core';
-import { ButtonSize, IconButton, IconButtonType, IconButtonWidth, IconElement, MaterialIcon, SheetsService, SideSheetRef, TypeBody } from "@vip9008/ngx-md3";
+import { ButtonSize, IconButton, IconButtonType, IconButtonWidth, IconElement, MaterialIcon, SheetsService, SideSheetRef, TypeBody, TypeDisplay } from "@vip9008/ngx-md3";
 import { Playground } from '../../playground/playground';
 import { Shiki } from '../../shiki/shiki';
 import { IconButtonConfig } from './icon-button-config/icon-button-config';
@@ -13,6 +13,7 @@ import { IconButtonConfig } from './icon-button-config/icon-button-config';
         Playground,
         Shiki,
         TypeBody,
+        TypeDisplay,
     ],
     templateUrl: './icon-buttons.component.html',
     styleUrl: './icon-buttons.component.scss',

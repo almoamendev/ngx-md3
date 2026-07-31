@@ -1,6 +1,6 @@
 import { Component, OnDestroy, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { IconButton, IconElement, InputElement, MaterialIcon, SheetsService, SideSheetRef, SupportingText, TextField, TypeBody } from '@vip9008/ngx-md3';
+import { IconButton, IconElement, InputElement, MaterialIcon, SheetsService, SideSheetRef, SupportingText, TextField, TypeBody, TypeDisplay } from '@vip9008/ngx-md3';
 import { Playground } from '../playground/playground';
 import { Shiki } from '../shiki/shiki';
 import { TextFieldConfig } from './text-field-config/text-field-config';
@@ -17,6 +17,7 @@ import { TextFieldConfig } from './text-field-config/text-field-config';
         Playground,
         Shiki,
         TypeBody,
+        TypeDisplay,
         RouterLink,
     ],
     templateUrl: './text-fields.component.html',

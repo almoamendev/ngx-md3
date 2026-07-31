@@ -86,6 +86,19 @@ a {
     color: rgb(var(--md-scheme-primary));
 }
 
+h1, h2, h3, h4, h5, h6 {
+    margin: 0.75em 0 0.5em;
+}
+
+p {
+    margin: 0.75em 0;
+    max-width: 40em;
+}
+
+li {
+    max-width: 40em;
+}
+
 .md3-state-component {
     position: relative;
     --border-top-start-r: var(--border-radius, 0em);

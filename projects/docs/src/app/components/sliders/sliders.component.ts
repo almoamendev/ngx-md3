@@ -1,5 +1,5 @@
 import { Component, effect, OnDestroy, signal } from '@angular/core';
-import { IconButton, IconElement, InputElement, MaterialIcon, SheetsService, SideSheetRef, Slider, SliderSize, TypeBody } from '@vip9008/ngx-md3';
+import { IconButton, IconElement, InputElement, MaterialIcon, SheetsService, SideSheetRef, Slider, SliderSize, TypeBody, TypeDisplay } from '@vip9008/ngx-md3';
 import { Playground } from '../playground/playground';
 import { Shiki } from '../shiki/shiki';
 import { SliderConfig } from './slider-config/slider-config';
@@ -15,6 +15,7 @@ import { SliderConfig } from './slider-config/slider-config';
         Playground,
         Shiki,
         TypeBody,
+        TypeDisplay,
     ],
     templateUrl: './sliders.component.html',
     styleUrl: './sliders.component.scss',

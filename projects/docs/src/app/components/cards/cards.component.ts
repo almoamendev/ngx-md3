@@ -1,5 +1,5 @@
 import { Component, OnDestroy, signal } from '@angular/core';
-import { Card, CardType, IconButton, IconElement, MaterialIcon, SheetsService, SideSheetRef, TypeBody } from "@vip9008/ngx-md3";
+import { Card, CardType, IconButton, IconElement, MaterialIcon, SheetsService, SideSheetRef, TypeBody, TypeDisplay } from "@vip9008/ngx-md3";
 import { CardConfig } from './card-config/card-config';
 import { Playground } from '../playground/playground';
 import { Shiki } from '../shiki/shiki';
@@ -14,6 +14,7 @@ import { Shiki } from '../shiki/shiki';
         Playground,
         Shiki,
         TypeBody,
+        TypeDisplay,
     ],
     templateUrl: './cards.component.html',
     styleUrl: './cards.component.scss',

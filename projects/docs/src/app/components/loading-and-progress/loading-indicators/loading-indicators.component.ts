@@ -1,5 +1,5 @@
 import { Component, OnDestroy, signal } from '@angular/core';
-import { IconButton, IconElement, LoadingIndicator, MaterialIcon, SheetsService, SideSheetRef, TypeBody } from "@vip9008/ngx-md3";
+import { IconButton, IconElement, LoadingIndicator, MaterialIcon, SheetsService, SideSheetRef, TypeBody, TypeDisplay } from "@vip9008/ngx-md3";
 import { Playground } from '../../playground/playground';
 import { Shiki } from '../../shiki/shiki';
 import { LoadingConfig } from './loading-config/loading-config';
@@ -14,6 +14,7 @@ import { LoadingConfig } from './loading-config/loading-config';
         Playground,
         Shiki,
         TypeBody,
+        TypeDisplay,
     ],
     templateUrl: './loading-indicators.component.html',
     styleUrl: './loading-indicators.component.scss',

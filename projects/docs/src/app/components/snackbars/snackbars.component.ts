@@ -1,6 +1,6 @@
 import { Component, OnDestroy, TemplateRef, signal, viewChild } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { Button, Divider, IconButton, IconElement, LinearProgressIndicator, MaterialIcon, SheetsService, SideSheetRef, SnackbarRef, SnackbarService, TypeBody } from '@vip9008/ngx-md3';
+import { Button, Divider, IconButton, IconElement, LinearProgressIndicator, MaterialIcon, SheetsService, SideSheetRef, SnackbarRef, SnackbarService, TypeBody, TypeDisplay } from '@vip9008/ngx-md3';
 import { Playground } from '../playground/playground';
 import { Shiki } from '../shiki/shiki';
 import { SnackbarConfig } from './snackbar-config/snackbar-config';
@@ -17,6 +17,7 @@ import { SnackbarConfig } from './snackbar-config/snackbar-config';
         Divider,
         Shiki,
         TypeBody,
+        TypeDisplay,
         RouterLink,
     ],
     templateUrl: './snackbars.component.html',

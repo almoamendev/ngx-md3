@@ -1,5 +1,5 @@
 import { Component, OnDestroy, signal } from '@angular/core';
-import { IconButton, IconElement, InputElement, MaterialIcon, RadioButton, SheetsService, SideSheetRef, TypeBody } from '@vip9008/ngx-md3';
+import { IconButton, IconElement, InputElement, MaterialIcon, RadioButton, SheetsService, SideSheetRef, TypeBody, TypeDisplay } from '@vip9008/ngx-md3';
 import { Playground } from '../../playground/playground';
 import { Shiki } from '../../shiki/shiki';
 import { RadioConfig } from './radio-config/radio-config';
@@ -15,6 +15,7 @@ import { RadioConfig } from './radio-config/radio-config';
         Playground,
         Shiki,
         TypeBody,
+        TypeDisplay,
     ],
     templateUrl: './radio-buttons.component.html',
     styleUrl: './radio-buttons.component.scss',

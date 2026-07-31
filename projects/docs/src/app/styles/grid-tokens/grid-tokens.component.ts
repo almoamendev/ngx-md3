@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { LayoutService } from '@vip9008/ngx-md3';
+import { LayoutService, TypeDisplay } from '@vip9008/ngx-md3';
 import { TokenTable } from '../token-table/token-table';
 import { Shiki } from '../../components/shiki/shiki';
 import { countTokens, GRID_TOKENS } from '../tokens.catalog';
@@ -11,6 +11,7 @@ import { countTokens, GRID_TOKENS } from '../tokens.catalog';
         RouterLink,
         TokenTable,
         Shiki,
+        TypeDisplay,
     ],
     templateUrl: './grid-tokens.component.html',
     styleUrl: './grid-tokens.component.scss',

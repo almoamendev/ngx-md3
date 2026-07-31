@@ -1,5 +1,5 @@
 import { Component, effect, OnDestroy, signal } from '@angular/core';
-import { CircularProgressIndicator, IconButton, IconElement, LinearProgressIndicator, MaterialIcon, SheetsService, SideSheetRef, TypeBody } from "@vip9008/ngx-md3";
+import { CircularProgressIndicator, IconButton, IconElement, LinearProgressIndicator, MaterialIcon, SheetsService, SideSheetRef, TypeBody, TypeDisplay } from "@vip9008/ngx-md3";
 import { Playground } from '../../playground/playground';
 import { Shiki } from '../../shiki/shiki';
 import { ProgressConfig } from './progress-config/progress-config';
@@ -15,6 +15,7 @@ import { ProgressConfig } from './progress-config/progress-config';
         Playground,
         Shiki,
         TypeBody,
+        TypeDisplay,
     ],
     templateUrl: './progress-indicators.component.html',
     styleUrl: './progress-indicators.component.scss',

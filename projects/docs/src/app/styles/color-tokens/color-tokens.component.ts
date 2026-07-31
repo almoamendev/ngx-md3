@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { TypeDisplay } from '@vip9008/ngx-md3';
 import { TokenTable } from '../token-table/token-table';
 import { Shiki } from '../../components/shiki/shiki';
 import { COLOR_TOKENS, countTokens } from '../tokens.catalog';
@@ -10,6 +11,7 @@ import { COLOR_TOKENS, countTokens } from '../tokens.catalog';
         RouterLink,
         TokenTable,
         Shiki,
+        TypeDisplay,
     ],
     templateUrl: './color-tokens.component.html',
     styleUrl: './color-tokens.component.scss',

@@ -1,5 +1,5 @@
 import { Component, OnDestroy, signal } from '@angular/core';
-import { Checkbox, IconButton, IconElement, InputElement, MaterialIcon, SheetsService, SideSheetRef, TypeBody } from '@vip9008/ngx-md3';
+import { Checkbox, IconButton, IconElement, InputElement, MaterialIcon, SheetsService, SideSheetRef, TypeBody, TypeDisplay } from '@vip9008/ngx-md3';
 import { Playground } from '../../playground/playground';
 import { Shiki } from '../../shiki/shiki';
 import { CheckboxConfig } from './checkbox-config/checkbox-config';
@@ -15,6 +15,7 @@ import { CheckboxConfig } from './checkbox-config/checkbox-config';
         Playground,
         Shiki,
         TypeBody,
+        TypeDisplay,
     ],
     templateUrl: './checkboxes.component.html',
     styleUrl: './checkboxes.component.scss',

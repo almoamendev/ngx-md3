@@ -1,6 +1,6 @@
 import { Component, computed, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { Card, IconButton, IconElement, InputElement, MaterialIcon, TextField, TypeBody, TypeTitle } from '@vip9008/ngx-md3';
+import { Card, IconButton, IconElement, InputElement, MaterialIcon, TextField, TypeBody, TypeTitle, TypeDisplay } from '@vip9008/ngx-md3';
 import { COMPONENT_GROUPS, COMPONENTS, ComponentEntry, componentsInGroup, ungroupedComponents } from './components.catalog';
 
 interface ComponentSection {
@@ -40,6 +40,7 @@ function searchableText(entry: ComponentEntry): string {
         InputElement,
         TypeTitle,
         TypeBody,
+        TypeDisplay
     ],
     templateUrl: './components.component.html',
     styleUrl: './components.component.scss',

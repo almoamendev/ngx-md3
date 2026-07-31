@@ -1,6 +1,6 @@
 import { Component, OnDestroy, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { AppBar, AppBarLogo, AppBarScrollingStyle, AppBarType, Avatar, IconButton, IconElement, InputElement, MaterialIcon, SheetsService, SideSheetRef } from '@vip9008/ngx-md3';
+import { AppBar, AppBarLogo, AppBarScrollingStyle, AppBarType, Avatar, IconButton, IconElement, InputElement, MaterialIcon, SheetsService, SideSheetRef, TypeDisplay } from '@vip9008/ngx-md3';
 import { Playground } from '../../components/playground/playground';
 import { Shiki } from '../../components/shiki/shiki';
 import { AppBarConfig } from './app-bar-config/app-bar-config';
@@ -17,6 +17,7 @@ import { AppBarConfig } from './app-bar-config/app-bar-config';
         InputElement,
         Playground,
         Shiki,
+        TypeDisplay,
         RouterLink,
     ],
     templateUrl: './app-bar.component.html',

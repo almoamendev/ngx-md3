@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { Divider, TypeBody } from '@vip9008/ngx-md3';
+import { Divider, TypeBody, TypeDisplay } from '@vip9008/ngx-md3';
 import { Shiki } from '../../components/shiki/shiki';
 
 @Component({
@@ -9,6 +9,7 @@ import { Shiki } from '../../components/shiki/shiki';
         RouterLink,
         Shiki,
         TypeBody,
+        TypeDisplay,
         Divider,
     ],
     templateUrl: './getting-started.component.html',

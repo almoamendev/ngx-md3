@@ -1,5 +1,5 @@
 import { Component, computed, inject, OnDestroy, signal } from '@angular/core';
-import { Grid, GridItem, IconButton, IconElement, LayoutService, MaterialIcon, SheetsService, SideSheetRef, TypeBody, Divider, TypeHeadline } from '@vip9008/ngx-md3';
+import { Grid, GridItem, IconButton, IconElement, LayoutService, MaterialIcon, SheetsService, SideSheetRef, TypeBody, Divider, TypeHeadline, TypeDisplay } from '@vip9008/ngx-md3';
 import { Playground } from '../../components/playground/playground';
 import { Shiki } from '../../components/shiki/shiki';
 import { GridConfig } from './grid-config/grid-config';
@@ -16,6 +16,7 @@ import { GridConfig } from './grid-config/grid-config';
         Shiki,
         TypeBody,
         TypeHeadline,
+        TypeDisplay,
         Divider
     ],
     templateUrl: './grids.component.html',

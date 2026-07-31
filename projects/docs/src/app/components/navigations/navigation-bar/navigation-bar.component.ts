@@ -1,6 +1,6 @@
 import { Component, OnDestroy, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { Badge, Divider, IconButton, IconElement, MaterialIcon, NavigationBar, NavigationItem, SheetsService, SideSheetRef, TypeBody } from '@vip9008/ngx-md3';
+import { Badge, Divider, IconButton, IconElement, MaterialIcon, NavigationBar, NavigationItem, SheetsService, SideSheetRef, TypeBody, TypeDisplay } from '@vip9008/ngx-md3';
 import { Playground } from '../../playground/playground';
 import { Shiki } from '../../shiki/shiki';
 import { NavBarConfig } from './nav-bar-config/nav-bar-config';
@@ -18,6 +18,7 @@ import { NavBarConfig } from './nav-bar-config/nav-bar-config';
         Divider,
         Shiki,
         TypeBody,
+        TypeDisplay,
         RouterLink,
     ],
     templateUrl: './navigation-bar.component.html',

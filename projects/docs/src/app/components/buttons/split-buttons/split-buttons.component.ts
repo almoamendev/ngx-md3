@@ -1,6 +1,6 @@
 import { Component, OnDestroy, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { Button, ButtonSize, Divider, IconButton, IconElement, MaterialIcon, MenuService, SheetsService, SideSheetRef, SplitButton, SplitButtonType, TypeBody } from '@vip9008/ngx-md3';
+import { Button, ButtonSize, Divider, IconButton, IconElement, MaterialIcon, MenuService, SheetsService, SideSheetRef, SplitButton, SplitButtonType, TypeBody, TypeDisplay } from '@vip9008/ngx-md3';
 import { SmapleMenu } from '../../menus/smaple-menu/smaple-menu';
 import { Playground } from '../../playground/playground';
 import { Shiki } from '../../shiki/shiki';
@@ -18,6 +18,7 @@ import { SplitButtonConfig } from './split-button-config/split-button-config';
         Divider,
         Shiki,
         TypeBody,
+        TypeDisplay,
         RouterLink,
     ],
     templateUrl: './split-buttons.component.html',
