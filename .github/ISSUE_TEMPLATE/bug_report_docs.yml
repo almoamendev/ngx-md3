@@ -1,7 +1,7 @@
 name: "Docs site bug: broken page or example"
 description: Something on the docs/gallery site (almoamendev.github.io/ngx-md3) is broken
 title: "[Bug][Docs]: "
-labels: ["bug", "docs"]
+labels: ["bug", "documentation"]
 body:
   - type: markdown
     attributes:

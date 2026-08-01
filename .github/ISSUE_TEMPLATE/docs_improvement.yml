@@ -1,7 +1,7 @@
 name: "Docs improvement"
 description: Request a new example, guide, or clearer explanation on the docs site
 title: "[Docs]: "
-labels: ["enhancement", "docs"]
+labels: ["enhancement", "documentation"]
 body:
   - type: markdown
     attributes:
