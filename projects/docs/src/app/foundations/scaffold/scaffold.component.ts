@@ -1,6 +1,6 @@
 import { Component, OnDestroy, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { IconButton, IconElement, MaterialIcon, SheetsService, SideSheetRef, TypeBody, TypeDisplay } from '@vip9008/ngx-md3';
+import { IconButton, IconElement, MaterialIcon, SheetsService, SideSheetRef, TypeBody, TypeDisplay } from '@almoamendev/ngx-md3';
 import { Playground } from '../../components/playground/playground';
 import { Shiki } from '../../components/shiki/shiki';
 import { ScaffoldConfig } from './scaffold-config/scaffold-config';
@@ -37,7 +37,7 @@ import {
     ScaffoldBar, // optional
     ScaffoldRail, // optional
     ScaffoldPane, // recommended: always project main content pane
-} from '@vip9008/ngx-md3';`;
+} from '@almoamendev/ngx-md3';`;
 
     public apiData: string = `// md3-scaffold-bar
 public region = input.required<'top' | 'bottom'>({

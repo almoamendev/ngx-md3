@@ -41,7 +41,7 @@ jobs:
         id: version-check
         run: |
           LOCAL_VERSION=$(node -p "require('./dist/ngx-md3/package.json').version")
-          PUBLISHED_VERSION=$(npm view @vip9008/ngx-md3 version 2>/dev/null || echo "none")
+          PUBLISHED_VERSION=$(npm view @almoamendev/ngx-md3 version 2>/dev/null || echo "none")
           echo "Local version:     $LOCAL_VERSION"
           echo "Published version: $PUBLISHED_VERSION"
           if [ "$LOCAL_VERSION" = "$PUBLISHED_VERSION" ]; then

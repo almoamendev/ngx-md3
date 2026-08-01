@@ -1,5 +1,5 @@
 import { Component, computed, OnDestroy, signal } from '@angular/core';
-import { IconButton, IconElement, MaterialIcon, SheetsService, SideSheetRef, TextSize, TextColor, TypeBody, TypeDisplay, TypeHeadline, TypeLabel, TypeTitle } from '@vip9008/ngx-md3';
+import { IconButton, IconElement, MaterialIcon, SheetsService, SideSheetRef, TextSize, TextColor, TypeBody, TypeDisplay, TypeHeadline, TypeLabel, TypeTitle } from '@almoamendev/ngx-md3';
 import { Playground } from '../../components/playground/playground';
 import { Shiki } from '../../components/shiki/shiki';
 import { TypographyConfig } from './typography-config/typography-config';
@@ -66,7 +66,7 @@ import {
     TypeTitle,
     TypeBody,
     TypeLabel,
-} from '@vip9008/ngx-md3';`;
+} from '@almoamendev/ngx-md3';`;
 
     public apiData: string = `// Shared shape across all 5 directives; only the selector and base class differ
 public size = input<TextSize | 'default'>('default');
@@ -82,7 +82,7 @@ public emphasized = input(false, {
 //                    so the element falls back to the base style`;
 
     public apiTypes: string = `// Types
-import { TextSize, TextColor } from '@vip9008/ngx-md3';
+import { TextSize, TextColor } from '@almoamendev/ngx-md3';
 
 type TextSize = 'large' | 'medium' | 'small';
 

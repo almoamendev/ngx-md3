@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { Button, ButtonGroup, IconElement, MaterialIcon, TypeBody, TypeDisplay } from '@vip9008/ngx-md3';
+import { Button, ButtonGroup, IconElement, MaterialIcon, TypeBody, TypeDisplay } from '@almoamendev/ngx-md3';
 
 @Component({
     selector: 'app-error',

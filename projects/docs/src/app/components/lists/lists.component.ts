@@ -1,6 +1,6 @@
 import { Component, computed, effect, OnDestroy, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { Checkbox, Divider, IconButton, IconElement, InputElement, List, ListItem, ListItemPrimaryAction, ListLeading, ListLeadingSize, ListLeadingType, ListSlot, MaterialIcon, RadioButton, SheetsService, SideSheetRef, Switch, TypeBody, TypeDisplay } from '@vip9008/ngx-md3';
+import { Checkbox, Divider, IconButton, IconElement, InputElement, List, ListItem, ListItemPrimaryAction, ListLeading, ListLeadingSize, ListLeadingType, ListSlot, MaterialIcon, RadioButton, SheetsService, SideSheetRef, Switch, TypeBody, TypeDisplay } from '@almoamendev/ngx-md3';
 import { Playground } from '../playground/playground';
 import { Shiki } from '../shiki/shiki';
 import { ListConfig } from './list-config/list-config';
@@ -81,7 +81,7 @@ import {
     Checkbox, // optional
     RadioButton, // optional
     InputElement, // optional
-} from '@vip9008/ngx-md3';`;
+} from '@almoamendev/ngx-md3';`;
 
     public apiData: string = `// Inputs
 
@@ -107,7 +107,7 @@ public position = input.required<'content' | 'trailing'>({
 });`;
 
     public apiTypes: string = `// Types
-import { ListLeadingType, ListLeadingSize } from '@vip9008/ngx-md3';
+import { ListLeadingType, ListLeadingSize } from '@almoamendev/ngx-md3';
 
 type ListLeadingType = 'icon' | 'avatar' | 'media' | 'selection-input';
 type ListLeadingSize = 'image' | 'small-video' | 'large-video';`;

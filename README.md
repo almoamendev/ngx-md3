@@ -2,7 +2,7 @@
 
 A standalone, signals-first Angular component library that follows the Material Design 3 spec closely — not a reskin of Material 2, and not a wrapper around Angular Material.
 
-**Docs & live component gallery: https://vip9008.github.io/ngx-md3/**
+**Docs & live component gallery: https://almoamendev.github.io/ngx-md3/**
 
 ## Why ngx-md3
 
@@ -16,12 +16,12 @@ A standalone, signals-first Angular component library that follows the Material 
 ## Quick start
 
 ```bash
-npm install @vip9008/ngx-md3
+npm install @almoamendev/ngx-md3
 ```
 
 ```ts
 import { Component } from '@angular/core';
-import { Button } from '@vip9008/ngx-md3';
+import { Button } from '@almoamendev/ngx-md3';
 
 @Component({
     selector: 'app-example',
@@ -35,13 +35,13 @@ import { Button } from '@vip9008/ngx-md3';
 export class ExampleComponent {}
 ```
 
-Browse the full component catalogue, API references, and live playgrounds at **https://vip9008.github.io/ngx-md3/**.
+Browse the full component catalogue, API references, and live playgrounds at **https://almoamendev.github.io/ngx-md3/**.
 
 ## Repository layout
 
 This is an Angular CLI workspace with two projects:
 
-- `projects/ngx-md3` — the publishable component library ([`@vip9008/ngx-md3`](https://www.npmjs.com/package/@vip9008/ngx-md3) on npm).
+- `projects/ngx-md3` — the publishable component library ([`@almoamendev/ngx-md3`](https://www.npmjs.com/package/@almoamendev/ngx-md3) on npm).
 - `projects/docs` — the documentation site, deployed to GitHub Pages.
 
 ## Development

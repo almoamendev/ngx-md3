@@ -1,5 +1,5 @@
 import { Component, OnDestroy, signal } from '@angular/core';
-import { Button, ButtonGroup, ButtonGroupSelection, ButtonGroupType, ButtonSize, Divider, IconButton, IconElement, MaterialIcon, SheetsService, SideSheetRef, TypeBody, TypeDisplay } from '@vip9008/ngx-md3';
+import { Button, ButtonGroup, ButtonGroupSelection, ButtonGroupType, ButtonSize, Divider, IconButton, IconElement, MaterialIcon, SheetsService, SideSheetRef, TypeBody, TypeDisplay } from '@almoamendev/ngx-md3';
 import { ButtonGroupConfig } from './button-group-config/button-group-config';
 import { Playground } from '../../playground/playground';
 import { Shiki } from '../../shiki/shiki';
@@ -38,7 +38,7 @@ import {
     IconButton, // optional
     MaterialIcon, // optional
     IconElement, // optional
-} from '@vip9008/ngx-md3';`;
+} from '@almoamendev/ngx-md3';`;
 
     public apiData: string = `// Inputs
 public buttonSize: InputSignal<ButtonSize> = input<ButtonSize>('small', {
@@ -52,7 +52,7 @@ public groupSelection: InputSignal<ButtonGroupSelection> = input<ButtonGroupSele
 });`;
 
     public apiTypes: string = `// Types
-import { ButtonSize, ButtonGroupType, ButtonGroupSelection } from '@vip9008/ngx-md3';
+import { ButtonSize, ButtonGroupType, ButtonGroupSelection } from '@almoamendev/ngx-md3';
 
 type ButtonSize = 'x-small' | 'small' | 'medium' | 'large' | 'x-large';
 type ButtonGroupType = 'standard' | 'connected';

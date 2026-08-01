@@ -1,5 +1,5 @@
 import { afterNextRender, Component, computed, inject, input } from '@angular/core';
-import { TypeBody } from '@vip9008/ngx-md3';
+import { TypeBody } from '@almoamendev/ngx-md3';
 import { TokenSection } from '../tokens.catalog';
 import { TokenValuesService } from '../token-values.service';
 

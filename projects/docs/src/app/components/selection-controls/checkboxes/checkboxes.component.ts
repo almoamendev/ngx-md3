@@ -1,5 +1,5 @@
 import { Component, OnDestroy, signal } from '@angular/core';
-import { Checkbox, IconButton, IconElement, InputElement, MaterialIcon, SheetsService, SideSheetRef, TypeBody, TypeDisplay } from '@vip9008/ngx-md3';
+import { Checkbox, IconButton, IconElement, InputElement, MaterialIcon, SheetsService, SideSheetRef, TypeBody, TypeDisplay } from '@almoamendev/ngx-md3';
 import { Playground } from '../../playground/playground';
 import { Shiki } from '../../shiki/shiki';
 import { CheckboxConfig } from './checkbox-config/checkbox-config';
@@ -32,7 +32,7 @@ export class CheckboxesComponent implements OnDestroy {
 import {
     Checkbox,
     InputElement,
-} from '@vip9008/ngx-md3';`;
+} from '@almoamendev/ngx-md3';`;
 
     public apiData: string = `// Inputs
 public control = input<AbstractControl | undefined>(undefined, {

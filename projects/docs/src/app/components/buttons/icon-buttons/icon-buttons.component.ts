@@ -1,5 +1,5 @@
 import { Component, OnDestroy, signal } from '@angular/core';
-import { ButtonSize, IconButton, IconButtonType, IconButtonWidth, IconElement, MaterialIcon, SheetsService, SideSheetRef, TypeBody, TypeDisplay } from "@vip9008/ngx-md3";
+import { ButtonSize, IconButton, IconButtonType, IconButtonWidth, IconElement, MaterialIcon, SheetsService, SideSheetRef, TypeBody, TypeDisplay } from "@almoamendev/ngx-md3";
 import { Playground } from '../../playground/playground';
 import { Shiki } from '../../shiki/shiki';
 import { IconButtonConfig } from './icon-button-config/icon-button-config';
@@ -33,7 +33,7 @@ import {
     IconButton,
     MaterialIcon, // optional
     IconElement, // optional
-} from '@vip9008/ngx-md3';`;
+} from '@almoamendev/ngx-md3';`;
 
     public apiData: string = `// Inputs
 public buttonSize = input<ButtonSize>('small', {
@@ -54,7 +54,7 @@ public isSelected = model<boolean | null>(null, {
 });`;
 
     public apiTypes: string = `// Types
-import { ButtonSize, IconButtonType, IconButtonWidth } from '@vip9008/ngx-md3';
+import { ButtonSize, IconButtonType, IconButtonWidth } from '@almoamendev/ngx-md3';
 
 type ButtonSize = 'x-small' | 'small' | 'medium' | 'large' | 'x-large';
 type IconButtonType = 'filled' | 'tonal' | 'outlined' | 'standard';

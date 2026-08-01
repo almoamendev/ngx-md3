@@ -1,5 +1,5 @@
 import { Component, input } from '@angular/core';
-import { Badge, Divider, IconElement, MaterialIcon, MenuGroup, MenuItem, MenuService } from '@vip9008/ngx-md3';
+import { Badge, Divider, IconElement, MaterialIcon, MenuGroup, MenuItem, MenuService } from '@almoamendev/ngx-md3';
 
 @Component({
     selector: 'app-smaple-menu',

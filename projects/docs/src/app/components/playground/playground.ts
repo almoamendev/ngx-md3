@@ -1,6 +1,6 @@
 import { NgClass } from '@angular/common';
 import { booleanAttribute, Component, input, signal } from '@angular/core';
-import { Button, Card, IconButton, IconElement, MaterialIcon } from '@vip9008/ngx-md3';
+import { Button, Card, IconButton, IconElement, MaterialIcon } from '@almoamendev/ngx-md3';
 
 @Component({
     selector: 'app-playground',

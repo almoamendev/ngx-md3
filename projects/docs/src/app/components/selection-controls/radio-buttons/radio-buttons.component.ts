@@ -1,5 +1,5 @@
 import { Component, OnDestroy, signal } from '@angular/core';
-import { IconButton, IconElement, InputElement, MaterialIcon, RadioButton, SheetsService, SideSheetRef, TypeBody, TypeDisplay } from '@vip9008/ngx-md3';
+import { IconButton, IconElement, InputElement, MaterialIcon, RadioButton, SheetsService, SideSheetRef, TypeBody, TypeDisplay } from '@almoamendev/ngx-md3';
 import { Playground } from '../../playground/playground';
 import { Shiki } from '../../shiki/shiki';
 import { RadioConfig } from './radio-config/radio-config';
@@ -32,7 +32,7 @@ export class RadioButtonsComponent implements OnDestroy {
 import {
     RadioButton,
     InputElement,
-} from '@vip9008/ngx-md3';`;
+} from '@almoamendev/ngx-md3';`;
 
     public apiData: string = `// Inputs
 public control = input<AbstractControl | undefined>(undefined, {

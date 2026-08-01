@@ -1,5 +1,5 @@
 import { Component, effect, OnDestroy, signal } from '@angular/core';
-import { CircularProgressIndicator, IconButton, IconElement, LinearProgressIndicator, MaterialIcon, SheetsService, SideSheetRef, TypeBody, TypeDisplay } from "@vip9008/ngx-md3";
+import { CircularProgressIndicator, IconButton, IconElement, LinearProgressIndicator, MaterialIcon, SheetsService, SideSheetRef, TypeBody, TypeDisplay } from "@almoamendev/ngx-md3";
 import { Playground } from '../../playground/playground';
 import { Shiki } from '../../shiki/shiki';
 import { ProgressConfig } from './progress-config/progress-config';
@@ -32,7 +32,7 @@ export class ProgressIndicatorsComponent implements OnDestroy {
 import {
     CircularProgressIndicator, // circular
     LinearProgressIndicator, // linear
-} from '@vip9008/ngx-md3';`;
+} from '@almoamendev/ngx-md3';`;
 
     public apiData: string = `// Inputs
 public indeterminate = input<boolean>(false);

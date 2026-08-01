@@ -1,5 +1,5 @@
 import { Component, OnDestroy, signal } from '@angular/core';
-import { IconButton, IconElement, LoadingIndicator, MaterialIcon, SheetsService, SideSheetRef, TypeBody, TypeDisplay } from "@vip9008/ngx-md3";
+import { IconButton, IconElement, LoadingIndicator, MaterialIcon, SheetsService, SideSheetRef, TypeBody, TypeDisplay } from "@almoamendev/ngx-md3";
 import { Playground } from '../../playground/playground';
 import { Shiki } from '../../shiki/shiki';
 import { LoadingConfig } from './loading-config/loading-config';
@@ -29,7 +29,7 @@ export class LoadingIndicatorsComponent implements OnDestroy {
     public apiImport: string = `// Component imports
 import {
     LoadingIndicator,
-} from '@vip9008/ngx-md3';`;
+} from '@almoamendev/ngx-md3';`;
 
     public apiData: string = `// Inputs
 public contained = input<boolean>(false);

@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { SideSheetRef } from '@vip9008/ngx-md3';
+import { SideSheetRef } from '@almoamendev/ngx-md3';
 
 import { ComponentsMenu } from './components-menu';
 

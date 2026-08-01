@@ -1,12 +1,12 @@
 {
-    "name": "@vip9008/ngx-md3",
+    "name": "@almoamendev/ngx-md3",
     "version": "0.0.8",
     "description": "MD3-style Angular components & style library",
-    "author": "Hussain Almomen",
+    "author": "Murtadha (Hussain) Almomen",
     "license": "MIT",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/vip9008/ngx-md3.git"
+        "url": "git+https://github.com/almoamendev/ngx-md3.git"
     },
     "keywords": [
         "angular",

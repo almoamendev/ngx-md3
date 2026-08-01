@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { Button, Card, IconElement, MaterialIcon, TypeBody, TypeDisplay, TypeHeadline, TypeLabel, TypeTitle } from '@vip9008/ngx-md3';
+import { Button, Card, IconElement, MaterialIcon, TypeBody, TypeDisplay, TypeHeadline, TypeLabel, TypeTitle } from '@almoamendev/ngx-md3';
 import { Shiki } from '../components/shiki/shiki';
 
 interface HomeFeature {
@@ -113,10 +113,10 @@ export class HomeComponent {
         },
     ];
 
-    public installCode: string = `npm install @vip9008/ngx-md3`;
+    public installCode: string = `npm install @almoamendev/ngx-md3`;
 
     public quickStartCode: string = `import { Component } from '@angular/core';
-import { Button } from '@vip9008/ngx-md3';
+import { Button } from '@almoamendev/ngx-md3';
 
 @Component({
     selector: 'app-example',

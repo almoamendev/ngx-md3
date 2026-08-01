@@ -1,6 +1,6 @@
 import { Component, OnDestroy, TemplateRef, signal, viewChild } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { Button, Divider, IconButton, IconElement, LinearProgressIndicator, MaterialIcon, SheetsService, SideSheetRef, SnackbarRef, SnackbarService, TypeBody, TypeDisplay } from '@vip9008/ngx-md3';
+import { Button, Divider, IconButton, IconElement, LinearProgressIndicator, MaterialIcon, SheetsService, SideSheetRef, SnackbarRef, SnackbarService, TypeBody, TypeDisplay } from '@almoamendev/ngx-md3';
 import { Playground } from '../playground/playground';
 import { Shiki } from '../shiki/shiki';
 import { SnackbarConfig } from './snackbar-config/snackbar-config';
@@ -45,7 +45,7 @@ export class SnackbarsComponent implements OnDestroy {
     public apiImport: string = `// Component imports
 import {
     SnackbarService,
-} from '@vip9008/ngx-md3';`;
+} from '@almoamendev/ngx-md3';`;
 
     public apiData: string = `// using snackbar service
 
@@ -93,7 +93,7 @@ snackbarService.dismiss();
 snackbarService.dismissAll();`;
 
     public apiTypes: string = `// Types
-import { SnackbarConfig, SnackbarRef } from '@vip9008/ngx-md3';
+import { SnackbarConfig, SnackbarRef } from '@almoamendev/ngx-md3';
 
 interface SnackbarConfig<D = unknown> {
     /**

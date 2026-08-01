@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { TypeDisplay } from '@vip9008/ngx-md3';
+import { TypeDisplay } from '@almoamendev/ngx-md3';
 import { Shiki } from '../../shiki/shiki';
 
 @Component({
@@ -15,7 +15,7 @@ import { Shiki } from '../../shiki/shiki';
 })
 export class NavigationItemComponent {
     public apiImport: string = `// Component imports
-import { NavigationItem } from '@vip9008/ngx-md3';`;
+import { NavigationItem } from '@almoamendev/ngx-md3';`;
 
     public apiData: string = `// Inputs
 public hideOnCollapse = input<boolean, unknown>(false, {

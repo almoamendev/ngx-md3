@@ -1,6 +1,6 @@
 import { Component, OnDestroy, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { Badge, Divider, IconButton, IconElement, MaterialIcon, NavigationBar, NavigationItem, SheetsService, SideSheetRef, TypeBody, TypeDisplay } from '@vip9008/ngx-md3';
+import { Badge, Divider, IconButton, IconElement, MaterialIcon, NavigationBar, NavigationItem, SheetsService, SideSheetRef, TypeBody, TypeDisplay } from '@almoamendev/ngx-md3';
 import { Playground } from '../../playground/playground';
 import { Shiki } from '../../shiki/shiki';
 import { NavBarConfig } from './nav-bar-config/nav-bar-config';
@@ -38,7 +38,7 @@ import {
     IconElement,
     MaterialIcon, // optional
     Badge, // optional
-} from '@vip9008/ngx-md3';`;
+} from '@almoamendev/ngx-md3';`;
 
     public apiData: string = `// NavigationBar has no configurable inputs.
 // Its layout switches automatically between a horizontal bar

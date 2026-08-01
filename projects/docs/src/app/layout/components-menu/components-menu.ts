@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { IconButton, SideSheetHeader, IconElement, MaterialIcon, SideSheetRef, NavigationGroup, NavigationItem, Divider, SideSheetBody, Badge } from '@vip9008/ngx-md3';
+import { IconButton, SideSheetHeader, IconElement, MaterialIcon, SideSheetRef, NavigationGroup, NavigationItem, Divider, SideSheetBody, Badge } from '@almoamendev/ngx-md3';
 import { COMPONENT_GROUPS, ComponentEntry, COMPONENTS, componentsInGroup, ungroupedComponents } from '../../components/components.catalog';
 
 interface MenuSection {

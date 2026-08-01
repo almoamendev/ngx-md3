@@ -1,5 +1,5 @@
 import { Component, effect, OnDestroy, signal } from '@angular/core';
-import { IconButton, IconElement, InputElement, MaterialIcon, SheetsService, SideSheetRef, Slider, SliderSize, TypeBody, TypeDisplay } from '@vip9008/ngx-md3';
+import { IconButton, IconElement, InputElement, MaterialIcon, SheetsService, SideSheetRef, Slider, SliderSize, TypeBody, TypeDisplay } from '@almoamendev/ngx-md3';
 import { Playground } from '../playground/playground';
 import { Shiki } from '../shiki/shiki';
 import { SliderConfig } from './slider-config/slider-config';
@@ -35,7 +35,7 @@ import {
     InputElement,
     MaterialIcon, // optional
     IconElement, // optional
-} from '@vip9008/ngx-md3';`;
+} from '@almoamendev/ngx-md3';`;
 
     public apiData: string = `// Inputs
 public control = input<AbstractControl | undefined>(undefined, {
@@ -49,7 +49,7 @@ public showValueLabel = input<boolean>(false, {
 });`;
 
     public apiTypes: string = `// Types
-import { SliderSize } from '@vip9008/ngx-md3';
+import { SliderSize } from '@almoamendev/ngx-md3';
 
 type SliderSize = 'x-small' | 'small' | 'medium' | 'large' | 'x-large';`;
 

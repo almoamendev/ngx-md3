@@ -1,5 +1,5 @@
 import { Component, input, Input } from '@angular/core';
-import { Button, DialogActions, DialogBody, DialogHeader, DialogRef, IconElement, MaterialIcon } from '@vip9008/ngx-md3';
+import { Button, DialogActions, DialogBody, DialogHeader, DialogRef, IconElement, MaterialIcon } from '@almoamendev/ngx-md3';
 
 @Component({
     selector: 'app-sample-dialog',

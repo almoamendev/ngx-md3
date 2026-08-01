@@ -1,5 +1,5 @@
 import { Component, effect, OnDestroy, signal } from '@angular/core';
-import { ChipAvatar, Chips, ChipStyle, ChipType, IconButton, IconElement, InputElement, MaterialIcon, SheetsService, SideSheetRef, TypeBody, TypeDisplay } from '@vip9008/ngx-md3';
+import { ChipAvatar, Chips, ChipStyle, ChipType, IconButton, IconElement, InputElement, MaterialIcon, SheetsService, SideSheetRef, TypeBody, TypeDisplay } from '@almoamendev/ngx-md3';
 import { Playground } from '../playground/playground';
 import { Shiki } from '../shiki/shiki';
 import { ChipsConfig } from './chips-config/chips-config';
@@ -39,7 +39,7 @@ import {
     IconElement, // optional
     InputElement, // optional
     MaterialIcon, // optional
-} from '@vip9008/ngx-md3';`;
+} from '@almoamendev/ngx-md3';`;
 
     public apiData: string = `// Inputs & outputs
 public trailingFunction = output<void>({
@@ -53,7 +53,7 @@ public chipStyle = input<ChipStyle>('default', {
 });`;
 
     public apiTypes: string = `// Types
-import { ChipType, ChipStyle } from '@vip9008/ngx-md3';
+import { ChipType, ChipStyle } from '@almoamendev/ngx-md3';
 
 type ChipType = 'assist' | 'filter' | 'input' | 'suggestion';
 type ChipStyle = 'default' | 'surface' | 'elevated';`;

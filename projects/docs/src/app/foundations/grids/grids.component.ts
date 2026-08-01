@@ -1,5 +1,5 @@
 import { Component, computed, inject, OnDestroy, signal } from '@angular/core';
-import { Grid, GridItem, IconButton, IconElement, LayoutService, MaterialIcon, SheetsService, SideSheetRef, TypeBody, Divider, TypeHeadline, TypeDisplay } from '@vip9008/ngx-md3';
+import { Grid, GridItem, IconButton, IconElement, LayoutService, MaterialIcon, SheetsService, SideSheetRef, TypeBody, Divider, TypeHeadline, TypeDisplay } from '@almoamendev/ngx-md3';
 import { Playground } from '../../components/playground/playground';
 import { Shiki } from '../../components/shiki/shiki';
 import { GridConfig } from './grid-config/grid-config';
@@ -41,7 +41,7 @@ export class GridsComponent implements OnDestroy {
     });
 
     public apiImport: string = `// Directive imports
-import { Grid, GridItem } from '@vip9008/ngx-md3';`;
+import { Grid, GridItem } from '@almoamendev/ngx-md3';`;
 
     public apiData: string = `// md3-grid
 public cols = input<number | undefined>(undefined, {

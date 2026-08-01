@@ -1,5 +1,5 @@
 import { Component, OnDestroy, signal } from '@angular/core';
-import { Button, DialogService, Divider, IconButton, IconElement, MaterialIcon, SheetsService, SideSheetRef, TypeBody, TypeDisplay } from '@vip9008/ngx-md3';
+import { Button, DialogService, Divider, IconButton, IconElement, MaterialIcon, SheetsService, SideSheetRef, TypeBody, TypeDisplay } from '@almoamendev/ngx-md3';
 import { SampleDialog } from './sample-dialog/sample-dialog';
 import { Playground } from '../playground/playground';
 import { Shiki } from '../shiki/shiki';
@@ -39,7 +39,7 @@ import {
     DialogBody, // optional
     DialogActions, // optional
     Button, // optional
-} from '@vip9008/ngx-md3';`;
+} from '@almoamendev/ngx-md3';`;
 
     public apiData: string = `// using dialog service
 
@@ -61,7 +61,7 @@ dialogRef.afterClosed().subscribe((result: YourDialogResults) => {
 });`;
 
     public apiTypes: string = `// Types
-import { DialogConfig, DialogRef } from '@vip9008/ngx-md3';
+import { DialogConfig, DialogRef } from '@almoamendev/ngx-md3';
 
 interface DialogConfig<D = unknown> {
     /**

@@ -1,6 +1,6 @@
 import { Component, OnDestroy, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { AppBar, AppBarLogo, AppBarScrollingStyle, AppBarType, Avatar, IconButton, IconElement, InputElement, MaterialIcon, SheetsService, SideSheetRef, TypeDisplay } from '@vip9008/ngx-md3';
+import { AppBar, AppBarLogo, AppBarScrollingStyle, AppBarType, Avatar, IconButton, IconElement, InputElement, MaterialIcon, SheetsService, SideSheetRef, TypeDisplay } from '@almoamendev/ngx-md3';
 import { Playground } from '../../components/playground/playground';
 import { Shiki } from '../../components/shiki/shiki';
 import { AppBarConfig } from './app-bar-config/app-bar-config';
@@ -41,7 +41,7 @@ import {
     MaterialIcon, // optional
     Avatar, // optional
     InputElement, // optional
- } from '@vip9008/ngx-md3';`;
+ } from '@almoamendev/ngx-md3';`;
 
     public apiData: string = `public title = input<string | null>(null, {
     alias: 'bar-title',
@@ -65,7 +65,7 @@ public centerAligned = input(false, {
 });`;
 
     public apiTypes: string = `// Types
-import { AppBarType, AppBarScrollingStyle } from '@vip9008/ngx-md3';
+import { AppBarType, AppBarScrollingStyle } from '@almoamendev/ngx-md3';
 
 type AppBarType = 'small' | 'medium' | 'large' | 'search';
 type AppBarScrollingStyle = 'none' | 'transparent' | 'elevate';`;

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { IconButton, IconElement, InputElement, MaterialIcon, RadioButton, SideSheetBody, SideSheetHeader, SideSheetRef, StateComponent, Switch, TextColor, TextSize, TypeBody, TypeLabel } from '@vip9008/ngx-md3';
+import { IconButton, IconElement, InputElement, MaterialIcon, RadioButton, SideSheetBody, SideSheetHeader, SideSheetRef, StateComponent, Switch, TextColor, TextSize, TypeBody, TypeLabel } from '@almoamendev/ngx-md3';
 
 type TypeScale = 'display' | 'headline' | 'title' | 'body' | 'label';
 

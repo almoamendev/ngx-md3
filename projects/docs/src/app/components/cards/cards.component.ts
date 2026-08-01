@@ -1,5 +1,5 @@
 import { Component, OnDestroy, signal } from '@angular/core';
-import { Card, CardType, IconButton, IconElement, MaterialIcon, SheetsService, SideSheetRef, TypeBody, TypeDisplay } from "@vip9008/ngx-md3";
+import { Card, CardType, IconButton, IconElement, MaterialIcon, SheetsService, SideSheetRef, TypeBody, TypeDisplay } from "@almoamendev/ngx-md3";
 import { CardConfig } from './card-config/card-config';
 import { Playground } from '../playground/playground';
 import { Shiki } from '../shiki/shiki';
@@ -29,7 +29,7 @@ export class CardsComponent implements OnDestroy {
     public apiImport: string = `// Component imports
 import {
     Card,
-} from '@vip9008/ngx-md3';`;
+} from '@almoamendev/ngx-md3';`;
 
     public apiData: string = `// Inputs
 public cardType = input<CardType>('elevated', {
@@ -42,7 +42,7 @@ public isInteractive = input<boolean, unknown>(false, {
 });`;
 
     public apiTypes: string = `// Types
-import { CardType } from '@vip9008/ngx-md3';
+import { CardType } from '@almoamendev/ngx-md3';
 
 type CardType = 'elevated' | 'filled' | 'outlined';`;
 

@@ -1,6 +1,6 @@
 import { Component, effect, OnDestroy, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { Badge, Divider, FloatingActionButton, IconButton, IconElement, MaterialIcon, NavigationGroup, NavigationItem, NavigationRail, SheetsService, SideSheetRef, TypeBody, TypeDisplay } from '@vip9008/ngx-md3';
+import { Badge, Divider, FloatingActionButton, IconButton, IconElement, MaterialIcon, NavigationGroup, NavigationItem, NavigationRail, SheetsService, SideSheetRef, TypeBody, TypeDisplay } from '@almoamendev/ngx-md3';
 import { Playground } from '../../playground/playground';
 import { Shiki } from '../../shiki/shiki';
 import { NavRailConfig } from './nav-rail-config/nav-rail-config';
@@ -50,7 +50,7 @@ import {
     MaterialIcon, // optional
     FloatingActionButton, // optional
     Badge, // optional
-} from '@vip9008/ngx-md3';`;
+} from '@almoamendev/ngx-md3';`;
 
     public apiData: string = `// Inputs
 public expanded = model<boolean>(false, {

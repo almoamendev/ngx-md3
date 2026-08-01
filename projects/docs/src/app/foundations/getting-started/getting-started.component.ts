@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { Divider, TypeBody, TypeDisplay } from '@vip9008/ngx-md3';
+import { Divider, TypeBody, TypeDisplay } from '@almoamendev/ngx-md3';
 import { Shiki } from '../../components/shiki/shiki';
 
 @Component({
@@ -16,7 +16,7 @@ import { Shiki } from '../../components/shiki/shiki';
     styleUrl: './getting-started.component.scss',
 })
 export class GettingStartedComponent {
-    public installCode: string = `npm install @vip9008/ngx-md3`;
+    public installCode: string = `npm install @almoamendev/ngx-md3`;
 
     public peerDepsCode: string = `# peer dependencies — install if your app doesn't have them yet
 npm install @angular/cdk`;
@@ -30,14 +30,14 @@ npm install @angular/cdk`;
 
 // Brings in the tokens, the base reset, and the typography/icon fonts.
 // Import this once, before your own global styles.
-@use '@vip9008/ngx-md3/src/lib/styles/md3.scss';
+@use '@almoamendev/ngx-md3/src/lib/styles/md3.scss';
 
 // ...your own global styles`;
 
     public includePathsCode: string = `// angular.json — optional, shortens the import above
 "stylePreprocessorOptions": {
     "includePaths": [
-        "node_modules/@vip9008/ngx-md3/src/lib/styles"
+        "node_modules/@almoamendev/ngx-md3/src/lib/styles"
     ]
 }
 
@@ -45,7 +45,7 @@ npm install @angular/cdk`;
 @use 'md3.scss';`;
 
     public firstComponentCode: string = `import { Component } from '@angular/core';
-import { Button, MaterialIcon, IconElement } from '@vip9008/ngx-md3';
+import { Button, MaterialIcon, IconElement } from '@almoamendev/ngx-md3';
 
 @Component({
     selector: 'app-example',
@@ -61,7 +61,7 @@ export class ExampleComponent {}`;
 <body class="md-scheme-dark">...</body>`;
 
     public schemeServiceCode: string = `import { Component, inject } from '@angular/core';
-import { LayoutService } from '@vip9008/ngx-md3';
+import { LayoutService } from '@almoamendev/ngx-md3';
 
 @Component({ /* ... */ })
 export class AppComponent {
@@ -89,7 +89,7 @@ export class AppComponent {
 }`;
 
     public overrideCode: string = `// src/styles.scss
-@use '@vip9008/ngx-md3/src/lib/styles/md3.scss';
+@use '@almoamendev/ngx-md3/src/lib/styles/md3.scss';
 
 // Override AFTER the import. Same selectors as md-scheme.scss, so these win
 // on source order. Values are "R, G, B" channels — no rgb(), no hex.

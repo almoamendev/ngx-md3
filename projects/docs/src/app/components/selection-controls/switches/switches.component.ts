@@ -1,5 +1,5 @@
 import { Component, effect, OnDestroy, signal } from '@angular/core';
-import { IconButton, IconElement, InputElement, MaterialIcon, SheetsService, SideSheetRef, Switch, TypeBody, TypeDisplay } from '@vip9008/ngx-md3';
+import { IconButton, IconElement, InputElement, MaterialIcon, SheetsService, SideSheetRef, Switch, TypeBody, TypeDisplay } from '@almoamendev/ngx-md3';
 import { Playground } from '../../playground/playground';
 import { Shiki } from '../../shiki/shiki';
 import { SwitchConfig } from './switch-config/switch-config';
@@ -36,7 +36,7 @@ import {
     InputElement,
     IconElement, // optional
     MaterialIcon, // optional
-} from '@vip9008/ngx-md3';`;
+} from '@almoamendev/ngx-md3';`;
 
     public apiData: string = `// Inputs
 public control = input<AbstractControl | undefined>(undefined, {

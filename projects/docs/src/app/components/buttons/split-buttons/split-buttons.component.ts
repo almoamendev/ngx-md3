@@ -1,6 +1,6 @@
 import { Component, OnDestroy, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { Button, ButtonSize, Divider, IconButton, IconElement, MaterialIcon, MenuService, SheetsService, SideSheetRef, SplitButton, SplitButtonType, TypeBody, TypeDisplay } from '@vip9008/ngx-md3';
+import { Button, ButtonSize, Divider, IconButton, IconElement, MaterialIcon, MenuService, SheetsService, SideSheetRef, SplitButton, SplitButtonType, TypeBody, TypeDisplay } from '@almoamendev/ngx-md3';
 import { SmapleMenu } from '../../menus/smaple-menu/smaple-menu';
 import { Playground } from '../../playground/playground';
 import { Shiki } from '../../shiki/shiki';
@@ -40,7 +40,7 @@ import {
     IconElement,
     Button, // optional
     MaterialIcon, // optional
-} from '@vip9008/ngx-md3';`;
+} from '@almoamendev/ngx-md3';`;
 
     public apiData: string = `// Inputs
 public buttonSize = input<ButtonSize>('small', {
@@ -56,7 +56,7 @@ public flipTrailingIcon = input<boolean, unknown>(true, {
 });`;
 
     public apiTypes: string = `// Types
-import { ButtonSize, SplitButtonType } from '@vip9008/ngx-md3';
+import { ButtonSize, SplitButtonType } from '@almoamendev/ngx-md3';
 
 type ButtonSize = 'x-small' | 'small' | 'medium' | 'large' | 'x-large';
 type SplitButtonType = 'elevated' | 'filled' | 'tonal' | 'outlined';`;

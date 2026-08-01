@@ -1,6 +1,6 @@
 import { Component, OnDestroy, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { Badge, IconButton, IconElement, MaterialIcon, SheetsService, SideSheetRef, TypeBody, TypeDisplay } from '@vip9008/ngx-md3';
+import { Badge, IconButton, IconElement, MaterialIcon, SheetsService, SideSheetRef, TypeBody, TypeDisplay } from '@almoamendev/ngx-md3';
 import { BadgeConfig } from './badge-config/badge-config';
 import { Playground } from '../playground/playground';
 import { Shiki } from '../shiki/shiki';
@@ -30,7 +30,7 @@ export class BadgesComponent implements OnDestroy {
     public apiImport: string = `// Component imports
 import {
     Badge,
-} from '@vip9008/ngx-md3';`;
+} from '@almoamendev/ngx-md3';`;
 
     public apiData: string = `// Inputs
 public isSmall = input<boolean, unknown>(false, {

@@ -1,5 +1,5 @@
 import { Component, effect, OnDestroy, signal } from '@angular/core';
-import { FabSize, FabType, FloatingActionButton, IconButton, IconElement, MaterialIcon, SheetsService, SideSheetRef, TypeBody, TypeDisplay } from "@vip9008/ngx-md3";
+import { FabSize, FabType, FloatingActionButton, IconButton, IconElement, MaterialIcon, SheetsService, SideSheetRef, TypeBody, TypeDisplay } from "@almoamendev/ngx-md3";
 import { Playground } from '../../playground/playground';
 import { Shiki } from '../../shiki/shiki';
 import { FabsConfig } from './fabs-config/fabs-config';
@@ -33,7 +33,7 @@ import {
     FloatingActionButton,
     IconElement, // optional
     MaterialIcon, // optional
-} from '@vip9008/ngx-md3';`;
+} from '@almoamendev/ngx-md3';`;
 
     public apiData: string = `// Inputs
 public buttonSize = input<FabSize>('small', {
@@ -48,7 +48,7 @@ public isExtended = input<boolean, unknown>(false, {
 });`;
 
     public apiTypes: string = `// Types
-import { FabSize, FabType } from '@vip9008/ngx-md3';
+import { FabSize, FabType } from '@almoamendev/ngx-md3';
 
 type FabSize = 'small' | 'medium' | 'large';
 type FabType = 'tonal-primary' | 'tonal-secondary' | 'tonal-tertiary' | 'primary' | 'secondary' | 'tertiary';`;
