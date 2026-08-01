@@ -46,4 +46,4 @@ Browse the full component catalogue, API references, and live playgrounds at **h
 
 ## License
 
-MIT © Hussain Almomen — see [LICENSE](https://github.com/almoamendev/ngx-md3/blob/main/LICENSE).
+MIT © Murtadha (Hussain) Almoamen — see [LICENSE](https://github.com/almoamendev/ngx-md3/blob/main/LICENSE).

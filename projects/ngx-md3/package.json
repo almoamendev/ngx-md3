@@ -1,8 +1,8 @@
 {
     "name": "@almoamendev/ngx-md3",
-    "version": "0.0.10",
+    "version": "0.0.11",
     "description": "MD3-style Angular components & style library",
-    "author": "Murtadha (Hussain) Almomen",
+    "author": "Murtadha (Hussain) Almoamen",
     "license": "MIT",
     "repository": {
         "type": "git",

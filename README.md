@@ -57,4 +57,4 @@ ng test ngx-md3     # run the library's unit tests
 
 ## License
 
-MIT © Hussain Almomen — see [LICENSE](./LICENSE).
+MIT © Murtadha (Hussain) Almoamen — see [LICENSE](./LICENSE).
