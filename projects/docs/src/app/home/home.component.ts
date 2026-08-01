@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { Button, Card, IconElement, MaterialIcon, TypeBody, TypeDisplay, TypeHeadline, TypeLabel, TypeTitle } from '@almoamendev/ngx-md3';
+import { Button, ButtonGroup, Card, IconElement, MaterialIcon, TypeBody, TypeDisplay, TypeHeadline, TypeLabel, TypeTitle } from '@almoamendev/ngx-md3';
 import { Shiki } from '../components/shiki/shiki';
 
 interface HomeFeature {
@@ -21,6 +21,7 @@ interface HomeCategory {
     imports: [
         RouterLink,
         Button,
+        ButtonGroup,
         Card,
         MaterialIcon,
         IconElement,

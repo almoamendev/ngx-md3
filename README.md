@@ -19,6 +19,8 @@ A standalone, signals-first Angular component library that follows the Material 
 npm install @almoamendev/ngx-md3
 ```
 
+**View on NPM: https://www.npmjs.com/package/@almoamendev/ngx-md3/**
+
 ```ts
 import { Component } from '@angular/core';
 import { Button } from '@almoamendev/ngx-md3';
