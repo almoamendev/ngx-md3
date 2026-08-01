@@ -1,63 +1,49 @@
-# NgxMd3
+# ngx-md3
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.0.
+A standalone, signals-first Angular component library that follows the Material Design 3 spec closely — not a reskin of Material 2, and not a wrapper around Angular Material.
 
-## Code scaffolding
+**Docs & live component gallery: https://almoamendev.github.io/ngx-md3/**
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Why ngx-md3
 
-```bash
-ng generate component component-name
-```
+- **Material Design 3** — color, shape, elevation, and motion tokens taken straight from the MD3 spec.
+- **Signals-first** — standalone components built on Angular Signals, with `model()` for real two-way bindings where they matter.
+- **Accessible by default** — correct ARIA roles, states, and keyboard behavior are built into every component, not bolted on afterward.
+- **Plays well with forms** — every input-like component works with Angular Reactive Forms out of the box.
+- **Fully themeable** — swap the entire palette by overriding CSS custom properties, no rebuild required.
+- **Tree-shakeable** — every component is a standalone import; pull in a button without dragging along the rest of the library.
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the library, run:
+## Install
 
 ```bash
-ng build ngx-md3
+npm install @almoamendev/ngx-md3
 ```
 
-This command will compile your project, and the build artifacts will be placed in the `dist/` directory.
+## Quick start
 
-### Publishing the Library
+```ts
+import { Component } from '@angular/core';
+import { Button } from '@almoamendev/ngx-md3';
 
-Once the project is built, you can publish your library by following these steps:
-
-1. Navigate to the `dist` directory:
-   ```bash
-   cd dist/ngx-md3
-   ```
-
-2. Run the `npm publish` command to publish your library to the npm registry:
-   ```bash
-   npm publish
-   ```
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
+@Component({
+    selector: 'app-example',
+    imports: [Button],
+    template: `
+        <button md3-button button-type="filled">
+            Get started
+        </button>
+    `,
+})
+export class ExampleComponent {}
 ```
 
-## Running end-to-end tests
+Browse the full component catalogue, API references, and live playgrounds at **https://almoamendev.github.io/ngx-md3/**.
 
-For end-to-end (e2e) testing, run:
+## Links
 
-```bash
-ng e2e
-```
+- Docs & component gallery: https://almoamendev.github.io/ngx-md3/
+- Source & issues: https://github.com/almoamendev/ngx-md3
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+## License
 
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+MIT © Hussain Almomen — see [LICENSE](https://github.com/almoamendev/ngx-md3/blob/main/LICENSE).
