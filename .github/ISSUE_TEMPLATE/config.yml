@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Docs & component gallery
+    url: https://almoamendev.github.io/ngx-md3/
+    about: Browse components, API references, and live examples before filing an issue.
+  - name: npm package
+    url: https://www.npmjs.com/package/@almoamendev/ngx-md3
+    about: Check the changelog / installed version.

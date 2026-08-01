@@ -1,0 +1,51 @@
+name: "Docs site bug: broken page or example"
+description: Something on the docs/gallery site (almoamendev.github.io/ngx-md3) is broken
+title: "[Bug][Docs]: "
+labels: ["bug", "docs"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This template is for the **docs site** (broken page, wrong/outdated example, dead link, typo). If the component itself is misbehaving in your own app, use the "Library bug" template instead.
+
+  - type: input
+    id: page-url
+    attributes:
+      label: Page URL
+      description: Which page on the docs site?
+      placeholder: https://almoamendev.github.io/ngx-md3/components/text-field
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: What's wrong?
+      description: A clear description — broken example, incorrect code snippet, dead link, rendering issue, etc.
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: What should it say/show instead?
+
+  - type: dropdown
+    id: browser
+    attributes:
+      label: Browser
+      multiple: true
+      options:
+        - Chrome
+        - Firefox
+        - Safari
+        - Edge
+        - Other (mention in description)
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checks
+      options:
+        - label: I searched existing issues and this hasn't been reported yet
+          required: true

@@ -1,0 +1,43 @@
+name: General feedback
+description: Thoughts, impressions, or things that felt off — no bug or feature request required
+title: "[Feedback]: "
+labels: ["feedback"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Trying the library out and just have thoughts to share? This is the place — API naming, DX, docs, first impressions, anything.
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Is this about the library, the docs site, or both?
+      options:
+        - Library
+        - Docs site
+        - Both / not sure
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: What did you try?
+      description: What were you building, or what part of the library/docs did you look at?
+    validations:
+      required: true
+
+  - type: textarea
+    id: worked-well
+    attributes:
+      label: What worked well?
+
+  - type: textarea
+    id: could-be-better
+    attributes:
+      label: What could be better?
+
+  - type: textarea
+    id: other
+    attributes:
+      label: Anything else?

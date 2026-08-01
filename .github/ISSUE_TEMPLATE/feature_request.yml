@@ -1,0 +1,55 @@
+name: "Library feature request"
+description: Request a new component, variant, or enhancement to the library
+title: "[Feature][Library]: "
+labels: ["enhancement", "library"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        For docs-site requests (missing examples, unclear explanations, new guide pages), use the "Docs improvement" template instead.
+
+  - type: dropdown
+    id: type
+    attributes:
+      label: What kind of request is this?
+      options:
+        - New component
+        - Enhancement to an existing component
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem does this solve?
+      description: What are you trying to do that the library doesn't support today?
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: What would the API or behavior look like? Inputs/outputs, usage example, etc.
+
+  - type: textarea
+    id: spec-reference
+    attributes:
+      label: Material Design 3 reference (if applicable)
+      description: Link to the relevant MD3 spec page, if this is about matching official MD3 behavior.
+      placeholder: https://m3.material.io/...
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Any workarounds you're using today, or other approaches you thought about.
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checks
+      options:
+        - label: I searched existing issues and this hasn't been requested yet
+          required: true
