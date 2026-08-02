@@ -11,6 +11,7 @@ import { StylesMenu } from './styles-menu/styles-menu';
 // straight from its package.json at build time rather than hand-maintained,
 // so it can never drift out of sync with what's really being built/deployed.
 import { version as ngxMd3Version } from '../../../../ngx-md3/package.json';
+import { PageFooter } from './page-footer/page-footer';
 
 enum NavigationGroupLink {
     FOUNDATIONS = 'foundations',
@@ -35,6 +36,7 @@ enum NavigationGroupLink {
         IconElement,
         NavigationRail,
         NavigationItem,
+        PageFooter,
     ],
     templateUrl: './layout.component.html',
     styleUrl: './layout.component.scss',

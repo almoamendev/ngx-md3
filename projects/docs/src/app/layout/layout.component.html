@@ -78,8 +78,11 @@
 
     <main md3-scaffold-pane="main">
         <div class="main-content">
-            <section style="padding: 1rem 2rem;">
-                <router-outlet></router-outlet>
+            <section style="padding: 1rem 0;">
+                <div style="padding: 0 2rem;">
+                    <router-outlet></router-outlet>
+                </div>
+                <app-page-footer></app-page-footer>
             </section>
         </div>
         <div class="surface-frame"></div>
