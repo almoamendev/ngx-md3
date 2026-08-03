@@ -62,7 +62,7 @@ type ButtonGroupSelection = 'none' | 'single' | 'multiple';`;
 <md3-button-group button-size="small" group-type="standard" selection="none">
     <!-- button -->
     <button md3-button>
-        <md3-icon md3-icon-element>bluetooth</md3-icon>
+        <md3-icon md3-icon-element="leading">bluetooth</md3-icon>
         Bluetooth
     </button>
     .
