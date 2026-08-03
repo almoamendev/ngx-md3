@@ -72,15 +72,21 @@ type ButtonType = 'elevated' | 'filled' | 'tonal' | 'outlined' | 'text';`;
     Bluetooth
 </button>
 
+<!-- Icon position can be leading or trailing -->
+<button md3-button button-size="small" button-type="filled" button-squared [selected]="null">
+    <md3-icon md3-icon-element="trailing">bluetooth</md3-icon> <!-- trailing icon -->
+    Bluetooth
+</button>
+
 <!-- using material icons -->
 <button md3-button button-size="small" button-type="filled" button-squared [selected]="null">
-    <md3-icon md3-icon-element>bluetooth</md3-icon>
+    <md3-icon md3-icon-element="leading">bluetooth</md3-icon>
     Bluetooth
 </button>
 
 <!-- using custom icon -->
 <button md3-button button-size="small" button-type="filled" [button-squared]="true" [selected]="null">
-    <your-custom-icon-element md3-icon-element></your-custom-icon-element>
+    <your-custom-icon-element md3-icon-element="leading"></your-custom-icon-element>
     Bluetooth
 </button>`;
     

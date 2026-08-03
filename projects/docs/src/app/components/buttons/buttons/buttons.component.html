@@ -22,9 +22,16 @@
 
     <button md3-button [button-size]="buttonSize()" [button-type]="buttonType()" [button-squared]="isSquared()" [selected]="isSelected()">
         @if (showIcon()) {
-            <md3-icon md3-icon-element>shopping_cart</md3-icon>
+            <md3-icon md3-icon-element="leading">shopping_cart</md3-icon>
         }
         Add to cart
+    </button>
+
+    <button md3-button [button-size]="buttonSize()" [button-type]="buttonType()" [button-squared]="isSquared()" [selected]="isSelected()">
+        @if (showIcon()) {
+            <md3-icon md3-icon-element="trailing" bi-directional>arrow_forward</md3-icon>
+        }
+        Go to library
     </button>
 </app-playground>
 
@@ -89,6 +96,7 @@
 <app-shiki [code]="apiTypes"></app-shiki>
 <app-shiki [code]="apiUsage" language="html"></app-shiki>
 <ul>
+    <li>Icon position is determined by <code>md3-icon-element</code> directive placement, either leading or trailing. Using 2 icons in a single button is not recommended.</li>
     <li>When using a custom icon, always apply the <code>md3-icon-element</code> directive to the icon element.</li>
     <li>
         <div>
