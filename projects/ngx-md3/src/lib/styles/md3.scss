@@ -505,6 +505,12 @@ md3-badge {
     &::-webkit-scrollbar-track {
         background: transparent;
     }
+
+    &[md3-scaffold-pane=main] {
+        height: 100%;
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
 }
 
 .md3-grid {
