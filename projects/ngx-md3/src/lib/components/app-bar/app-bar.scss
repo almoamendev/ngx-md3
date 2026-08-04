@@ -86,44 +86,8 @@
                 }
             }
             
-            ::ng-deep [md3-avatar] {
-                --border-radius: var(--md-border-radius-large);
-                --border-size: 0em;
-
+            ::ng-deep .md3-avatar {
                 flex: 0 0 2em;
-                height: 2em;
-                width: 2em;
-                display: inline-flex;
-                align-items: center;
-                justify-content: center;
-                border-radius: var(--border-radius);
-                background-color: rgb(var(--md-scheme-on-primary-container));
-                color: rgb(var(--md-scheme-primary-container));
-                border: none;
-                padding: 0;
-                margin: 0;
-                text-decoration: none;
-                font-size: 1em;
-                position: relative;
-                user-select: none;
-                cursor: default;
-            }
-
-            ::ng-deep button[md3-avatar],
-            ::ng-deep a[md3-avatar] {
-                --state-color: var(--md-scheme-on-primary);
-                --outline-color: rgb(var(--md-scheme-secondary));
-                --outline-width: 0.1875em;
-                --outline-offset: -0.125em;
-
-                cursor: pointer;
-
-                &::before {
-                    content: '';
-                    position: absolute;
-                    height: 3em;
-                    width: 3em;
-                }
             }
         }
     

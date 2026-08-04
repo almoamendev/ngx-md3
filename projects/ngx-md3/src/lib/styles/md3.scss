@@ -523,6 +523,53 @@ md3-badge {
     padding-inline: var(--md-grid-margin);
 }
 
+.md3-avatar {
+    --border-radius: var(--md-border-radius-large);
+    --border-size: 0em;
+    
+    height: 2em;
+    width: 2em;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--border-radius);
+    background-color: rgb(var(--md-scheme-on-primary-container));
+    color: rgb(var(--md-scheme-primary-container));
+    border: none;
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+    font-size: 1em;
+    position: relative;
+    user-select: none;
+    cursor: default;
+    overflow: hidden;
+    text-decoration: none;
+
+    img {
+        display: block;
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+    }
+}
+
+button.md3-avatar, a.md3-avatar {
+    --state-color: var(--md-scheme-on-primary);
+    --outline-color: rgb(var(--md-scheme-secondary));
+    --outline-width: .1875em;
+    --outline-offset: -.125em;
+
+    cursor: pointer;
+
+    &::before {
+        content: '';
+        position: absolute;
+        height: 3em;
+        width: 3em;
+    }
+}
+
 .md3-grid-item {
     min-width: 0em;
     min-height: 0em;

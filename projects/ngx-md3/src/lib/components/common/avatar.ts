@@ -3,6 +3,9 @@ import { StateComponent } from './state-component';
 
 @Directive({
     selector: '[md3-avatar]',
+    host: {
+        'class': 'md3-avatar',
+    },
     hostDirectives: [
         StateComponent,
     ],
