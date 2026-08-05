@@ -5,9 +5,8 @@ import { ComponentRef, inject, Injectable, Injector, Type, ViewContainerRef } fr
 import { Dialog } from './dialog';
 import { FullScreenDialog } from './full-screen-dialog/full-screen-dialog';
 import { DIALOG_COMPONENT, DIALOG_CONFIG, DIALOG_DATA, DialogRef } from './dialog-ref';
-import { DialogConfig, DialogContainer } from '../../interfaces/dialog-config.interface';
+import { DialogConfig, DialogContainer, PreviousDialog } from '../../interfaces/dialog-config.interface';
 import { FullScreenDialogConfig } from '../../interfaces/full-screen-dialog-config.interface';
-import { PreviousDialog } from '../../types/previous-dialog.type';
 
 interface ResolvedDialogConfig<D = unknown> extends DialogConfig<D> {
     data: D | undefined;

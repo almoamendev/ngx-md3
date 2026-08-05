@@ -1,6 +1,6 @@
 import { CdkDialogContainer } from '@angular/cdk/dialog';
-import { CdkPortalOutlet, ComponentPortal } from '@angular/cdk/portal';
-import { Component, ComponentRef, ElementRef, inject, Injector, signal, Type, viewChild } from '@angular/core';
+import { CdkPortalOutlet } from '@angular/cdk/portal';
+import { Component, ElementRef, inject, signal, viewChild } from '@angular/core';
 import { DIALOG_CONFIG } from './dialog-ref';
 import { DialogConfig, DialogContainer } from '../../interfaces/dialog-config.interface';
 
@@ -45,13 +45,5 @@ export class Dialog extends CdkDialogContainer implements DialogContainer {
 
     public recaptureFocus(): void {
         this._recaptureFocus();
-    }
-
-    /**
-     * @deprecated The CDK dialog service attaches the content. Kept for
-     * backwards compatibility and will be removed in a future release.
-     */
-    public attachContent<T>(component: Type<T>, injector: Injector): ComponentRef<T> {
-        return this.attachComponentPortal(new ComponentPortal(component, null, injector));
     }
 }

@@ -1,6 +1,12 @@
 import { Injector, ViewContainerRef } from "@angular/core";
 import { DialogRole } from "../types/dialog-role.type";
-import { PreviousDialog } from "../types/previous-dialog.type";
+
+/**
+ * What happens to a dialog that is already open when a new dialog opens.
+ * - close: the open dialogs are closed before the new one opens.
+ * - hide: the dialog on top is hidden and shown again once the new one closes.
+ */
+export type PreviousDialog = 'close' | 'hide';
 
 export interface DialogConfig<D = unknown> {
     /**
