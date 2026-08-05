@@ -143,6 +143,7 @@ export const COMPONENTS: ComponentEntry[] = [
         group: 'Sheets',
         description: 'Panels anchored to the start or end of the layout for supporting content.',
         icon: 'right_panel_open',
+        image: 'md3-side-sheet.png',
     },
 
     {
