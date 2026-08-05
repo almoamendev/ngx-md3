@@ -20,7 +20,6 @@
         flex-direction: column;
         align-items: start;
         position: relative;
-        padding: 2.75em 0 0;
         background-color: rgb(var(--md-scheme-surface));
         color: rgb(var(--md-scheme-on-surface));
         height: 100%;
@@ -31,8 +30,7 @@
             flex-direction: column;
             align-items: start;
             gap: 0.25em;
-            padding-inline: 1.25em;
-            margin-bottom: 2.5em;
+            padding: 2.75em 1.25em 1.5em;
             width: 100%;
             min-width: fit-content;
 
@@ -62,6 +60,7 @@
             flex-direction: column;
             align-items: stretch;
             width: 100%;
+            padding-top: 1.25em;
             transition: opacity var(--md-motion-standard-default-spatial-duration) var(--md-motion-standard-default-spatial-easing);
 
             ::ng-deep md3-nav-group {
@@ -189,7 +188,6 @@
             min-width: 13.75em;
             max-width: 22.5em;
             width: fit-content;
-            padding: 2.75em 0;
 
             .md3-nav-header {
                 padding-inline: 1.25em;
@@ -210,7 +208,9 @@
             }
 
             .md3-menu-container {
+                padding-bottom: 2.5em;
                 opacity: 1;
+                overflow-y: auto;
 
                 ::ng-deep [md3-nav-item] {
                     padding-inline: 1.25em;
