@@ -31,17 +31,19 @@ interface SideSheetOutletState<T = unknown, R = unknown> {
 })
 export class SheetsService {
     private readonly injector = inject(Injector);
-    private readonly states = new Map<SideSheetSide, SideSheetOutletState>();
+
+    /**
+     * Outlets registered per side, from the page scaffold up to whatever took
+     * them over last. Sheets always open in the outlet on top, so a full screen
+     * dialog can host them while it is up and hand them back when it closes.
+     */
+    private readonly states = new Map<SideSheetSide, SideSheetOutletState[]>();
 
     public registerSideSheetOutlet(side: SideSheetSide, outlet: CdkPortalOutlet): void {
-        const currentState = this.states.get(side);
+        const stack = this.getOutletStack(side);
 
-        if (currentState?.outlet === outlet) {
+        if (stack.some((state) => state.outlet === outlet)) {
             return;
-        }
-
-        if (currentState) {
-            this.disposeOutletState(currentState);
         }
 
         if (outlet.hasAttached()) {
@@ -51,7 +53,7 @@ export class SheetsService {
         const stackPortal = new ComponentPortal(SideSheetStack, null, this.injector);
         const stackComponentRef = outlet.attachComponentPortal(stackPortal);
 
-        this.states.set(side, {
+        stack.push({
             outlet,
             stackComponentRef,
             refs: [],
@@ -59,14 +61,21 @@ export class SheetsService {
     }
 
     public unregisterSideSheetOutlet(side: SideSheetSide, outlet: CdkPortalOutlet): void {
-        const state = this.states.get(side);
+        const stack = this.states.get(side);
+        const index = stack?.findIndex((state) => state.outlet === outlet) ?? -1;
 
-        if (!state || state.outlet !== outlet) {
+        if (!stack || index === -1) {
             return;
         }
 
-        this.disposeOutletState(state);
-        this.states.delete(side);
+        // Sheets opened in this outlet go with it, and the outlet underneath
+        // becomes the one new sheets open in.
+        this.disposeOutletState(stack[index]);
+        stack.splice(index, 1);
+
+        if (stack.length === 0) {
+            this.states.delete(side);
+        }
     }
 
     public openSideSheet<T = unknown, D = unknown, R = unknown>(
@@ -74,7 +83,7 @@ export class SheetsService {
         config: SideSheetConfig<D> = {},
     ): SideSheetRef<T, R> {
         const sheetConfig = this.mergeConfig(config);
-        const state = this.states.get(sheetConfig.side);
+        const state = this.activeState(sheetConfig.side);
 
         if (!state) {
             throw new Error(`No ${sheetConfig.side} side sheet outlet is registered.`);
@@ -105,7 +114,24 @@ export class SheetsService {
     }
 
     public closeSideSheet<R = unknown>(side: SideSheetSide = 'end', result?: R): void {
-        this.getVisibleRef(this.states.get(side))?.close(result);
+        this.getVisibleRef(this.activeState(side))?.close(result);
+    }
+
+    /** Outlet that sheets currently open in: the last one that registered. */
+    private activeState(side: SideSheetSide): SideSheetOutletState | undefined {
+        const stack = this.states.get(side);
+
+        return stack?.[stack.length - 1];
+    }
+
+    private getOutletStack(side: SideSheetSide): SideSheetOutletState[] {
+        const stack = this.states.get(side) ?? [];
+
+        if (!this.states.has(side)) {
+            this.states.set(side, stack);
+        }
+
+        return stack;
     }
 
     private mergeConfig<D>(config: SideSheetConfig<D>): ResolvedSideSheetConfig<D> {

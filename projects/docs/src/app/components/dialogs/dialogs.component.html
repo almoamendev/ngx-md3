@@ -24,6 +24,7 @@
     </button>
 
     <button type="button" md3-button (click)="sampleDialog()">Open sample dialog</button>
+    <button type="button" md3-button button-type="tonal" (click)="fullScreenDialog()">Open full screen dialog</button>
 </app-playground>
 
 <h2>API</h2>
@@ -171,4 +172,22 @@
     <li>Dialogs replace each other in sequence rather than at the same time: the one on screen starts leaving, and the next one animates in 160ms later. The same head start applies in reverse, when a hidden dialog comes back. The scrim is handed over between them, so the page behind keeps a single, steady scrim.</li>
     <li>A hidden dialog keeps its component instance, so scroll position, form state and subscriptions are preserved. It is marked <code>inert</code> while hidden, so it takes no focus and is skipped by screen readers.</li>
     <li>Page scrolling stays blocked for as long as any dialog of the stack is open, and focus returns to the element that opened the first dialog once the last one closes.</li>
+</ul>
+
+<h2>Full screen dialog</h2>
+
+<p>
+    A full screen dialog covers the window and holds a whole task rather than a single decision. It has no scrim, since
+    there is nothing left to dim, and it brings the same start and end panes the scaffold has, so side sheets opened
+    while it is up land inside it.
+</p>
+
+<app-shiki [code]="apiFullScreen"></app-shiki>
+<app-shiki [code]="apiFullScreenUsage" language="html"></app-shiki>
+<ul>
+    <li>Only one full screen dialog can be open at a time. Opening another one replaces it, along with anything stacked on top of it.</li>
+    <li>While it is open, <code>openSideSheet()</code> targets the dialog's own panes. When it closes, the page scaffold takes the outlets back and the sheets opened inside the dialog go with it.</li>
+    <li>Regular dialogs open on top of a full screen dialog and never hide or close it, whatever <code>previousDialog</code> says. They still replace each other as usual.</li>
+    <li>A full screen dialog is a header and a body, nothing else: <code>md3-fullscreen-dialog-header</code> sticks to the top and carries the actions, and <code>md3-dialog-body</code> takes the remaining space and scrolls underneath it. There is no bottom action bar &mdash; the trailing header button is the confirming action.</li>
+    <li>The header slots are <code>md3-header-leading</code> for the icon button that leaves the dialog, and <code>md3-header-trailing</code> for the action. Anything else goes in the body.</li>
 </ul>

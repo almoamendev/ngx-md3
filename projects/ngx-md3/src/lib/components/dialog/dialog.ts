@@ -1,8 +1,8 @@
 import { CdkDialogContainer } from '@angular/cdk/dialog';
 import { CdkPortalOutlet, ComponentPortal } from '@angular/cdk/portal';
-import { Component, ComponentRef, inject, Injector, signal, Type } from '@angular/core';
+import { Component, ComponentRef, ElementRef, inject, Injector, signal, Type, viewChild } from '@angular/core';
 import { DIALOG_CONFIG } from './dialog-ref';
-import { DialogConfig } from '../../interfaces/dialog-config.interface';
+import { DialogConfig, DialogContainer } from '../../interfaces/dialog-config.interface';
 
 /**
  * Material 3 dialog shell. It extends the CDK dialog container, so focus
@@ -17,20 +17,34 @@ import { DialogConfig } from '../../interfaces/dialog-config.interface';
     templateUrl: './dialog.html',
     styleUrl: './dialog.scss',
 })
-export class Dialog extends CdkDialogContainer {
+export class Dialog extends CdkDialogContainer implements DialogContainer {
+    private readonly surface = viewChild<ElementRef<HTMLElement>>('surface');
+
     public isActive = signal<boolean>(false);
 
     protected readonly config = inject<DialogConfig>(DIALOG_CONFIG, { optional: true }) ?? {};
 
+    public get surfaceElement(): HTMLElement | null {
+        return this.surface()?.nativeElement ?? null;
+    }
+
     /**
      * Started by DialogService, either right after the dialog is created or
-     * once the dialog it replaces has finished animating out. The animation
-     * runs on the next frame so the surface has a real from/to state.
+     * once the dialog it replaces has had its head start. The animation runs on
+     * the next frame so the surface has a real from/to state.
      */
     public startEnterAnimation(): void {
         requestAnimationFrame(() => {
             this.isActive.set(true);
         });
+    }
+
+    public setActive(value: boolean): void {
+        this.isActive.set(value);
+    }
+
+    public recaptureFocus(): void {
+        this._recaptureFocus();
     }
 
     /**

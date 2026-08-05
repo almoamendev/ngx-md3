@@ -1,6 +1,7 @@
 import { Component, OnDestroy, signal } from '@angular/core';
 import { Button, DialogService, Divider, IconButton, IconElement, MaterialIcon, PreviousDialog, SheetsService, SideSheetRef, TypeBody, TypeDisplay } from '@almoamendev/ngx-md3';
 import { SampleDialog } from './sample-dialog/sample-dialog';
+import { SampleFullScreenDialog } from './sample-fullscreen-dialog/sample-fullscreen-dialog';
 import { Playground } from '../playground/playground';
 import { Shiki } from '../shiki/shiki';
 import { DialogConfig } from './dialog-config/dialog-config';
@@ -187,9 +188,24 @@ class DialogService {
      */
     public get openDialogs(): readonly DialogRef[];
 
+    /**
+     * The full screen dialog that is open, if there is one
+     */
+    public get fullScreenDialog(): DialogRef | undefined;
+
     public open<T, D = unknown, R = unknown>(
         component: Type<T>,
         config?: DialogConfig<D>,
+    ): DialogRef<T, R>;
+
+    /**
+     * Open a dialog that covers the whole screen. Only one can be open
+     * at a time. FullScreenDialogConfig is DialogConfig without
+     * previousDialog, which does not apply to full screen dialogs
+     */
+    public openFullScreen<T, D = unknown, R = unknown>(
+        component: Type<T>,
+        config?: FullScreenDialogConfig<D>,
     ): DialogRef<T, R>;
 
     /**
@@ -198,6 +214,35 @@ class DialogService {
      */
     public closeAll(): Promise<void>;
 }`;
+
+    public apiFullScreen: string = `// Full screen dialog
+
+// opens edge to edge, replacing whatever dialog is open
+const dialogRef: DialogRef = dialogService.openFullScreen(YourDialogComponent, <FullScreenDialogConfig>{...});
+
+// side sheets opened from now on land inside the dialog
+sheetsService.openSideSheet(YourSheetComponent, { side: 'end' });
+
+// regular dialogs stack on top of it and leave it alone
+dialogService.open(YourDialogComponent);
+
+// the full screen dialog that is open, if any
+const current = dialogService.fullScreenDialog;`;
+
+    public apiFullScreenUsage: string = `<!-- Full screen dialog component usage -->
+
+<!-- sticky header: a leading icon button and a trailing action -->
+<md3-fullscreen-dialog-header title="Full screen dialog">
+    <!-- leading icon button, usually leaves the dialog -->
+    <button type="button" md3-icon-button md3-header-leading button-type="standard" (click)="close()">
+        <md3-icon md3-icon-element bi-directional>arrow_back</md3-icon>
+    </button>
+    <!-- trailing action -->
+    <button md3-header-trailing type="button" md3-button button-type="text" (click)="close(true)">Save</button>
+</md3-fullscreen-dialog-header>
+
+<!-- takes the rest of the dialog and scrolls under the header -->
+<md3-dialog-body>...</md3-dialog-body>`;
 
     public apiUsage: string = `<!-- Component usage -->
 
@@ -233,6 +278,19 @@ class DialogService {
             disableCloseEvents: !this.closeEvents(),
             previousDialog: this.previousDialog(),
             ariaLabel: 'Sample Dialog',
+            scheme: this.darkMode() ? 'dark' : 'light',
+            direction: this.direction(),
+        });
+    }
+
+    public fullScreenDialog(): void {
+        this.dialogService.openFullScreen(SampleFullScreenDialog, {
+            data: {
+                showIcon: this.showIcon(),
+            },
+            bindDataToInputs: true,
+            disableCloseEvents: !this.closeEvents(),
+            ariaLabel: 'Sample full screen dialog',
             scheme: this.darkMode() ? 'dark' : 'light',
             direction: this.direction(),
         });

@@ -3,8 +3,7 @@ import { hasModifierKey } from '@angular/cdk/keycodes';
 import { OverlayRef } from '@angular/cdk/overlay';
 import { InjectionToken, Type } from '@angular/core';
 import { filter, Observable, Subject, take } from 'rxjs';
-import { DialogConfig } from '../../interfaces/dialog-config.interface';
-import { Dialog } from './dialog';
+import { DialogConfig, DialogContainer } from '../../interfaces/dialog-config.interface';
 
 export const DIALOG_DATA = new InjectionToken<unknown>('MD3_DIALOG_DATA');
 export const DIALOG_CONFIG = new InjectionToken<DialogConfig>('MD3_DIALOG_CONFIG');
@@ -21,7 +20,8 @@ export class DialogRef<T = unknown, R = unknown> {
     private closeSettled = false;
     private hidden = false;
 
-    public dialogInstance?: Dialog;
+    /** Shell hosting the dialog: the regular dialog or the full screen one. */
+    public dialogInstance?: DialogContainer;
     /**
      * Filled by DialogService after the user component is attached. Keeping the
      * instance here lets callers imperatively update inputs when that is useful.
@@ -46,6 +46,8 @@ export class DialogRef<T = unknown, R = unknown> {
     constructor(
         private readonly cdkRef: CdkDialogRef<R, T>,
         disableCloseEvents: boolean,
+        /** Whether this reference belongs to a full screen dialog. */
+        public readonly isFullScreen: boolean = false,
     ) {
         // Closing always goes through this reference so the exit animation can
         // run before the CDK disposes the overlay. Detachments triggered from
@@ -81,7 +83,7 @@ export class DialogRef<T = unknown, R = unknown> {
 
         this.hidden = true;
         this.toggleHiddenState(true);
-        this.dialogInstance?.isActive.set(false);
+        this.dialogInstance?.setActive(false);
 
         return this.waitForSurfaceAnimation();
     }
@@ -99,10 +101,10 @@ export class DialogRef<T = unknown, R = unknown> {
         if (this.hidden) {
             this.hidden = false;
             this.toggleHiddenState(false);
-            this.dialogInstance?.isActive.set(true);
+            this.dialogInstance?.setActive(true);
         }
 
-        this.dialogInstance?._recaptureFocus();
+        this.dialogInstance?.recaptureFocus();
     }
 
     /** Emits when the dialog starts closing, before the exit animation runs. */
@@ -165,7 +167,7 @@ export class DialogRef<T = unknown, R = unknown> {
 
         overlayRef.overlayElement.classList.add('md3-dialog-closing');
         overlayRef.backdropElement?.classList.add('md3-dialog-closing');
-        this.dialogInstance?.isActive.set(false);
+        this.dialogInstance?.setActive(false);
 
         // A hidden dialog already played the exit animation, so there is
         // nothing left to transition and it can be disposed right away.
@@ -175,7 +177,7 @@ export class DialogRef<T = unknown, R = unknown> {
     /** Resolves when the surface finished animating, with a timeout as a safety net. */
     private waitForSurfaceAnimation(): Promise<void> {
         const panel = this.cdkRef.overlayRef.overlayElement;
-        const surface = panel.querySelector<HTMLElement>('.md3-dialog-container') ?? panel;
+        const surface = this.dialogInstance?.surfaceElement ?? panel;
 
         return new Promise((resolve) => {
             let isResolved = false;

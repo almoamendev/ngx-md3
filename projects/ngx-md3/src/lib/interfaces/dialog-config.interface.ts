@@ -37,3 +37,21 @@ export interface DialogConfig<D = unknown> {
     viewContainerRef?: ViewContainerRef;
     injector?: Injector;
 }
+
+/**
+ * What DialogRef needs from the shell hosting a dialog. Implemented by both the
+ * regular dialog and the full screen dialog, so the reference can drive either.
+ */
+export interface DialogContainer {
+    /** Element that plays the enter and exit transition. */
+    readonly surfaceElement: HTMLElement | null;
+
+    /** Starts the enter animation. Delayed when the dialog replaces another one. */
+    startEnterAnimation(): void;
+
+    /** Shows or hides the surface, which is what drives both transitions. */
+    setActive(value: boolean): void;
+
+    /** Moves focus back inside the dialog when it is not there already. */
+    recaptureFocus(): void;
+}

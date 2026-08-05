@@ -1,0 +1,25 @@
+<!-- The role and aria attributes live on the host element, applied by the CDK dialog container. -->
+<section
+    #surface
+    class="md3-fullscreen-dialog-container"
+    [class.md3-active]="isActive()"
+    [class.md-scheme-dark]="config.scheme == 'dark'"
+    [class.md-scheme-light]="config.scheme == 'light'"
+    [attr.dir]="config.direction ?? null">
+    <div class="md3-panes-container md3-scrollable">
+        <!--
+            The CDK attaches the dialog content to the first portal outlet of
+            this template, so the main pane has to come first. The panes are
+            placed by grid area, which makes the DOM order irrelevant visually.
+        -->
+        <div class="md3-pane md3-pane-main">
+            <ng-template cdkPortalOutlet></ng-template>
+        </div>
+        <div class="md3-pane md3-pane-start">
+            <ng-template #startOutlet cdkPortalOutlet></ng-template>
+        </div>
+        <div class="md3-pane md3-pane-end">
+            <ng-template #endOutlet cdkPortalOutlet></ng-template>
+        </div>
+    </div>
+</section>

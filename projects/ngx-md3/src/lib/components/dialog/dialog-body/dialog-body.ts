@@ -8,6 +8,9 @@ import { TypeBody } from '../../../styles/typography/type-body';
     ],
     templateUrl: './dialog-body.html',
     styleUrl: './dialog-body.scss',
+    host: {
+        'class': 'md3-scrollable',
+    },
 })
 export class DialogBody {
 }

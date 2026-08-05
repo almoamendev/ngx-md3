@@ -3,8 +3,10 @@ import { DOCUMENT } from '@angular/common';
 import { Overlay } from '@angular/cdk/overlay';
 import { ComponentRef, inject, Injectable, Injector, Type, ViewContainerRef } from '@angular/core';
 import { Dialog } from './dialog';
+import { FullScreenDialog } from './full-screen-dialog/full-screen-dialog';
 import { DIALOG_COMPONENT, DIALOG_CONFIG, DIALOG_DATA, DialogRef } from './dialog-ref';
-import { DialogConfig } from '../../interfaces/dialog-config.interface';
+import { DialogConfig, DialogContainer } from '../../interfaces/dialog-config.interface';
+import { FullScreenDialogConfig } from '../../interfaces/full-screen-dialog-config.interface';
 import { PreviousDialog } from '../../types/previous-dialog.type';
 
 interface ResolvedDialogConfig<D = unknown> extends DialogConfig<D> {
@@ -22,6 +24,8 @@ interface ResolvedDialogConfig<D = unknown> extends DialogConfig<D> {
     injector: Injector;
 }
 
+const PANEL_CLASS = 'md3-dialog-panel';
+const FULL_SCREEN_PANEL_CLASS = 'md3-fullscreen-dialog-panel';
 const OPENING_CLASS = 'md3-dialog-opening';
 const SCRIM_KEPT_CLASS = 'md3-dialog-scrim-kept';
 const SCRIM_INSTANT_CLASS = 'md3-dialog-scrim-instant';
@@ -58,6 +62,11 @@ export class DialogService {
         return this.refs;
     }
 
+    /** The full screen dialog that is open, if there is one. */
+    public get fullScreenDialog(): DialogRef<any, any> | undefined {
+        return this.refs.find((ref) => ref.isFullScreen && !ref.isClosing);
+    }
+
     public open<T, D = unknown, R = unknown>(
         component: Type<T>,
         config: DialogConfig<D> = {},
@@ -69,11 +78,12 @@ export class DialogService {
         }
 
         // The dialog that is on screen starts leaving first, so the two dialogs
-        // never animate on top of each other.
-        const previousRef = this.topRef();
+        // never animate on top of each other. A full screen dialog is not part
+        // of this: regular dialogs open on top of it and leave it alone.
+        const previousRef = this.topRegularRef();
 
         if (previousRef) {
-            this.dismissPrevious(previousRef, dialogConfig);
+            this.dismissPrevious(previousRef, dialogConfig.previousDialog);
         }
 
         let dialogRef!: DialogRef<T, R>;
@@ -111,7 +121,7 @@ export class DialogService {
             injector: dialogConfig.injector,
             hasBackdrop: true,
             backdropClass: ['md3-dialog-scrim', OPENING_CLASS],
-            panelClass: ['md3-dialog-panel', OPENING_CLASS],
+            panelClass: [PANEL_CLASS, OPENING_CLASS],
             positionStrategy: this.overlay.position()
                 .global()
                 .centerHorizontally()
@@ -126,7 +136,92 @@ export class DialogService {
             disableClose: true,
         });
 
-        dialogRef.dialogInstance = cdkRef.containerInstance as Dialog;
+        this.registerDialog(dialogRef, cdkRef, dialogConfig, previousRef);
+
+        return dialogRef;
+    }
+
+    /**
+     * Opens a dialog that covers the whole screen. Only one can be open at a
+     * time, so it replaces whatever is open, and while it is up the side sheet
+     * outlets belong to it: side sheets open inside the dialog, not behind it.
+     */
+    public openFullScreen<T, D = unknown, R = unknown>(
+        component: Type<T>,
+        config: FullScreenDialogConfig<D> = {},
+    ): DialogRef<T, R> {
+        const dialogConfig = this.mergeConfig(config);
+
+        if (this.refs.length === 0) {
+            this.rootTrigger = this.getFocusedElement();
+        }
+
+        // A full screen dialog is a context of its own: the dialog it replaces
+        // and anything stacked on that dialog goes with it.
+        const previousRef = this.topRef();
+
+        if (previousRef) {
+            // Everything open belongs to the context being replaced, including
+            // a full screen dialog that is already up.
+            this.closeAll();
+        }
+
+        let dialogRef!: DialogRef<T, R>;
+
+        const cdkRef = this.cdkDialog.open<R, D, T>(component, {
+            container: {
+                type: FullScreenDialog,
+                providers: () => [
+                    { provide: DIALOG_CONFIG, useValue: dialogConfig },
+                ],
+            },
+            providers: (cdkDialogRef: CdkDialogRef<R, T>) => {
+                dialogRef = new DialogRef<T, R>(cdkDialogRef, dialogConfig.disableCloseEvents, true);
+
+                return [
+                    { provide: DialogRef, useValue: dialogRef },
+                    { provide: DIALOG_DATA, useValue: dialogConfig.data },
+                    { provide: DIALOG_CONFIG, useValue: dialogConfig },
+                    { provide: DIALOG_COMPONENT, useValue: component },
+                ];
+            },
+            data: dialogConfig.data,
+            role: dialogConfig.role,
+            ariaModal: true,
+            ariaLabel: dialogConfig.ariaLabel || null,
+            ariaLabelledBy: dialogConfig.ariaLabelledBy || null,
+            ariaDescribedBy: dialogConfig.ariaDescribedBy || null,
+            direction: dialogConfig.direction ?? undefined,
+            viewContainerRef: dialogConfig.viewContainerRef,
+            injector: dialogConfig.injector,
+            // The dialog covers the page on its own, so there is nothing left
+            // for a scrim to dim.
+            hasBackdrop: false,
+            panelClass: [FULL_SCREEN_PANEL_CLASS, OPENING_CLASS],
+            // The CDK writes the size on the panel and the global strategy then
+            // drops its centering margins, which is how the panel ends up
+            // covering the whole wrapper.
+            width: '100%',
+            height: '100%',
+            positionStrategy: this.overlay.position().global(),
+            scrollStrategy: this.overlay.scrollStrategies.noop(),
+            restoreFocus: this.rootTrigger ?? true,
+            disableClose: true,
+        });
+
+        this.registerDialog(dialogRef, cdkRef, dialogConfig, previousRef);
+
+        return dialogRef;
+    }
+
+    /** Wires a freshly created dialog into the stack and starts its animation. */
+    private registerDialog<T, D, R>(
+        dialogRef: DialogRef<T, R>,
+        cdkRef: CdkDialogRef<R, T>,
+        dialogConfig: ResolvedDialogConfig<D>,
+        previousRef: DialogRef<any, any> | undefined,
+    ): void {
+        dialogRef.dialogInstance = cdkRef.containerInstance as unknown as DialogContainer;
         dialogRef.componentInstance = cdkRef.componentInstance ?? undefined;
 
         if (cdkRef.componentRef) {
@@ -149,15 +244,22 @@ export class DialogService {
         // already coming back while this one is fading out.
         dialogRef.beforeClosed().subscribe(() => this.restorePreviousDialog(dialogRef));
         dialogRef.afterClosed().subscribe(() => this.removeRef(dialogRef));
-
-        return dialogRef;
     }
 
-    /** Closes every open dialog, including the hidden ones. */
+    /** Closes every open dialog, including the hidden and the full screen ones. */
     public closeAll(): Promise<void> {
         // Closed from the bottom up so a closing dialog never brings back a
         // hidden dialog that is about to close as well.
         return Promise.all([...this.refs].map((ref) => ref.close())).then(() => undefined);
+    }
+
+    /** Closes the regular dialogs and leaves a full screen dialog alone. */
+    private closeRegularDialogs(): Promise<void> {
+        const closing = this.refs
+            .filter((ref) => !ref.isFullScreen)
+            .map((ref) => ref.close());
+
+        return Promise.all(closing).then(() => undefined);
     }
 
     private mergeConfig<D>(config: DialogConfig<D>): ResolvedDialogConfig<D> {
@@ -184,11 +286,11 @@ export class DialogService {
      */
     private dismissPrevious(
         previousRef: DialogRef<any, any>,
-        config: ResolvedDialogConfig,
+        behavior: PreviousDialog,
     ): Promise<void> {
         previousRef.overlayRef.backdropElement?.classList.add(SCRIM_KEPT_CLASS);
 
-        return config.previousDialog === 'hide' ? previousRef.hide() : this.closeAll();
+        return behavior === 'hide' ? previousRef.hide() : this.closeRegularDialogs();
     }
 
     private startOpenAnimation(dialogRef: DialogRef<any, any>): void {
@@ -255,6 +357,12 @@ export class DialogService {
         const from = fromRef.overlayRef.backdropElement;
         const to = toRef.overlayRef.backdropElement;
 
+        // Nothing to hand the scrim over to, e.g. a full screen dialog: the
+        // outgoing scrim fades out on its own instead.
+        if (!to) {
+            return;
+        }
+
         from?.classList.add(SCRIM_INSTANT_CLASS);
         from?.classList.remove(SCRIM_KEPT_CLASS);
         to?.classList.add(SCRIM_INSTANT_CLASS);
@@ -301,6 +409,16 @@ export class DialogService {
         return undefined;
     }
 
+    /**
+     * Same, without the full screen dialog: it hosts the dialogs opened on top
+     * of it, so it is never the one that gets hidden or closed to make room.
+     */
+    private topRegularRef(): DialogRef<any, any> | undefined {
+        const ref = this.topRef();
+
+        return ref?.isFullScreen ? undefined : ref;
+    }
+
     private restorePreviousDialog(ref: DialogRef<any, any>): void {
         const index = this.refs.indexOf(ref);
 
@@ -316,8 +434,12 @@ export class DialogService {
             }
 
             // The closing dialog gets the same head start it was given when it
-            // took the screen, and keeps the scrim until then.
-            ref.overlayRef.backdropElement?.classList.add(SCRIM_KEPT_CLASS);
+            // took the screen, and keeps the scrim until then. Nothing to keep
+            // when the dialog underneath has no scrim of its own.
+            if (previousRef.overlayRef.backdropElement) {
+                ref.overlayRef.backdropElement?.classList.add(SCRIM_KEPT_CLASS);
+            }
+
             setTimeout(
                 () => this.startRestoringAnimation(ref, previousRef),
                 DIALOG_HANDOVER_DELAY_MS,

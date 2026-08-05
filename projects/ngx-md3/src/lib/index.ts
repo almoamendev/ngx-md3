@@ -21,6 +21,7 @@ export * from './types/list-leading-size.type';
 
 // interfaces
 export * from './interfaces/dialog-config.interface';
+export * from './interfaces/full-screen-dialog-config.interface';
 export * from './interfaces/menu-config.interface';
 export * from './interfaces/side-sheet-config.interface';
 export * from './interfaces/snackbar-config.interface';
@@ -103,6 +104,8 @@ export * from './components/dialog/dialog.service';
 export * from './components/dialog/dialog-header/dialog-header';
 export * from './components/dialog/dialog-body/dialog-body';
 export * from './components/dialog/dialog-actions/dialog-actions';
+export * from './components/dialog/full-screen-dialog/full-screen-dialog';
+export * from './components/dialog/full-screen-dialog-header/full-screen-dialog-header';
 
 // menus
 export * from './components/menu/menu';
