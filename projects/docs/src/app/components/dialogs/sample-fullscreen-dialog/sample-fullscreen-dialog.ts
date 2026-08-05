@@ -15,6 +15,7 @@ import {
     SideSheetHeader,
     SideSheetRef,
     TypeBody,
+    TypeTitle,
 } from '@almoamendev/ngx-md3';
 import { SampleDialog } from '../sample-dialog/sample-dialog';
 
@@ -61,6 +62,7 @@ export class SampleFullScreenSheet {
         IconElement,
         MaterialIcon,
         TypeBody,
+        TypeTitle,
     ],
     templateUrl: './sample-fullscreen-dialog.html',
 })

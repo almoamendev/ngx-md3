@@ -231,12 +231,14 @@ const current = dialogService.fullScreenDialog;`;
 
     public apiFullScreenUsage: string = `<!-- Full screen dialog component usage -->
 
-<!-- sticky header: a leading icon button and a trailing action -->
-<md3-fullscreen-dialog-header title="Full screen dialog">
+<!-- sticky header: a leading icon button, the headline, and a trailing action -->
+<md3-fullscreen-dialog-header>
     <!-- leading icon button, usually leaves the dialog -->
     <button type="button" md3-icon-button md3-header-leading button-type="standard" (click)="close()">
         <md3-icon md3-icon-element bi-directional>arrow_back</md3-icon>
     </button>
+    <!-- anything that is not a slotted button becomes the headline -->
+    <span md3-type-title size="large">Full screen dialog</span>
     <!-- trailing action -->
     <button md3-header-trailing type="button" md3-button button-type="text" (click)="close(true)">Save</button>
 </md3-fullscreen-dialog-header>

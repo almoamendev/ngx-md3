@@ -1,6 +1,5 @@
 import { Component, input, signal, Signal } from '@angular/core';
 import { ButtonContext, MD3_BUTTON_CONTEXT } from '../../../interfaces/button-context.interface';
-import { TypeTitle } from '../../../styles/typography/type-title';
 import { ButtonSize } from '../../../types/button-size.type';
 import { IconButtonWidth } from '../../../types/icon-button-width.type';
 
@@ -12,7 +11,6 @@ import { IconButtonWidth } from '../../../types/icon-button-width.type';
 @Component({
     selector: 'md3-fullscreen-dialog-header',
     imports: [
-        TypeTitle,
     ],
     templateUrl: './full-screen-dialog-header.html',
     styleUrl: './full-screen-dialog-header.scss',
@@ -24,10 +22,6 @@ import { IconButtonWidth } from '../../../types/icon-button-width.type';
     ],
 })
 export class FullScreenDialogHeader implements ButtonContext {
-    public title = input<string>('', {
-        alias: 'title',
-    });
-
     // context values
     buttonContextSize: Signal<ButtonSize> = signal('small');
     buttonContextWidth: Signal<IconButtonWidth> = signal('default');

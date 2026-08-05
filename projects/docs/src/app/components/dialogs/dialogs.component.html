@@ -189,5 +189,5 @@
     <li>While it is open, <code>openSideSheet()</code> targets the dialog's own panes. When it closes, the page scaffold takes the outlets back and the sheets opened inside the dialog go with it.</li>
     <li>Regular dialogs open on top of a full screen dialog and never hide or close it, whatever <code>previousDialog</code> says. They still replace each other as usual.</li>
     <li>A full screen dialog is a header and a body, nothing else: <code>md3-fullscreen-dialog-header</code> sticks to the top and carries the actions, and <code>md3-dialog-body</code> takes the remaining space and scrolls underneath it. There is no bottom action bar &mdash; the trailing header button is the confirming action.</li>
-    <li>The header slots are <code>md3-header-leading</code> for the icon button that leaves the dialog, and <code>md3-header-trailing</code> for the action. Anything else goes in the body.</li>
+    <li>The header takes an icon button marked <code>md3-header-leading</code> to leave the dialog and an action marked <code>md3-header-trailing</code>. Everything else projected into it becomes the headline, so it carries its own typography &mdash; usually <code>md3-type-title</code> at large size.</li>
 </ul>
