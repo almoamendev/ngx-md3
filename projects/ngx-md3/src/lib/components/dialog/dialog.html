@@ -1,14 +1,9 @@
+<!-- The role and aria attributes live on the host element, applied by the CDK dialog container. -->
 <section
     class="md3-dialog-container"
     [class.md3-active]="isActive()"
     [class.md-scheme-dark]="config.scheme == 'dark'"
     [class.md-scheme-light]="config.scheme == 'light'"
-    [attr.dir]="config.direction ?? null"
-    tabindex="-1"
-    [attr.role]="role"
-    [attr.aria-modal]="true"
-    [attr.aria-label]="config.ariaLabel ?? null"
-    [attr.aria-labelledby]="config.ariaLabelledBy ?? null"
-    [attr.aria-describedby]="config.ariaDescribedBy ?? null">
+    [attr.dir]="config.direction ?? null">
     <ng-template cdkPortalOutlet></ng-template>
 </section>

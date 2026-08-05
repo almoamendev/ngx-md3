@@ -1,5 +1,6 @@
 import { Injector, ViewContainerRef } from "@angular/core";
 import { DialogRole } from "../types/dialog-role.type";
+import { PreviousDialog } from "../types/previous-dialog.type";
 
 export interface DialogConfig<D = unknown> {
     /**
@@ -15,6 +16,13 @@ export interface DialogConfig<D = unknown> {
     bindDataToInputs?: boolean;
 
     disableCloseEvents?: boolean;
+
+    /**
+     * What happens to a dialog that is already open when this dialog opens.
+     * A hidden dialog keeps its state and is shown again once this dialog closes.
+     */
+    previousDialog?: PreviousDialog;
+
     role?: DialogRole;
     ariaLabel?: string;
     ariaLabelledBy?: string;

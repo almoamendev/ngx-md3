@@ -2,7 +2,7 @@
     @if (showIcon()) {
         <md3-icon md3-icon-element>chat_info</md3-icon>
     }
-    <span>Basic dialog title</span>
+    <span>Basic dialog title @if (level() > 1) {({{ level() }})}</span>
 </md3-dialog-header>
 <md3-dialog-body>
     A dialog is a modal window that<br>
@@ -11,6 +11,6 @@
     for a dicision to be made.
 </md3-dialog-body>
 <md3-dialog-actions>
-    <button type="button" md3-button button-type="text" (click)="closeDialog()">Action 1</button>
-    <button type="button" md3-button button-type="text" (click)="closeDialog()">Action 2</button>
+    <button type="button" md3-button button-type="text" (click)="openAnother()">Open another</button>
+    <button type="button" md3-button button-type="text" (click)="closeDialog()">Close</button>
 </md3-dialog-actions>

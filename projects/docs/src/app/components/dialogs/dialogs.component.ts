@@ -1,5 +1,5 @@
 import { Component, OnDestroy, signal } from '@angular/core';
-import { Button, DialogService, Divider, IconButton, IconElement, MaterialIcon, SheetsService, SideSheetRef, TypeBody, TypeDisplay } from '@almoamendev/ngx-md3';
+import { Button, DialogService, Divider, IconButton, IconElement, MaterialIcon, PreviousDialog, SheetsService, SideSheetRef, TypeBody, TypeDisplay } from '@almoamendev/ngx-md3';
 import { SampleDialog } from './sample-dialog/sample-dialog';
 import { Playground } from '../playground/playground';
 import { Shiki } from '../shiki/shiki';
@@ -29,6 +29,7 @@ export class DialogsComponent implements OnDestroy {
     public closeEvents = signal<boolean>(true);
     public darkMode = signal<boolean>(true);
     public direction = signal<'ltr' | 'rtl'>('ltr');
+    public previousDialog = signal<PreviousDialog>('close');
 
     public apiImport: string = `// Component imports
 import {
@@ -52,8 +53,14 @@ private dialogRef: DialogRef = inject(DialogRef<YourDialogComponent, YourDialogR
 // open dialog
 const dialogRef: DialogRef = dialogService.open(YourDialogComponent, <DialogConfig>{...});
 
+// open a dialog on top of the current one, hiding it until this one closes
+dialogService.open(YourDialogComponent, { previousDialog: 'hide' });
+
 // close dialog
 dialogRef.close(youDialogResult);
+
+// close every open dialog
+dialogService.closeAll();
 
 // after close
 dialogRef.afterClosed().subscribe((result: YourDialogResults) => {
@@ -83,7 +90,14 @@ interface DialogConfig<D = unknown> {
      * @default false
      */
     disableCloseEvents?: boolean;
-    
+
+    /**
+     * What happens to a dialog that is already open when this dialog opens.
+     * A hidden dialog keeps its state and is shown again once this dialog closes.
+     * @default close
+     */
+    previousDialog?: 'close' | 'hide';
+
     /**
      * Dialog html role attribute
      * @default dialog
@@ -136,14 +150,53 @@ class DialogRef<T = unknown, R = unknown> {
     public componentInstance?: T;
 
     /**
-     * Close the dialog with optional result
+     * Whether the dialog started closing, and whether it is currently
+     * hidden behind another dialog.
      */
-    public close(result?: R): void;
+    public get isClosing(): boolean;
+    public get isHidden(): boolean;
+
+    /**
+     * Close the dialog with optional result.
+     * Resolves once the closing animation is done
+     */
+    public close(result?: R): Promise<void>;
+
+    /**
+     * Hide the dialog with the closing animation while keeping it alive,
+     * then bring it back with the opening animation. Handled automatically
+     * when opening a dialog with previousDialog: 'hide'.
+     */
+    public hide(): Promise<void>;
+    public show(): void;
+
+    /**
+     * Emits when the dialog starts closing, before the exit animation runs
+     */
+    public beforeClosed(): Observable<void>;
 
     /**
      * After dialog close observable. optional result will emit after dialog is closed
      */
     public afterClosed(): Observable<R | undefined>;
+}
+
+class DialogService {
+    /**
+     * Open dialogs, from the first one opened to the one currently on top
+     */
+    public get openDialogs(): readonly DialogRef[];
+
+    public open<T, D = unknown, R = unknown>(
+        component: Type<T>,
+        config?: DialogConfig<D>,
+    ): DialogRef<T, R>;
+
+    /**
+     * Close every open dialog, including the hidden ones.
+     * Resolves once they are all closed
+     */
+    public closeAll(): Promise<void>;
 }`;
 
     public apiUsage: string = `<!-- Component usage -->
@@ -174,9 +227,11 @@ class DialogRef<T = unknown, R = unknown> {
         const ref = this.dialogService.open(SampleDialog, {
             data: {
                 showIcon: this.showIcon(),
+                level: 1,
             },
             bindDataToInputs: true,
             disableCloseEvents: !this.closeEvents(),
+            previousDialog: this.previousDialog(),
             ariaLabel: 'Sample Dialog',
             scheme: this.darkMode() ? 'dark' : 'light',
             direction: this.direction(),
@@ -230,6 +285,11 @@ class DialogRef<T = unknown, R = unknown> {
         this.configSheet?.componentInstance?.direction.setValue(this.direction());
         this.configSheet?.componentInstance?.direction.registerOnChange(() => {
             this.direction.set(this.configSheet?.componentInstance?.direction.value);
+        });
+
+        this.configSheet?.componentInstance?.previousDialog.setValue(this.previousDialog());
+        this.configSheet?.componentInstance?.previousDialog.registerOnChange(() => {
+            this.previousDialog.set(this.configSheet?.componentInstance?.previousDialog.value);
         });
     }
 }

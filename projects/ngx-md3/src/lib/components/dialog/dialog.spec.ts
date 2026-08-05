@@ -1,3 +1,4 @@
+import { DialogConfig as CdkDialogConfig } from '@angular/cdk/dialog';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { Dialog } from './dialog';
@@ -8,7 +9,9 @@ describe('Dialog', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Dialog]
+      imports: [Dialog],
+      // The CDK dialog container reads its configuration from DI.
+      providers: [{ provide: CdkDialogConfig, useValue: new CdkDialogConfig() }],
     })
     .compileComponents();
 

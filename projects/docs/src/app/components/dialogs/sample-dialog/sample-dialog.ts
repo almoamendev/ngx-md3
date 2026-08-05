@@ -1,5 +1,5 @@
-import { Component, input, Input } from '@angular/core';
-import { Button, DialogActions, DialogBody, DialogHeader, DialogRef, IconElement, MaterialIcon } from '@almoamendev/ngx-md3';
+import { Component, inject, input } from '@angular/core';
+import { Button, DIALOG_CONFIG, DialogActions, DialogBody, DialogConfig, DialogHeader, DialogRef, DialogService, IconElement, MaterialIcon } from '@almoamendev/ngx-md3';
 
 @Component({
     selector: 'app-sample-dialog',
@@ -16,10 +16,30 @@ import { Button, DialogActions, DialogBody, DialogHeader, DialogRef, IconElement
 })
 export class SampleDialog {
     public showIcon = input<boolean>(true);
+    public level = input<number>(1);
+
+    private readonly dialogService = inject(DialogService);
+
+    /**
+     * The configuration of this dialog, reused so the dialog opened from here
+     * keeps the same scheme, direction and stacking behaviour.
+     */
+    private readonly config = inject<DialogConfig<Record<string, unknown>>>(DIALOG_CONFIG, { optional: true }) ?? {};
 
     constructor(
         private readonly dialogRef: DialogRef<SampleDialog, boolean>
     ) {
+    }
+
+    public openAnother(): void {
+        this.dialogService.open(SampleDialog, {
+            ...this.config,
+            data: {
+                ...this.config.data,
+                showIcon: this.showIcon(),
+                level: this.level() + 1,
+            },
+        });
     }
 
     public closeDialog(result: boolean = false) {

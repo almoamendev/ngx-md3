@@ -70,6 +70,17 @@
             </tr>
             <tr>
                 <td>
+                    <i>previousDialog?</i>
+                    <p md3-type-body size="small">What happens to a dialog that is already open when this dialog opens. A hidden dialog keeps its state and is shown again once this dialog closes.</p>
+                </td>
+                <td>
+                    PreviousDialog
+                    <p md3-type-body size="small">close, hide</p>
+                </td>
+                <td style="white-space: nowrap;">close</td>
+            </tr>
+            <tr>
+                <td>
                     <i>role?</i>
                     <p md3-type-body size="small">Dialog html role attribute.</p>
                 </td>
@@ -153,5 +164,11 @@
     <li>Dialogs are custom components injected in the page using dialog service.</li>
     <li>When creating your custom dialog component, you can optionally use <code>md3-dialog-header</code>, <code>md3-dialog-body</code> and <code>md3-dialog-actions</code>.</li>
     <li>On open, focus moves to the first focusable element inside the dialog (or the dialog surface itself if none is found). On close, focus returns to the element that triggered the dialog.</li>
-    <li>Unless <code>disableCloseEvents</code> is set, clicking the scrim or pressing Escape closes the dialog with no result.</li>
+    <li>While a dialog is open, focus stays trapped inside it and the rest of the page is hidden from assistive technology.</li>
+    <li>Unless <code>disableCloseEvents</code> is set, clicking the scrim or pressing Escape closes the dialog with no result. Escape combined with a modifier key is ignored.</li>
+    <li>The dialog is rendered through the CDK dialog (<code>&#64;angular/cdk/dialog</code>), so it plays well with other CDK overlays such as menus and sheets.</li>
+    <li>Opening a dialog while another one is open closes the open one by default. Use <code>previousDialog: 'hide'</code> to keep it alive instead &mdash; it comes back with the opening animation once the dialog above it closes.</li>
+    <li>Dialogs replace each other in sequence rather than at the same time: the one on screen starts leaving, and the next one animates in 160ms later. The same head start applies in reverse, when a hidden dialog comes back. The scrim is handed over between them, so the page behind keeps a single, steady scrim.</li>
+    <li>A hidden dialog keeps its component instance, so scroll position, form state and subscriptions are preserved. It is marked <code>inert</code> while hidden, so it takes no focus and is skipped by screen readers.</li>
+    <li>Page scrolling stays blocked for as long as any dialog of the stack is open, and focus returns to the element that opened the first dialog once the last one closes.</li>
 </ul>

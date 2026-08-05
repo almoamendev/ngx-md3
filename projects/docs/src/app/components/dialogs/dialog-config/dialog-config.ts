@@ -25,6 +25,7 @@ export class DialogConfig {
     public closeEvents: FormControl = new FormControl<boolean>(true);
     public darkMode: FormControl = new FormControl<boolean>(true);
     public direction: FormControl = new FormControl<'ltr' | 'rtl'>('ltr');
+    public previousDialog: FormControl = new FormControl<'close' | 'hide'>('close');
 
     constructor(
         private sideSheetRef: SideSheetRef<DialogConfig>

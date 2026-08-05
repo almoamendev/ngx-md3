@@ -20,6 +20,26 @@
         &.md3-dialog-closing {
             opacity: 0;
         }
+
+        // A dialog hidden behind another one gives its scrim up, so the page
+        // behind keeps a single scrim no matter how deep the stack is.
+        &.md3-dialog-hidden {
+            opacity: 0;
+        }
+
+        // Set while a dialog makes room for another one: the scrim stays up
+        // until the new dialog is ready to take it over, so the page behind
+        // never brightens in between.
+        &.md3-dialog-scrim-kept {
+            opacity: 0.32;
+            transition: none;
+        }
+
+        // Handover frame. Both scrims move to their new value at once, which
+        // has to happen without a transition to stay invisible.
+        &.md3-dialog-scrim-instant {
+            transition: none;
+        }
     }
 
     .cdk-global-overlay-wrapper {
@@ -35,7 +55,8 @@
             pointer-events: auto;
             max-width: 35em;
 
-            &.md3-dialog-closing {
+            &.md3-dialog-closing,
+            &.md3-dialog-hidden {
                 pointer-events: none;
             }
         }
@@ -46,7 +67,8 @@
     display: block;
     max-width: 100%;
     min-width: 17.5em;
-    
+    outline: 0;
+
     .md3-dialog-container {
         display: block;
         width: 100%;

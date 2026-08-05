@@ -25,6 +25,22 @@
         </label>
     </div>
 
+    <div md3-type-body size="large">Previous dialog</div>
+    <div class="controls-list">
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="previousDialog">
+                <input type="radio" md3-input-element name="previous-dialog" value="close">
+            </md3-radio-button>
+            <div md3-type-label size="large">Close</div>
+        </label>
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="previousDialog">
+                <input type="radio" md3-input-element name="previous-dialog" value="hide">
+            </md3-radio-button>
+            <div md3-type-label size="large">Hide</div>
+        </label>
+    </div>
+
     <div md3-type-body size="large">Direction</div>
     <div class="controls-list">
         <label md3-state-component tabindex="0">

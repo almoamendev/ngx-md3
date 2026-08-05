@@ -13,6 +13,7 @@ export * from './types/fab-size.type';
 export * from './types/fab-type.type';
 export * from './types/slider-size.type';
 export * from './types/dialog-role.type';
+export * from './types/previous-dialog.type';
 export * from './types/chip-type.type';
 export * from './types/chip-style.type';
 export * from './types/list-leading-type.type';
