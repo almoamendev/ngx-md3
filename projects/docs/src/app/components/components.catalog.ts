@@ -25,6 +25,7 @@ export type ComponentGroup =
     | 'Navigation'
     | 'Buttons'
     | 'Selection controls'
+    | 'Sheets'
     | 'Loading & progress';
 
 /** Group render order. Ungrouped entries are rendered last. */
@@ -32,6 +33,7 @@ export const COMPONENT_GROUPS: ComponentGroup[] = [
     'Navigation',
     'Buttons',
     'Selection controls',
+    'Sheets',
     'Loading & progress',
 ];
 
@@ -133,6 +135,14 @@ export const COMPONENTS: ComponentEntry[] = [
         description: 'Select exactly one option from a set.',
         icon: 'radio_button_checked',
         image: 'md3-radio-button.png',
+    },
+
+    {
+        label: 'Side sheets',
+        link: '/components/sheets/side-sheets',
+        group: 'Sheets',
+        description: 'Panels anchored to the start or end of the layout for supporting content.',
+        icon: 'right_panel_open',
     },
 
     {

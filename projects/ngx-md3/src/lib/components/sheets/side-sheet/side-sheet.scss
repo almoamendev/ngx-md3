@@ -28,7 +28,7 @@
     .md3-side-sheet-container {
         flex: 1 1 auto;
         position: relative;
-        max-width: 25em;
+        max-width: 16em;
         min-width: 16em;
         height: 100%;
         overflow: hidden;
@@ -140,6 +140,12 @@
         top: 0;
         bottom: 0;
         z-index: 500;
+
+        .md3-side-sheet-container {
+            // A modal sheet floats over the content instead of sharing the
+            // window with it, so it keeps the tighter MD3 cap.
+            max-width: 25em;
+        }
 
         .md3-side-sheet-scrim {
             display: block;

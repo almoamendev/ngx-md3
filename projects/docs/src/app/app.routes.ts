@@ -26,6 +26,7 @@ import { NavigationBarComponent } from './components/navigations/navigation-bar/
 import { NavigationItemComponent } from './components/navigations/navigation-item/navigation-item.component';
 import { AppBarComponent } from './components/app-bar/app-bar.component';
 import { SnackbarsComponent } from './components/snackbars/snackbars.component';
+import { SideSheetsComponent } from './components/sheets/side-sheets/side-sheets.component';
 import { HomeComponent } from './home/home.component';
 import { BadgesComponent } from './components/badges/badges.component';
 import { ComponentsComponent } from './components/components.component';
@@ -201,6 +202,15 @@ export const routes: Routes = [
                     {
                         path: 'menus',
                         component: MenusComponent,
+                    },
+                    {
+                        path: 'sheets',
+                        children: [
+                            {
+                                path: 'side-sheets',
+                                component: SideSheetsComponent,
+                            },
+                        ],
                     },
                     {
                         path: 'snackbars',
