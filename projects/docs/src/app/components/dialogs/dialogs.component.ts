@@ -57,6 +57,14 @@ const dialogRef: DialogRef = dialogService.open(YourDialogComponent, <DialogConf
 // open a dialog on top of the current one, hiding it until this one closes
 dialogService.open(YourDialogComponent, { previousDialog: 'hide' });
 
+// hide the dialog and bring it back later, with its content and state intact
+dialogRef.hide();
+dialogRef.show();
+
+// hide every dialog on screen, then put them back
+dialogService.hideAll();
+dialogService.showAll();
+
 // close dialog
 dialogRef.close(youDialogResult);
 
@@ -152,7 +160,7 @@ class DialogRef<T = unknown, R = unknown> {
 
     /**
      * Whether the dialog started closing, and whether it is currently
-     * hidden behind another dialog.
+     * hidden, on request or behind another dialog.
      */
     public get isClosing(): boolean;
     public get isHidden(): boolean;
@@ -165,8 +173,9 @@ class DialogRef<T = unknown, R = unknown> {
 
     /**
      * Hide the dialog with the closing animation while keeping it alive,
-     * then bring it back with the opening animation. Handled automatically
-     * when opening a dialog with previousDialog: 'hide'.
+     * then bring it back with the opening animation. Also handled
+     * automatically when opening a dialog with previousDialog: 'hide'.
+     * Resolves once the dialog is out of sight
      */
     public hide(): Promise<void>;
     public show(): void;
@@ -175,6 +184,11 @@ class DialogRef<T = unknown, R = unknown> {
      * Emits when the dialog starts closing, before the exit animation runs
      */
     public beforeClosed(): Observable<void>;
+
+    /**
+     * Emits the new value of isHidden every time the dialog is hidden or shown
+     */
+    public hiddenChanged(): Observable<boolean>;
 
     /**
      * After dialog close observable. optional result will emit after dialog is closed
@@ -187,6 +201,11 @@ class DialogService {
      * Open dialogs, from the first one opened to the one currently on top
      */
     public get openDialogs(): readonly DialogRef[];
+
+    /**
+     * Open dialogs that are currently on screen, from the bottom one up
+     */
+    public get visibleDialogs(): readonly DialogRef[];
 
     /**
      * The full screen dialog that is open, if there is one
@@ -209,6 +228,19 @@ class DialogService {
     ): DialogRef<T, R>;
 
     /**
+     * Hide every dialog on screen, the full screen one included, keeping
+     * them alive. Resolves once they are all out of sight
+     */
+    public hideAll(): Promise<void>;
+
+    /**
+     * Put the dialogs back on screen: the dialog that was on top, along
+     * with the full screen dialog it sits in. Dialogs hidden behind
+     * another dialog stay hidden
+     */
+    public showAll(): void;
+
+    /**
      * Close every open dialog, including the hidden ones.
      * Resolves once they are all closed
      */
@@ -227,7 +259,11 @@ sheetsService.openSideSheet(YourSheetComponent, { side: 'end' });
 dialogService.open(YourDialogComponent);
 
 // the full screen dialog that is open, if any
-const current = dialogService.fullScreenDialog;`;
+const current = dialogService.fullScreenDialog;
+
+// hides and shows like any other dialog, side sheets included
+dialogRef.hide();
+dialogRef.show();`;
 
     public apiFullScreenUsage: string = `<!-- Full screen dialog component usage -->
 
@@ -296,6 +332,11 @@ const current = dialogService.fullScreenDialog;`;
             scheme: this.darkMode() ? 'dark' : 'light',
             direction: this.direction(),
         });
+    }
+
+    /** Brings back whatever the "Hide" action inside the dialogs sent away. */
+    public showHiddenDialogs(): void {
+        this.dialogService.showAll();
     }
 
     public openConfig(): void {

@@ -21,10 +21,12 @@
             opacity: 0;
         }
 
-        // A dialog hidden behind another one gives its scrim up, so the page
-        // behind keeps a single scrim no matter how deep the stack is.
+        // A hidden dialog gives its scrim up, so the page keeps a single scrim
+        // no matter how deep the stack is, and nothing is left in front of the
+        // page once every dialog is hidden.
         &.md3-dialog-hidden {
             opacity: 0;
+            pointer-events: none;
         }
 
         // Set while a dialog makes room for another one: the scrim stays up

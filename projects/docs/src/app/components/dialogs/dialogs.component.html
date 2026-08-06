@@ -25,6 +25,7 @@
 
     <button type="button" md3-button (click)="sampleDialog()">Open sample dialog</button>
     <button type="button" md3-button button-type="tonal" (click)="fullScreenDialog()">Open full screen dialog</button>
+    <button type="button" md3-button button-type="outlined" (click)="showHiddenDialogs()">Show hidden dialogs</button>
 </app-playground>
 
 <h2>API</h2>
@@ -171,7 +172,9 @@
     <li>Opening a dialog while another one is open closes the open one by default. Use <code>previousDialog: 'hide'</code> to keep it alive instead &mdash; it comes back with the opening animation once the dialog above it closes.</li>
     <li>Dialogs replace each other in sequence rather than at the same time: the one on screen starts leaving, and the next one animates in 160ms later. The same head start applies in reverse, when a hidden dialog comes back. The scrim is handed over between them, so the page behind keeps a single, steady scrim.</li>
     <li>A hidden dialog keeps its component instance, so scroll position, form state and subscriptions are preserved. It is marked <code>inert</code> while hidden, so it takes no focus and is skipped by screen readers.</li>
-    <li>Page scrolling stays blocked for as long as any dialog of the stack is open, and focus returns to the element that opened the first dialog once the last one closes.</li>
+    <li>Dialogs can also be hidden on purpose, to let the page be used without losing the dialog: <code>dialogRef.hide()</code> sends one away with the closing animation, <code>dialogRef.show()</code> brings it back with the opening one. <code>hideAll()</code> and <code>showAll()</code> do the same for everything on screen, the full screen dialog included.</li>
+    <li>While every dialog is hidden the page belongs to the user again: the scrim is gone, scrolling is released, the page is exposed to assistive technology once more, and focus goes back to the element that opened the first dialog. A hidden dialog also ignores the Escape key, since it is not the dialog the key is meant for.</li>
+    <li>Page scrolling stays blocked for as long as one dialog of the stack is on screen, and focus returns to the element that opened the first dialog once the last one closes.</li>
 </ul>
 
 <h2>Full screen dialog</h2>
@@ -190,4 +193,5 @@
     <li>Regular dialogs open on top of a full screen dialog and never hide or close it, whatever <code>previousDialog</code> says. They still replace each other as usual.</li>
     <li>A full screen dialog is a header and a body, nothing else: <code>md3-fullscreen-dialog-header</code> sticks to the top and carries the actions, and <code>md3-dialog-body</code> takes the remaining space and scrolls underneath it. There is no bottom action bar &mdash; the trailing header button is the confirming action.</li>
     <li>The header takes an icon button marked <code>md3-header-leading</code> to leave the dialog and an action marked <code>md3-header-trailing</code>. Everything else projected into it becomes the headline, so it carries its own typography &mdash; usually <code>md3-type-title</code> at large size.</li>
+    <li>A full screen dialog hides and shows like any other one, with the whole task it holds still in place. It keeps the side sheet outlets while it is hidden, so a side sheet opened in the meantime lands in the dialog and comes back with it.</li>
 </ul>

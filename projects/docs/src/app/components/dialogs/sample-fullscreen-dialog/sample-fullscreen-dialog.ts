@@ -98,6 +98,11 @@ export class SampleFullScreenDialog {
         });
     }
 
+    /** Goes out of sight with the whole task it holds still in place. */
+    public hide(): void {
+        this.dialogRef.hide();
+    }
+
     public close(result: boolean = false): void {
         this.dialogRef.close(result);
     }

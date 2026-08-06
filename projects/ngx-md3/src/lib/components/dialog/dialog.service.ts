@@ -1,6 +1,6 @@
 import { Dialog as CdkDialog, DialogRef as CdkDialogRef } from '@angular/cdk/dialog';
 import { DOCUMENT } from '@angular/common';
-import { Overlay } from '@angular/cdk/overlay';
+import { Overlay, OverlayContainer } from '@angular/cdk/overlay';
 import { ComponentRef, inject, Injectable, Injector, Type, ViewContainerRef } from '@angular/core';
 import { Dialog } from './dialog';
 import { FullScreenDialog } from './full-screen-dialog/full-screen-dialog';
@@ -42,11 +42,18 @@ const DIALOG_HANDOVER_DELAY_MS = 160;
 export class DialogService {
     private readonly cdkDialog = inject(CdkDialog);
     private readonly overlay = inject(Overlay);
+    private readonly overlayContainer = inject(OverlayContainer);
     private readonly injector = inject(Injector);
     private readonly document = inject(DOCUMENT);
 
     /** Open dialogs, from the first one opened to the one currently on top. */
     private readonly refs: DialogRef<any, any>[] = [];
+
+    /**
+     * Elements the page was made of that the CDK hid from assistive technology,
+     * kept here while the dialogs are hidden and the page is given back.
+     */
+    private readonly pageAriaHidden = new Map<Element, string>();
 
     /**
      * Page scrolling is blocked here instead of per overlay, so stacked dialogs
@@ -57,8 +64,15 @@ export class DialogService {
     /** Element that was focused before the first dialog of the stack opened. */
     private rootTrigger: HTMLElement | null = null;
 
+    private pageStateQueued = false;
+
     public get openDialogs(): readonly DialogRef<any, any>[] {
         return this.refs;
+    }
+
+    /** Open dialogs that are currently on screen, from the bottom one up. */
+    public get visibleDialogs(): readonly DialogRef<any, any>[] {
+        return this.refs.filter((ref) => !ref.isHidden);
     }
 
     /** The full screen dialog that is open, if there is one. */
@@ -228,7 +242,7 @@ export class DialogService {
         }
 
         this.refs.push(dialogRef);
-        this.updateScrollBlock();
+        this.syncPageState();
 
         if (previousRef) {
             setTimeout(
@@ -243,6 +257,48 @@ export class DialogService {
         // already coming back while this one is fading out.
         dialogRef.beforeClosed().subscribe(() => this.restorePreviousDialog(dialogRef));
         dialogRef.afterClosed().subscribe(() => this.removeRef(dialogRef));
+        // Hiding and showing can also come straight from the reference, so the
+        // page state is driven by what the dialogs report rather than by the
+        // calls that went through this service.
+        dialogRef.hiddenChanged().subscribe(() => this.syncPageState());
+    }
+
+    /**
+     * Hides every dialog that is on screen, the full screen one included, with
+     * the closing animation. They stay alive with their content and state, the
+     * page underneath becomes usable, and showAll() puts them back. The promise
+     * resolves once they are all out of sight.
+     */
+    public hideAll(): Promise<void> {
+        const visible = this.refs.filter((ref) => !ref.isHidden && !ref.isClosing);
+
+        return Promise.all(visible.map((ref) => ref.hide())).then(() => undefined);
+    }
+
+    /**
+     * Brings the dialogs back on screen, whether they were hidden one by one or
+     * all at once: the dialog that was on top returns, along with the full
+     * screen dialog it sits in. Dialogs hidden behind another dialog stay
+     * hidden, since that is where they belong once the stack is back.
+     */
+    public showAll(): void {
+        const topRef = this.topRef();
+
+        if (!topRef) {
+            return;
+        }
+
+        const fullScreenRef = this.fullScreenDialog;
+
+        // The full screen dialog is the context the top one sits in, so it
+        // comes back first and the dialog on top ends up on top, with the focus.
+        if (fullScreenRef && fullScreenRef !== topRef && fullScreenRef.isHidden) {
+            fullScreenRef.show();
+        }
+
+        if (topRef.isHidden) {
+            topRef.show();
+        }
     }
 
     /** Closes every open dialog, including the hidden and the full screen ones. */
@@ -460,14 +516,97 @@ export class DialogService {
             this.rootTrigger = null;
         }
 
-        this.updateScrollBlock();
+        this.syncPageState();
     }
 
-    private updateScrollBlock(): void {
-        if (this.refs.length > 0) {
+    /**
+     * State that belongs to the dialogs as a whole rather than to one of them:
+     * page scrolling, the page being hidden from assistive technology, and
+     * where focus sits. Applied in a task of its own, so a dialog handing the
+     * screen over to another one does not give the page back and take it again
+     * within the same frame.
+     */
+    private syncPageState(): void {
+        if (this.pageStateQueued) {
+            return;
+        }
+
+        this.pageStateQueued = true;
+
+        setTimeout(() => {
+            this.pageStateQueued = false;
+            this.applyPageState();
+        });
+    }
+
+    private applyPageState(): void {
+        const hasVisibleDialog = this.refs.some((ref) => !ref.isHidden);
+
+        if (hasVisibleDialog) {
             this.scrollBlock.enable();
         } else {
             this.scrollBlock.disable();
+        }
+
+        if (this.refs.length === 0) {
+            // Nothing is open anymore: the CDK gives the page back to assistive
+            // technology on its own, so there is nothing left to restore here.
+            this.pageAriaHidden.clear();
+            return;
+        }
+
+        if (hasVisibleDialog) {
+            this.hidePageFromAssistiveTechnology();
+            return;
+        }
+
+        this.exposePageToAssistiveTechnology();
+        this.releaseFocus();
+    }
+
+    /**
+     * Gives the page back to assistive technology while every dialog is hidden.
+     * The CDK hides it for as long as a dialog is open, which would otherwise
+     * leave nothing to read at all once the dialogs are out of sight.
+     */
+    private exposePageToAssistiveTechnology(): void {
+        if (this.pageAriaHidden.size > 0) {
+            return;
+        }
+
+        const container = this.overlayContainer.getContainerElement();
+
+        Array.from(container.parentElement?.children ?? []).forEach((sibling) => {
+            const value = sibling.getAttribute('aria-hidden');
+
+            if (sibling === container || value === null) {
+                return;
+            }
+
+            this.pageAriaHidden.set(sibling, value);
+            sibling.removeAttribute('aria-hidden');
+        });
+    }
+
+    /** Hides the page again as soon as a dialog is back on screen. */
+    private hidePageFromAssistiveTechnology(): void {
+        this.pageAriaHidden.forEach((value, element) => {
+            element.setAttribute('aria-hidden', value);
+        });
+
+        this.pageAriaHidden.clear();
+    }
+
+    /**
+     * Focus follows the dialogs off the screen: it goes back to whatever opened
+     * the stack, so the page stays usable with the keyboard while the dialogs
+     * wait behind it. Focus that already moved somewhere else is left alone.
+     */
+    private releaseFocus(): void {
+        const activeElement = this.document.activeElement;
+
+        if (this.rootTrigger && (!activeElement || activeElement === this.document.body)) {
+            this.rootTrigger.focus();
         }
     }
 

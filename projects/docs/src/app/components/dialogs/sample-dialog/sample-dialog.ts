@@ -42,6 +42,11 @@ export class SampleDialog {
         });
     }
 
+    /** The dialog stays alive behind the page until "Show hidden dialogs". */
+    public hideDialog(): void {
+        this.dialogRef.hide();
+    }
+
     public closeDialog(result: boolean = false) {
         this.dialogRef.close(result);
     }

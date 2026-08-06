@@ -15,6 +15,7 @@ const HIDDEN_CLASS = 'md3-dialog-hidden';
 export class DialogRef<T = unknown, R = unknown> {
     private readonly closed = new Subject<R | undefined>();
     private readonly closing = new Subject<void>();
+    private readonly hiddenChanges = new Subject<boolean>();
     private closePromise: Promise<void> | null = null;
     private closeStarted = false;
     private closeSettled = false;
@@ -38,7 +39,7 @@ export class DialogRef<T = unknown, R = unknown> {
         return this.closeStarted;
     }
 
-    /** Whether the dialog is currently hidden behind another dialog. */
+    /** Whether the dialog is currently hidden, on request or behind another dialog. */
     public get isHidden(): boolean {
         return this.hidden;
     }
@@ -74,6 +75,7 @@ export class DialogRef<T = unknown, R = unknown> {
     /**
      * Hides the dialog with the closing animation while keeping it alive, so
      * its content, form state and subscriptions survive until show() is called.
+     * The page underneath becomes usable again while the dialog waits behind it.
      * The promise resolves once the dialog is out of sight.
      */
     public hide(): Promise<void> {
@@ -84,6 +86,7 @@ export class DialogRef<T = unknown, R = unknown> {
         this.hidden = true;
         this.toggleHiddenState(true);
         this.dialogInstance?.setActive(false);
+        this.hiddenChanges.next(true);
 
         return this.waitForSurfaceAnimation();
     }
@@ -102,6 +105,7 @@ export class DialogRef<T = unknown, R = unknown> {
             this.hidden = false;
             this.toggleHiddenState(false);
             this.dialogInstance?.setActive(true);
+            this.hiddenChanges.next(false);
         }
 
         this.dialogInstance?.recaptureFocus();
@@ -110,6 +114,11 @@ export class DialogRef<T = unknown, R = unknown> {
     /** Emits when the dialog starts closing, before the exit animation runs. */
     public beforeClosed(): Observable<void> {
         return this.closing.asObservable();
+    }
+
+    /** Emits the new value of `isHidden` every time the dialog is hidden or shown. */
+    public hiddenChanged(): Observable<boolean> {
+        return this.hiddenChanges.asObservable();
     }
 
     public afterClosed(): Observable<R | undefined> {
@@ -124,8 +133,10 @@ export class DialogRef<T = unknown, R = unknown> {
             this.close();
         });
 
+        // A hidden dialog is not the one the Escape key is meant for, even
+        // though the overlay it sits in is still the one receiving the event.
         this.cdkRef.keydownEvents.pipe(
-            filter((event) => event.key === 'Escape' && !hasModifierKey(event)),
+            filter((event) => !this.hidden && event.key === 'Escape' && !hasModifierKey(event)),
             take(1),
         ).subscribe((event) => {
             event.preventDefault();
@@ -214,6 +225,7 @@ export class DialogRef<T = unknown, R = unknown> {
         // waiting on beforeClosed() is still notified.
         this.startClosing();
         this.closeSettled = true;
+        this.hiddenChanges.complete();
         this.closed.next(result);
         this.closed.complete();
     }
