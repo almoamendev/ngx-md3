@@ -7,6 +7,7 @@ import { IconButtonsComponent } from './components/buttons/icon-buttons/icon-but
 import { LoadingIndicatorsComponent } from './components/loading-and-progress/loading-indicators/loading-indicators.component';
 import { ProgressIndicatorsComponent } from './components/loading-and-progress/progress-indicators/progress-indicators.component';
 import { CardsComponent } from './components/cards/cards.component';
+import { CarouselComponent } from './components/carousel/carousel.component';
 import { TextFieldsComponent } from './components/text-fields/text-fields.component';
 import { CheckboxesComponent } from './components/selection-controls/checkboxes/checkboxes.component';
 import { TypographyComponent } from './styles/typography/typography.component';
@@ -135,6 +136,10 @@ export const routes: Routes = [
                     {
                         path: 'cards',
                         component: CardsComponent,
+                    },
+                    {
+                        path: 'carousel',
+                        component: CarouselComponent,
                     },
                     {
                         path: 'chips',

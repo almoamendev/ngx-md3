@@ -1,0 +1,73 @@
+:host {
+    --md3-carousel-height: 14em;
+    --md3-carousel-scroll-size: 100%;
+    --md3-carousel-viewport-size: 100%;
+    --md3-carousel-gap: 0px;
+
+    --outline-color: rgb(var(--md-scheme-secondary));
+    --outline-width: 0.1875em;
+    --outline-offset: 0.125em;
+
+    font-size: 1rem;
+    display: block;
+    inline-size: 100%;
+    block-size: var(--md3-carousel-height);
+}
+
+.md3-carousel-scroller {
+    block-size: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    outline: none;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+    &:focus-visible {
+        outline: var(--outline-width) solid var(--outline-color);
+        outline-offset: var(--outline-offset);
+        border-radius: var(--md-border-radius-xlarge);
+    }
+
+    &.md3-snap {
+        scroll-snap-type: x mandatory;
+    }
+}
+
+// Sized to the full scroll range so the viewport below has room to stick across it. Items are
+// not laid out here — this element exists purely to give the scroller a stable scroll range
+// that does not change as items are masked.
+.md3-carousel-content {
+    position: relative;
+    inline-size: var(--md3-carousel-scroll-size);
+    block-size: 100%;
+}
+
+// Pinned to the visible area of the scroller, which lets items be positioned in container
+// coordinates instead of scroll coordinates.
+.md3-carousel-viewport {
+    position: sticky;
+    inset-inline-start: 0;
+    inset-block-start: 0;
+    inline-size: var(--md3-carousel-viewport-size);
+    block-size: 100%;
+}
+
+// Zero-size snap targets, kept separate from the items so snapping is unaffected by masking.
+.md3-carousel-snap {
+    position: absolute;
+    inset-block-start: 0;
+    inline-size: 1px;
+    block-size: 1px;
+    scroll-snap-align: start;
+    pointer-events: none;
+    visibility: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .md3-carousel-scroller {
+        scroll-behavior: auto;
+    }
+}

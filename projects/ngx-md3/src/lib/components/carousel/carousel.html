@@ -1,0 +1,11 @@
+<div #scroller class="md3-carousel-scroller" tabindex="0" [class.md3-snap]="snap()">
+    <div class="md3-carousel-content">
+        <div class="md3-carousel-viewport">
+            <ng-content></ng-content>
+        </div>
+
+        @for (point of snapPoints(); track $index) {
+            <div class="md3-carousel-snap" aria-hidden="true" [style.inset-inline-start.px]="point"></div>
+        }
+    </div>
+</div>

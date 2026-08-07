@@ -1,0 +1,52 @@
+<md3-side-sheet-header title="Configurations">
+    <button type="button" md3-icon-button trailing button-type="standard" (click)="close()">
+        <md3-icon md3-icon-element>close</md3-icon>
+    </button>
+</md3-side-sheet-header>
+<md3-side-sheet-body class="md3-component-config">
+    <div md3-type-body size="large">Alignment</div>
+    <div class="controls-list">
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="alignment">
+                <input type="radio" md3-input-element name="carousel-alignment" value="start">
+            </md3-radio-button>
+            <div md3-type-label size="large">Start</div>
+        </label>
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="alignment">
+                <input type="radio" md3-input-element name="carousel-alignment" value="center">
+            </md3-radio-button>
+            <div md3-type-label size="large">Centre</div>
+        </label>
+    </div>
+
+    <div md3-type-body size="large">Item size</div>
+    <div class="controls-list">
+        <div style="padding: 0 1em;">
+            <md3-slider slider-size="x-small" [control]="itemSize">
+                <input type="range" md3-input-element min="96" max="384" step="8" name="item-size">
+            </md3-slider>
+            <div md3-type-label size="small" style="text-align: end;">{{ itemSize.value }}px</div>
+        </div>
+    </div>
+
+    <div md3-type-body size="large">Gap</div>
+    <div class="controls-list">
+        <div style="padding: 0 1em;">
+            <md3-slider slider-size="x-small" [control]="gap">
+                <input type="range" md3-input-element min="0" max="32" step="2" name="gap">
+            </md3-slider>
+            <div md3-type-label size="small" style="text-align: end;">{{ gap.value }}px</div>
+        </div>
+    </div>
+
+    <div md3-type-body size="large">Items</div>
+    <div class="controls-list">
+        <div style="padding: 0 1em;">
+            <md3-slider slider-size="x-small" [control]="itemCount">
+                <input type="range" md3-input-element min="1" max="16" step="1" name="item-count">
+            </md3-slider>
+            <div md3-type-label size="small" style="text-align: end;">{{ itemCount.value }}</div>
+        </div>
+    </div>
+</md3-side-sheet-body>

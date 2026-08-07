@@ -1,0 +1,339 @@
+<h1 md3-type-display size="large">Carousel</h1>
+
+<p>
+    Carousels show a collection of items that can be scrolled on and off the screen. They emphasise
+    visuals, and can carry brief text that adapts as an item changes size.
+</p>
+
+<p>
+    Items are laid out against a set of keylines &mdash; large, medium, small, and an off-screen
+    anchor &mdash; and adopt the size of whichever keyline they are passing through. That is what
+    makes items grow into the focal range and crop away as they leave it, rather than simply
+    sliding past.
+</p>
+
+<figure class="component-image">
+    <img src="img/md3-carousel.png" alt="Material Design Carousel" />
+    <ol>
+        <li>Container</li>
+        <li>Large carousel item</li>
+        <li>Medium carousel item</li>
+        <li>Small carousel item</li>
+    </ol>
+</figure>
+
+<app-playground>
+    <button action-item md3-icon-button button-type="tonal" button-squared [selected]="configOpen()"
+        (click)="openConfig()">
+        <md3-icon md3-icon-element>settings</md3-icon>
+    </button>
+
+    <button action-item md3-button button-type="tonal" (click)="carousel.previous()"
+        [disabled]="carousel.atStart()">
+        <md3-icon md3-icon-element="leading" bi-directional>chevron_left</md3-icon>
+        Previous
+    </button>
+
+    <button action-item md3-button button-type="tonal" (click)="carousel.next()"
+        [disabled]="carousel.atEnd()">
+        Next
+        <md3-icon md3-icon-element="trailing" bi-directional>chevron_right</md3-icon>
+    </button>
+
+    <div class="demo-stack">
+        <md3-carousel #carousel [(index)]="selected" [alignment]="alignment()"
+            [item-size]="itemSize()" [gap]="gap()">
+            @for (slide of slides(); track slide.id) {
+                <md3-carousel-item>
+                    <div class="demo-slide" [style.background]="slide.gradient">
+                        <span md3-type-label size="large">{{ slide.label }}</span>
+                    </div>
+                </md3-carousel-item>
+            }
+        </md3-carousel>
+
+        <div class="demo-readout" md3-type-body size="small">
+            <span>
+                Leading: <b>{{ selectedLabel() }}</b>
+                (index {{ selected() }} of {{ carousel.lastIndex() }})
+            </span>
+
+            @if (carousel.arrangement(); as arrangement) {
+                <span>
+                    Solved arrangement:
+                    <b>{{ arrangement.largeCount }}</b> &times;
+                    {{ round(arrangement.largeSize) }}px large
+                    @if (arrangement.mediumCount) {
+                        &middot; <b>{{ arrangement.mediumCount }}</b> &times;
+                        {{ round(arrangement.mediumSize) }}px medium
+                    }
+                    @if (arrangement.smallCount) {
+                        &middot; <b>{{ arrangement.smallCount }}</b> &times;
+                        {{ round(arrangement.smallSize) }}px small
+                    }
+                </span>
+            }
+        </div>
+    </div>
+</app-playground>
+
+<p>
+    <i>item-size</i> is a preference, not a fixed width. The carousel adjusts it as little as it
+    can while still producing an arrangement that fills the container exactly &mdash; which is why
+    the solved sizes above rarely match the value you set. Resize the window, or change the
+    settings, to watch it re-solve.
+</p>
+
+<h2>Alignment</h2>
+
+<p>
+    A <b>start-aligned</b> carousel keeps its large items at the beginning of the container,
+    followed by the medium and small items. A <b>centre-aligned</b> one puts the large items in the
+    middle with smaller items on both sides, so it needs matching keylines either side of the focal
+    range and shifts them at both ends of the list rather than only at the end.
+</p>
+
+<h2>Controlled index</h2>
+
+<p>
+    <i>index</i> is a two-way model holding the item leading the focal range. Setting it scrolls
+    the carousel; scrolling the carousel updates it.
+</p>
+
+<p>
+    It is clamped to <i>lastIndex</i>, which is lower than the last item's index: once the carousel
+    is scrolled to the end, the trailing items all share the focal range, so none of them has a
+    resting position of its own. Bind buttons to <i>atStart</i> and <i>atEnd</i> rather than
+    comparing against the item count, or the last few presses will do nothing.
+</p>
+
+<app-shiki [code]="apiControlled" language="html"></app-shiki>
+
+<h2>Reacting to the item's size</h2>
+
+<p>
+    Every item carries the size band it currently renders at as a class &mdash; <i>md3-large</i>,
+    <i>md3-medium</i> or <i>md3-small</i> &mdash; so content can adapt from a stylesheet with no
+    bindings at all. Bands are snapped to the nearest of the arrangement's three sizes and flip at
+    the midpoint between them. The labels in the demo above use exactly this.
+</p>
+
+<app-shiki [code]="apiSizeClasses" language="css"></app-shiki>
+
+<p>
+    For finer control, each item also exposes a <i>maskRatio</i> signal &mdash; 0 while the item is
+    fully unmasked, rising towards 1 as it crops away. Use it when a step change between three
+    bands is too coarse and you want content to track the crop continuously.
+</p>
+
+<app-shiki [code]="apiMask" language="html"></app-shiki>
+
+<h2>API</h2>
+
+<div class="table-container md3-scrollable">
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 50%;">Name</th>
+                <th>Type</th>
+                <th>Default</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <i>carousel-layout</i>
+                    <p md3-type-body size="small">Arrangement strategy used to size items.</p>
+                </td>
+                <td>
+                    input&lt;CarouselLayout&gt;
+                    <p md3-type-body size="small">multi-browse</p>
+                </td>
+                <td style="white-space: nowrap;">multi-browse</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>alignment</i>
+                    <p md3-type-body size="small">Where the focal items sit in the container.</p>
+                </td>
+                <td>
+                    input&lt;CarouselAlignment&gt;
+                    <p md3-type-body size="small">start, center</p>
+                </td>
+                <td style="white-space: nowrap;">start</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>item-size</i>
+                    <p md3-type-body size="small">
+                        Preferred size of a fully unmasked item, in pixels. Adjusted as little as
+                        possible to make the arrangement fit.
+                    </p>
+                </td>
+                <td>input&lt;number&gt;</td>
+                <td style="white-space: nowrap;">200</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>small-item-size-min</i>
+                    <p md3-type-body size="small">Smallest a small item may shrink to, in pixels.</p>
+                </td>
+                <td>input&lt;number&gt;</td>
+                <td style="white-space: nowrap;">40</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>small-item-size-max</i>
+                    <p md3-type-body size="small">Largest a small item may grow to, in pixels.</p>
+                </td>
+                <td>input&lt;number&gt;</td>
+                <td style="white-space: nowrap;">56</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>gap</i>
+                    <p md3-type-body size="small">Space between items, in pixels.</p>
+                </td>
+                <td>input&lt;number&gt;</td>
+                <td style="white-space: nowrap;">8</td>
+            </tr>
+            <tr>
+                <td>
+                    index
+                    <p md3-type-body size="small">
+                        Item leading the focal range, clamped to lastIndex. Two-way bindable with
+                        [(index)].
+                    </p>
+                </td>
+                <td>model&lt;number&gt;</td>
+                <td style="white-space: nowrap;">0</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<h3>Read-only state</h3>
+
+<div class="table-container md3-scrollable">
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 50%;">Name</th>
+                <th>Type</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>lastIndex</td>
+                <td>Signal&lt;number&gt;</td>
+                <td>
+                    Highest index the carousel can rest on. Lower than the last item's index by the
+                    number of items sharing the focal range, and it changes as the container
+                    resizes.
+                </td>
+            </tr>
+            <tr>
+                <td>atStart</td>
+                <td>Signal&lt;boolean&gt;</td>
+                <td>True when the carousel cannot scroll further towards the start.</td>
+            </tr>
+            <tr>
+                <td>atEnd</td>
+                <td>Signal&lt;boolean&gt;</td>
+                <td>True when the carousel cannot scroll further towards the end.</td>
+            </tr>
+            <tr>
+                <td>snap</td>
+                <td>Signal&lt;boolean&gt;</td>
+                <td>
+                    Whether the current layout brings items to rest on keylines. Decided by the
+                    layout, since an arrangement that resizes items only reads correctly when they
+                    sit on keylines.
+                </td>
+            </tr>
+            <tr>
+                <td>arrangement</td>
+                <td>Signal&lt;CarouselArrangement | undefined&gt;</td>
+                <td>The solved sizes and counts for the current container.</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<h3>md3-carousel-item</h3>
+
+<div class="table-container md3-scrollable">
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 50%;">Name</th>
+                <th>Type</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>maskRatio</td>
+                <td>signal&lt;number&gt;</td>
+                <td>0 while fully unmasked, approaching 1 as the item crops away.</td>
+            </tr>
+            <tr>
+                <td>maskedSize</td>
+                <td>signal&lt;number&gt;</td>
+                <td>Current rendered size of the item, in pixels.</td>
+            </tr>
+            <tr>
+                <td>size</td>
+                <td>
+                    signal&lt;CarouselItemSize&gt;
+                    <p md3-type-body size="small">large, medium, small</p>
+                </td>
+                <td>
+                    Nearest of the arrangement's three sizes, mirrored onto the element as
+                    <i>md3-large</i>, <i>md3-medium</i> or <i>md3-small</i>.
+                </td>
+            </tr>
+            <tr>
+                <td>isFocal</td>
+                <td>signal&lt;boolean&gt;</td>
+                <td>
+                    True while the item rests in the focal range. Also applied as
+                    <i>md3-focal</i>.
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<app-shiki [code]="apiImport"></app-shiki>
+<app-shiki [code]="apiData"></app-shiki>
+<app-shiki [code]="apiTypes"></app-shiki>
+<app-shiki [code]="apiUsage" language="html"></app-shiki>
+<app-shiki [code]="apiCustomProperties" language="css"></app-shiki>
+
+<h2>Accessibility</h2>
+
+<p>
+    The carousel is a focusable group with <i>aria-roledescription="carousel"</i>, and each item is
+    announced as a slide with its position in the list. When the carousel has focus:
+</p>
+
+<ul>
+    <li><b>Arrow keys</b> move one item at a time, mirrored automatically under right-to-left.</li>
+    <li><b>Home</b> and <b>End</b> jump to the first and last item.</li>
+</ul>
+
+<p>
+    Focusable content inside a cropped item is scrolled into the focal range automatically, so
+    tabbing never lands on something the reader cannot see. Programmatic scrolling honours
+    <i>prefers-reduced-motion</i>.
+</p>
+
+<h2>Content</h2>
+
+<p>
+    Masking works by cropping the item towards its centre while its content stays at full size, so
+    items look best with full-bleed content &mdash; an image or a background that reaches the edges.
+    Content with its own padding or margins will reveal empty space as the item crops.
+</p>

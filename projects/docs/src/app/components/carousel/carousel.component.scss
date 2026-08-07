@@ -1,0 +1,39 @@
+.demo-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75em;
+    inline-size: 100%;
+}
+
+.demo-readout {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25em;
+    color: rgb(var(--md-scheme-on-surface-variant));
+}
+
+// Uses the size classes the carousel puts on each item: the label is only readable once the
+// item is large, so it fades out as the item narrows.
+md3-carousel-item {
+    .demo-slide span {
+        transition: opacity var(--md-motion-standard-fast-effects-duration)
+            var(--md-motion-standard-fast-effects-easing);
+    }
+
+    &.md3-medium .demo-slide span,
+    &.md3-small .demo-slide span {
+        opacity: 0;
+    }
+}
+
+// Full-bleed content, which is what carousel masking is designed for.
+.demo-slide {
+    display: flex;
+    align-items: flex-end;
+    inline-size: 100%;
+    block-size: 100%;
+    padding: 1em;
+    color: rgb(255 255 255);
+    text-shadow: 0 0.0625em 0.25em rgb(0 0 0 / 40%);
+    white-space: nowrap;
+}

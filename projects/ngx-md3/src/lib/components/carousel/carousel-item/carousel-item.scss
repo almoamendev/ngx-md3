@@ -1,0 +1,59 @@
+:host {
+    --md3-carousel-item-size: 0px;
+    --md3-carousel-item-full-size: 0px;
+    --md3-carousel-item-offset: 0px;
+    --md3-carousel-item-mask-ratio: 0;
+
+    --background-color: rgb(var(--md-scheme-surface-container-high));
+    --border-radius: var(--md-border-radius-xlarge);
+
+    // The solver folds the gap into every item size, so it is taken back out here: each item is
+    // inset by half a gap on both sides, which leaves exactly one gap between neighbours.
+    --md3-carousel-item-gap: var(--md3-carousel-gap, 0px);
+    --md3-carousel-item-visible-size: max(
+        0px,
+        calc(var(--md3-carousel-item-size) - var(--md3-carousel-item-gap))
+    );
+    --md3-carousel-item-visible-full-size: max(
+        0px,
+        calc(var(--md3-carousel-item-full-size) - var(--md3-carousel-item-gap))
+    );
+
+    position: absolute;
+    inset-block: 0;
+
+    // Logical inset keeps the carousel correct under `dir="rtl"` with no direction-aware
+    // arithmetic in TypeScript: offsets are always measured from the container's start edge.
+    inset-inline-start: calc(var(--md3-carousel-item-offset) + var(--md3-carousel-item-gap) / 2);
+
+    inline-size: var(--md3-carousel-item-visible-size);
+    overflow: hidden;
+    border-radius: var(--border-radius);
+    background-color: var(--background-color);
+    contain: paint;
+}
+
+:host([hidden]) {
+    display: none;
+}
+
+// Content stays at the item's unmasked size and remains centred while the box crops inwards,
+// which produces the Material Design crop rather than a squash. The negative logical margin
+// does the centring so it mirrors correctly in RTL.
+.md3-carousel-item-content {
+    position: absolute;
+    inset-block: 0;
+    inset-inline-start: 50%;
+    inline-size: var(--md3-carousel-item-visible-full-size);
+    margin-inline-start: calc(var(--md3-carousel-item-visible-full-size) / -2);
+}
+
+// Common full-bleed content. Anything else is left to the consumer.
+:host ::ng-deep .md3-carousel-item-content > img,
+:host ::ng-deep .md3-carousel-item-content > video,
+:host ::ng-deep .md3-carousel-item-content > picture {
+    display: block;
+    inline-size: 100%;
+    block-size: 100%;
+    object-fit: cover;
+}

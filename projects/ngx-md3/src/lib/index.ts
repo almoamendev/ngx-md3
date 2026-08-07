@@ -17,6 +17,10 @@ export * from './types/chip-type.type';
 export * from './types/chip-style.type';
 export * from './types/list-leading-type.type';
 export * from './types/list-leading-size.type';
+export * from './types/carousel-layout.type';
+export * from './types/carousel-alignment.type';
+export * from './types/carousel-orientation.type';
+export * from './types/carousel-item-size.type';
 
 // interfaces
 export * from './interfaces/dialog-config.interface';
@@ -24,6 +28,9 @@ export * from './interfaces/full-screen-dialog-config.interface';
 export * from './interfaces/menu-config.interface';
 export * from './interfaces/side-sheet-config.interface';
 export * from './interfaces/snackbar-config.interface';
+export * from './interfaces/carousel-arrangement.interface';
+export * from './interfaces/carousel-keyline.interface';
+export * from './interfaces/carousel-strategy.interface';
 
 // typography
 export * from './styles/typography/type-display';
@@ -59,6 +66,12 @@ export * from './components/buttons/button-group/button-group';
 
 // cards
 export * from './components/card/card';
+
+// carousel
+export * from './components/carousel/carousel';
+export * from './components/carousel/carousel-item/carousel-item';
+export * from './components/carousel/carousel-arrangement';
+export * from './components/carousel/carousel-keylines';
 
 // chips
 export * from './components/chips/chips';

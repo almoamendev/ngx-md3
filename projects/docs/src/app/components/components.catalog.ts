@@ -178,6 +178,13 @@ export const COMPONENTS: ComponentEntry[] = [
         image: 'md3-card.png',
     },
     {
+        label: 'Carousel',
+        link: '/components/carousel',
+        description: 'Scrollable collections of visual items that resize as they move.',
+        icon: 'view_carousel',
+        image: 'md3-carousel.png',
+    },
+    {
         label: 'Chips',
         link: '/components/chips',
         description: 'Assist, filter, input, and suggestion chips.',
