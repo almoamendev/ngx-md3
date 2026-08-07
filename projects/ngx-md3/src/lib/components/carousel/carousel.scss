@@ -11,7 +11,11 @@
     font-size: 1rem;
     display: block;
     inline-size: 100%;
-    block-size: var(--md3-carousel-height);
+
+    // `--md3-carousel-aspect-height` is written by the component only while `aspect-ratio` is
+    // set, so the consumer's own `--md3-carousel-height` is never overwritten and comes back
+    // the moment the ratio is removed.
+    block-size: var(--md3-carousel-aspect-height, var(--md3-carousel-height));
 }
 
 .md3-carousel-scroller {

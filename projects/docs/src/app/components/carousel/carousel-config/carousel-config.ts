@@ -39,6 +39,7 @@ export class CarouselConfig {
     public itemSize: FormControl = new FormControl<number>(200);
     public gap: FormControl = new FormControl<number>(8);
     public itemCount: FormControl = new FormControl<number>(10);
+    public aspectRatio: FormControl = new FormControl<string>('16/9');
 
     constructor(
         private sideSheetRef: SideSheetRef<CarouselConfig>

@@ -32,6 +32,31 @@ import {
 } from './carousel-keylines';
 import { CarouselItem } from './carousel-item/carousel-item';
 
+/**
+ * Reads an aspect ratio from an input value.
+ *
+ * Accepts a number (`1.778`) or the more readable fraction form (`"16 / 9"`). Anything that is
+ * not a positive, finite ratio resolves to `undefined`, which leaves the height to CSS.
+ */
+export function parseCarouselAspectRatio(value: unknown): number | undefined {
+    if (value === null || value === undefined || value === '') {
+        return undefined;
+    }
+
+    let ratio: number;
+
+    if (typeof value === 'number') {
+        ratio = value;
+    } else {
+        const parts = String(value).split('/');
+        ratio = parts.length === 2
+            ? Number(parts[0]) / Number(parts[1])
+            : Number(parts[0]);
+    }
+
+    return Number.isFinite(ratio) && ratio > 0 ? ratio : undefined;
+}
+
 /** Grace period after a programmatic scroll before the index is synced back from the DOM. */
 const SCROLL_END_FALLBACK = 120;
 
@@ -105,6 +130,20 @@ export class Carousel {
     public gap = input<number, unknown>(8, {
         alias: 'gap',
         transform: numberAttribute,
+    });
+
+    /**
+     * Width-to-height ratio of a fully unmasked item, as a number or a `"16 / 9"` fraction.
+     *
+     * The solver changes item width as the container resizes, so a fixed height would let the
+     * ratio drift. Setting this derives the carousel's height from the solved item width
+     * instead, keeping items at a constant shape at every viewport size.
+     *
+     * Leave it unset to size the carousel with `--md3-carousel-height` in CSS.
+     */
+    public aspectRatio = input<number | undefined, unknown>(undefined, {
+        alias: 'aspect-ratio',
+        transform: parseCarouselAspectRatio,
     });
 
     /**
@@ -201,6 +240,24 @@ export class Carousel {
      */
     public readonly lastIndex = computed<number>(() => this.geometry()?.lastIndex ?? 0);
 
+    /**
+     * Height implied by `aspect-ratio`, in pixels, or `undefined` when CSS owns the height.
+     *
+     * Measured against a focal item's visible width — the solved item size less the gap — so a
+     * fully unmasked item matches the requested ratio exactly. Masked items keep this height and
+     * crop horizontally, which is what the Material Design arrangement expects.
+     */
+    public readonly resolvedHeight = computed<number | undefined>(() => {
+        const ratio = this.aspectRatio();
+        const geometry = this.geometry();
+
+        if (!ratio || !geometry) {
+            return undefined;
+        }
+
+        return (geometry.itemSize - this.metrics().gap) / ratio;
+    });
+
     public readonly atStart = computed<boolean>(() => this.index() <= 0);
 
     /** True when the carousel cannot scroll any further towards the end. */
@@ -272,6 +329,20 @@ export class Carousel {
             this.geometry();
             this.items();
             this.applyGeometry();
+        });
+
+        // Derive the height from the solved item width so items keep their shape as the
+        // container resizes. Changing the height cannot feed back into the arrangement, which
+        // only depends on the container's width, so this settles in one pass.
+        effect(() => {
+            const height = this.resolvedHeight();
+
+            if (height === undefined) {
+                this.element.style.removeProperty('--md3-carousel-aspect-height');
+                return;
+            }
+
+            this.element.style.setProperty('--md3-carousel-aspect-height', `${height}px`);
         });
 
         // Follow the index when it is set from outside, but not while the user is scrolling —

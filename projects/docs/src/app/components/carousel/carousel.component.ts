@@ -58,6 +58,7 @@ export class CarouselComponent implements OnDestroy {
     public itemSize = signal<number>(200);
     public gap = signal<number>(8);
     public itemCount = signal<number>(10);
+    public aspectRatio = signal<string>('16/9');
     public selected = signal<number>(0);
 
     public readonly slides = computed<DemoSlide[]>(() => {
@@ -107,6 +108,11 @@ public gap = input<number, unknown>(8, {
     transform: numberAttribute,
 });
 
+public aspectRatio = input<number | undefined, unknown>(undefined, {
+    alias: 'aspect-ratio',
+    transform: parseCarouselAspectRatio,
+});
+
 // Two-way model
 public index = model<number>(0);
 
@@ -115,6 +121,7 @@ public readonly lastIndex: Signal<number>;
 public readonly atStart: Signal<boolean>;
 public readonly atEnd: Signal<boolean>;
 public readonly snap: Signal<boolean>;
+public readonly resolvedHeight: Signal<number | undefined>;
 public readonly arrangement: Signal<CarouselArrangement | undefined>;
 
 // Methods
@@ -187,7 +194,13 @@ md3-carousel-item {
     }
 </md3-carousel>`;
 
-    public apiCustomProperties: string = `/* Custom properties */
+    public apiHeight: string = `<!-- Items keep their shape as the container resizes -->
+
+<md3-carousel aspect-ratio="16 / 9">...</md3-carousel>
+<md3-carousel aspect-ratio="4 / 3">...</md3-carousel>
+<md3-carousel [aspect-ratio]="1">...</md3-carousel>`;
+
+    public apiCustomProperties: string = `/* Sizing from CSS, when aspect-ratio is not set */
 
 md3-carousel {
     --md3-carousel-height: 14em;
@@ -260,6 +273,11 @@ md3-carousel-item {
         config.itemCount.setValue(this.itemCount());
         config.itemCount.registerOnChange(() => {
             this.itemCount.set(Number(config.itemCount.value));
+        });
+
+        config.aspectRatio.setValue(this.aspectRatio());
+        config.aspectRatio.registerOnChange(() => {
+            this.aspectRatio.set(config.aspectRatio.value);
         });
     }
 }

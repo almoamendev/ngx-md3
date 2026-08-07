@@ -1,12 +1,13 @@
 import { Component, signal, viewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Carousel } from './carousel';
+import { Carousel, parseCarouselAspectRatio } from './carousel';
 import { CarouselItem } from './carousel-item/carousel-item';
 
 @Component({
     imports: [Carousel, CarouselItem],
     template: `
-        <md3-carousel [(index)]="index" [item-size]="200" style="width: 800px;">
+        <md3-carousel [(index)]="index" [item-size]="200" [aspect-ratio]="ratio()"
+            style="width: 800px;">
             @for (item of items(); track item) {
                 <md3-carousel-item>
                     <img src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" [alt]="'item ' + item" />
@@ -18,8 +19,29 @@ import { CarouselItem } from './carousel-item/carousel-item';
 class CarouselHost {
     public readonly items = signal<number[]>([1, 2, 3, 4, 5, 6, 7, 8]);
     public readonly index = signal<number>(0);
+    public readonly ratio = signal<string | undefined>(undefined);
     public readonly carousel = viewChild.required(Carousel);
 }
+
+describe('parseCarouselAspectRatio', () => {
+    it('reads numbers and fractions', () => {
+        expect(parseCarouselAspectRatio(1.5)).toBe(1.5);
+        expect(parseCarouselAspectRatio('1.5')).toBe(1.5);
+        expect(parseCarouselAspectRatio('16/9')).toBeCloseTo(16 / 9, 6);
+        expect(parseCarouselAspectRatio(' 16 / 9 ')).toBeCloseTo(16 / 9, 6);
+        expect(parseCarouselAspectRatio('1/1')).toBe(1);
+    });
+
+    it('falls back to undefined for anything unusable', () => {
+        expect(parseCarouselAspectRatio(undefined)).toBeUndefined();
+        expect(parseCarouselAspectRatio(null)).toBeUndefined();
+        expect(parseCarouselAspectRatio('')).toBeUndefined();
+        expect(parseCarouselAspectRatio(0)).toBeUndefined();
+        expect(parseCarouselAspectRatio(-2)).toBeUndefined();
+        expect(parseCarouselAspectRatio('16/0')).toBeUndefined();
+        expect(parseCarouselAspectRatio('wide')).toBeUndefined();
+    });
+});
 
 describe('Carousel', () => {
     let fixture: ComponentFixture<CarouselHost>;
@@ -175,6 +197,55 @@ describe('Carousel', () => {
     it('keeps the first items unmasked at rest', () => {
         expect(host.carousel().items()[0].maskRatio()).toBeCloseTo(0, 2);
         expect(host.carousel().items()[0].isFocal()).toBeTrue();
+    });
+
+    it('leaves the height to CSS when no ratio is set', () => {
+        const element = fixture.nativeElement.querySelector('md3-carousel') as HTMLElement;
+
+        expect(host.carousel().resolvedHeight()).toBeUndefined();
+        expect(element.style.getPropertyValue('--md3-carousel-aspect-height')).toBe('');
+    });
+
+    it('derives the height from the solved item width for a ratio', async () => {
+        host.ratio.set('16 / 9');
+        await settle();
+
+        const carousel = host.carousel();
+        const width = carousel.geometry()!.itemSize - 8;
+
+        expect(carousel.resolvedHeight()).toBeCloseTo(width / (16 / 9), 3);
+    });
+
+    it('keeps the ratio when the container resizes', async () => {
+        host.ratio.set('16 / 9');
+        await settle();
+
+        const carousel = host.carousel();
+        const element = fixture.nativeElement.querySelector('md3-carousel') as HTMLElement;
+        const before = carousel.resolvedHeight()!;
+        const beforeWidth = carousel.geometry()!.itemSize;
+
+        element.style.width = '520px';
+        await settle();
+
+        const after = carousel.resolvedHeight()!;
+        const afterWidth = carousel.geometry()!.itemSize;
+
+        // The solved item width has to change for this to prove anything.
+        expect(afterWidth).not.toBeCloseTo(beforeWidth, 1);
+        expect(after / (afterWidth - 8)).toBeCloseTo(before / (beforeWidth - 8), 3);
+    });
+
+    it('restores the CSS height when the ratio is removed', async () => {
+        host.ratio.set('16 / 9');
+        await settle();
+
+        host.ratio.set(undefined);
+        await settle();
+
+        const element = fixture.nativeElement.querySelector('md3-carousel') as HTMLElement;
+
+        expect(element.style.getPropertyValue('--md3-carousel-aspect-height')).toBe('');
     });
 
     it('classes each item with the size it renders at', () => {

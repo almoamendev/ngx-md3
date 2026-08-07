@@ -42,7 +42,7 @@
 
     <div class="demo-stack">
         <md3-carousel #carousel [(index)]="selected" [alignment]="alignment()"
-            [item-size]="itemSize()" [gap]="gap()">
+            [item-size]="itemSize()" [gap]="gap()" [aspect-ratio]="aspectRatio()">
             @for (slide of slides(); track slide.id) {
                 <md3-carousel-item>
                     <div class="demo-slide" [style.background]="slide.gradient">
@@ -83,6 +83,32 @@
     the solved sizes above rarely match the value you set. Resize the window, or change the
     settings, to watch it re-solve.
 </p>
+
+<h2>Height</h2>
+
+<p>
+    Because the solver changes item width as the container resizes, a fixed height would let items
+    drift out of shape. Set <i>aspect-ratio</i> and the carousel derives its height from the solved
+    item width instead, so items keep a constant shape at every viewport size. It takes a number or
+    the more readable fraction form.
+</p>
+
+<app-shiki [code]="apiHeight" language="html"></app-shiki>
+
+<p>
+    The ratio applies to the item box, so it works with any content &mdash; images, text, or mixed
+    markup all fill the same shape. Masked items keep the height and crop horizontally, which is
+    what the arrangement expects.
+</p>
+
+<p>
+    Leave <i>aspect-ratio</i> unset to size the carousel from CSS with
+    <i>--md3-carousel-height</i> instead. Note that setting <i>height</i> on the element will not
+    work: the component declares its own <i>block-size</i>, and a plain element selector loses to
+    it on specificity.
+</p>
+
+<app-shiki [code]="apiCustomProperties" language="css"></app-shiki>
 
 <h2>Alignment</h2>
 
@@ -199,6 +225,21 @@
             </tr>
             <tr>
                 <td>
+                    <i>aspect-ratio</i>
+                    <p md3-type-body size="small">
+                        Width-to-height ratio of an unmasked item. Derives the carousel's height
+                        from the solved item width, so items keep their shape as the container
+                        resizes. Unset means the height comes from CSS.
+                    </p>
+                </td>
+                <td>
+                    input&lt;number | undefined&gt;
+                    <p md3-type-body size="small">1.778, "16 / 9"</p>
+                </td>
+                <td style="white-space: nowrap;">&mdash;</td>
+            </tr>
+            <tr>
+                <td>
                     index
                     <p md3-type-body size="small">
                         Item leading the focal range, clamped to lastIndex. Two-way bindable with
@@ -250,6 +291,14 @@
                     Whether the current layout brings items to rest on keylines. Decided by the
                     layout, since an arrangement that resizes items only reads correctly when they
                     sit on keylines.
+                </td>
+            </tr>
+            <tr>
+                <td>resolvedHeight</td>
+                <td>Signal&lt;number | undefined&gt;</td>
+                <td>
+                    Height implied by <i>aspect-ratio</i>, in pixels, or undefined when CSS owns
+                    the height.
                 </td>
             </tr>
             <tr>
@@ -310,7 +359,6 @@
 <app-shiki [code]="apiData"></app-shiki>
 <app-shiki [code]="apiTypes"></app-shiki>
 <app-shiki [code]="apiUsage" language="html"></app-shiki>
-<app-shiki [code]="apiCustomProperties" language="css"></app-shiki>
 
 <h2>Accessibility</h2>
 
