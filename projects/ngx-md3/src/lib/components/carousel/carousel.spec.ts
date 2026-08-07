@@ -69,6 +69,27 @@ describe('Carousel', () => {
         }
     }
 
+    /**
+     * Waits for a DOM resize to be picked up.
+     *
+     * `ResizeObserver` delivers asynchronously and is not something `whenStable` tracks, so a
+     * fixed number of change detection passes can return before the carousel has re-measured.
+     */
+    async function settleResize(until: () => boolean): Promise<void> {
+        for (let attempt = 0; attempt < 50; attempt++) {
+            fixture.detectChanges();
+            await fixture.whenStable();
+
+            if (until()) {
+                return;
+            }
+
+            await new Promise<void>((resolve) => setTimeout(resolve, 10));
+        }
+
+        throw new Error('Timed out waiting for the carousel to re-measure after a resize');
+    }
+
     it('creates', () => {
         expect(host.carousel()).toBeTruthy();
     });
@@ -222,18 +243,21 @@ describe('Carousel', () => {
 
         const carousel = host.carousel();
         const element = fixture.nativeElement.querySelector('md3-carousel') as HTMLElement;
-        const before = carousel.resolvedHeight()!;
         const beforeWidth = carousel.geometry()!.itemSize;
+        const beforeHeight = carousel.resolvedHeight()!;
 
         element.style.width = '520px';
-        await settle();
+        await settleResize(() => carousel.geometry()!.itemSize !== beforeWidth);
 
-        const after = carousel.resolvedHeight()!;
         const afterWidth = carousel.geometry()!.itemSize;
+        const afterHeight = carousel.resolvedHeight()!;
 
-        // The solved item width has to change for this to prove anything.
+        // Both dimensions have to move for this to prove anything...
         expect(afterWidth).not.toBeCloseTo(beforeWidth, 1);
-        expect(after / (afterWidth - 8)).toBeCloseTo(before / (beforeWidth - 8), 3);
+        expect(afterHeight).not.toBeCloseTo(beforeHeight, 1);
+
+        // ...and the shape they describe must not.
+        expect((afterWidth - 8) / afterHeight).toBeCloseTo((beforeWidth - 8) / beforeHeight, 3);
     });
 
     it('restores the CSS height when the ratio is removed', async () => {
