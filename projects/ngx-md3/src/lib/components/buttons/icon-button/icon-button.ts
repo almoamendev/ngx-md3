@@ -25,6 +25,10 @@ export class IconButton {
             return;
         }
 
+        if (this.context?.buttonContextSelection?.() === 'single') {
+            return;
+        }
+
         this.isSelected.update((value) => {
             return !value;
         });

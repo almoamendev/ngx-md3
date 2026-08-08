@@ -24,6 +24,10 @@ export class Button {
             return;
         }
 
+        if (this.context?.buttonContextSelection?.() === 'single') {
+            return;
+        }
+
         this.isSelected.update((value) => {
             return !value;
         });

@@ -28,11 +28,12 @@ export class ButtonGroup implements ButtonContext {
 
         const selectedItem = this.findEventButton(event);
 
-        if (selectedItem?.isSelected()) {
-            this.clearOtherSelections(selectedItem);
+        if (!selectedItem) {
+            return;
         }
 
-        selectedItem?.isSelected.set(true);
+        this.clearOtherSelections(selectedItem);
+        selectedItem.isSelected.set(true);
     }
     
     public buttonSize: InputSignal<ButtonSize> = input<ButtonSize>('small', {
@@ -50,6 +51,7 @@ export class ButtonGroup implements ButtonContext {
     
     // context values
     buttonContextSize: Signal<ButtonSize> = this.buttonSize;
+    buttonContextSelection: Signal<ButtonGroupSelection> = this.groupSelection;
 
     constructor(private el: ElementRef) {
         effect((onCleanup) => {
