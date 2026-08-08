@@ -31,6 +31,8 @@ export class ButtonGroup implements ButtonContext {
         if (selectedItem?.isSelected()) {
             this.clearOtherSelections(selectedItem);
         }
+
+        selectedItem?.isSelected.set(true);
     }
     
     public buttonSize: InputSignal<ButtonSize> = input<ButtonSize>('small', {
