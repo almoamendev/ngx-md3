@@ -1,5 +1,5 @@
 <!-- The role and aria attributes live on the host element, applied by the CDK dialog container. -->
-<section
+<div
     #surface
     class="md3-dialog-container"
     [class.md3-active]="isActive()"
@@ -7,4 +7,4 @@
     [class.md-scheme-light]="config.scheme == 'light'"
     [attr.dir]="config.direction ?? null">
     <ng-template cdkPortalOutlet></ng-template>
-</section>
+</div>
