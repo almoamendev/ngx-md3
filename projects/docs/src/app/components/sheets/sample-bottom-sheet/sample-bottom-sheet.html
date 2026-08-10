@@ -1,19 +1,20 @@
-<md3-bottom-sheet-header [title]="title()">
-    <button type="button" md3-icon-button trailing button-type="standard" (click)="close()">
+<header class="sheet-header">
+    <h2 md3-type-title size="large" class="sheet-title">{{ title() }}</h2>
+    <button type="button" md3-icon-button button-type="standard" (click)="close()">
         <md3-icon md3-icon-element>close</md3-icon>
     </button>
-</md3-bottom-sheet-header>
+</header>
 
-<md3-bottom-sheet-body>
+<div class="sheet-body md3-scrollable">
     <p md3-type-body size="medium" style="margin: 0 1.5em 1em;">
-        Opened as an <strong>{{ config.inset ? 'inset' : 'edge-to-edge' }}</strong> bottom sheet.
+        Opened <strong>{{ config.handle === false ? 'without' : 'with' }}</strong> the drag handle.
     </p>
     <p md3-type-body size="small" style="margin: 0 1.5em;">
         Bottom sheets are always modal &mdash; they open in an overlay above the page, the same way a dialog does.
     </p>
-</md3-bottom-sheet-body>
+</div>
 
-<md3-bottom-sheet-actions>
+<div class="sheet-actions">
     <button type="button" md3-button button-type="filled" (click)="close(true)">Save</button>
     <button type="button" md3-button button-type="text" (click)="close()">Cancel</button>
-</md3-bottom-sheet-actions>
+</div>

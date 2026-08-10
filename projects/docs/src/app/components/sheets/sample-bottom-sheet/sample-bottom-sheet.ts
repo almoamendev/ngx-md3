@@ -1,31 +1,28 @@
 import { Component, inject, input } from '@angular/core';
 import {
     BOTTOM_SHEET_CONFIG,
-    BottomSheetActions,
-    BottomSheetBody,
     BottomSheetConfig,
-    BottomSheetHeader,
     BottomSheetRef,
     Button,
     IconButton,
     IconElement,
     MaterialIcon,
     TypeBody,
+    TypeTitle,
 } from '@almoamendev/ngx-md3';
 
 @Component({
     selector: 'app-sample-bottom-sheet',
     imports: [
-        BottomSheetHeader,
-        BottomSheetBody,
-        BottomSheetActions,
         IconButton,
         IconElement,
         MaterialIcon,
         Button,
         TypeBody,
+        TypeTitle,
     ],
     templateUrl: './sample-bottom-sheet.html',
+    styleUrl: './sample-bottom-sheet.scss',
 })
 export class SampleBottomSheet {
     public title = input<string>('Bottom sheet');

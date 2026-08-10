@@ -8,7 +8,6 @@ import { BottomSheetConfig } from '../../../interfaces/bottom-sheet-config.inter
 interface ResolvedBottomSheetConfig<D = unknown> extends BottomSheetConfig<D> {
     data: D | undefined;
     bindDataToInputs: boolean;
-    inset: boolean;
     handle: boolean;
     scheme: 'inherit' | 'dark' | 'light';
     direction: null | 'ltr' | 'rtl';
@@ -136,7 +135,6 @@ export class BottomSheetService {
         return {
             data: config.data,
             bindDataToInputs: config.bindDataToInputs ?? false,
-            inset: config.inset ?? false,
             handle: config.handle ?? true,
             scheme: config.scheme ?? 'inherit',
             direction: config.direction ?? null,

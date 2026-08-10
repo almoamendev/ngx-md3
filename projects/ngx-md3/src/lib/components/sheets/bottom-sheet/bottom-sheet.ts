@@ -19,7 +19,6 @@ import { BottomSheetConfig, BottomSheetContainer } from '../../../interfaces/bot
     templateUrl: './bottom-sheet.html',
     styleUrl: './bottom-sheet.scss',
     host: {
-        '[class.md3-inset]': 'isInset()',
         '[class.md3-hide-handle]': '!showHandle()',
     },
 })
@@ -29,7 +28,6 @@ export class BottomSheet extends CdkDialogContainer implements BottomSheetContai
     protected readonly config = inject<BottomSheetConfig>(BOTTOM_SHEET_CONFIG, { optional: true }) ?? {};
 
     public isActive = signal<boolean>(false);
-    public readonly isInset = signal<boolean>(this.config.inset ?? false);
     public readonly showHandle = signal<boolean>(this.config.handle ?? true);
 
     public get surfaceElement(): HTMLElement | null {

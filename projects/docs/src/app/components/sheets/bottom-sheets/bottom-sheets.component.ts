@@ -30,9 +30,6 @@ export class BottomSheetsComponent implements OnDestroy {
     public apiImport: string = `// Component imports
 import {
     BottomSheetService,
-    BottomSheetHeader, // optional
-    BottomSheetBody, // optional
-    BottomSheetActions, // optional
     Button, // optional
 } from '@almoamendev/ngx-md3';`;
 
@@ -75,12 +72,6 @@ interface BottomSheetConfig<D = unknown> {
      * @default false
      */
     bindDataToInputs?: boolean;
-
-    /**
-     * Insets the sheet from the viewport edges and rounds every corner.
-     * @default false
-     */
-    inset?: boolean;
 
     /**
      * Shows the MD3 drag handle centered above the sheet's content.
@@ -127,23 +118,23 @@ class BottomSheetRef<T = unknown, R = unknown> {
     public afterClosed(): Observable<R | undefined>;
 }`;
 
-    public apiUsage: string = `<!-- Component usage -->
+    public apiUsage: string = `<!-- Component usage: the sheet lays its content out on a
+     "header" / "body" / "actions" grid, so each section only claims its area -->
 
-<!-- optional sheet header, with an optional leading or trailing icon button -->
-<md3-bottom-sheet-header title="Details">
-    <button type="button" md3-icon-button trailing button-type="standard" (click)="close()">
+<header style="grid-area: header;">
+    <h2 md3-type-title size="large">Details</h2>
+    <button type="button" md3-icon-button button-type="standard" (click)="close()">
         <md3-icon md3-icon-element>close</md3-icon>
     </button>
-</md3-bottom-sheet-header>
+</header>
 
-<!-- optional body section, scrolls on its own -->
-<md3-bottom-sheet-body>...</md3-bottom-sheet-body>
+<!-- the body is the part that scrolls -->
+<div style="grid-area: body; overflow-y: auto;" class="md3-scrollable">...</div>
 
-<!-- optional actions pinned to the bottom of the sheet -->
-<md3-bottom-sheet-actions>
+<div style="grid-area: actions;">
     <button type="button" md3-button button-type="filled">Save</button>
     <button type="button" md3-button button-type="text">Cancel</button>
-</md3-bottom-sheet-actions>`;
+</div>`;
 
     constructor(
         private bottomSheetService: BottomSheetService
@@ -151,10 +142,6 @@ class BottomSheetRef<T = unknown, R = unknown> {
 
     public openDefaultSheet(): void {
         this.openSheet({});
-    }
-
-    public openInsetSheet(): void {
-        this.openSheet({ inset: true });
     }
 
     public openNoHandleSheet(): void {
@@ -180,10 +167,6 @@ class BottomSheetRef<T = unknown, R = unknown> {
     }
 
     private sheetTitle(config: BottomSheetConfig): string {
-        if (config.inset) {
-            return 'Inset sheet';
-        }
-
         if (config.handle === false) {
             return 'No handle';
         }

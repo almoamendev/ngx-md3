@@ -4,9 +4,6 @@ export interface BottomSheetConfig<D = unknown> {
     data?: D;
     bindDataToInputs?: boolean;
 
-    /** Insets the sheet from the viewport edges and rounds every corner. */
-    inset?: boolean;
-
     /** Shows the MD3 drag handle centered above the sheet's content. */
     handle?: boolean;
 

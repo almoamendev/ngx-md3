@@ -7,7 +7,6 @@
 
 <app-playground hide-direction hide-theme>
     <button type="button" md3-button (click)="openDefaultSheet()">Open sheet</button>
-    <button type="button" md3-button (click)="openInsetSheet()">Inset</button>
     <button type="button" md3-button (click)="openNoHandleSheet()">No handle</button>
     <button type="button" md3-button button-type="outlined" (click)="closeSheet()">Close</button>
 </app-playground>
@@ -42,14 +41,6 @@
                 <td>
                     bindDataToInputs?
                     <p md3-type-body size="small">When enabled, object keys from data are also assigned to matching inputs.</p>
-                </td>
-                <td>boolean</td>
-                <td style="white-space: nowrap;">false</td>
-            </tr>
-            <tr>
-                <td>
-                    <i>inset?</i>
-                    <p md3-type-body size="small">Insets the sheet from the viewport edges and rounds every corner.</p>
                 </td>
                 <td>boolean</td>
                 <td style="white-space: nowrap;">false</td>
@@ -106,7 +97,7 @@
 <app-shiki [code]="apiUsage" language="html"></app-shiki>
 <ul>
     <li>Bottom sheets are custom components opened through the bottom sheet service, the same way dialogs are opened through the dialog service.</li>
-    <li>When creating your sheet component, you can optionally use <code>md3-bottom-sheet-header</code>, <code>md3-bottom-sheet-body</code> and <code>md3-bottom-sheet-actions</code>. The body is the part that scrolls.</li>
+    <li>The sheet lays your component's content out on a grid with <code>header</code>, <code>body</code> and <code>actions</code> areas. Place your own elements in them with <code>grid-area</code>; the body is the part that scrolls.</li>
     <li>A bottom sheet is always modal: it brings its own scrim and closes when the scrim is clicked, when Escape is pressed, or when another bottom sheet opens on top of it.</li>
     <li>Unlike side sheets, bottom sheets are not part of the page scaffold &mdash; they render in an overlay above it, so there is no outlet to register.</li>
 </ul>

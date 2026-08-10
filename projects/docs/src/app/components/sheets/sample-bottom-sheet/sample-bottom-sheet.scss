@@ -1,0 +1,29 @@
+// The bottom sheet lays its content out on a "header" / "body" / "actions" grid,
+// so the sections below only need to claim their area.
+.sheet-header {
+    grid-area: header;
+    display: flex;
+    align-items: center;
+    gap: 0.25em;
+    height: 4.5em;
+    padding: 0 1em;
+    color: rgb(var(--md-scheme-on-surface-variant));
+
+    .sheet-title {
+        flex: 1 1 auto;
+        margin: 0;
+        padding-inline-start: 0.5em;
+    }
+}
+
+.sheet-body {
+    grid-area: body;
+    overflow-y: auto;
+}
+
+.sheet-actions {
+    grid-area: actions;
+    display: flex;
+    gap: 0.5em;
+    padding: 1em 1em 1.5em;
+}
