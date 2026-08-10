@@ -1,0 +1,148 @@
+// Repeated verbatim by every overlay-based component in the library, so a select works on a
+// page that has never loaded a menu or a dialog.
+::ng-deep .cdk-overlay-container {
+    position: fixed;
+    z-index: 1000;
+    inset: 0;
+    pointer-events: none;
+    font-size: 1rem;
+
+    .md3-select-scrim {
+        position: absolute;
+        inset: 0;
+        pointer-events: auto;
+    }
+
+    .cdk-overlay-connected-position-bounding-box {
+        pointer-events: none;
+    }
+
+    .md3-select-overlay-panel {
+        pointer-events: auto;
+    }
+}
+
+:host {
+    --background-color: rgb(var(--md-scheme-surface-container-low));
+    --foreground-color: rgb(var(--md-scheme-on-surface));
+
+    position: relative;
+    display: block;
+    width: 100%;
+    font-size: 1rem;
+
+    // The field is picked from, not typed in, until a search turns it back into a text box.
+    ::ng-deep .md3-input-element {
+        cursor: pointer;
+        caret-color: transparent;
+        user-select: none;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    &.md3-searching ::ng-deep .md3-input-element {
+        cursor: text;
+        caret-color: var(--caret-color);
+        user-select: auto;
+    }
+
+    ::ng-deep .md3-select-arrow {
+        transition: transform var(--md-motion-standard-fast-spatial-duration) var(--md-motion-standard-fast-spatial-easing);
+    }
+
+    &.md3-open ::ng-deep .md3-select-arrow {
+        transform: rotate(180deg);
+    }
+
+    // The text field pins a trailing icon and a trailing icon button to the same spot, so with
+    // both a clear button and the arrow the button moves inboard and the input's end padding
+    // grows to clear the pair. The class on the field element outranks the text field's own rule
+    // whichever order the stylesheets land in.
+    ::ng-deep md3-text-field.md3-has-clear {
+        [md3-icon-button] {
+            inset-inline-end: 2.75em;
+        }
+
+        .md3-input-element {
+            padding-inline-end: 5.5em;
+        }
+
+        .md3-text-field-label {
+            inset-inline-end: 5.5em;
+        }
+    }
+
+    .md3-select-measure {
+        position: absolute;
+        top: 0;
+        inset-inline-start: 0;
+        visibility: hidden;
+        pointer-events: none;
+        white-space: nowrap;
+    }
+}
+
+// The panel is moved into the overlay container, so it is not a descendant of :host and cannot
+// inherit anything declared there. It is still scoped to this component by Angular, because the
+// template it comes from is this component's.
+.md3-select-panel {
+    --select-option-label-color: rgb(var(--md-scheme-on-surface));
+    --select-option-supporting-color: rgb(var(--md-scheme-on-surface-variant));
+    --select-option-selected-background: rgb(var(--md-scheme-tertiary-container));
+    --select-option-selected-foreground: rgb(var(--md-scheme-on-tertiary-container));
+    --select-option-state-color: var(--md-scheme-on-surface);
+    --select-option-border-radius: var(--md-border-radius-xsmall);
+    --select-option-outline-color: rgb(var(--md-scheme-secondary));
+    --select-option-outline-width: 0.1875em;
+    --select-option-outline-offset: -0.1875em;
+
+    display: flex;
+    flex-direction: column;
+    padding: 0.25em;
+    font-size: 1rem;
+    background-color: rgb(var(--md-scheme-surface-container-low));
+    color: rgb(var(--md-scheme-on-surface));
+    border-radius: var(--md-border-radius-small);
+    box-shadow: var(--md-shadow-3dp);
+    max-height: var(--md3-select-panel-max-height, min(20em, calc(100dvh - 2rem)));
+    overflow: hidden;
+    transition: all var(--md-motion-expressive-default-spatial-duration) var(--md-motion-expressive-default-spatial-easing);
+    opacity: 0;
+    transform: scaleY(0.8);
+    transform-origin: top;
+
+    &.md3-visible {
+        opacity: 1;
+        transform: scaleY(1);
+    }
+
+    .md3-select-loading {
+        flex: 0 0 auto;
+        margin-bottom: 0.25em;
+    }
+
+    // position: relative so an option's offsetTop is measured against this box, which is what
+    // the scroll-into-view maths assumes.
+    .md3-select-panel-options {
+        position: relative;
+        flex: 1 1 auto;
+        display: flex;
+        flex-direction: column;
+        gap: 0.125em;
+        overflow-y: auto;
+        min-height: 0;
+    }
+
+    .md3-select-empty {
+        padding: 0.75em;
+        color: rgb(var(--md-scheme-on-surface-variant));
+        font-size: 0.875em;
+        line-height: 1.428571em;
+        text-align: center;
+    }
+}
+
+// A panel opening upwards grows from its bottom edge.
+::ng-deep .md3-select-above .md3-select-panel {
+    transform-origin: bottom;
+}

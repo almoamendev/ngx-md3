@@ -1,0 +1,360 @@
+<h1 md3-type-display size="large">Selects</h1>
+
+<p>
+    A select is a text field that is picked from rather than typed into. Closed, it is the same chrome as a
+    <a routerLink="/components/text-fields">text field</a> &mdash; filled or outlined, floating label, supporting text,
+    leading and trailing icons. Open, it shows a panel of options much like a
+    <a routerLink="/components/menus">menu</a>. It takes one value or many, and can turn its own field into a search
+    box that filters the options as you type.
+</p>
+
+<h2>Single</h2>
+
+<app-playground hide-direction>
+    <div class="select-row">
+        <md3-select label="City" [(value)]="singleCity">
+            @for (city of cities; track city.id) {
+                <md3-select-option [value]="city.id">{{ city.name }}</md3-select-option>
+            }
+        </md3-select>
+
+        <md3-select
+            label="City"
+            field-type="outlined"
+            leading-icon="place"
+            supporting-text="Where you are based"
+            clearable
+            [(value)]="outlinedCity">
+            @for (city of cities; track city.id) {
+                <md3-select-option [value]="city.id" [supporting-text]="city.country">{{ city.name }}</md3-select-option>
+            }
+        </md3-select>
+
+        <md3-select label="Grouped" field-type="outlined" [(value)]="singleCity">
+            @for (country of countries; track country) {
+                <md3-select-option-group [label]="country">
+                    @for (city of citiesIn(country); track city.id) {
+                        <md3-select-option [value]="city.id">{{ city.name }}</md3-select-option>
+                    }
+                </md3-select-option-group>
+            }
+        </md3-select>
+    </div>
+</app-playground>
+
+<h2>Multiple</h2>
+
+<app-playground hide-direction>
+    <div class="select-row">
+        <md3-select label="Cities" multiple clearable [(value)]="manyCities">
+            @for (city of cities; track city.id) {
+                <md3-select-option [value]="city.id">{{ city.name }}</md3-select-option>
+            }
+        </md3-select>
+
+        <md3-select label="Cities" field-type="outlined" multiple [max-visible-selections]="1" [(value)]="manyCities">
+            @for (city of cities; track city.id) {
+                <md3-select-option [value]="city.id">{{ city.name }}</md3-select-option>
+            }
+        </md3-select>
+    </div>
+</app-playground>
+
+<h2>Searchable</h2>
+
+<app-playground hide-direction>
+    <div class="select-row">
+        <md3-select label="City" searchable clearable [(value)]="searchedCity">
+            @for (city of cities; track city.id) {
+                <md3-select-option [value]="city.id" [supporting-text]="city.country">{{ city.name }}</md3-select-option>
+            }
+        </md3-select>
+
+        <md3-select
+            label="City"
+            field-type="outlined"
+            searchable
+            filter-mode="manual"
+            supporting-text="Filtered by the page, not the select"
+            [loading]="remoteLoading()"
+            [search-debounce]="200"
+            [(value)]="remoteCity"
+            (searchChange)="searchRemote($event)">
+            @for (city of remoteCities(); track city.id) {
+                <md3-select-option [value]="city.id">{{ city.name }}</md3-select-option>
+            }
+        </md3-select>
+    </div>
+</app-playground>
+
+<h2>In a form</h2>
+
+<app-playground hide-direction>
+    <div class="select-row">
+        <md3-select label="City" [formControl]="cityControl" required clearable supporting-text="Required">
+            @for (city of cities; track city.id) {
+                <md3-select-option [value]="city.id">{{ city.name }}</md3-select-option>
+            }
+        </md3-select>
+
+        <md3-select label="City" [compare-with]="compareCities" field-type="outlined" [(value)]="cityObject">
+            @for (city of cities; track city.id) {
+                <md3-select-option [value]="city" [label]="city.name">{{ city.name }}</md3-select-option>
+            }
+        </md3-select>
+    </div>
+
+    <button type="button" md3-button button-type="outlined" action-item (click)="touchForm()">Touch</button>
+    <button type="button" md3-button button-type="outlined" action-item (click)="clearForm()">Reset</button>
+    <button type="button" md3-button button-type="outlined" action-item (click)="toggleFormDisabled()">Toggle disabled</button>
+</app-playground>
+
+<h2>API</h2>
+
+<div class="table-container md3-scrollable">
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 50%;">Name</th>
+                <th>Type</th>
+                <th>Default</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td colspan="3">
+                    <h3>md3-select</h3>
+                    <md3-divider></md3-divider>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <i>value</i>
+                    <p md3-type-body size="small">The selected value, or an array of them when multiple. Two-way bindable.</p>
+                </td>
+                <td>T | T[] | null</td>
+                <td style="white-space: nowrap;">null</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>label</i>
+                    <p md3-type-body size="small">The field's floating label.</p>
+                </td>
+                <td>string | null</td>
+                <td style="white-space: nowrap;">null</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>field-type</i>
+                    <p md3-type-body size="small">Which text field style the closed control wears.</p>
+                </td>
+                <td>
+                    TextFieldType
+                    <p md3-type-body size="small">filled, outlined</p>
+                </td>
+                <td style="white-space: nowrap;">filled</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>leading-icon</i>
+                    <p md3-type-body size="small">Material icon name shown at the start of the field.</p>
+                </td>
+                <td>string | null</td>
+                <td style="white-space: nowrap;">null</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>supporting-text</i>
+                    <p md3-type-body size="small">Helper text under the field, which turns red on error.</p>
+                </td>
+                <td>string | null</td>
+                <td style="white-space: nowrap;">null</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>multiple</i>
+                    <p md3-type-body size="small">Takes more than one value. The field then reads as a joined list with a "+n" for the rest.</p>
+                </td>
+                <td>boolean</td>
+                <td style="white-space: nowrap;">false</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>searchable</i>
+                    <p md3-type-body size="small">Turns the field into a search box while the panel is open.</p>
+                </td>
+                <td>boolean</td>
+                <td style="white-space: nowrap;">false</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>filter-mode</i>
+                    <p md3-type-body size="small">Whether the select filters its own options, or leaves it to you.</p>
+                </td>
+                <td>
+                    SelectFilterMode
+                    <p md3-type-body size="small">auto, manual</p>
+                </td>
+                <td style="white-space: nowrap;">auto</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>loading</i>
+                    <p md3-type-body size="small">Shows a progress indicator at the top of the panel, for a search that is still running.</p>
+                </td>
+                <td>boolean</td>
+                <td style="white-space: nowrap;">false</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>clearable</i>
+                    <p md3-type-body size="small">Adds a button that empties the selection.</p>
+                </td>
+                <td>boolean</td>
+                <td style="white-space: nowrap;">false</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>disabled</i>
+                    <p md3-type-body size="small">Disables the field. A disabled form control does this on its own.</p>
+                </td>
+                <td>boolean</td>
+                <td style="white-space: nowrap;">false</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>required</i>
+                    <p md3-type-body size="small">Marks the field required to assistive technology. Validation stays with your form.</p>
+                </td>
+                <td>boolean</td>
+                <td style="white-space: nowrap;">false</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>compare-with</i>
+                    <p md3-type-body size="small">How two values are told apart. Object values need one of these.</p>
+                </td>
+                <td>(a: T, b: T) =&gt; boolean</td>
+                <td style="white-space: nowrap;">a === b</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>max-visible-selections</i>
+                    <p md3-type-body size="small">How many selections the field names before the rest become a count. Measured to fit by default.</p>
+                </td>
+                <td>number | 'auto'</td>
+                <td style="white-space: nowrap;">auto</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>search-debounce</i>
+                    <p md3-type-body size="small">Milliseconds to wait before acting on typing. Useful with a server.</p>
+                </td>
+                <td>number</td>
+                <td style="white-space: nowrap;">0</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>empty-text</i>
+                    <p md3-type-body size="small">Shown when every option is filtered out.</p>
+                </td>
+                <td>string</td>
+                <td style="white-space: nowrap;">No results</td>
+            </tr>
+            <tr>
+                <td>
+                    control
+                    <p md3-type-body size="small">Only read for error styling. A bound form control is picked up on its own.</p>
+                </td>
+                <td>AbstractControl</td>
+                <td style="white-space: nowrap;">undefined</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>searchChange</i>
+                    <p md3-type-body size="small">Output. The current search text, in either filter mode.</p>
+                </td>
+                <td>output&lt;string&gt;</td>
+                <td style="white-space: nowrap;">&mdash;</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>openedChange</i>
+                    <p md3-type-body size="small">Output. Emits when the panel opens and closes.</p>
+                </td>
+                <td>output&lt;boolean&gt;</td>
+                <td style="white-space: nowrap;">&mdash;</td>
+            </tr>
+
+            <tr>
+                <td colspan="3">
+                    <h3>md3-select-option</h3>
+                    <md3-divider></md3-divider>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <i>value</i>
+                    <p md3-type-body size="small">Required. What picking this option selects.</p>
+                </td>
+                <td>T</td>
+                <td style="white-space: nowrap;">&mdash;</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>label</i>
+                    <p md3-type-body size="small">What the option reads as in the closed field and to typeahead. Defaults to its own text.</p>
+                </td>
+                <td>string | null</td>
+                <td style="white-space: nowrap;">null</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>supporting-text</i>
+                    <p md3-type-body size="small">A second line under the option's label.</p>
+                </td>
+                <td>string | null</td>
+                <td style="white-space: nowrap;">null</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>disabled</i>
+                    <p md3-type-body size="small">Cannot be picked, and the keyboard skips over it.</p>
+                </td>
+                <td>boolean</td>
+                <td style="white-space: nowrap;">false</td>
+            </tr>
+
+            <tr>
+                <td colspan="3">
+                    <h3>md3-select-option-group</h3>
+                    <md3-divider></md3-divider>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <i>label</i>
+                    <p md3-type-body size="small">Heading for the options inside. The group hides itself when a search leaves none of them.</p>
+                </td>
+                <td>string</td>
+                <td style="white-space: nowrap;">''</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<app-shiki [code]="apiImport"></app-shiki>
+<app-shiki [code]="apiData"></app-shiki>
+<app-shiki [code]="apiUsage" language="html"></app-shiki>
+
+<ul>
+    <li>Options are declared as content of the select and rendered into its panel, so they exist whether or not it is open &mdash; which is how the closed field knows what to call the value it is holding.</li>
+    <li>Unlike the library's other inputs, a select is bound directly: <code>formControlName</code>, <code>formControl</code> and <code>ngModel</code> all go on <code>md3-select</code> itself, because the value is not a native input's value. <code>[control]</code> is still accepted, but only to drive the error styling.</li>
+    <li>Give <code>compare-with</code> whenever the values are objects. Without it two structurally identical objects are different values, and nothing will look selected.</li>
+    <li>Never set a placeholder on a select. The text field floats its label from the input being empty, so a placeholder would leave the label floating over an empty field forever.</li>
+    <li>A single select closes when you pick; a multiple one stays open. Picking the option that is already selected in a single select keeps it rather than clearing the field.</li>
+    <li>The panel matches the field's width and follows it as the window resizes. It opens downwards, or upwards when there is no room below.</li>
+    <li>Opening covers the page with an invisible scrim, so the click that closes the panel does not also press whatever was underneath &mdash; the same as a native select. Clicking a neighbouring field takes a second click.</li>
+    <li>Keyboard: arrows, <kbd>Home</kbd>, <kbd>End</kbd>, <kbd>PageUp</kbd> and <kbd>PageDown</kbd> move through the options, <kbd>Enter</kbd> or <kbd>Space</kbd> picks, <kbd>Escape</kbd> closes, <kbd>Tab</kbd> leaves. On a select that is not searchable, typing jumps to a matching option. Focus stays in the field throughout and the active option is announced through <code>aria-activedescendant</code>.</li>
+    <li>With <code>filter-mode="manual"</code> the select filters nothing and just reports what was typed through <code>(searchChange)</code>, which is what to use for a server. Pair it with <code>[loading]</code> and <code>[search-debounce]</code>.</li>
+</ul>

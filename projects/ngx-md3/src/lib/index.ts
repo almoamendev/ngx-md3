@@ -21,6 +21,8 @@ export * from './types/carousel-layout.type';
 export * from './types/carousel-alignment.type';
 export * from './types/carousel-orientation.type';
 export * from './types/carousel-item-size.type';
+export * from './types/text-field-type.type';
+export * from './types/select-filter-mode.type';
 
 // interfaces
 export * from './interfaces/dialog-config.interface';
@@ -109,6 +111,11 @@ export * from './components/navigations/navigation-bar/navigation-bar';
 // text fields
 export * from './components/text-field/text-field';
 export * from './components/text-field/supporting-text';
+
+// select
+export * from './components/select/select';
+export * from './components/select/select-option/select-option';
+export * from './components/select/select-option-group/select-option-group';
 
 // dialogs
 export * from './components/dialog/dialog';

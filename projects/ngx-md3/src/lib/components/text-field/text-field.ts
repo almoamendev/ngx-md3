@@ -6,6 +6,7 @@ import { fromEvent, merge } from 'rxjs';
 import { IconButton } from '../buttons/icon-button/icon-button';
 import { ButtonContext, MD3_BUTTON_CONTEXT } from '../../interfaces/button-context.interface';
 import { ButtonSize } from '../../types/button-size.type';
+import { TextFieldType } from '../../types/text-field-type.type';
 import { NgClass } from '@angular/common';
 
 @Component({
@@ -26,7 +27,7 @@ export class TextField implements ButtonContext {
     public label = input<string | null>(null, {
         alias: 'label',
     });
-    public fieldType = input<'filled' | 'outlined'>('filled', {
+    public fieldType = input<TextFieldType>('filled', {
         alias: 'field-type',
     });
     public inputCounter = input<boolean | number>(false, {

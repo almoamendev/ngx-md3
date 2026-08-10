@@ -1,0 +1,152 @@
+:host {
+    --state-color: var(--select-option-state-color, var(--md-scheme-on-surface));
+    --border-radius: var(--select-option-border-radius, var(--md-border-radius-xsmall));
+    --outline-color: var(--select-option-outline-color, rgb(var(--md-scheme-secondary)));
+    --outline-width: var(--select-option-outline-width, 0.1875em);
+    --outline-offset: var(--select-option-outline-offset, -0.1875em);
+
+    position: relative;
+    display: block;
+    color: var(--select-option-label-color, rgb(var(--md-scheme-on-surface)));
+    font: inherit;
+    text-align: start;
+    cursor: pointer;
+    user-select: none;
+    z-index: 0;
+
+    // Filtered out by a search. A class rather than the `hidden` attribute, which the display
+    // above would win against.
+    &.md3-hidden {
+        display: none;
+    }
+
+    .md3-select-option-container {
+        display: flex;
+        align-items: center;
+        min-height: 3em;
+        padding: 0 0.75em;
+        border-radius: var(--border-radius);
+        transition: background-color var(--md-motion-standard-fast-spatial-duration) var(--md-motion-standard-fast-spatial-easing),
+        color var(--md-motion-standard-fast-spatial-duration) var(--md-motion-standard-fast-spatial-easing);
+
+        .md3-select-option-leading {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: inherit;
+            opacity: 0;
+            transform: scale(1.2);
+            width: 0;
+            height: 1.25em;
+            color: var(--select-option-supporting-color, rgb(var(--md-scheme-on-surface-variant)));
+            transition: all var(--md-motion-standard-fast-spatial-duration) var(--md-motion-standard-fast-spatial-easing);
+
+            ::ng-deep [md3-icon-element],
+            ::ng-deep md3-icon {
+                font-size: 1.25em !important;
+                height: 1em !important;
+                width: 1em !important;
+                line-height: 1em !important;
+            }
+
+            &.has-icon {
+                margin-inline-end: 0.5em;
+                opacity: 1;
+                transform: scale(1);
+                height: 1.25em;
+                width: 1.25em;
+            }
+        }
+
+        .md3-select-option-content {
+            flex: 1 1 auto;
+            min-width: 0;
+
+            .md3-text-label.md3-text-large {
+                display: block;
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                letter-spacing: 0.007143em;
+                color: var(--select-option-label-color, rgb(var(--md-scheme-on-surface)));
+            }
+
+            .md3-text-body.md3-text-small {
+                display: block;
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                letter-spacing: 0.0333334em;
+                color: var(--select-option-supporting-color, rgb(var(--md-scheme-on-surface-variant)));
+            }
+        }
+
+        .md3-select-option-trailing {
+            flex: 0 1 content;
+            display: inline-flex;
+            gap: 0.5em;
+            align-items: center;
+            justify-content: center;
+            margin-inline-start: 0.5em;
+            color: var(--select-option-supporting-color, rgb(var(--md-scheme-on-surface-variant)));
+
+            &:empty {
+                margin: 0;
+            }
+
+            ::ng-deep [md3-icon-element] {
+                font-size: 1.25em !important;
+                height: 1em !important;
+                width: 1em !important;
+                line-height: 1em !important;
+            }
+        }
+    }
+
+    // Selected. Menu items drive this off a hidden checkbox's :checked state; an option is not a
+    // form control and must stay out of the tab order and out of any enclosing form, so the same
+    // declarations hang off a class instead.
+    &.md3-selected .md3-select-option-container {
+        --select-option-label-color: var(--select-option-selected-foreground, rgb(var(--md-scheme-on-tertiary-container)));
+        --select-option-supporting-color: var(--select-option-selected-foreground, rgb(var(--md-scheme-on-tertiary-container)));
+        --border-radius: var(--md-border-radius-medium);
+
+        background-color: var(--select-option-selected-background, rgb(var(--md-scheme-tertiary-container)));
+
+        .md3-select-option-leading {
+            opacity: 1;
+            transform: scale(1);
+            width: 1.25em;
+        }
+    }
+
+    // Keyboard position. Options are never focused — the field keeps focus and points at the
+    // active option with aria-activedescendant — so the focus ring is drawn from a class.
+    &.md3-active {
+        z-index: 1;
+
+        .md3-select-option-container:after {
+            opacity: 1;
+        }
+    }
+
+    &.md3-disabled {
+        cursor: default;
+
+        .md3-select-option-container {
+            --select-option-selected-background: transparent;
+
+            pointer-events: none;
+            opacity: 0.38;
+
+            &.md3-state-layer,
+            &:after {
+                display: none;
+            }
+        }
+    }
+}

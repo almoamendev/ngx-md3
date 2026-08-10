@@ -1,0 +1,17 @@
+:host {
+    display: block;
+
+    // Every option inside was filtered out, so the heading has nothing left to head.
+    &.md3-hidden {
+        display: none;
+    }
+
+    .md3-select-option-group-label {
+        padding: 0.5em 0.75em 0.25em;
+        color: rgb(var(--md-scheme-on-surface-variant));
+        font-size: 0.75em;
+        font-weight: 500;
+        line-height: 1.333333em;
+        letter-spacing: 0.03125em;
+    }
+}

@@ -221,6 +221,13 @@ export const COMPONENTS: ComponentEntry[] = [
         image: 'md3-menu.png',
     },
     {
+        label: 'Selects',
+        link: '/components/selects',
+        description: 'Text field styled dropdowns with single, multiple, and searchable selection.',
+        icon: 'arrow_drop_down_circle',
+        image: 'md3-menu.png',
+    },
+    {
         label: 'Sliders',
         link: '/components/sliders',
         description: 'Select a value or range from a continuous or stepped scale.',

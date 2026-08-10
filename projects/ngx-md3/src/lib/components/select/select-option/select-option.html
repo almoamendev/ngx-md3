@@ -1,0 +1,19 @@
+<div class="md3-select-option-container" md3-state-component>
+    <div class="md3-select-option-leading" [class.has-icon]="showLeadingIcon()">
+        <ng-content select="[md3-icon-element=leading]"></ng-content>
+        @if (!leadingIcons().length) {
+            <md3-icon>check</md3-icon>
+        }
+    </div>
+
+    <div #content class="md3-select-option-content">
+        <md3-type-label size="large"><ng-content></ng-content></md3-type-label>
+        @if (supportingText()) {
+            <md3-type-body size="small">{{ supportingText() }}</md3-type-body>
+        }
+    </div>
+
+    <div class="md3-select-option-trailing">
+        <ng-content select="[md3-icon-element=trailing]"></ng-content>
+    </div>
+</div>

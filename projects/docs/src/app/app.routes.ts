@@ -19,6 +19,7 @@ import { ButtonGroupsComponent } from './components/buttons/button-groups/button
 import { DialogsComponent } from './components/dialogs/dialogs.component';
 import { ChipsComponent } from './components/chips/chips.component';
 import { MenusComponent } from './components/menus/menus.component';
+import { SelectsComponent } from './components/selects/selects.component';
 import { SplitButtonsComponent } from './components/buttons/split-buttons/split-buttons.component';
 import { NavigationRailComponent } from './components/navigations/navigation-rail/navigation-rail.component';
 import { ScaffoldComponent } from './foundations/scaffold/scaffold.component';
@@ -208,6 +209,10 @@ export const routes: Routes = [
                     {
                         path: 'menus',
                         component: MenusComponent,
+                    },
+                    {
+                        path: 'selects',
+                        component: SelectsComponent,
                     },
                     {
                         path: 'sheets',

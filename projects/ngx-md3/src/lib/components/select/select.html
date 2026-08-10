@@ -1,0 +1,81 @@
+<!-- The trigger is a real text field with a real input inside it, so the floating label, the
+     outline notch, focus, hover, disabled and error states are the ones the text field already
+     ships. The icons are declared here rather than projected: the text field detects them with a
+     content query, which would not see them through a second layer of projection. -->
+<md3-text-field
+    #field
+    [label]="label()"
+    [field-type]="fieldType()"
+    [control]="errorControl()"
+    [class.md3-has-clear]="showClear()">
+
+    @if (leadingIcon()) {
+        <md3-icon md3-icon-element="leading">{{ leadingIcon() }}</md3-icon>
+    }
+
+    <input
+        #trigger
+        md3-input-element
+        type="text"
+        autocomplete="off"
+        spellcheck="false"
+        role="combobox"
+        aria-haspopup="listbox"
+        [attr.aria-label]="label() || null"
+        [attr.aria-expanded]="isOpen()"
+        [attr.aria-controls]="panelId"
+        [attr.aria-activedescendant]="activeOptionId()"
+        [attr.aria-autocomplete]="isSearchInput() ? 'list' : 'none'"
+        [attr.aria-required]="required() ? 'true' : null"
+        [attr.readonly]="isSearchInput() ? null : ''"
+        [disabled]="isDisabled()"
+        (click)="onTriggerClick()"
+        (keydown)="onTriggerKeydown($event)"
+        (input)="onSearchInput($event)"
+        (blur)="onTriggerBlur($event)">
+
+    @if (showClear()) {
+        <button
+            type="button"
+            md3-icon-button
+            button-type="standard"
+            class="md3-select-clear"
+            tabindex="-1"
+            aria-hidden="true"
+            (click)="onClearClick($event)">
+            <md3-icon md3-icon-element>close</md3-icon>
+        </button>
+    }
+
+    <md3-icon md3-icon-element="trailing" class="md3-select-arrow">arrow_drop_down</md3-icon>
+
+    @if (supportingText()) {
+        <span md3-supporting-text>{{ supportingText() }}</span>
+    }
+</md3-text-field>
+
+<!-- Measures candidate trigger texts to work out how many selections fit on the line. -->
+<span #measure class="md3-select-measure" aria-hidden="true"></span>
+
+<ng-template #panelTemplate>
+    <div
+        class="md3-select-panel"
+        [class.md3-visible]="panelVisible()"
+        [attr.id]="panelId"
+        role="listbox"
+        [attr.aria-label]="label() || null"
+        [attr.aria-multiselectable]="multiple() ? 'true' : null">
+
+        @if (loading()) {
+            <md3-linear-progress-indicator class="md3-select-loading" [indeterminate]="true"></md3-linear-progress-indicator>
+        }
+
+        <div class="md3-select-panel-options md3-scrollable">
+            <ng-content></ng-content>
+
+            @if (isEmpty()) {
+                <div class="md3-select-empty">{{ emptyText() }}</div>
+            }
+        </div>
+    </div>
+</ng-template>
