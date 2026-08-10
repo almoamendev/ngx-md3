@@ -151,6 +151,7 @@ export const COMPONENTS: ComponentEntry[] = [
         group: 'Sheets',
         description: 'Panels that slide up from the bottom of the viewport, over the page or docked into it.',
         icon: 'vertical_align_bottom',
+        image: 'md3-bottom-sheet.png',
     },
 
     {
