@@ -1,0 +1,19 @@
+:host {
+    // The peek box: where the sheet rests, and the frame the surface inside is measured
+    // against. It floats over the content rather than taking a strip out of it — the scaffold
+    // region holding it has no height of its own, so nothing below moves when a sheet opens.
+    //
+    // Anchored to the bottom of that region, which sits above the bottom bar, and capped at the
+    // same width as a modal sheet's panel so the two variants line up on a wide window.
+    position: absolute;
+    display: block;
+    inset-inline: 0;
+    bottom: 0;
+    width: 100%;
+    max-width: 40em;
+    margin-inline: auto;
+    height: var(--md3-bottom-sheet-collapsed-height, 10em);
+
+    // The expanded surface has to reach up out of this box.
+    overflow: visible;
+}

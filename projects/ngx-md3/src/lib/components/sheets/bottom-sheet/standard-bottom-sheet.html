@@ -1,0 +1,11 @@
+<md3-bottom-sheet-surface
+    mode="standard"
+    [showHandle]="showHandle()"
+    [allowGestures]="allowGestures()"
+    [dismissible]="dismissible()"
+    [initialState]="initialState()"
+    [controlsId]="regionId"
+    [scheme]="config.scheme ?? 'inherit'"
+    [direction]="config.direction ?? null">
+    <ng-template cdkPortalOutlet></ng-template>
+</md3-bottom-sheet-surface>

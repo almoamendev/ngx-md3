@@ -1,8 +1,11 @@
 <h1 md3-type-display size="large">Bottom sheets</h1>
 
 <p>
-    Bottom sheets are modal panels anchored to the bottom of the viewport. They hold supporting content or actions
-    related to the current screen, the same way a dialog does, but slide up from the bottom edge instead.
+    Bottom sheets are panels anchored to the bottom of the viewport that hold supporting content or actions related
+    to the current screen. A <strong>modal</strong> sheet floats above the page with a scrim, the same way a dialog
+    does, and is the default. A <strong>standard</strong> sheet floats above the page without one: it docks into the
+    scaffold above the bottom bar, leaves the rest of the page scrollable and clickable, and is dragged between a
+    collapsed height and an expanded one.
 </p>
 
 <app-playground hide-direction hide-theme>
@@ -10,6 +13,14 @@
     <button type="button" md3-button (click)="openNoHandleSheet()">No handle</button>
     <button type="button" md3-button (click)="openNoGesturesSheet()">No gestures</button>
     <button type="button" md3-button button-type="outlined" (click)="closeSheet()">Close</button>
+</app-playground>
+
+<app-playground hide-direction hide-theme>
+    <button type="button" md3-button (click)="openStandardSheet()">Standard</button>
+    <button type="button" md3-button (click)="openDismissibleStandardSheet()">Standard, dismissible</button>
+    <button type="button" md3-button button-type="tonal" (click)="expandStandardSheet()">Expand</button>
+    <button type="button" md3-button button-type="tonal" (click)="collapseStandardSheet()">Collapse</button>
+    <button type="button" md3-button button-type="outlined" (click)="closeStandardSheet()">Close</button>
 </app-playground>
 
 <h2>API</h2>
@@ -48,6 +59,14 @@
             </tr>
             <tr>
                 <td>
+                    <i>type?</i>
+                    <p md3-type-body size="small">How the sheet sits in the layout. A modal sheet floats above the page with a scrim; a standard sheet docks into the scaffold and shares the layout with the content above it.</p>
+                </td>
+                <td>'standard' | 'modal'</td>
+                <td style="white-space: nowrap;">modal</td>
+            </tr>
+            <tr>
+                <td>
                     <i>handle?</i>
                     <p md3-type-body size="small">Shows the MD3 drag handle centered above the sheet's content.</p>
                 </td>
@@ -57,10 +76,58 @@
             <tr>
                 <td>
                     <i>gestures?</i>
-                    <p md3-type-body size="small">Lets the sheet be dragged down, and flung, to dismiss it.</p>
+                    <p md3-type-body size="small">Lets the sheet be dragged, and flung. A modal sheet is dragged down to dismiss it, a standard sheet between its two heights.</p>
                 </td>
                 <td>boolean</td>
                 <td style="white-space: nowrap;">true</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>collapsedHeight?</i>
+                    <p md3-type-body size="small">Standard only. How much of the sheet shows when it is collapsed. Numbers are pixels.</p>
+                </td>
+                <td>number | string</td>
+                <td style="white-space: nowrap;">10em</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>expandedHeight?</i>
+                    <p md3-type-body size="small">Standard only. Height the sheet grows to when it is expanded.</p>
+                </td>
+                <td>number | string</td>
+                <td style="white-space: nowrap;">70dvh</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>initialState?</i>
+                    <p md3-type-body size="small">Standard only. Which of the two heights the sheet opens at.</p>
+                </td>
+                <td>'collapsed' | 'expanded'</td>
+                <td style="white-space: nowrap;">collapsed</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>dismissible?</i>
+                    <p md3-type-body size="small">Standard only. Whether dragging below the collapsed height closes the sheet.</p>
+                </td>
+                <td>boolean</td>
+                <td style="white-space: nowrap;">false</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>label?</i>
+                    <p md3-type-body size="small">Standard only. Accessible name for the region the sheet occupies.</p>
+                </td>
+                <td>string</td>
+                <td style="white-space: nowrap;">&mdash;</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>labelledBy?</i>
+                    <p md3-type-body size="small">Standard only. Id of the element naming the sheet, when it already has a visible title.</p>
+                </td>
+                <td>string</td>
+                <td style="white-space: nowrap;">&mdash;</td>
             </tr>
             <tr>
                 <td>
@@ -107,7 +174,26 @@
 <ul>
     <li>Bottom sheets are custom components opened through the bottom sheet service, the same way dialogs are opened through the dialog service.</li>
     <li>The sheet lays your component's content out on a grid with <code>header</code>, <code>body</code> and <code>actions</code> areas. Place your own elements in them with <code>grid-area</code>; the body is the part that scrolls.</li>
-    <li>Dragging the sheet down dismisses it, either by taking it past a bit under half its height or by flinging it. A shorter drag snaps back. The drag handle is the affordance for it, and is where the gesture is most reliable on touch, but the drag starts anywhere on the sheet that is not scrolling content of its own. Set <code>gestures: false</code> to turn it off.</li>
-    <li>A bottom sheet is always modal: it brings its own scrim and closes when the scrim is clicked, when Escape is pressed, or when another bottom sheet opens on top of it.</li>
-    <li>Unlike side sheets, bottom sheets are not part of the page scaffold &mdash; they render in an overlay above it, so there is no outlet to register.</li>
+    <li>Dragging a sheet moves it to the next height in the direction of travel, once the drag covers about 40% of the gap or is flung. A shorter drag snaps back. A modal sheet has one height and dragging it down dismisses it; a standard sheet moves between collapsed and expanded, and only closes on a drag when <code>dismissible</code> is on. The drag handle is the affordance, and is where the gesture is most reliable on touch, but the drag starts anywhere on the sheet that is not scrolling content of its own. Set <code>gestures: false</code> to turn it off.</li>
+    <li>A modal sheet brings its own scrim, blocks page scrolling, traps focus, and closes when the scrim is clicked, when Escape is pressed, or when another modal sheet opens on top of it.</li>
+    <li>A standard sheet does none of that: no scrim, no focus trap, Escape is left alone, and the page behind it keeps scrolling and taking clicks. It stays open until you close it. One of each kind may be open at the same time, and opening a sheet only replaces one of its own kind.</li>
+    <li>On a standard sheet the drag handle is also a button: it toggles the two heights on click, and responds to <kbd>Enter</kbd>, <kbd>Space</kbd> and the up and down arrows. Arrow down collapses but never dismisses, since there is no undo for that from the keyboard.</li>
+    <li>Give a standard sheet a <code>label</code> or a <code>labelledBy</code>. It renders as a labelled region, and an unnamed one is silently not exposed as a landmark.</li>
+</ul>
+
+<h2>Outlets</h2>
+
+<p>
+    A modal sheet renders in an overlay of its own and works anywhere. A standard sheet renders into an outlet in the
+    page scaffold, which is what anchors it to the layout rather than the viewport. The scaffold registers that outlet
+    on its own, in a region between the content and the bottom bar, so a standard sheet opened anywhere in the app
+    lands in the current layout and sits above a
+    <a routerLink="/components/navigations/navigation-bars">navigation bar</a> rather than over it.
+</p>
+
+<ul>
+    <li>The region takes no space of its own. The sheet floats over the content, at the same maximum width as a modal sheet's panel, so opening or dragging one never reflows the page behind it.</li>
+    <li>Because it reserves nothing, a <a routerLink="/components/snackbars">snackbar</a> will overlap a standard sheet. Pass <code>bottomOffset</code> when opening one to clear it.</li>
+    <li>Calling <code>open()</code> with <code>type: 'standard'</code> and no registered outlet throws &mdash; the layout has to be in place first.</li>
+    <li>There is no live switch between the two types, unlike <a routerLink="/components/sheets/side-sheets">side sheets</a>, which have a <code>setSheetType</code>. The two variants live in different hosts here, so changing type means closing the sheet and opening it again.</li>
 </ul>

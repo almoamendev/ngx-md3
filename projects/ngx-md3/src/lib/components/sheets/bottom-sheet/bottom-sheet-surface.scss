@@ -1,0 +1,150 @@
+:host {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    outline: 0;
+
+    .md3-bottom-sheet-container {
+        position: relative;
+        display: block;
+        width: 100%;
+        overflow: hidden;
+        color: rgb(var(--md-scheme-on-surface));
+        background-color: rgb(var(--md-scheme-surface-container-low));
+        border-start-start-radius: var(--md-border-radius-large);
+        border-start-end-radius: var(--md-border-radius-large);
+        box-shadow: var(--md-shadow-1dp);
+        transition: all var(--md-motion-standard-default-spatial-duration) var(--md-motion-standard-default-spatial-easing);
+        transform-origin: bottom;
+        opacity: 0;
+
+        // The closed position stays in CSS so it lands the moment the element is inserted,
+        // whichever way round the first change detection and the opening frame happen to fall.
+        // Without a rendered from-state there is nothing for the enter transition to run from.
+        // The component only writes a transform over this once it has one of its own: a drag,
+        // or the resting offset of a collapsed standard sheet.
+        transform: translateY(60%) scaleY(0.8);
+
+        &.md3-active {
+            opacity: 1;
+            transform: translateY(0%) scaleY(1);
+        }
+
+        .md3-bottom-sheet-handle {
+            position: absolute;
+            top: 0.75em;
+            left: 50%;
+            width: 2em;
+            height: 0.25em;
+            padding: 0;
+            border: 0;
+            appearance: none;
+            border-radius: var(--md-border-radius-rounded);
+            background-color: rgb(var(--md-scheme-on-surface-variant));
+            opacity: 0.4;
+            transform: translateX(-50%);
+            pointer-events: none;
+        }
+
+        // :not() excludes the handle above, which is a sibling of the
+        // attached content rather than part of it.
+        & > ::ng-deep *:not(.md3-bottom-sheet-handle) {
+            display: grid;
+            grid-template-areas: "header" "body" "actions";
+            grid-template-rows: auto minmax(0, 1fr) auto;
+            max-height: inherit;
+            overflow: hidden;
+            padding-top: 1.25em;
+        }
+    }
+
+    // A modal sheet is as tall as its content up to the MD3 cap; a standard sheet is sized by
+    // the shell hosting it, since its height is what the drag moves between.
+    &.md3-mode-modal .md3-bottom-sheet-container {
+        max-height: 70vh;
+    }
+
+    &.md3-mode-standard {
+        // Sized to the expanded height and anchored to the bottom of the peek box the shell
+        // occupies, so what shows is decided by the transform alone. No percentage cap here:
+        // it would resolve against that peek box and clamp the sheet to its collapsed height.
+        position: absolute;
+        inset-inline: 0;
+        bottom: 0;
+        height: var(--md3-bottom-sheet-expanded-height, 70dvh);
+
+        // A collapsed sheet is the surface pushed down, so most of it hangs below this box and
+        // would cover the bottom bar. Clip that off at the bottom edge only — `overflow` would
+        // also cut the elevation shadow above an expanded sheet.
+        clip-path: inset(-100vh -100vw 0 -100vw);
+
+        .md3-bottom-sheet-container {
+            height: 100%;
+
+            // Far enough down to clear the strip it rests at, so the sheet always enters
+            // from below rather than fading in partway up.
+            transform: translateY(100%);
+
+            &.md3-active {
+                transform: translateY(0%);
+            }
+
+            // The content fills the surface rather than sizing to itself, so the body area
+            // keeps its own scrollbar at both heights.
+            & > ::ng-deep *:not(.md3-bottom-sheet-handle) {
+                height: 100%;
+            }
+        }
+    }
+
+    &.md3-hide-handle .md3-bottom-sheet-container {
+        .md3-bottom-sheet-handle {
+            display: none;
+        }
+
+        & > ::ng-deep *:not(.md3-bottom-sheet-handle) {
+            padding-top: 0;
+        }
+    }
+
+    &.md3-draggable .md3-bottom-sheet-container .md3-bottom-sheet-handle {
+        // The handle is the affordance for the drag, so it takes the pointer back
+        // and keeps the browser from panning instead of dragging the sheet.
+        pointer-events: auto;
+        touch-action: none;
+        cursor: grab;
+
+        // A 0.25em bar is too small to grab, so the strip it sits in is the target.
+        &::after {
+            content: '';
+            position: absolute;
+            inset: -0.625em -1.5em;
+        }
+
+        &:focus-visible {
+            opacity: 1;
+            outline: 0.125em solid rgb(var(--md-scheme-secondary));
+            outline-offset: 0.375em;
+        }
+    }
+
+    // Following the pointer means moving with it rather than transitioning towards it.
+    &.md3-dragging .md3-bottom-sheet-container {
+        transition: none;
+
+        .md3-bottom-sheet-handle {
+            cursor: grabbing;
+        }
+    }
+
+    // A collapsed standard sheet has nothing to scroll, so the whole surface can own the
+    // gesture. Once expanded the content takes vertical panning back.
+    &.md3-mode-standard.md3-draggable .md3-bottom-sheet-container {
+        touch-action: none;
+        overscroll-behavior: contain;
+    }
+
+    &.md3-mode-standard.md3-draggable.md3-expanded .md3-bottom-sheet-container {
+        touch-action: pan-y;
+    }
+}

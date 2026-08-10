@@ -9,9 +9,16 @@
     <p md3-type-body size="medium" style="margin: 0 1.5em 1em;">
         Opened <strong>{{ config.handle === false ? 'without' : 'with' }}</strong> the drag handle.
     </p>
-    <p md3-type-body size="small" style="margin: 0 1.5em;">
-        Bottom sheets are always modal &mdash; they open in an overlay above the page, the same way a dialog does.
-    </p>
+    @if (config.type === 'standard') {
+        <p md3-type-body size="small" style="margin: 0 1.5em;">
+            A standard sheet floats above the page without a scrim &mdash; scroll and click behind it, and drag the
+            handle to move between its two heights.
+        </p>
+    } @else {
+        <p md3-type-body size="small" style="margin: 0 1.5em;">
+            A modal sheet opens in an overlay above the page, the same way a dialog does.
+        </p>
+    }
 </div>
 
 <div class="sheet-actions">

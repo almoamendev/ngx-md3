@@ -15,5 +15,11 @@
     </div>
 </div>
 
+<!-- Standard bottom sheets dock here, between the content and the bottom bar. The region
+     measures zero until one opens, so it reserves nothing the rest of the time. -->
+<div class="md3-bottom-sheet-region">
+    <ng-template #bottomOutlet cdkPortalOutlet></ng-template>
+</div>
+
 <ng-content select="[md3-scaffold-rail=trailing]"></ng-content>
 <ng-content select="[md3-scaffold-bar=bottom]"></ng-content>

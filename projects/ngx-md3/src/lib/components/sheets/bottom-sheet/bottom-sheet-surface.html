@@ -1,0 +1,23 @@
+<div
+    #surface
+    class="md3-bottom-sheet-container"
+    [class.md3-active]="isActive()"
+    [class.md-scheme-dark]="scheme() === 'dark'"
+    [class.md-scheme-light]="scheme() === 'light'"
+    [style.transform]="surfaceTransform()"
+    [attr.dir]="direction() ?? null"
+    (pointerdown)="onPointerDown($event)">
+    @if (isHandleInteractive()) {
+        <button
+            type="button"
+            class="md3-bottom-sheet-handle"
+            [attr.aria-label]="handleLabel()"
+            [attr.aria-expanded]="state() === 'expanded'"
+            [attr.aria-controls]="controlsId() || null"
+            (click)="toggle()"
+            (keydown)="onHandleKeydown($event)"></button>
+    } @else {
+        <div class="md3-bottom-sheet-handle" aria-hidden="true"></div>
+    }
+    <ng-content></ng-content>
+</div>

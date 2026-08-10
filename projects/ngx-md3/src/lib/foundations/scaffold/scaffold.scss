@@ -4,12 +4,15 @@
     height: 100dvh;
     min-height: 0em;
     overflow: hidden;
+    // The rails span both middle rows, so a docked bottom sheet takes its strip out of the
+    // content area alone and stays clear of the bottom bar.
     grid-template-areas:
         "top top top"
         "start content end"
+        "start sheet end"
         "bottom bottom bottom";
     grid-template-columns: auto minmax(0, 1fr) auto;
-    grid-template-rows: auto minmax(0, 1fr) auto;
+    grid-template-rows: auto minmax(0, 1fr) auto auto;
 
     ::ng-deep {
         [md3-scaffold-bar="top"] {
@@ -51,6 +54,19 @@
             overflow: hidden;
             z-index: 2;
         }
+    }
+
+    // Unlike every other region, this one takes no space and lets its content out. It exists to
+    // give a standard bottom sheet a bottom edge that sits above the bottom bar; the sheet
+    // itself floats over the content from there, so opening one moves nothing.
+    .md3-bottom-sheet-region {
+        grid-area: sheet;
+        justify-self: stretch;
+        min-width: 0em;
+        height: 0em;
+        position: relative;
+        overflow: visible;
+        z-index: 4;
     }
 
     .md3-panes-container {
