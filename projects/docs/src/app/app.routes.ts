@@ -28,6 +28,7 @@ import { NavigationItemComponent } from './components/navigations/navigation-ite
 import { AppBarComponent } from './components/app-bar/app-bar.component';
 import { SnackbarsComponent } from './components/snackbars/snackbars.component';
 import { SideSheetsComponent } from './components/sheets/side-sheets/side-sheets.component';
+import { BottomSheetsComponent } from './components/sheets/bottom-sheets/bottom-sheets.component';
 import { HomeComponent } from './home/home.component';
 import { BadgesComponent } from './components/badges/badges.component';
 import { ComponentsComponent } from './components/components.component';
@@ -214,6 +215,10 @@ export const routes: Routes = [
                             {
                                 path: 'side-sheets',
                                 component: SideSheetsComponent,
+                            },
+                            {
+                                path: 'bottom-sheets',
+                                component: BottomSheetsComponent,
                             },
                         ],
                     },

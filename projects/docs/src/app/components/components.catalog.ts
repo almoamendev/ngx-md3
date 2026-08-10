@@ -145,6 +145,13 @@ export const COMPONENTS: ComponentEntry[] = [
         icon: 'right_panel_open',
         image: 'md3-side-sheet.png',
     },
+    {
+        label: 'Bottom sheets',
+        link: '/components/sheets/bottom-sheets',
+        group: 'Sheets',
+        description: 'Modal panels that slide up from the bottom of the viewport.',
+        icon: 'vertical_align_bottom',
+    },
 
     {
         label: 'Loading indicators',

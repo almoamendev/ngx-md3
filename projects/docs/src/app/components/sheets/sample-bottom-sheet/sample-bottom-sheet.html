@@ -1,0 +1,19 @@
+<md3-bottom-sheet-header [title]="title()">
+    <button type="button" md3-icon-button trailing button-type="standard" (click)="close()">
+        <md3-icon md3-icon-element>close</md3-icon>
+    </button>
+</md3-bottom-sheet-header>
+
+<md3-bottom-sheet-body>
+    <p md3-type-body size="medium" style="margin: 0 1.5em 1em;">
+        Opened as an <strong>{{ config.inset ? 'inset' : 'edge-to-edge' }}</strong> bottom sheet.
+    </p>
+    <p md3-type-body size="small" style="margin: 0 1.5em;">
+        Bottom sheets are always modal &mdash; they open in an overlay above the page, the same way a dialog does.
+    </p>
+</md3-bottom-sheet-body>
+
+<md3-bottom-sheet-actions>
+    <button type="button" md3-button button-type="filled" (click)="close(true)">Save</button>
+    <button type="button" md3-button button-type="text" (click)="close()">Cancel</button>
+</md3-bottom-sheet-actions>

@@ -1,0 +1,112 @@
+<h1 md3-type-display size="large">Bottom sheets</h1>
+
+<p>
+    Bottom sheets are modal panels anchored to the bottom of the viewport. They hold supporting content or actions
+    related to the current screen, the same way a dialog does, but slide up from the bottom edge instead.
+</p>
+
+<app-playground hide-direction hide-theme>
+    <button type="button" md3-button (click)="openDefaultSheet()">Open sheet</button>
+    <button type="button" md3-button (click)="openInsetSheet()">Inset</button>
+    <button type="button" md3-button (click)="openNoHandleSheet()">No handle</button>
+    <button type="button" md3-button button-type="outlined" (click)="closeSheet()">Close</button>
+</app-playground>
+
+<h2>API</h2>
+
+<div class="table-container md3-scrollable">
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 50%;">Name</th>
+                <th>Type</th>
+                <th>Default</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td colspan="3">
+                    <h3>interface BottomSheetConfig&lt;D = unknown&gt;</h3>
+                    <md3-divider></md3-divider>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <i>data?</i>
+                    <p md3-type-body size="small">Optional data passed to the component opened inside the sheet.</p>
+                </td>
+                <td>D = unknown</td>
+                <td style="white-space: nowrap;">{{ '{}' }}</td>
+            </tr>
+            <tr>
+                <td>
+                    bindDataToInputs?
+                    <p md3-type-body size="small">When enabled, object keys from data are also assigned to matching inputs.</p>
+                </td>
+                <td>boolean</td>
+                <td style="white-space: nowrap;">false</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>inset?</i>
+                    <p md3-type-body size="small">Insets the sheet from the viewport edges and rounds every corner.</p>
+                </td>
+                <td>boolean</td>
+                <td style="white-space: nowrap;">false</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>handle?</i>
+                    <p md3-type-body size="small">Shows the MD3 drag handle centered above the sheet's content.</p>
+                </td>
+                <td>boolean</td>
+                <td style="white-space: nowrap;">true</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>scheme?</i>
+                    <p md3-type-body size="small">Overrides the color scheme of the sheet regardless of the page it opened from.</p>
+                </td>
+                <td>
+                    'inherit' | 'dark' | 'light'
+                </td>
+                <td style="white-space: nowrap;">inherit</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>direction?</i>
+                    <p md3-type-body size="small">Overrides the text direction of the sheet.</p>
+                </td>
+                <td>null | 'ltr' | 'rtl'</td>
+                <td style="white-space: nowrap;">null</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>viewContainerRef?</i>
+                    <p md3-type-body size="small">Optional Angular context for the dynamic component.</p>
+                </td>
+                <td>ViewContainerRef</td>
+                <td style="white-space: nowrap;">ViewContainerRef</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>injector?</i>
+                    <p md3-type-body size="small">Optional Angular injector used when creating the sheet component.</p>
+                </td>
+                <td>Injector</td>
+                <td style="white-space: nowrap;">Injector</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<app-shiki [code]="apiImport"></app-shiki>
+<app-shiki [code]="apiData"></app-shiki>
+<app-shiki [code]="apiTypes"></app-shiki>
+<app-shiki [code]="apiUsage" language="html"></app-shiki>
+<ul>
+    <li>Bottom sheets are custom components opened through the bottom sheet service, the same way dialogs are opened through the dialog service.</li>
+    <li>When creating your sheet component, you can optionally use <code>md3-bottom-sheet-header</code>, <code>md3-bottom-sheet-body</code> and <code>md3-bottom-sheet-actions</code>. The body is the part that scrolls.</li>
+    <li>A bottom sheet is always modal: it brings its own scrim and closes when the scrim is clicked, when Escape is pressed, or when another bottom sheet opens on top of it.</li>
+    <li>Unlike side sheets, bottom sheets are not part of the page scaffold &mdash; they render in an overlay above it, so there is no outlet to register.</li>
+</ul>
