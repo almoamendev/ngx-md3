@@ -27,6 +27,7 @@ export * from './interfaces/dialog-config.interface';
 export * from './interfaces/full-screen-dialog-config.interface';
 export * from './interfaces/menu-config.interface';
 export * from './interfaces/side-sheet-config.interface';
+export * from './interfaces/bottom-sheet-config.interface';
 export * from './interfaces/snackbar-config.interface';
 export * from './interfaces/carousel-arrangement.interface';
 export * from './interfaces/carousel-keyline.interface';
@@ -132,6 +133,11 @@ export * from './components/sheets/sheets.service';
 export * from './components/sheets/side-sheet-header/side-sheet-header';
 export * from './components/sheets/side-sheet-body/side-sheet-body';
 export * from './components/sheets/side-sheet-actions/side-sheet-actions';
+export * from './components/sheets/bottom-sheet/bottom-sheet-ref';
+export * from './components/sheets/bottom-sheet/bottom-sheet.service';
+export * from './components/sheets/bottom-sheet-header/bottom-sheet-header';
+export * from './components/sheets/bottom-sheet-body/bottom-sheet-body';
+export * from './components/sheets/bottom-sheet-actions/bottom-sheet-actions';
 
 // snackbar
 export * from './components/snackbar/snackbar';

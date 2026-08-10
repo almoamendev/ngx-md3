@@ -1,0 +1,115 @@
+::ng-deep .cdk-overlay-container {
+    position: fixed;
+    z-index: 1000;
+    inset: 0;
+    pointer-events: none;
+    font-size: 1rem;
+
+    .md3-bottom-sheet-scrim {
+        position: absolute;
+        inset: 0;
+        pointer-events: auto;
+        background-color: rgb(var(--md-scheme-scrim));
+        transition: all var(--md-motion-expressive-slow-spatial-duration) var(--md-motion-expressive-slow-spatial-easing);
+        opacity: 0.32;
+
+        &.md3-bottom-sheet-opening,
+        &.md3-bottom-sheet-closing {
+            opacity: 0;
+        }
+    }
+
+    .cdk-global-overlay-wrapper {
+        position: absolute;
+        display: flex;
+        inset: 0;
+        pointer-events: none;
+        overflow: hidden;
+
+        // A wrapper holding a bottom sheet anchors it flush to the bottom
+        // edge instead of the padded, centered area regular dialogs use.
+        &:has(> .md3-bottom-sheet-panel) {
+            padding: 0;
+        }
+
+        .md3-bottom-sheet-panel {
+            width: 100%;
+            max-width: 40em;
+            pointer-events: auto;
+
+            &.md3-bottom-sheet-closing {
+                pointer-events: none;
+            }
+        }
+    }
+}
+
+:host {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    outline: 0;
+
+    .md3-bottom-sheet-container {
+        position: relative;
+        display: block;
+        width: 100%;
+        max-height: 70vh;
+        overflow: hidden;
+        color: rgb(var(--md-scheme-on-surface));
+        background-color: rgb(var(--md-scheme-surface-container-low));
+        border-start-start-radius: var(--md-border-radius-large);
+        border-start-end-radius: var(--md-border-radius-large);
+        box-shadow: var(--md-shadow-1dp);
+        transition: all var(--md-motion-expressive-default-spatial-duration) var(--md-motion-expressive-default-spatial-easing);
+        opacity: 0;
+        transform: translateY(100%);
+
+        &.md3-active {
+            opacity: 1;
+            transform: translateY(0%);
+        }
+
+        .md3-bottom-sheet-handle {
+            position: absolute;
+            top: 0.75em;
+            left: 50%;
+            width: 2em;
+            height: 0.25em;
+            border-radius: var(--md-border-radius-rounded);
+            background-color: rgb(var(--md-scheme-on-surface-variant));
+            opacity: 0.4;
+            transform: translateX(-50%);
+            pointer-events: none;
+        }
+
+        // :not() excludes the handle above, which is a sibling of the
+        // attached content rather than part of it.
+        & > ::ng-deep *:not(.md3-bottom-sheet-handle) {
+            display: grid;
+            grid-template-areas: "header" "body" "actions";
+            grid-template-rows: auto minmax(0, 1fr) auto;
+            max-height: inherit;
+            overflow: hidden;
+            padding-top: 1.25em;
+        }
+    }
+
+    &.md3-hide-handle .md3-bottom-sheet-container {
+        .md3-bottom-sheet-handle {
+            display: none;
+        }
+
+        & > ::ng-deep *:not(.md3-bottom-sheet-handle) {
+            padding-top: 0;
+        }
+    }
+
+    &.md3-inset {
+        padding: 1em;
+
+        .md3-bottom-sheet-container {
+            border-radius: var(--md-border-radius-large);
+        }
+    }
+}

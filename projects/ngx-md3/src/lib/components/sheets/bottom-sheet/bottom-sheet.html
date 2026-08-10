@@ -1,0 +1,11 @@
+<!-- The role and aria attributes live on the host element, applied by the CDK dialog container. -->
+<div
+    #surface
+    class="md3-bottom-sheet-container"
+    [class.md3-active]="isActive()"
+    [class.md-scheme-dark]="config.scheme == 'dark'"
+    [class.md-scheme-light]="config.scheme == 'light'"
+    [attr.dir]="config.direction ?? null">
+    <div class="md3-bottom-sheet-handle"></div>
+    <ng-template cdkPortalOutlet></ng-template>
+</div>
