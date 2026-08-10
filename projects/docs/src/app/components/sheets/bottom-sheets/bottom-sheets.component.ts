@@ -80,6 +80,12 @@ interface BottomSheetConfig<D = unknown> {
     handle?: boolean;
 
     /**
+     * Lets the sheet be dragged down, and flung, to dismiss it.
+     * @default true
+     */
+    gestures?: boolean;
+
+    /**
      * Overrides the color scheme of the sheet regardless of the page it opened from.
      * @default inherit
      */
@@ -148,6 +154,10 @@ class BottomSheetRef<T = unknown, R = unknown> {
         this.openSheet({ handle: false });
     }
 
+    public openNoGesturesSheet(): void {
+        this.openSheet({ gestures: false });
+    }
+
     public closeSheet(): void {
         this.bottomSheetService.close();
     }
@@ -169,6 +179,10 @@ class BottomSheetRef<T = unknown, R = unknown> {
     private sheetTitle(config: BottomSheetConfig): string {
         if (config.handle === false) {
             return 'No handle';
+        }
+
+        if (config.gestures === false) {
+            return 'No gestures';
         }
 
         return 'Bottom sheet';

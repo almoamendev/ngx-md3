@@ -6,12 +6,20 @@
     font-size: 1rem;
 
     .md3-bottom-sheet-scrim {
+        // BottomSheetRef lowers this while the sheet is dragged, so the scrim
+        // fades along with it and comes back on its own when the drag is released.
+        --md3-drag-remaining: 1;
+
         position: absolute;
         inset: 0;
         pointer-events: auto;
         background-color: rgb(var(--md-scheme-scrim));
         transition: all var(--md-motion-standard-slow-spatial-duration) var(--md-motion-standard-slow-spatial-easing);
-        opacity: 0.32;
+        opacity: calc(0.32 * var(--md3-drag-remaining));
+
+        &.md3-bottom-sheet-dragging {
+            transition: none;
+        }
 
         &.md3-bottom-sheet-opening,
         &.md3-bottom-sheet-closing {
@@ -103,6 +111,30 @@
 
         & > ::ng-deep *:not(.md3-bottom-sheet-handle) {
             padding-top: 0;
+        }
+    }
+
+    &.md3-draggable .md3-bottom-sheet-container .md3-bottom-sheet-handle {
+        // The handle is the affordance for the drag, so it takes the pointer back
+        // and keeps the browser from panning instead of dragging the sheet.
+        pointer-events: auto;
+        touch-action: none;
+        cursor: grab;
+
+        // A 0.25em bar is too small to grab, so the strip it sits in is the target.
+        &::after {
+            content: '';
+            position: absolute;
+            inset: -0.625em -1.5em;
+        }
+    }
+
+    // Following the pointer means moving with it rather than transitioning towards it.
+    &.md3-dragging .md3-bottom-sheet-container {
+        transition: none;
+
+        .md3-bottom-sheet-handle {
+            cursor: grabbing;
         }
     }
 }

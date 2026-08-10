@@ -8,6 +8,7 @@
 <app-playground hide-direction hide-theme>
     <button type="button" md3-button (click)="openDefaultSheet()">Open sheet</button>
     <button type="button" md3-button (click)="openNoHandleSheet()">No handle</button>
+    <button type="button" md3-button (click)="openNoGesturesSheet()">No gestures</button>
     <button type="button" md3-button button-type="outlined" (click)="closeSheet()">Close</button>
 </app-playground>
 
@@ -49,6 +50,14 @@
                 <td>
                     <i>handle?</i>
                     <p md3-type-body size="small">Shows the MD3 drag handle centered above the sheet's content.</p>
+                </td>
+                <td>boolean</td>
+                <td style="white-space: nowrap;">true</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>gestures?</i>
+                    <p md3-type-body size="small">Lets the sheet be dragged down, and flung, to dismiss it.</p>
                 </td>
                 <td>boolean</td>
                 <td style="white-space: nowrap;">true</td>
@@ -98,6 +107,7 @@
 <ul>
     <li>Bottom sheets are custom components opened through the bottom sheet service, the same way dialogs are opened through the dialog service.</li>
     <li>The sheet lays your component's content out on a grid with <code>header</code>, <code>body</code> and <code>actions</code> areas. Place your own elements in them with <code>grid-area</code>; the body is the part that scrolls.</li>
+    <li>Dragging the sheet down dismisses it, either by taking it past a bit under half its height or by flinging it. A shorter drag snaps back. The drag handle is the affordance for it, and is where the gesture is most reliable on touch, but the drag starts anywhere on the sheet that is not scrolling content of its own. Set <code>gestures: false</code> to turn it off.</li>
     <li>A bottom sheet is always modal: it brings its own scrim and closes when the scrim is clicked, when Escape is pressed, or when another bottom sheet opens on top of it.</li>
     <li>Unlike side sheets, bottom sheets are not part of the page scaffold &mdash; they render in an overlay above it, so there is no outlet to register.</li>
 </ul>

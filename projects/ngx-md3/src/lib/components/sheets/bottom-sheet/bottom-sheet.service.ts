@@ -9,6 +9,7 @@ interface ResolvedBottomSheetConfig<D = unknown> extends BottomSheetConfig<D> {
     data: D | undefined;
     bindDataToInputs: boolean;
     handle: boolean;
+    gestures: boolean;
     scheme: 'inherit' | 'dark' | 'light';
     direction: null | 'ltr' | 'rtl';
     injector: Injector;
@@ -88,7 +89,7 @@ export class BottomSheetService {
             disableClose: true,
         });
 
-        sheetRef.sheetInstance = cdkRef.containerInstance as unknown as BottomSheet;
+        sheetRef.attachContainer(cdkRef.containerInstance as unknown as BottomSheet);
         sheetRef.componentInstance = cdkRef.componentInstance ?? undefined;
 
         if (cdkRef.componentRef) {
@@ -136,6 +137,7 @@ export class BottomSheetService {
             data: config.data,
             bindDataToInputs: config.bindDataToInputs ?? false,
             handle: config.handle ?? true,
+            gestures: config.gestures ?? true,
             scheme: config.scheme ?? 'inherit',
             direction: config.direction ?? null,
             viewContainerRef: config.viewContainerRef,
