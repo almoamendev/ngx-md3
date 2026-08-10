@@ -135,9 +135,6 @@ export * from './components/sheets/side-sheet-body/side-sheet-body';
 export * from './components/sheets/side-sheet-actions/side-sheet-actions';
 export * from './components/sheets/bottom-sheet/bottom-sheet-ref';
 export * from './components/sheets/bottom-sheet/bottom-sheet.service';
-export * from './components/sheets/bottom-sheet-header/bottom-sheet-header';
-export * from './components/sheets/bottom-sheet-body/bottom-sheet-body';
-export * from './components/sheets/bottom-sheet-actions/bottom-sheet-actions';
 
 // snackbar
 export * from './components/snackbar/snackbar';
