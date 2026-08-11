@@ -98,7 +98,6 @@
 
     display: flex;
     flex-direction: column;
-    padding: 0.25em;
     font-size: 1rem;
     background-color: rgb(var(--md-scheme-surface-container-low));
     color: rgb(var(--md-scheme-on-surface));
@@ -110,6 +109,7 @@
     opacity: 0;
     transform: scaleY(0.8);
     transform-origin: top;
+    width: 100%;
 
     &.md3-visible {
         opacity: 1;
@@ -130,6 +130,7 @@
         flex-direction: column;
         gap: 0.125em;
         overflow-y: auto;
+        overflow-x: hidden;
         min-height: 0;
     }
 

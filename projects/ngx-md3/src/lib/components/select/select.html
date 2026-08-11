@@ -1,13 +1,8 @@
-<!-- The trigger is a real text field with a real input inside it, so the floating label, the
-     outline notch, focus, hover, disabled and error states are the ones the text field already
-     ships. The icons are declared here rather than projected: the text field detects them with a
-     content query, which would not see them through a second layer of projection. -->
 <md3-text-field
     #field
     [label]="label()"
     [field-type]="fieldType()"
-    [control]="errorControl()"
-    [class.md3-has-clear]="showClear()">
+    [control]="errorControl()">
 
     @if (leadingIcon()) {
         <md3-icon md3-icon-element="leading">{{ leadingIcon() }}</md3-icon>
@@ -33,19 +28,6 @@
         (keydown)="onTriggerKeydown($event)"
         (input)="onSearchInput($event)"
         (blur)="onTriggerBlur($event)">
-
-    @if (showClear()) {
-        <button
-            type="button"
-            md3-icon-button
-            button-type="standard"
-            class="md3-select-clear"
-            tabindex="-1"
-            aria-hidden="true"
-            (click)="onClearClick($event)">
-            <md3-icon md3-icon-element>close</md3-icon>
-        </button>
-    }
 
     <md3-icon md3-icon-element="trailing" class="md3-select-arrow">arrow_drop_down</md3-icon>
 

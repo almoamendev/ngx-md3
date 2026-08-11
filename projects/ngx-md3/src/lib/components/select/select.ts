@@ -205,9 +205,6 @@ export class Select<T = any> implements SelectContext<T>, ControlValueAccessor, 
     protected readonly errorControl = computed<AbstractControl | undefined>(() => {
         return this.control() ?? this.ngControlSignal();
     });
-    protected readonly showClear = computed<boolean>(() => {
-        return this.clearable() && !this.isDisabled() && this.selection().length > 0;
-    });
     protected readonly activeOptionId = computed<string | null>(() => {
         return this.opened() ? this.activeOption()?.id ?? null : null;
     });
@@ -275,18 +272,19 @@ export class Select<T = any> implements SelectContext<T>, ControlValueAccessor, 
         }
 
         const template = this.panelTemplate();
-        const field = this.fieldElement();
+        // const field = this.fieldElement();
+        const trigger = this.triggerElement();
 
-        if (!template || !field) {
+        if (!template || !trigger) {
             return;
         }
 
         // Re-opening while the last close is still animating out keeps the same view.
         this.clearPendingDetach();
 
-        const overlayRef = this.createOverlay(field);
+        const overlayRef = this.createOverlay(trigger);
 
-        overlayRef.updateSize({ width: field.getBoundingClientRect().width });
+        overlayRef.updateSize({ width: trigger.getBoundingClientRect().width });
 
         if (!overlayRef.hasAttached()) {
             this.portal ??= new TemplatePortal(template, this.viewContainerRef);
@@ -295,7 +293,7 @@ export class Select<T = any> implements SelectContext<T>, ControlValueAccessor, 
 
         this.opened.set(true);
         this.searchQuery.set('');
-        this.watchFieldSize(field, overlayRef);
+        this.watchFieldSize(trigger, overlayRef);
         this.preventBackdropFocusSteal(overlayRef);
         this.activateInitialOption();
         this.openedChange.emit(true);
@@ -515,15 +513,6 @@ export class Select<T = any> implements SelectContext<T>, ControlValueAccessor, 
         }
     }
 
-    protected onClearClick(event: MouseEvent): void {
-        // preventDefault stops the enclosing <label> forwarding this click to the input, which
-        // would open the panel the clear button was meant to leave alone.
-        event.preventDefault();
-        event.stopPropagation();
-
-        this.applySelection([], 'user');
-    }
-
     // Selection ---------------------------------------------------------------------------
 
     private applySelection(next: readonly T[], source: 'user' | 'programmatic'): void {
@@ -582,6 +571,10 @@ export class Select<T = any> implements SelectContext<T>, ControlValueAccessor, 
 
     private fieldElement(): HTMLElement | null {
         return this.field()?.nativeElement ?? null;
+    }
+
+    private triggerElement(): HTMLInputElement | null {
+        return this.trigger()?.nativeElement ?? null;
     }
 
     /**

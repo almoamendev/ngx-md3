@@ -13,6 +13,7 @@
         position: relative;
         border-radius: var(--md-border-radius-xsmall) var(--md-border-radius-xsmall) 0 0;
         overflow: hidden;
+        margin-top: 0.5em;
 
         ::ng-deep [md3-icon-element=leading] {
             position: absolute;
@@ -251,6 +252,7 @@
             --background-color: transparent;
 
             border-radius: var(--md-border-radius-xsmall);
+            margin-top: 0;
             padding-top: 0.5em;
 
             .md3-text-field-outline {
