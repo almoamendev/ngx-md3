@@ -2,7 +2,9 @@
 
 <p>
     Button groups arrange related text and icon buttons together. They can be standard or connected, and can support no
-    selection, single selection, or multiple selection.
+    selection, single selection, or multiple selection. When the group should not manage selection at all, the manual
+    mode leaves every button to its own <code>selected</code> binding, so a single button can be a toggle while the
+    others stay regular buttons.
 </p>
 
 <figure class="component-image">
@@ -25,7 +27,7 @@
     </button>
     
     <md3-button-group [button-size]="buttonSize()" [group-type]="groupType()" [selection]="selection()">
-        <button md3-button>
+        <button md3-button [selected]="manualToggle()">
             <md3-icon md3-icon-element="leading">star</md3-icon>
             label
         </button>
@@ -40,7 +42,7 @@
     </md3-button-group>
 
     <md3-button-group [button-size]="buttonSize()" [group-type]="groupType()" [selection]="selection()">
-        <button md3-icon-button>
+        <button md3-icon-button [selected]="manualToggle()">
             <md3-icon md3-icon-element>bluetooth</md3-icon>
         </button>
         <button md3-icon-button>
@@ -50,9 +52,9 @@
             <md3-icon md3-icon-element>link</md3-icon>
         </button>
     </md3-button-group>
-    
+
     <md3-button-group [button-size]="buttonSize()" [group-type]="groupType()" [selection]="selection()">
-        <button md3-button button-squared>
+        <button md3-button button-squared [selected]="manualToggle()">
             <md3-icon md3-icon-element="leading">bluetooth</md3-icon>
             Bluetooth
         </button>
@@ -65,7 +67,7 @@
     </md3-button-group>
 
     <md3-button-group [button-size]="buttonSize()" [group-type]="groupType()" [selection]="selection()">
-        <button md3-icon-button button-type="tonal" button-width="narrow">
+        <button md3-icon-button button-type="tonal" button-width="narrow" [selected]="manualToggle()">
             <md3-icon md3-icon-element>bluetooth</md3-icon>
         </button>
         <button md3-icon-button button-type="outlined" button-width="wide">
@@ -76,6 +78,11 @@
         </button>
     </md3-button-group>
 </app-playground>
+
+<p md3-type-body size="small">
+    In the playground, only the first button of every group is bound to <code>selected</code>. Switch the selection to
+    manual to see it acting as a toggle while the remaining buttons stay regular buttons.
+</p>
 
 <h2>API</h2>
 
@@ -120,11 +127,11 @@
             <tr>
                 <td>
                     selection
-                    <p md3-type-body size="small">Controls whether buttons behave as non-selectable, single-select, or multi-select items.</p>
+                    <p md3-type-body size="small">Controls whether buttons behave as non-selectable, single-select, or multi-select items. With manual, the group does not manage selection and each button follows its own <code>selected</code> binding.</p>
                 </td>
                 <td>
                     input&lt;ButtonGroupSelection&gt;
-                    <p md3-type-body size="small">none, single, multiple</p>
+                    <p md3-type-body size="small">none, single, multiple, manual</p>
                 </td>
                 <td style="white-space: nowrap;">none</td>
             </tr>
@@ -170,7 +177,7 @@
             <tr>
                 <td>
                     <i>selected</i>
-                    <p md3-type-body size="small">Button selection state. This option is controlled by the button group.</p>
+                    <p md3-type-body size="small">Button selection state. This option is controlled by the button group, unless the group selection is manual.</p>
                 </td>
                 <td>
                     model&lt;boolean | null&gt;
@@ -230,7 +237,7 @@
             <tr>
                 <td>
                     <i>selected</i>
-                    <p md3-type-body size="small">Button selection state. This option is controlled by the button group.</p>
+                    <p md3-type-body size="small">Button selection state. This option is controlled by the button group, unless the group selection is manual.</p>
                 </td>
                 <td>
                     model&lt;boolean | null&gt;
@@ -245,3 +252,14 @@
 <app-shiki [code]="apiData"></app-shiki>
 <app-shiki [code]="apiTypes"></app-shiki>
 <app-shiki [code]="apiUsage" language="html"></app-shiki>
+<app-shiki [code]="apiManualUsage" language="html"></app-shiki>
+<ul>
+    <li><code>none</code> clears the selection state of every button, so none of them can be toggled.</li>
+    <li><code>single</code> and <code>multiple</code> turn every button into a toggle and keep the selection in sync, ignoring the <code>selected</code> value each button was declared with.</li>
+    <li>
+        <code>manual</code> hands the selection back to the buttons. A button is a toggle only when its
+        <code>selected</code> value is not <code>null</code>, and it flips its own state on click. Buttons the group
+        turned into toggles in another mode are released when the group switches to manual.
+    </li>
+    <li>Because <code>selected</code> is a model, use <code>[selected]="false"</code> (or a two-way binding) to declare a toggle. The bare <code>selected</code> attribute is not a valid value.</li>
+</ul>

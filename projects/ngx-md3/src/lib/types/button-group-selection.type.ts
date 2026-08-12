@@ -1,1 +1,1 @@
-export type ButtonGroupSelection = 'none' | 'single' | 'multiple';
+export type ButtonGroupSelection = 'none' | 'single' | 'multiple' | 'manual';
