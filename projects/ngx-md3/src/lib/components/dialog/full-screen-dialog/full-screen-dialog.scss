@@ -94,6 +94,8 @@
                     grid-template-rows: auto minmax(0, 1fr) auto;
                     min-height: 0;
                     height: 100%;
+                    max-height: 100dvh;
+                    max-width: 100dvw;
                     overflow-x: hidden;
                     overflow-y: auto;
                     scrollbar-width: thin; /* Firefox */
@@ -113,7 +115,8 @@
                         grid-area: body;
                         margin: 0;
                         padding: 1em 1.5em;
-                        overflow-y: visible;
+                        max-width: inherit;
+                        overflow-y: auto;
                         height: auto;
                     }
                 }
