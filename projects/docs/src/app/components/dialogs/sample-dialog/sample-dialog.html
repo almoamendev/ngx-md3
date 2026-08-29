@@ -5,10 +5,12 @@
     <span>Basic dialog title @if (level() > 1) {({{ level() }})}</span>
 </md3-dialog-header>
 <md3-dialog-body>
-    A dialog is a modal window that<br>
-    appears in front of app content to<br>
-    provide critical information or prompt<br>
-    for a dicision to be made.
+    <md3-type-body size="medium">
+        A dialog is a modal window that<br>
+        appears in front of app content to<br>
+        provide critical information or prompt<br>
+        for a dicision to be made.
+    </md3-type-body>
 </md3-dialog-body>
 <md3-dialog-actions>
     <button type="button" md3-button button-type="text" (click)="openAnother()">Open another</button>
