@@ -1,0 +1,11 @@
+<div class="md3-toolbar-layout" #layout>
+    @if (isFloating()) {
+        <ng-content select="[md3-fab]"></ng-content>
+    }
+    
+    <div class="md3-toolbar-container">
+        <div class="md3-toolbar-slots">
+            <ng-content></ng-content>
+        </div>
+    </div>
+</div>

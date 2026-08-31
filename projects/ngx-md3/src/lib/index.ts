@@ -18,6 +18,12 @@ export * from './types/chip-style.type';
 export * from './types/list-leading-type.type';
 export * from './types/list-leading-size.type';
 export * from './types/carousel-layout.type';
+export * from './types/toolbar-type.type';
+export * from './types/toolbar-color.type';
+export * from './types/toolbar-orientation.type';
+export * from './types/toolbar-alignment.type';
+export * from './types/toolbar-scroll-action.type';
+export * from './types/toolbar-region.type';
 export * from './types/carousel-alignment.type';
 export * from './types/carousel-orientation.type';
 export * from './types/carousel-item-size.type';
@@ -99,6 +105,9 @@ export * from './components/loading-and-progress/circular-progress-indicator/cir
 // app bar
 export * from './components/app-bar/app-bar';
 export * from './components/app-bar/app-bar-logo';
+
+// toolbar
+export * from './components/toolbar/toolbar';
 
 // navigations
 export * from './components/navigations/navigation-item/navigation-item';

@@ -1,0 +1,251 @@
+:host {
+    --md-toolbar-size: 4em;
+    --md-toolbar-margin: 1em;
+    --md-toolbar-padding: 1em;
+    --md-toolbar-gap: 0.5em;
+    --md-toolbar-radius: var(--md-toolbar-size);
+    --md-toolbar-shadow: var(--md-shadow-3dp);
+
+    // The transition bound for a collapsing item. Raise it for very wide items.
+    --md-toolbar-item-max-size: 20em;
+
+    --md-toolbar-duration: var(--md-motion-expressive-default-spatial-duration);
+    --md-toolbar-easing: var(--md-motion-expressive-default-spatial-easing);
+    --md-toolbar-effect-duration: var(--md-motion-expressive-fast-effects-duration);
+
+    --background-color: rgb(var(--md-scheme-surface-container));
+    --foreground-color: rgb(var(--md-scheme-on-surface));
+
+    display: block;
+    min-width: 0em;
+    min-height: 0em;
+
+    .md3-toolbar-layout {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: var(--md-toolbar-gap);
+        min-width: 0em;
+        min-height: 0em;
+        transition: transform var(--md-toolbar-duration) var(--md-toolbar-easing);
+    
+        .md3-toolbar-container {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            min-width: 0em;
+            max-width: 100%;
+            height: var(--md-toolbar-size);
+            padding: 0 var(--md-toolbar-padding);
+            border-radius: var(--md-toolbar-radius);
+            background-color: var(--background-color);
+            color: var(--foreground-color);
+            box-shadow: var(--md-toolbar-shadow);
+            overflow: hidden;
+            pointer-events: auto;
+            transition:
+                max-width var(--md-toolbar-duration) var(--md-toolbar-easing),
+                padding var(--md-toolbar-duration) var(--md-toolbar-easing),
+                box-shadow var(--md-toolbar-effect-duration) linear,
+                opacity var(--md-toolbar-effect-duration) linear,
+                visibility 0s linear;
+            
+            .md3-toolbar-slots {
+                display: flex;
+                gap: var(--md-toolbar-gap);
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                min-width: 0em;
+            
+                ::ng-deep > * {
+                    flex: 0 0 auto;
+                    max-width: var(--md-toolbar-item-max-size);
+                    transition:
+                        max-width var(--md-toolbar-duration) var(--md-toolbar-easing),
+                        margin var(--md-toolbar-duration) var(--md-toolbar-easing),
+                        padding var(--md-toolbar-duration) var(--md-toolbar-easing),
+                        opacity var(--md-toolbar-effect-duration) linear,
+                        visibility 0s linear;
+                }
+            }
+        }
+    }
+
+    &.md3-align-start {
+        .md3-toolbar-container {
+            justify-content: start;
+        }
+    }
+
+    &.md3-align-center {
+        .md3-toolbar-container {
+            justify-content: center;
+        }
+    }
+
+    &.md3-align-end {
+        .md3-toolbar-container {
+            justify-content: end;
+        }
+    }
+
+    &.md3-fab-start {
+        ::ng-deep [md3-fab] {
+            order: -1;
+        }
+    }
+
+    &.md3-fab-end {
+        ::ng-deep [md3-fab] {
+            order: 1;
+        }
+    }
+
+    &.md3-docked {
+        --md-toolbar-radius: var(--md-border-radius-none);
+        --md-toolbar-shadow: var(--md-shadow-0dp);
+
+        background-color: var(--background-color);
+
+        .md3-toolbar-layout {
+            width: 100%;
+        }
+
+        .md3-toolbar-container {
+            width: 100%;
+            background-color: transparent;
+        }
+    }
+
+    &.md3-floating-region {
+        &.md3-bar-region {
+            position: relative;
+            height: 0em;
+            overflow: visible;
+
+            .md3-toolbar-layout {
+                position: absolute;
+                inset-inline: 0em;
+                padding: var(--md-toolbar-margin);
+                pointer-events: none;
+            }
+
+            ::ng-deep [md3-fab] {
+                pointer-events: auto;
+            }
+        }
+
+        &.md3-rail-region {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            padding: var(--md-toolbar-margin);
+            overflow: visible;
+        }
+
+        &.md3-region-block-end .md3-toolbar-layout {
+            inset-block-end: 0em;
+        }
+
+        &.md3-region-block-start .md3-toolbar-layout {
+            inset-block-start: 0em;
+        }
+    }
+
+    &.md3-vertical {
+        .md3-toolbar-layout {
+            flex-direction: column;
+    
+            .md3-toolbar-container {
+                flex-direction: column;
+                width: var(--md-toolbar-size);
+                height: auto;
+                max-height: 100%;
+                padding: var(--md-toolbar-padding) 0;
+        
+                .md3-toolbar-slots {
+                    flex-direction: column;
+                    width: 100%;
+                    height: auto;
+                    
+                    ::ng-deep > * {
+                        max-width: none;
+                        max-height: var(--md-toolbar-item-max-size);
+                    }
+                }
+            }
+        }
+    }
+
+    &.md3-hidden {
+        .md3-toolbar-layout {
+            transform: translateY(100%);
+        }
+
+        &.md3-region-block-start {
+            .md3-toolbar-layout {
+                transform: translateY(-100%);
+            }
+        }
+    }
+
+    &.md3-collapsed {
+        ::ng-deep .md3-toolbar-slots > *:not([md3-toolbar-persistent]) {
+            max-width: 0em;
+            max-height: 0em;
+            margin: 0em;
+            padding-inline: 0em;
+            border-inline-width: 0em;
+            opacity: 0;
+            visibility: hidden;
+            transition:
+                max-width var(--md-toolbar-duration) var(--md-toolbar-easing),
+                max-height var(--md-toolbar-duration) var(--md-toolbar-easing),
+                margin var(--md-toolbar-duration) var(--md-toolbar-easing),
+                padding var(--md-toolbar-duration) var(--md-toolbar-easing),
+                opacity var(--md-toolbar-effect-duration) linear,
+                visibility 0s linear var(--md-toolbar-duration);
+        }
+    }
+
+    &.md3-collapse-to-fab {
+        .md3-toolbar-container {
+            max-width: 0em;
+            padding-inline: 0em;
+            opacity: 0;
+            visibility: hidden;
+            box-shadow: var(--md-shadow-0dp);
+            // Stay visible until the width animation finishes, so the collapse is not a jump cut.
+            transition:
+                max-width var(--md-toolbar-duration) var(--md-toolbar-easing),
+                padding var(--md-toolbar-duration) var(--md-toolbar-easing),
+                box-shadow var(--md-toolbar-effect-duration) linear,
+                opacity var(--md-toolbar-effect-duration) linear,
+                visibility 0s linear var(--md-toolbar-duration);
+        }
+    }
+
+    &.md3-vibrant {
+        --background-color: rgb(var(--md-scheme-primary-container));
+        --foreground-color: rgb(var(--md-scheme-on-primary-container));
+
+        ::ng-deep .md3-toolbar-slots {
+            [md3-icon-button].md3-standard,
+            [md3-icon-button].md3-outlined,
+            [md3-button].md3-text,
+            [md3-button].md3-outlined {
+                --foreground-color: rgb(var(--md-scheme-on-primary-container));
+            }
+
+            [md3-icon-button].md3-tonal,
+            [md3-button].md3-tonal {
+                --background-color: rgb(var(--md-scheme-surface-container));
+                --foreground-color: rgb(var(--md-scheme-on-surface));
+            }
+        }
+    }
+
+}

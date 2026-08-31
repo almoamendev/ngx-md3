@@ -7,6 +7,13 @@ import { filter, fromEvent, map, startWith, Subscription } from 'rxjs';
 import { ViewportWidth } from '../types/viewport-width.type';
 import { ViewportHeight } from '../types/viewport-height.type';
 
+export type FloatingBarSide = 'blockStart' | 'blockEnd';
+
+export interface FloatingInset {
+    blockStart: number;
+    blockEnd: number;
+}
+
 export type Md3NavigationMode = 'none' | 'navigation-bar' | 'navigation-rail' | 'standard-drawer' | 'modal-drawer';
 
 @Injectable({
@@ -38,8 +45,22 @@ export class LayoutService {
     private panesContainerResizeObserver?: ResizeObserver;
     private panesContainerResizeListener?: () => void;
 
+    /** Floating bars currently registered, keyed by the measured element. */
+    private readonly floatingBars = new Map<HTMLElement, { side: FloatingBarSide; observer: ResizeObserver; }>();
+
+    /** How far the main pane must move before the scroll direction flips. Stops jitter. */
+    private static readonly scrollDirectionThreshold = 64;
+    private scrollPosition = 0;
+
     readonly mainScrollTop = signal<number>(0);
     readonly mainIsScrolled = computed<boolean>(() => this.mainScrollTop() > 0);
+
+    /**
+     * True while the main pane moves down, false while it moves up. A small threshold keeps
+     * a jitter from flipping the value. Components that react to scrolling — the app bar and
+     * the toolbar — read this, so they can never disagree.
+     */
+    readonly isScrollingDown = signal<boolean>(false);
 
     /**
      * Distance, in pixels, between the viewport bottom and the bottom edge of
@@ -49,6 +70,24 @@ export class LayoutService {
      * they never render lower than the panes container.
      */
     readonly bottomInset = signal<number>(0);
+
+    /**
+     * Space a floating scaffold bar covers but does not reserve, per logical block side.
+     *
+     * A floating toolbar in a bar region leaves the layout flow, so its grid track collapses
+     * and the content flows under it. This signal reports what it covers, so the scaffold can
+     * pad the main pane and overlays can stay clear of it.
+     *
+     * A floating toolbar in a *rail* region stays in the flow and reserves its own space, so
+     * it never appears here.
+     */
+    readonly floatingInset = signal<FloatingInset>({ blockStart: 0, blockEnd: 0 });
+
+    /**
+     * The distance from the viewport bottom that a viewport-anchored overlay must keep clear.
+     * It covers both the reserved bottom bar and any floating bottom bar over it.
+     */
+    readonly bottomSafeInset = computed<number>(() => this.bottomInset() + this.floatingInset().blockEnd);
 
     public readonly viewport = toSignal(
         fromEvent(window, 'resize').pipe(
@@ -143,6 +182,12 @@ export class LayoutService {
     public darkMode = signal<boolean>(true);
 
     constructor() {
+        // Keep the scroll direction in step with the position. Anything that writes
+        // mainScrollTop drives it, so the app bar and the toolbar always agree.
+        effect(() => {
+            this.updateScrollDirection(this.mainScrollTop());
+        });
+
         effect(() => {
             const darkMode = this.darkMode();
             this.document.body.classList.toggle('md-scheme-dark', darkMode);
@@ -169,6 +214,7 @@ export class LayoutService {
     private scrollMainPaneToTop(): void {
         this.mainPaneEl?.scrollTo({ top: 0 });
         this.mainScrollTop.set(0);
+        this.resetScrollDirection();
     }
 
     public registerMainPane(element: HTMLElement): void {
@@ -201,6 +247,27 @@ export class LayoutService {
         }
 
         this.mainScrollTop.set(0);
+        this.resetScrollDirection();
+    }
+
+    private resetScrollDirection(): void {
+        this.scrollPosition = 0;
+        this.isScrollingDown.set(false);
+    }
+
+    private updateScrollDirection(scrollTop: number): void {
+        if (scrollTop === this.scrollPosition) {
+            return;
+        }
+
+        const offset = scrollTop - this.scrollPosition;
+
+        if (Math.abs(offset) <= LayoutService.scrollDirectionThreshold) {
+            return;
+        }
+
+        this.isScrollingDown.set(offset > 0);
+        this.scrollPosition = scrollTop;
     }
 
     public registerPanesContainer(element: HTMLElement): void {
@@ -218,6 +285,76 @@ export class LayoutService {
 
         this.panesContainerResizeListener = update;
         window.addEventListener('resize', update, { passive: true });
+    }
+
+    /**
+     * Register a floating bar so the scaffold and the overlays know what it covers.
+     *
+     * Call this for a floating toolbar in a scaffold *bar* region only. A rail region keeps
+     * the toolbar in the layout flow, so it reserves its own space and needs no inset.
+     */
+    public registerFloatingBar(element: HTMLElement, side: FloatingBarSide): void {
+        this.unregisterFloatingBar(element);
+
+        const observer = new ResizeObserver(() => this.measureFloatingBars());
+        observer.observe(element);
+
+        this.floatingBars.set(element, { side, observer });
+        this.measureFloatingBars();
+    }
+
+    public unregisterFloatingBar(element: HTMLElement): void {
+        const entry = this.floatingBars.get(element);
+
+        if (!entry) {
+            return;
+        }
+
+        entry.observer.disconnect();
+        this.floatingBars.delete(element);
+        this.measureFloatingBars();
+    }
+
+    private measureFloatingBars(): void {
+        let blockStart = 0;
+        let blockEnd = 0;
+
+        for (const [element, entry] of this.floatingBars) {
+            const size = this.measureBlockSize(element);
+
+            if (entry.side === 'blockStart') {
+                blockStart = Math.max(blockStart, size);
+            } else {
+                blockEnd = Math.max(blockEnd, size);
+            }
+        }
+
+        const current = this.floatingInset();
+
+        // Only write on a real change. The main pane padding reads this value, and padding
+        // changes the panes container size, which fires the observer again.
+        if (current.blockStart === blockStart && current.blockEnd === blockEnd) {
+            return;
+        }
+
+        this.floatingInset.set({ blockStart, blockEnd });
+    }
+
+    /**
+     * `offsetHeight` ignores transforms. So a toolbar that scrolling has hidden or collapsed
+     * still reports its expanded size, and the content padding never moves while the user
+     * scrolls.
+     */
+    private measureBlockSize(element: HTMLElement): number {
+        if (typeof getComputedStyle === 'undefined') {
+            return element.offsetHeight || 0;
+        }
+
+        const styles = getComputedStyle(element);
+        const start = Number.parseFloat(styles.marginBlockStart) || 0;
+        const end = Number.parseFloat(styles.marginBlockEnd) || 0;
+
+        return Math.max(0, Math.round(element.offsetHeight + start + end));
     }
 
     public unregisterPanesContainer(): void {

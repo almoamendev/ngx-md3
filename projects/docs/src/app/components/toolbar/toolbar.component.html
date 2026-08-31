@@ -1,0 +1,298 @@
+<h1 md3-type-display size="large">Toolbar</h1>
+
+<p>
+    Toolbars hold the actions of the current page. <code>md3-toolbar</code> is projected into a
+    <a routerLink="/foundations/scaffold"><code>md3-scaffold</code></a> region, and the region decides where
+    it goes and which way it runs &mdash; a bar region gives a horizontal toolbar, and a rail region gives a
+    vertical one. It reads its scroll state from the scaffold's main pane through
+    <code>LayoutService</code>, so no extra wiring is needed.
+</p>
+
+<p>
+    The Material Design 3 specification replaces the bottom app bar with the docked toolbar. Use
+    <code>toolbar-type="docked"</code> where you would have used a bottom app bar.
+</p>
+
+<figure class="component-image">
+    <img src="img/md3-toolbar.png" alt="Material Design toolbars" />
+    <p>Configurations of floating toolbars</p>
+</figure>
+
+<app-playground bg-variant>
+    <button action-item md3-icon-button button-type="tonal" button-squared [selected]="configOpen()"
+        (click)="openConfig()">
+        <md3-icon md3-icon-element>settings</md3-icon>
+    </button>
+
+    <div class="toolbar-demo">
+        <md3-toolbar [toolbar-type]="toolbarType()" [toolbar-color]="toolbarColor()"
+            [orientation]="orientation()" [alignment]="alignment()"
+            [scroll-action]="scrollAction()" [fab-position]="fabPosition()">
+            <button type="button" md3-icon-button button-type="standard">
+                <md3-icon md3-icon-element>format_bold</md3-icon>
+            </button>
+            <button type="button" md3-icon-button button-type="standard"
+                [attr.md3-toolbar-persistent]="persistentItem() ? '' : null">
+                <md3-icon md3-icon-element>format_italic</md3-icon>
+            </button>
+            <button type="button" md3-icon-button button-type="standard">
+                <md3-icon md3-icon-element>format_underlined</md3-icon>
+            </button>
+            <button type="button" md3-icon-button button-type="tonal">
+                <md3-icon md3-icon-element>link</md3-icon>
+            </button>
+
+            @if (showFab()) {
+                <button type="button" md3-fab button-type="primary" button-size="small">
+                    <md3-icon md3-icon-element>edit</md3-icon>
+                </button>
+            }
+        </md3-toolbar>
+    </div>
+
+    <p md3-type-body size="small" color="on-surface-variant">
+        This demo toolbar sits outside a scaffold region, so it shows the container only.
+        <code>scroll-action</code> still reads the same <code>LayoutService</code> signal as the rest of the
+        site &mdash; scroll this page to see "hide" and "collapse" react to the real scroll position.
+    </p>
+</app-playground>
+
+<h2>Placement</h2>
+
+<p>
+    Put the scaffold region attribute on the toolbar itself. The region sets the default orientation, and it
+    decides whether the toolbar covers the content or reserves its own space.
+</p>
+
+<div class="table-container md3-scrollable">
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 34%;">Region</th>
+                <th>Default orientation</th>
+                <th>Space</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><i>md3-scaffold-bar="bottom"</i></td>
+                <td>horizontal</td>
+                <td><b>Floating:</b> covers the content. The scaffold pads the main pane by what it covers.<br><b>Docked:</b> reserves its own row.</td>
+            </tr>
+            <tr>
+                <td><i>md3-scaffold-bar="top"</i></td>
+                <td>horizontal</td>
+                <td>Same as the bottom bar.</td>
+            </tr>
+            <tr>
+                <td><i>md3-scaffold-rail="leading"</i></td>
+                <td>vertical</td>
+                <td>Reserves its own column. Nothing goes behind it, so no padding is necessary.</td>
+            </tr>
+            <tr>
+                <td><i>md3-scaffold-rail="trailing"</i></td>
+                <td>vertical</td>
+                <td>Same as the leading rail.</td>
+            </tr>
+            <tr>
+                <td>No region</td>
+                <td>horizontal</td>
+                <td>The toolbar is a plain block. Position it yourself.</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<p>
+    A docked toolbar spans the full window width, so it belongs in a bar region only. A vertical toolbar
+    ignores <code>scroll-action</code>. Both give a development-mode warning if you configure them otherwise.
+</p>
+
+<h2>Content slots</h2>
+
+<div class="table-container md3-scrollable">
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 50%;">Name</th>
+                <th>Renders when</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><i>(default)</i></td>
+                <td>Always. Icon buttons, buttons, button groups and text fields, in the order you write them. Use <a routerLink="/components/buttons/button-groups"><code>md3-button-group</code></a> to group related actions.</td>
+            </tr>
+            <tr>
+                <td><i>[md3-fab]</i></td>
+                <td>A projected <a routerLink="/components/buttons/floating-action-buttons"><code>md3-fab</code></a> sits beside the container as its own surface, on the side that <code>fab-position</code> names.</td>
+            </tr>
+            <tr>
+                <td><i>[md3-toolbar-persistent]</i></td>
+                <td>A plain attribute on any item in the default slot. The item stays on the screen when <code>scroll-action="collapse"</code> hides the others.</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<h2>API</h2>
+
+<div class="table-container md3-scrollable">
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 50%;">Name</th>
+                <th>Type</th>
+                <th>Default</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <i>toolbar-type</i>
+                    <p md3-type-body size="small">Floating draws a rounded, elevated container with a 16px outside margin. Docked fills its region with square corners and no elevation.</p>
+                </td>
+                <td>input&lt;ToolbarType&gt;</td>
+                <td style="white-space: nowrap;">floating</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>toolbar-color</i>
+                    <p md3-type-body size="small">Standard uses a surface container. Vibrant uses a primary container, and remaps the colors of the buttons inside it.</p>
+                </td>
+                <td>input&lt;ToolbarColor&gt;</td>
+                <td style="white-space: nowrap;">standard</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>orientation</i>
+                    <p md3-type-body size="small">Leave it unset to follow the scaffold region. An explicit value always wins.</p>
+                </td>
+                <td>input&lt;ToolbarOrientation | null&gt;</td>
+                <td style="white-space: nowrap;">null</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>alignment</i>
+                    <p md3-type-body size="small">Where the item row sits inside the container. Visible on a docked toolbar; a floating container is as wide as its content, so it has no free space to align in.</p>
+                </td>
+                <td>input&lt;ToolbarAlignment&gt;</td>
+                <td style="white-space: nowrap;">center</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>scroll-action</i>
+                    <p md3-type-body size="small">What happens when the scaffold's main pane scrolls down. Hide moves the toolbar out of the region. Collapse keeps the FAB and the marked items only.</p>
+                </td>
+                <td>input&lt;ToolbarScrollAction&gt;</td>
+                <td style="white-space: nowrap;">none</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>fab-position</i>
+                    <p md3-type-body size="small">Which side of the container a projected FAB sits on.</p>
+                </td>
+                <td>input&lt;'start' | 'end'&gt;</td>
+                <td style="white-space: nowrap;">end</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>expanded</i>
+                    <p md3-type-body size="small">The collapse state, as a two-way model. Scrolling writes to it, and you can read or set it yourself.</p>
+                </td>
+                <td>model&lt;boolean&gt;</td>
+                <td style="white-space: nowrap;">true</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<app-shiki [code]="apiImport"></app-shiki>
+<app-shiki [code]="apiData"></app-shiki>
+<app-shiki [code]="apiTypes"></app-shiki>
+<app-shiki [code]="apiUsage" language="html"></app-shiki>
+
+<h2>CSS custom properties</h2>
+
+<div class="table-container md3-scrollable">
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 50%;">Name</th>
+                <th>Default</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <i>--md-toolbar-size</i>
+                    <p md3-type-body size="small">Container height, or width when vertical.</p>
+                </td>
+                <td style="white-space: nowrap;">4em</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>--md-toolbar-margin</i>
+                    <p md3-type-body size="small">Outside margin of a floating toolbar.</p>
+                </td>
+                <td style="white-space: nowrap;">1em</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>--md-toolbar-padding</i>
+                    <p md3-type-body size="small">Padding inside the container.</p>
+                </td>
+                <td style="white-space: nowrap;">0.5em</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>--md-toolbar-gap</i>
+                    <p md3-type-body size="small">Space between the items.</p>
+                </td>
+                <td style="white-space: nowrap;">0.5em</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>--md-toolbar-item-max-size</i>
+                    <p md3-type-body size="small">Transition bound for a collapsing item. Raise it for very wide items.</p>
+                </td>
+                <td style="white-space: nowrap;">20em</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>--md-scaffold-floating-inset-block-start</i><br>
+                    <i>--md-scaffold-floating-inset-block-end</i>
+                    <p md3-type-body size="small">Published by the scaffold. The main pane pads itself by these values, so a floating bar never hides the content permanently. Set them to 0 on a page that needs full-bleed content.</p>
+                </td>
+                <td style="white-space: nowrap;">0</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<ul>
+    <li>
+        The toolbar has one item region. Group related actions with
+        <a routerLink="/components/buttons/button-groups"><code>md3-button-group</code></a> rather than with
+        separate leading and trailing slots.
+    </li>
+    <li>
+        <code>scroll-action="collapse"</code> needs something to keep: a projected FAB, or at least one item
+        with <code>md3-toolbar-persistent</code>. With neither, the toolbar hides instead, and warns in
+        development mode.
+    </li>
+    <li>
+        The toolbar never hides or collapses while it holds the focus, and it expands again as soon as the
+        focus enters it. This keeps every control reachable for keyboard and screen-reader users.
+    </li>
+    <li>
+        A floating toolbar reports its expanded height at all times, even while it is hidden or collapsed. The
+        content padding therefore stays still while the user scrolls, and
+        <a routerLink="/components/snackbars">snackbars</a> stay above it.
+    </li>
+    <li>
+        <code>scroll-action</code> keys off <code>LayoutService.mainScrollTop()</code>, which is populated by
+        whichever element carries <code>md3-scaffold-pane="main"</code> &mdash; outside a
+        <a routerLink="/foundations/scaffold">scaffold</a>, the toolbar will not react to scrolling at all.
+    </li>
+</ul>

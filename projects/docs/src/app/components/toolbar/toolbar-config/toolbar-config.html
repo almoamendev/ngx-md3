@@ -1,0 +1,135 @@
+<md3-side-sheet-header title="Configurations">
+    <button type="button" md3-icon-button trailing button-type="standard" (click)="close()">
+        <md3-icon md3-icon-element>close</md3-icon>
+    </button>
+</md3-side-sheet-header>
+<md3-side-sheet-body class="md3-component-config">
+    <div md3-type-body size="large">Type</div>
+    <div class="controls-list">
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="toolbarType">
+                <input type="radio" md3-input-element name="toolbar-type" value="floating">
+            </md3-radio-button>
+            <div md3-type-label size="large">Floating</div>
+        </label>
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="toolbarType">
+                <input type="radio" md3-input-element name="toolbar-type" value="docked">
+            </md3-radio-button>
+            <div md3-type-label size="large">Docked</div>
+        </label>
+    </div>
+
+    <div md3-type-body size="large">Color</div>
+    <div class="controls-list">
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="toolbarColor">
+                <input type="radio" md3-input-element name="toolbar-color" value="standard">
+            </md3-radio-button>
+            <div md3-type-label size="large">Standard</div>
+        </label>
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="toolbarColor">
+                <input type="radio" md3-input-element name="toolbar-color" value="vibrant">
+            </md3-radio-button>
+            <div md3-type-label size="large">Vibrant</div>
+        </label>
+    </div>
+
+    <div md3-type-body size="large">Orientation</div>
+    <div class="controls-list">
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="orientation">
+                <input type="radio" md3-input-element name="toolbar-orientation" value="auto">
+            </md3-radio-button>
+            <div md3-type-label size="large">Auto (follow the region)</div>
+        </label>
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="orientation">
+                <input type="radio" md3-input-element name="toolbar-orientation" value="horizontal">
+            </md3-radio-button>
+            <div md3-type-label size="large">Horizontal</div>
+        </label>
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="orientation">
+                <input type="radio" md3-input-element name="toolbar-orientation" value="vertical">
+            </md3-radio-button>
+            <div md3-type-label size="large">Vertical</div>
+        </label>
+    </div>
+
+    <div md3-type-body size="large">Alignment</div>
+    <div class="controls-list">
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="alignment">
+                <input type="radio" md3-input-element name="toolbar-alignment" value="start">
+            </md3-radio-button>
+            <div md3-type-label size="large">Start</div>
+        </label>
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="alignment">
+                <input type="radio" md3-input-element name="toolbar-alignment" value="center">
+            </md3-radio-button>
+            <div md3-type-label size="large">Center</div>
+        </label>
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="alignment">
+                <input type="radio" md3-input-element name="toolbar-alignment" value="end">
+            </md3-radio-button>
+            <div md3-type-label size="large">End</div>
+        </label>
+    </div>
+
+    <div md3-type-body size="large">Scroll action</div>
+    <div class="controls-list">
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="scrollAction">
+                <input type="radio" md3-input-element name="toolbar-scroll-action" value="none">
+            </md3-radio-button>
+            <div md3-type-label size="large">None</div>
+        </label>
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="scrollAction">
+                <input type="radio" md3-input-element name="toolbar-scroll-action" value="hide">
+            </md3-radio-button>
+            <div md3-type-label size="large">Hide</div>
+        </label>
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="scrollAction">
+                <input type="radio" md3-input-element name="toolbar-scroll-action" value="collapse">
+            </md3-radio-button>
+            <div md3-type-label size="large">Collapse</div>
+        </label>
+    </div>
+
+    <div md3-type-body size="large">FAB position</div>
+    <div class="controls-list">
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="fabPosition">
+                <input type="radio" md3-input-element name="toolbar-fab-position" value="start">
+            </md3-radio-button>
+            <div md3-type-label size="large">Start</div>
+        </label>
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="fabPosition">
+                <input type="radio" md3-input-element name="toolbar-fab-position" value="end">
+            </md3-radio-button>
+            <div md3-type-label size="large">End</div>
+        </label>
+    </div>
+
+    <div class="controls-list">
+        <label md3-state-component tabindex="0">
+            <div md3-type-label size="large">Show a FAB</div>
+            <md3-switch disable-state-layer [control]="showFab">
+                <input type="checkbox" md3-input-element name="toolbar-show-fab">
+            </md3-switch>
+        </label>
+        <label md3-state-component tabindex="0">
+            <div md3-type-label size="large">Keep one item on collapse</div>
+            <md3-switch disable-state-layer [control]="persistentItem">
+                <input type="checkbox" md3-input-element name="toolbar-persistent-item">
+            </md3-switch>
+        </label>
+    </div>
+</md3-side-sheet-body>

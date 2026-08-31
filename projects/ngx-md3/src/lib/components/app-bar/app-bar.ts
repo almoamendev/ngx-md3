@@ -65,9 +65,11 @@ export class AppBar implements ButtonContext {
     public hasAvatar = computed(() => !!this.avatar());
 
     public mainIsScrolled = computed(() => this.layoutService.mainIsScrolled());
-    public isScrollingDown = signal<boolean>(false);
 
-    private scrollPosition = 0;
+    // One source of truth. The toolbar reads the same signal, so the two bars can never
+    // disagree about which way the main pane is moving.
+    public isScrollingDown = computed<boolean>(() => this.layoutService.isScrollingDown());
+
     private bottomExpandedHeight = computed(() => {
         const type = this.appBarType();
 
@@ -104,8 +106,6 @@ export class AppBar implements ButtonContext {
         private el: ElementRef,
         private layoutService: LayoutService
     ) {
-        this.scrollPosition = this.layoutService.mainScrollTop();
-
         effect((onCleanup) => {
             const type = 'md3-' + this.appBarType();
 
@@ -133,10 +133,6 @@ export class AppBar implements ButtonContext {
             onCleanup(() => {
                 this.element.classList.remove(width);
             });
-        });
-
-        effect(() => {
-            this.updateScrollDirection(this.layoutService.mainScrollTop());
         });
 
         effect(() => {
@@ -172,22 +168,6 @@ export class AppBar implements ButtonContext {
 
     private isBottomCollapsed(collapse: number, expandedHeight: number): boolean {
         return expandedHeight > 0 && collapse >= expandedHeight;
-    }
-
-    private updateScrollDirection(scrollTop: number): void {
-        if (scrollTop === this.scrollPosition) {
-            return;
-        }
-
-        const defaultBarHeight = this.getHostFontSize() * 4;
-        const scrollOffset = scrollTop - this.scrollPosition;
-
-        if (Math.abs(scrollOffset) <= defaultBarHeight) {
-            return;
-        }
-
-        this.isScrollingDown.set(scrollOffset > 0);
-        this.scrollPosition = scrollTop;
     }
 
     private hasCollapsibleBottom(type: AppBarType): boolean {

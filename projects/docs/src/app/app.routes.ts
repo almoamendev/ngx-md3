@@ -26,6 +26,7 @@ import { GridsComponent } from './foundations/grids/grids.component';
 import { NavigationBarComponent } from './components/navigations/navigation-bar/navigation-bar.component';
 import { NavigationItemComponent } from './components/navigations/navigation-item/navigation-item.component';
 import { AppBarComponent } from './components/app-bar/app-bar.component';
+import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { SnackbarsComponent } from './components/snackbars/snackbars.component';
 import { SideSheetsComponent } from './components/sheets/side-sheets/side-sheets.component';
 import { BottomSheetsComponent } from './components/sheets/bottom-sheets/bottom-sheets.component';
@@ -104,6 +105,10 @@ export const routes: Routes = [
                     {
                         path: 'app-bar',
                         component: AppBarComponent,
+                    },
+                    {
+                        path: 'toolbar',
+                        component: ToolbarComponent,
                     },
                     {
                         path: 'buttons',
