@@ -48,6 +48,7 @@ export class ButtonGroup implements ButtonContext {
 
     private buttons = contentChildren<Button>(Button, { descendants: true });
     private iconButtons = contentChildren<IconButton>(IconButton, { descendants: true });
+    private managedButtons = new WeakSet<Button | IconButton>();
     
     // context values
     buttonContextSize: Signal<ButtonSize> = this.buttonSize;
@@ -74,14 +75,31 @@ export class ButtonGroup implements ButtonContext {
 
         effect(() => {
             const selection = this.groupSelection();
+            const buttons = this.allButtons();
+
+            if (selection == 'manual') {
+                // hand the control back, only for the buttons the group made selectable
+                buttons.forEach((item) => {
+                    if (this.managedButtons.has(item)) {
+                        item.isSelected.set(null);
+                    }
+                });
+
+                this.managedButtons = new WeakSet();
+                return;
+            }
 
             if (selection == 'none') {
-                this.allButtons().forEach((item) => {
+                buttons.forEach((item) => {
                     item.isSelected.set(null);
                 });
+
+                this.managedButtons = new WeakSet();
             } else {
-                this.allButtons().forEach((item) => {
-                    item.enableSelection();
+                buttons.forEach((item) => {
+                    if (item.enableSelection()) {
+                        this.managedButtons.add(item);
+                    }
                 });
 
                 if (selection == 'single') {
