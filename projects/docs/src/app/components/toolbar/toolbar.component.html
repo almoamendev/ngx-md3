@@ -28,19 +28,27 @@
         <md3-toolbar [toolbar-type]="toolbarType()" [toolbar-color]="toolbarColor()"
             [orientation]="orientation()" [alignment]="alignment()"
             [scroll-action]="scrollAction()" [fab-position]="fabPosition()">
-            <button type="button" md3-icon-button button-type="standard">
-                <md3-icon md3-icon-element>format_bold</md3-icon>
-            </button>
-            <button type="button" md3-icon-button button-type="standard"
-                [attr.md3-toolbar-persistent]="persistentItem() ? '' : null">
-                <md3-icon md3-icon-element>format_italic</md3-icon>
-            </button>
-            <button type="button" md3-icon-button button-type="standard">
-                <md3-icon md3-icon-element>format_underlined</md3-icon>
-            </button>
-            <button type="button" md3-icon-button button-type="tonal">
-                <md3-icon md3-icon-element>link</md3-icon>
-            </button>
+            <md3-toolbar-item>
+                <button type="button" md3-icon-button button-type="standard">
+                    <md3-icon md3-icon-element>format_bold</md3-icon>
+                </button>
+            </md3-toolbar-item>
+            <md3-toolbar-item>
+                <button type="button" md3-icon-button button-type="standard"
+                    [attr.md3-toolbar-persistent]="persistentItem() ? '' : null">
+                    <md3-icon md3-icon-element>format_italic</md3-icon>
+                </button>
+            </md3-toolbar-item>
+            <md3-toolbar-item>
+                <button type="button" md3-icon-button button-type="standard">
+                    <md3-icon md3-icon-element>format_underlined</md3-icon>
+                </button>
+            </md3-toolbar-item>
+            <md3-toolbar-item>
+                <button type="button" md3-icon-button button-type="tonal">
+                    <md3-icon md3-icon-element>link</md3-icon>
+                </button>
+            </md3-toolbar-item>
 
             @if (showFab()) {
                 <button type="button" md3-fab button-type="primary" button-size="small">

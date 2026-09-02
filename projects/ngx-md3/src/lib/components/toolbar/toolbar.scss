@@ -2,7 +2,6 @@
     --md-toolbar-size: 4em;
     --md-toolbar-margin: 1em;
     --md-toolbar-padding: 1em;
-    --md-toolbar-gap: 0.5em;
     --md-toolbar-radius: var(--md-toolbar-size);
     --md-toolbar-shadow: var(--md-shadow-3dp);
 
@@ -25,7 +24,7 @@
         flex-direction: row;
         align-items: center;
         justify-content: center;
-        gap: var(--md-toolbar-gap);
+        gap: 0.5em;
         min-width: 0em;
         min-height: 0em;
         transition: transform var(--md-toolbar-duration) var(--md-toolbar-easing);
@@ -53,13 +52,15 @@
             
             .md3-toolbar-slots {
                 display: flex;
-                gap: var(--md-toolbar-gap);
+                flex: 0 1 auto;
                 flex-direction: row;
                 align-items: center;
-                justify-content: center;
                 min-width: 0em;
             
-                ::ng-deep > * {
+                ::ng-deep > md3-toolbar-item {
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
                     flex: 0 0 auto;
                     max-width: var(--md-toolbar-item-max-size);
                     transition:

@@ -108,6 +108,7 @@ export * from './components/app-bar/app-bar-logo';
 
 // toolbar
 export * from './components/toolbar/toolbar';
+export * from './components/toolbar/toolbar-item';
 
 // navigations
 export * from './components/navigations/navigation-item/navigation-item';
