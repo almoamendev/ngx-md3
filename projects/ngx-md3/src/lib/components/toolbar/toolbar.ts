@@ -1,4 +1,5 @@
-import { Component, computed, contentChild, effect, ElementRef, inject, input, model, OnDestroy, Signal, signal, viewChild } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { Component, computed, contentChild, effect, ElementRef, inject, input, model, OnDestroy, PLATFORM_ID, Signal, signal, viewChild } from '@angular/core';
 import { ButtonContext, MD3_BUTTON_CONTEXT } from '../../interfaces/button-context.interface';
 import { LayoutService } from '../../foundations/layout.service';
 import { ScaffoldBar } from '../../foundations/scaffold-bar';
@@ -103,12 +104,19 @@ export class Toolbar implements ButtonContext, OnDestroy {
     public expanded = model<boolean>(true);
 
     private readonly layoutElement = viewChild<ElementRef<HTMLElement>>('layout');
+    private readonly containerElement = viewChild<ElementRef<HTMLElement>>('container');
+    private readonly slotsElement = viewChild<ElementRef<HTMLElement>>('slots');
     private readonly fab = contentChild(FloatingActionButton);
 
     /** Set from the DOM, because `md3-toolbar-persistent` is a plain attribute, not a directive. */
     private readonly hasPersistentItem = signal<boolean>(false);
     private readonly hasFocusWithin = signal<boolean>(false);
     private persistentObserver?: MutationObserver;
+
+    private readonly isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
+
+    /** The last published free space, to keep an unchanged measurement from writing to the DOM. */
+    private lastGap = -1;
 
     public readonly isFloating = computed<boolean>(() => this.toolbarType() === 'floating');
 
@@ -230,6 +238,36 @@ export class Toolbar implements ButtonContext, OnDestroy {
             }
         });
 
+        // Measure again when the region gives the toolbar a different amount of space, and when
+        // the items themselves change size or number.
+        effect((onCleanup) => {
+            if (!this.isBrowser) {
+                return;
+            }
+
+            // Read the state that changes the geometry, so a new orientation or a collapse
+            // measures again without a resize.
+            this.effectiveOrientation();
+            this.isCollapsed();
+            this.collapsesToFab();
+
+            const layout = this.layoutElement()?.nativeElement;
+            const slots = this.slotsElement()?.nativeElement;
+
+            if (!layout || !slots) {
+                return;
+            }
+
+            // The observer reports the first size as soon as it starts, so no separate initial
+            // measurement is necessary.
+            const observer = new ResizeObserver(() => this.measureGap());
+            observer.observe(this.element);
+            observer.observe(layout);
+            observer.observe(slots);
+
+            onCleanup(() => observer.disconnect());
+        });
+
         if (typeof ngDevMode === 'undefined' || ngDevMode) {
             effect(() => this.checkConfiguration());
         }
@@ -281,6 +319,86 @@ export class Toolbar implements ButtonContext, OnDestroy {
 
         this.isHidden.set(action === 'hide' && away);
         this.expanded.set(action === 'hide' ? true : !away);
+    }
+
+    /**
+     * Divide the free space of the container between the gaps.
+     *
+     * The measurement starts from the host, because the host holds the space the region gives
+     * the toolbar. A floating container is only as wide as its content, so reading the container
+     * itself would feed the gap back into the measurement and the value would never settle.
+     */
+    private measureGap(): void {
+        const layout = this.layoutElement()?.nativeElement;
+        const container = this.containerElement()?.nativeElement;
+        const slots = this.slotsElement()?.nativeElement;
+
+        if (!layout || !container || !slots) {
+            return;
+        }
+
+        const vertical = this.effectiveOrientation() === 'vertical';
+        const items = Array.from(slots.children) as HTMLElement[];
+        const extents = items.map((item) => this.extent(item, vertical));
+
+        // A collapsed item keeps its box but loses its size, and it must not keep a gap either.
+        const visible = extents.filter((extent) => extent > 0.5).length;
+
+        if (visible < 2) {
+            this.publishGap(0);
+            return;
+        }
+
+        const content = extents.reduce((sum, extent) => sum + extent, 0);
+        const free = this.contentExtent(this.element, vertical)
+            - this.paddingExtent(layout, vertical)
+            - this.siblingExtent(layout, container, vertical)
+            - this.paddingExtent(container, vertical)
+            - content;
+
+        this.publishGap(free / (visible - 1));
+    }
+
+    private publishGap(gap: number): void {
+        // Round down, so a fraction of a pixel never pushes the last item past the container.
+        const value = Math.max(0, Math.floor(gap * 100) / 100);
+
+        if (value === this.lastGap) {
+            return;
+        }
+
+        this.lastGap = value;
+        this.element.style.setProperty('--md-toolbar-gap-free', `${value}px`);
+    }
+
+    private extent(element: HTMLElement, vertical: boolean): number {
+        const rect = element.getBoundingClientRect();
+
+        return vertical ? rect.height : rect.width;
+    }
+
+    private contentExtent(element: HTMLElement, vertical: boolean): number {
+        const size = vertical ? element.clientHeight : element.clientWidth;
+
+        return Math.max(0, size - this.paddingExtent(element, vertical));
+    }
+
+    private paddingExtent(element: HTMLElement, vertical: boolean): number {
+        const style = getComputedStyle(element);
+        const start = parseFloat(vertical ? style.paddingTop : style.paddingLeft) || 0;
+        const end = parseFloat(vertical ? style.paddingBottom : style.paddingRight) || 0;
+
+        return start + end;
+    }
+
+    /** What the other children of the layout take, the flex gap that separates them included. */
+    private siblingExtent(layout: HTMLElement, container: HTMLElement, vertical: boolean): number {
+        const style = getComputedStyle(layout);
+        const gap = parseFloat(vertical ? style.rowGap : style.columnGap) || 0;
+
+        return (Array.from(layout.children) as HTMLElement[])
+            .filter((child) => child !== container)
+            .reduce((sum, child) => sum + this.extent(child, vertical) + gap, 0);
     }
 
     private watchPersistentItems(element: HTMLElement): void {

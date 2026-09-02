@@ -8,6 +8,14 @@
     // The transition bound for a collapsing item. Raise it for very wide items.
     --md-toolbar-item-max-size: 20em;
 
+    // Space between the items. The component measures the free space of the container along
+    // the main axis, divides it between the gaps, and publishes it as --md-toolbar-gap-free.
+    // The clamp keeps the result between the two bounds, so the items spread out in a wide
+    // toolbar and stay close together in a narrow one.
+    --md-toolbar-gap-min: 0.25em;
+    --md-toolbar-gap-max: 2em;
+    --md-toolbar-gap: clamp(var(--md-toolbar-gap-min), var(--md-toolbar-gap-free, 0px), var(--md-toolbar-gap-max));
+
     --md-toolbar-duration: var(--md-motion-expressive-default-spatial-duration);
     --md-toolbar-easing: var(--md-motion-expressive-default-spatial-easing);
     --md-toolbar-effect-duration: var(--md-motion-expressive-fast-effects-duration);
@@ -57,6 +65,13 @@
                 align-items: center;
                 min-width: 0em;
             
+                // The gap is a margin, not a flex gap, because the collapse animates the
+                // margins of the items and a flex gap would keep the space of an item that
+                // is no longer there.
+                ::ng-deep > md3-toolbar-item + md3-toolbar-item {
+                    margin-inline-start: var(--md-toolbar-gap);
+                }
+
                 ::ng-deep > md3-toolbar-item {
                     display: inline-flex;
                     align-items: center;
@@ -176,6 +191,11 @@
                         max-width: none;
                         max-height: var(--md-toolbar-item-max-size);
                     }
+
+                    ::ng-deep > md3-toolbar-item + md3-toolbar-item {
+                        margin-inline-start: 0em;
+                        margin-block-start: var(--md-toolbar-gap);
+                    }
                 }
             }
         }
@@ -194,6 +214,9 @@
     }
 
     &.md3-collapsed {
+        // The item that stays must not keep the space of the items that went away.
+        --md-toolbar-gap: 0em;
+
         ::ng-deep .md3-toolbar-slots > *:not([md3-toolbar-persistent]) {
             max-width: 0em;
             max-height: 0em;
