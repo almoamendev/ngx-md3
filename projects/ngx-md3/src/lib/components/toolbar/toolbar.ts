@@ -54,7 +54,7 @@ import { FloatingActionButton } from '../buttons/floating-action-button/floating
         '[class.md3-rail-region]': 'isRailRegion()',
         '[class.md3-hidden]': 'isHidden()',
         '[class.md3-collapsed]': 'isCollapsed()',
-        '[class.md3-collapse-to-fab]': 'collapsesToFab()',
+        '[class.md3-collapse-to-fab]': 'isCollapsedToFab()',
         '(focusin)': 'onFocusIn()',
         '(focusout)': 'onFocusOut($event)',
     },
@@ -146,7 +146,7 @@ export class Toolbar implements ButtonContext, OnDestroy {
     /** Something must survive a collapse, or a collapse is just a hide. */
     private readonly canCollapse = computed<boolean>(() => (!!this.fab() && this.isFloating()) || this.hasPersistentItem());
 
-    /** With a FAB and no marked item, the container goes away and the FAB stays alone. */
+    /** With a FAB and no marked item, a collapse takes the container away and the FAB stays alone. */
     protected readonly collapsesToFab = computed<boolean>(() => !!this.fab() && this.isFloating() && !this.hasPersistentItem());
 
     /** A vertical toolbar never reacts to scrolling, and a docked one never collapses. */
@@ -168,6 +168,14 @@ export class Toolbar implements ButtonContext, OnDestroy {
     public readonly isCollapsed = computed<boolean>(() => {
         return this.resolvedScrollAction() === 'collapse' && !this.expanded();
     });
+
+    /**
+     * The collapsed state in which the FAB stays alone.
+     *
+     * This is the state, not the capability. A FAB by itself must never take the container
+     * away, because a toolbar that does not collapse keeps its items at all times.
+     */
+    protected readonly isCollapsedToFab = computed<boolean>(() => this.isCollapsed() && this.collapsesToFab());
 
     // button context — the container is 4em high, so the buttons inside it are small.
     public buttonContextSize: Signal<ButtonSize> = signal<ButtonSize>('small');
@@ -266,7 +274,7 @@ export class Toolbar implements ButtonContext, OnDestroy {
             // measures again without a resize.
             this.effectiveOrientation();
             this.isCollapsed();
-            this.collapsesToFab();
+            this.isCollapsedToFab();
 
             const layout = this.layoutElement()?.nativeElement;
             const slots = this.slotsElement()?.nativeElement;

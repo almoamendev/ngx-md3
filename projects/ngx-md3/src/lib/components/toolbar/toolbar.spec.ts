@@ -154,6 +154,19 @@ describe('Toolbar in a scaffold region', () => {
         expect(toolbars[2].resolvedScrollAction()).toBe('collapse');
     });
 
+    it('should keep the container while the toolbar is expanded', () => {
+        const toolbar = toolbars[2];
+
+        // A FAB alone must not take the container away. Only a collapse does that.
+        expect(toolbar.expanded()).toBeTrue();
+        expect(toolbar.element.classList.contains('md3-collapse-to-fab')).toBeFalse();
+
+        toolbar.expanded.set(false);
+        fixture.detectChanges();
+
+        expect(toolbar.element.classList.contains('md3-collapse-to-fab')).toBeTrue();
+    });
+
     it('should report a floating bottom bar to the layout service', () => {
         const layout = TestBed.inject(LayoutService);
 
