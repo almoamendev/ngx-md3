@@ -1,21 +1,16 @@
 <h1 md3-type-display size="large">Toolbar</h1>
 
 <p>
-    Toolbars hold the actions of the current page. <code>md3-toolbar</code> is projected into a
-    <a routerLink="/foundations/scaffold"><code>md3-scaffold</code></a> region, and the region decides where
-    it goes and which way it runs &mdash; a bar region gives a horizontal toolbar, and a rail region gives a
-    vertical one. It reads its scroll state from the scaffold's main pane through
-    <code>LayoutService</code>, so no extra wiring is needed.
+    Toolbars display frequently used actions relevant to the current page
 </p>
 
-<p>
-    The Material Design 3 specification replaces the bottom app bar with the docked toolbar. Use
-    <code>toolbar-type="docked"</code> where you would have used a bottom app bar.
-</p>
-
-<figure class="component-image">
+<figure class="component-image outlined">
     <img src="img/md3-toolbar.png" alt="Material Design toolbars" />
-    <p>Configurations of floating toolbars</p>
+    <ol>
+        <li>Standard and vibrant toolbars</li>
+        <li>Vertical floating toolbar</li>
+        <li>Floating toolbar with FAB</li>
+    </ol>
 </figure>
 
 <app-playground bg-variant>
@@ -163,7 +158,7 @@
             <tr>
                 <td>
                     <i>toolbar-type</i>
-                    <p md3-type-body size="small">Floating draws a rounded, elevated container with a 16px outside margin. Docked fills its region with square corners and no elevation.</p>
+                    <p md3-type-body size="small">Floating draws a rounded, elevated container, held off the edge of the region by <code>--md-toolbar-padding</code>. Docked fills its region with square corners and no elevation.</p>
                 </td>
                 <td>input&lt;ToolbarType&gt;</td>
                 <td style="white-space: nowrap;">floating</td>
@@ -245,17 +240,10 @@
             </tr>
             <tr>
                 <td>
-                    <i>--md-toolbar-margin</i>
-                    <p md3-type-body size="small">Outside margin of a floating toolbar.</p>
-                </td>
-                <td style="white-space: nowrap;">1em</td>
-            </tr>
-            <tr>
-                <td>
                     <i>--md-toolbar-padding</i>
-                    <p md3-type-body size="small">Padding inside the container.</p>
+                    <p md3-type-body size="small">Padding inside the container. On a floating toolbar it also sets the offset from the edge of the region.</p>
                 </td>
-                <td style="white-space: nowrap;">1em</td>
+                <td style="white-space: nowrap;">0.5em</td>
             </tr>
             <tr>
                 <td>

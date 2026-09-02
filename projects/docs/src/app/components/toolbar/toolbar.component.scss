@@ -3,9 +3,13 @@
     align-items: center;
     justify-content: center;
     width: 100%;
-    min-height: 18em;
+    min-height: 40em;
 
     md3-toolbar {
-        flex: 1 1 auto;
+        flex: 1 1 100%;
+
+        &.md3-vertical {
+            align-self: stretch;
+        }
     }
 }

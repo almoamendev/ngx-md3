@@ -1,4 +1,4 @@
-import { Component, computed, OnDestroy, signal } from '@angular/core';
+import { Component, computed, effect, OnDestroy, signal, untracked } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { FloatingActionButton, IconButton, IconElement, MaterialIcon, SheetsService, SideSheetRef, Toolbar, ToolbarAlignment, ToolbarColor, ToolbarItem, ToolbarOrientation, ToolbarScrollAction, ToolbarType, TypeDisplay } from '@almoamendev/ngx-md3';
 import { Playground } from '../../components/playground/playground';
@@ -28,18 +28,12 @@ export class ToolbarComponent implements OnDestroy {
 
     public toolbarType = signal<ToolbarType>('floating');
     public toolbarColor = signal<ToolbarColor>('standard');
-    public orientationChoice = signal<ToolbarOrientationChoice>('auto');
+    public orientation = signal<ToolbarOrientationChoice>('horizontal');
     public alignment = signal<ToolbarAlignment>('center');
     public scrollAction = signal<ToolbarScrollAction>('none');
     public fabPosition = signal<'start' | 'end'>('end');
     public showFab = signal<boolean>(false);
     public persistentItem = signal<boolean>(false);
-
-    /** `auto` is the unset input, so the component falls back to the region. */
-    public orientation = computed<ToolbarOrientation | null>(() => {
-        const choice = this.orientationChoice();
-        return choice === 'auto' ? null : choice;
-    });
 
     public apiImport: string = `// Component import
 import {
@@ -153,6 +147,39 @@ type ToolbarRegion = 'blockStart' | 'blockEnd' | 'inlineStart' | 'inlineEnd';`;
     constructor(
         private sheetsService: SheetsService,
     ) {
+        effect(() => {
+            this.typeInit();
+        });
+
+        effect(() => {
+            this.orientationInit();
+        });
+    }
+
+    private typeInit() {
+        const type = this.toolbarType();
+        if (type == 'docked') {
+            this.configSheet?.componentInstance?.fabPosition.disable();
+            this.configSheet?.componentInstance?.showFab.disable();
+            this.configSheet?.componentInstance?.persistentItem.disable();
+            this.configSheet?.componentInstance?.disableCollapse.set(true);
+        } else {
+            this.configSheet?.componentInstance?.fabPosition.enable();
+            this.configSheet?.componentInstance?.showFab.enable();
+            this.configSheet?.componentInstance?.persistentItem.enable();
+            this.configSheet?.componentInstance?.disableCollapse.set(false);
+        }
+    }
+
+    private orientationInit() {
+        const orientation = this.orientation();
+        if (orientation == 'vertical') {
+            this.configSheet?.componentInstance?.scrollAction.disable();
+            this.configSheet?.componentInstance?.disableCollapse.set(false);
+        } else {
+            this.configSheet?.componentInstance?.scrollAction.enable();
+            this.configSheet?.componentInstance?.disableCollapse.set(untracked(this.toolbarType) == 'docked');
+        }
     }
 
     public openConfig(): void {
@@ -199,9 +226,9 @@ type ToolbarRegion = 'blockStart' | 'blockEnd' | 'inlineStart' | 'inlineEnd';`;
             this.toolbarColor.set(config.toolbarColor.value);
         });
 
-        config.orientation.setValue(this.orientationChoice());
+        config.orientation.setValue(this.orientation());
         config.orientation.registerOnChange(() => {
-            this.orientationChoice.set(config.orientation.value);
+            this.orientation.set(config.orientation.value);
         });
 
         config.alignment.setValue(this.alignment());
@@ -228,5 +255,8 @@ type ToolbarRegion = 'blockStart' | 'blockEnd' | 'inlineStart' | 'inlineEnd';`;
         config.persistentItem.registerOnChange(() => {
             this.persistentItem.set(config.persistentItem.value);
         });
+
+        this.typeInit();
+        this.orientationInit();
     }
 }
