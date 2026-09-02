@@ -33,9 +33,8 @@
                     <md3-icon md3-icon-element>format_bold</md3-icon>
                 </button>
             </md3-toolbar-item>
-            <md3-toolbar-item>
-                <button type="button" md3-icon-button button-type="standard"
-                    [attr.md3-toolbar-persistent]="persistentItem() ? '' : null">
+            <md3-toolbar-item [attr.md3-toolbar-persistent]="persistentItem() ? '' : null">
+                <button type="button" md3-icon-button button-type="standard">
                     <md3-icon md3-icon-element>format_italic</md3-icon>
                 </button>
             </md3-toolbar-item>
