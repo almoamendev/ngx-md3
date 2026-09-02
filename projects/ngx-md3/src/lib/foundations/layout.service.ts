@@ -52,8 +52,8 @@ export class LayoutService {
     private static readonly scrollDirectionThreshold = 64;
     private scrollPosition = 0;
 
-    readonly mainScrollTop = signal<number>(0);
-    readonly mainIsScrolled = computed<boolean>(() => this.mainScrollTop() > 0);
+    public readonly mainScrollTop = signal<number>(0);
+    public readonly mainIsScrolled = computed<boolean>(() => this.mainScrollTop() > 0);
 
     /**
      * True while the main pane moves down, false while it moves up. A small threshold keeps
