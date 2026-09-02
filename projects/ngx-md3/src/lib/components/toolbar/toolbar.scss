@@ -127,6 +127,7 @@
 
         .md3-toolbar-layout {
             width: 100%;
+            height: 100%;
         }
 
         .md3-toolbar-container {
@@ -171,7 +172,13 @@
         }
     }
 
+    &.md3-horizontal {
+        max-height: var(--md-toolbar-size);
+    }
+
     &.md3-vertical {
+        max-width: var(--md-toolbar-size);
+
         .md3-toolbar-layout {
             flex-direction: column;
     
