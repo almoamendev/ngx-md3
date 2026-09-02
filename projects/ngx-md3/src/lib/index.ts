@@ -47,7 +47,9 @@ export * from './styles/typography/type-body';
 export * from './styles/typography/type-label';
 
 // foundations
+export * from './foundations/viewport.service';
 export * from './foundations/layout.service';
+export * from './foundations/layout/layout';
 export * from './foundations/scaffold/scaffold';
 export * from './foundations/scaffold-bar';
 export * from './foundations/scaffold-rail';
@@ -128,7 +130,6 @@ export * from './components/dialog/dialog-header/dialog-header';
 export * from './components/dialog/dialog-body/dialog-body';
 export * from './components/dialog/dialog-actions/dialog-actions';
 export * from './components/dialog/full-screen-dialog/full-screen-dialog';
-export * from './components/dialog/full-screen-dialog-header/full-screen-dialog-header';
 
 // menus
 export * from './components/menu/menu';

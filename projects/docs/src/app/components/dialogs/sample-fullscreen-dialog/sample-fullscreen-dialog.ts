@@ -1,21 +1,23 @@
 import { Component, inject, input } from '@angular/core';
 import {
+    AppBar,
     Button,
     DIALOG_CONFIG,
     DialogBody,
     DialogConfig,
     DialogRef,
     DialogService,
-    FullScreenDialogHeader,
     IconButton,
     IconElement,
     MaterialIcon,
+    Layout,
+    ScaffoldBar,
+    ScaffoldPane,
     SheetsService,
     SideSheetBody,
     SideSheetHeader,
     SideSheetRef,
     TypeBody,
-    TypeTitle,
 } from '@almoamendev/ngx-md3';
 import { SampleDialog } from '../sample-dialog/sample-dialog';
 
@@ -55,14 +57,16 @@ export class SampleFullScreenSheet {
 @Component({
     selector: 'app-sample-fullscreen-dialog',
     imports: [
-        FullScreenDialogHeader,
+        Layout,
+        ScaffoldBar,
+        ScaffoldPane,
+        AppBar,
         DialogBody,
         Button,
         IconButton,
         IconElement,
         MaterialIcon,
         TypeBody,
-        TypeTitle,
     ],
     templateUrl: './sample-fullscreen-dialog.html',
 })

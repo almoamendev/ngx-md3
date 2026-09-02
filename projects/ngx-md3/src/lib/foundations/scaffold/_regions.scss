@@ -1,0 +1,122 @@
+// The region shell shared by the page scaffold and by the contained layout.
+//
+// Both place the same regions — the bar rows, the rail columns, the panes container and the
+// bottom sheet strip. Only the size of the host differs: the scaffold fills the window, and
+// md3-layout fills whatever holds it. Keeping the regions here is what stops the two from
+// drifting apart.
+@mixin regions {
+
+    display: grid;
+    min-height: 0em;
+    overflow: hidden;
+    grid-template-areas:
+        "top top top"
+        "start content end"
+        "start sheet end"
+        "bottom bottom bottom";
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    grid-template-rows: auto minmax(0, 1fr) auto auto;
+    
+    .md3-bar-region {
+        display: flex;
+        flex-direction: column;
+        justify-self: stretch;
+        align-self: stretch;
+        min-width: 0em;
+        min-height: 0em;
+        overflow: visible;
+        z-index: 2;
+
+        &.md3-bar-region-top {
+            grid-area: top;
+        }
+
+        &.md3-bar-region-bottom {
+            grid-area: bottom;
+        }
+    }
+
+    ::ng-deep {
+        [md3-scaffold-bar="top"],
+        [md3-scaffold-bar="bottom"] {
+            min-width: 0em;
+            min-height: 0em;
+            overflow: hidden;
+        }
+
+        [md3-scaffold-rail="leading"] {
+            grid-area: start;
+            justify-self: stretch;
+            align-self: stretch;
+            min-width: 0em;
+            min-height: 0em;
+            overflow: hidden;
+            z-index: 3;
+        }
+
+        [md3-scaffold-rail="trailing"] {
+            grid-area: end;
+            justify-self: stretch;
+            align-self: stretch;
+            min-width: 0em;
+            min-height: 0em;
+            overflow: hidden;
+            z-index: 3;
+        }
+        
+        [md3-scaffold-bar].md3-floating-region,
+        [md3-scaffold-rail].md3-floating-region {
+            overflow: visible;
+        }
+    }
+
+    .md3-bottom-sheet-region {
+        grid-area: sheet;
+        justify-self: stretch;
+        min-width: 0em;
+        height: 0em;
+        position: relative;
+        overflow: visible;
+        z-index: 4;
+    }
+
+    .md3-panes-container {
+        --background-color: rgb(var(--md-scheme-surface));
+        --foreground-color: rgb(var(--md-scheme-on-surface));
+
+        grid-area: content;
+        min-width: 0em;
+        min-height: 0em;
+        overflow: hidden;
+        background-color: var(--background-color);
+        color: var(--foreground-color);
+
+        display: grid;
+        grid-template-areas: "start main end";
+        grid-template-columns: auto minmax(0, 1fr) auto;
+        grid-template-rows: minmax(0, 1fr);
+
+        .md3-pane {
+            justify-self: stretch;
+            align-self: stretch;
+            min-width: 0em;
+            min-height: 0em;
+            height: 100%;
+            overflow: hidden;
+
+            &.md3-pane-start {
+                grid-area: start;
+            }
+
+            &.md3-pane-main {
+                position: relative;
+                grid-area: main;
+                z-index: 1;
+            }
+
+            &.md3-pane-end {
+                grid-area: end;
+            }
+        }
+    }
+}

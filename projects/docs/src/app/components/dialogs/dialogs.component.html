@@ -144,7 +144,7 @@
                     <p md3-type-body size="small">Optional Angular context for the dynamic component.</p>
                 </td>
                 <td>ViewContainerRef</td>
-                <td style="white-space: nowrap;">ViewContainerRef</td>
+                <td style="white-space: nowrap;">null</td>
             </tr>
             <tr>
                 <td>
@@ -152,7 +152,7 @@
                     <p md3-type-body size="small">Optional Angular injector used when creating the dialog component.</p>
                 </td>
                 <td>Injector</td>
-                <td style="white-space: nowrap;">Injector</td>
+                <td style="white-space: nowrap;">null</td>
             </tr>
         </tbody>
     </table>
@@ -181,17 +181,24 @@
 
 <p>
     A full screen dialog covers the window and holds a whole task rather than a single decision. It has no scrim, since
-    there is nothing left to dim, and it brings the same start and end panes the scaffold has, so side sheets opened
-    while it is up land inside it.
+    there is nothing left to dim.
+</p>
+
+<p>
+    Its content is an <code>md3-layout</code>, which places the same regions the
+    <a routerLink="/foundations/scaffold">scaffold</a> does &mdash; the bar rows, the rail columns and the start and end
+    panes. So the dialog holds an app bar, a toolbar and a side sheet the same way a page does, and a side sheet opened
+    while the dialog is up lands inside it.
 </p>
 
 <app-shiki [code]="apiFullScreen"></app-shiki>
 <app-shiki [code]="apiFullScreenUsage" language="html"></app-shiki>
 <ul>
-    <li>Only one full screen dialog can be open at a time. Opening another one replaces it, along with anything stacked on top of it.</li>
-    <li>While it is open, <code>openSideSheet()</code> targets the dialog's own panes. When it closes, the page scaffold takes the outlets back and the sheets opened inside the dialog go with it.</li>
+    <li>Only one full screen dialog can be open at a time. Opening another one replaces it, along with anything stacked on top of it. <code>openFullScreen()</code> therefore takes a <code>FullScreenDialogConfig</code>, which is the dialog configuration without <code>previousDialog</code>.</li>
+    <li>While it is open, <code>openSideSheet()</code> targets the panes of the dialog's layout, so a sheet opens beside the main pane and under the app bar, exactly as it does on a page. When the dialog closes, the page scaffold takes the outlets back and the sheets opened inside the dialog go with it.</li>
     <li>Regular dialogs open on top of a full screen dialog and never hide or close it, whatever <code>previousDialog</code> says. They still replace each other as usual.</li>
-    <li>A full screen dialog is a header and a body, nothing else: <code>md3-fullscreen-dialog-header</code> sticks to the top and carries the actions, and <code>md3-dialog-body</code> takes the remaining space and scrolls underneath it. There is no bottom action bar &mdash; the trailing header button is the confirming action.</li>
-    <li>The header takes an icon button marked <code>md3-header-leading</code> to leave the dialog and an action marked <code>md3-header-trailing</code>. Everything else projected into it becomes the headline, so it carries its own typography &mdash; usually <code>md3-type-title</code> at large size.</li>
+    <li>The content of a full screen dialog is an <code>md3-layout</code>. It places the same regions the <a routerLink="/foundations/scaffold">scaffold</a> does, so the dialog takes an <a routerLink="/components/app-bar"><code>md3-app-bar</code></a> in a bar region, a <a routerLink="/components/toolbar"><code>md3-toolbar</code></a> in a bar or a rail region, and <code>md3-dialog-body</code> in the main pane, which scrolls. There is no bottom action bar &mdash; the trailing app bar button is the confirming action.</li>
+    <li>The layout is not optional. A content root that does not start with <code>md3-layout</code> gets a warning in development mode, because the dialog then has no bar and no rail region and the content does not scroll on its own. The dialog still falls back to panes of its own in that case, so a side sheet never opens behind it where nobody can see it.</li>
+    <li>The app bar takes an icon button marked <code>md3-app-bar-leading</code> to leave the dialog and an action marked <code>md3-app-bar-trailing</code>. The headline is the <code>bar-title</code> input. A bar inside a dialog carries no <code>banner</code> role, because the banner of the document is the app bar of the page behind it.</li>
     <li>A full screen dialog hides and shows like any other one, with the whole task it holds still in place. It keeps the side sheet outlets while it is hidden, so a side sheet opened in the meantime lands in the dialog and comes back with it.</li>
 </ul>

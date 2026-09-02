@@ -1,4 +1,5 @@
 import { Component, OnDestroy, signal } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { Button, DialogService, Divider, IconButton, IconElement, MaterialIcon, PreviousDialog, SheetsService, SideSheetRef, TypeBody, TypeDisplay } from '@almoamendev/ngx-md3';
 import { SampleDialog } from './sample-dialog/sample-dialog';
 import { SampleFullScreenDialog } from './sample-fullscreen-dialog/sample-fullscreen-dialog';
@@ -18,6 +19,7 @@ import { DialogConfig } from './dialog-config/dialog-config';
         Shiki,
         TypeBody,
         TypeDisplay,
+        RouterLink,
     ],
     templateUrl: './dialogs.component.html',
     styleUrl: './dialogs.component.scss',
@@ -249,6 +251,16 @@ class DialogService {
 
     public apiFullScreen: string = `// Full screen dialog
 
+// what the content component of a full screen dialog imports
+import {
+    Layout,        // md3-layout, the root of the content
+    ScaffoldBar,   // md3-scaffold-bar="top", for the app bar
+    ScaffoldRail,  // md3-scaffold-rail="trailing", for a toolbar
+    ScaffoldPane,  // md3-scaffold-pane="main", the pane that scrolls
+    AppBar,
+    DialogBody,
+} from '@almoamendev/ngx-md3';
+
 // opens edge to edge, replacing whatever dialog is open
 const dialogRef: DialogRef = dialogService.openFullScreen(YourDialogComponent, <FullScreenDialogConfig>{...});
 
@@ -267,20 +279,32 @@ dialogRef.show();`;
 
     public apiFullScreenUsage: string = `<!-- Full screen dialog component usage -->
 
-<!-- sticky header: a leading icon button, the headline, and a trailing action -->
-<md3-fullscreen-dialog-header>
-    <!-- leading icon button, usually leaves the dialog -->
-    <button type="button" md3-icon-button md3-header-leading button-type="standard" (click)="close()">
-        <md3-icon md3-icon-element bi-directional>arrow_back</md3-icon>
-    </button>
-    <!-- anything that is not a slotted button becomes the headline -->
-    <span md3-type-title size="large">Full screen dialog</span>
-    <!-- trailing action -->
-    <button md3-header-trailing type="button" md3-button button-type="text" (click)="close(true)">Save</button>
-</md3-fullscreen-dialog-header>
+<!-- the content of a full screen dialog is a layout: the same regions the scaffold places -->
+<md3-layout>
+    <!-- the app bar of the dialog. It carries no banner role inside a dialog. -->
+    <md3-app-bar md3-scaffold-bar="top" bar-type="small" bar-title="Full screen dialog">
+        <!-- leading icon button, usually leaves the dialog -->
+        <button type="button" md3-icon-button md3-app-bar-leading button-type="standard" (click)="close()">
+            <md3-icon md3-icon-element bi-directional>arrow_back</md3-icon>
+        </button>
+        <!-- trailing action -->
+        <button md3-app-bar-trailing type="button" md3-button button-type="text" (click)="close(true)">Save</button>
+    </md3-app-bar>
 
-<!-- takes the rest of the dialog and scrolls under the header -->
-<md3-dialog-body>...</md3-dialog-body>`;
+    <!-- a toolbar works here too, in a bar region or in a rail region -->
+    <md3-toolbar md3-scaffold-rail="trailing" toolbar-type="floating">
+        <md3-toolbar-item>
+            <button type="button" md3-icon-button button-type="standard">
+                <md3-icon md3-icon-element>format_bold</md3-icon>
+            </button>
+        </md3-toolbar-item>
+    </md3-toolbar>
+
+    <!-- takes the rest of the dialog and scrolls under the app bar -->
+    <div md3-scaffold-pane="main">
+        <md3-dialog-body>...</md3-dialog-body>
+    </div>
+</md3-layout>`;
 
     public apiUsage: string = `<!-- Component usage -->
 

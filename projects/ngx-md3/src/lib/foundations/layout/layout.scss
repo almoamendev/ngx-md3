@@ -1,0 +1,10 @@
+@use '../scaffold/regions';
+
+:host {
+    // A contained layout takes the size of whatever holds it — a full screen dialog, a card,
+    // a pane. Everything else is the same shell the page scaffold uses.
+    width: 100%;
+    height: 100%;
+
+    @include regions.regions;
+}

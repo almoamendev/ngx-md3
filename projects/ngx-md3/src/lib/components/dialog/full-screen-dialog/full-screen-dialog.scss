@@ -79,46 +79,24 @@
                 grid-area: start;
             }
 
+            // The dialog places its content and nothing else. The content brings the grid —
+            // md3-layout, with the regions, the panes and the scrolling main pane that the rest
+            // of the library uses. The dialog used to impose a header and a body row of its own
+            // here, which left no room for a bar or a rail region.
             &.md3-pane-main {
                 position: relative;
                 grid-area: main;
                 z-index: 1;
                 display: grid;
                 grid-template-rows: minmax(0, 1fr);
+                grid-template-columns: minmax(0, 1fr);
 
-                // Same deal as the side sheet: the attached component is the
-                // one that has to fill the pane, so it gets the layout.
                 & > ::ng-deep * {
-                    display: grid;
-                    grid-template-areas: "header" "body";
-                    grid-template-rows: auto minmax(0, 1fr) auto;
+                    min-width: 0;
                     min-height: 0;
                     height: 100%;
                     max-height: 100dvh;
                     max-width: 100dvw;
-                    overflow-x: hidden;
-                    overflow-y: auto;
-                    scrollbar-width: thin; /* Firefox */
-                    scrollbar-color: rgb(var(--md-scheme-outline-variant)) transparent;
-
-                    /* Chromium / Safari */
-                    &::-webkit-scrollbar {
-                        width: 0.5rem;
-                        height: 0.5rem;
-                    }
-
-                    &::-webkit-scrollbar-track {
-                        background: transparent;
-                    }
-
-                    & > md3-dialog-body {
-                        grid-area: body;
-                        margin: 0;
-                        padding: 1em 1.5em;
-                        max-width: inherit;
-                        overflow-y: auto;
-                        height: auto;
-                    }
                 }
             }
 

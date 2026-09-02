@@ -1,8 +1,9 @@
-import { booleanAttribute, Component, computed, contentChild, effect, ElementRef, input, Signal, signal } from '@angular/core';
+import { booleanAttribute, Component, computed, contentChild, effect, ElementRef, inject, input, Signal, signal } from '@angular/core';
 import { ButtonContext, MD3_BUTTON_CONTEXT } from '../../interfaces/button-context.interface';
 import { ButtonSize } from '../../types/button-size.type';
 import { Avatar } from '../common/avatar';
 import { LayoutService } from '../../foundations/layout.service';
+import { DIALOG_CONFIG } from '../dialog/dialog-ref';
 import { AppBarLogo } from './app-bar-logo';
 import { TypeDisplay, TypeHeadline, TypeTitle } from '../../../public-api';
 
@@ -25,13 +26,38 @@ export type AppBarScrollingStyle = 'none' | 'transparent' | 'elevate';
         },
     ],
     host: {
-        role: 'banner',
+        '[attr.role]': 'resolvedRole()',
         '[class.md3-scrolled]': 'mainIsScrolled()',
         '[class.md3-auto-hide]': 'autoHide()',
         '[class.md3-scrolling-down]': 'isScrollingDown()',
     },
 })
 export class AppBar implements ButtonContext {
+    // A dialog provides its configuration to everything it holds, so this is how the bar knows
+    // it is not the banner of the document.
+    private readonly inDialog = !!inject(DIALOG_CONFIG, { optional: true });
+
+    /**
+     * The landmark role of the bar.
+     *
+     * A page has one banner, and the app bar of the page is it. A bar inside a dialog is not
+     * the banner of the document — a banner nested in a dialog misleads a screen reader — so a
+     * bar that finds itself in one carries no role. Set this input to force either value.
+     */
+    public barRole = input<'banner' | 'none' | null>(null, {
+        alias: 'bar-role',
+    });
+
+    protected readonly resolvedRole = computed<string | null>(() => {
+        const role = this.barRole();
+
+        if (role !== null) {
+            return role === 'none' ? null : role;
+        }
+
+        return this.inDialog ? null : 'banner';
+    });
+
     public title = input<string | null>(null, {
         alias: 'bar-title',
     });
