@@ -49,11 +49,6 @@ import { FloatingActionButton } from '../buttons/floating-action-button/floating
     host: {
         'role': 'toolbar',
         '[attr.aria-orientation]': 'effectiveOrientation()',
-        '[class.md3-floating]': 'isFloating()',
-        '[class.md3-docked]': '!isFloating()',
-        '[class.md3-vibrant]': "toolbarColor() === 'vibrant'",
-        '[class.md3-horizontal]': "effectiveOrientation() === 'horizontal'",
-        '[class.md3-vertical]': "effectiveOrientation() === 'vertical'",
         '[class.md3-floating-region]': 'isFloatingRegion()',
         '[class.md3-bar-region]': 'isBarRegion()',
         '[class.md3-rail-region]': 'isRailRegion()',
@@ -149,10 +144,10 @@ export class Toolbar implements ButtonContext, OnDestroy {
     private readonly coversContent = computed<boolean>(() => this.isFloating() && this.isBarRegion());
 
     /** Something must survive a collapse, or a collapse is just a hide. */
-    private readonly canCollapse = computed<boolean>(() => !!this.fab() || this.hasPersistentItem());
+    private readonly canCollapse = computed<boolean>(() => (!!this.fab() && this.isFloating()) || this.hasPersistentItem());
 
     /** With a FAB and no marked item, the container goes away and the FAB stays alone. */
-    protected readonly collapsesToFab = computed<boolean>(() => !!this.fab() && !this.hasPersistentItem());
+    protected readonly collapsesToFab = computed<boolean>(() => !!this.fab() && this.isFloating() && !this.hasPersistentItem());
 
     /** A vertical toolbar never reacts to scrolling, and a docked one never collapses. */
     public readonly resolvedScrollAction = computed<ToolbarScrollAction>(() => {
@@ -178,6 +173,28 @@ export class Toolbar implements ButtonContext, OnDestroy {
     public buttonContextSize: Signal<ButtonSize> = signal<ButtonSize>('small');
 
     constructor() {
+        effect(() => {
+            if (this.isFloating()) {
+                this.element.classList.add('md3-floating');
+                this.element.classList.remove('md3-docked');
+            } else {
+                this.element.classList.add('md3-docked');
+                this.element.classList.remove('md3-floating');
+            }
+        });
+
+        effect((onCleanup) => {
+            const orientation = 'md3-' + this.effectiveOrientation();
+            this.element.classList.add(orientation);
+            onCleanup(() => this.element.classList.remove(orientation));
+        });
+
+        effect((onCleanup) => {
+            const color = 'md3-color-' + this.toolbarColor();
+            this.element.classList.add(color);
+            onCleanup(() => this.element.classList.remove(color));
+        });
+
         effect((onCleanup) => {
             const alignment = 'md3-align-' + this.alignment();
             this.element.classList.add(alignment);
