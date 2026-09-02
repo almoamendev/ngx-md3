@@ -1,6 +1,6 @@
 import { DOCUMENT } from '@angular/common';
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { computed, effect, inject, Injectable, signal } from '@angular/core';
+import { computed, effect, inject, Injectable, signal, untracked } from '@angular/core';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter, fromEvent, map, startWith, Subscription } from 'rxjs';
@@ -329,7 +329,12 @@ export class LayoutService {
             }
         }
 
-        const current = this.floatingInset();
+        // Read the current value untracked. A component registers its floating bar from an
+        // effect, so a tracked read would make that effect depend on the signal that the same
+        // run writes. The cleanup measures an empty map and writes 0, the body measures the bar
+        // and writes its size, and the effect dirties itself again on every run. That loop never
+        // settles, and change detection never finishes.
+        const current = untracked(this.floatingInset);
 
         // Only write on a real change. The main pane padding reads this value, and padding
         // changes the panes container size, which fires the observer again.

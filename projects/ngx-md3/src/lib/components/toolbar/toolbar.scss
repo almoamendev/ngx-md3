@@ -1,7 +1,6 @@
 :host {
     --md-toolbar-size: 4em;
-    --md-toolbar-margin: 1em;
-    --md-toolbar-padding: 1em;
+    --md-toolbar-padding: 0.5em;
     --md-toolbar-radius: var(--md-toolbar-size);
     --md-toolbar-shadow: var(--md-shadow-3dp);
 
@@ -27,6 +26,9 @@
     position: relative;
     min-width: 0em;
     min-height: 0em;
+    transition: max-height var(--md-toolbar-duration) var(--md-toolbar-easing),
+                max-width var(--md-toolbar-duration) var(--md-toolbar-easing),
+                opacity var(--md-toolbar-duration) var(--md-toolbar-easing);
 
     .md3-toolbar-layout {
         display: flex;
@@ -38,7 +40,8 @@
         height: 100%;
         min-width: 0em;
         min-height: 0em;
-        transition: transform var(--md-toolbar-duration) var(--md-toolbar-easing);
+        transition: transform var(--md-toolbar-duration) var(--md-toolbar-easing),
+                    opacity var(--md-toolbar-duration) var(--md-toolbar-easing);
     
         .md3-toolbar-container {
             display: flex;
@@ -67,13 +70,6 @@
                 flex-direction: row;
                 align-items: center;
                 min-width: 0em;
-            
-                // The gap is a margin, not a flex gap, because the collapse animates the
-                // margins of the items and a flex gap would keep the space of an item that
-                // is no longer there.
-                ::ng-deep > md3-toolbar-item + md3-toolbar-item {
-                    margin-inline-start: var(--md-toolbar-gap);
-                }
 
                 ::ng-deep > md3-toolbar-item {
                     display: inline-flex;
@@ -81,12 +77,20 @@
                     justify-content: center;
                     flex: 0 0 auto;
                     max-width: var(--md-toolbar-item-max-size);
+                    min-width: 3em;
                     transition:
                         max-width var(--md-toolbar-duration) var(--md-toolbar-easing),
                         margin var(--md-toolbar-duration) var(--md-toolbar-easing),
                         padding var(--md-toolbar-duration) var(--md-toolbar-easing),
                         opacity var(--md-toolbar-effect-duration) linear,
                         visibility 0s linear;
+                }
+            
+                // The gap is a margin, not a flex gap, because the collapse animates the
+                // margins of the items and a flex gap would keep the space of an item that
+                // is no longer there.
+                ::ng-deep > md3-toolbar-item + md3-toolbar-item {
+                    margin-inline-start: var(--md-toolbar-gap);
                 }
             }
         }
@@ -275,14 +279,19 @@
     }
 
     &.md3-hidden {
-        .md3-toolbar-layout {
-            transform: translateY(100%);
+        opacity: 0;
+        pointer-events: none;
+
+        &.md3-horizontal {
+            max-height: 0em;
         }
 
-        &.md3-region-block-start {
-            .md3-toolbar-layout {
-                transform: translateY(-100%);
-            }
+        &.md3-vertical {
+            max-width: 0em;
+        }
+
+        .md3-toolbar-layout {
+            transform: scaleY(0);
         }
     }
 
@@ -291,11 +300,13 @@
         --md-toolbar-gap: 0em;
 
         .md3-toolbar-slots > ::ng-deep md3-toolbar-item:not([md3-toolbar-persistent]) {
-            max-width: 0em;
-            max-height: 0em;
+            max-width: 0em !important;
+            max-height: 0em !important;
+            min-width: 0em !important;
+            min-height: 0em !important;
             margin: 0em;
             padding-inline: 0em;
-            border-inline-width: 0em;
+            border-width: 0em;
             opacity: 0;
             visibility: hidden;
             transition:
@@ -330,17 +341,19 @@
         --foreground-color: rgb(var(--md-scheme-on-primary-container));
 
         ::ng-deep .md3-toolbar-slots {
-            [md3-icon-button].md3-standard,
-            [md3-icon-button].md3-outlined,
-            [md3-button].md3-text,
-            [md3-button].md3-outlined {
-                --foreground-color: rgb(var(--md-scheme-on-primary-container));
-            }
-
-            [md3-icon-button].md3-tonal,
-            [md3-button].md3-tonal {
-                --background-color: rgb(var(--md-scheme-surface-container));
-                --foreground-color: rgb(var(--md-scheme-on-surface));
+            md3-toolbar-item {
+                [md3-icon-button].md3-standard,
+                [md3-icon-button].md3-outlined,
+                [md3-button].md3-text,
+                [md3-button].md3-outlined {
+                    --foreground-color: rgb(var(--md-scheme-on-primary-container));
+                }
+    
+                [md3-icon-button].md3-tonal,
+                [md3-button].md3-tonal {
+                    --background-color: rgb(var(--md-scheme-surface-container));
+                    --foreground-color: rgb(var(--md-scheme-on-surface));
+                }
             }
         }
     }

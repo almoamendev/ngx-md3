@@ -44,6 +44,7 @@ export class ToolbarComponent implements OnDestroy {
     public apiImport: string = `// Component import
 import {
     Toolbar,
+    ToolbarItem,
     IconButton, // optional
     IconElement, // optional
     MaterialIcon, // optional
@@ -91,22 +92,31 @@ type ToolbarRegion = 'blockStart' | 'blockEnd' | 'inlineStart' | 'inlineEnd';`;
     public apiUsage: string = `<!-- A floating toolbar over the content, in the scaffold's bottom bar region -->
 
 <md3-toolbar md3-scaffold-bar="bottom" toolbar-type="floating" scroll-action="collapse">
-    <button md3-icon-button button-type="standard">
-        <md3-icon md3-icon-element>format_bold</md3-icon>
-    </button>
-    <button md3-icon-button button-type="standard" md3-toolbar-persistent>
-        <md3-icon md3-icon-element>format_italic</md3-icon>
-    </button>
-    <button md3-icon-button button-type="standard">
-        <md3-icon md3-icon-element>link</md3-icon>
-    </button>
+    <md3-toolbar-item>
+        <button md3-icon-button button-type="standard">
+            <md3-icon md3-icon-element>format_bold</md3-icon>
+        </button>
+    </md3-toolbar-item>
+    <md3-toolbar-item md3-toolbar-persistent>
+        <button md3-icon-button button-type="standard">
+            <md3-icon md3-icon-element>format_italic</md3-icon>
+        </button>
+    </md3-toolbar-item>
+    <md3-toolbar-item>
+        <button md3-icon-button button-type="standard">
+            <md3-icon md3-icon-element>link</md3-icon>
+        </button>
+    </md3-toolbar-item>
 </md3-toolbar>
 
 <!-- With a FAB. The FAB sits beside the container, and it is always kept on collapse. -->
 <md3-toolbar md3-scaffold-bar="bottom" fab-position="end" scroll-action="collapse">
-    <button md3-icon-button button-type="standard">
-        <md3-icon md3-icon-element>share</md3-icon>
-    </button>
+    <md3-toolbar-item>
+        <button md3-icon-button button-type="standard">
+            <md3-icon md3-icon-element>share</md3-icon>
+        </button>
+    </md3-toolbar-item>
+
     <button md3-fab button-type="primary">
         <md3-icon md3-icon-element>edit</md3-icon>
     </button>
@@ -114,22 +124,30 @@ type ToolbarRegion = 'blockStart' | 'blockEnd' | 'inlineStart' | 'inlineEnd';`;
 
 <!-- Vertical, in a rail region. It reserves its own space, so nothing goes behind it. -->
 <md3-toolbar md3-scaffold-rail="trailing" toolbar-color="vibrant">
-    <button md3-icon-button button-type="standard">
-        <md3-icon md3-icon-element>zoom_in</md3-icon>
-    </button>
-    <button md3-icon-button button-type="standard">
-        <md3-icon md3-icon-element>zoom_out</md3-icon>
-    </button>
+    <md3-toolbar-item>
+        <button md3-icon-button button-type="standard">
+            <md3-icon md3-icon-element>zoom_in</md3-icon>
+        </button>
+    </md3-toolbar-item>
+    <md3-toolbar-item>
+        <button md3-icon-button button-type="standard">
+            <md3-icon md3-icon-element>zoom_out</md3-icon>
+        </button>
+    </md3-toolbar-item>
 </md3-toolbar>
 
-<!-- Docked: fills the region, square corners, no elevation. -->
+<!-- Docked: fills the region, square corners, no elevation. The alignment moves the item row. -->
 <md3-toolbar md3-scaffold-bar="bottom" toolbar-type="docked" alignment="start">
-    <button md3-icon-button button-type="standard">
-        <md3-icon md3-icon-element>undo</md3-icon>
-    </button>
-    <button md3-icon-button button-type="standard">
-        <md3-icon md3-icon-element>redo</md3-icon>
-    </button>
+    <md3-toolbar-item>
+        <button md3-icon-button button-type="standard">
+            <md3-icon md3-icon-element>undo</md3-icon>
+        </button>
+    </md3-toolbar-item>
+    <md3-toolbar-item>
+        <button md3-icon-button button-type="standard">
+            <md3-icon md3-icon-element>redo</md3-icon>
+        </button>
+    </md3-toolbar-item>
 </md3-toolbar>`;
 
     constructor(

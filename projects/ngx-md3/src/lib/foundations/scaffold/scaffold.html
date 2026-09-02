@@ -1,4 +1,7 @@
-<ng-content select="[md3-scaffold-bar=top]"></ng-content>
+<div class="md3-bar-region md3-bar-region-top">
+    <ng-content select="[md3-scaffold-bar=top]"></ng-content>
+</div>
+
 <ng-content select="[md3-scaffold-rail=leading]"></ng-content>
 
 <div class="md3-panes-container" #panesContainer>
@@ -22,4 +25,7 @@
 </div>
 
 <ng-content select="[md3-scaffold-rail=trailing]"></ng-content>
-<ng-content select="[md3-scaffold-bar=bottom]"></ng-content>
+
+<div class="md3-bar-region md3-bar-region-bottom">
+    <ng-content select="[md3-scaffold-bar=bottom]"></ng-content>
+</div>

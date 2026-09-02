@@ -117,6 +117,12 @@
 
 <h2>Content slots</h2>
 
+<p>
+    Every action goes inside an <code>md3-toolbar-item</code>. The toolbar projects that element only, so a
+    button written directly inside <code>md3-toolbar</code> does not appear. The wrapper carries the space
+    between the items and the collapse animation, and the toolbar keeps the order you write.
+</p>
+
 <div class="table-container md3-scrollable">
     <table>
         <thead>
@@ -127,16 +133,16 @@
         </thead>
         <tbody>
             <tr>
-                <td><i>(default)</i></td>
-                <td>Always. Icon buttons, buttons, button groups and text fields, in the order you write them. Use <a routerLink="/components/buttons/button-groups"><code>md3-button-group</code></a> to group related actions.</td>
+                <td><i>md3-toolbar-item</i></td>
+                <td>Always. One action each &mdash; an icon button, a button, a button group or a text field. Use <a routerLink="/components/buttons/button-groups"><code>md3-button-group</code></a> to group related actions.</td>
             </tr>
             <tr>
                 <td><i>[md3-fab]</i></td>
-                <td>A projected <a routerLink="/components/buttons/floating-action-buttons"><code>md3-fab</code></a> sits beside the container as its own surface, on the side that <code>fab-position</code> names.</td>
+                <td>A projected <a routerLink="/components/buttons/floating-action-buttons"><code>md3-fab</code></a> sits beside the container as its own surface, on the side that <code>fab-position</code> names. A floating toolbar only &mdash; a docked toolbar does not show a FAB.</td>
             </tr>
             <tr>
                 <td><i>[md3-toolbar-persistent]</i></td>
-                <td>A plain attribute on any item in the default slot. The item stays on the screen when <code>scroll-action="collapse"</code> hides the others.</td>
+                <td>A plain attribute on an <code>md3-toolbar-item</code>. The item stays on the screen when <code>scroll-action="collapse"</code> hides the others.</td>
             </tr>
         </tbody>
     </table>
@@ -181,7 +187,7 @@
             <tr>
                 <td>
                     <i>alignment</i>
-                    <p md3-type-body size="small">Where the item row sits inside the container. Visible on a docked toolbar; a floating container is as wide as its content, so it has no free space to align in.</p>
+                    <p md3-type-body size="small">Where the toolbar sits along its main axis. A docked toolbar aligns the item row inside its full-width container. A floating toolbar aligns the container itself, and the FAB with it, inside the region.</p>
                 </td>
                 <td>input&lt;ToolbarAlignment&gt;</td>
                 <td style="white-space: nowrap;">center</td>
@@ -249,7 +255,7 @@
                     <i>--md-toolbar-padding</i>
                     <p md3-type-body size="small">Padding inside the container.</p>
                 </td>
-                <td style="white-space: nowrap;">0.5em</td>
+                <td style="white-space: nowrap;">1em</td>
             </tr>
             <tr>
                 <td>
@@ -289,6 +295,11 @@
         The toolbar has one item region. Group related actions with
         <a routerLink="/components/buttons/button-groups"><code>md3-button-group</code></a> rather than with
         separate leading and trailing slots.
+    </li>
+    <li>
+        The space between the items follows the free space of the container. It opens to
+        <code>--md-toolbar-gap-max</code> when there is room to spare, and closes to
+        <code>--md-toolbar-gap-min</code> when the container is full.
     </li>
     <li>
         <code>scroll-action="collapse"</code> needs something to keep: a projected FAB, or at least one item

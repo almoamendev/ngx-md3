@@ -4,8 +4,6 @@
     height: 100dvh;
     min-height: 0em;
     overflow: hidden;
-    // The rails span both middle rows, so a docked bottom sheet takes its strip out of the
-    // content area alone and stays clear of the bottom bar.
     grid-template-areas:
         "top top top"
         "start content end"
@@ -13,16 +11,32 @@
         "bottom bottom bottom";
     grid-template-columns: auto minmax(0, 1fr) auto;
     grid-template-rows: auto minmax(0, 1fr) auto auto;
+    
+    .md3-bar-region {
+        display: flex;
+        flex-direction: column;
+        justify-self: stretch;
+        align-self: stretch;
+        min-width: 0em;
+        min-height: 0em;
+        overflow: visible;
+        z-index: 2;
+
+        &.md3-bar-region-top {
+            grid-area: top;
+        }
+
+        &.md3-bar-region-bottom {
+            grid-area: bottom;
+        }
+    }
 
     ::ng-deep {
-        [md3-scaffold-bar="top"] {
-            grid-area: top;
-            justify-self: stretch;
-            align-self: stretch;
+        [md3-scaffold-bar="top"],
+        [md3-scaffold-bar="bottom"] {
             min-width: 0em;
             min-height: 0em;
             overflow: hidden;
-            z-index: 2;
         }
 
         [md3-scaffold-rail="leading"] {
@@ -44,34 +58,13 @@
             overflow: hidden;
             z-index: 3;
         }
-
-        [md3-scaffold-bar="bottom"] {
-            grid-area: bottom;
-            justify-self: stretch;
-            align-self: stretch;
-            min-width: 0em;
-            min-height: 0em;
-            overflow: hidden;
-            z-index: 2;
-        }
-
-        // A floating region child (today: md3-toolbar with toolbar-type="floating") draws
-        // outside its own box, so the region must stop clipping it and must sit above the
-        // panes and the rails.
-        //
-        // In a *bar* region the child keeps a zero thickness and floats its own content out
-        // over the pane, so the track collapses. In a *rail* region the child stays in the
-        // flow and reserves its space like any other rail.
+        
         [md3-scaffold-bar].md3-floating-region,
         [md3-scaffold-rail].md3-floating-region {
             overflow: visible;
-            z-index: 5;
         }
     }
 
-    // Unlike every other region, this one takes no space and lets its content out. It exists to
-    // give a standard bottom sheet a bottom edge that sits above the bottom bar; the sheet
-    // itself floats over the content from there, so opening one moves nothing.
     .md3-bottom-sheet-region {
         grid-area: sheet;
         justify-self: stretch;

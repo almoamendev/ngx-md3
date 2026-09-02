@@ -21,11 +21,14 @@ import { FloatingActionButton } from '../buttons/floating-action-button/floating
  *
  * ```html
  * <md3-toolbar md3-scaffold-bar="bottom" toolbar-type="floating" scroll-action="collapse">
- *     <button md3-icon-button>...</button>
- *     <button md3-icon-button md3-toolbar-persistent>...</button>
+ *     <md3-toolbar-item><button md3-icon-button>...</button></md3-toolbar-item>
+ *     <md3-toolbar-item md3-toolbar-persistent><button md3-icon-button>...</button></md3-toolbar-item>
  *     <button md3-fab>...</button>
  * </md3-toolbar>
  * ```
+ *
+ * Every action goes inside an `md3-toolbar-item`. The toolbar projects that element only. A FAB is
+ * the one exception: it sits beside the container, and a floating toolbar takes it.
  *
  * A **floating** toolbar in a *bar* region leaves the layout flow, so the content passes
  * behind it. The scaffold pads the main pane by the height it covers. In a *rail* region it
@@ -34,7 +37,8 @@ import { FloatingActionButton } from '../buttons/floating-action-button/floating
  * A **docked** toolbar fills its region. The specification allows it in a bar region only.
  *
  * Group actions with `md3-button-group`. The toolbar has one slots region, and it keeps the
- * authored order.
+ * authored order. The space between the items follows the free space of the container, between
+ * `--md-toolbar-gap-min` and `--md-toolbar-gap-max`.
  */
 @Component({
     selector: 'md3-toolbar',
@@ -340,7 +344,7 @@ export class Toolbar implements ButtonContext, OnDestroy {
             return;
         }
 
-        const away = this.layout.mainScrollTop() > 0 && this.layout.isScrollingDown();
+        const away = this.layout.mainIsScrolled() && this.layout.isScrollingDown();
 
         this.isHidden.set(action === 'hide' && away);
         this.expanded.set(action === 'hide' ? true : !away);
