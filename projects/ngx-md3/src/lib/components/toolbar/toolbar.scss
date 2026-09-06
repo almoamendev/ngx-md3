@@ -1,6 +1,6 @@
 :host {
     --md-toolbar-size: 4em;
-    --md-toolbar-padding: 0.5em;
+    --md-toolbar-padding: 0.75em;
     --md-toolbar-radius: var(--md-toolbar-size);
     --md-toolbar-shadow: var(--md-shadow-3dp);
 
@@ -187,7 +187,6 @@
                 .md3-toolbar-slots {
                     ::ng-deep > md3-toolbar-item {
                         max-width: var(--md-toolbar-item-max-size);
-                        min-width: 3em;
                         
                         & + md3-toolbar-item {
                             margin-inline-start: var(--md-toolbar-gap);
