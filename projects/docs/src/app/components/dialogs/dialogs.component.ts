@@ -221,12 +221,12 @@ class DialogService {
 
     /**
      * Open a dialog that covers the whole screen. Only one can be open
-     * at a time. FullScreenDialogConfig is DialogConfig without
-     * previousDialog, which does not apply to full screen dialogs
+     * at a time, so it replaces the dialogs that are open. previousDialog
+     * decides what happens to them, as it does for a regular dialog
      */
     public openFullScreen<T, D = unknown, R = unknown>(
         component: Type<T>,
-        config?: FullScreenDialogConfig<D>,
+        config?: DialogConfig<D>,
     ): DialogRef<T, R>;
 
     /**
@@ -262,7 +262,7 @@ import {
 } from '@almoamendev/ngx-md3';
 
 // opens edge to edge, replacing whatever dialog is open
-const dialogRef: DialogRef = dialogService.openFullScreen(YourDialogComponent, <FullScreenDialogConfig>{...});
+const dialogRef: DialogRef = dialogService.openFullScreen(YourDialogComponent, <DialogConfig>{...});
 
 // side sheets opened from now on land inside the dialog
 sheetsService.openSideSheet(YourSheetComponent, { side: 'end' });
@@ -352,6 +352,7 @@ dialogRef.show();`;
             },
             bindDataToInputs: true,
             disableCloseEvents: !this.closeEvents(),
+            previousDialog: this.previousDialog(),
             ariaLabel: 'Sample full screen dialog',
             scheme: this.darkMode() ? 'dark' : 'light',
             direction: this.direction(),

@@ -6,7 +6,6 @@ import { Dialog } from './dialog';
 import { FullScreenDialog } from './full-screen-dialog/full-screen-dialog';
 import { DIALOG_COMPONENT, DIALOG_CONFIG, DIALOG_DATA, DialogRef } from './dialog-ref';
 import { DialogConfig, DialogContainer, PreviousDialog } from '../../interfaces/dialog-config.interface';
-import { FullScreenDialogConfig } from '../../interfaces/full-screen-dialog-config.interface';
 
 interface ResolvedDialogConfig<D = unknown> extends DialogConfig<D> {
     data: D | undefined;
@@ -158,10 +157,12 @@ export class DialogService {
      * Opens a dialog that covers the whole screen. Only one can be open at a
      * time, so it replaces whatever is open, and while it is up the side sheet
      * outlets belong to it: side sheets open inside the dialog, not behind it.
+     * `previousDialog` decides what happens to the dialogs it replaces, the
+     * same way it does for a regular dialog.
      */
     public openFullScreen<T, D = unknown, R = unknown>(
         component: Type<T>,
-        config: FullScreenDialogConfig<D> = {},
+        config: DialogConfig<D> = {},
     ): DialogRef<T, R> {
         const dialogConfig = this.mergeConfig(config);
 
@@ -176,7 +177,7 @@ export class DialogService {
         if (previousRef) {
             // Everything open belongs to the context being replaced, including
             // a full screen dialog that is already up.
-            this.closeAll();
+            this.dismissPreviousContext(dialogConfig.previousDialog);
         }
 
         let dialogRef!: DialogRef<T, R>;
@@ -348,6 +349,16 @@ export class DialogService {
         return behavior === 'hide' ? previousRef.hide() : this.closeRegularDialogs();
     }
 
+    /**
+     * The same choice for a full screen dialog, applied to everything that is
+     * on screen: what it takes over from is a whole context, a full screen
+     * dialog of its own included. `hide` keeps that context alive, and it comes
+     * back as it was once this dialog closes.
+     */
+    private dismissPreviousContext(behavior: PreviousDialog): Promise<void> {
+        return behavior === 'hide' ? this.hideAll() : this.closeAll();
+    }
+
     private startOpenAnimation(dialogRef: DialogRef<any, any>): void {
         const overlayRef = dialogRef.overlayRef;
         const panel = overlayRef.overlayElement;
@@ -415,6 +426,14 @@ export class DialogService {
         // Nothing to hand the scrim over to, e.g. a full screen dialog: the
         // outgoing scrim fades out on its own instead.
         if (!to) {
+            return;
+        }
+
+        // Nothing to hand over either: the dialog leaving carries no scrim, so
+        // the one coming in fades its own in rather than switching it on in a
+        // single frame. This is a full screen dialog closing over a dialog that
+        // was hidden underneath it.
+        if (!from) {
             return;
         }
 
@@ -495,11 +514,29 @@ export class DialogService {
                 ref.overlayRef.backdropElement?.classList.add(SCRIM_KEPT_CLASS);
             }
 
-            setTimeout(
-                () => this.startRestoringAnimation(ref, previousRef),
-                DIALOG_HANDOVER_DELAY_MS,
-            );
+            setTimeout(() => {
+                this.showHostFullScreenDialog(previousRef);
+                this.startRestoringAnimation(ref, previousRef);
+            }, DIALOG_HANDOVER_DELAY_MS);
             return;
+        }
+    }
+
+    /**
+     * Brings back the full screen dialog a restored dialog sits in. The two are
+     * hidden together when a full screen dialog takes over with
+     * `previousDialog: 'hide'`, so the context has to be on screen again before
+     * the dialog that sits on top of it, exactly as showAll() puts them back.
+     */
+    private showHostFullScreenDialog(ref: DialogRef<any, any>): void {
+        if (ref.isFullScreen) {
+            return;
+        }
+
+        const hostRef = this.fullScreenDialog;
+
+        if (hostRef?.isHidden && this.refs.indexOf(hostRef) < this.refs.indexOf(ref)) {
+            hostRef.show();
         }
     }
 

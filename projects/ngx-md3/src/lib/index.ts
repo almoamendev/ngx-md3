@@ -30,7 +30,6 @@ export * from './types/carousel-item-size.type';
 
 // interfaces
 export * from './interfaces/dialog-config.interface';
-export * from './interfaces/full-screen-dialog-config.interface';
 export * from './interfaces/menu-config.interface';
 export * from './interfaces/side-sheet-config.interface';
 export * from './interfaces/bottom-sheet-config.interface';
