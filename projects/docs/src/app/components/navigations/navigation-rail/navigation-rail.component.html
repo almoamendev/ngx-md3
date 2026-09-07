@@ -19,7 +19,7 @@
     </button>
 
     <md3-navigation-rail [(expanded)]="expanded" [hide-menu-button]="hideMenuButton()"
-        [full-width-indicator]="fullWidthIndicator()" [container-style]="containerStyle()"
+        [full-width-indicator]="fullWidthIndicator()" [menu-alignment]="menuAlignment()" [container-style]="containerStyle()"
         [collapsed-layout]="collapsedLayout()" [expanded-layout]="expandedLayout()">
         @if (showFab()) {
             <button type="button" md3-fab extended>
@@ -107,6 +107,16 @@
                 </td>
                 <td>input&lt;boolean&gt;</td>
                 <td style="white-space: nowrap;">false</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>menu-alignment</i>
+                    <p md3-type-body size="small">Align navigation menu vertically.</p>
+                </td>
+                <td>
+                    input&lt;'start' | 'center' | 'end'&gt;
+                </td>
+                <td style="white-space: nowrap;">start</td>
             </tr>
             <tr>
                 <td>
