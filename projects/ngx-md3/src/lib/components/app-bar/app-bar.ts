@@ -5,7 +5,7 @@ import { Avatar } from '../common/avatar';
 import { LayoutService } from '../../foundations/layout.service';
 import { DIALOG_CONFIG } from '../dialog/dialog-ref';
 import { AppBarLogo } from './app-bar-logo';
-import { TypeDisplay, TypeHeadline, TypeTitle } from '../../../public-api';
+import { TypeBody, TypeDisplay, TypeHeadline, TypeTitle } from '../../../public-api';
 
 export type AppBarType = 'small' | 'medium' | 'large' | 'search';
 export type AppBarScrollingStyle = 'none' | 'transparent' | 'elevate';
@@ -15,6 +15,7 @@ export type AppBarScrollingStyle = 'none' | 'transparent' | 'elevate';
     imports: [
         TypeHeadline,
         TypeTitle,
+        TypeBody,
         TypeDisplay,
     ],
     templateUrl: './app-bar.html',
