@@ -8,6 +8,8 @@
             padding-top: 0.25em !important;
 
             .md3-nav-header {
+                padding-top: 0 !important;
+
                 .md3-menu-button {
                     margin: 0.5em 0 !important;
                 }
@@ -16,18 +18,10 @@
     }
 
     ::ng-deep .md3-panes-container {
-        .md3-pane.md3-pane-start {
+        .md3-pane {
             md3-side-sheet-stack {
                 md3-side-sheet.md3-style-default.md3-inset {
-                    padding-inline-end: 0.5em;
-                }
-            }
-        }
-        
-        .md3-pane.md3-pane-end {
-            md3-side-sheet-stack {
-                md3-side-sheet.md3-style-default.md3-inset {
-                    padding-inline-start: 0.5em;
+                    padding: 0.5em;
                 }
             }
         }
@@ -36,7 +30,7 @@
     main {
         min-width: 0;
         min-height: 0;
-        padding: 1em 0.5em;
+        padding: 0.5em;
         position: relative;
         display: grid;
         grid-template-columns: minmax(0, 1fr);
@@ -71,7 +65,7 @@
             &::before {
                 content: "";
                 display: block;
-                height: calc(100dvh - 6em);
+                height: calc(100dvh - 5em);
                 border-radius: 1em;
                 box-shadow: 0 0 0 4em var(--background-color);
             }

@@ -1,5 +1,5 @@
 import { Component, inject, input } from '@angular/core';
-import { Button, DIALOG_CONFIG, DialogActions, DialogBody, DialogConfig, DialogHeader, DialogRef, DialogService, IconElement, MaterialIcon } from '@almoamendev/ngx-md3';
+import { Button, DIALOG_CONFIG, DialogActions, DialogBody, DialogConfig, DialogHeader, DialogRef, DialogService, IconElement, MaterialIcon, TypeBody } from '@almoamendev/ngx-md3';
 
 @Component({
     selector: 'app-sample-dialog',
@@ -10,6 +10,7 @@ import { Button, DIALOG_CONFIG, DialogActions, DialogBody, DialogConfig, DialogH
         DialogBody,
         DialogActions,
         Button,
+        TypeBody,
     ],
     templateUrl: './sample-dialog.html',
     styleUrl: './sample-dialog.scss',

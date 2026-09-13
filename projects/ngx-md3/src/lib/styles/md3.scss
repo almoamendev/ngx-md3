@@ -510,6 +510,14 @@ md3-badge {
         height: 100%;
         overflow-x: hidden;
         overflow-y: auto;
+
+        // A floating toolbar in a scaffold bar covers content that it does not reserve. The
+        // scaffold publishes how much, and the fallback is 0, so a layout without one is
+        // unchanged. Set these to 0 on a page that needs full-bleed content.
+        padding-block-start: var(--md-scaffold-floating-inset-block-start, 0em);
+        padding-block-end: var(--md-scaffold-floating-inset-block-end, 0em);
+        scroll-padding-block-start: var(--md-scaffold-floating-inset-block-start, 0em);
+        scroll-padding-block-end: var(--md-scaffold-floating-inset-block-end, 0em);
     }
 }
 

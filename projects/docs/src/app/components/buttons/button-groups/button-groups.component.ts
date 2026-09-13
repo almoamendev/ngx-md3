@@ -1,4 +1,4 @@
-import { Component, OnDestroy, signal } from '@angular/core';
+import { Component, computed, OnDestroy, signal } from '@angular/core';
 import { Button, ButtonGroup, ButtonGroupSelection, ButtonGroupType, ButtonSize, Divider, IconButton, IconElement, MaterialIcon, SheetsService, SideSheetRef, TypeBody, TypeDisplay } from '@almoamendev/ngx-md3';
 import { ButtonGroupConfig } from './button-group-config/button-group-config';
 import { Playground } from '../../playground/playground';
@@ -30,6 +30,7 @@ export class ButtonGroupsComponent implements OnDestroy {
     public buttonSize = signal<ButtonSize>('small');
     public groupType = signal<ButtonGroupType>('standard');
     public selection = signal<ButtonGroupSelection>('none');
+    public manualToggle = computed<boolean | null>(() => this.selection() == 'manual' ? false : null);
 
     public apiImport: string = `// Component imports
 import {
@@ -56,7 +57,7 @@ import { ButtonSize, ButtonGroupType, ButtonGroupSelection } from '@almoamendev/
 
 type ButtonSize = 'x-small' | 'small' | 'medium' | 'large' | 'x-large';
 type ButtonGroupType = 'standard' | 'connected';
-type ButtonGroupSelection = 'none' | 'single' | 'multiple';`;
+type ButtonGroupSelection = 'none' | 'single' | 'multiple' | 'manual';`;
 
     public apiUsage: string = `<!-- Component usage -->
 <md3-button-group button-size="small" group-type="standard" selection="none">
@@ -75,6 +76,25 @@ type ButtonGroupSelection = 'none' | 'single' | 'multiple';`;
     .
     .
     .
+</md3-button-group>`;
+
+    public apiManualUsage: string = `<!-- Manual selection: every button controls its own state -->
+<md3-button-group selection="manual">
+    <!-- toggle button, starts unselected -->
+    <button md3-button [selected]="false">
+        <md3-icon md3-icon-element="leading">bluetooth</md3-icon>
+        Bluetooth
+    </button>
+
+    <!-- toggle button bound to the host component state -->
+    <button md3-icon-button [(selected)]="isAlarmOn">
+        <md3-icon md3-icon-element>alarm</md3-icon>
+    </button>
+
+    <!-- regular button, no selection at all -->
+    <button md3-icon-button>
+        <md3-icon md3-icon-element>link</md3-icon>
+    </button>
 </md3-button-group>`;
 
     constructor(

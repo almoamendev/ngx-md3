@@ -18,6 +18,12 @@ export * from './types/chip-style.type';
 export * from './types/list-leading-type.type';
 export * from './types/list-leading-size.type';
 export * from './types/carousel-layout.type';
+export * from './types/toolbar-type.type';
+export * from './types/toolbar-color.type';
+export * from './types/toolbar-orientation.type';
+export * from './types/toolbar-alignment.type';
+export * from './types/toolbar-scroll-action.type';
+export * from './types/toolbar-region.type';
 export * from './types/carousel-alignment.type';
 export * from './types/carousel-orientation.type';
 export * from './types/carousel-item-size.type';
@@ -26,7 +32,6 @@ export * from './types/select-filter-mode.type';
 
 // interfaces
 export * from './interfaces/dialog-config.interface';
-export * from './interfaces/full-screen-dialog-config.interface';
 export * from './interfaces/menu-config.interface';
 export * from './interfaces/side-sheet-config.interface';
 export * from './interfaces/bottom-sheet-config.interface';
@@ -43,7 +48,9 @@ export * from './styles/typography/type-body';
 export * from './styles/typography/type-label';
 
 // foundations
+export * from './foundations/viewport.service';
 export * from './foundations/layout.service';
+export * from './foundations/layout/layout';
 export * from './foundations/scaffold/scaffold';
 export * from './foundations/scaffold-bar';
 export * from './foundations/scaffold-rail';
@@ -102,6 +109,10 @@ export * from './components/loading-and-progress/circular-progress-indicator/cir
 export * from './components/app-bar/app-bar';
 export * from './components/app-bar/app-bar-logo';
 
+// toolbar
+export * from './components/toolbar/toolbar';
+export * from './components/toolbar/toolbar-item';
+
 // navigations
 export * from './components/navigations/navigation-item/navigation-item';
 export * from './components/navigations/navigation-group/navigation-group';
@@ -125,7 +136,6 @@ export * from './components/dialog/dialog-header/dialog-header';
 export * from './components/dialog/dialog-body/dialog-body';
 export * from './components/dialog/dialog-actions/dialog-actions';
 export * from './components/dialog/full-screen-dialog/full-screen-dialog';
-export * from './components/dialog/full-screen-dialog-header/full-screen-dialog-header';
 
 // menus
 export * from './components/menu/menu';

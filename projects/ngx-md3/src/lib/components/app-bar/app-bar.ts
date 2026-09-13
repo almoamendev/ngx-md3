@@ -1,10 +1,11 @@
-import { booleanAttribute, Component, computed, contentChild, effect, ElementRef, input, Signal, signal } from '@angular/core';
+import { booleanAttribute, Component, computed, contentChild, effect, ElementRef, inject, input, Signal, signal } from '@angular/core';
 import { ButtonContext, MD3_BUTTON_CONTEXT } from '../../interfaces/button-context.interface';
 import { ButtonSize } from '../../types/button-size.type';
 import { Avatar } from '../common/avatar';
 import { LayoutService } from '../../foundations/layout.service';
+import { DIALOG_CONFIG } from '../dialog/dialog-ref';
 import { AppBarLogo } from './app-bar-logo';
-import { TypeDisplay, TypeHeadline, TypeTitle } from '../../../public-api';
+import { TypeBody, TypeDisplay, TypeHeadline, TypeTitle } from '../../../public-api';
 
 export type AppBarType = 'small' | 'medium' | 'large' | 'search';
 export type AppBarScrollingStyle = 'none' | 'transparent' | 'elevate';
@@ -14,6 +15,7 @@ export type AppBarScrollingStyle = 'none' | 'transparent' | 'elevate';
     imports: [
         TypeHeadline,
         TypeTitle,
+        TypeBody,
         TypeDisplay,
     ],
     templateUrl: './app-bar.html',
@@ -25,13 +27,38 @@ export type AppBarScrollingStyle = 'none' | 'transparent' | 'elevate';
         },
     ],
     host: {
-        role: 'banner',
+        '[attr.role]': 'resolvedRole()',
         '[class.md3-scrolled]': 'mainIsScrolled()',
         '[class.md3-auto-hide]': 'autoHide()',
         '[class.md3-scrolling-down]': 'isScrollingDown()',
     },
 })
 export class AppBar implements ButtonContext {
+    // A dialog provides its configuration to everything it holds, so this is how the bar knows
+    // it is not the banner of the document.
+    private readonly inDialog = !!inject(DIALOG_CONFIG, { optional: true });
+
+    /**
+     * The landmark role of the bar.
+     *
+     * A page has one banner, and the app bar of the page is it. A bar inside a dialog is not
+     * the banner of the document — a banner nested in a dialog misleads a screen reader — so a
+     * bar that finds itself in one carries no role. Set this input to force either value.
+     */
+    public barRole = input<'banner' | 'none' | null>(null, {
+        alias: 'bar-role',
+    });
+
+    protected readonly resolvedRole = computed<string | null>(() => {
+        const role = this.barRole();
+
+        if (role !== null) {
+            return role === 'none' ? null : role;
+        }
+
+        return this.inDialog ? null : 'banner';
+    });
+
     public title = input<string | null>(null, {
         alias: 'bar-title',
     });
@@ -65,9 +92,11 @@ export class AppBar implements ButtonContext {
     public hasAvatar = computed(() => !!this.avatar());
 
     public mainIsScrolled = computed(() => this.layoutService.mainIsScrolled());
-    public isScrollingDown = signal<boolean>(false);
 
-    private scrollPosition = 0;
+    // One source of truth. The toolbar reads the same signal, so the two bars can never
+    // disagree about which way the main pane is moving.
+    public isScrollingDown = computed<boolean>(() => this.layoutService.isScrollingDown());
+
     private bottomExpandedHeight = computed(() => {
         const type = this.appBarType();
 
@@ -104,8 +133,6 @@ export class AppBar implements ButtonContext {
         private el: ElementRef,
         private layoutService: LayoutService
     ) {
-        this.scrollPosition = this.layoutService.mainScrollTop();
-
         effect((onCleanup) => {
             const type = 'md3-' + this.appBarType();
 
@@ -133,10 +160,6 @@ export class AppBar implements ButtonContext {
             onCleanup(() => {
                 this.element.classList.remove(width);
             });
-        });
-
-        effect(() => {
-            this.updateScrollDirection(this.layoutService.mainScrollTop());
         });
 
         effect(() => {
@@ -172,22 +195,6 @@ export class AppBar implements ButtonContext {
 
     private isBottomCollapsed(collapse: number, expandedHeight: number): boolean {
         return expandedHeight > 0 && collapse >= expandedHeight;
-    }
-
-    private updateScrollDirection(scrollTop: number): void {
-        if (scrollTop === this.scrollPosition) {
-            return;
-        }
-
-        const defaultBarHeight = this.getHostFontSize() * 4;
-        const scrollOffset = scrollTop - this.scrollPosition;
-
-        if (Math.abs(scrollOffset) <= defaultBarHeight) {
-            return;
-        }
-
-        this.isScrollingDown.set(scrollOffset > 0);
-        this.scrollPosition = scrollTop;
     }
 
     private hasCollapsibleBottom(type: AppBarType): boolean {

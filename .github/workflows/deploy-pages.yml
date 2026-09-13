@@ -26,35 +26,66 @@ jobs:
         with:
           fetch-depth: 0
 
-      # Docs only redeploys when the workspace root package.json's version
-      # is bumped — the same "only ship on a version bump" gate the npm
-      # publish workflow uses, just diffed against git history here since
-      # there's no registry to check a "currently deployed" version against.
+      # Docs only redeploys on a version bump — the same "only ship on a
+      # version bump" gate the npm publish workflow uses, just diffed against
+      # git history here since there's no registry to check a "currently
+      # deployed" version against.
+      #
+      # Two versions matter, and either one alone is enough to redeploy:
+      #   - package.json                  -> the workspace itself
+      #   - projects/ngx-md3/package.json -> the library. This is the one the
+      #     docs bundle, show in the header version badge, and publish.yml
+      #     ships to npm. It is frequently bumped in a commit that leaves the
+      #     workspace version alone, and watching only the workspace version
+      #     let those pushes go out to npm while the site stayed stale.
+      #
       # Manual (workflow_dispatch) runs always build, ignoring this check.
-      - name: Check whether the root package.json version changed
+      - name: Check whether a version changed
         id: version-check
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          BEFORE: ${{ github.event.before }}
         run: |
-          CURRENT_VERSION=$(node -p "require('./package.json').version")
+          set -euo pipefail
 
-          if [ "${{ github.event_name }}" != "push" ]; then
-            echo "Manually triggered — building regardless of version."
+          ROOT_PKG='package.json'
+          LIB_PKG='projects/ngx-md3/package.json'
+
+          CURRENT_ROOT=$(node -p "require('./$ROOT_PKG').version")
+          CURRENT_LIB=$(node -p "require('./$LIB_PKG').version")
+
+          if [ "$EVENT_NAME" != "push" ]; then
+            echo "Triggered by $EVENT_NAME - building regardless of version."
             echo "should-deploy=true" >> "$GITHUB_OUTPUT"
             exit 0
           fi
 
-          if git cat-file -e "${{ github.event.before }}" 2>/dev/null; then
-            PREVIOUS_VERSION=$(git show "${{ github.event.before }}:package.json" | node -p "JSON.parse(require('fs').readFileSync(0, 'utf8')).version" 2>/dev/null || echo "")
-          else
-            PREVIOUS_VERSION=""
-          fi
+          # Reads the "version" field of a package.json at a given commit.
+          # Prints nothing when that commit or file is unreachable (first push
+          # on a branch, force push, file added in this push). An unknown
+          # previous version counts as changed, so the site still deploys.
+          # The blob reaches node through the environment, so a package.json
+          # that was malformed at that commit reads as unknown instead of
+          # failing the step.
+          version_at() {
+            local blob
+            blob=$(git show "$1:$2" 2>/dev/null) || return 0
+            [ -n "$blob" ] || return 0
+            PKG_JSON="$blob" node -p "JSON.parse(process.env.PKG_JSON).version" 2>/dev/null || true
+          }
 
-          echo "Current version:  $CURRENT_VERSION"
-          echo "Previous version: $PREVIOUS_VERSION"
+          PREVIOUS_ROOT=$(version_at "$BEFORE" "$ROOT_PKG")
+          PREVIOUS_LIB=$(version_at "$BEFORE" "$LIB_PKG")
 
-          if [ "$CURRENT_VERSION" = "$PREVIOUS_VERSION" ]; then
-            echo "should-deploy=false" >> "$GITHUB_OUTPUT"
-          else
+          echo "workspace: ${PREVIOUS_ROOT:-unknown} -> $CURRENT_ROOT"
+          echo "library:   ${PREVIOUS_LIB:-unknown} -> $CURRENT_LIB"
+
+          if [ "$CURRENT_ROOT" != "$PREVIOUS_ROOT" ] || [ "$CURRENT_LIB" != "$PREVIOUS_LIB" ]; then
+            echo "A version changed - deploying."
             echo "should-deploy=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "No version change - skipping the deploy."
+            echo "should-deploy=false" >> "$GITHUB_OUTPUT"
           fi
 
   build:
@@ -66,7 +97,7 @@ jobs:
         uses: actions/checkout@v7
 
       - name: Setup Node
-        uses: actions/setup-node@v7
+        uses: actions/setup-node@v6
         with:
           node-version: 24
           cache: 'npm'

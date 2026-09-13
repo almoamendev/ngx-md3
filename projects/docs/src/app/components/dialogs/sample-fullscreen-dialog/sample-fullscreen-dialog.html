@@ -1,22 +1,26 @@
-<md3-fullscreen-dialog-header>
-    <button type="button" md3-icon-button md3-header-leading button-type="standard" (click)="close()">
-        <md3-icon md3-icon-element bi-directional>arrow_back</md3-icon>
-    </button>
-    <span md3-type-title size="large">Full screen dialog</span>
-    <button md3-header-trailing type="button" md3-button button-type="text" (click)="close(true)">Save</button>
-</md3-fullscreen-dialog-header>
+<md3-layout>
+    <md3-app-bar md3-scaffold-bar="top" bar-type="small" bar-title="Full screen dialog" scroll-style="elevate">
+        <button type="button" md3-icon-button md3-app-bar-leading button-type="standard" (click)="close()">
+            <md3-icon md3-icon-element bi-directional>arrow_back</md3-icon>
+        </button>
+        <button md3-app-bar-trailing type="button" md3-button button-type="text" (click)="close(true)">Save</button>
+    </md3-app-bar>
 
-<md3-dialog-body>
-    <p md3-type-body size="medium">
-        A full screen dialog fills the window and holds a whole task, instead of a
-        single decision. It brings its own start and end panes, so side sheets open
-        inside it just like they do in the scaffold.
-    </p>
-    <p md3-type-body size="medium">
-        Dialogs opened from here stack on top of this one and leave it alone.
-    </p>
+    <div md3-scaffold-pane="main">
+        <md3-dialog-body>
+            <p md3-type-body size="medium">
+                A full screen dialog fills the window and holds a whole task, instead of a
+                single decision. Its content is an <code>md3-layout</code>, so it carries the
+                same regions the scaffold does &mdash; a bar for the app bar, a rail for a
+                toolbar, and start and end panes where side sheets open inside it.
+            </p>
+            <p md3-type-body size="medium">
+                Dialogs opened from here stack on top of this one and leave it alone.
+            </p>
 
-    <button type="button" md3-button button-type="filled" (click)="openSideSheet()">Open side sheet</button>
-    <button type="button" md3-button button-type="text" (click)="openDialog()">Open dialog on top</button>
-    <button type="button" md3-button button-type="text" (click)="hide()">Hide</button>
-</md3-dialog-body>
+            <button type="button" md3-button button-type="filled" (click)="openSideSheet()">Open side sheet</button>
+            <button type="button" md3-button button-type="text" (click)="openDialog()">Open dialog on top</button>
+            <button type="button" md3-button button-type="text" (click)="hide()">Hide</button>
+        </md3-dialog-body>
+    </div>
+</md3-layout>

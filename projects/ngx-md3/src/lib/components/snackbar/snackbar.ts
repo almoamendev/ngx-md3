@@ -58,7 +58,7 @@ export class Snackbar implements OnInit, OnDestroy {
 
     constructor(private readonly el: ElementRef<HTMLElement>) {
         effect(() => {
-            const inset = this.layout.bottomInset() + (this.config.bottomOffset ?? 0);
+            const inset = this.layout.bottomSafeInset() + (this.config.bottomOffset ?? 0);
             this.el.nativeElement.style.setProperty('--md3-snackbar-bottom-inset', `${inset}px`);
         });
 

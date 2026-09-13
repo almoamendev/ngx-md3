@@ -107,13 +107,18 @@ export class IconButton {
         return this.el.nativeElement as HTMLElement;
     }
 
-    public enableSelection() {
+    public enableSelection(): boolean {
+        let enabled = false;
+
         this.isSelected.update((current) => {
             if (current !== null) {
                 return current;
             }
 
+            enabled = true;
             return false;
         });
+
+        return enabled;
     }
 }

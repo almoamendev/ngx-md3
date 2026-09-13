@@ -35,6 +35,7 @@ export class NavigationRailComponent implements OnDestroy {
     public expanded = signal<boolean>(false);
     public hideMenuButton = signal<boolean>(false);
     public fullWidthIndicator = signal<boolean>(false);
+    public menuAlignment = signal<'start' | 'center' | 'end'>('start');
     public containerStyle = signal<'none' | 'elevated' | 'divider'>('none');
     public collapsedLayout = signal<'compact' | 'narrow' | 'hidden'>('compact');
     public expandedLayout = signal<'standard' | 'modal'>('standard');
@@ -64,6 +65,10 @@ public fullWidthIndicator = input<boolean, unknown>(false, {
     alias: 'full-width-indicator',
     transform: booleanAttribute,
 });
+public menuAlignment = input<MenuAlignment>('start', {
+    alias: 'menu-alignment',
+    transform: (v) => v as MenuAlignment,
+});
 public containerStyle = input<ContainerStyle>('none', {
     alias: 'container-style',
 });
@@ -79,7 +84,8 @@ public expandedMode = input<ExpandedLayout>('standard', {
 // inline unions, not exported as named types
 type ContainerStyle = 'none' | 'elevated' | 'divider';
 type CollapsedLayout = 'compact' | 'narrow' | 'hidden';
-type ExpandedLayout = 'standard' | 'modal';`;
+type ExpandedLayout = 'standard' | 'modal';
+type MenuAlignment = 'start' | 'center' | 'end';`;
 
     public apiUsage: string = `<!-- Component usage -->
 
@@ -199,6 +205,11 @@ type ExpandedLayout = 'standard' | 'modal';`;
         this.configSheet?.componentInstance?.showFab.setValue(this.showFab());
         this.configSheet?.componentInstance?.showFab.registerOnChange(() => {
             this.showFab.set(this.configSheet?.componentInstance?.showFab.value);
+        });
+
+        this.configSheet?.componentInstance?.menuAlignment.setValue(this.menuAlignment());
+        this.configSheet?.componentInstance?.menuAlignment.registerOnChange(() => {
+            this.menuAlignment.set(this.configSheet?.componentInstance?.menuAlignment.value);
         });
 
         this.configSheet?.componentInstance?.badge.setValue(this.badge());

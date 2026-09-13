@@ -25,7 +25,7 @@
                 <div md3-type-title size="large">{{ title() }}</div>
             }
             @if (subtitle()?.length) {
-                <div md3-type-body size="small" emphasized>{{ subtitle() }}</div>
+                <div md3-type-body size="small" emphasized color="on-surface-variant">{{ subtitle() }}</div>
             }
         </div>
     }
@@ -47,7 +47,7 @@
                         <div md3-type-headline size="medium">{{ title() }}</div>
                     }
                     @if (subtitle()?.length) {
-                        <div md3-type-title size="small">{{ subtitle() }}</div>
+                        <div md3-type-title size="small" color="on-surface-variant">{{ subtitle() }}</div>
                     }
                 }
                 @if (appBarType() == 'large') {
@@ -55,7 +55,7 @@
                         <div md3-type-display size="small">{{ title() }}</div>
                     }
                     @if (subtitle()?.length) {
-                        <div md3-type-title size="medium">{{ subtitle() }}</div>
+                        <div md3-type-title size="medium" color="on-surface-variant">{{ subtitle() }}</div>
                     }
                 }
             </div>

@@ -24,6 +24,7 @@ export class NavRailConfig {
     public expanded: FormControl = new FormControl<boolean>(false);
     public hideMenuButton: FormControl = new FormControl<boolean>(false);
     public fullWidthIndicator: FormControl = new FormControl<boolean>(false);
+    public menuAlignment: FormControl = new FormControl<'start' | 'center' | 'end'>('start');
     public containerStyle: FormControl = new FormControl<'none' | 'elevated' | 'divider'>('none');
     public collapsedLayout: FormControl = new FormControl<'compact' | 'narrow' | 'hidden'>('compact');
     public expandedLayout: FormControl = new FormControl<'standard' | 'modal'>('standard');

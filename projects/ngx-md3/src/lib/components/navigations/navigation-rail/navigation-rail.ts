@@ -6,6 +6,7 @@ import { ButtonContext, MD3_BUTTON_CONTEXT } from '../../../interfaces/button-co
 import { ButtonSize } from '../../../types/button-size.type';
 import { IconButton } from '../../buttons/icon-button/icon-button';
 import { MaterialIcon } from '../../common/material-icon/material-icon';
+import { NgClass } from '@angular/common';
 
 type ExpandedLayout = 'standard' | 'modal';
 type CollapsedLayout = 'compact' | 'narrow' | 'hidden';
@@ -17,6 +18,7 @@ type ContainerStyle = 'none' | 'elevated' | 'divider';
         IconButton,
         IconElement,
         MaterialIcon,
+        NgClass,
     ],
     templateUrl: './navigation-rail.html',
     styleUrl: './navigation-rail.scss',
@@ -46,6 +48,10 @@ export class NavigationRail implements ButtonContext {
     public fullWidthIndicator = input<boolean, unknown>(false, {
         alias: 'full-width-indicator',
         transform: booleanAttribute
+    });
+
+    public menuAlignment = input<'start' | 'center' | 'end'>('start', {
+        alias: 'menu-alignment',
     });
 
     public containerStyle = input<ContainerStyle>('none', {

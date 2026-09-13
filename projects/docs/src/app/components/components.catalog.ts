@@ -45,6 +45,13 @@ export const COMPONENTS: ComponentEntry[] = [
         icon: 'web_asset',
         image: 'md3-app-bar.png',
     },
+    {
+        label: 'Toolbar',
+        link: '/components/toolbar',
+        description: 'Floating or docked bar for the actions of the current page.',
+        icon: 'tune',
+        image: 'md3-toolbar.png',
+    },
 
     {
         label: 'Navigation bar',

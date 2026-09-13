@@ -1,0 +1,378 @@
+:host {
+    --md-toolbar-size: 4em;
+    --md-toolbar-padding: 0.75em;
+    --md-toolbar-radius: var(--md-toolbar-size);
+    --md-toolbar-shadow: var(--md-shadow-3dp);
+
+    // The transition bound for a collapsing item. Raise it for very wide items.
+    --md-toolbar-item-max-size: 20em;
+
+    // Space between the items. The component measures the free space of the container along
+    // the main axis, divides it between the gaps, and publishes it as --md-toolbar-gap-free.
+    // The clamp keeps the result between the two bounds, so the items spread out in a wide
+    // toolbar and stay close together in a narrow one.
+    --md-toolbar-gap-min: 0.25em;
+    --md-toolbar-gap-max: 2em;
+    --md-toolbar-gap: clamp(var(--md-toolbar-gap-min), var(--md-toolbar-gap-free, 0px), var(--md-toolbar-gap-max));
+
+    --md-toolbar-duration: var(--md-motion-expressive-default-spatial-duration);
+    --md-toolbar-easing: var(--md-motion-expressive-default-spatial-easing);
+    --md-toolbar-effect-duration: var(--md-motion-expressive-fast-effects-duration);
+
+    --background-color: rgb(var(--md-scheme-surface-container));
+    --foreground-color: rgb(var(--md-scheme-on-surface));
+
+    display: block;
+    position: relative;
+    min-width: 0em;
+    min-height: 0em;
+    transition: max-height var(--md-toolbar-duration) var(--md-toolbar-easing),
+                max-width var(--md-toolbar-duration) var(--md-toolbar-easing),
+                opacity var(--md-toolbar-duration) var(--md-toolbar-easing);
+
+    .md3-toolbar-layout {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: var(--md-toolbar-padding);
+        width: 100%;
+        height: 100%;
+        min-width: 0em;
+        min-height: 0em;
+        transition: transform var(--md-toolbar-duration) var(--md-toolbar-easing),
+                    opacity var(--md-toolbar-duration) var(--md-toolbar-easing);
+    
+        .md3-toolbar-container {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            min-width: 0em;
+            min-height: 0em;
+            max-width: 100%;
+            max-height: 100%;
+            border-radius: var(--md-toolbar-radius);
+            background-color: var(--background-color);
+            color: var(--foreground-color);
+            box-shadow: var(--md-toolbar-shadow);
+            overflow: hidden;
+            pointer-events: auto;
+            transition:
+                max-width var(--md-toolbar-duration) var(--md-toolbar-easing),
+                padding var(--md-toolbar-duration) var(--md-toolbar-easing),
+                box-shadow var(--md-toolbar-effect-duration) linear,
+                opacity var(--md-toolbar-effect-duration) linear,
+                visibility 0s linear;
+            
+            .md3-toolbar-slots {
+                display: flex;
+                flex: 0 1 auto;
+                flex-direction: row;
+                align-items: center;
+                min-width: 0em;
+                min-height: 0em;
+
+                ::ng-deep > md3-toolbar-item {
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    flex: 0 0 auto;
+                    transition:
+                        max-width var(--md-toolbar-duration) var(--md-toolbar-easing),
+                        margin var(--md-toolbar-duration) var(--md-toolbar-easing),
+                        padding var(--md-toolbar-duration) var(--md-toolbar-easing),
+                        opacity var(--md-toolbar-effect-duration) linear,
+                        visibility 0s linear;
+                }
+            }
+        }
+    }
+
+    &.md3-fab-start {
+        ::ng-deep [md3-fab] {
+            order: -1;
+        }
+    }
+
+    &.md3-fab-end {
+        ::ng-deep [md3-fab] {
+            order: 1;
+        }
+    }
+
+    &.md3-docked {
+        --md-toolbar-radius: var(--md-border-radius-none);
+        --md-toolbar-shadow: var(--md-shadow-0dp);
+
+        background-color: var(--background-color);
+
+        &.md3-align-start {
+            .md3-toolbar-layout {
+                .md3-toolbar-container {
+                    justify-content: start;
+                }
+            }
+        }
+
+        &.md3-align-center {
+            .md3-toolbar-layout {
+                .md3-toolbar-container {
+                    justify-content: center;
+                }
+            }
+        }
+
+        &.md3-align-end {
+            .md3-toolbar-layout {
+                .md3-toolbar-container {
+                    justify-content: end;
+                }
+            }
+        }
+
+        .md3-toolbar-layout {
+            width: 100%;
+            height: 100%;
+    
+            .md3-toolbar-container {
+                background-color: transparent;
+            }
+        }
+    }
+
+    &.md3-floating {
+        &.md3-align-start {
+            .md3-toolbar-layout {
+                justify-content: start;
+            }
+        }
+
+        &.md3-align-center {
+            .md3-toolbar-layout {
+                justify-content: center;
+            }
+        }
+
+        &.md3-align-end {
+            .md3-toolbar-layout {
+                justify-content: end;
+            }
+        }
+
+        .md3-toolbar-layout {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+
+            .md3-toolbar-container {
+                pointer-events: auto;
+            }
+
+            ::ng-deep [md3-fab] {
+                pointer-events: auto;
+            }
+        }
+    }
+
+    &.md3-horizontal {
+        max-height: var(--md-toolbar-size);
+        
+        .md3-toolbar-layout {
+            height: var(--md-toolbar-size);
+            padding: 0 1em;
+
+            .md3-toolbar-container {
+                height: var(--md-toolbar-size);
+
+                .md3-toolbar-slots {
+                    ::ng-deep > md3-toolbar-item {
+                        max-width: var(--md-toolbar-item-max-size);
+                        
+                        & + md3-toolbar-item {
+                            margin-inline-start: var(--md-toolbar-gap);
+                        }
+                    }
+                }
+            }
+        }
+
+        &.md3-docked {
+            .md3-toolbar-layout {
+                .md3-toolbar-container {
+                    width: 100%;
+                }
+            }
+        }
+
+        &.md3-floating {
+            height: 0;
+        
+            .md3-toolbar-layout {
+                .md3-toolbar-container {
+                    padding: 0 var(--md-toolbar-padding);
+                }
+            }
+            
+            &.md3-region-block-end {
+                .md3-toolbar-layout {
+                    inset-block-start: auto;
+                    inset-block-end: 1em;
+                }
+            }
+            
+            &.md3-region-block-start {
+                .md3-toolbar-layout {
+                    inset-block-end: auto;
+                    inset-block-start: 1em;
+                }
+            }
+        }
+    }
+
+    &.md3-vertical {
+        max-width: var(--md-toolbar-size);
+
+        .md3-toolbar-layout {
+            flex-direction: column;
+            width: var(--md-toolbar-size);
+            padding: 1em 0;
+    
+            .md3-toolbar-container {
+                flex-direction: column;
+                width: var(--md-toolbar-size);
+        
+                .md3-toolbar-slots {
+                    flex-direction: column;
+                    width: 100%;
+                    height: auto;
+                    
+                    ::ng-deep > md3-toolbar-item {
+                        max-height: var(--md-toolbar-item-max-size);
+                        min-height: 3em;
+    
+                        & + md3-toolbar-item {
+                            margin-block-start: var(--md-toolbar-gap);
+                        }
+                    }
+                }
+            }
+        }
+
+        &.md3-docked {
+            .md3-toolbar-layout {
+                .md3-toolbar-container {
+                    height: 100%;
+                }
+            }
+        }
+
+        &.md3-floating {
+            width: 0;
+        
+            .md3-toolbar-layout {
+                .md3-toolbar-container {
+                    padding: var(--md-toolbar-padding) 0;
+                }
+            }
+            
+            &.md3-region-inline-end {
+                .md3-toolbar-layout {
+                    inset-inline-start: auto;
+                    inset-inline-end: 1em;
+                }
+            }
+            
+            &.md3-region-inline-start {
+                .md3-toolbar-layout {
+                    inset-inline-end: auto;
+                    inset-inline-start: 1em;
+                }
+            }
+        }
+    }
+
+    &.md3-hidden {
+        opacity: 0;
+        pointer-events: none;
+
+        &.md3-horizontal {
+            max-height: 0em;
+        }
+
+        &.md3-vertical {
+            max-width: 0em;
+        }
+
+        .md3-toolbar-layout {
+            transform: scaleY(0);
+        }
+    }
+
+    &.md3-collapsed {
+        // The item that stays must not keep the space of the items that went away.
+        --md-toolbar-gap: 0em;
+
+        .md3-toolbar-container {
+            .md3-toolbar-slots > ::ng-deep md3-toolbar-item:not([md3-toolbar-persistent]) {
+                max-width: 0em !important;
+                max-height: 0em !important;
+                min-width: 0em !important;
+                min-height: 0em !important;
+                margin: 0em;
+                padding-inline: 0em;
+                border-width: 0em;
+                opacity: 0;
+                visibility: hidden;
+                transition:
+                    max-width var(--md-toolbar-duration) var(--md-toolbar-easing),
+                    max-height var(--md-toolbar-duration) var(--md-toolbar-easing),
+                    margin var(--md-toolbar-duration) var(--md-toolbar-easing),
+                    padding var(--md-toolbar-duration) var(--md-toolbar-easing),
+                    opacity var(--md-toolbar-effect-duration) linear,
+                    visibility 0s linear var(--md-toolbar-duration);
+            }
+        }
+
+        &.md3-collapse-to-fab {
+            --md-toolbar-padding: 0;
+
+            .md3-toolbar-container {
+                max-width: 0em;
+                opacity: 0;
+                visibility: hidden;
+                pointer-events: none;
+                box-shadow: var(--md-shadow-0dp);
+                transition:
+                    max-width var(--md-toolbar-duration) var(--md-toolbar-easing),
+                    padding var(--md-toolbar-duration) var(--md-toolbar-easing),
+                    box-shadow var(--md-toolbar-effect-duration) linear,
+                    opacity var(--md-toolbar-effect-duration) linear,
+                    visibility 0s linear var(--md-toolbar-duration);
+            }
+        }
+    }
+
+
+    &.md3-color-vibrant {
+        --background-color: rgb(var(--md-scheme-primary-container));
+        --foreground-color: rgb(var(--md-scheme-on-primary-container));
+
+        ::ng-deep .md3-toolbar-slots {
+            md3-toolbar-item {
+                [md3-icon-button].md3-standard,
+                [md3-icon-button].md3-outlined,
+                [md3-button].md3-text,
+                [md3-button].md3-outlined {
+                    --foreground-color: rgb(var(--md-scheme-on-primary-container));
+                }
+    
+                [md3-icon-button].md3-tonal,
+                [md3-button].md3-tonal {
+                    --background-color: rgb(var(--md-scheme-surface-container));
+                    --foreground-color: rgb(var(--md-scheme-on-surface));
+                }
+            }
+        }
+    }
+
+}
