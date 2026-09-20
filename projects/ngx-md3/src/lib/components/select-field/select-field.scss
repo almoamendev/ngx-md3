@@ -1,0 +1,13 @@
+.md3-select-input {
+    & ~ .md3-select-arrow {
+        transition: transform var(--md-motion-standard-fast-spatial-duration) var(--md-motion-standard-fast-spatial-easing);
+    }
+
+    &.md3-menu-active:dir(ltr) ~ .md3-select-arrow {
+        transform: rotate(180deg);
+    }
+    
+    &.md3-menu-active:dir(rtl) ~ .md3-select-arrow {
+        transform: rotate(-180deg);
+    }
+}

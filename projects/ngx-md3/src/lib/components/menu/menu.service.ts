@@ -86,7 +86,7 @@ export class MenuService {
         menuRef.menuInstance = menuComponentRef.instance;
         this.bindTriggerActiveState(triggerElement, overlayRef, menuRef);
         this.startOpenAnimation(overlayRef);
-        this.connectCloseEvents(overlayRef, menuRef);
+        this.connectCloseEvents(overlayRef, menuRef, menuOverlay.origin);
 
         return menuRef;
     }
@@ -123,6 +123,7 @@ export class MenuService {
             bindDataToInputs: config.bindDataToInputs ?? false,
             isSubMenu: (config as InternalMenuConfig<D>).isSubMenu ?? false,
             menuColors: config.menuColors ?? 'standard',
+            origin: config.origin,
             xPosition: config.xPosition ?? 'start',
             yPosition: config.yPosition ?? 'below',
             overlapTrigger: config.overlapTrigger ?? false,
@@ -136,6 +137,10 @@ export class MenuService {
             viewContainerRef: config.viewContainerRef,
             injector: config.injector ?? this.injector,
         };
+    }
+
+    private isSelectInput(origin: ResolvedMenuOrigin): boolean {
+        return (origin as Element)?.tagName.toLowerCase() == 'input' && (origin as Element)?.classList.contains('md3-select-input');
     }
 
     private createOverlay(
@@ -152,12 +157,17 @@ export class MenuService {
             .withPositions(config.positions ?? this.getInitialConnectedPositions(config))
             .withTransformOriginOn('.md3-menu-container');
 
+        const isSelectInput = this.isSelectInput(origin);
+        const originRect = this.getOriginClientRect(origin);
+        const minWidth = !isSelectInput ? undefined : originRect.width;
+
         const overlayConfig = new OverlayConfig({
-            hasBackdrop: true,
+            hasBackdrop: !isSelectInput,
             backdropClass: ['md3-menu-scrim', 'md3-menu-opening'],
-            panelClass: ['md3-menu-panel', 'md3-menu-opening'],
+            panelClass: ['md3-menu-panel', 'md3-menu-opening', ...(isSelectInput ? ['md3-select-menu'] : [])],
             positionStrategy,
             scrollStrategy: this.getScrollStrategy(config.scrollStrategy),
+            minWidth: minWidth,
         });
 
         return {
@@ -651,12 +661,28 @@ export class MenuService {
     private connectCloseEvents<T, R>(
         overlayRef: OverlayRef,
         menuRef: MenuRef<T, R>,
+        origin: ResolvedMenuOrigin,
     ): void {
         overlayRef.backdropClick().pipe(take(1)).subscribe(() => menuRef.close());
         overlayRef.keydownEvents().pipe(
             filter((event) => event.key === 'Escape'),
             take(1),
         ).subscribe(() => menuRef.close());
+
+        if (this.isSelectInput(origin)) {
+            const originRect = this.getOriginClientRect(origin);
+
+            overlayRef.outsidePointerEvents().pipe(
+                filter((event: MouseEvent) => {
+                    const clickedInsideOrigin = 
+                        event.clientX >= originRect.left &&
+                        event.clientX <= originRect.right &&
+                        event.clientY >= originRect.top &&
+                        event.clientY <= originRect.bottom;
+                    return !clickedInsideOrigin;
+                })
+            ).subscribe(() => menuRef.close());
+        }
     }
 
     private getFocusedElement(): HTMLElement | null {

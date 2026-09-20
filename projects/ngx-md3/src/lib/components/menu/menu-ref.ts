@@ -38,7 +38,7 @@ export class MenuRef<T = unknown, R = unknown> {
             // dynamically attached content component in one operation.
             this.overlayRef.dispose();
 
-            this.previouslyFocusedElement?.focus();
+            // this.previouslyFocusedElement?.focus();
 
             this.closed.next(result);
             this.closed.complete();

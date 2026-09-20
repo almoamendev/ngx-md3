@@ -120,6 +120,7 @@ export * from './components/navigations/navigation-bar/navigation-bar';
 // text fields
 export * from './components/text-field/text-field';
 export * from './components/text-field/supporting-text';
+export * from './components/select-field/select-field';
 
 // dialogs
 export * from './components/dialog/dialog';

@@ -18,6 +18,11 @@
     .md3-menu-panel {
         pointer-events: auto;
 
+        &.md3-select-menu > .md3-menu-container {
+            --menu-min-width: 100%;
+            --menu-max-width: 100%;
+        }
+
         &.md3-menu-closing {
             pointer-events: none;
         }
