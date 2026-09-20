@@ -151,6 +151,10 @@ export class TextField implements ButtonContext {
                 return;
             }
 
+            this.iconElements().forEach((x) => {
+                console.log(x.element);
+            });
+
             const hasLeading: boolean = this.iconElements().some(i => i.iconType() === 'leading') ?? false;
             const hasTrailing: boolean = (this.iconElements().some(i => i.iconType() === 'trailing') || !!this.iconButtons().length) ?? false;
 

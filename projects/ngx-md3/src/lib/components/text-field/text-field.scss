@@ -14,7 +14,7 @@
         border-radius: var(--md-border-radius-xsmall) var(--md-border-radius-xsmall) 0 0;
         overflow: hidden;
 
-        ::ng-deep [md3-icon-element=leading] {
+        > ::ng-deep [md3-icon-element=leading] {
             position: absolute;
             font-size: 1.5em !important;
             height: 1em !important;
@@ -25,7 +25,7 @@
             color: var(--label-color);
         }
 
-        ::ng-deep [md3-icon-element=trailing] {
+        > ::ng-deep [md3-icon-element=trailing] {
             position: absolute;
             font-size: 1.5em !important;
             height: 1em !important;
@@ -36,7 +36,7 @@
             color: var(--label-color);
         }
 
-        ::ng-deep [md3-icon-button] {
+        > ::ng-deep [md3-icon-button] {
             position: absolute;
             font-size: 1em !important;
             top: 0.5em;
@@ -258,9 +258,9 @@
                 border: 0.0625em solid var(--outline-color);
             }
 
-            ::ng-deep [md3-icon-element=leading],
-            ::ng-deep [md3-icon-element=trailing],
-            ::ng-deep [md3-icon-button] {
+            > ::ng-deep [md3-icon-element=leading],
+            > ::ng-deep [md3-icon-element=trailing],
+            > ::ng-deep [md3-icon-button] {
                 top: 1em;
             }
 

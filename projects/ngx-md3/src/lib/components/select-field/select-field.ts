@@ -1,4 +1,4 @@
-import { Component, effect, ElementRef, signal, viewChild, ViewContainerRef } from '@angular/core';
+import { Component, computed, contentChildren, effect, ElementRef, signal, viewChild, ViewContainerRef } from '@angular/core';
 import { TextField } from '../text-field/text-field';
 import { IconElement } from '../common/icon-element';
 import { IconButton } from '../buttons/icon-button/icon-button';
@@ -21,6 +21,9 @@ import { MenuRef } from '../menu/menu-ref';
     styleUrl: './select-field.scss',
 })
 export class SelectField {
+    private iconElements = contentChildren(IconElement, { descendants: true });
+    public hasLeadingIcon = computed<boolean>(() => this.iconElements().some(i => i.iconType() === 'leading') ?? false);
+
     private isMenuOpen = signal<boolean>(false);
     private menuRef: MenuRef<SelectOptions, unknown> | null = null;
     private inputElement = viewChild(InputElement, { read: ElementRef });

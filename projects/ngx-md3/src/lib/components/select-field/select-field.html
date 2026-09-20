@@ -1,5 +1,10 @@
 <md3-text-field [label]="'Select input'">
-    <md3-icon md3-icon-element="leading">search</md3-icon>
+    <!-- <md3-icon md3-icon-element="leading">search</md3-icon> -->
+    @if (hasLeadingIcon()) {
+        <div md3-icon-element="leading">
+            <ng-content select="[md3-icon-element=leading]"></ng-content>
+        </div>
+    }
 
     <input md3-input-element type="text" [readonly]="true" (click)="openMenu()" class="md3-select-input">
 
