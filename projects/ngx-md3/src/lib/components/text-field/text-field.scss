@@ -141,7 +141,7 @@
                     border-bottom-width: 0.1875em;
                 }
 
-                &~.md3-text-field-label {
+                &:not(:read-only)~.md3-text-field-label {
                     color: var(--caret-color);
                     top: 0.4375em;
                     transform: scale(0.75);
