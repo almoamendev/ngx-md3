@@ -50,7 +50,6 @@ export class Switch {
 
     private inputDisabledState = signal<boolean>(false);
     public isDisabled = computed<boolean>(() => {
-        console.log('Switch disabled');
         return this.inputDisabledState();
     });
 

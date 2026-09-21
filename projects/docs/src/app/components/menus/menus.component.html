@@ -20,8 +20,23 @@
 
     <button type="button" md3-button (click)="sampleMenu($event)">Open sample menu</button>
 
-    <md3-select-field>
+    <md3-select-field [options]="[
+        {
+            value: 1,
+            label: 'Option 1',
+        },
+        {
+            value: 2,
+            label: 'Option 2',
+        },
+        {
+            value: 3,
+            label: 'Option 3',
+        },
+    ]">
         <md3-icon md3-icon-element="leading">search</md3-icon>
+        <!-- <md3-icon md3-icon-element="arrow">arrow_drop_up</md3-icon> -->
+        <div md3-supporting-text>Supporting text here</div>
     </md3-select-field>
 </app-playground>
 

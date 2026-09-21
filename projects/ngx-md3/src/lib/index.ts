@@ -27,6 +27,7 @@ export * from './types/toolbar-region.type';
 export * from './types/carousel-alignment.type';
 export * from './types/carousel-orientation.type';
 export * from './types/carousel-item-size.type';
+export * from './types/select-option.type';
 
 // interfaces
 export * from './interfaces/dialog-config.interface';

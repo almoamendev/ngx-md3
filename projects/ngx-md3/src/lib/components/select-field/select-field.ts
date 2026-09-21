@@ -1,4 +1,4 @@
-import { Component, computed, contentChildren, effect, ElementRef, signal, viewChild, ViewContainerRef } from '@angular/core';
+import { Component, computed, contentChildren, effect, ElementRef, input, signal, viewChild, ViewContainerRef } from '@angular/core';
 import { TextField } from '../text-field/text-field';
 import { IconElement } from '../common/icon-element';
 import { IconButton } from '../buttons/icon-button/icon-button';
@@ -7,6 +7,7 @@ import { MaterialIcon } from '../common/material-icon/material-icon';
 import { MenuService } from '../menu/menu.service';
 import { SelectOptions } from './select-options/select-options';
 import { MenuRef } from '../menu/menu-ref';
+import { SelectOption } from '../../types/select-option.type';
 
 @Component({
     selector: 'md3-select-field',
@@ -21,8 +22,11 @@ import { MenuRef } from '../menu/menu-ref';
     styleUrl: './select-field.scss',
 })
 export class SelectField {
+    public options = input.required<SelectOption[]>();
+    
     private iconElements = contentChildren(IconElement, { descendants: true });
     public hasLeadingIcon = computed<boolean>(() => this.iconElements().some(i => i.iconType() === 'leading') ?? false);
+    public hasArrowIcon = computed<boolean>(() => this.iconElements().some(i => i.iconType() === 'arrow') ?? false);
 
     private isMenuOpen = signal<boolean>(false);
     private menuRef: MenuRef<SelectOptions, unknown> | null = null;
@@ -45,6 +49,7 @@ export class SelectField {
     private openSelectOptions() {
         this.menuRef = this.menuService.open(SelectOptions, {
             data: {
+                options: this.options(),
             },
             bindDataToInputs: true,
             menuColors: 'standard',

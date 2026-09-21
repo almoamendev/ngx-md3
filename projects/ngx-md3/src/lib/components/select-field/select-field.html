@@ -9,8 +9,12 @@
     <input md3-input-element type="text" [readonly]="true" (click)="openMenu()" class="md3-select-input">
 
     <button md3-icon-button button-type="standard" (click)="toggleMenu()" class="md3-select-arrow">
-        <md3-icon md3-icon-element>arrow_drop_down</md3-icon>
+        @if (hasArrowIcon()) {
+            <ng-content select="[md3-icon-element=arrow]"></ng-content>
+        } @else {
+            <md3-icon md3-icon-element>arrow_drop_down</md3-icon>
+        }
     </button>
 
-    <div md3-supporting-text>Supporting text</div>
+    <ng-content select="[md3-supporting-text]" ngProjectAs="[md3-supporting-text]"></ng-content>
 </md3-text-field>

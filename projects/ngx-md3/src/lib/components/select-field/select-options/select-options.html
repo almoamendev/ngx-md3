@@ -1,11 +1,13 @@
 <md3-menu-group class="md3-scrollable">
-    <button md3-menu-item [selected]="false" label="Options 1" trailing-text="⌘+C"></button>
-    <button md3-menu-item [selected]="false" label="Options 2" trailing-text="⌘+C"></button>
-    <button md3-menu-item [selected]="false" label="Options 3" trailing-text="⌘+C"></button>
-    <button md3-menu-item [selected]="false" label="Options 4" trailing-text="⌘+C"></button>
-    <button md3-menu-item [selected]="false" label="Options 5" trailing-text="⌘+C"></button>
-    <button md3-menu-item [selected]="false" label="Options 6" trailing-text="⌘+C"></button>
-    <button md3-menu-item [selected]="false" label="Options 7" trailing-text="⌘+C"></button>
-    <button md3-menu-item [selected]="false" label="Options 8" trailing-text="⌘+C"></button>
-    <button md3-menu-item [selected]="false" label="Options 9" trailing-text="⌘+C"></button>
+    @for (item of options(); track `${item.value}-${item.label}`) {
+        <button
+            md3-menu-item
+            [selected]="item.selected ?? false"
+            [label]="item.label"
+            [supporting-text]="item.supportingText ?? null"
+            [trailing-text]="item.trailingText ?? null"
+            (click)="optionClick($index)"
+        >
+        </button>
+    }
 </md3-menu-group>

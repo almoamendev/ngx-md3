@@ -1,4 +1,6 @@
 .md3-select-input {
+    text-overflow: ellipsis;
+    
     & ~ .md3-select-arrow {
         transition: transform var(--md-motion-standard-fast-spatial-duration) var(--md-motion-standard-fast-spatial-easing);
     }
