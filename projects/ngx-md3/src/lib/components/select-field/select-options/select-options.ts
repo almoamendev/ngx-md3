@@ -1,9 +1,7 @@
-import { Component, input, signal } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { MenuGroup } from '../../menu/menu-group/menu-group';
 import { MenuItem } from '../../menu/menu-item/menu-item';
-import { SelectOption } from '../../../types/select-option.type';
-
-type ValueType = (number | string)[] | null;
+import { SelectOption, SelectOptionValue } from '../../../types/select-option.type';
 
 @Component({
     selector: 'md3-select-options',
@@ -17,18 +15,27 @@ type ValueType = (number | string)[] | null;
 export class SelectOptions {
     public options = input.required<SelectOption[]>();
     public multiple = input<boolean>(false);
-    public selectedOptions = signal<SelectOption[]>([]);
+
+    /** Emits the values selected by the user. The field owns the selection state. */
+    public selectionChange = output<SelectOptionValue[]>();
 
     public optionClick(index: number) {
         const options = this.options();
+        const option = options.at(index);
+        if (!option) {
+            return;
+        }
+
         if (this.multiple()) {
-            options.at(index)!.selected = !(options.at(index)!.selected ?? false);
+            option.selected = !(option.selected ?? false);
         } else {
             options.forEach((item, i) => {
                 item.selected = i == index;
             });
         }
 
-        this.selectedOptions.set(options.filter((item) => item.selected));
+        this.selectionChange.emit(
+            options.filter((item) => item.selected).map((item) => item.value)
+        );
     }
 }
