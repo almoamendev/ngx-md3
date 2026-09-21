@@ -95,7 +95,7 @@ describe('SelectOptions', () => {
         await click(fixture, 0);
         await click(fixture, 2);
 
-        expect(options.map((option) => option.selected)).toEqual([true, false, true]);
+        expect(selectedValues(options)).toEqual(['ada', 'grace']);
         expect(emitted).toEqual([['ada'], ['ada', 'grace']]);
     });
 
@@ -107,7 +107,7 @@ describe('SelectOptions', () => {
         await click(fixture, 2);
         await click(fixture, 0);
 
-        expect(options.map((option) => option.selected)).toEqual([false, false, true]);
+        expect(selectedValues(options)).toEqual(['grace']);
         expect(emitted.at(-1)).toEqual(['grace']);
     });
 
@@ -137,6 +137,10 @@ describe('SelectOptions', () => {
         expect(emitted).toEqual([]);
     });
 });
+
+function selectedValues(options: SelectOption[]): SelectOptionValue[] {
+    return options.filter((option) => option.selected).map((option) => option.value);
+}
 
 function items(fixture: ComponentFixture<SelectOptions>): HTMLElement[] {
     return Array.from(fixture.nativeElement.querySelectorAll('[md3-menu-item]'));
