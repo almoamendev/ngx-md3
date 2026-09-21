@@ -1,4 +1,4 @@
-<md3-text-field [label]="'Select input'">
+<md3-text-field [label]="'Select input'" [field-type]="fieldType()">
     <!-- <md3-icon md3-icon-element="leading">search</md3-icon> -->
     @if (hasLeadingIcon()) {
         <div md3-icon-element="leading">
@@ -6,7 +6,7 @@
         </div>
     }
 
-    <input md3-input-element type="text" [readonly]="true" (click)="openMenu()" class="md3-select-input">
+    <input md3-input-element type="text" [readonly]="true" (click)="openMenu()" class="md3-select-input" [value]="selectedText()">
 
     <button md3-icon-button button-type="standard" (click)="toggleMenu()" class="md3-select-arrow">
         @if (hasArrowIcon()) {

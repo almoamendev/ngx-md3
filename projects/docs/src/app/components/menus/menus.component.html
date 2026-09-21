@@ -20,10 +20,11 @@
 
     <button type="button" md3-button (click)="sampleMenu($event)">Open sample menu</button>
 
-    <md3-select-field [options]="[
+    <md3-select-field field-type="outlined" menu-colors="vibrant" multiple [options]="[
         {
             value: 1,
             label: 'Option 1',
+            selected: true,
         },
         {
             value: 2,
@@ -32,6 +33,18 @@
         {
             value: 3,
             label: 'Option 3',
+        },
+        {
+            value: 4,
+            label: 'Option 4',
+        },
+        {
+            value: 5,
+            label: 'Option 5',
+        },
+        {
+            value: 6,
+            label: 'Option 6',
         },
     ]">
         <md3-icon md3-icon-element="leading">search</md3-icon>

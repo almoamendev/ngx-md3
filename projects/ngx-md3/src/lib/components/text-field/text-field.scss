@@ -276,7 +276,7 @@
                     border-width: 0.1875em;
                 }
 
-                &:focus,
+                &:not(:read-only):focus,
                 &:not(:placeholder-shown) {
                     &~.md3-text-field-outline .md3-label-gap {
                         padding: 0 0.375em;
