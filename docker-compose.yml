@@ -30,3 +30,23 @@ services:
         done;
         npm run ng -- serve docs --host 0.0.0.0 --poll 2000
       "
+
+  # ── Run the unit tests ────────────────────────
+  # Usage: docker compose run --rm md3-test
+  #        docker compose run --rm md3-test npm run ng -- test docs --watch=false
+
+  md3-test:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/md3
+    shm_size: "1gb"
+    environment:
+      NG_CLI_ANALYTICS: "false"
+      CHOKIDAR_USEPOLLING: "true"
+    command: >
+      sh -c "
+        npm install;
+        npm run ng -- test ngx-md3 --watch=false
+      "

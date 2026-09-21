@@ -29,7 +29,9 @@
         "test": {
           "builder": "@angular/build:karma",
           "options": {
-            "tsConfig": "projects/ngx-md3/tsconfig.spec.json"
+            "tsConfig": "projects/ngx-md3/tsconfig.spec.json",
+            "karmaConfig": "karma.conf.js",
+            "browsers": "ChromeHeadlessNoSandbox"
           }
         }
       }
@@ -110,6 +112,8 @@
           "builder": "@angular/build:karma",
           "options": {
             "tsConfig": "projects/docs/tsconfig.spec.json",
+            "karmaConfig": "karma.conf.js",
+            "browsers": "ChromeHeadlessNoSandbox",
             "inlineStyleLanguage": "scss",
             "assets": [
               {

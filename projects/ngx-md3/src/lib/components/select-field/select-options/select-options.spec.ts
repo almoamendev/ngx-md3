@@ -130,11 +130,59 @@ describe('SelectOptions', () => {
         expect(checkedStates(fixture)).toEqual([false, true, false]);
     });
 
-    it('should do nothing for an index that has no option', () => {
-        component.optionClick(9);
+    describe('visibleOptions', () => {
+        it('should render every option while no filter applies', () => {
+            expect(component.visibleOptions()).toBeNull();
+            expect(labels(fixture)).toEqual(['Ada', 'Alan', 'Grace']);
+        });
 
-        expect(options.some((option) => option.selected)).toBeFalse();
-        expect(emitted).toEqual([]);
+        it('should render only the options that the filter keeps', async () => {
+            component.visibleOptions.set([options[1], options[2]]);
+            await fixture.whenStable();
+
+            expect(labels(fixture)).toEqual(['Alan', 'Grace']);
+        });
+
+        it('should render every option again when the filter is removed', async () => {
+            component.visibleOptions.set([options[0]]);
+            await fixture.whenStable();
+
+            component.visibleOptions.set(null);
+            await fixture.whenStable();
+
+            expect(labels(fixture)).toEqual(['Ada', 'Alan', 'Grace']);
+        });
+
+        it('should render no item for an empty filter', async () => {
+            component.visibleOptions.set([]);
+            await fixture.whenStable();
+
+            expect(items(fixture).length).toBe(0);
+        });
+
+        it('should select a visible option through its position in the filtered list', async () => {
+            component.visibleOptions.set([options[2]]);
+            await fixture.whenStable();
+
+            await click(fixture, 0);
+
+            expect(selectedValues(options)).toEqual(['grace']);
+            expect(emitted).toEqual([['grace']]);
+        });
+
+        it('should keep a selection that the filter hides in the emitted values', async () => {
+            fixture.componentRef.setInput('multiple', true);
+            await fixture.whenStable();
+
+            await click(fixture, 0);
+
+            component.visibleOptions.set([options[2]]);
+            await fixture.whenStable();
+
+            await click(fixture, 0);
+
+            expect(emitted.at(-1)).toEqual(['ada', 'grace']);
+        });
     });
 });
 
