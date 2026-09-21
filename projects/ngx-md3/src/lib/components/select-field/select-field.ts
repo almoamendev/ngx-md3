@@ -36,6 +36,14 @@ export class SelectField implements ControlValueAccessor {
         transform: booleanAttribute,
     });
 
+    /**
+     * Lets the user type in the field to filter the options. While the field has focus it
+     * acts as a search box; the selected options are shown again as soon as it loses focus.
+     */
+    public searchable = input<boolean, unknown>(false, {
+        transform: booleanAttribute,
+    });
+
     public label = input<string | null>(null, {
         alias: 'label',
     });
@@ -96,6 +104,9 @@ export class SelectField implements ControlValueAccessor {
     /** Selection is kept by value so it survives options arriving or being replaced later. */
     private selectedValues = signal<SelectOptionValue[]>([]);
 
+    private searchQuery = signal<string>('');
+    private isInputFocused = signal<boolean>(false);
+
     public formControl = computed<AbstractControl | undefined>(() => this.control() ?? this.hostControl());
 
     public isDisabled = computed<boolean>(() => this.disabled() || this.controlDisabled());
@@ -117,6 +128,40 @@ export class SelectField implements ControlValueAccessor {
         }
 
         return selected.map((option) => option.label).join(', ');
+    });
+
+    /** True while the field acts as a search box instead of showing the selection. */
+    public isSearching = computed<boolean>(() => this.searchable() && !this.isDisabled() && this.isInputFocused());
+
+    /** What the input element shows: the search query while searching, the selection otherwise. */
+    public displayText = computed<string | null>(() => this.isSearching() ? this.searchQuery() : this.selectedText());
+
+    /**
+     * Each option paired with the text the search runs against. It is rebuilt only when the
+     * options array changes, so typing does not normalize the same text again and again.
+     * The fields are joined with a character the query can never contain, which stops a query
+     * from matching across two fields.
+     */
+    private searchIndex = computed<{ option: SelectOption, text: string }[]>(() => {
+        return this.options().map((option) => ({
+            option,
+            text: [option.label, String(option.value), option.supportingText, option.trailingText]
+                .filter((field): field is string => !!field)
+                .map((field) => this.normalizeSearchText(field))
+                .join('\u0000'),
+        }));
+    });
+
+    /** The options the menu shows. Options that do not match the query are hidden. */
+    public filteredOptions = computed<SelectOption[]>(() => {
+        const query = this.normalizeSearchText(this.searchQuery());
+        if (!this.searchable() || query.length == 0) {
+            return this.options();
+        }
+
+        return this.searchIndex()
+            .filter((entry) => entry.text.includes(query))
+            .map((entry) => entry.option);
     });
 
     constructor(
@@ -179,8 +224,41 @@ export class SelectField implements ControlValueAccessor {
 
                 this.menuRef?.close();
                 this.menuRef = null;
+                this.searchQuery.set('');
             });
         });
+
+        // Keeps an open menu in step with the query. The menu binds its inputs once, at open.
+        effect(() => {
+            const filtered = this.filteredOptions();
+
+            untracked(() => this.menuRef?.componentInstance?.visibleOptions.set(filtered));
+        });
+    }
+
+    // Search
+
+    public onSearchFocus(): void {
+        this.isInputFocused.set(true);
+    }
+
+    public onSearchBlur(): void {
+        this.isInputFocused.set(false);
+        this.searchQuery.set('');
+    }
+
+    public onSearchInput(event: Event): void {
+        if (!this.searchable()) {
+            return;
+        }
+
+        this.searchQuery.set((event.target as HTMLInputElement).value);
+        this.openMenu();
+    }
+
+    /** Lower-cases the text and removes everything that is not a letter or a digit. */
+    private normalizeSearchText(text: string): string {
+        return text.toLowerCase().replace(/[^\p{L}\p{N}]+/gu, '');
     }
 
     // ControlValueAccessor
@@ -242,6 +320,7 @@ export class SelectField implements ControlValueAccessor {
             viewContainerRef: this.viewContainerRef,
         });
 
+        this.menuRef.componentInstance?.visibleOptions.set(this.filteredOptions());
         this.menuRef.componentInstance?.selectionChange.subscribe((values) => this.selectValues(values));
 
         this.menuRef.afterClosed().subscribe(() => {

@@ -24,6 +24,7 @@ export class SelectFieldConfig {
     public fieldType: FormControl = new FormControl<'filled' | 'outlined'>('filled');
     public menuColors: FormControl = new FormControl<'standard' | 'vibrant'>('standard');
     public multiple: FormControl = new FormControl<boolean>(false);
+    public searchable: FormControl = new FormControl<boolean>(false);
     public displayFormat: FormControl = new FormControl<'labels' | 'count' | 'summary'>('labels');
     public leadingIcon: FormControl = new FormControl<boolean>(false);
     public supportingText: FormControl = new FormControl<boolean>(false);

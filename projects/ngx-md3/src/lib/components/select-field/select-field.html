@@ -6,7 +6,9 @@
         </div>
     }
 
-    <input md3-input-element type="text" [readonly]="true" [disabled]="isDisabled()" (click)="openMenu()" class="md3-select-input" [class.md3-menu-active]="isMenuOpen()" [value]="selectedText()">
+    <input md3-input-element type="text" [readonly]="!searchable()" [disabled]="isDisabled()" (click)="openMenu()"
+        (focus)="onSearchFocus()" (blur)="onSearchBlur()" (input)="onSearchInput($event)"
+        class="md3-select-input" [value]="displayText()">
 
     <button md3-icon-button button-type="standard" [disabled]="isDisabled()" (click)="toggleMenu()" class="md3-select-arrow">
         @if (hasArrowIcon()) {

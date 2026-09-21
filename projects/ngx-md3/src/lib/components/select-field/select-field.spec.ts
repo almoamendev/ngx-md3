@@ -77,6 +77,18 @@ class ControlInputHost {
 
 @Component({
     imports: [SelectField],
+    template: `<md3-select-field searchable [options]="options"></md3-select-field>`,
+})
+class SearchableHost {
+    options: SelectOption[] = [
+        { value: 'ak', label: 'AK', supportingText: 'Alaska', selected: true },
+        { value: 'ny', label: 'NY', supportingText: 'New York', trailingText: 'East coast' },
+        { value: 12, label: 'Twelve' },
+    ];
+}
+
+@Component({
+    imports: [SelectField],
     template: `<md3-select-field [options]="options"></md3-select-field>`,
 })
 class StandaloneHost {
@@ -95,6 +107,7 @@ describe('SelectField', () => {
                 MultipleHost,
                 DisplayWithHost,
                 ControlInputHost,
+                SearchableHost,
                 StandaloneHost,
             ],
         }).compileComponents();
@@ -240,6 +253,84 @@ describe('SelectField', () => {
         expect(getSupportingText(fixture).classList).toContain('md3-has-error');
     });
 
+    it('should keep the input read-only unless the field is searchable', () => {
+        const plain = TestBed.createComponent(StandaloneHost);
+        plain.detectChanges();
+        expect(getInput(plain).readOnly).toBeTrue();
+
+        const searchable = TestBed.createComponent(SearchableHost);
+        searchable.detectChanges();
+        expect(getInput(searchable).readOnly).toBeFalse();
+    });
+
+    it('should show the query while focused and the selection after', () => {
+        const fixture = TestBed.createComponent(SearchableHost);
+        fixture.detectChanges();
+        const input = getInput(fixture);
+
+        expect(input.value).toBe('AK');
+
+        search(fixture, 'new');
+        expect(input.value).toBe('new');
+
+        input.dispatchEvent(new Event('blur'));
+        fixture.detectChanges();
+
+        expect(input.value).toBe('AK');
+        expect(getSelectField(fixture).filteredOptions().length).toBe(3);
+    });
+
+    it('should match the label, the value, the supporting text and the trailing text', () => {
+        const fixture = TestBed.createComponent(SearchableHost);
+        fixture.detectChanges();
+
+        search(fixture, 'twe');
+        expect(matched(fixture)).toEqual(['Twelve']);
+
+        search(fixture, '12');
+        expect(matched(fixture)).toEqual(['Twelve']);
+
+        search(fixture, 'alaska');
+        expect(matched(fixture)).toEqual(['AK']);
+
+        search(fixture, 'coast');
+        expect(matched(fixture)).toEqual(['NY']);
+    });
+
+    it('should ignore case, spaces and punctuation', () => {
+        const fixture = TestBed.createComponent(SearchableHost);
+        fixture.detectChanges();
+
+        search(fixture, 'NEWYORK');
+        expect(matched(fixture)).toEqual(['NY']);
+
+        search(fixture, '  new   york ');
+        expect(matched(fixture)).toEqual(['NY']);
+
+        search(fixture, 'east-coast!');
+        expect(matched(fixture)).toEqual(['NY']);
+    });
+
+    it('should not match across two fields of the same option', () => {
+        const fixture = TestBed.createComponent(SearchableHost);
+        fixture.detectChanges();
+
+        // 'NY' + 'New York' must not read as one text
+        search(fixture, 'nynew');
+        expect(matched(fixture)).toEqual([]);
+    });
+
+    it('should show every option again once the query is empty', () => {
+        const fixture = TestBed.createComponent(SearchableHost);
+        fixture.detectChanges();
+
+        search(fixture, 'zz');
+        expect(matched(fixture)).toEqual([]);
+
+        search(fixture, '');
+        expect(matched(fixture)).toEqual(['AK', 'NY', 'Twelve']);
+    });
+
     it('should support a control passed through [control]', () => {
         const fixture = TestBed.createComponent(ControlInputHost);
         fixture.detectChanges();
@@ -252,6 +343,19 @@ describe('SelectField', () => {
         expect(getInput(fixture).value).toBe('Grace');
     });
 });
+
+function search<T>(fixture: ComponentFixture<T>, text: string): void {
+    const input = getInput(fixture);
+
+    input.dispatchEvent(new Event('focus'));
+    input.value = text;
+    input.dispatchEvent(new Event('input'));
+    fixture.detectChanges();
+}
+
+function matched<T>(fixture: ComponentFixture<T>): string[] {
+    return getSelectField(fixture).filteredOptions().map((option) => option.label);
+}
 
 function getSelectField<T>(fixture: ComponentFixture<T>): SelectField {
     return fixture.debugElement.query(By.directive(SelectField)).componentInstance;

@@ -1,12 +1,13 @@
 <md3-menu-group class="md3-scrollable">
-    @for (item of options(); track `${$index}-${item.value}`) {
+    @for (item of renderedOptions(); track item.value) {
         <button
             md3-menu-item
             [selected]="item.selected ?? false"
             [label]="item.label"
             [supporting-text]="item.supportingText ?? null"
             [trailing-text]="item.trailingText ?? null"
-            (click)="optionClick($index)"
+            (mousedown)="$event.preventDefault()"
+            (click)="optionClick(item)"
         >
         </button>
     }

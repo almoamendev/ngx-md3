@@ -33,6 +33,7 @@ export class SelectFieldsComponent implements OnDestroy {
     public supportingText = signal<boolean>(false);
     public disabled = signal<boolean>(false);
     public displayFormat = signal<'labels' | 'count' | 'summary'>('labels');
+    public searchable = signal<boolean>(false);
 
     /**
      * The component writes the current selection back to SelectOption.selected. A fresh array
@@ -93,6 +94,9 @@ public label = input<string | null>(null, {
 public displayWith = input<((selected: SelectOption[]) => string) | null>(null, {
     alias: 'display-with',
 });
+public searchable = input<boolean, unknown>(false, {
+    transform: booleanAttribute,
+});
 public disabled = input<boolean, unknown>(false, {
     transform: booleanAttribute,
 });
@@ -127,6 +131,14 @@ public control = input<AbstractControl | undefined>(undefined, {
 <!-- displayed text: a summary, "3 selected" -->
 <md3-select-field label="States" multiple [options]="states"
     [display-with]="summaryFormat"></md3-select-field>
+
+<!-- searchable field. the user can type in it to filter the options -->
+<md3-select-field label="State" searchable [options]="states">
+    <md3-icon md3-icon-element="leading">search</md3-icon>
+</md3-select-field>
+
+<!-- searchable and multiple -->
+<md3-select-field label="States" searchable multiple [options]="states"></md3-select-field>
 
 <!-- custom arrow icon -->
 <md3-select-field label="State" [options]="states">
@@ -230,6 +242,11 @@ public addressForm = new FormGroup({
         this.configSheet?.componentInstance?.displayFormat.setValue(this.displayFormat());
         this.configSheet?.componentInstance?.displayFormat.registerOnChange(() => {
             this.displayFormat.set(this.configSheet?.componentInstance?.displayFormat.value);
+        });
+
+        this.configSheet?.componentInstance?.searchable.setValue(this.searchable());
+        this.configSheet?.componentInstance?.searchable.registerOnChange(() => {
+            this.searchable.set(this.configSheet?.componentInstance?.searchable.value);
         });
 
         this.configSheet?.componentInstance?.leadingIcon.setValue(this.leadingIcon());

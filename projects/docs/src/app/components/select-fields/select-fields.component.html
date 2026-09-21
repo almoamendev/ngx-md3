@@ -2,8 +2,8 @@
 
 <p>
     Select fields let users choose one or more options from a list. The field shows the current
-    selection and opens a menu with the available options. The field itself is read-only, so the
-    value can only come from the menu or from a bound form control.
+    selection and opens a menu with the available options. A searchable field also lets the user
+    type in it to find an option.
 </p>
 
 <figure class="component-image">
@@ -24,7 +24,8 @@
 
     <md3-select-field [label]="multiple() ? 'States' : 'State'" [field-type]="fieldType()"
         [menu-colors]="menuColors()" [multiple]="multiple()" [disabled]="disabled()"
-        [display-with]="displayWith()" [options]="options()" style="width: 20em;">
+        [display-with]="displayWith()" [searchable]="searchable()" [options]="options()"
+        style="width: 20em;">
         @if (leadingIcon()) {
             <md3-icon md3-icon-element="leading">flag</md3-icon>
         }
@@ -74,6 +75,14 @@
                 <td>
                     multiple
                     <p md3-type-body size="small">Lets the user select more than one option. The value is then an array.</p>
+                </td>
+                <td>input&lt;boolean&gt;</td>
+                <td style="white-space: nowrap;">false</td>
+            </tr>
+            <tr>
+                <td>
+                    searchable
+                    <p md3-type-body size="small">Lets the user type in the field to filter the options.</p>
                 </td>
                 <td>input&lt;boolean&gt;</td>
                 <td style="white-space: nowrap;">false</td>
@@ -159,6 +168,23 @@
         An empty selection always leaves the field empty, and
         <code>display-with</code> is not called for it. This keeps the floating label in its
         place.
+    </li>
+    <li>
+        <code>searchable</code> lets the user type in the field to find an option. While the
+        field has focus it shows the query; when it loses focus it shows the selection again.
+        The options that do not match are hidden from the menu.
+    </li>
+    <li>
+        The search covers the <code>label</code> and the <code>value</code> of an option, and
+        its <code>supportingText</code> and <code>trailingText</code> when they are set. It
+        ignores upper and lower case, spaces and punctuation, so <code>new york</code>,
+        <code>New-York</code> and <code>NEWYORK</code> all find the same option. It does not
+        match across two fields of one option.
+    </li>
+    <li>
+        The query is cleared when the field loses focus, and when the menu closes. A click on
+        an option keeps the focus in the field, so the query stays while the user selects more
+        than one option.
     </li>
     <li>
         The error state comes from the bound control (invalid and touched/dirty), and it is shown on
