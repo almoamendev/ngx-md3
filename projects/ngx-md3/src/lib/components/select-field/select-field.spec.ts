@@ -52,6 +52,21 @@ class MultipleHost {
 }
 
 @Component({
+    imports: [SelectField, ReactiveFormsModule],
+    template: `
+        <md3-select-field [options]="options" multiple [display-with]="format"
+            [formControl]="control"></md3-select-field>
+    `,
+})
+class DisplayWithHost {
+    options = people();
+    control = new FormControl<string[] | null>(['ada', 'grace']);
+
+    format = (selected: SelectOption[]): string =>
+        selected[0].label + (selected.length > 1 ? ` (+${selected.length - 1})` : '');
+}
+
+@Component({
     imports: [SelectField],
     template: `<md3-select-field [options]="options" [control]="control"></md3-select-field>`,
 })
@@ -78,6 +93,7 @@ describe('SelectField', () => {
                 FormControlHost,
                 FormControlNameHost,
                 MultipleHost,
+                DisplayWithHost,
                 ControlInputHost,
                 StandaloneHost,
             ],
@@ -141,12 +157,34 @@ describe('SelectField', () => {
         expect(fixture.componentInstance.options[0].selected).toBeFalse();
     });
 
-    it('should summarise a multiple selection', () => {
+    it('should join the labels of a multiple selection', () => {
         const fixture = TestBed.createComponent(MultipleHost);
         fixture.detectChanges();
 
-        expect(getInput(fixture).value).toBe('Ada +1');
+        expect(getInput(fixture).value).toBe('Ada, Grace');
         expect(getSelectField(fixture).selectedOptions().map(o => o.value)).toEqual(['ada', 'grace']);
+    });
+
+    it('should format the displayed text with display-with', () => {
+        const fixture = TestBed.createComponent(DisplayWithHost);
+        fixture.detectChanges();
+
+        expect(getInput(fixture).value).toBe('Ada (+1)');
+    });
+
+    it('should not call display-with for an empty selection', () => {
+        const fixture = TestBed.createComponent(DisplayWithHost);
+        let calls = 0;
+        const format = fixture.componentInstance.format;
+        fixture.componentInstance.format = (selected) => {
+            calls++;
+            return format(selected);
+        };
+        fixture.componentInstance.control.setValue([]);
+        fixture.detectChanges();
+
+        expect(getInput(fixture).value).toBe('');
+        expect(calls).toBe(0);
     });
 
     it('should keep a single selection when the control holds an array', () => {

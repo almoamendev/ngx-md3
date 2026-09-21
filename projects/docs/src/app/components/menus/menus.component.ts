@@ -1,6 +1,6 @@
 import { Component, OnDestroy, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { Button, Divider, IconButton, IconElement, MaterialIcon, MenuService, SelectField, SheetsService, SideSheetRef, SupportingText, TypeBody, TypeDisplay } from '@almoamendev/ngx-md3';
+import { Button, Divider, IconButton, IconElement, MaterialIcon, MenuService, SheetsService, SideSheetRef, TypeBody, TypeDisplay } from '@almoamendev/ngx-md3';
 import { SmapleMenu } from './smaple-menu/smaple-menu';
 import { Playground } from '../playground/playground';
 import { Shiki } from '../shiki/shiki';
@@ -19,8 +19,6 @@ import { MenuConfig } from './menu-config/menu-config';
         TypeBody,
         TypeDisplay,
         RouterLink,
-        SelectField,
-        SupportingText,
     ],
     templateUrl: './menus.component.html',
     styleUrl: './menus.component.scss',

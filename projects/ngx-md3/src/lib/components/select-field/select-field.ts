@@ -36,6 +36,20 @@ export class SelectField implements ControlValueAccessor {
         transform: booleanAttribute,
     });
 
+    public label = input<string | null>(null, {
+        alias: 'label',
+    });
+
+    /**
+     * Formats the text shown in the field. The default joins the labels of the selected
+     * options with a comma, so the field shows as many labels as its width allows.
+     * The formatter is not called for an empty selection: the field stays empty, which keeps
+     * the floating label in its place.
+     */
+    public displayWith = input<((selected: SelectOption[]) => string) | null>(null, {
+        alias: 'display-with',
+    });
+
     /**
      * Disables the field outside of a form. With reactive forms prefer control.disable().
      */
@@ -97,7 +111,12 @@ export class SelectField implements ControlValueAccessor {
             return null;
         }
 
-        return selected[0].label + (selected.length > 1 ? ' +' + (selected.length - 1) : '');
+        const format = this.displayWith();
+        if (format) {
+            return format(selected);
+        }
+
+        return selected.map((option) => option.label).join(', ');
     });
 
     constructor(

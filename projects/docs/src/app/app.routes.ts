@@ -27,6 +27,7 @@ import { NavigationBarComponent } from './components/navigations/navigation-bar/
 import { NavigationItemComponent } from './components/navigations/navigation-item/navigation-item.component';
 import { AppBarComponent } from './components/app-bar/app-bar.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
+import { SelectFieldsComponent } from './components/select-fields/select-fields.component';
 import { SnackbarsComponent } from './components/snackbars/snackbars.component';
 import { SideSheetsComponent } from './components/sheets/side-sheets/side-sheets.component';
 import { BottomSheetsComponent } from './components/sheets/bottom-sheets/bottom-sheets.component';
@@ -213,6 +214,10 @@ export const routes: Routes = [
                     {
                         path: 'menus',
                         component: MenusComponent,
+                    },
+                    {
+                        path: 'select-fields',
+                        component: SelectFieldsComponent,
                     },
                     {
                         path: 'sheets',

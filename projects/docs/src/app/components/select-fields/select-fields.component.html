@@ -1,0 +1,171 @@
+<h1 md3-type-display size="large">Select fields</h1>
+
+<p>
+    Select fields let users choose one or more options from a list. The field shows the current
+    selection and opens a menu with the available options. The field itself is read-only, so the
+    value can only come from the menu or from a bound form control.
+</p>
+
+<figure class="component-image">
+    <img src="img/md3-select-field.png" alt="Material Design select field" />
+    <ol>
+        <li>Select field</li>
+        <li>Trailing arrow</li>
+        <li>Options menu</li>
+        <li>Selected option</li>
+    </ol>
+</figure>
+
+<app-playground>
+    <button action-item md3-icon-button button-type="tonal" button-squared [selected]="configOpen()"
+        (click)="openConfig()">
+        <md3-icon md3-icon-element>settings</md3-icon>
+    </button>
+
+    <md3-select-field [label]="multiple() ? 'States' : 'State'" [field-type]="fieldType()"
+        [menu-colors]="menuColors()" [multiple]="multiple()" [disabled]="disabled()"
+        [display-with]="displayWith()" [options]="options()" style="width: 20em;">
+        @if (leadingIcon()) {
+            <md3-icon md3-icon-element="leading">flag</md3-icon>
+        }
+        @if (supportingText()) {
+            <div md3-supporting-text>Supporting text</div>
+        }
+    </md3-select-field>
+</app-playground>
+
+<h2>API</h2>
+
+<div class="table-container md3-scrollable">
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 50%;">Name</th>
+                <th>Type</th>
+                <th>Default</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    options
+                    <p md3-type-body size="small">The options shown in the menu. Required.</p>
+                </td>
+                <td>input&lt;SelectOption[]&gt;</td>
+                <td style="white-space: nowrap;">&mdash;</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>label</i>
+                    <p md3-type-body size="small">Sets the floating label text.</p>
+                </td>
+                <td>input&lt;string | null&gt;</td>
+                <td style="white-space: nowrap;">null</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>display-with</i>
+                    <p md3-type-body size="small">Formats the text shown in the field. The default joins the labels of the selected options with a comma.</p>
+                </td>
+                <td>input&lt;(selected: SelectOption[]) =&gt; string&gt;</td>
+                <td style="white-space: nowrap;">null</td>
+            </tr>
+            <tr>
+                <td>
+                    multiple
+                    <p md3-type-body size="small">Lets the user select more than one option. The value is then an array.</p>
+                </td>
+                <td>input&lt;boolean&gt;</td>
+                <td style="white-space: nowrap;">false</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>field-type</i>
+                    <p md3-type-body size="small">Sets the style of the field.</p>
+                </td>
+                <td>
+                    input&lt;TextFieldType&gt;
+                    <p md3-type-body size="small">filled, outlined</p>
+                </td>
+                <td style="white-space: nowrap;">filled</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>menu-colors</i>
+                    <p md3-type-body size="small">Sets the color scheme of the options menu.</p>
+                </td>
+                <td>
+                    input&lt;MenuColors&gt;
+                    <p md3-type-body size="small">standard, vibrant</p>
+                </td>
+                <td style="white-space: nowrap;">standard</td>
+            </tr>
+            <tr>
+                <td>
+                    disabled
+                    <p md3-type-body size="small">Disables the field. With a form control, use control.disable() instead.</p>
+                </td>
+                <td>input&lt;boolean&gt;</td>
+                <td style="white-space: nowrap;">false</td>
+            </tr>
+            <tr>
+                <td>
+                    control
+                    <p md3-type-body size="small">Input form control object (see angular forms and form controls).</p>
+                </td>
+                <td>input&lt;AbstractControl&gt;</td>
+                <td style="white-space: nowrap;">undefined</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<app-shiki [code]="apiImport"></app-shiki>
+<app-shiki [code]="apiData"></app-shiki>
+<app-shiki [code]="apiUsage" language="html"></app-shiki>
+<app-shiki [code]="apiExample"></app-shiki>
+<ul>
+    <li>
+        Every option needs a unique <code>value</code>. <code>supportingText</code> and
+        <code>trailingText</code> are optional, and they are rendered by the
+        <a routerLink="/components/menus"><code>menu item</code></a> inside the options menu.
+    </li>
+    <li>
+        The field reports a single value for single selection, and an array of values for
+        <code>multiple</code>. An empty single selection reports <code>null</code>.
+    </li>
+    <li>
+        The component supports <code>[formControl]</code>, <code>formControlName</code> and
+        <code>[(ngModel)]</code> directly on <code>md3-select-field</code>, because the field owns
+        its own input element. The <code>control</code> input does the same job as on the
+        <a routerLink="/components/text-fields"><code>md3-text-field</code></a>.
+    </li>
+    <li>
+        <code>selected</code> on an option sets the starting selection. A bound form control
+        overrides it: from the first value the control writes, the control is the source of truth.
+    </li>
+    <li>
+        A value that has no matching option yet is kept. It appears as soon as the option list
+        arrives, which is useful when the options are loaded asynchronously.
+    </li>
+    <li>
+        By default the field shows the labels of the selected options, joined with a comma.
+        The text is cut with an ellipsis, so the field shows as many labels as its width
+        allows. Give <code>display-with</code> a function to format the text in another way,
+        for example a count, or a summary in the language of the user. Write the function as
+        an arrow property on your component, so that <code>this</code> stays bound.
+    </li>
+    <li>
+        An empty selection always leaves the field empty, and
+        <code>display-with</code> is not called for it. This keeps the floating label in its
+        place.
+    </li>
+    <li>
+        The error state comes from the bound control (invalid and touched/dirty), and it is shown on
+        the <code>md3-supporting-text</code> below the field.
+    </li>
+    <li>
+        A leading icon goes in the <code>md3-icon-element="leading"</code> slot. To replace the
+        default arrow, put your own icon in the <code>md3-icon-element="arrow"</code> slot.
+    </li>
+</ul>

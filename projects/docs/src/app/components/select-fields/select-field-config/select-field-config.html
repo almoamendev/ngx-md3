@@ -1,0 +1,96 @@
+<md3-side-sheet-header title="Configurations">
+    <button type="button" md3-icon-button trailing button-type="standard" (click)="close()">
+        <md3-icon md3-icon-element>close</md3-icon>
+    </button>
+</md3-side-sheet-header>
+<md3-side-sheet-body class="md3-component-config">
+    <div md3-type-body size="large">Field type</div>
+    <div class="controls-list">
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="fieldType">
+                <input type="radio" md3-input-element name="field-type" value="filled">
+            </md3-radio-button>
+            <div md3-type-label size="large">Filled</div>
+        </label>
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="fieldType">
+                <input type="radio" md3-input-element name="field-type" value="outlined">
+            </md3-radio-button>
+            <div md3-type-label size="large">Outlined</div>
+        </label>
+    </div>
+
+    <div md3-type-body size="large">Menu colors</div>
+    <div class="controls-list">
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="menuColors">
+                <input type="radio" md3-input-element name="menu-colors" value="standard">
+            </md3-radio-button>
+            <div md3-type-label size="large">Standard</div>
+        </label>
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="menuColors">
+                <input type="radio" md3-input-element name="menu-colors" value="vibrant">
+            </md3-radio-button>
+            <div md3-type-label size="large">Vibrant</div>
+        </label>
+    </div>
+
+    <div class="controls-list">
+        <label md3-state-component tabindex="0">
+            <div md3-type-label size="large">Multiple selection</div>
+            <md3-switch disable-state-layer [control]="multiple">
+                <input type="checkbox" md3-input-element name="multiple">
+            </md3-switch>
+        </label>
+    </div>
+
+    <div md3-type-body size="large">Displayed text</div>
+    <div class="controls-list">
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="displayFormat">
+                <input type="radio" md3-input-element name="display-format" value="labels">
+            </md3-radio-button>
+            <div md3-type-label size="large">Joined labels</div>
+        </label>
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="displayFormat">
+                <input type="radio" md3-input-element name="display-format" value="count">
+            </md3-radio-button>
+            <div md3-type-label size="large">First label and count</div>
+        </label>
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="displayFormat">
+                <input type="radio" md3-input-element name="display-format" value="summary">
+            </md3-radio-button>
+            <div md3-type-label size="large">Count only</div>
+        </label>
+    </div>
+
+    <div class="controls-list">
+        <label md3-state-component tabindex="0">
+            <div md3-type-label size="large">Leading icon</div>
+            <md3-switch disable-state-layer [control]="leadingIcon">
+                <input type="checkbox" md3-input-element name="leading-icon">
+            </md3-switch>
+        </label>
+    </div>
+
+    <div class="controls-list">
+        <label md3-state-component tabindex="0">
+            <div md3-type-label size="large">Supporting text</div>
+            <md3-switch disable-state-layer [control]="supportingText">
+                <input type="checkbox" md3-input-element name="supporting-text">
+            </md3-switch>
+        </label>
+    </div>
+
+    <div class="controls-list">
+        <label md3-state-component tabindex="0">
+            <div md3-type-label size="large">Disabled</div>
+            <md3-switch disable-state-layer [control]="disabled">
+                <input type="checkbox" md3-input-element name="disabled">
+            </md3-switch>
+        </label>
+    </div>
+</md3-side-sheet-body>
