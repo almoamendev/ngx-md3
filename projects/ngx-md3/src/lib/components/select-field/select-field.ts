@@ -9,6 +9,7 @@ import { MenuService } from '../menu/menu.service';
 import { SelectOptions } from './select-options/select-options';
 import { MenuRef } from '../menu/menu-ref';
 import { SelectFieldValue, SelectOption, SelectOptionValue } from '../../types/select-option.type';
+import { MenuScrollStrategy } from '../../interfaces/menu-config.interface';
 
 @Component({
     selector: 'md3-select-field',
@@ -67,6 +68,9 @@ export class SelectField implements ControlValueAccessor {
 
     public menuColors = input<'standard' | 'vibrant'>('standard', {
         alias: 'menu-colors',
+    });
+    public scrollStrategy = input<MenuScrollStrategy>(undefined, {
+        alias: 'menu-scroll-strategy',
     });
     public fieldType = input<'filled' | 'outlined'>('filled', {
         alias: 'field-type',
@@ -316,7 +320,7 @@ export class SelectField implements ControlValueAccessor {
             xPosition: 'start',
             yPosition: 'below',
             overlapTrigger: false,
-            // scrollStrategy: 'close',
+            scrollStrategy: this.scrollStrategy(),
             viewContainerRef: this.viewContainerRef,
         });
 

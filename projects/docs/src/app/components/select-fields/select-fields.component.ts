@@ -83,6 +83,8 @@ type SelectOption = {
 // The value reported to Angular forms
 type SelectFieldValue = SelectOptionValue | SelectOptionValue[] | null;
 
+type MenuScrollStrategy = 'reposition' | 'block' | 'close' | 'noop';
+
 // Inputs
 public options = input.required<SelectOption[]>();
 public multiple = input<boolean, unknown>(false, {
@@ -106,6 +108,9 @@ public fieldType = input<'filled' | 'outlined'>('filled', {
 public menuColors = input<'standard' | 'vibrant'>('standard', {
     alias: 'menu-colors',
 });
+public scrollStrategy = input<MenuScrollStrategy>(undefined, {
+    alias: 'menu-scroll-strategy',
+});
 public control = input<AbstractControl | undefined>(undefined, {
     alias: 'control',
 });`;
@@ -115,9 +120,12 @@ public control = input<AbstractControl | undefined>(undefined, {
 <!-- basic select field -->
 <md3-select-field label="State" [options]="states"></md3-select-field>
 
-<!-- outlined field with a leading icon and supporting text -->
+<!-- outlined field with a custom icons and supporting text -->
 <md3-select-field label="State" field-type="outlined" [options]="states">
     <md3-icon md3-icon-element="leading">flag</md3-icon>
+    <!-- or <your-custom-icon-element md3-icon-element="leading"></your-custom-icon-element> -->
+    <md3-icon md3-icon-element="arrow">arrow_drop_down</md3-icon>
+    <!-- or <your-custom-icon-element md3-icon-element="arrow"></your-custom-icon-element> -->
     <div md3-supporting-text>Supporting text</div>
 </md3-select-field>
 
@@ -132,8 +140,8 @@ public control = input<AbstractControl | undefined>(undefined, {
 <md3-select-field label="States" multiple [options]="states"
     [display-with]="summaryFormat"></md3-select-field>
 
-<!-- searchable field. the user can type in it to filter the options -->
-<md3-select-field label="State" searchable [options]="states">
+<!-- searchable field with scroll strategy. the user can type in it to filter the options -->
+<md3-select-field label="State" searchable [options]="states" menu-scroll-strategy="close">
     <md3-icon md3-icon-element="leading">search</md3-icon>
 </md3-select-field>
 
