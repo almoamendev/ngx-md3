@@ -1,6 +1,21 @@
 :host {
-    md3-app-bar.menu-button {
-        padding-inline-start: 4em;
+    md3-app-bar {
+        &.menu-button {
+            padding-inline-start: 4em;
+        }
+
+        .app-bar-header {
+            display: flex;
+            gap: 0.5em;
+            text-align: start;
+
+            .app-title {
+                .subtitle {
+                    display: inline-flex;
+                    gap: 0.5em;
+                }
+            }
+        }
     }
 
     md3-navigation-rail.menu-button {

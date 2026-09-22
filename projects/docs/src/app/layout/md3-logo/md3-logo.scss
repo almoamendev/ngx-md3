@@ -1,0 +1,12 @@
+:host {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 3em;
+    min-width: 3em;
+    height: 100%;
+
+    ::ng-deep svg {
+        min-height: 100%;
+    }
+}

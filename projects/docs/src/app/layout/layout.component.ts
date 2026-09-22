@@ -1,6 +1,6 @@
 import { Component, computed, effect, signal } from '@angular/core';
 import { NavigationEnd, Router, RouterLink, RouterOutlet } from "@angular/router";
-import { AppBar, Badge, IconElement, InputElement, LayoutService, MaterialIcon, NavigationItem, NavigationRail, Scaffold, ScaffoldBar, ScaffoldPane, ScaffoldRail, SheetsService, SideSheetConfig, SideSheetRef, SideSheetType, Switch } from '@almoamendev/ngx-md3';
+import { AppBar, AppBarHeader, Badge, IconElement, InputElement, LayoutService, MaterialIcon, NavigationItem, NavigationRail, Scaffold, ScaffoldBar, ScaffoldPane, ScaffoldRail, SheetsService, SideSheetConfig, SideSheetRef, SideSheetType, Switch, TypeBody, TypeTitle } from '@almoamendev/ngx-md3';
 import { FormControl } from '@angular/forms';
 import { ComponentsMenu } from './components-menu/components-menu';
 import { filter } from 'rxjs';
@@ -12,6 +12,7 @@ import { StylesMenu } from './styles-menu/styles-menu';
 // so it can never drift out of sync with what's really being built/deployed.
 import { version as ngxMd3Version } from '../../../../ngx-md3/package.json';
 import { PageFooter } from './page-footer/page-footer';
+import { Md3Logo } from './md3-logo/md3-logo';
 
 enum NavigationGroupLink {
     FOUNDATIONS = 'foundations',
@@ -29,6 +30,10 @@ enum NavigationGroupLink {
         ScaffoldRail,
         ScaffoldPane,
         AppBar,
+        AppBarHeader,
+        Md3Logo,
+        TypeTitle,
+        TypeBody,
         Badge,
         Switch,
         InputElement,

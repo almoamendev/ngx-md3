@@ -1,0 +1,31 @@
+import { Component, inject } from '@angular/core';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+
+@Component({
+    selector: 'app-md3-logo',
+    imports: [],
+    templateUrl: './md3-logo.html',
+    styleUrl: './md3-logo.scss',
+    host: {
+        '[innerHTML]': 'logo',
+    },
+})
+export class Md3Logo {
+    private sanitizer = inject(DomSanitizer);
+    public logo: SafeHtml = this.sanitizer.bypassSecurityTrustHtml(`
+    <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <linearGradient id="md3-icon-fill" x1="4" y1="4" x2="44" y2="44" gradientUnits="userSpaceOnUse">
+        <stop offset="0" stop-color="rgb(var(--md-scheme-primary-container))"/>
+        <stop offset="1" stop-color="rgb(var(--md-scheme-primary))"/>
+        </linearGradient>
+    </defs>
+    <path
+        d="M20.00 7.07 Q24.00 4.00 28.00 7.07 Q32.00 10.14 36.66 12.07 Q41.32 14.00 40.66 19.00 Q40.00 24.00 40.66 29.00 Q41.32 34.00 36.66 35.93 Q32.00 37.86 28.00 40.93 Q24.00 44.00 20.00 40.93 Q16.00 37.86 11.34 35.93 Q6.68 34.00 7.34 29.00 Q8.00 24.00 7.34 19.00 Q6.68 14.00 11.34 12.07 Q16.00 10.14 20.00 7.07 Z"
+        fill="url(#md3-icon-fill)"/>
+    <path
+        d="M24 12 C27 21 36 21 36 24 C27 27 27 27 24 36 C21 27 12 27 12 24 C21 21 21 21 24 12 Z"
+        fill="rgb(var(--md-scheme-surface))"/>
+    </svg>
+    `);
+}
