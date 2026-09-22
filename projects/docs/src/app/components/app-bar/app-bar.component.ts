@@ -37,7 +37,7 @@ export class AppBarComponent implements OnDestroy {
     private sanitizer = inject(DomSanitizer);
 
     public logo: SafeHtml = this.sanitizer.bypassSecurityTrustHtml(`
-    <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 372 74">
+    <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 372 74" style="padding: 0.5em 0.125em">
         <path fill="#1e92ff" d="m46.2 24.78l-41.57 22.6 34.43 18.72c4.45 2.42 9.82 2.42 14.28 0l25.43-13.83c3.88-2.11 3.88-7.67 0-9.78 0 0-32.57-17.71-32.57-17.71z"/>
         <path fill-rule="evenodd" fill="#603bea" d="m46.2 49.22l-41.57-1.84 41.57-22.6 41.56 1.84-41.56 22.6z"/>
         <path fill="#7d4dff" d="m39.06 7.9l-25.44 13.83c-3.87 2.11-3.87 7.67 0 9.77l32.58 17.71 41.56-22.59-34.43-18.72c-4.45-2.42-9.82-2.42-14.27 0z"/>
