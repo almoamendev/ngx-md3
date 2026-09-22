@@ -15,9 +15,9 @@
                 </div>
             </div>
         </div>
-    } @else if (hasLogo()) {
-        <div class="md3-app-bar-logo" [class.md3-center]="centerAligned()">
-            <ng-content select="[md3-app-bar-logo]"></ng-content>
+    } @else if (hasCustomHeader()) {
+        <div class="md3-app-bar-header" [class.md3-center]="centerAligned()">
+            <ng-content select="[md3-app-bar-header]"></ng-content>
         </div>
     } @else if (title() || subtitle()) {
         <div class="md3-app-bar-title" [class.md3-center]="centerAligned()">

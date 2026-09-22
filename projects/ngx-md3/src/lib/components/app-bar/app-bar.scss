@@ -152,7 +152,7 @@
             }
         }
     
-        .md3-app-bar-logo {
+        .md3-app-bar-header {
             grid-column: 2;
             grid-row: 1;
             align-self: center;
@@ -169,11 +169,11 @@
                 justify-content: center;
             }
     
-            ::ng-deep a[md3-app-bar-logo], ::ng-deep button[md3-app-bar-logo] {
+            ::ng-deep a[md3-app-bar-header], ::ng-deep button[md3-app-bar-header] {
                 cursor: pointer;
             }
 
-            ::ng-deep [md3-app-bar-logo] {
+            ::ng-deep [md3-app-bar-header] {
                 flex: 0 1 auto;
                 max-height: 100%;
                 max-width: 100%;
@@ -186,6 +186,11 @@
                 margin: 0;
 
                 & > * {
+                    max-height: 100%;
+                    max-width: 100%;
+                }
+
+                & > img, & > svg {
                     display: inline-block;
                     max-height: 100%;
                     max-width: 100%;

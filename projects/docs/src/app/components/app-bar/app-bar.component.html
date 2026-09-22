@@ -7,7 +7,6 @@
     </button>
 
     <div class="app-bar-demo">
-        <!-- <button md3-app-bar-logo><img  src="https://media.wired.com/photos/5926ffe47034dc5f91bed4e8/master/pass/google-logo.jpg"></button> -->
         @if (barType() == 'search') {
             <md3-app-bar bar-title="Screen title" bar-subtitle="Subtitle" [bar-type]="barType()" [scroll-style]="scrollStyle()" [auto-hide]="autoHide()" [center-aligned]="centerAligned()">
                 <button md3-app-bar-leading md3-icon-button button-type="standard">
@@ -29,6 +28,12 @@
             </md3-app-bar>
         } @else {
             <md3-app-bar bar-title="Screen title" bar-subtitle="Subtitle" [bar-type]="barType()" [scroll-style]="scrollStyle()" [auto-hide]="autoHide()" [center-aligned]="centerAligned()">
+
+                @if (customHeader()) {
+                    <div md3-app-bar-header [innerHTML]="logo">
+                    </div>
+                }
+
                 <button md3-app-bar-leading md3-icon-button button-type="standard">
                     <md3-icon md3-icon-element bi-directional>arrow_back</md3-icon>
                 </button>
@@ -89,12 +94,12 @@
                 <td>Placed inside <code>[md3-app-bar-trailing]</code>; gets avatar-specific sizing/styling.</td>
             </tr>
             <tr>
-                <td><i>[md3-app-bar-logo]</i></td>
-                <td><code>bar-type</code> is not <code>search</code>, and a logo is projected — takes priority over <code>bar-title</code> / <code>bar-subtitle</code>.</td>
+                <td><i>[md3-app-bar-header]</i></td>
+                <td><code>bar-type</code> is not <code>search</code>, and a custom header is projected — takes priority over <code>bar-title</code> / <code>bar-subtitle</code>.</td>
             </tr>
             <tr>
                 <td><i>[md3-search-leading]</i>, <code>[md3-input-element]</code>, <i>[md3-search-trailing]</i></td>
-                <td><code>bar-type="search"</code> — replaces the title/logo area with a search field.</td>
+                <td><code>bar-type="search"</code> — replaces the header area with a search field.</td>
             </tr>
         </tbody>
     </table>
@@ -115,7 +120,7 @@
             <tr>
                 <td>
                     <i>bar-title</i>
-                    <p md3-type-body size="small">Screen title. Ignored when <code>bar-type="search"</code> or a logo is projected.</p>
+                    <p md3-type-body size="small">Screen title. Will only appear in medium/large bar-types when <code>bar-type="search"</code> or a custom header is projected.</p>
                 </td>
                 <td>input&lt;string | null&gt;</td>
                 <td style="white-space: nowrap;">null</td>
@@ -123,7 +128,7 @@
             <tr>
                 <td>
                     <i>bar-subtitle</i>
-                    <p md3-type-body size="small">Optional subtitle shown under the title.</p>
+                    <p md3-type-body size="small">Optional subtitle shown under the title. Will only appear in medium/large bar-types when <code>bar-type="search"</code> or a custom header is projected.</p>
                 </td>
                 <td>input&lt;string | null&gt;</td>
                 <td style="white-space: nowrap;">null</td>
@@ -184,7 +189,7 @@
     </li>
     <li>
         Content priority for the middle area is: <code>bar-type="search"</code> first, then a projected
-        <code>[md3-app-bar-logo]</code>, then <code>bar-title</code> / <code>bar-subtitle</code>.
+        <code>[md3-app-bar-header]</code>, then <code>bar-title</code> / <code>bar-subtitle</code>.
     </li>
     <li>
         <code>scroll-style</code> and <code>auto-hide</code> both key off <code>LayoutService.mainScrollTop()</code>,

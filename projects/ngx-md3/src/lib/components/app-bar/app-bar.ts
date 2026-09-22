@@ -4,7 +4,7 @@ import { ButtonSize } from '../../types/button-size.type';
 import { Avatar } from '../common/avatar';
 import { LayoutService } from '../../foundations/layout.service';
 import { DIALOG_CONFIG } from '../dialog/dialog-ref';
-import { AppBarLogo } from './app-bar-logo';
+import { AppBarHeader } from './app-bar-header';
 import { TypeBody, TypeDisplay, TypeHeadline, TypeTitle } from '../../../public-api';
 
 export type AppBarType = 'small' | 'medium' | 'large' | 'search';
@@ -85,10 +85,10 @@ export class AppBar implements ButtonContext {
         transform: booleanAttribute,
     });
 
-    private logo = contentChild(AppBarLogo);
+    private customHeader = contentChild(AppBarHeader);
     private avatar = contentChild(Avatar);
 
-    public hasLogo = computed(() => !!this.logo());
+    public hasCustomHeader = computed(() => !!this.customHeader());
     public hasAvatar = computed(() => !!this.avatar());
 
     public mainIsScrolled = computed(() => this.layoutService.mainIsScrolled());

@@ -22,6 +22,7 @@ import { AppBarScrollingStyle, AppBarType, IconButton, IconElement, InputElement
 })
 export class AppBarConfig {
     public barType: FormControl<AppBarType> = new FormControl<AppBarType>('small', { nonNullable: true });
+    public customHeader: FormControl<boolean> = new FormControl<boolean>(false, { nonNullable: true });
     public scrollStyle: FormControl<AppBarScrollingStyle> = new FormControl<AppBarScrollingStyle>('elevate', { nonNullable: true });
     public autoHide: FormControl<boolean> = new FormControl<boolean>(false, { nonNullable: true });
     public centerAligned: FormControl<boolean> = new FormControl<boolean>(false, { nonNullable: true });
