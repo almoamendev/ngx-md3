@@ -24,8 +24,7 @@
 
     <md3-select-field [label]="multiple() ? 'States' : 'State'" [field-type]="fieldType()"
         [menu-colors]="menuColors()" [multiple]="multiple()" [disabled]="disabled()"
-        [display-with]="displayWith()" [searchable]="searchable()" [options]="options()"
-        style="width: 20em;">
+        [display-with]="displayWith()" [searchable]="searchable()" [options]="options()">
         @if (leadingIcon()) {
             <md3-icon md3-icon-element="leading">flag</md3-icon>
         }
