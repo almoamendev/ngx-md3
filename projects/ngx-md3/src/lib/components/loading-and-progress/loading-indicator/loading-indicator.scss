@@ -1,10 +1,45 @@
 :host {
     display: inline-flex;
     font-size: 1em;
+
+    &.md3-color-primary {
+        .md3-indicator-indeterminate {
+            --indicator-color: rgb(var(--md-scheme-primary));
+            --container-color: transparent;
+    
+            &.md3-contained {
+                --indicator-color: rgb(var(--md-scheme-on-primary-container));
+                background-color: rgb(var(--md-scheme-primary-container));
+            }
+        }
+    }
+
+    &.md3-color-secondary {
+        .md3-indicator-indeterminate {
+            --indicator-color: rgb(var(--md-scheme-secondary));
+            --container-color: transparent;
+    
+            &.md3-contained {
+                --indicator-color: rgb(var(--md-scheme-on-secondary-container));
+                background-color: rgb(var(--md-scheme-secondary-container));
+            }
+        }
+    }
+
+    &.md3-color-tertiary {
+        .md3-indicator-indeterminate {
+            --indicator-color: rgb(var(--md-scheme-tertiary));
+            --container-color: transparent;
+    
+            &.md3-contained {
+                --indicator-color: rgb(var(--md-scheme-on-tertiary-container));
+                background-color: rgb(var(--md-scheme-tertiary-container));
+            }
+        }
+    }
     
     .md3-indicator-indeterminate {
         --size: 3rem;
-        --indicator-color: rgb(var(--md-scheme-primary));
     
         width: var(--size);
         height: var(--size);
@@ -14,11 +49,6 @@
         max-height: 15rem;
         border-radius: 50%;
         display: inline-block;
-    
-        &.md3-contained {
-            --indicator-color: rgb(var(--md-scheme-on-primary-container));
-            background-color: rgb(var(--md-scheme-primary-container));
-        }
 
         .md3-indicator-svg {
             width: 100%;

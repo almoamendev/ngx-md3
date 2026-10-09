@@ -19,7 +19,7 @@
     </button>
 
     <div style="min-height: 15em; max-height: 15em;overflow: hidden; display: flex; align-items: center; justify-content: center;">
-        <md3-loading-indicator [contained]="contained()" [size]="size()"></md3-loading-indicator>
+        <md3-loading-indicator [contained]="contained()" [size]="size()" [color]="color()"></md3-loading-indicator>
     </div>
 </app-playground>
 
@@ -50,6 +50,14 @@
                 </td>
                 <td>input&lt;number&gt;</td>
                 <td style="white-space: nowrap;">48</td>
+            </tr>
+            <tr>
+                <td>
+                    color
+                    <p md3-type-body size="small">Loading indicator color.</p>
+                </td>
+                <td>input&lt;'primary' | 'secondary' | 'tertiary'&gt;</td>
+                <td style="white-space: nowrap;">'primary'</td>
             </tr>
         </tbody>
     </table>

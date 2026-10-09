@@ -24,6 +24,7 @@ export class ProgressConfig {
     public indeterminate: FormControl = new FormControl<boolean>(false);
     public thickness: FormControl = new FormControl<string>('4');
     public progress: FormControl = new FormControl<number>(0);
+    public color: FormControl = new FormControl<'primary' | 'secondary' | 'tertiary'>('primary');
 
     constructor(
         private sideSheetRef: SideSheetRef<ProgressConfig>

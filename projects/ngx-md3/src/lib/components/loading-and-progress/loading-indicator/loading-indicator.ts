@@ -1,4 +1,4 @@
-import { Component, computed, ElementRef, input, Input } from '@angular/core';
+import { Component, computed, effect, ElementRef, input, Input } from '@angular/core';
 
 @Component({
     selector: 'md3-loading-indicator',
@@ -9,6 +9,7 @@ import { Component, computed, ElementRef, input, Input } from '@angular/core';
 export class LoadingIndicator {
     public contained = input<boolean>(false);
     public size = input<number>(48);
+    public color = input<'primary' | 'secondary' | 'tertiary'>('primary');
 
     public dpSize = computed(() => {
         const fontSize = this.getHostFontSize();
@@ -18,6 +19,14 @@ export class LoadingIndicator {
     constructor(
         private el: ElementRef,
     ) {
+        effect((onCleanup) => {
+            const color = 'md3-color-' + this.color();
+            this.element.classList.add(color);
+
+            onCleanup(() => {
+                this.element.classList.remove(color);
+            });
+        });
     }
 
     public get element(): HTMLElement {

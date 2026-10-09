@@ -27,6 +27,7 @@ export class ProgressIndicatorsComponent implements OnDestroy {
     public indeterminate = signal<boolean>(false);
     public thickness = signal<4 | 8>(4);
     public progress = signal<number>(0);
+    public color = signal<'primary' | 'secondary' | 'tertiary'>('primary');
 
     public apiImport: string = `// Component imports
 import {
@@ -37,15 +38,16 @@ import {
     public apiData: string = `// Inputs
 public indeterminate = input<boolean>(false);
 public thickness = input<4 | 8>(4);
-public progress = input<number>(0);`;
+public progress = input<number>(0);
+public color = input<'primary' | 'secondary' | 'tertiary'>('primary');`;
 
     public apiUsage: string = `<!-- Component usage -->
 
 <!-- circular progress indicator -->
-<md3-circular-progress-indicator [indeterminate]="false" [thickness]="4" [progress]="0"></md3-circular-progress-indicator>
+<md3-circular-progress-indicator [indeterminate]="false" [thickness]="4" [progress]="0" [color]="'primary'"></md3-circular-progress-indicator>
 
 <!-- linear progress indicator -->
-<md3-linear-progress-indicator [indeterminate]="false" [thickness]="4" [progress]="0"></md3-linear-progress-indicator>`;
+<md3-linear-progress-indicator [indeterminate]="false" [thickness]="4" [progress]="0" [color]="'primary'"></md3-linear-progress-indicator>`;
     
     constructor(
         private sheetsService: SheetsService,
@@ -96,6 +98,11 @@ public progress = input<number>(0);`;
         this.configSheet?.componentInstance?.thickness.setValue(this.thickness().toString());
         this.configSheet?.componentInstance?.thickness.registerOnChange(() => {
             this.thickness.set(Number(this.configSheet?.componentInstance?.thickness.value) as 4 | 8);
+        });
+
+        this.configSheet?.componentInstance?.color.setValue(this.color().toString());
+        this.configSheet?.componentInstance?.color.registerOnChange(() => {
+            this.color.set(this.configSheet?.componentInstance?.color.value);
         });
 
         this.configSheet?.componentInstance?.progress.setValue(this.progress());

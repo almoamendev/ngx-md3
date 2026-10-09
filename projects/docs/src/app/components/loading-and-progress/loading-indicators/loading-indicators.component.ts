@@ -25,6 +25,7 @@ export class LoadingIndicatorsComponent implements OnDestroy {
 
     public contained = signal<boolean>(false);
     public size = signal<number>(48);
+    public color = signal<'primary' | 'secondary' | 'tertiary'>('primary');
 
     public apiImport: string = `// Component imports
 import {
@@ -33,11 +34,12 @@ import {
 
     public apiData: string = `// Inputs
 public contained = input<boolean>(false);
-public size = input<number>(48);`;
+public size = input<number>(48);
+public color = input<'primary' | 'secondary' | 'tertiary'>('primary');`;
 
     public apiUsage: string = `<!-- Component usage -->
 
-<md3-loading-indicator [contained]="true" [size]="48"></md3-loading-indicator>`;
+<md3-loading-indicator [contained]="true" [size]="48" [color]="'primary'"></md3-loading-indicator>`;
     
     constructor(
         private sheetsService: SheetsService,
@@ -81,6 +83,11 @@ public size = input<number>(48);`;
         this.configSheet?.componentInstance?.size.setValue(this.size());
         this.configSheet?.componentInstance?.size.registerOnChange(() => {
             this.size.set(this.configSheet?.componentInstance?.size.value);
+        });
+
+        this.configSheet?.componentInstance?.color.setValue(this.color().toString());
+        this.configSheet?.componentInstance?.color.registerOnChange(() => {
+            this.color.set(this.configSheet?.componentInstance?.color.value);
         });
     }
 }

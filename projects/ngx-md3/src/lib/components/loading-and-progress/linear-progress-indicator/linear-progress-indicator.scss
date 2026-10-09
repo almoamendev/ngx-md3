@@ -1,10 +1,26 @@
 :host {
+    --indicator-color: rgb(var(--md-scheme-primary));
+    --track-color: rgb(var(--md-scheme-primary-container));
+
     display: block;
     width: 100%;
 
-    .md3-linear-indicator {
+    &.md3-color-primary {
         --indicator-color: rgb(var(--md-scheme-primary));
         --track-color: rgb(var(--md-scheme-primary-container));
+    }
+
+    &.md3-color-secondary {
+        --indicator-color: rgb(var(--md-scheme-secondary));
+        --track-color: rgb(var(--md-scheme-secondary-container));
+    }
+
+    &.md3-color-tertiary {
+        --indicator-color: rgb(var(--md-scheme-tertiary));
+        --track-color: rgb(var(--md-scheme-tertiary-container));
+    }
+
+    .md3-linear-indicator {
         --progress: 0%;
         
         font-size: 0.25rem;

@@ -1,5 +1,23 @@
 :host {
+    --indicator-color: rgb(var(--md-scheme-primary));
+    --track-color: rgb(var(--md-scheme-primary-container));
+    
     display: inline-flex;
+
+    &.md3-color-primary {
+        --indicator-color: rgb(var(--md-scheme-primary));
+        --track-color: rgb(var(--md-scheme-primary-container));
+    }
+
+    &.md3-color-secondary {
+        --indicator-color: rgb(var(--md-scheme-secondary));
+        --track-color: rgb(var(--md-scheme-secondary-container));
+    }
+
+    &.md3-color-tertiary {
+        --indicator-color: rgb(var(--md-scheme-tertiary));
+        --track-color: rgb(var(--md-scheme-tertiary-container));
+    }
     
     .md3-indicator-container {
         font-size: 0.25rem;
@@ -10,9 +28,6 @@
             font-size: 0.5rem;
             --gap: 10;
         }
-    
-        --indicator-color: rgb(var(--md-scheme-primary));
-        --track-color: rgb(var(--md-scheme-primary-container));
     
         --size: calc(2.25rem + 1em);
         --stroke: 1em;
