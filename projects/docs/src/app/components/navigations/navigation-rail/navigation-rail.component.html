@@ -42,7 +42,7 @@
             Home
         </button>
 
-        <md3-nav-group label="Library" [collapse-mode]="onCollapse()">
+        <md3-nav-group label="Library" [collapse-mode]="collapseMode()">
             <button type="button" md3-nav-item [class.md3-active]="activeItem() == 'favorites'"
                 (click)="activeItem.set('favorites')">
                 @if (badge() != 'none') {
