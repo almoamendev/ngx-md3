@@ -41,6 +41,7 @@ export class NavigationRailComponent implements OnDestroy {
     public expandedLayout = signal<'standard' | 'modal'>('standard');
     public showFab = signal<boolean>(false);
     public badge = signal<'none' | 'dot' | 'count'>('none');
+    public onCollapse = signal<'none' | 'hide' | 'show'>('none');
 
     public apiImport: string = `// Component imports
 import {
@@ -107,7 +108,7 @@ type MenuAlignment = 'start' | 'center' | 'end';`;
 
 <!-- grouping items -->
 <md3-navigation-rail>
-    <md3-nav-group label="Library" hide-on-collapse>
+    <md3-nav-group label="Library" on-collapse="hide">
         <button type="button" md3-nav-item>...</button>
         <button type="button" md3-nav-item>...</button>
     </md3-nav-group>
@@ -230,6 +231,11 @@ type MenuAlignment = 'start' | 'center' | 'end';`;
         this.configSheet?.componentInstance?.expandedLayout.setValue(this.expandedLayout());
         this.configSheet?.componentInstance?.expandedLayout.registerOnChange(() => {
             this.expandedLayout.set(this.configSheet?.componentInstance?.expandedLayout.value);
+        });
+
+        this.configSheet?.componentInstance?.onCollapse.setValue(this.onCollapse());
+        this.configSheet?.componentInstance?.onCollapse.registerOnChange(() => {
+            this.onCollapse.set(this.configSheet?.componentInstance?.onCollapse.value);
         });
     }
 }

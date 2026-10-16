@@ -40,6 +40,28 @@
         </label>
     </div>
     
+    <div md3-type-body size="large">Navigation group on collapse</div>
+    <div class="controls-list">
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="onCollapse">
+                <input type="radio" md3-input-element name="on-collapse" value="none">
+            </md3-radio-button>
+            <div md3-type-label size="large">None</div>
+        </label>
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="onCollapse">
+                <input type="radio" md3-input-element name="on-collapse" value="hide">
+            </md3-radio-button>
+            <div md3-type-label size="large">Hide</div>
+        </label>
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="onCollapse">
+                <input type="radio" md3-input-element name="on-collapse" value="show">
+            </md3-radio-button>
+            <div md3-type-label size="large">show</div>
+        </label>
+    </div>
+    
     <div md3-type-body size="large">Menu alignment</div>
     <div class="controls-list">
         <label md3-state-component tabindex="0">

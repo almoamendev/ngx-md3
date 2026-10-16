@@ -18,9 +18,8 @@ export class NavigationItemComponent {
 import { NavigationItem } from '@almoamendev/ngx-md3';`;
 
     public apiData: string = `// Inputs
-public hideOnCollapse = input<boolean, unknown>(false, {
-    alias: 'hide-on-collapse',
-    transform: booleanAttribute,
+public onCollapse = input<'none' | 'hide' | 'show'>('none', {
+    alias: 'on-collapse',
 });
 
 // Forwarded from Angular's RouterLinkActive via hostDirectives
@@ -66,7 +65,7 @@ type AriaCurrentWhenActive = 'page' | 'step' | 'location' | 'date' | 'time' | tr
 </a>
 
 <!-- hide entirely while the parent rail is collapsed -->
-<button type="button" md3-nav-item hide-on-collapse>
+<button type="button" md3-nav-item on-collapse="hide">
     <md3-icon md3-icon-element>star</md3-icon>
     Extras
 </button>`;

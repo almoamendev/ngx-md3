@@ -26,11 +26,11 @@
         <tbody>
             <tr>
                 <td>
-                    <i>hide-on-collapse</i>
-                    <p md3-type-body size="small">Hides the item entirely while the parent rail is collapsed.</p>
+                    <i>on-collapse</i>
+                    <p md3-type-body size="small">Control the item visibility while the parent rail is collapsed.</p>
                 </td>
-                <td>input&lt;boolean&gt;</td>
-                <td style="white-space: nowrap;">false</td>
+                <td>input&lt;'none' | 'hide' | 'show'&gt;</td>
+                <td style="white-space: nowrap;">'none'</td>
             </tr>
             <tr>
                 <td>
@@ -90,7 +90,7 @@
         needs no wrapper or positioning styles of its own.
     </li>
     <li>
-        <code>hide-on-collapse</code> only has an effect inside a navigation rail, since a navigation bar
+        <code>on-collapse</code> only has an effect inside a navigation rail, since a navigation bar
         never collapses.
     </li>
 </ul>

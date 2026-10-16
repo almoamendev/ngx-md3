@@ -10,7 +10,8 @@ import { Badge } from '../../common/badge';
     templateUrl: './navigation-item.html',
     styleUrl: './navigation-item.scss',
     host: {
-        '[class.md3-hide-on-collapse]': 'this.hideOnCollapse()',
+        '[class.md3-hide-on-collapse]': 'hideOnCollapse()',
+        '[class.md3-show-on-collapse]': 'showOnCollapse()',
     },
     hostDirectives: [
         {
@@ -23,10 +24,12 @@ export class NavigationItem {
     private readonly el = inject(ElementRef<HTMLElement>);
     private routerLinkActive = inject(RouterLinkActive);
     
-    public hideOnCollapse = input<boolean, unknown>(false, {
-        alias: 'hide-on-collapse',
-        transform: booleanAttribute
+    public onCollapse = input<'none' | 'hide' | 'show'>('none', {
+        alias: 'on-collapse',
     });
+
+    public hideOnCollapse = computed<boolean>(() => this.onCollapse() == 'hide');
+    public showOnCollapse = computed<boolean>(() => this.onCollapse() == 'show');
 
     private icons = contentChildren<IconElement>(IconElement);
 

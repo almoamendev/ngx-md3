@@ -101,6 +101,14 @@
                         max-width: 0em;
                     }
 
+                    &.md3-show-on-collapse {
+                        margin-bottom: 0.25em;
+                        transform: scaleY(1);
+                        opacity: 1;
+                        max-height: 4em;
+                        max-width: 100%;
+                    }
+
                     .md3-item-container {
                         width: 100%;
                     }
@@ -198,14 +206,21 @@
             }
 
             .md3-nav-label {
-                transform: scaleY(0);
-                opacity: 0;
-                max-height: 0em;
+                display: none;
             }
         }
     }
 
     &.md3-expanded {
+        ::ng-deep md3-nav-group {
+            &.md3-show-on-collapse {
+                transform: scaleY(0);
+                opacity: 0;
+                max-height: 0em;
+                max-width: 0em;
+            }
+        }
+
         .md3-nav-container {
             min-width: 13.75em;
             max-width: 22.5em;
@@ -246,6 +261,14 @@
                             opacity: 1;
                             max-height: 5em;
                             max-width: 100%;
+                        }
+
+                        &.md3-show-on-collapse {
+                            margin-bottom: 0;
+                            transform: scaleY(0);
+                            opacity: 0;
+                            max-height: 0em;
+                            max-width: 0em;
                         }
                         
                         .md3-item-container {
