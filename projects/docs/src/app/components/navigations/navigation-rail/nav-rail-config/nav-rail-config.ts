@@ -30,7 +30,7 @@ export class NavRailConfig {
     public expandedLayout: FormControl = new FormControl<'standard' | 'modal'>('standard');
     public showFab: FormControl = new FormControl<boolean>(false);
     public badge: FormControl = new FormControl<'none' | 'dot' | 'count'>('none');
-    public onCollapse: FormControl = new FormControl<'none' | 'hide' | 'show'>('none');
+    public collapseMode: FormControl = new FormControl<'none' | 'hide' | 'show'>('none');
 
     constructor(
         private sideSheetRef: SideSheetRef<NavRailConfig>

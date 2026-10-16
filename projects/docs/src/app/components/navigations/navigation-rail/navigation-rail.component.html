@@ -42,7 +42,7 @@
             Home
         </button>
 
-        <md3-nav-group label="Library" [on-collapse]="onCollapse()">
+        <md3-nav-group label="Library" [collapse-mode]="onCollapse()">
             <button type="button" md3-nav-item [class.md3-active]="activeItem() == 'favorites'"
                 (click)="activeItem.set('favorites')">
                 @if (badge() != 'none') {
@@ -167,8 +167,8 @@
             </tr>
             <tr>
                 <td>
-                    <i>on-collapse</i>
-                    <p md3-type-body size="small">Control the group entirely while the rail is collapsed, instead of just hiding its label.</p>
+                    <i>collapse-mode</i>
+                    <p md3-type-body size="small">Control the group visibility while the rail is collapsed, instead of just hiding its label.</p>
                 </td>
                 <td>input&lt;'none' | 'hide' | 'show'&gt;</td>
                 <td style="white-space: nowrap;">'none'</td>

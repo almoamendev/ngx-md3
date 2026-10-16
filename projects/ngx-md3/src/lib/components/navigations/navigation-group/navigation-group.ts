@@ -18,12 +18,12 @@ export class NavigationGroup {
     
     public label = input<string>();
     
-    public onCollapse = input<'none' | 'hide' | 'show'>('none', {
-        alias: 'on-collapse'
+    public collapseMode = input<'none' | 'hide' | 'show'>('none', {
+        alias: 'collapse-mode'
     });
 
-    public hideOnCollapse = computed<boolean>(() => this.onCollapse() == 'hide');
-    public showOnCollapse = computed<boolean>(() => this.onCollapse() == 'show');
+    public hideOnCollapse = computed<boolean>(() => this.collapseMode() == 'hide');
+    public showOnCollapse = computed<boolean>(() => this.collapseMode() == 'show');
 
     public get element(): HTMLElement {
         return this.el.nativeElement;

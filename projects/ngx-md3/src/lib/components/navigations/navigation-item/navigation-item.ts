@@ -24,12 +24,12 @@ export class NavigationItem {
     private readonly el = inject(ElementRef<HTMLElement>);
     private routerLinkActive = inject(RouterLinkActive);
     
-    public onCollapse = input<'none' | 'hide' | 'show'>('none', {
-        alias: 'on-collapse',
+    public collapseMode = input<'none' | 'hide' | 'show'>('none', {
+        alias: 'collapse-mode',
     });
 
-    public hideOnCollapse = computed<boolean>(() => this.onCollapse() == 'hide');
-    public showOnCollapse = computed<boolean>(() => this.onCollapse() == 'show');
+    public hideOnCollapse = computed<boolean>(() => this.collapseMode() == 'hide');
+    public showOnCollapse = computed<boolean>(() => this.collapseMode() == 'show');
 
     private icons = contentChildren<IconElement>(IconElement);
 
