@@ -64,14 +64,14 @@
             </button>
         </md3-nav-group>
 
-        <md3-nav-group md3-nav-footer>
+        <ng-container md3-nav-footer>
             <button type="button" md3-nav-item [class.md3-active]="activeItem() == 'help'"
                 (click)="activeItem.set('help')">
                 <md3-icon md3-icon-element>help</md3-icon>
                 <md3-icon md3-icon-element="active" filled>help</md3-icon>
                 Help
             </button>
-        </md3-nav-group>
+        </ng-container>
     </md3-navigation-rail>
 </app-playground>
 

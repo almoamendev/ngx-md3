@@ -135,12 +135,12 @@ type MenuAlignment = 'start' | 'center' | 'end';`;
 <md3-navigation-rail>
     <button type="button" md3-nav-item>...</button>
     ...
-    <md3-nav-group md3-nav-footer>
+    <ng-container md3-nav-footer>
         <button type="button" md3-nav-item>
             <md3-icon md3-icon-element>help</md3-icon>
             Help
         </button>
-    </md3-nav-group>
+    </ng-container>
 </md3-navigation-rail>
 
 <!-- custom expand/collapse menu icons -->
