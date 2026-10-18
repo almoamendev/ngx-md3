@@ -131,6 +131,18 @@ type MenuAlignment = 'start' | 'center' | 'end';`;
     ...
 </md3-navigation-rail>
 
+<!-- footer pinned to the bottom of the rail -->
+<md3-navigation-rail>
+    <button type="button" md3-nav-item>...</button>
+    ...
+    <md3-nav-group md3-nav-footer>
+        <button type="button" md3-nav-item>
+            <md3-icon md3-icon-element>help</md3-icon>
+            Help
+        </button>
+    </md3-nav-group>
+</md3-navigation-rail>
+
 <!-- custom expand/collapse menu icons -->
 <md3-navigation-rail>
     <md3-icon md3-icon-element="expand">menu</md3-icon>

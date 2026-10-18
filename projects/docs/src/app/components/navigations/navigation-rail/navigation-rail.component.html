@@ -63,8 +63,51 @@
                 Settings
             </button>
         </md3-nav-group>
+
+        <md3-nav-group md3-nav-footer>
+            <button type="button" md3-nav-item [class.md3-active]="activeItem() == 'help'"
+                (click)="activeItem.set('help')">
+                <md3-icon md3-icon-element>help</md3-icon>
+                <md3-icon md3-icon-element="active" filled>help</md3-icon>
+                Help
+            </button>
+        </md3-nav-group>
     </md3-navigation-rail>
 </app-playground>
+
+<h2>Content slots</h2>
+
+<div class="table-container md3-scrollable">
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 50%;">Name</th>
+                <th>Renders when</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><i>[md3-fab]</i></td>
+                <td>Always. Shown in the header, below the menu button.</td>
+            </tr>
+            <tr>
+                <td><i>[md3-icon-element=expand]</i>, <i>[md3-icon-element=collapse]</i></td>
+                <td><code>hide-menu-button</code> is false. Replaces the default menu button icons.</td>
+            </tr>
+            <tr>
+                <td><i>[md3-nav-item]</i>, <i>md3-nav-group</i></td>
+                <td>Always. The main navigation list. It scrolls when the items do not fit.</td>
+            </tr>
+            <tr>
+                <td><i>[md3-nav-footer]</i></td>
+                <td>
+                    Content is projected. Pinned to the bottom of the rail, below the navigation list, and
+                    does not scroll with it. Fades out with the list when <code>collapsed-layout="hidden"</code>.
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 
 <h2>API</h2>
 
@@ -233,6 +276,12 @@
     </li>
     <li>
         A single <code>md3-fab</code> can be placed at the top of the rail, above the navigation items.
+    </li>
+    <li>
+        Put an element with the <code>md3-nav-footer</code> attribute in the rail to pin content to its bottom
+        (for example, Settings or Help items). Wrap the footer items in that element: an item that has both
+        <code>md3-nav-item</code> and <code>md3-nav-footer</code> goes into the main list, not the footer.
+        Items in the footer get the same styles and active state as the other items.
     </li>
     <li>
         Custom expand/collapse icons can be provided via <code>md3-icon-element="expand"</code> and
