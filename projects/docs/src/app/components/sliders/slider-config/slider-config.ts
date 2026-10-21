@@ -31,7 +31,6 @@ export class SliderConfig {
     constructor(
         private sideSheetRef: SideSheetRef<SliderConfig>
     ) {
-        this.showIcon.disable();
     }
 
     public close(): void {

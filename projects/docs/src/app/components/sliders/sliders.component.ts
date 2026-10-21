@@ -114,14 +114,12 @@ type SliderSize = 'x-small' | 'small' | 'medium' | 'large' | 'x-large';`;
         private sheetsService: SheetsService,
     ) {
 		effect(() => {
-			const size = this.sliderSize();
-			if (size == 'x-small' || size == 'small') {
-        		this.configSheet?.componentInstance?.showIcon.setValue(false);
-        		this.configSheet?.componentInstance?.showIcon.disable();
-			} else {
-        		this.configSheet?.componentInstance?.showIcon.enable();
-            }
+			this.updateSize(this.sliderSize());
 		});
+
+        effect(() => {
+            this.updateShowValueLabel(this.showValueLabel());
+        });
     }
 
     public openConfig(): void {
@@ -152,6 +150,23 @@ type SliderSize = 'x-small' | 'small' | 'medium' | 'large' | 'x-large';`;
         this.configSheet?.close();
     }
 
+    private updateSize(size: SliderSize) {
+        if (size == 'x-small' || size == 'small') {
+            this.configSheet?.componentInstance?.showIcon.setValue(false);
+            this.configSheet?.componentInstance?.showIcon.disable();
+        } else {
+            this.configSheet?.componentInstance?.showIcon.enable();
+        }
+    }
+
+    private updateShowValueLabel(showValueLabel: boolean) {
+        if (showValueLabel) {
+            this.configSheet?.componentInstance?.valueFormat.enable();
+        } else {
+            this.configSheet?.componentInstance?.valueFormat.disable();
+        }
+    }
+
     private registerConfigEvents() {
         this.configSheet?.componentInstance?.sliderSize.setValue(this.sliderSize());
         this.configSheet?.componentInstance?.sliderSize.registerOnChange(() => {
@@ -177,5 +192,8 @@ type SliderSize = 'x-small' | 'small' | 'medium' | 'large' | 'x-large';`;
         this.configSheet?.componentInstance?.disable.registerOnChange(() => {
             this.disable.set(this.configSheet?.componentInstance?.disable.value);
         });
+
+        this.updateSize(this.sliderSize());
+        this.updateShowValueLabel(this.showValueLabel());
     }
 }
