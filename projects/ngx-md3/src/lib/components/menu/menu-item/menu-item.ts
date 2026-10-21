@@ -1,4 +1,4 @@
-import { Component, contentChildren, ElementRef, input, model } from '@angular/core';
+import { booleanAttribute, Component, contentChildren, ElementRef, input, model } from '@angular/core';
 import { StateComponent } from '../../common/state-component';
 import { IconElement } from '../../common/icon-element';
 import { InputElement } from '../../common/input-element';
@@ -38,6 +38,16 @@ export class MenuItem {
         alias: 'selected'
     });
 
+    /**
+     * When true (default), a click toggles the selected state of the item.
+     * Set it to false when a parent owns the selection, for example md3-select-field.
+     * The item then shows the bound selected value only.
+     */
+    public toggleOnClick = input<boolean, unknown>(true, {
+        alias: 'toggle-on-click',
+        transform: booleanAttribute,
+    });
+
     private iconElements = contentChildren(IconElement);
     
     public get leading(): IconElement | undefined {
@@ -54,7 +64,7 @@ export class MenuItem {
 
     public onHostClick(): void {
         const selected = this.selected();
-        if (selected === null) {
+        if (selected === null || !this.toggleOnClick()) {
             return;
         }
 

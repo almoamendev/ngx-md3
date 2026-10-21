@@ -331,6 +331,52 @@ describe('SelectField', () => {
         expect(matched(fixture)).toEqual(['AK', 'NY', 'Twelve']);
     });
 
+    it('should close the menu after an option is selected in single selection mode', () => {
+        const fixture = TestBed.createComponent(FormControlHost);
+        fixture.detectChanges();
+
+        const field = getSelectField(fixture);
+        field.openMenu();
+        fixture.detectChanges();
+
+        menuItems()[2].click();
+        fixture.detectChanges();
+
+        expect(fixture.componentInstance.control.value).toBe('grace');
+        expect(field['isMenuOpen']()).toBeFalse();
+    });
+
+    it('should close the menu when the selected option is clicked again in single selection mode', () => {
+        const fixture = TestBed.createComponent(FormControlHost);
+        fixture.detectChanges();
+
+        const field = getSelectField(fixture);
+        field.openMenu();
+        fixture.detectChanges();
+
+        menuItems()[1].click();
+        fixture.detectChanges();
+
+        expect(fixture.componentInstance.control.value).toBe('alan');
+        expect(getInput(fixture).value).toBe('Alan');
+        expect(field['isMenuOpen']()).toBeFalse();
+    });
+
+    it('should keep the menu open after an option is selected in multiple selection mode', () => {
+        const fixture = TestBed.createComponent(MultipleHost);
+        fixture.detectChanges();
+
+        const field = getSelectField(fixture);
+        field.openMenu();
+        fixture.detectChanges();
+
+        menuItems()[1].click();
+        fixture.detectChanges();
+
+        expect(fixture.componentInstance.control.value).toEqual(['ada', 'alan', 'grace']);
+        expect(field['isMenuOpen']()).toBeTrue();
+    });
+
     it('should support a control passed through [control]', () => {
         const fixture = TestBed.createComponent(ControlInputHost);
         fixture.detectChanges();
@@ -355,6 +401,10 @@ function search<T>(fixture: ComponentFixture<T>, text: string): void {
 
 function matched<T>(fixture: ComponentFixture<T>): string[] {
     return getSelectField(fixture).filteredOptions().map((option) => option.label);
+}
+
+function menuItems(): HTMLElement[] {
+    return Array.from(document.querySelectorAll('md3-select-options [md3-menu-item]'));
 }
 
 function getSelectField<T>(fixture: ComponentFixture<T>): SelectField {

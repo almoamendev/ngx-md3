@@ -85,6 +85,7 @@ describe('SelectOptions', () => {
         await click(fixture, 0);
 
         expect(options.map((option) => option.selected)).toEqual([true, false, false]);
+        expect(checkedStates(fixture)).toEqual([true, false, false]);
         expect(emitted).toEqual([['ada'], ['ada']]);
     });
 

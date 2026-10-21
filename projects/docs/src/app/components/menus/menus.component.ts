@@ -220,6 +220,14 @@ class MenuRef<T = unknown, R = unknown> {
 <md3-menu-group>
     <button md3-menu-item [selected]="true" label="Show ruler"></button>
     <button md3-menu-item [selected]="false" label="Show minimap"></button>
+</md3-menu-group>
+
+<!-- selection owned by the parent (no toggle on click) -->
+<md3-menu-group>
+    @for (theme of themes; track theme) {
+        <button md3-menu-item [label]="theme" [toggle-on-click]="false"
+            [selected]="theme === activeTheme()" (click)="activeTheme.set(theme)"></button>
+    }
 </md3-menu-group>`;
 
     constructor(
