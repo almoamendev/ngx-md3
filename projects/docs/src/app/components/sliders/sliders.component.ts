@@ -1,8 +1,8 @@
-import { Component, effect, OnDestroy, signal } from '@angular/core';
+import { Component, computed, effect, OnDestroy, signal } from '@angular/core';
 import { IconButton, IconElement, InputElement, MaterialIcon, SheetsService, SideSheetRef, Slider, SliderSize, TypeBody, TypeDisplay } from '@almoamendev/ngx-md3';
 import { Playground } from '../playground/playground';
 import { Shiki } from '../shiki/shiki';
-import { SliderConfig } from './slider-config/slider-config';
+import { SliderConfig, SliderValueFormat } from './slider-config/slider-config';
 
 @Component({
     selector: 'app-sliders',
@@ -28,6 +28,14 @@ export class SlidersComponent implements OnDestroy {
     public sliderSize = signal<SliderSize>('x-small');
     public showValueLabel = signal<boolean>(false);
     public disable = signal<boolean>(false);
+    public valueFormat = signal<SliderValueFormat>('none');
+
+    private readonly formatters: Record<SliderValueFormat, (value: number) => string> = {
+        none: (value) => String(value),
+        percent: (value) => `${value}%`,
+        celsius: (value) => `${value} °C`,
+    };
+    public valueFormatter = computed(() => this.formatters[this.valueFormat()]);
 
     public apiImport: string = `// Component imports
 import {
@@ -44,9 +52,22 @@ public control = input<AbstractControl | undefined>(undefined, {
 public sliderSize = input<SliderSize>('x-small', {
     alias: 'slider-size',
 });
-public showValueLabel = input<boolean>(false, {
-    alias: 'show-value-label'
+public showValueLabel = input<boolean, unknown>(false, {
+    alias: 'show-value-label',
+    transform: booleanAttribute,
+});
+public valueFormatter = input<(value: number) => string>((v) => String(v), {
+    alias: 'value-formatter',
 });`;
+
+    public apiFormatter: string = `// Value formatter examples (component class)
+public percent = (value: number): string => \`\${value}%\`;
+public celsius = (value: number): string => \`\${value} °C\`;
+public price = (value: number): string => \`$\${value}\`;
+
+// Locale-aware formatting (optional)
+private currency = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' });
+public money = (value: number): string => this.currency.format(value);`;
 
     public apiTypes: string = `// Types
 import { SliderSize } from '@almoamendev/ngx-md3';
@@ -74,6 +95,11 @@ type SliderSize = 'x-small' | 'small' | 'medium' | 'large' | 'x-large';`;
     <input type="range" min="0" max="100" step="1" md3-input-element>
 </md3-slider>
 
+<!-- custom value label (prefix / suffix) -->
+<md3-slider show-value-label [value-formatter]="percent">
+    <input type="range" min="0" max="100" step="1" md3-input-element>
+</md3-slider>
+
 <!-- checkbox input using form control -->
 <md3-slider [show-value-label]="true" slider-size="x-small" [control]="sliderControl">
     <input type="range" min="0" max="100" step="1" md3-input-element>
@@ -88,14 +114,12 @@ type SliderSize = 'x-small' | 'small' | 'medium' | 'large' | 'x-large';`;
         private sheetsService: SheetsService,
     ) {
 		effect(() => {
-			const size = this.sliderSize();
-			if (size == 'x-small' || size == 'small') {
-        		this.configSheet?.componentInstance?.showIcon.setValue(false);
-        		this.configSheet?.componentInstance?.showIcon.disable();
-			} else {
-        		this.configSheet?.componentInstance?.showIcon.enable();
-            }
+			this.updateSize(this.sliderSize());
 		});
+
+        effect(() => {
+            this.updateShowValueLabel(this.showValueLabel());
+        });
     }
 
     public openConfig(): void {
@@ -126,6 +150,23 @@ type SliderSize = 'x-small' | 'small' | 'medium' | 'large' | 'x-large';`;
         this.configSheet?.close();
     }
 
+    private updateSize(size: SliderSize) {
+        if (size == 'x-small' || size == 'small') {
+            this.configSheet?.componentInstance?.showIcon.setValue(false);
+            this.configSheet?.componentInstance?.showIcon.disable();
+        } else {
+            this.configSheet?.componentInstance?.showIcon.enable();
+        }
+    }
+
+    private updateShowValueLabel(showValueLabel: boolean) {
+        if (showValueLabel) {
+            this.configSheet?.componentInstance?.valueFormat.enable();
+        } else {
+            this.configSheet?.componentInstance?.valueFormat.disable();
+        }
+    }
+
     private registerConfigEvents() {
         this.configSheet?.componentInstance?.sliderSize.setValue(this.sliderSize());
         this.configSheet?.componentInstance?.sliderSize.registerOnChange(() => {
@@ -142,9 +183,17 @@ type SliderSize = 'x-small' | 'small' | 'medium' | 'large' | 'x-large';`;
             this.showIcon.set(this.configSheet?.componentInstance?.showIcon.value);
         });
 
+        this.configSheet?.componentInstance?.valueFormat.setValue(this.valueFormat());
+        this.configSheet?.componentInstance?.valueFormat.registerOnChange(() => {
+            this.valueFormat.set(this.configSheet?.componentInstance?.valueFormat.value);
+        });
+
         this.configSheet?.componentInstance?.disable.setValue(this.disable());
         this.configSheet?.componentInstance?.disable.registerOnChange(() => {
             this.disable.set(this.configSheet?.componentInstance?.disable.value);
         });
+
+        this.updateSize(this.sliderSize());
+        this.updateShowValueLabel(this.showValueLabel());
     }
 }

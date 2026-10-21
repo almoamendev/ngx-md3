@@ -1,4 +1,4 @@
-import { Component, computed, contentChild, effect, ElementRef, input, signal } from '@angular/core';
+import { booleanAttribute, Component, computed, contentChild, effect, ElementRef, input, signal } from '@angular/core';
 import { AbstractControl, FormControlName } from '@angular/forms';
 import { fromEvent, merge } from 'rxjs';
 import { InputElement } from '../common/input-element';
@@ -20,8 +20,12 @@ export class Slider {
     public sliderSize = input<SliderSize>('x-small', {
         alias: 'slider-size',
     });
-    public showValueLabel = input<boolean>(false, {
-        alias: 'show-value-label'
+    public showValueLabel = input<boolean, unknown>(false, {
+        alias: 'show-value-label',
+        transform: booleanAttribute,
+    });
+    public valueFormatter = input<(value: number) => string>((v) => String(v), {
+        alias: 'value-formatter'
     });
 
     private input = contentChild<InputElement>(InputElement);
@@ -33,6 +37,9 @@ export class Slider {
     public progress = signal<number>(0);
 
     protected formControl = computed<AbstractControl | undefined>(() => this.control() ?? this.controlName()?.control);
+    protected formattedValue = computed(() =>
+        this.valueFormatter()(this.value()),
+    );
 
     constructor(private el: ElementRef<HTMLElement>) {
         effect((onCleanup) => {
@@ -46,6 +53,15 @@ export class Slider {
 
         effect(() => {
             this.element.style.setProperty('--slider-progress', `${this.progress()}%`);
+        });
+
+        effect(() => {
+            const input = this.input()?.nativeElement;
+            if (!input) {
+                return;
+            }
+
+            input.setAttribute('aria-valuetext', this.formattedValue());
         });
 
         effect((onCleanup) => {
