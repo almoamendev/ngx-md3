@@ -338,6 +338,7 @@ export class SelectField implements ControlValueAccessor {
     private selectValues(values: SelectOptionValue[]): void {
         this.setSelectedValues(this.normalizeValues(values));
         this.commitValue();
+
         if (!this.multiple()) {
             this.closeMenu();
         }
