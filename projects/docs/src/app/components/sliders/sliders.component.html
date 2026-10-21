@@ -20,7 +20,8 @@
     </button>
 
     <div style="max-width: 32em; width: 100%; text-align: center;">
-        <md3-slider [slider-size]="sliderSize()" [show-value-label]="showValueLabel()">
+        <md3-slider [slider-size]="sliderSize()" [show-value-label]="showValueLabel()"
+            [value-formatter]="valueFormatter()">
             @if (showIcon()) {
                 <md3-icon md3-icon-element bi-directional>volume_up</md3-icon>
             }
@@ -63,10 +64,26 @@
             <tr>
                 <td>
                     show-value-label
-                    <p md3-type-body size="small">Show input value when active.</p>
+                    <p md3-type-body size="small">
+                        Show the value label above the handle when the slider is active.
+                        Accepts a boolean binding or the bare attribute.
+                    </p>
                 </td>
                 <td>input&lt;boolean&gt;</td>
                 <td style="white-space: nowrap;">false</td>
+            </tr>
+            <tr>
+                <td>
+                    value-formatter
+                    <p md3-type-body size="small">
+                        Function that converts the value to the text in the value label.
+                        Use it to add a prefix, a suffix, or locale formatting.
+                        The same text is set as <code>aria-valuetext</code> on the input,
+                        so screen readers announce the formatted value.
+                    </p>
+                </td>
+                <td>input&lt;(value: number) =&gt; string&gt;</td>
+                <td style="white-space: nowrap;">String(value)</td>
             </tr>
         </tbody>
     </table>
@@ -74,9 +91,14 @@
 
 <app-shiki [code]="apiImport"></app-shiki>
 <app-shiki [code]="apiData"></app-shiki>
+<app-shiki [code]="apiFormatter"></app-shiki>
 <app-shiki [code]="apiTypes"></app-shiki>
 <app-shiki [code]="apiUsage" language="html"></app-shiki>
 <ul>
+    <li>
+        The <code>value-formatter</code> function runs each time the value changes.
+        Keep it fast, and create objects such as <code>Intl.NumberFormat</code> one time, outside the function.
+    </li>
     <li>When using a custom icon, always apply the <code>md3-icon-element</code> directive to the icon element.</li>
     <li>
         <div>

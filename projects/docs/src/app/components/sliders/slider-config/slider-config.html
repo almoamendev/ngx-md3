@@ -31,6 +31,28 @@
         </label>
     </div>
 
+    <div md3-type-body size="large">Value format</div>
+    <div class="controls-list">
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="valueFormat">
+                <input type="radio" md3-input-element name="value-format" value="none">
+            </md3-radio-button>
+            <div md3-type-label size="large">None</div>
+        </label>
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="valueFormat">
+                <input type="radio" md3-input-element name="value-format" value="percent">
+            </md3-radio-button>
+            <div md3-type-label size="large">Percent (50%)</div>
+        </label>
+        <label md3-state-component tabindex="0">
+            <md3-radio-button disable-state-layer [control]="valueFormat">
+                <input type="radio" md3-input-element name="value-format" value="celsius">
+            </md3-radio-button>
+            <div md3-type-label size="large">Celsius (50 °C)</div>
+        </label>
+    </div>
+
     <div md3-type-body size="large">Size</div>
     <div class="controls-list">
         <label md3-state-component tabindex="0">

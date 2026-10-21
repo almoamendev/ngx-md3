@@ -55,6 +55,15 @@ export class Slider {
             this.element.style.setProperty('--slider-progress', `${this.progress()}%`);
         });
 
+        effect(() => {
+            const input = this.input()?.nativeElement;
+            if (!input) {
+                return;
+            }
+
+            input.setAttribute('aria-valuetext', this.formattedValue());
+        });
+
         effect((onCleanup) => {
             const input = this.input()?.nativeElement;
             if (!input) {
