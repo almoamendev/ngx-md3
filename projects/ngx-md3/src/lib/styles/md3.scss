@@ -195,7 +195,7 @@ li {
         }
     }
 
-    &.draggable:active {
+    &.draggable:active, &.draggable.cdk-drag-preview {
         .md3-state-layer {
             background-color: var(--state-color, transparent);
             opacity: 0.16;

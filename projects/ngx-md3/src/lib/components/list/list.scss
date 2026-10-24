@@ -33,7 +33,8 @@
                 --border-top-end-r: var(--md-border-radius-large);
             }
             
-            &.md3-state-component:last-child, &:last-child [md3-primary-action] {
+            // The drag preview is appended to the list, so the item before it is the real last one.
+            &.md3-state-component:last-child, &.md3-state-component:has(+ .cdk-drag-preview:last-child), &:last-child [md3-primary-action] {
                 --border-bottom-start-r: var(--md-border-radius-large);
                 --border-bottom-end-r: var(--md-border-radius-large);
             }
@@ -55,7 +56,20 @@
                 --border-bottom-start-r: var(--border-radius);
                 --border-bottom-end-r: var(--border-radius);
             }
+
+            &.cdk-drag-preview {
+                --border-radius: var(--md-border-radius-large);
+
+                --border-top-start-r: var(--border-radius);
+                --border-top-end-r: var(--border-radius);
+                --border-bottom-start-r: var(--border-radius);
+                --border-bottom-end-r: var(--border-radius);
+            }
         }
+    }
+
+    &.cdk-drop-list-dragging ::ng-deep .cdk-drag:not(.cdk-drag-placeholder):not(.cdk-drag-preview) {
+        transition: all var(--md-motion-expressive-fast-spatial-duration) var(--md-motion-expressive-fast-spatial-easing);
     }
 
     &.md3-baseline {

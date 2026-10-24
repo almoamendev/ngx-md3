@@ -1,8 +1,10 @@
-import { AfterViewInit, booleanAttribute, Component, computed, contentChild, Directive, effect, ElementRef, HostListener, input } from '@angular/core';
+import { AfterViewInit, booleanAttribute, Component, computed, contentChild, Directive, effect, ElementRef, HostListener, input, Optional, signal } from '@angular/core';
+import { CdkDrag } from '@angular/cdk/drag-drop';
 import { StateComponent } from '../../common/state-component';
 import { Checkbox } from '../../selection-controls/checkbox/checkbox';
 import { RadioButton } from '../../selection-controls/radio-button/radio-button';
 import { Switch } from '../../selection-controls/switch/switch';
+import { List } from '../list';
 
 @Directive({
     selector: 'button[md3-item-primary-action], a[md3-item-primary-action]',
@@ -22,9 +24,11 @@ export class ListItemPrimaryAction {
     styleUrl: './list-item.scss',
     host: {
         '[class.md3-selected]': 'isSelected()',
+        '[class.draggable]': 'isDraggable()',
     },
     hostDirectives: [
-        StateComponent
+        StateComponent,
+        CdkDrag,
     ],
 })
 export class ListItem implements AfterViewInit {
@@ -34,8 +38,12 @@ export class ListItem implements AfterViewInit {
     public selected = input<boolean, unknown>(false, {
         transform: booleanAttribute,
     });
+    public dragDisabled = input<boolean, unknown>(false, {
+        alias: 'drag-disabled',
+        transform: booleanAttribute,
+    });
 
-    public isActionTag: boolean = false;
+    public isActionTag = signal<boolean>(false);
     private isLabelTag: boolean = false;
     private checkbox = contentChild(Checkbox);
     private radioButton = contentChild(RadioButton);
@@ -56,10 +64,19 @@ export class ListItem implements AfterViewInit {
         return this.checkbox()?.isDisabled() || this.radioButton()?.isDisabled() || this.switch()?.isDisabled();
     });
 
+    public isDraggable = computed(() => {
+        return !!this.list?.draggable() && !this.dragDisabled() && !this.isInputDisabled();
+    });
+
     constructor(
         private el: ElementRef,
-        private state: StateComponent
+        private state: StateComponent,
+        private drag: CdkDrag,
+        @Optional() private list: List | null
     ) {
+        // Keep the preview inside the list so it inherits the list's tokens.
+        this.drag.previewContainer = 'parent';
+
         effect((onCleanup) => {
             const alignment = 'md3-slots-alignment-' + this.slotsAlignment();
             this.element.classList.add(alignment);
@@ -70,13 +87,16 @@ export class ListItem implements AfterViewInit {
         });
 
         effect(() => {
-            if (this.isInputDisabled()) {
-                this.state.setStateLayer(false);
-                this.element.classList.add('md3-disabled');
-            } else {
-                this.state.setStateLayer(true);
-                this.element.classList.remove('md3-disabled');
-            }
+            this.element.classList.toggle('md3-disabled', !!this.isInputDisabled());
+        });
+
+        // Draggable items always need the state layer for the dragged state.
+        effect(() => {
+            this.state.setStateLayer(this.isDraggable() || (this.isActionTag() && !this.isInputDisabled()));
+        });
+
+        effect(() => {
+            this.drag.disabled = !this.isDraggable();
         });
     }
 
@@ -94,11 +114,7 @@ export class ListItem implements AfterViewInit {
             this.setLabelInputTabIndex();
         }
 
-        this.isActionTag = tagName != 'md3-list-item';
-        
-        if (!this.isActionTag) {
-            this.state.setStateLayer(false);
-        }
+        this.isActionTag.set(tagName != 'md3-list-item');
     }
 
     @HostListener('focusin', ['$event'])

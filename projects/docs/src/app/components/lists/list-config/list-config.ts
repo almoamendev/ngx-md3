@@ -24,6 +24,7 @@ export class ListConfig {
     // md3-list options
     public listVariant: FormControl = new FormControl<'expressive' | 'baseline'>('expressive');
     public listType: FormControl = new FormControl<'standard' | 'segmented'>('standard');
+    public listDraggable: FormControl = new FormControl<boolean>(false);
 
     // md3-list-item options
     public supportingText: FormControl = new FormControl<boolean>(true);
