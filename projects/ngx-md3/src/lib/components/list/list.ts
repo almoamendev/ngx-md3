@@ -1,15 +1,30 @@
-import { Component, effect, ElementRef, input } from '@angular/core';
+import { booleanAttribute, Component, effect, ElementRef, input } from '@angular/core';
+import { CdkDropList } from '@angular/cdk/drag-drop';
 
 @Component({
     selector: 'md3-list',
     templateUrl: './list.html',
     styleUrl: './list.scss',
+    hostDirectives: [
+        {
+            directive: CdkDropList,
+            outputs: ['cdkDropListDropped: dropped'],
+        },
+    ],
 })
 export class List {
     public variant = input<'expressive' | 'baseline'>('expressive');
     public type = input<'standard' | 'segmented'>('standard');
+    public draggable = input<boolean, unknown>(false, {
+        transform: booleanAttribute,
+    });
 
-    constructor(private el: ElementRef) {
+    constructor(
+        private el: ElementRef,
+        private dropList: CdkDropList
+    ) {
+        this.dropList.lockAxis = 'y';
+
         effect((onCleanup) => {
             const variant = 'md3-' + this.variant();
             this.element.classList.add(variant);
@@ -26,6 +41,10 @@ export class List {
             onCleanup(() => {
                 this.element.classList.remove(type);
             });
+        });
+
+        effect(() => {
+            this.dropList.disabled = !this.draggable();
         });
     }
 

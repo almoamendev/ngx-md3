@@ -18,9 +18,11 @@
         <md3-icon md3-icon-element>settings</md3-icon>
     </button>
 
-    <md3-list style="width: 20em; max-width: 100%;" [variant]="listVariant()" [type]="listType()">
-    @if (isSelectionInput()) {
-        <label md3-list-item [slots-alignment]="itemSlotsAlignment()" [selected]="itemSelected()">
+    <md3-list style="width: 20em; max-width: 100%;" [variant]="listVariant()" [type]="listType()" [draggable]="listDraggable()"
+        (dropped)="reorderItems($event)">
+    @for (item of items(); track item.id) {
+        @if (isSelectionInput()) {
+        <label md3-list-item [slots-alignment]="itemSlotsAlignment()" [selected]="item.id === 1 && itemSelected()">
             @if (leadingItem()) {
                 <md3-list-leading [type]="leadingInput() ? 'selection-input' : leadingType()" [size]="leadingSize()">
                     @if (leadingInput()) {
@@ -32,7 +34,7 @@
                             }
                             @case ('radio') {
                                 <md3-radio-button [disable-state-layer]="true">
-                                    <input type="radio" md3-input-element name="playground-radio" checked [disabled]="itemDisabled()">
+                                    <input type="radio" md3-input-element name="playground-radio" [attr.checked]="item.id === 1 ? '' : null" [disabled]="itemDisabled()">
                                 </md3-radio-button>
                             }
                             @case ('switch') {
@@ -57,7 +59,7 @@
                 </md3-list-leading>
             }
             <div md3-list-slot="content">
-                First item
+                {{ item.label }}
                 @if (supportingText()) {
                     <div md3-type-body size="small" color="on-surface-variant">Supporting text</div>
                 }
@@ -73,7 +75,7 @@
                             }
                             @case ('radio') {
                                 <md3-radio-button [disable-state-layer]="true">
-                                    <input type="radio" md3-input-element name="playground-radio" checked [disabled]="itemDisabled()">
+                                    <input type="radio" md3-input-element name="playground-radio" [attr.checked]="item.id === 1 ? '' : null" [disabled]="itemDisabled()">
                                 </md3-radio-button>
                             }
                             @case ('switch') {
@@ -100,88 +102,8 @@
                 </div>
             }
         </label>
-        <label md3-list-item [slots-alignment]="itemSlotsAlignment()">
-            @if (leadingItem()) {
-                <md3-list-leading [type]="leadingInput() ? 'selection-input' : leadingType()" [size]="leadingSize()">
-                    @if (leadingInput()) {
-                        @switch (itemInput()) {
-                            @case ('checkbox') {
-                                <md3-checkbox [disable-state-layer]="true">
-                                    <input type="checkbox" md3-input-element name="playground-checkbox" [disabled]="itemDisabled()">
-                                </md3-checkbox>
-                            }
-                            @case ('radio') {
-                                <md3-radio-button [disable-state-layer]="true">
-                                    <input type="radio" md3-input-element name="playground-radio" [disabled]="itemDisabled()">
-                                </md3-radio-button>
-                            }
-                            @case ('switch') {
-                                <md3-switch [disable-state-layer]="true">
-                                    <input type="checkbox" md3-input-element name="playground-switch" [disabled]="itemDisabled()">
-                                </md3-switch>
-                            }
-                        }
-                    } @else {
-                        @switch (leadingType()) {
-                            @case ('icon') {
-                                <md3-icon>person</md3-icon>
-                            }
-                            @case ('avatar') {
-                                <span>A</span>
-                            }
-                            @case ('media') {
-                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9zOGcuI9vSzATrKTCoudSLSY36LWLrtU-xA&s">
-                            }
-                        }
-                    }
-                </md3-list-leading>
-            }
-            <div md3-list-slot="content">
-                Second item
-                @if (supportingText()) {
-                    <div md3-type-body size="small" color="on-surface-variant">Supporting text</div>
-                }
-            </div>
-            @if (trailingItem()) {
-                <div md3-list-slot="trailing">
-                    @if (trailingInput()) {
-                        @switch (itemInput()) {
-                            @case ('checkbox') {
-                                <md3-checkbox [disable-state-layer]="true">
-                                    <input type="checkbox" md3-input-element name="playground-checkbox" [disabled]="itemDisabled()">
-                                </md3-checkbox>
-                            }
-                            @case ('radio') {
-                                <md3-radio-button [disable-state-layer]="true">
-                                    <input type="radio" md3-input-element name="playground-radio" [disabled]="itemDisabled()">
-                                </md3-radio-button>
-                            }
-                            @case ('switch') {
-                                <md3-switch [disable-state-layer]="true">
-                                    <input type="checkbox" md3-input-element name="playground-switch" [disabled]="itemDisabled()">
-                                </md3-switch>
-                            }
-                        }
-                    } @else {
-                        @switch (trailingType()) {
-                            @case ('text') {
-                                <span>99+</span>
-                            }
-                            @case ('icon') {
-                                <md3-icon bi-directional>chevron_right</md3-icon>
-                            }
-                            @case ('button') {
-                                <button md3-icon-button button-type="standard" button-width="narrow">
-                                    <md3-icon md3-icon-element>edit</md3-icon>
-                                </button>
-                            }
-                        }
-                    }
-                </div>
-            }
-        </label>
-    } @else {
-        <md3-list-item [slots-alignment]="itemSlotsAlignment()" [selected]="itemSelected()">
+        } @else {
+        <md3-list-item [slots-alignment]="itemSlotsAlignment()" [selected]="item.id === 1 && itemSelected()">
             @if (itemPrimaryAction()) {
                 <button md3-item-primary-action [disabled]="itemDisabled()"></button>
             }
@@ -201,7 +123,7 @@
                 </md3-list-leading>
             }
             <div md3-list-slot="content">
-                First item
+                {{ item.label }}
                 @if (supportingText()) {
                     <div md3-type-body size="small" color="on-surface-variant">Supporting text</div>
                 }
@@ -224,49 +146,7 @@
                 </div>
             }
         </md3-list-item>
-        <md3-list-item [slots-alignment]="itemSlotsAlignment()">
-            @if (itemPrimaryAction()) {
-                <button md3-item-primary-action [disabled]="itemDisabled()"></button>
-            }
-            @if (leadingItem()) {
-                <md3-list-leading [type]="leadingType()" [size]="leadingSize()">
-                    @switch (leadingType()) {
-                        @case ('icon') {
-                            <md3-icon>person</md3-icon>
-                        }
-                        @case ('avatar') {
-                            <span>A</span>
-                        }
-                        @case ('media') {
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9zOGcuI9vSzATrKTCoudSLSY36LWLrtU-xA&s">
-                        }
-                    }
-                </md3-list-leading>
-            }
-            <div md3-list-slot="content">
-                Second item
-                @if (supportingText()) {
-                    <div md3-type-body size="small" color="on-surface-variant">Supporting text</div>
-                }
-            </div>
-            @if (trailingItem()) {
-                <div md3-list-slot="trailing">
-                    @switch (trailingType()) {
-                        @case ('text') {
-                            <span>99+</span>
-                        }
-                        @case ('icon') {
-                            <md3-icon bi-directional>chevron_right</md3-icon>
-                        }
-                        @case ('button') {
-                            <button md3-icon-button button-type="standard" button-width="narrow">
-                                <md3-icon md3-icon-element>edit</md3-icon>
-                            </button>
-                        }
-                    }
-                </div>
-            }
-        </md3-list-item>
+        }
     }
     </md3-list>
 </app-playground>
@@ -310,6 +190,26 @@
                 <td style="white-space: nowrap;">standard</td>
             </tr>
             <tr>
+                <td>
+                    draggable
+                    <p md3-type-body size="small">Allows reordering the list items by dragging them. The list does not change your data, reorder it in the <code>dropped</code> output.</p>
+                </td>
+                <td>
+                    input&lt;boolean&gt;
+                </td>
+                <td style="white-space: nowrap;">false</td>
+            </tr>
+            <tr>
+                <td>
+                    dropped
+                    <p md3-type-body size="small">Emits when a dragged item is dropped, with its <code>previousIndex</code> and <code>currentIndex</code>.</p>
+                </td>
+                <td>
+                    output&lt;CdkDragDrop&lt;any&gt;&gt;
+                </td>
+                <td style="white-space: nowrap;">-</td>
+            </tr>
+            <tr>
                 <td colspan="3">
                     <h3>ListItem</h3>
                     <md3-divider></md3-divider>
@@ -333,6 +233,18 @@
                         selected
                     </i>
                     <p md3-type-body size="small">List item selected state. When using a selection input, the input controls the selection state.</p>
+                </td>
+                <td>
+                    input&lt;boolean&gt;
+                </td>
+                <td style="white-space: nowrap;">false</td>
+            </tr>
+            <tr>
+                <td>
+                    <i>
+                        drag-disabled
+                    </i>
+                    <p md3-type-body size="small">Prevents dragging this item when the list is draggable. Items with a disabled selection input can't be dragged either.</p>
                 </td>
                 <td>
                     input&lt;boolean&gt;
@@ -382,6 +294,10 @@
 <ul>
     <li>When using primary and secondary actions, it is recommended to use a regular list item with <code>md3-item-primary-action</code> inside to separate both actions entirely.</li>
     <li>When using a label tag as a list item with a selection input, it is recommended to disable the input state layer.</li>
+    <li>
+        Draggable lists are built on <code>&#64;angular/cdk/drag-drop</code>. Update your items order in <code>(dropped)</code>,
+        for example with <code>moveItemInArray</code>, otherwise the item returns to its original position.
+    </li>
     <li>Icons in leading or trailing slots should be 24dp.</li>
     <li>Media inside leading slot can be an image or video in any available media size.</li>
     <li>

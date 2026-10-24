@@ -1,5 +1,6 @@
 import { Component, computed, effect, OnDestroy, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Checkbox, Divider, IconButton, IconElement, InputElement, List, ListItem, ListItemPrimaryAction, ListLeading, ListLeadingSize, ListLeadingType, ListSlot, MaterialIcon, RadioButton, SheetsService, SideSheetRef, Switch, TypeBody, TypeDisplay } from '@almoamendev/ngx-md3';
 import { Playground } from '../playground/playground';
 import { Shiki } from '../shiki/shiki';
@@ -38,6 +39,11 @@ export class ListsComponent implements OnDestroy {
     // md3-list options
     public listVariant = signal<'expressive' | 'baseline'>('expressive');
     public listType = signal<'standard' | 'segmented'>('standard');
+    public listDraggable = signal<boolean>(false);
+    public items = signal<{ id: number, label: string }[]>([
+        { id: 1, label: 'First item' },
+        { id: 2, label: 'Second item' },
+    ]);
 
     // md3-list-item options
     public supportingText = signal<boolean>(true);
@@ -81,19 +87,30 @@ import {
     Checkbox, // optional
     RadioButton, // optional
     InputElement, // optional
-} from '@almoamendev/ngx-md3';`;
+} from '@almoamendev/ngx-md3';
 
-    public apiData: string = `// Inputs
+// Reordering helper for draggable lists (optional)
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';`;
+
+    public apiData: string = `// Inputs & outputs
 
 // md3-list
 public variant = input<'expressive' | 'baseline'>('expressive');
 public type = input<'standard' | 'segmented'>('standard');
+public draggable = input<boolean, unknown>(false, {
+    transform: booleanAttribute,
+});
+public dropped = output<CdkDragDrop<any>>(); // output
 
 // md3-list-item
 public slotsAlignment = input<'start' | 'center' | 'end'>('center', {
     alias: 'slots-alignment',
 });
 public selected = input<boolean, unknown>(false, {
+    transform: booleanAttribute,
+});
+public dragDisabled = input<boolean, unknown>(false, {
+    alias: 'drag-disabled',
     transform: booleanAttribute,
 });
 
@@ -156,6 +173,13 @@ type ListLeadingSize = 'image' | 'small-video' | 'large-video';`;
         </div>
     </label>
 </md3-list>
+
+<!-- draggable list: reorder your data in (dropped), e.g. with moveItemInArray from @angular/cdk/drag-drop -->
+<md3-list draggable (dropped)="moveItemInArray(items, $event.previousIndex, $event.currentIndex)">
+    @for (item of items; track item) {
+        <md3-list-item [drag-disabled]="false">...</md3-list-item>
+    }
+</md3-list>
 `;
 
     constructor(
@@ -212,6 +236,12 @@ type ListLeadingSize = 'image' | 'small-video' | 'large-video';`;
             this.configSheet = undefined;
             this.configOpen.set(false);
         });
+    }
+
+    public reorderItems(event: CdkDragDrop<unknown>): void {
+        const items = [...this.items()];
+        moveItemInArray(items, event.previousIndex, event.currentIndex);
+        this.items.set(items);
     }
 
     ngOnDestroy(): void {
@@ -297,6 +327,10 @@ type ListLeadingSize = 'image' | 'small-video' | 'large-video';`;
         this.configSheet?.componentInstance?.listType.setValue(this.listType());
         this.configSheet?.componentInstance?.listType.registerOnChange(() => {
             this.listType.set(this.configSheet?.componentInstance?.listType.value);
+        });
+        this.configSheet?.componentInstance?.listDraggable.setValue(this.listDraggable());
+        this.configSheet?.componentInstance?.listDraggable.registerOnChange(() => {
+            this.listDraggable.set(this.configSheet?.componentInstance?.listDraggable.value);
         });
         
         // md3-list-item options
