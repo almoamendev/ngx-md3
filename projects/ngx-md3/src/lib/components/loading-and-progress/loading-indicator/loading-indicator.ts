@@ -1,4 +1,4 @@
-import { Component, computed, effect, ElementRef, input, Input } from '@angular/core';
+import { booleanAttribute, Component, computed, effect, ElementRef, input, Input } from '@angular/core';
 
 @Component({
     selector: 'md3-loading-indicator',
@@ -7,7 +7,9 @@ import { Component, computed, effect, ElementRef, input, Input } from '@angular/
     styleUrl: './loading-indicator.scss',
 })
 export class LoadingIndicator {
-    public contained = input<boolean>(false);
+    public contained = input<boolean, unknown>(false, {
+        transform: booleanAttribute
+    });
     public size = input<number>(48);
     public color = input<'primary' | 'secondary' | 'tertiary'>('primary');
 

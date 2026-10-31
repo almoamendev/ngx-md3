@@ -33,7 +33,9 @@ import {
 } from '@almoamendev/ngx-md3';`;
 
     public apiData: string = `// Inputs
-public contained = input<boolean>(false);
+public contained = input<boolean, unknown>(false, {
+    transform: booleanAttribute
+});
 public size = input<number>(48);
 public color = input<'primary' | 'secondary' | 'tertiary'>('primary');`;
 

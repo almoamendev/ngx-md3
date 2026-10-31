@@ -1,4 +1,4 @@
-import { Component, computed, effect, ElementRef, input } from '@angular/core';
+import { booleanAttribute, Component, computed, effect, ElementRef, input } from '@angular/core';
 
 @Component({
     selector: 'md3-linear-progress-indicator',
@@ -7,7 +7,9 @@ import { Component, computed, effect, ElementRef, input } from '@angular/core';
     styleUrl: './linear-progress-indicator.scss',
 })
 export class LinearProgressIndicator {
-    public indeterminate = input<boolean>(false);
+    public indeterminate = input<boolean, unknown>(false, {
+        transform: booleanAttribute
+    });
     public thickness = input<4 | 8>(4);
     public progress = input<number>(0);
     public color = input<'primary' | 'secondary' | 'tertiary'>('primary');
