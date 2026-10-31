@@ -36,7 +36,9 @@ import {
 } from '@almoamendev/ngx-md3';`;
 
     public apiData: string = `// Inputs
-public indeterminate = input<boolean>(false);
+public indeterminate = input<boolean, unknown>(false, {
+    transform: booleanAttribute
+});
 public thickness = input<4 | 8>(4);
 public progress = input<number>(0);
 public color = input<'primary' | 'secondary' | 'tertiary'>('primary');`;
