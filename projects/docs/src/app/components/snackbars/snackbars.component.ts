@@ -166,6 +166,12 @@ interface SnackbarConfig<D = unknown> {
     direction?: null | 'ltr' | 'rtl';
 
     /**
+     * Size of the snackbar, as a factor of 1rem. Sets --md3-scale on its panel.
+     * @default undefined (the root --md3-scale)
+     */
+    scale?: number;
+
+    /**
      * Snackbar horizontal placement.
      * @default start
      */

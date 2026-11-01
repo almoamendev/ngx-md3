@@ -22,18 +22,22 @@ export class GridTokensComponent {
     public readonly tokens = GRID_TOKENS;
     public readonly total = countTokens(GRID_TOKENS);
 
-    public breakpointsCode: string = `// compact: <600dp
-:root {
+    public breakpointsCode: string = `html {
+    container: md-viewport / inline-size;
+}
+
+// compact: <600dp
+body {
     --md-grid-columns: 4;
     --md-grid-margin: 1em;
     --md-grid-gutter: 1em;
 }
 
 // medium, expanded: 600-1199dp
-@media (min-width: 37.5em) and (max-width: 74.999em) { ... }
+@container md-viewport (min-width: 37.5rem) and (max-width: 74.999rem) { body { ... } }
 
 // large, extra-large: >=1200dp
-@media (min-width: 75em) { ... }`;
+@container md-viewport (min-width: 75rem) { body { ... } }`;
 
     public usageCode: string = `.my-layout {
     display: grid;

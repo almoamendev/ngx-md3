@@ -2,6 +2,7 @@ import { Overlay, OverlayConfig, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { Injectable, Injector, TemplateRef, inject } from '@angular/core';
 import { SnackbarConfig, SnackbarPoliteness } from '../../interfaces/snackbar-config.interface';
+import { applyScale } from '../../foundations/scale';
 import { Snackbar } from './snackbar';
 import { SNACKBAR_ACTION_LABEL, SNACKBAR_CONFIG, SNACKBAR_MESSAGE, SnackbarRef } from './snackbar-ref';
 
@@ -159,6 +160,7 @@ export class SnackbarService {
             direction: config.direction ?? null,
             position: config.position ?? 'start',
             bottomOffset: config.bottomOffset ?? 0,
+            scale: config.scale,
             viewContainerRef: config.viewContainerRef,
             injector: config.injector ?? this.injector,
         };
@@ -177,7 +179,10 @@ export class SnackbarService {
             scrollStrategy: this.overlay.scrollStrategies.noop(),
         });
 
-        return this.overlay.create(overlayConfig);
+        const overlayRef = this.overlay.create(overlayConfig);
+        applyScale(overlayRef.overlayElement, config.scale);
+
+        return overlayRef;
     }
 
     private createInjector(queued: QueuedSnackbar): Injector {

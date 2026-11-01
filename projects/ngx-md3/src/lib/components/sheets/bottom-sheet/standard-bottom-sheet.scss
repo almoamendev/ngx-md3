@@ -5,6 +5,7 @@
     //
     // Anchored to the bottom of that region, which sits above the bottom bar, and capped at the
     // same width as a modal sheet's panel so the two variants line up on a wide window.
+    font-size: calc(var(--md3-scale, 1) * 1rem);
     position: absolute;
     display: block;
     inset-inline: 0;

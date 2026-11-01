@@ -20,16 +20,16 @@
     }
     
     .md3-indicator-container {
-        font-size: 0.25rem;
+        font-size: calc(var(--md3-scale, 1) * 0.25rem);
         --gap: 7;
         --progress: 0;
     
         &.md3-thickness-8dp {
-            font-size: 0.5rem;
+            font-size: calc(var(--md3-scale, 1) * 0.5rem);
             --gap: 10;
         }
     
-        --size: calc(2.25rem + 1em);
+        --size: calc(var(--md3-scale, 1) * 2.25rem + 1em);
         --stroke: 1em;
         --center: calc(var(--size) / 2);
         --radius: calc(var(--size) / 2 - var(--stroke) / 2);

@@ -1,4 +1,5 @@
 import { Component, computed, OnDestroy, signal } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { IconButton, IconElement, MaterialIcon, SheetsService, SideSheetRef, TextSize, TextColor, TypeBody, TypeDisplay, TypeHeadline, TypeLabel, TypeTitle } from '@almoamendev/ngx-md3';
 import { Playground } from '../../components/playground/playground';
 import { Shiki } from '../../components/shiki/shiki';
@@ -19,6 +20,7 @@ type TypeScale = 'display' | 'headline' | 'title' | 'body' | 'label';
         MaterialIcon,
         Playground,
         Shiki,
+        RouterLink,
     ],
     templateUrl: './typography.component.html',
     styleUrl: './typography.component.scss',

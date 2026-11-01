@@ -1,6 +1,6 @@
 import { Component, computed, effect, OnDestroy, signal, untracked } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { FloatingActionButton, IconButton, IconElement, MaterialIcon, SheetsService, SideSheetRef, Toolbar, ToolbarAlignment, ToolbarColor, ToolbarItem, ToolbarOrientation, ToolbarScrollAction, ToolbarType, TypeDisplay } from '@almoamendev/ngx-md3';
+import { FloatingActionButton, IconButton, IconElement, MaterialIcon, SheetsService, SideSheetRef, Toolbar, ToolbarAlignment, ToolbarColor, ToolbarItem, ToolbarOrientation, ToolbarScrollAction, ToolbarType, TypeBody, TypeDisplay } from '@almoamendev/ngx-md3';
 import { Playground } from '../../components/playground/playground';
 import { Shiki } from '../../components/shiki/shiki';
 import { ToolbarConfig, ToolbarOrientationChoice } from './toolbar-config/toolbar-config';
@@ -17,6 +17,7 @@ import { ToolbarConfig, ToolbarOrientationChoice } from './toolbar-config/toolba
         Playground,
         Shiki,
         TypeDisplay,
+        TypeBody,
         RouterLink,
     ],
     templateUrl: './toolbar.component.html',

@@ -1,6 +1,6 @@
 import { Component, effect, inject, OnDestroy, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { AppBar, AppBarHeader, AppBarScrollingStyle, AppBarType, Avatar, IconButton, IconElement, InputElement, MaterialIcon, SheetsService, SideSheetRef, TypeDisplay } from '@almoamendev/ngx-md3';
+import { AppBar, AppBarHeader, AppBarScrollingStyle, AppBarType, Avatar, IconButton, IconElement, InputElement, MaterialIcon, SheetsService, SideSheetRef, TypeBody, TypeDisplay } from '@almoamendev/ngx-md3';
 import { Playground } from '../../components/playground/playground';
 import { Shiki } from '../../components/shiki/shiki';
 import { AppBarConfig } from './app-bar-config/app-bar-config';
@@ -19,6 +19,7 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
         Playground,
         Shiki,
         TypeDisplay,
+        TypeBody,
         RouterLink,
     ],
     templateUrl: './app-bar.component.html',

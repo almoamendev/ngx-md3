@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { TypeDisplay } from '@almoamendev/ngx-md3';
+import { TypeBody, TypeDisplay } from '@almoamendev/ngx-md3';
 import { Shiki } from '../../shiki/shiki';
 
 @Component({
@@ -8,6 +8,7 @@ import { Shiki } from '../../shiki/shiki';
     imports: [
         Shiki,
         TypeDisplay,
+        TypeBody,
         RouterLink,
     ],
     templateUrl: './navigation-item.component.html',

@@ -3,7 +3,10 @@
     z-index: 1000;
     inset: 0;
     pointer-events: none;
-    font-size: 1rem;
+    font-size: calc(var(--md3-scale, 1) * 1rem);
+    // The root scale, resolved here, before a menu sets a scale of its own on its pane. The
+    // window gutters of a menu follow it.
+    --md3-root-scale: var(--md3-scale, 1);
 
     .md3-menu-scrim {
         position: absolute;
@@ -16,6 +19,7 @@
     }
 
     .md3-menu-panel {
+        font-size: calc(var(--md3-scale, 1) * 1rem);
         pointer-events: auto;
 
         &.md3-select-menu > .md3-menu-container {
@@ -33,7 +37,7 @@
         display: flex;
         inset: 0;
         pointer-events: none;
-        padding: 3.5rem 0;
+        padding: 3.5em 0;
         overflow: hidden;
 
         .md3-menu-panel {
@@ -73,10 +77,10 @@
 
     position: relative;
     display: block;
-    font-size: 1rem;
+    font-size: calc(var(--md3-scale, 1) * 1rem);
     min-width: var(--menu-min-width);
-    max-width: min(var(--menu-max-width), calc(100vw - 2rem));
-    max-height: min(32rem, calc(100vh - 2rem));
+    max-width: min(var(--menu-max-width), calc(100vw - var(--md3-root-scale, 1) * 2rem));
+    max-height: min(32em, calc(100vh - var(--md3-root-scale, 1) * 2rem));
     outline: none;
     transition: all var(--md-motion-expressive-default-spatial-duration) var(--md-motion-expressive-default-spatial-easing);
     opacity: 0;

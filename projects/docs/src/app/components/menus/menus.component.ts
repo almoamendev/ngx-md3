@@ -159,6 +159,13 @@ interface MenuConfig<D = unknown> {
     direction?: null | 'ltr' | 'rtl';
 
     /**
+     * Size of the menu, as a factor of 1rem. Sets --md3-scale on its panel.
+     * 'inherit' copies the scale of the element the menu opens from.
+     * @default undefined (the root --md3-scale); 'inherit' for submenus and select fields
+     */
+    scale?: number | 'inherit';
+
+    /**
      * Optional Angular context for the dynamic component.
      * Passing a ViewContainerRef keeps dependency lookup close to the caller.
      */

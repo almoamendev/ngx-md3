@@ -3,7 +3,7 @@
     z-index: 1000;
     inset: 0;
     pointer-events: none;
-    font-size: 1rem;
+    font-size: calc(var(--md3-scale, 1) * 1rem);
 
     .md3-bottom-sheet-scrim {
         // BottomSheetRef lowers this while the sheet is dragged, so the scrim
@@ -41,6 +41,7 @@
         }
 
         .md3-bottom-sheet-panel {
+            font-size: calc(var(--md3-scale, 1) * 1rem);
             width: 100%;
             max-width: 40em;
             pointer-events: auto;

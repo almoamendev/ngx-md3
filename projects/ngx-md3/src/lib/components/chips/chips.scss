@@ -12,7 +12,7 @@
     align-items: center;
     justify-content: center;
     position: relative;
-    font-size: 1rem;
+    font-size: calc(var(--md3-scale, 1) * 1rem);
     height: 2em;
     width: fit-content;
     padding: 0;

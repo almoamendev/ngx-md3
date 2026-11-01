@@ -11,7 +11,7 @@
     position: relative;
     display: block;
     width: 100%;
-    font-size: 1rem;
+    font-size: calc(var(--md3-scale, 1) * 1rem);
     min-width: 12.5em;
     min-height: 2.75em;
     height: calc(var(--slider-size) + 1.125em);

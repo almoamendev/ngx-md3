@@ -3,9 +3,10 @@
     z-index: 1000;
     inset: 0;
     pointer-events: none;
-    font-size: 1rem;
+    font-size: calc(var(--md3-scale, 1) * 1rem);
 
     .md3-snackbar-panel {
+        font-size: calc(var(--md3-scale, 1) * 1rem);
         position: absolute;
         inset: auto 0 0 0;
         display: flex;

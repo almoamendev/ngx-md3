@@ -2,8 +2,16 @@
 
 <p>
     <code>md-grid.scss</code> defines the {{ total }} tokens behind the responsive layout grid. Unlike every other
-    token family, these are redeclared inside media queries, so their values change with the viewport rather than
+    token family, these are redeclared inside container queries, so their values change with the viewport rather than
     with the color scheme.
+</p>
+
+<p>
+    The root element is the query container, named <code>md-viewport</code>, and the tokens are declared on
+    <code>body</code>. The breakpoints are in <code>rem</code>, which a container query resolves against the computed
+    <code>font-size</code> of <code>html</code>, so changing it moves the breakpoints with the rest of the layout. A
+    media query would resolve <code>rem</code> against the browser's default font size instead and ignore it. See
+    <a routerLink="/foundations/sizing">Sizing &amp; scaling</a>.
 </p>
 
 <app-shiki [code]="breakpointsCode" language="scss"></app-shiki>
@@ -36,6 +44,7 @@
 
 <p>
     Because they are ordinary custom properties, overriding them on a container rescopes the grid for that subtree
-    only. Redeclaring them at <code>:root</code> after importing <code>md3.scss</code> changes the grid globally,
-    though the breakpoints themselves are fixed unless you also replace the media queries.
+    only. Redeclaring them on <code>body</code> after importing <code>md3.scss</code> changes the grid globally
+    &mdash; not on <code>:root</code>, since the library's declarations on <code>body</code> would win over the
+    inherited value. The breakpoints themselves are fixed unless you also replace the container queries.
 </p>

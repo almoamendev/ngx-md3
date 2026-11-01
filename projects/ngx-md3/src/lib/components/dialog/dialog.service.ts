@@ -6,6 +6,7 @@ import { Dialog } from './dialog';
 import { FullScreenDialog } from './full-screen-dialog/full-screen-dialog';
 import { DIALOG_COMPONENT, DIALOG_CONFIG, DIALOG_DATA, DialogRef } from './dialog-ref';
 import { DialogConfig, DialogContainer, PreviousDialog } from '../../interfaces/dialog-config.interface';
+import { applyScale } from '../../foundations/scale';
 
 interface ResolvedDialogConfig<D = unknown> extends DialogConfig<D> {
     data: D | undefined;
@@ -235,6 +236,8 @@ export class DialogService {
         dialogConfig: ResolvedDialogConfig<D>,
         previousRef: DialogRef<any, any> | undefined,
     ): void {
+        applyScale(dialogRef.overlayRef.overlayElement, dialogConfig.scale);
+
         dialogRef.dialogInstance = cdkRef.containerInstance as unknown as DialogContainer;
         dialogRef.componentInstance = cdkRef.componentInstance ?? undefined;
 
@@ -330,6 +333,7 @@ export class DialogService {
             ariaDescribedBy: config.ariaDescribedBy ?? '',
             scheme: config.scheme ?? 'inherit',
             direction: config.direction ?? null,
+            scale: config.scale,
             viewContainerRef: config.viewContainerRef,
             injector: config.injector ?? this.injector,
         };

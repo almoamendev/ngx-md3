@@ -1,6 +1,6 @@
 :host {
     display: inline-flex;
-    font-size: 1em;
+    font-size: calc(var(--md3-scale, 1) * 1rem);
 
     &.md3-color-primary {
         .md3-indicator-indeterminate {
@@ -39,14 +39,14 @@
     }
     
     .md3-indicator-indeterminate {
-        --size: 3rem;
+        --size: 3em;
     
         width: var(--size);
         height: var(--size);
-        min-width: 1.5rem;
-        min-height: 1.5rem;
-        max-width: 15rem;
-        max-height: 15rem;
+        min-width: 1.5em;
+        min-height: 1.5em;
+        max-width: 15em;
+        max-height: 15em;
         border-radius: 50%;
         display: inline-block;
 

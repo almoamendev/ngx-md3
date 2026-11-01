@@ -1,0 +1,190 @@
+<h1 md3-type-display size="large">Sizing &amp; scaling</h1>
+
+<p>
+    Every size in the library is relative to a font-size. Components size themselves in <code>em</code>, the
+    breakpoints are in <code>rem</code>, and <code>md3.scss</code> sets <code>html {{ '{' }} font-size: 16px {{ '}' }}</code>,
+    so 1rem is 16dp and the sizes match the Material Design specs. That gives you two levers: the <code>html</code>
+    font-size scales the whole UI, layout included, and the <code>--md3-scale</code> custom property scales the
+    components &mdash; everywhere, in one part of the page, or one at a time.
+</p>
+
+<h2>How a component is sized</h2>
+
+<p>
+    Each component sets its font-size to <code>--md3-scale</code> times <code>1rem</code> on its host element and
+    measures everything else &mdash; height, padding, gaps, icons, the label &mdash; in <code>em</code> of that
+    font-size. At the default scale of 1 a button is 40px tall; at 1.25 it is 50px, with every part kept in
+    proportion. Tokens such as <a routerLink="/styles/shape">shape</a> and
+    <a routerLink="/styles/elevation">elevation</a> are in <code>em</code> too, so a corner radius or a shadow follows
+    the component it is on. The <a routerLink="/styles/typography">type scale</a> and badges read
+    <code>--md3-scale</code> the same way.
+</p>
+
+<app-shiki [code]="componentCode" language="scss"></app-shiki>
+
+<h2>Scaling the whole UI</h2>
+
+<p>
+    Change the font-size of <code>html</code> after importing <code>md3.scss</code>. Every component, the typography
+    scale and the layout grid follow it.
+</p>
+
+<app-shiki [code]="scaleUiCode" language="scss"></app-shiki>
+
+<p>
+    <code>md3.scss</code> uses <code>16px</code> rather than <code>100%</code>, so the library looks the same in every
+    browser by default. Setting <code>100%</code> instead lets the font size the user picked in their browser
+    settings scale the UI.
+</p>
+
+<h3>The breakpoints scale too</h3>
+
+<p>
+    The window size classes are measured in <code>rem</code>, so a larger root font-size moves them with the rest of
+    the UI. A window 1280px wide is <i>large</i> at 16px (80rem) but <i>expanded</i> at 20px (64rem): the UI is
+    bigger, so the layout switches to the one for a smaller window, exactly as it would on a smaller screen. Your
+    window is currently <strong>{{ layout.widthClass() }}</strong> wide and <strong>{{ layout.heightClass() }}</strong>
+    tall.
+</p>
+
+<div class="table-container md3-scrollable">
+    <table>
+        <thead>
+            <tr>
+                <th>Width class</th>
+                <th>From</th>
+                <th>At 16px</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>compact</td><td>0</td><td>0px</td></tr>
+            <tr><td>medium</td><td>37.5rem</td><td>600px</td></tr>
+            <tr><td>expanded</td><td>52.5rem</td><td>840px</td></tr>
+            <tr><td>large</td><td>75rem</td><td>1200px</td></tr>
+            <tr><td>extra-large</td><td>100rem</td><td>1600px</td></tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="table-container md3-scrollable">
+    <table>
+        <thead>
+            <tr>
+                <th>Height class</th>
+                <th>From</th>
+                <th>At 16px</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>compact</td><td>0</td><td>0px</td></tr>
+            <tr><td>medium</td><td>30rem</td><td>480px</td></tr>
+            <tr><td>expanded</td><td>56.25rem</td><td>900px</td></tr>
+        </tbody>
+    </table>
+</div>
+
+<p>
+    Media queries can't do this. Inside a <code>@media</code> condition, <code>rem</code> and <code>em</code> resolve
+    against the browser's default font size, not against <code>html {{ '{' }} font-size {{ '}' }}</code>. So the library
+    uses none for its breakpoints:
+</p>
+
+<ul>
+    <li>
+        <code>md-grid.scss</code> makes <code>html</code> a query container named <code>md-viewport</code> and declares
+        the <a routerLink="/styles/grid">grid tokens</a> in <code>@container</code> rules. A container query resolves
+        <code>rem</code> against the root's computed font-size.
+    </li>
+    <li>
+        <code>LayoutService.widthClass()</code> and <code>heightClass()</code>, which the navigation, the scaffold and
+        the other responsive components read, divide the root's width and the window's height by the root
+        font-size. They re-measure when the window resizes and when the root font-size changes, whatever changes it.
+    </li>
+</ul>
+
+<app-shiki [code]="breakpointsCode" language="scss"></app-shiki>
+
+<p>
+    Both measure the same box, the <code>html</code> element, against the same thresholds, so a component that
+    switches layout and the grid that adds columns always switch at the same pixel.
+</p>
+
+<h2>Scaling components with --md3-scale</h2>
+
+<p>
+    <code>--md3-scale</code> is a plain number, 1 by default. Like any custom property it is inherited, so set it
+    on a component to scale that component, or on any element to scale every component inside it. A component
+    inside a scaled region can set its own value again.
+</p>
+
+<app-shiki [code]="scaleComponentHtml" language="html"></app-shiki>
+<app-shiki [code]="scaleComponentCode" language="scss"></app-shiki>
+
+<p>
+    It is always a factor of <code>1rem</code>, never of the surrounding size, so scales don't compound: a button
+    at 1.25 inside a card at 1.25 is 1.25 times its normal size, the same as the card's own parts. And since it is
+    a custom property, any selector works &mdash; there is no specificity to beat.
+</p>
+
+<p>
+    Unlike the <code>html</code> font-size, <code>--md3-scale</code> leaves the layout alone: the breakpoints, the
+    grid and the default text size of <code>body</code> only follow the root font-size. Use it to make components
+    larger or more compact, and the root font-size to scale everything.
+</p>
+
+<h3>Overlays</h3>
+
+<p>
+    Dialogs, sheets, menus and snackbars render at the end of <code>body</code>, outside the element that opened
+    them, so they follow the <code>--md3-scale</code> of the root, not of the region they were opened from. Each
+    service takes a <code>scale</code> option for a different one:
+</p>
+
+<app-shiki [code]="overlayScaleCode" language="ts"></app-shiki>
+
+<p>
+    A menu also accepts <code>'inherit'</code>, which copies the scale of the element it opens from. Submenus and the
+    options of a <a routerLink="/components/select-fields">select field</a> use it by default, so they always match
+    their trigger. The margins that keep a dialog or a menu away from the window edges follow the root scale, never
+    an overlay's own, so every dialog sits in the same frame.
+</p>
+
+<h2>Scrolling and the scrollbar</h2>
+
+<p>
+    In the <a routerLink="/foundations/scaffold">scaffold</a>, the window never scrolls &mdash; <code>md3.scss</code>
+    sets <code>html</code> and <code>body</code> to the window height, and the content scrolls inside its panes. The
+    <code>html</code> element never gets a scrollbar, so the width the breakpoints measure is always the full width
+    of the window.
+</p>
+
+<p>
+    If you change that, so the window scrolls the document as a classic page does, a classic scrollbar (Windows,
+    Linux, macOS with <i>Always show scrollbars</i>) takes about 15&ndash;17px from <code>html</code>. Phones and
+    macOS by default use overlay scrollbars, which take no space, and are not affected. Two things follow:
+</p>
+
+<ul>
+    <li>
+        The breakpoints measure the width without the scrollbar. That is consistent between the components and the
+        grid, but a window is one class narrower than its outer size suggests over those few pixels.
+    </li>
+    <li>
+        Near a breakpoint the layout can flip back and forth. A switch to a narrower layout makes the page taller, a
+        scrollbar appears, <code>html</code> loses its width, and the class can change again. You see a flicker, a
+        layout stuck in the wrong class, or a <i>ResizeObserver loop</i> message in the console.
+    </li>
+</ul>
+
+<p>
+    Reserve the scrollbar's space up front, so <code>html</code> keeps one width whether it scrolls or not:
+</p>
+
+<app-shiki [code]="scrollbarGutterCode" language="scss"></app-shiki>
+
+<p>
+    The library does not set this for you. <code>scrollbar-gutter: stable</code> reserves the space even when the
+    page does not overflow, so in the scaffold &mdash; where the window never scrolls &mdash; it would leave an empty
+    strip the color of the page background along the inline-end edge, and take that width from the breakpoints
+    for nothing. Add it only when you move scrolling to the window.
+</p>

@@ -12,7 +12,7 @@
 
     padding: 0 1em;
 
-    font-size: 1rem;
+    font-size: calc(var(--md3-scale, 1) * 1rem);
     border: none;
     outline: none;
     cursor: pointer;

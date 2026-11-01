@@ -22,6 +22,7 @@
     --background-color: rgb(var(--md-scheme-surface-container));
     --foreground-color: rgb(var(--md-scheme-on-surface));
 
+    font-size: calc(var(--md3-scale, 1) * 1rem);
     display: block;
     position: relative;
     min-width: 0em;
