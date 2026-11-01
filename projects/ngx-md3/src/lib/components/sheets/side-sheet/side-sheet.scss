@@ -5,6 +5,7 @@
     --elevation: var(--md-shadow-0dp);
     --hidden-offset: 80%;
 
+    font-size: calc(var(--md3-scale, 1) * 1rem);
     position: relative;
     height: 100%;
     width: 100%;

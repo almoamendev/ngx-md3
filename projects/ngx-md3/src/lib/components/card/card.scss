@@ -8,7 +8,7 @@
     --outline-width: 0.1875em;
     --outline-offset: -0.125em;
 
-    font-size: 1rem;
+    font-size: calc(var(--md3-scale, 1) * 1rem);
     border-radius: var(--md-border-radius-medium);
     display: block;
     width: 100%;

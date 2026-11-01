@@ -98,7 +98,7 @@
         cursor: pointer;
         position: absolute;
         inset: 0;
-        font-size: 1rem;
+        font-size: calc(var(--md3-scale, 1) * 1rem);
         border-radius: var(--border-radius);
         border: none;
         background-color: var(--background-color);

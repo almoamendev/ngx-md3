@@ -37,6 +37,13 @@ export interface DialogConfig<D = unknown> {
     direction?: null | 'ltr' | 'rtl';
 
     /**
+     * Size of the dialog and everything in it, as a factor of 1rem: sets `--md3-scale` on its
+     * panel. When omitted, the dialog follows the `--md3-scale` of the root. The margins between
+     * the dialog and the window always follow the root.
+     */
+    scale?: number;
+
+    /**
      * Optional Angular context for the dynamic component. Passing a
      * ViewContainerRef keeps dependency lookup close to the caller.
      */

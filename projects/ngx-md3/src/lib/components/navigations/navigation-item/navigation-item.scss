@@ -4,7 +4,7 @@
     --state-color: rgb(var(--md-scheme-on-secondary-container));
     --active-indicator-color: transparent;
 
-    font-size: 1em;
+    font-size: calc(var(--md3-scale, 1) * 1rem);
     text-decoration: none;
     border: none;
     outline: none;

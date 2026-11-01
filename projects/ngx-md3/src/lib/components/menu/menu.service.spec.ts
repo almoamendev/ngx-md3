@@ -1,8 +1,15 @@
+import { Component } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import type { ConnectedPosition } from '@angular/cdk/overlay';
 import type { MenuPositionX, MenuPositionY, MenuScrollStrategy } from '../../interfaces/menu-config.interface';
 
 import { MenuService } from './menu.service';
+
+@Component({
+  selector: 'md3-test-menu-content',
+  template: `content`,
+})
+class TestMenuContent { }
 
 type TestMenuPositionConfig = {
   bindDataToInputs: boolean;
@@ -41,6 +48,25 @@ describe('MenuService', () => {
 
   it('should be created', () => {
     expect(service).toBeTruthy();
+  });
+
+  it('should copy the scale of the trigger when the scale is inherit', () => {
+    const region = document.createElement('div');
+    region.style.setProperty('--md3-scale', '1.5');
+    const trigger = document.createElement('button');
+    region.appendChild(trigger);
+    document.body.appendChild(region);
+
+    const lastPanel = () => Array.from(document.querySelectorAll<HTMLElement>('.md3-menu-panel')).pop()!;
+
+    service.open(TestMenuContent, { origin: trigger, scale: 'inherit' });
+    expect(lastPanel().style.getPropertyValue('--md3-scale')).toBe('1.5');
+
+    service.open(TestMenuContent, { origin: trigger });
+    expect(lastPanel().style.getPropertyValue('--md3-scale')).toBe('');
+
+    document.querySelectorAll('.md3-menu-panel, .md3-menu-scrim').forEach((element) => element.remove());
+    region.remove();
   });
 
   it('should start with only the preferred position so push runs before fallbacks', () => {

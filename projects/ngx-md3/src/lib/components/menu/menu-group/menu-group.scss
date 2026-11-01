@@ -42,10 +42,11 @@
 }
 
 .md3-menu-group-label {
-    padding: 0.5rem var(--menu-item-inline-padding, 0.75rem) 0.25rem;
+    // In em of the label's own 12dp font-size: 8dp 12dp 4dp, a 16dp line, 0.5dp tracking.
+    padding: 0.666667em var(--menu-item-inline-padding, 1em) 0.333333em;
     color: rgb(var(--md-scheme-on-surface-variant));
-    font-size: 0.75rem;
+    font-size: 0.75em;
     font-weight: 500;
-    line-height: 1rem;
-    letter-spacing: 0.03125rem;
+    line-height: 1.333333em;
+    letter-spacing: 0.041667em;
 }

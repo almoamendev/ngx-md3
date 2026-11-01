@@ -8,6 +8,7 @@
     --app-bar-bottom-collapse: 0px;
     --app-bar-bottom-opacity: 1;
 
+    font-size: calc(var(--md3-scale, 1) * 1rem);
     display: block;
     min-height: 0em;
     max-height: 9.5em;

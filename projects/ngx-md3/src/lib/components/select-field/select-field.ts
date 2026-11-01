@@ -320,6 +320,8 @@ export class SelectField implements ControlValueAccessor {
             xPosition: 'start',
             yPosition: 'below',
             overlapTrigger: false,
+            // The options sit right under the field, so they match its size.
+            scale: 'inherit',
             scrollStrategy: this.scrollStrategy(),
             viewContainerRef: this.viewContainerRef,
         });

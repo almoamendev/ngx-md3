@@ -8,6 +8,7 @@ import {
     SideSheetRef,
 } from './side-sheet/side-sheet-ref';
 import { SideSheetConfig, SideSheetSide, SideSheetType } from '../../interfaces/side-sheet-config.interface';
+import { applyScale } from '../../foundations/scale';
 
 interface ResolvedSideSheetConfig<D = unknown> extends SideSheetConfig<D> {
     data: D | undefined;
@@ -105,6 +106,7 @@ export class SheetsService {
             injector,
         );
 
+        applyScale(sheetComponentRef.location.nativeElement, sheetConfig.scale);
         sheetRef.attachSheetComponentRef(sheetComponentRef);
         this.bindDataToInputs(contentComponentRef, sheetConfig);
         sheetRef.componentInstance = contentComponentRef.instance;
@@ -143,6 +145,7 @@ export class SheetsService {
             inset: config.inset ?? false,
             divider: config.divider ?? false,
             closeExisting: config.closeExisting ?? false,
+            scale: config.scale,
             viewContainerRef: config.viewContainerRef,
             injector: config.injector ?? this.injector,
         };

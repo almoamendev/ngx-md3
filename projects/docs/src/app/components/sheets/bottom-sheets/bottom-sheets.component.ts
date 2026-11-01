@@ -156,6 +156,12 @@ interface BottomSheetConfig<D = unknown> {
     direction?: null | 'ltr' | 'rtl';
 
     /**
+     * Size of the sheet, as a factor of 1rem. Sets --md3-scale on the sheet.
+     * @default undefined (the root --md3-scale, or the layout's for a standard sheet)
+     */
+    scale?: number;
+
+    /**
      * Optional Angular context for the dynamic component.
      */
     viewContainerRef?: ViewContainerRef;

@@ -1,4 +1,5 @@
 :host {
+    font-size: calc(var(--md3-scale, 1) * 1rem);
     display: flex;
     width: 6em;
     transition: all var(--md-motion-standard-default-spatial-duration) var(--md-motion-standard-default-spatial-easing);

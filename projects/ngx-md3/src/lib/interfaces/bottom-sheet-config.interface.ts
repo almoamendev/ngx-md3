@@ -47,6 +47,13 @@ export interface BottomSheetConfig<D = unknown> {
 
     scheme?: 'inherit' | 'dark' | 'light';
     direction?: null | 'ltr' | 'rtl';
+
+    /**
+     * Size of the sheet and everything in it, as a factor of 1rem: sets `--md3-scale` on the
+     * sheet. When omitted, a modal sheet follows the `--md3-scale` of the root, and a standard
+     * sheet the one of the layout it docks into.
+     */
+    scale?: number;
     viewContainerRef?: ViewContainerRef;
     injector?: Injector;
 }

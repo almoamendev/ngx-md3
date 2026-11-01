@@ -9,7 +9,7 @@
     --outline-offset: -0.125em;
     --inline-padding: 1em;
 
-    font-size: 1rem;
+    font-size: calc(var(--md3-scale, 1) * 1rem);
     border: none;
     outline: none;
     cursor: pointer;
@@ -106,8 +106,8 @@
             content: '';
             position: absolute;
             display: block;
-            min-width: 3rem;
-            min-height: 3rem;
+            min-width: 3em;
+            min-height: 3em;
             width: 100%;
         }
 
@@ -146,8 +146,8 @@
             content: '';
             position: absolute;
             display: block;
-            min-width: 3rem;
-            min-height: 3rem;
+            min-width: 3em;
+            min-height: 3em;
             width: 100%;
         }
 

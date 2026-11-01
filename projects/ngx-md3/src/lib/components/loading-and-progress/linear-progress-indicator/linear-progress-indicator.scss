@@ -23,14 +23,14 @@
     .md3-linear-indicator {
         --progress: 0%;
         
-        font-size: 0.25rem;
+        font-size: calc(var(--md3-scale, 1) * 0.25rem);
         position: relative;
         overflow: hidden;
         height: 1em;
         border-radius: var(--md-border-radius-large);
     
         &.md3-thickness-8dp {
-            font-size: 0.5rem;
+            font-size: calc(var(--md3-scale, 1) * 0.5rem);
         }
     
         .md3-track {
@@ -38,7 +38,7 @@
             inset-block: 0;
             inset-inline-end: 0;
             height: 100%;
-            width: calc(100% - var(--progress) - 0.25rem);
+            width: calc(100% - var(--progress) - var(--md3-scale, 1) * 0.25rem);
             border-radius: var(--md-border-radius-large);
             background-color: var(--track-color);
             transition: width var(--md-motion-standard-fast-effects-duration) var(--md-motion-standard-fast-effects-easing);
@@ -126,7 +126,7 @@
     @keyframes md3-indeterminate-track-start {
         0% {
             width: 80%;
-            inset-inline-end: calc(135% + 0.25rem);
+            inset-inline-end: calc(135% + var(--md3-scale, 1) * 0.25rem);
         }
         50% {
             width: 70%;
@@ -149,13 +149,13 @@
     
     @keyframes md3-indeterminate-track-end {
         0% {
-            inset-inline-start: calc(0% + 0.25rem);
+            inset-inline-start: calc(0% + var(--md3-scale, 1) * 0.25rem);
         }
         60% {
-            inset-inline-start: calc(190% + 0.25rem);
+            inset-inline-start: calc(190% + var(--md3-scale, 1) * 0.25rem);
         }
         100% {
-            inset-inline-start: calc(190% + 0.25rem);
+            inset-inline-start: calc(190% + var(--md3-scale, 1) * 0.25rem);
         }
     }
     
@@ -165,11 +165,11 @@
             inset-inline-end: 100%;
         }
         60% {
-            inset-inline-start: calc(100% + 0.25rem);
+            inset-inline-start: calc(100% + var(--md3-scale, 1) * 0.25rem);
             inset-inline-end: -90%;
         }
         100% {
-            inset-inline-start: calc(100% + 0.25rem);
+            inset-inline-start: calc(100% + var(--md3-scale, 1) * 0.25rem);
             inset-inline-end: -90%;
         }
     }
@@ -178,7 +178,7 @@
         0% {
             opacity: 1;
             inset-inline-start: 0%;
-            inset-inline-end: calc(300% + 0.25rem);
+            inset-inline-end: calc(300% + var(--md3-scale, 1) * 0.25rem);
         }
         50% {
             inset-inline-start: 0%;
@@ -188,18 +188,18 @@
         }
         60% {
             inset-inline-start: 60%;
-            inset-inline-end: calc(-7% + 0.25rem);
+            inset-inline-end: calc(-7% + var(--md3-scale, 1) * 0.25rem);
         }
         100% {
             inset-inline-start: 100%;
-            inset-inline-end: calc(108% + 0.25rem);
+            inset-inline-end: calc(108% + var(--md3-scale, 1) * 0.25rem);
         }
     }
     
     @keyframes md3-indeterminate-track-end-short {
         0% {
             width: 44%;
-            inset-inline-start: calc(0% + 0.25rem);
+            inset-inline-start: calc(0% + var(--md3-scale, 1) * 0.25rem);
         }
         10% {
             width: 38%;
@@ -212,11 +212,11 @@
         }
         60% {
             width: 40%;
-            inset-inline-start: calc(108% + 0.25rem);
+            inset-inline-start: calc(108% + var(--md3-scale, 1) * 0.25rem);
         }
         100% {
             width: 0%;
-            inset-inline-start: calc(108% + 0.25rem);
+            inset-inline-start: calc(108% + var(--md3-scale, 1) * 0.25rem);
         }
     }
     

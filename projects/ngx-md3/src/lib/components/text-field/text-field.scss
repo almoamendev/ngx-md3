@@ -5,7 +5,7 @@
     --caret-color: rgb(var(--md-scheme-primary));
     --outline-color: rgb(var(--md-scheme-on-surface-variant));
 
-    font-size: 1rem;
+    font-size: calc(var(--md3-scale, 1) * 1rem);
     width: 100%;
 
     .md3-text-field-container {

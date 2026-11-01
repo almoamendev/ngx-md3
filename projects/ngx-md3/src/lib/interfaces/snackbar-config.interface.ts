@@ -72,6 +72,12 @@ export interface SnackbarConfig<D = unknown> {
     bottomOffset?: number;
 
     /**
+     * Size of the snackbar, as a factor of 1rem: sets `--md3-scale` on its panel. When omitted,
+     * the snackbar follows the `--md3-scale` of the root.
+     */
+    scale?: number;
+
+    /**
      * Optional Angular context for the message TemplateRef.
      */
     viewContainerRef?: ViewContainerRef;

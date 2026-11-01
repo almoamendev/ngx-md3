@@ -12,6 +12,7 @@ import { MENU_COMPONENT, MENU_CONFIG, MENU_DATA, MenuRef } from './menu-ref';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { Menu } from './menu';
 import { filter, take } from 'rxjs';
+import { applyScale, readScale } from '../../foundations/scale';
 
 interface ResolvedMenuConfig<D = unknown> extends MenuConfig<D> {
     data: D | undefined;
@@ -64,6 +65,10 @@ export class MenuService {
         const triggerElement = this.resolveTriggerElement(menuConfig.origin, previouslyFocusedElement);
         const menuOverlay = this.createOverlay(menuConfig, previouslyFocusedElement);
         const overlayRef = menuOverlay.overlayRef;
+
+        // Before the menu is attached, so it is measured and positioned at its final size.
+        applyScale(overlayRef.overlayElement, this.resolveScale(menuConfig.scale, menuOverlay.origin));
+
         const menuRef = new MenuRef<T, R>(
             overlayRef,
             previouslyFocusedElement
@@ -134,9 +139,20 @@ export class MenuService {
             scrollStrategy: config.scrollStrategy ?? 'reposition',
             scheme: config.scheme ?? 'inherit',
             direction: config.direction ?? null,
+            // A submenu opens from an item of its parent menu, so it takes that menu's scale.
+            scale: config.scale ?? ((config as InternalMenuConfig<D>).isSubMenu ? 'inherit' : undefined),
             viewContainerRef: config.viewContainerRef,
             injector: config.injector ?? this.injector,
         };
+    }
+
+    /** `inherit` reads the scale of the origin. A point has none, so the menu keeps the root scale. */
+    private resolveScale(scale: number | 'inherit' | undefined, origin: ResolvedMenuOrigin): number | undefined {
+        if (scale !== 'inherit') {
+            return scale;
+        }
+
+        return origin instanceof Element ? readScale(origin) : undefined;
     }
 
     private isSelectInput(origin: ResolvedMenuOrigin): boolean {

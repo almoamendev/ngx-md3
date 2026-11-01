@@ -111,6 +111,12 @@ interface SideSheetConfig<D = unknown> {
     closeExisting?: boolean;
 
     /**
+     * Size of the sheet, as a factor of 1rem. Sets --md3-scale on the sheet.
+     * @default undefined (the --md3-scale of the layout it opens in)
+     */
+    scale?: number;
+
+    /**
      * Optional Angular context for the dynamic component.
      */
     viewContainerRef?: ViewContainerRef;

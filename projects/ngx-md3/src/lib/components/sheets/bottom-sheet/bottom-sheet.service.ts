@@ -13,6 +13,7 @@ import {
     StandardBottomSheetRef,
 } from './bottom-sheet-ref';
 import { BottomSheetConfig, BottomSheetState, BottomSheetType } from '../../../interfaces/bottom-sheet-config.interface';
+import { applyScale } from '../../../foundations/scale';
 
 interface ResolvedBottomSheetConfig<D = unknown> extends BottomSheetConfig<D> {
     data: D | undefined;
@@ -174,6 +175,7 @@ export class BottomSheetService {
             disableClose: true,
         });
 
+        applyScale(cdkRef.overlayRef.overlayElement, sheetConfig.scale);
         sheetRef.attachContainer(cdkRef.containerInstance as unknown as BottomSheet);
         sheetRef.componentInstance = cdkRef.componentInstance ?? undefined;
 
@@ -217,6 +219,7 @@ export class BottomSheetService {
 
         const injector = this.createInjector(component, sheetConfig, sheetRef);
         const sheetComponentRef = host.hostComponentRef.instance.createSheet(injector);
+        applyScale(sheetComponentRef.location.nativeElement, sheetConfig.scale);
         const contentComponentRef = sheetComponentRef.instance.attachContent(component, injector);
 
         sheetComponentRef.changeDetectorRef.detectChanges();

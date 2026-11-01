@@ -1,22 +1,31 @@
 // Responsive layout grid tokens (columns, margin, gutter).
-// Breakpoints mirror LayoutService.widthQueries — keep both in sync.
-:root {
+// Breakpoints mirror widthBreakpoints in viewport.service.ts — keep both in sync.
+//
+// Container queries instead of media queries: rem in a container query condition resolves
+// against the root's computed font-size, so the breakpoints scale with `html { font-size }`.
+// A media query resolves rem against the browser default and ignores it. The root is the
+// query container, so the tokens are declared on body, its descendant.
+html {
+    container: md-viewport / inline-size;
+}
+
+body {
     // compact: <600dp
     --md-grid-columns: 4;
     --md-grid-margin: 1em; // 16dp
     --md-grid-gutter: 1em; // 16dp
 }
 
-@media (min-width: 37.5em) and (max-width: 74.999em) { // medium, expanded: 600-1199dp
-    :root {
+@container md-viewport (min-width: 37.5rem) and (max-width: 74.999rem) { // medium, expanded: 600-1199dp
+    body {
         --md-grid-columns: 8;
         --md-grid-margin: 1.5em; // 24dp
         --md-grid-gutter: 1.5em; // 24dp
     }
 }
 
-@media (min-width: 75em) { // large, extra-large: >=1200dp
-    :root {
+@container md-viewport (min-width: 75rem) { // large, extra-large: >=1200dp
+    body {
         --md-grid-columns: 12;
         --md-grid-margin: 1.5em; // 24dp
         --md-grid-gutter: 1.5em; // 24dp

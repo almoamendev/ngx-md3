@@ -7,7 +7,7 @@
     display: inline-flex;
     gap: var(--button-group-gap);
     align-items: center;
-    font-size: 1rem;
+    font-size: calc(var(--md3-scale, 1) * 1rem);
     position: relative;
 
     ::ng-deep [md3-button], ::ng-deep [md3-icon-button] {

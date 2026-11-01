@@ -23,6 +23,7 @@ import { SplitButtonsComponent } from './components/buttons/split-buttons/split-
 import { NavigationRailComponent } from './components/navigations/navigation-rail/navigation-rail.component';
 import { ScaffoldComponent } from './foundations/scaffold/scaffold.component';
 import { GridsComponent } from './foundations/grids/grids.component';
+import { SizingComponent } from './foundations/sizing/sizing.component';
 import { NavigationBarComponent } from './components/navigations/navigation-bar/navigation-bar.component';
 import { NavigationItemComponent } from './components/navigations/navigation-item/navigation-item.component';
 import { AppBarComponent } from './components/app-bar/app-bar.component';
@@ -93,6 +94,10 @@ export const routes: Routes = [
                     {
                         path: 'grids',
                         component: GridsComponent,
+                    },
+                    {
+                        path: 'sizing',
+                        component: SizingComponent,
                     },
                 ],
             },

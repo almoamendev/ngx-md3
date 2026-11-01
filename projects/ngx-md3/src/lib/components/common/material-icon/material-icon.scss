@@ -58,19 +58,19 @@
     }
 
     &.md3-20 {
-        font-size: 1.25rem;
+        font-size: calc(var(--md3-scale, 1) * 1.25rem);
     }
     
     &.md3-24 {
-        font-size: 1.5rem;
+        font-size: calc(var(--md3-scale, 1) * 1.5rem);
     }
     
     &.md3-36 {
-        font-size: 2.25rem;
+        font-size: calc(var(--md3-scale, 1) * 2.25rem);
     }
     
     &.md3-48 {
-        font-size: 3rem;
+        font-size: calc(var(--md3-scale, 1) * 3rem);
     }
 
     &.md3-bi-directional:dir(rtl) {
