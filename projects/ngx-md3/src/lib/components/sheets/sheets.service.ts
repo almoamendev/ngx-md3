@@ -23,6 +23,8 @@ interface ResolvedSideSheetConfig<D = unknown> extends SideSheetConfig<D> {
 
 interface SideSheetOutletState<T = unknown, R = unknown> {
     outlet: CdkPortalOutlet;
+    /** Whether new sheets can open here. False while the outlet is in a hidden dialog. */
+    isAvailable: () => boolean;
     stackComponentRef: ComponentRef<SideSheetStack>;
     refs: SideSheetRef<T, R>[];
 }
@@ -35,12 +37,17 @@ export class SheetsService {
 
     /**
      * Outlets registered per side, from the page scaffold up to whatever took
-     * them over last. Sheets always open in the outlet on top, so a full screen
-     * dialog can host them while it is up and hand them back when it closes.
+     * them over last. Sheets open in the highest outlet that is available, so a
+     * full screen dialog hosts them while it is up, and gives them back when it
+     * is hidden or closes.
      */
     private readonly states = new Map<SideSheetSide, SideSheetOutletState[]>();
 
-    public registerSideSheetOutlet(side: SideSheetSide, outlet: CdkPortalOutlet): void {
+    public registerSideSheetOutlet(
+        side: SideSheetSide,
+        outlet: CdkPortalOutlet,
+        isAvailable: () => boolean = () => true,
+    ): void {
         const stack = this.getOutletStack(side);
 
         if (stack.some((state) => state.outlet === outlet)) {
@@ -56,6 +63,7 @@ export class SheetsService {
 
         stack.push({
             outlet,
+            isAvailable,
             stackComponentRef,
             refs: [],
         });
@@ -87,7 +95,7 @@ export class SheetsService {
         const state = this.activeState(sheetConfig.side);
 
         if (!state) {
-            throw new Error(`No ${sheetConfig.side} side sheet outlet is registered.`);
+            throw new Error(`No available ${sheetConfig.side} side sheet outlet is registered.`);
         }
 
         if (sheetConfig.closeExisting) {
@@ -119,11 +127,17 @@ export class SheetsService {
         this.getVisibleRef(this.activeState(side))?.close(result);
     }
 
-    /** Outlet that sheets currently open in: the last one that registered. */
+    /** Outlet that new sheets open in: the last registered one that is available. */
     private activeState(side: SideSheetSide): SideSheetOutletState | undefined {
-        const stack = this.states.get(side);
+        const stack = this.states.get(side) ?? [];
 
-        return stack?.[stack.length - 1];
+        for (let index = stack.length - 1; index >= 0; index--) {
+            if (stack[index].isAvailable()) {
+                return stack[index];
+            }
+        }
+
+        return undefined;
     }
 
     private getOutletStack(side: SideSheetSide): SideSheetOutletState[] {
