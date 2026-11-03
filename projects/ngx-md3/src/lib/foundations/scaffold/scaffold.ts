@@ -1,5 +1,6 @@
 import { CdkPortalOutlet } from '@angular/cdk/portal';
 import { AfterViewInit, Component, effect, ElementRef, inject, OnDestroy, viewChild } from '@angular/core';
+import { DialogRef } from '../../components/dialog/dialog-ref';
 import { BottomSheetService } from '../../components/sheets/bottom-sheet/bottom-sheet.service';
 import { SheetsService } from '../../components/sheets/sheets.service';
 import { LayoutService } from '../layout.service';
@@ -21,6 +22,9 @@ export class Scaffold implements AfterViewInit, OnDestroy {
     private bottomSheets = inject(BottomSheetService);
     private layout = inject(LayoutService);
     private el = inject(ElementRef);
+    /** Set when the scaffold is in dialog content. A hidden dialog cannot host new sheets. */
+    private dialogRef = inject(DialogRef, { optional: true });
+    private readonly isOutletAvailable = (): boolean => !this.dialogRef?.isHidden;
 
     constructor() {
         // Publish what a floating bar covers but does not reserve. The main pane pads itself
@@ -42,11 +46,11 @@ export class Scaffold implements AfterViewInit, OnDestroy {
         const panesContainer = this.panesContainer();
 
         if (startOutlet) {
-            this.sheets.registerSideSheetOutlet('start', startOutlet);
+            this.sheets.registerSideSheetOutlet('start', startOutlet, this.isOutletAvailable);
         }
 
         if (endOutlet) {
-            this.sheets.registerSideSheetOutlet('end', endOutlet);
+            this.sheets.registerSideSheetOutlet('end', endOutlet, this.isOutletAvailable);
         }
 
         if (bottomOutlet) {

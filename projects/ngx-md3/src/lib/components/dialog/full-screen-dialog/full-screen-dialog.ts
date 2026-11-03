@@ -32,6 +32,10 @@ export class FullScreenDialog extends CdkDialogContainer implements DialogContai
     /** True while the shell holds the side sheet outlets, which happens without a layout only. */
     private ownsSideSheetOutlets = false;
 
+    /** A hidden dialog makes its overlay panel inert, and an inert shell cannot host new sheets. */
+    private readonly isOutletAvailable = (): boolean =>
+        !this._elementRef.nativeElement.closest('[inert]');
+
     public isActive = signal<boolean>(false);
 
     protected readonly config = inject<DialogConfig>(DIALOG_CONFIG, { optional: true }) ?? {};
@@ -59,11 +63,11 @@ export class FullScreenDialog extends CdkDialogContainer implements DialogContai
         const endOutlet = this.endOutlet();
 
         if (startOutlet) {
-            this.sheets.registerSideSheetOutlet('start', startOutlet);
+            this.sheets.registerSideSheetOutlet('start', startOutlet, this.isOutletAvailable);
         }
 
         if (endOutlet) {
-            this.sheets.registerSideSheetOutlet('end', endOutlet);
+            this.sheets.registerSideSheetOutlet('end', endOutlet, this.isOutletAvailable);
         }
 
         this.ownsSideSheetOutlets = !!startOutlet || !!endOutlet;
