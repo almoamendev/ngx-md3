@@ -251,8 +251,8 @@
         }
     }
     
-    &:not(:hover):not(:active):focus .md3-chip-container,
-    ::ng-deep .md3-input-element:not(:hover):not(:active):focus + .md3-chip-container {
+    &:not(:hover):not(:active):focus-visible .md3-chip-container,
+    ::ng-deep .md3-input-element:not(:hover):not(:active):focus-visible + .md3-chip-container {
         &::after {
             opacity: 1;
         }

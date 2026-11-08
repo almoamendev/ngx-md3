@@ -85,10 +85,10 @@
                     opacity: 0.1;
                 }
             }
+        }
 
-            &:not(:hover):not(:active) + .md3-radio-button-container::after {
-                opacity: 1;
-            }
+        &:not(:hover):not(:active):focus-visible + .md3-radio-button-container::after {
+            opacity: 1;
         }
 
         &:active {

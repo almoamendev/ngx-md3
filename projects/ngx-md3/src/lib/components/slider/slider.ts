@@ -1,5 +1,5 @@
 import { booleanAttribute, Component, computed, contentChild, effect, ElementRef, input, signal } from '@angular/core';
-import { AbstractControl, FormControlName } from '@angular/forms';
+import { AbstractControl, NgControl } from '@angular/forms';
 import { fromEvent, merge } from 'rxjs';
 import { InputElement } from '../common/input-element';
 import { TypeBody } from '../../styles/typography/type-body';
@@ -29,14 +29,14 @@ export class Slider {
     });
 
     private input = contentChild<InputElement>(InputElement);
-    private controlName = contentChild<FormControlName>(FormControlName);
+    private ngControl = contentChild<NgControl>(NgControl);
 
     public value = signal<number>(0);
     public min = signal<number>(0);
     public max = signal<number>(100);
     public progress = signal<number>(0);
 
-    protected formControl = computed<AbstractControl | undefined>(() => this.control() ?? this.controlName()?.control);
+    protected formControl = computed<AbstractControl | undefined>(() => this.control() ?? this.ngControl()?.control ?? undefined);
     protected formattedValue = computed(() =>
         this.valueFormatter()(this.value()),
     );
@@ -80,7 +80,12 @@ export class Slider {
                 this.syncControlFromState(this.value());
             });
 
-            onCleanup(() => inputEvents.unsubscribe());
+            const stopWatching = this.watchProgrammaticChanges(input);
+
+            onCleanup(() => {
+                inputEvents.unsubscribe();
+                stopWatching();
+            });
         });
 
         effect((onCleanup) => {
@@ -103,6 +108,75 @@ export class Slider {
 
     public get element(): HTMLElement {
         return this.el.nativeElement;
+    }
+
+    /**
+     * Programmatic changes to a plain input (a `[value]` binding, `input.value = …`,
+     * `stepUp()`…) fire no events, so the input's value setters are wrapped on the
+     * instance and its value/min/max/step attributes are observed. The sync is deferred
+     * to a microtask, because a template binding sets the value while Angular renders,
+     * where writing signals is not allowed.
+     */
+    private watchProgrammaticChanges(input: HTMLInputElement): () => void {
+        const proto = HTMLInputElement.prototype;
+        let active = true;
+        let scheduled = false;
+        const scheduleSync = () => {
+            if (scheduled) {
+                return;
+            }
+
+            scheduled = true;
+            queueMicrotask(() => {
+                scheduled = false;
+                if (active) {
+                    this.syncStateFromInput(input);
+                }
+            });
+        };
+        const patched: (keyof HTMLInputElement)[] = ['value', 'valueAsNumber'];
+
+        for (const key of patched) {
+            const descriptor = Object.getOwnPropertyDescriptor(proto, key);
+            if (!descriptor?.get || !descriptor.set) {
+                continue;
+            }
+
+            Object.defineProperty(input, key, {
+                configurable: true,
+                enumerable: descriptor.enumerable,
+                get() {
+                    return descriptor.get!.call(this);
+                },
+                set: (value: unknown) => {
+                    descriptor.set!.call(input, value);
+                    scheduleSync();
+                },
+            });
+        }
+
+        const methods = ['stepUp', 'stepDown'] as const;
+        for (const method of methods) {
+            const original = proto[method];
+            input[method] = (n?: number) => {
+                original.call(input, n);
+                scheduleSync();
+            };
+        }
+
+        const observer = new MutationObserver(scheduleSync);
+        observer.observe(input, {
+            attributes: true,
+            attributeFilter: ['value', 'min', 'max', 'step'],
+        });
+
+        return () => {
+            active = false;
+            observer.disconnect();
+            for (const key of [...patched, ...methods]) {
+                delete (input as unknown as Record<string, unknown>)[key];
+            }
+        };
     }
 
     private syncInitialState(input: HTMLInputElement): void {
