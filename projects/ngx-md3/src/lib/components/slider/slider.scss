@@ -236,9 +236,10 @@
                 width: 0.125em;
             }
 
-            &:not(:hover):not(:active) ~ .md3-slider-container .md3-slider-handle::after {
-                opacity: 1;
-            }
+        }
+
+        &:not(:hover):not(:active):focus-visible ~ .md3-slider-container .md3-slider-handle::after {
+            opacity: 1;
         }
 
         &:disabled {

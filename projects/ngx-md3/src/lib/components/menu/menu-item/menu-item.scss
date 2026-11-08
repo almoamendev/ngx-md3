@@ -22,10 +22,10 @@
 
     &:focus {
         z-index: 1;
-
-        &:not(:hover) .md3-menu-item-container:after {
-            opacity: 1;
-        }
+    }
+    
+    &:not(:hover):focus-visible .md3-menu-item-container:after {
+        opacity: 1;
     }
 
     &:active {
