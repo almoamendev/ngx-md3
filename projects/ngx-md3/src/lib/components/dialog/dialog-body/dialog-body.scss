@@ -1,6 +1,9 @@
 :host {
     display: block;
-    margin: 1em 1.5em 1.5em;
+    margin: 1em 0 1.5em;
+    padding: 0 1.5em;
+    overflow-y: auto;
+    max-height: calc(100dvh - 22em);
     color: rgb(var(--md-scheme-on-surface-variant));
 
     .md3-text-body.md3-text-medium {
