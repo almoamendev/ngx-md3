@@ -8,6 +8,7 @@ import { Component, ElementRef, input, booleanAttribute, effect } from '@angular
     host: {
         '[class.md3-filled]': 'isFilled()',
         '[class.md3-bi-directional]': 'biDirectional()',
+        '[attr.aria-hidden]': 'true',
     },
 })
 export class MaterialIcon {
