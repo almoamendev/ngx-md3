@@ -70,14 +70,24 @@ export class Button {
             });
         });
 
+        // a toggle exposes its state to assistive tech through aria-pressed. The
+        // attribute is removed only when this button set it, so an aria-pressed
+        // the app manages itself on a plain button is left alone.
+        let ownsAriaPressed = false;
         effect(() => {
-            const toggle = this.isSelected() !== null;
+            const selected = this.isSelected();
 
-            if (toggle) {
+            if (selected !== null) {
                 this.element.classList.add('md3-toggle');
-                this.element.classList.toggle('md3-selected', this.isSelected() ?? false);
+                this.element.classList.toggle('md3-selected', selected);
+                this.element.setAttribute('aria-pressed', String(selected));
+                ownsAriaPressed = true;
             } else {
                 this.element.classList.remove('md3-toggle', 'md3-selected');
+                if (ownsAriaPressed) {
+                    this.element.removeAttribute('aria-pressed');
+                    ownsAriaPressed = false;
+                }
             }
         });
     }
