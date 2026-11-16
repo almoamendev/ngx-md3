@@ -83,6 +83,12 @@
     &.md3-start {
         --hidden-offset: -80%;
 
+        // translateX is physical, so the slide direction must flip with the
+        // inline direction for the sheet to enter from its logical edge.
+        &:dir(rtl) {
+            --hidden-offset: 80%;
+        }
+
         &.md3-style-modal {
             inset-inline-start: 0;
         }
@@ -99,6 +105,10 @@
 
     &.md3-end {
         --hidden-offset: 80%;
+
+        &:dir(rtl) {
+            --hidden-offset: -80%;
+        }
 
         &.md3-style-modal {
             inset-inline-end: 0;
