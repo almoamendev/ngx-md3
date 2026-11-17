@@ -55,6 +55,10 @@ sheetRef.close(yourSheetResult);
 // or close whichever sheet is visible on a side
 sheetsService.closeSideSheet('end');
 
+// open in the page scaffold while a full screen dialog is up
+sheetsService.openSideSheet(YourSheetComponent, { host: 'page' });
+sheetsService.closeSideSheet('end', yourSheetResult, 'page');
+
 // after close
 sheetRef.afterClosed().subscribe((result: YourSheetResults) => {
     // optional: result when closing the sheet
@@ -109,6 +113,13 @@ interface SideSheetConfig<D = unknown> {
      * @default false
      */
     closeExisting?: boolean;
+
+    /**
+     * Which scaffold the sheet opens in. 'page' opens it in the app's page
+     * scaffold even while a full screen dialog with its own scaffold is up
+     * @default current
+     */
+    host?: 'current' | 'page';
 
     /**
      * Size of the sheet, as a factor of 1rem. Sets --md3-scale on the sheet.

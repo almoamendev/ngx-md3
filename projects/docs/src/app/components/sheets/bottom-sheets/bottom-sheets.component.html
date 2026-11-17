@@ -149,6 +149,17 @@
             </tr>
             <tr>
                 <td>
+                    <i>host?</i>
+                    <p md3-type-body size="small">Standard only. Which scaffold the sheet docks into. <code>current</code> is the topmost one, which is a full screen dialog's while one is up. <code>page</code> is the app's page scaffold, even while a full screen dialog is up. A modal sheet is an overlay and ignores it. See Outlets below.</p>
+                </td>
+                <td>
+                    SheetHost
+                    <p md3-type-body size="small">current, page</p>
+                </td>
+                <td style="white-space: nowrap;">current</td>
+            </tr>
+            <tr>
+                <td>
                     <i>direction?</i>
                     <p md3-type-body size="small">Overrides the text direction of the sheet.</p>
                 </td>
@@ -202,6 +213,7 @@
 <ul>
     <li>The region takes no space of its own. The sheet floats over the content, at the same maximum width as a modal sheet's panel, so opening or dragging one never reflows the page behind it.</li>
     <li>Because it reserves nothing, a <a routerLink="/components/snackbars">snackbar</a> will overlap a standard sheet. Pass <code>bottomOffset</code> when opening one to clear it.</li>
+    <li>Outlets stack: a full screen dialog with a scaffold of its own registers an outlet while it is up, so a standard sheet opened from inside it docks into the dialog. Pass <code>host: 'page'</code> to dock it into the page scaffold instead. The page sits under the dialog, so the sheet is out of sight until the dialog is hidden or closed, and it stays open after the dialog closes. Only one standard sheet is open at a time either way.</li>
     <li>Calling <code>open()</code> with <code>type: 'standard'</code> and no registered outlet throws &mdash; the layout has to be in place first.</li>
     <li>There is no live switch between the two types, unlike <a routerLink="/components/sheets/side-sheets">side sheets</a>, which have a <code>setSheetType</code>. The two variants live in different hosts here, so changing type means closing the sheet and opening it again.</li>
 </ul>

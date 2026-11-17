@@ -1,4 +1,5 @@
 import { Injector, ViewContainerRef } from "@angular/core";
+import { SheetHost } from "../types/sheet-host.type";
 
 export type SideSheetSide = 'start' | 'end';
 export type SideSheetType = 'default' | 'standard' | 'modal';
@@ -11,6 +12,18 @@ export interface SideSheetConfig<D = unknown> {
     inset?: boolean;
     divider?: boolean;
     closeExisting?: boolean;
+
+    /**
+     * Which scaffold the sheet opens in. `'page'` opens it in the app's page scaffold even
+     * while a full screen dialog with its own scaffold is up. The sheet then waits under the
+     * dialog until it is hidden or closed, and outlives it.
+     *
+     * A sheet that can outlive the dialog should not get an injector from inside the dialog,
+     * or it keeps the dialog's providers after they are destroyed.
+     *
+     * @default 'current'
+     */
+    host?: SheetHost;
 
     /**
      * Size of the sheet and everything in it, as a factor of 1rem: sets `--md3-scale` on the

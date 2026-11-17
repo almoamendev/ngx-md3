@@ -14,6 +14,7 @@ import {
 } from './bottom-sheet-ref';
 import { BottomSheetConfig, BottomSheetState, BottomSheetType } from '../../../interfaces/bottom-sheet-config.interface';
 import { applyScale } from '../../../foundations/scale';
+import { SheetHost, SheetOutletLevel, SheetOutletOptions } from '../../../types/sheet-host.type';
 
 interface ResolvedBottomSheetConfig<D = unknown> extends BottomSheetConfig<D> {
     data: D | undefined;
@@ -25,12 +26,15 @@ interface ResolvedBottomSheetConfig<D = unknown> extends BottomSheetConfig<D> {
     initialState: BottomSheetState;
     scheme: 'inherit' | 'dark' | 'light';
     direction: null | 'ltr' | 'rtl';
+    host: SheetHost;
     injector: Injector;
 }
 
 /** An outlet a standard sheet can be opened in, with the host attached into it. */
 interface BottomSheetOutletState {
     outlet: CdkPortalOutlet;
+    isAvailable: () => boolean;
+    level: SheetOutletLevel;
     hostComponentRef: ComponentRef<BottomSheetOutlet>;
 }
 
@@ -57,15 +61,19 @@ export class BottomSheetService {
 
     /**
      * Outlets registered from the page scaffold up to whatever took them over last. Standard
-     * sheets always open in the outlet on top.
+     * sheets open in the highest outlet that is available, or with `host: 'page'`, in the
+     * highest one a page scaffold registered.
      */
     private readonly outlets: BottomSheetOutletState[] = [];
 
     private modalRef?: ModalBottomSheetRef<any, any>;
     private standardRef?: StandardBottomSheetRef<any, any>;
 
+    /** Outlet the open standard sheet lives in. */
+    private standardOutlet?: BottomSheetOutletState;
+
     /** Registers the outlet standard bottom sheets open into. Called by Scaffold. */
-    public registerBottomSheetOutlet(outlet: CdkPortalOutlet): void {
+    public registerBottomSheetOutlet(outlet: CdkPortalOutlet, options: SheetOutletOptions = {}): void {
         if (this.outlets.some((state) => state.outlet === outlet)) {
             return;
         }
@@ -78,6 +86,8 @@ export class BottomSheetService {
 
         this.outlets.push({
             outlet,
+            isAvailable: options.isAvailable ?? (() => true),
+            level: options.level ?? 'page',
             hostComponentRef: outlet.attachComponentPortal(portal),
         });
     }
@@ -91,8 +101,9 @@ export class BottomSheetService {
 
         // A sheet open in this outlet goes with it, without an exit animation: the outlet is
         // being torn down, so there is nothing left to animate in.
-        if (index === this.outlets.length - 1) {
+        if (this.standardOutlet === this.outlets[index]) {
             this.standardRef?.dispose();
+            this.standardOutlet = undefined;
         }
 
         this.outlets[index].outlet.detach();
@@ -199,12 +210,14 @@ export class BottomSheetService {
         component: Type<T>,
         sheetConfig: ResolvedBottomSheetConfig<D>,
     ): BottomSheetRef<T, R> {
-        const host = this.activeOutlet();
+        const host = this.activeOutlet(sheetConfig.host);
 
         if (!host) {
+            const kind = sheetConfig.host === 'page' ? 'page ' : '';
+
             throw new Error(
-                'No bottom sheet outlet is registered. A standard bottom sheet docks into the '
-                + 'scaffold, so the layout has to be in place before one can open.',
+                `No available ${kind}bottom sheet outlet is registered. A standard bottom sheet `
+                + 'docks into the scaffold, so the layout has to be in place before one can open.',
             );
         }
 
@@ -214,6 +227,7 @@ export class BottomSheetService {
         const sheetRef: StandardBottomSheetRef<T, R> = new StandardBottomSheetRef<T, R>(() => {
             if (this.standardRef === sheetRef) {
                 this.standardRef = undefined;
+                this.standardOutlet = undefined;
             }
         });
 
@@ -229,13 +243,22 @@ export class BottomSheetService {
         sheetRef.componentInstance = contentComponentRef.instance;
 
         this.standardRef = sheetRef;
+        this.standardOutlet = host;
         sheetComponentRef.instance.startEnterAnimation();
 
         return sheetRef;
     }
 
-    private activeOutlet(): BottomSheetOutletState | undefined {
-        return this.outlets[this.outlets.length - 1];
+    private activeOutlet(host: SheetHost): BottomSheetOutletState | undefined {
+        for (let index = this.outlets.length - 1; index >= 0; index--) {
+            const state = this.outlets[index];
+
+            if ((host === 'current' || state.level === 'page') && state.isAvailable()) {
+                return state;
+            }
+        }
+
+        return undefined;
     }
 
     private createInjector<T, D>(
@@ -285,6 +308,7 @@ export class BottomSheetService {
             initialState: config.initialState ?? 'collapsed',
             scheme: config.scheme ?? 'inherit',
             direction: config.direction ?? null,
+            host: config.host ?? 'current',
             viewContainerRef: config.viewContainerRef,
             injector: config.injector ?? this.injector,
         };

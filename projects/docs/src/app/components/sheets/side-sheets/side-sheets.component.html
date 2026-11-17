@@ -104,6 +104,17 @@
             </tr>
             <tr>
                 <td>
+                    <i>host?</i>
+                    <p md3-type-body size="small">Which scaffold the sheet opens in. <code>current</code> is the topmost one, which is a full screen dialog's while one is up. <code>page</code> is the app's page scaffold, even while a full screen dialog is up. See Outlets below.</p>
+                </td>
+                <td>
+                    SheetHost
+                    <p md3-type-body size="small">current, page</p>
+                </td>
+                <td style="white-space: nowrap;">current</td>
+            </tr>
+            <tr>
+                <td>
                     <i>viewContainerRef?</i>
                     <p md3-type-body size="small">Optional Angular context for the dynamic component.</p>
                 </td>
@@ -144,5 +155,7 @@
 <app-shiki [code]="apiOutlets" language="html"></app-shiki>
 <ul>
     <li>Outlets stack: whichever registered last is where new sheets open. A full screen dialog registers its own pair while it is up, so sheets opened from inside it render in the dialog and are closed with it.</li>
+    <li>Pass <code>host: 'page'</code> to open a sheet in the page scaffold instead, skipping the dialog's outlets. The page sits under the dialog, so the sheet is out of sight until the dialog is hidden or closed, and it stays open after the dialog closes. <code>closeExisting</code> only closes sheets in the scaffold the new sheet opens in, and <code>closeSideSheet(side, result, 'page')</code> closes the page's sheet while the dialog is up.</li>
+    <li>A sheet opened with <code>host: 'page'</code> from inside a dialog can outlive it, so do not pass it an <code>injector</code> from inside the dialog.</li>
     <li>Calling <code>openSideSheet()</code> with no registered outlet for that side throws &mdash; the layout has to be in place first.</li>
 </ul>

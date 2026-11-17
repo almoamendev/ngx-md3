@@ -63,11 +63,11 @@ export class FullScreenDialog extends CdkDialogContainer implements DialogContai
         const endOutlet = this.endOutlet();
 
         if (startOutlet) {
-            this.sheets.registerSideSheetOutlet('start', startOutlet, this.isOutletAvailable);
+            this.sheets.registerSideSheetOutlet('start', startOutlet, { isAvailable: this.isOutletAvailable, level: 'dialog' });
         }
 
         if (endOutlet) {
-            this.sheets.registerSideSheetOutlet('end', endOutlet, this.isOutletAvailable);
+            this.sheets.registerSideSheetOutlet('end', endOutlet, { isAvailable: this.isOutletAvailable, level: 'dialog' });
         }
 
         this.ownsSideSheetOutlets = !!startOutlet || !!endOutlet;
