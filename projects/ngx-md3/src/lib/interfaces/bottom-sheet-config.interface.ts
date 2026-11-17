@@ -1,5 +1,6 @@
 import { Injector, Signal, ViewContainerRef } from "@angular/core";
 import { Observable } from "rxjs";
+import { SheetHost } from "../types/sheet-host.type";
 
 /**
  * How the sheet sits in the layout. A modal sheet floats above the page in an overlay with a
@@ -38,6 +39,19 @@ export interface BottomSheetConfig<D = unknown> {
 
     /** Standard only. Whether dragging below the collapsed height closes the sheet. */
     dismissible?: boolean;
+
+    /**
+     * Standard only. Which scaffold the sheet docks into. `'page'` docks it into the app's page
+     * scaffold even while a full screen dialog with its own scaffold is up. The sheet then waits
+     * under the dialog until it is hidden or closed, and outlives it. A modal sheet is an
+     * overlay and ignores this.
+     *
+     * A sheet that can outlive the dialog should not get an injector from inside the dialog,
+     * or it keeps the dialog's providers after they are destroyed.
+     *
+     * @default 'current'
+     */
+    host?: SheetHost;
 
     /** Standard only. Accessible name for the region the sheet occupies. */
     label?: string;

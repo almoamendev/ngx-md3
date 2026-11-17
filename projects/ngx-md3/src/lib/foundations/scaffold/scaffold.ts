@@ -4,6 +4,7 @@ import { DialogRef } from '../../components/dialog/dialog-ref';
 import { BottomSheetService } from '../../components/sheets/bottom-sheet/bottom-sheet.service';
 import { SheetsService } from '../../components/sheets/sheets.service';
 import { LayoutService } from '../layout.service';
+import { SheetOutletOptions } from '../../types/sheet-host.type';
 
 @Component({
     selector: 'md3-scaffold',
@@ -26,6 +27,14 @@ export class Scaffold implements AfterViewInit, OnDestroy {
     private dialogRef = inject(DialogRef, { optional: true });
     private readonly isOutletAvailable = (): boolean => !this.dialogRef?.isHidden;
 
+    /** A scaffold in dialog content registers as the dialog's, so `host: 'page'` skips it. */
+    private get outletOptions(): SheetOutletOptions {
+        return {
+            isAvailable: this.isOutletAvailable,
+            level: this.dialogRef ? 'dialog' : 'page',
+        };
+    }
+
     constructor() {
         // Publish what a floating bar covers but does not reserve. The main pane pads itself
         // by these values, and the fallback is 0, so a layout without a floating bar is
@@ -46,15 +55,15 @@ export class Scaffold implements AfterViewInit, OnDestroy {
         const panesContainer = this.panesContainer();
 
         if (startOutlet) {
-            this.sheets.registerSideSheetOutlet('start', startOutlet, this.isOutletAvailable);
+            this.sheets.registerSideSheetOutlet('start', startOutlet, this.outletOptions);
         }
 
         if (endOutlet) {
-            this.sheets.registerSideSheetOutlet('end', endOutlet, this.isOutletAvailable);
+            this.sheets.registerSideSheetOutlet('end', endOutlet, this.outletOptions);
         }
 
         if (bottomOutlet) {
-            this.bottomSheets.registerBottomSheetOutlet(bottomOutlet);
+            this.bottomSheets.registerBottomSheetOutlet(bottomOutlet, this.outletOptions);
         }
 
         if (panesContainer) {

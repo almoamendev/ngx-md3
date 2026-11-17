@@ -145,6 +145,14 @@ interface BottomSheetConfig<D = unknown> {
     labelledBy?: string;
 
     /**
+     * Standard only. Which scaffold the sheet docks into. 'page' docks it into
+     * the app's page scaffold even while a full screen dialog with its own
+     * scaffold is up. A modal sheet ignores it
+     * @default current
+     */
+    host?: 'current' | 'page';
+
+    /**
      * Overrides the color scheme of the sheet regardless of the page it opened from.
      * @default inherit
      */

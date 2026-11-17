@@ -9,6 +9,7 @@ import {
 } from './side-sheet/side-sheet-ref';
 import { SideSheetConfig, SideSheetSide, SideSheetType } from '../../interfaces/side-sheet-config.interface';
 import { applyScale } from '../../foundations/scale';
+import { SheetHost, SheetOutletLevel, SheetOutletOptions } from '../../types/sheet-host.type';
 
 interface ResolvedSideSheetConfig<D = unknown> extends SideSheetConfig<D> {
     data: D | undefined;
@@ -18,6 +19,7 @@ interface ResolvedSideSheetConfig<D = unknown> extends SideSheetConfig<D> {
     inset: boolean;
     divider: boolean;
     closeExisting: boolean;
+    host: SheetHost;
     injector: Injector;
 }
 
@@ -25,6 +27,7 @@ interface SideSheetOutletState<T = unknown, R = unknown> {
     outlet: CdkPortalOutlet;
     /** Whether new sheets can open here. False while the outlet is in a hidden dialog. */
     isAvailable: () => boolean;
+    level: SheetOutletLevel;
     stackComponentRef: ComponentRef<SideSheetStack>;
     refs: SideSheetRef<T, R>[];
 }
@@ -39,14 +42,15 @@ export class SheetsService {
      * Outlets registered per side, from the page scaffold up to whatever took
      * them over last. Sheets open in the highest outlet that is available, so a
      * full screen dialog hosts them while it is up, and gives them back when it
-     * is hidden or closes.
+     * is hidden or closes. A sheet opened with `host: 'page'` skips the dialog
+     * outlets and goes to the highest page outlet instead.
      */
     private readonly states = new Map<SideSheetSide, SideSheetOutletState[]>();
 
     public registerSideSheetOutlet(
         side: SideSheetSide,
         outlet: CdkPortalOutlet,
-        isAvailable: () => boolean = () => true,
+        options: SheetOutletOptions = {},
     ): void {
         const stack = this.getOutletStack(side);
 
@@ -63,7 +67,8 @@ export class SheetsService {
 
         stack.push({
             outlet,
-            isAvailable,
+            isAvailable: options.isAvailable ?? (() => true),
+            level: options.level ?? 'page',
             stackComponentRef,
             refs: [],
         });
@@ -92,10 +97,12 @@ export class SheetsService {
         config: SideSheetConfig<D> = {},
     ): SideSheetRef<T, R> {
         const sheetConfig = this.mergeConfig(config);
-        const state = this.activeState(sheetConfig.side);
+        const state = this.activeState(sheetConfig.side, sheetConfig.host);
 
         if (!state) {
-            throw new Error(`No available ${sheetConfig.side} side sheet outlet is registered.`);
+            const kind = sheetConfig.host === 'page' ? 'page ' : '';
+
+            throw new Error(`No available ${kind}${sheetConfig.side} side sheet outlet is registered.`);
         }
 
         if (sheetConfig.closeExisting) {
@@ -123,17 +130,27 @@ export class SheetsService {
         return sheetRef;
     }
 
-    public closeSideSheet<R = unknown>(side: SideSheetSide = 'end', result?: R): void {
-        this.getVisibleRef(this.activeState(side))?.close(result);
+    /** Closes the visible sheet on `side` in the scaffold `host` names. */
+    public closeSideSheet<R = unknown>(
+        side: SideSheetSide = 'end',
+        result?: R,
+        host: SheetHost = 'current',
+    ): void {
+        this.getVisibleRef(this.activeState(side, host))?.close(result);
     }
 
-    /** Outlet that new sheets open in: the last registered one that is available. */
-    private activeState(side: SideSheetSide): SideSheetOutletState | undefined {
+    /**
+     * Outlet that new sheets open in: the last registered one that is available, and for
+     * `'page'`, the last one a page scaffold registered.
+     */
+    private activeState(side: SideSheetSide, host: SheetHost = 'current'): SideSheetOutletState | undefined {
         const stack = this.states.get(side) ?? [];
 
         for (let index = stack.length - 1; index >= 0; index--) {
-            if (stack[index].isAvailable()) {
-                return stack[index];
+            const state = stack[index];
+
+            if ((host === 'current' || state.level === 'page') && state.isAvailable()) {
+                return state;
             }
         }
 
@@ -159,6 +176,7 @@ export class SheetsService {
             inset: config.inset ?? false,
             divider: config.divider ?? false,
             closeExisting: config.closeExisting ?? false,
+            host: config.host ?? 'current',
             scale: config.scale,
             viewContainerRef: config.viewContainerRef,
             injector: config.injector ?? this.injector,
