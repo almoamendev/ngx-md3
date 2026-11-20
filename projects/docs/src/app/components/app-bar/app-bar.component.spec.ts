@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideRouter } from '@angular/router';
 
 import { AppBarComponent } from './app-bar.component';
 
@@ -8,7 +9,8 @@ describe('AppBarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AppBarComponent]
+      imports: [AppBarComponent],
+      providers: [provideRouter([])],
     })
     .compileComponents();
 

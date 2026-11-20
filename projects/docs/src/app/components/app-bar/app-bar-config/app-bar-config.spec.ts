@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { SideSheetRef } from '@almoamendev/ngx-md3';
 
 import { AppBarConfig } from './app-bar-config';
 
@@ -8,7 +9,8 @@ describe('AppBarConfig', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AppBarConfig]
+      imports: [AppBarConfig],
+      providers: [{ provide: SideSheetRef, useValue: jasmine.createSpyObj<SideSheetRef>('SideSheetRef', ['close']) }],
     })
     .compileComponents();
 

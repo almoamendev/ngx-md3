@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideRouter } from '@angular/router';
 
 import { ScaffoldComponent } from './scaffold.component';
 
@@ -8,7 +9,8 @@ describe('ScaffoldComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ScaffoldComponent]
+      imports: [ScaffoldComponent],
+      providers: [provideRouter([])],
     })
     .compileComponents();
 

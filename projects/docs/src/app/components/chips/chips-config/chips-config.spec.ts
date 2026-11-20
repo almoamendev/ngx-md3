@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { SideSheetRef } from '@almoamendev/ngx-md3';
 
 import { ChipsConfig } from './chips-config';
 
@@ -8,7 +9,8 @@ describe('ChipsConfig', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ChipsConfig]
+      imports: [ChipsConfig],
+      providers: [{ provide: SideSheetRef, useValue: jasmine.createSpyObj<SideSheetRef>('SideSheetRef', ['close']) }],
     })
     .compileComponents();
 

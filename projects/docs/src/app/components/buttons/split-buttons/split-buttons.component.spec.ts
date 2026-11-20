@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideRouter } from '@angular/router';
 
 import { SplitButtonsComponent } from './split-buttons.component';
 
@@ -8,7 +9,8 @@ describe('SplitButtonsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SplitButtonsComponent]
+      imports: [SplitButtonsComponent],
+      providers: [provideRouter([])],
     })
     .compileComponents();
 

@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { SideSheetRef } from '@almoamendev/ngx-md3';
 
 import { TypographyConfig } from './typography-config';
 
@@ -8,7 +9,8 @@ describe('TypographyConfig', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TypographyConfig]
+      imports: [TypographyConfig],
+      providers: [{ provide: SideSheetRef, useValue: jasmine.createSpyObj<SideSheetRef>('SideSheetRef', ['close']) }],
     })
     .compileComponents();
 

@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { SideSheetRef } from '@almoamendev/ngx-md3';
 
 import { SnackbarConfig } from './snackbar-config';
 
@@ -8,7 +9,8 @@ describe('SnackbarConfig', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SnackbarConfig]
+      imports: [SnackbarConfig],
+      providers: [{ provide: SideSheetRef, useValue: jasmine.createSpyObj<SideSheetRef>('SideSheetRef', ['close']) }],
     })
     .compileComponents();
 

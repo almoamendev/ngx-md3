@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideRouter } from '@angular/router';
 
 import { BottomSheetsComponent } from './bottom-sheets.component';
 
@@ -8,7 +9,8 @@ describe('BottomSheetsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [BottomSheetsComponent]
+      imports: [BottomSheetsComponent],
+      providers: [provideRouter([])],
     })
     .compileComponents();
 

@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { SideSheetRef } from '@almoamendev/ngx-md3';
 
 import { GridConfig } from './grid-config';
 
@@ -8,7 +9,8 @@ describe('GridConfig', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [GridConfig]
+      imports: [GridConfig],
+      providers: [{ provide: SideSheetRef, useValue: jasmine.createSpyObj<SideSheetRef>('SideSheetRef', ['close']) }],
     })
     .compileComponents();
 
