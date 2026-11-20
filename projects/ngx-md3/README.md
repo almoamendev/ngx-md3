@@ -69,6 +69,7 @@ The root import, `@almoamendev/ngx-md3`, still re-exports everything, and existi
 | `@almoamendev/ngx-md3/switch` | `Switch` |
 | `@almoamendev/ngx-md3/slider` | `Slider` |
 | `@almoamendev/ngx-md3/list` | `List`, `ListItem`, `ListLeading`, `ListSlot` |
+| `@almoamendev/ngx-md3/list-reorder` | `LIST_REORDER` (`ListReorder`, `ListReorderItem`), for `draggable` lists |
 | `@almoamendev/ngx-md3/progress` | `LoadingIndicator`, `LinearProgressIndicator`, `CircularProgressIndicator` |
 | `@almoamendev/ngx-md3/app-bar` | `AppBar`, `AppBarHeader` |
 | `@almoamendev/ngx-md3/toolbar` | `Toolbar`, `ToolbarItem` |
@@ -90,6 +91,34 @@ The global styles stay where they were:
 ```scss
 @use '@almoamendev/ngx-md3/src/lib/styles/md3.scss';
 ```
+
+## Reorderable lists
+
+Drag-and-drop reordering lives in its own entry point, so lists that are never reordered don't load `@angular/cdk/drag-drop`. Add `LIST_REORDER` to the imports of each component whose template has a `draggable` list; the markup stays the same.
+
+```ts
+import { List, ListItem } from '@almoamendev/ngx-md3/list';
+import { LIST_REORDER } from '@almoamendev/ngx-md3/list-reorder';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+
+@Component({
+  imports: [List, ListItem, LIST_REORDER],
+  template: `
+    <md3-list type="segmented" draggable (dropped)="drop($event)">
+      @for (item of items; track item.id) {
+        <md3-list-item [drag-disabled]="item.locked">…</md3-list-item>
+      }
+    </md3-list>
+  `,
+})
+export class Tasks {
+  drop(event: CdkDragDrop<unknown>) {
+    moveItemInArray(this.items, event.previousIndex, event.currentIndex);
+  }
+}
+```
+
+Without `LIST_REORDER` a `draggable` list renders as a plain list, `(dropped)` never fires, and a warning is logged in dev mode. Reordering is meant for `md3-list-item` elements written directly inside `md3-list`; see the list docs for wrapping items in your own components.
 
 ## Links
 
