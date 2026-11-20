@@ -11,7 +11,7 @@
           "style": "scss"
         }
       },
-      "sourceRoot": "projects/ngx-md3/src",
+      "sourceRoot": "projects/ngx-md3",
       "prefix": "md3",
       "architect": {
         "build": {
@@ -95,6 +95,11 @@
         },
         "serve": {
           "builder": "@angular/build:dev-server",
+          "options": {
+            "prebundle": {
+              "exclude": ["@almoamendev/ngx-md3"]
+            }
+          },
           "configurations": {
             "production": {
               "buildTarget": "docs:build:production"

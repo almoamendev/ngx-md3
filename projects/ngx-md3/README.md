@@ -23,7 +23,7 @@ npm install @almoamendev/ngx-md3
 
 ```ts
 import { Component } from '@angular/core';
-import { Button } from '@almoamendev/ngx-md3';
+import { Button } from '@almoamendev/ngx-md3/button';
 
 @Component({
     selector: 'app-example',
@@ -38,6 +38,58 @@ export class ExampleComponent {}
 ```
 
 Browse the full component catalogue, API references, and live playgrounds at **https://almoamendev.github.io/ngx-md3/**.
+
+## Entry points
+
+Each component family is published as its own secondary entry point, the way Angular Material does it. Import from the entry point so each lazy route only carries the components it uses:
+
+```ts
+import { Button } from '@almoamendev/ngx-md3/button';
+import { SnackbarService } from '@almoamendev/ngx-md3/snackbar';
+```
+
+The root import, `@almoamendev/ngx-md3`, still re-exports everything, and existing code keeps compiling. Each entry point is a separate file in the package, so bundlers split the root import too, but the entry points show more clearly what a file depends on.
+
+| Entry point | Main exports |
+| --- | --- |
+| `@almoamendev/ngx-md3/core` | `LayoutService`, `ViewportService`, `StateComponent`, `InputElement`, `SheetHost`, `applyScale` |
+| `@almoamendev/ngx-md3/typography` | `TypeDisplay`, `TypeHeadline`, `TypeTitle`, `TypeBody`, `TypeLabel` |
+| `@almoamendev/ngx-md3/icon` | `MaterialIcon`, `IconElement` |
+| `@almoamendev/ngx-md3/avatar` | `Avatar` |
+| `@almoamendev/ngx-md3/badge` | `Badge` |
+| `@almoamendev/ngx-md3/divider` | `Divider` |
+| `@almoamendev/ngx-md3/button` | `Button`, `IconButton`, `FloatingActionButton` |
+| `@almoamendev/ngx-md3/split-button` | `SplitButton` |
+| `@almoamendev/ngx-md3/button-group` | `ButtonGroup` |
+| `@almoamendev/ngx-md3/card` | `Card` |
+| `@almoamendev/ngx-md3/carousel` | `Carousel`, `CarouselItem` |
+| `@almoamendev/ngx-md3/chips` | `Chips`, `ChipAvatar` |
+| `@almoamendev/ngx-md3/checkbox` | `Checkbox` |
+| `@almoamendev/ngx-md3/radio` | `RadioButton` |
+| `@almoamendev/ngx-md3/switch` | `Switch` |
+| `@almoamendev/ngx-md3/slider` | `Slider` |
+| `@almoamendev/ngx-md3/list` | `List`, `ListItem`, `ListLeading`, `ListSlot` |
+| `@almoamendev/ngx-md3/progress` | `LoadingIndicator`, `LinearProgressIndicator`, `CircularProgressIndicator` |
+| `@almoamendev/ngx-md3/app-bar` | `AppBar`, `AppBarHeader` |
+| `@almoamendev/ngx-md3/toolbar` | `Toolbar`, `ToolbarItem` |
+| `@almoamendev/ngx-md3/navigation` | `NavigationBar`, `NavigationRail`, `NavigationItem`, `NavigationGroup` |
+| `@almoamendev/ngx-md3/text-field` | `TextField`, `SupportingText` |
+| `@almoamendev/ngx-md3/select` | `SelectField` |
+| `@almoamendev/ngx-md3/menu` | `Menu`, `MenuService`, `MenuItem`, `MenuGroup` |
+| `@almoamendev/ngx-md3/dialog` | `DialogService`, `DialogRef`, `DialogHeader`, `DialogBody`, `DialogActions` |
+| `@almoamendev/ngx-md3/side-sheet` | `SheetsService`, `SideSheetRef`, `SideSheetHeader`, `SideSheetBody`, `SideSheetActions` |
+| `@almoamendev/ngx-md3/bottom-sheet` | `BottomSheetService`, `BottomSheetRef` |
+| `@almoamendev/ngx-md3/snackbar` | `SnackbarService`, `SnackbarRef` |
+| `@almoamendev/ngx-md3/scaffold` | `Layout`, `Scaffold`, `ScaffoldBar`, `ScaffoldRail`, `ScaffoldPane` |
+| `@almoamendev/ngx-md3/grid` | `Grid`, `GridItem` |
+
+Types and config interfaces come from the same entry point as the component that uses them, for example `ButtonSize` from `/button` and `DialogConfig` from `/dialog`.
+
+The global styles stay where they were:
+
+```scss
+@use '@almoamendev/ngx-md3/src/lib/styles/md3.scss';
+```
 
 ## Links
 

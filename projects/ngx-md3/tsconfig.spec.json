@@ -6,10 +6,14 @@
     "outDir": "../../out-tsc/spec",
     "types": [
       "jasmine"
-    ]
+    ],
+    "paths": {
+      "@almoamendev/ngx-md3": ["./src/public-api.ts"],
+      "@almoamendev/ngx-md3/*": ["./*/public-api.ts"]
+    }
   },
   "include": [
-    "src/**/*.d.ts",
-    "src/**/*.spec.ts"
+    "**/*.d.ts",
+    "**/*.spec.ts"
   ]
 }
