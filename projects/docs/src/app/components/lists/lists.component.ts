@@ -1,7 +1,7 @@
 import { Component, computed, effect, OnDestroy, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { Checkbox, Divider, IconButton, IconElement, InputElement, List, ListItem, ListItemPrimaryAction, ListLeading, ListLeadingSize, ListLeadingType, ListSlot, MaterialIcon, RadioButton, SheetsService, SideSheetRef, Switch, TypeBody, TypeDisplay } from '@almoamendev/ngx-md3';
+import { Checkbox, Divider, IconButton, IconElement, InputElement, List, LIST_REORDER, ListItem, ListItemPrimaryAction, ListLeading, ListLeadingSize, ListLeadingType, ListSlot, MaterialIcon, RadioButton, SheetsService, SideSheetRef, Switch, TypeBody, TypeDisplay } from '@almoamendev/ngx-md3';
 import { Playground } from '../playground/playground';
 import { Shiki } from '../shiki/shiki';
 import { ListConfig } from './list-config/list-config';
@@ -11,6 +11,7 @@ import { ListConfig } from './list-config/list-config';
     imports: [
         List,
         ListItem,
+        LIST_REORDER,
         ListSlot,
         ListLeading,
         ListItemPrimaryAction,
@@ -89,7 +90,8 @@ import {
     InputElement, // optional
 } from '@almoamendev/ngx-md3';
 
-// Reordering helper for draggable lists (optional)
+// Reordering for draggable lists (optional): add LIST_REORDER to the component's imports
+import { LIST_REORDER } from '@almoamendev/ngx-md3/list-reorder';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';`;
 
     public apiData: string = `// Inputs & outputs
@@ -100,6 +102,8 @@ public type = input<'standard' | 'segmented'>('standard');
 public draggable = input<boolean, unknown>(false, {
     transform: booleanAttribute,
 });
+
+// md3-list[draggable] (ListReorder, from LIST_REORDER)
 public dropped = output<CdkDragDrop<any>>(); // output
 
 // md3-list-item
@@ -174,7 +178,7 @@ type ListLeadingSize = 'image' | 'small-video' | 'large-video';`;
     </label>
 </md3-list>
 
-<!-- draggable list: reorder your data in (dropped), e.g. with moveItemInArray from @angular/cdk/drag-drop -->
+<!-- draggable list: needs LIST_REORDER in imports; reorder your data in (dropped), e.g. with moveItemInArray -->
 <md3-list draggable (dropped)="moveItemInArray(items, $event.previousIndex, $event.currentIndex)">
     @for (item of items; track item) {
         <md3-list-item [drag-disabled]="false">...</md3-list-item>

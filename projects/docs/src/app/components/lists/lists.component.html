@@ -192,7 +192,7 @@
             <tr>
                 <td>
                     draggable
-                    <p md3-type-body size="small">Allows reordering the list items by dragging them. The list does not change your data, reorder it in the <code>dropped</code> output.</p>
+                    <p md3-type-body size="small">Allows reordering the list items by dragging them. Needs <code>LIST_REORDER</code> from <code>&#64;almoamendev/ngx-md3/list-reorder</code> in the component's imports. The list does not change your data, reorder it in the <code>dropped</code> output.</p>
                 </td>
                 <td>
                     input&lt;boolean&gt;
@@ -202,7 +202,7 @@
             <tr>
                 <td>
                     dropped
-                    <p md3-type-body size="small">Emits when a dragged item is dropped, with its <code>previousIndex</code> and <code>currentIndex</code>.</p>
+                    <p md3-type-body size="small">Emits when a dragged item is dropped, with its <code>previousIndex</code> and <code>currentIndex</code>. Comes from <code>LIST_REORDER</code>.</p>
                 </td>
                 <td>
                     output&lt;CdkDragDrop&lt;any&gt;&gt;
@@ -295,8 +295,18 @@
     <li>When using primary and secondary actions, it is recommended to use a regular list item with <code>md3-item-primary-action</code> inside to separate both actions entirely.</li>
     <li>When using a label tag as a list item with a selection input, it is recommended to disable the input state layer.</li>
     <li>
-        Draggable lists are built on <code>&#64;angular/cdk/drag-drop</code>. Update your items order in <code>(dropped)</code>,
-        for example with <code>moveItemInArray</code>, otherwise the item returns to its original position.
+        Draggable lists are built on <code>&#64;angular/cdk/drag-drop</code>, which is only loaded through
+        <code>LIST_REORDER</code> from <code>&#64;almoamendev/ngx-md3/list-reorder</code>. Add it to the imports of the
+        component whose template has the list, so lists that are never reordered don't load drag-drop.
+        Update your items order in <code>(dropped)</code>, for example with <code>moveItemInArray</code>, otherwise
+        the item returns to its original position.
+    </li>
+    <li>
+        Reordering is meant for <code>md3-list-item</code> elements written directly inside <code>md3-list</code>.
+        To reuse item content, put your own component inside the item (<code>&lt;md3-list-item&gt;&lt;app-row /&gt;&lt;/md3-list-item&gt;</code>).
+        If you wrap the item itself in a component, that component also needs <code>LIST_REORDER</code>, the drag preview
+        is placed inside your component and the segmented corners treat every item as the first and last one, so
+        styling those cases is up to you.
     </li>
     <li>Icons in leading or trailing slots should be 24dp.</li>
     <li>Media inside leading slot can be an image or video in any available media size.</li>
