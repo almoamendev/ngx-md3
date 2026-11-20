@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideRouter } from '@angular/router';
+import { SideSheetRef } from '@almoamendev/ngx-md3';
 
 import { StylesMenu } from './styles-menu';
 
@@ -8,7 +10,8 @@ describe('StylesMenu', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [StylesMenu]
+      imports: [StylesMenu],
+      providers: [provideRouter([]), { provide: SideSheetRef, useValue: jasmine.createSpyObj<SideSheetRef>('SideSheetRef', ['close']) }],
     })
     .compileComponents();
 

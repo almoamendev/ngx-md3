@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { SideSheetRef } from '@almoamendev/ngx-md3';
 
 import { CheckboxConfig } from './checkbox-config';
 
@@ -8,7 +9,8 @@ describe('CheckboxConfig', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CheckboxConfig]
+      imports: [CheckboxConfig],
+      providers: [{ provide: SideSheetRef, useValue: jasmine.createSpyObj<SideSheetRef>('SideSheetRef', ['close']) }],
     })
     .compileComponents();
 

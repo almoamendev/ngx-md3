@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideRouter } from '@angular/router';
 
 import { DialogsComponent } from './dialogs.component';
 
@@ -8,7 +9,8 @@ describe('DialogsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DialogsComponent]
+      imports: [DialogsComponent],
+      providers: [provideRouter([])],
     })
     .compileComponents();
 

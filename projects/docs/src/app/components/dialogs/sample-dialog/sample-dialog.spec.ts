@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { DialogRef } from '@almoamendev/ngx-md3';
 
 import { SampleDialog } from './sample-dialog';
 
@@ -8,7 +9,8 @@ describe('SampleDialog', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SampleDialog]
+      imports: [SampleDialog],
+      providers: [{ provide: DialogRef, useValue: jasmine.createSpyObj<DialogRef>('DialogRef', ['close', 'hide']) }],
     })
     .compileComponents();
 

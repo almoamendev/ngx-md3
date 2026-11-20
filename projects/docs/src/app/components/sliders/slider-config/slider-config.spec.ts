@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { SideSheetRef } from '@almoamendev/ngx-md3';
 
 import { SliderConfig } from './slider-config';
 
@@ -8,7 +9,8 @@ describe('SliderConfig', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SliderConfig]
+      imports: [SliderConfig],
+      providers: [{ provide: SideSheetRef, useValue: jasmine.createSpyObj<SideSheetRef>('SideSheetRef', ['close']) }],
     })
     .compileComponents();
 

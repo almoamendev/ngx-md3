@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideRouter } from '@angular/router';
 
 import { SelectFieldsComponent } from './select-fields.component';
 
@@ -8,7 +9,8 @@ describe('SelectFieldsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SelectFieldsComponent]
+      imports: [SelectFieldsComponent],
+      providers: [provideRouter([])],
     })
     .compileComponents();
 

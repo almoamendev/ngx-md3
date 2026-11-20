@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideRouter } from '@angular/router';
 import { SideSheetRef } from '@almoamendev/ngx-md3';
 
 import { ComponentsMenu } from './components-menu';
@@ -14,6 +15,7 @@ describe('ComponentsMenu', () => {
     await TestBed.configureTestingModule({
       imports: [ComponentsMenu],
       providers: [
+        provideRouter([]),
         { provide: SideSheetRef, useValue: sideSheetRef },
       ],
     })

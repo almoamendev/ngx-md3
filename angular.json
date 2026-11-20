@@ -128,7 +128,13 @@
             ],
             "styles": [
               "projects/docs/src/styles.scss"
-            ]
+            ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "projects/ngx-md3/src/lib/styles",
+                "projects/ngx-md3/src/lib/tokens"
+              ]
+            }
           }
         }
       }

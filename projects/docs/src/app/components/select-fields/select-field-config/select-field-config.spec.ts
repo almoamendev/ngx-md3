@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { SideSheetRef } from '@almoamendev/ngx-md3';
 
 import { SelectFieldConfig } from './select-field-config';
 
@@ -8,7 +9,8 @@ describe('SelectFieldConfig', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SelectFieldConfig]
+      imports: [SelectFieldConfig],
+      providers: [{ provide: SideSheetRef, useValue: jasmine.createSpyObj<SideSheetRef>('SideSheetRef', ['close']) }],
     })
     .compileComponents();
 

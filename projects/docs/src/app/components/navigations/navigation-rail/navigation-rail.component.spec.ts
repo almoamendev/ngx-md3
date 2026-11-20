@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideRouter } from '@angular/router';
 
 import { NavigationRailComponent } from './navigation-rail.component';
 
@@ -8,7 +9,8 @@ describe('NavigationRailComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [NavigationRailComponent]
+      imports: [NavigationRailComponent],
+      providers: [provideRouter([])],
     })
     .compileComponents();
 

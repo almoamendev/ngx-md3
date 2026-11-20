@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { SideSheetRef } from '@almoamendev/ngx-md3';
 
 import { ScaffoldConfig } from './scaffold-config';
 
@@ -8,7 +9,8 @@ describe('ScaffoldConfig', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ScaffoldConfig]
+      imports: [ScaffoldConfig],
+      providers: [{ provide: SideSheetRef, useValue: jasmine.createSpyObj<SideSheetRef>('SideSheetRef', ['close']) }],
     })
     .compileComponents();
 

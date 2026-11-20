@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { SideSheetRef } from '@almoamendev/ngx-md3';
 
 import { SwitchConfig } from './switch-config';
 
@@ -8,7 +9,8 @@ describe('SwitchConfig', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SwitchConfig]
+      imports: [SwitchConfig],
+      providers: [{ provide: SideSheetRef, useValue: jasmine.createSpyObj<SideSheetRef>('SideSheetRef', ['close']) }],
     })
     .compileComponents();
 
