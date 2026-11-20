@@ -1,0 +1,78 @@
+import { booleanAttribute, Component, contentChildren, ElementRef, input, model } from '@angular/core';
+import { StateComponent, InputElement } from '@almoamendev/ngx-md3/core';
+import { IconElement, MaterialIcon } from '@almoamendev/ngx-md3/icon';
+import { TypeBody, TypeLabel, TypeTitle } from '@almoamendev/ngx-md3/typography';
+
+@Component({
+    selector: 'button[md3-menu-item], a[md3-menu-item]',
+    imports: [
+        InputElement,
+        StateComponent,
+        MaterialIcon,
+        TypeLabel,
+        TypeBody,
+        TypeTitle,
+    ],
+    templateUrl: './menu-item.html',
+    styleUrl: './menu-item.scss',
+    host: {
+        '(click)': 'onHostClick()',
+    },
+})
+export class MenuItem {
+    public label = input<string>('', {
+        alias: 'label',
+    });
+
+    public supportingText = input<string | null>(null, {
+        alias: 'supporting-text',
+    });
+
+    public trailingText = input<string | null>(null, {
+        alias: 'trailing-text',
+    });
+
+    public selected = model<boolean | null>(null, {
+        alias: 'selected'
+    });
+
+    /**
+     * When true (default), a click toggles the selected state of the item.
+     * Set it to false when a parent owns the selection, for example md3-select-field.
+     * The item then shows the bound selected value only.
+     */
+    public toggleOnClick = input<boolean, unknown>(true, {
+        alias: 'toggle-on-click',
+        transform: booleanAttribute,
+    });
+
+    private iconElements = contentChildren(IconElement);
+    
+    public get leading(): IconElement | undefined {
+        return this.iconElements().find((icon) => icon.iconType() === 'leading');
+    }
+
+    public get trailing(): IconElement | undefined {
+        return this.iconElements().find((icon) => icon.iconType() === 'trailing');
+    }
+
+    public get showLeadingIcon(): boolean {
+        return (!!this.leading && !this.selected()) || this.selected() == true;
+    }
+
+    public onHostClick(): void {
+        const selected = this.selected();
+        if (selected === null || !this.toggleOnClick()) {
+            return;
+        }
+
+        this.selected.set(!selected);
+    }
+
+    constructor(private el: ElementRef<HTMLElement>) {
+    }
+
+    public get element(): HTMLElement {
+        return this.el.nativeElement;
+    }
+}

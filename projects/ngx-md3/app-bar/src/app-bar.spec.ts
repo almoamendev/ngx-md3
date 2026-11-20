@@ -1,0 +1,52 @@
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { AppBar } from './app-bar';
+import { LayoutService } from '@almoamendev/ngx-md3/core';
+
+describe('AppBar', () => {
+  let component: AppBar;
+  let fixture: ComponentFixture<AppBar>;
+  let layoutService: LayoutService;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [AppBar]
+    })
+    .compileComponents();
+
+    layoutService = TestBed.inject(LayoutService);
+    layoutService.mainScrollTop.set(0);
+
+    fixture = TestBed.createComponent(AppBar);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+
+  it('should ignore scroll offsets within the default bar height', () => {
+    layoutService.mainScrollTop.set(24);
+    fixture.detectChanges();
+
+    expect(component.isScrollingDown()).toBeFalse();
+  });
+
+  it('should detect scrolling down after the default bar height', () => {
+    layoutService.mainScrollTop.set(80);
+    fixture.detectChanges();
+
+    expect(component.isScrollingDown()).toBeTrue();
+  });
+
+  it('should detect scrolling up', () => {
+    layoutService.mainScrollTop.set(80);
+    fixture.detectChanges();
+
+    layoutService.mainScrollTop.set(8);
+    fixture.detectChanges();
+
+    expect(component.isScrollingDown()).toBeFalse();
+  });
+});
