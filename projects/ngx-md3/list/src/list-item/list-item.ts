@@ -1,6 +1,5 @@
-import { AfterViewInit, booleanAttribute, Component, computed, contentChildren, Directive, effect, ElementRef, HostListener, input, Optional, signal } from '@angular/core';
-import { CdkDrag } from '@angular/cdk/drag-drop';
-import { List } from '../list';
+import { AfterViewInit, booleanAttribute, Component, computed, contentChildren, Directive, effect, ElementRef, HostListener, inject, input, signal } from '@angular/core';
+import { LIST_REORDER_STATE } from '../list-reorder-state';
 import { StateComponent, LIST_ITEM_CONTROL, ListItemControl } from '@almoamendev/ngx-md3/core';
 
 @Directive({
@@ -25,7 +24,6 @@ export class ListItemPrimaryAction {
     },
     hostDirectives: [
         StateComponent,
-        CdkDrag,
     ],
 })
 export class ListItem implements AfterViewInit {
@@ -35,6 +33,7 @@ export class ListItem implements AfterViewInit {
     public selected = input<boolean, unknown>(false, {
         transform: booleanAttribute,
     });
+    /** Keeps this item in place while its list is reorderable. */
     public dragDisabled = input<boolean, unknown>(false, {
         alias: 'drag-disabled',
         transform: booleanAttribute,
@@ -46,6 +45,7 @@ export class ListItem implements AfterViewInit {
     private checkbox = computed(() => this.findControl('checkbox'));
     private radioButton = computed(() => this.findControl('radio'));
     private switch = computed(() => this.findControl('switch'));
+    private reorder = inject(LIST_REORDER_STATE, { optional: true });
 
     public isSelected = computed(() => {
         const checkbox = this.checkbox();
@@ -63,18 +63,13 @@ export class ListItem implements AfterViewInit {
     });
 
     public isDraggable = computed(() => {
-        return !!this.list?.draggable() && !this.dragDisabled() && !this.isInputDisabled();
+        return !!this.reorder?.enabled() && !this.dragDisabled() && !this.isInputDisabled();
     });
 
     constructor(
         private el: ElementRef,
-        private state: StateComponent,
-        private drag: CdkDrag,
-        @Optional() private list: List | null
+        private state: StateComponent
     ) {
-        // Keep the preview inside the list so it inherits the list's tokens.
-        this.drag.previewContainer = 'parent';
-
         effect((onCleanup) => {
             const alignment = 'md3-slots-alignment-' + this.slotsAlignment();
             this.element.classList.add(alignment);
@@ -93,9 +88,6 @@ export class ListItem implements AfterViewInit {
             this.state.setStateLayer(this.isDraggable() || (this.isActionTag() && !this.isInputDisabled()));
         });
 
-        effect(() => {
-            this.drag.disabled = !this.isDraggable();
-        });
     }
 
     private findControl(type: ListItemControl['listItemControlType']): ListItemControl | undefined {

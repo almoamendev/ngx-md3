@@ -1,30 +1,25 @@
-import { booleanAttribute, Component, effect, ElementRef, input } from '@angular/core';
-import { CdkDropList } from '@angular/cdk/drag-drop';
+import { booleanAttribute, Component, effect, ElementRef, inject, Injector, input } from '@angular/core';
+import { LIST_REORDER_STATE } from './list-reorder-state';
 
 @Component({
     selector: 'md3-list',
     templateUrl: './list.html',
     styleUrl: './list.scss',
-    hostDirectives: [
-        {
-            directive: CdkDropList,
-            outputs: ['cdkDropListDropped: dropped'],
-        },
-    ],
 })
 export class List {
     public variant = input<'expressive' | 'baseline'>('expressive');
     public type = input<'standard' | 'segmented'>('standard');
+    /**
+     * Lets the items be reordered by dragging. Needs `LIST_REORDER` from
+     * `@almoamendev/ngx-md3/list-reorder` in the component's imports.
+     */
     public draggable = input<boolean, unknown>(false, {
         transform: booleanAttribute,
     });
 
-    constructor(
-        private el: ElementRef,
-        private dropList: CdkDropList
-    ) {
-        this.dropList.lockAxis = 'y';
+    private injector = inject(Injector);
 
+    constructor(private el: ElementRef) {
         effect((onCleanup) => {
             const variant = 'md3-' + this.variant();
             this.element.classList.add(variant);
@@ -43,9 +38,20 @@ export class List {
             });
         });
 
-        effect(() => {
-            this.dropList.disabled = !this.draggable();
-        });
+        if (typeof ngDevMode === 'undefined' || ngDevMode) {
+            let warned = false;
+
+            effect(() => {
+                // Looked up here, not in the constructor: ListReorder injects this list.
+                if (!warned && this.draggable() && !this.injector.get(LIST_REORDER_STATE, null, { self: true, optional: true })) {
+                    warned = true;
+                    console.warn(
+                        'md3-list has `draggable` but reordering is not loaded. Add LIST_REORDER from ' +
+                        '@almoamendev/ngx-md3/list-reorder to the imports of the component that uses this list.'
+                    );
+                }
+            });
+        }
     }
 
     public get element(): HTMLElement {

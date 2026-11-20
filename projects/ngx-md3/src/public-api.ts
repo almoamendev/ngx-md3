@@ -23,6 +23,7 @@ export * from '@almoamendev/ngx-md3/radio';
 export * from '@almoamendev/ngx-md3/switch';
 export * from '@almoamendev/ngx-md3/slider';
 export * from '@almoamendev/ngx-md3/list';
+export * from '@almoamendev/ngx-md3/list-reorder';
 export * from '@almoamendev/ngx-md3/progress';
 export * from '@almoamendev/ngx-md3/app-bar';
 export * from '@almoamendev/ngx-md3/toolbar';

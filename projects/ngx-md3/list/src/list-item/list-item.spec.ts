@@ -1,6 +1,5 @@
 import { Component, signal } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { CdkDrag } from '@angular/cdk/drag-drop';
 import { FormControl } from '@angular/forms';
 import { Checkbox } from '@almoamendev/ngx-md3/checkbox';
 import { InputElement } from '@almoamendev/ngx-md3/core';
@@ -41,54 +40,53 @@ describe('ListItem', () => {
   template: `
     <md3-list [draggable]="draggable()">
       <md3-list-item>One</md3-list-item>
-      <md3-list-item [drag-disabled]="true">Two</md3-list-item>
+      <md3-list-item>Two</md3-list-item>
     </md3-list>
   `,
 })
-class DraggableListHost {
+class PlainListHost {
   public draggable = signal(false);
 }
 
-describe('ListItem in a draggable list', () => {
-  let fixture: ComponentFixture<DraggableListHost>;
+describe('ListItem in a plain list', () => {
+  let fixture: ComponentFixture<PlainListHost>;
   let items: HTMLElement[];
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DraggableListHost]
+      imports: [PlainListHost]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(DraggableListHost);
+    spyOn(console, 'warn');
+    fixture = TestBed.createComponent(PlainListHost);
     fixture.detectChanges();
     items = Array.from(fixture.nativeElement.querySelectorAll('md3-list-item'));
   });
 
-  it('should keep a plain item without state layer while the list is not draggable', () => {
+  it('should have no drag behaviour and no state layer', () => {
+    const list = fixture.nativeElement.querySelector('md3-list') as HTMLElement;
+
+    expect(list.classList).not.toContain('cdk-drop-list');
+    expect(items[0].classList).not.toContain('cdk-drag');
     expect(items[0].classList).not.toContain('draggable');
     expect(items[0].classList).not.toContain('md3-state-component');
     expect(items[0].querySelector(':scope > .md3-state-layer')).toBeNull();
+    expect(console.warn).not.toHaveBeenCalled();
   });
 
-  it('should enable dragging and the state layer when the list is draggable', () => {
+  it('should stay static and warn once when draggable is set without the reorder import', () => {
+    fixture.componentInstance.draggable.set(true);
+    fixture.detectChanges();
+    fixture.componentInstance.draggable.set(false);
+    fixture.detectChanges();
     fixture.componentInstance.draggable.set(true);
     fixture.detectChanges();
 
-    expect(items[0].classList).toContain('draggable');
-    expect(items[0].classList).toContain('md3-state-component');
-    expect(items[0].querySelector(':scope > .md3-state-layer')).not.toBeNull();
-  });
-
-  it('should respect drag-disabled', () => {
-    fixture.componentInstance.draggable.set(true);
-    fixture.detectChanges();
-
-    const drags = fixture.debugElement.queryAll((el) => el.name === 'md3-list-item').map((el) => el.injector.get(CdkDrag));
-
-    expect(drags[0].disabled).toBeFalse();
-    expect(drags[1].disabled).toBeTrue();
-    expect(items[1].classList).not.toContain('draggable');
-    expect(items[1].classList).not.toContain('md3-state-component');
+    expect(items[0].classList).not.toContain('draggable');
+    expect(items[0].classList).not.toContain('cdk-drag');
+    expect(console.warn).toHaveBeenCalledTimes(1);
+    expect((console.warn as jasmine.Spy).calls.mostRecent().args[0]).toContain('@almoamendev/ngx-md3/list-reorder');
   });
 });
 
