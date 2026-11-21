@@ -72,6 +72,14 @@
             </tr>
             <tr>
                 <td>
+                    closeOnNavigation?
+                    <p md3-type-body size="small">When disabled, dialog stays open when the user goes back or forward in the browser history.</p>
+                </td>
+                <td>boolean</td>
+                <td style="white-space: nowrap;">true</td>
+            </tr>
+            <tr>
+                <td>
                     <i>previousDialog?</i>
                     <p md3-type-body size="small">What happens to a dialog that is already open when this dialog opens. A hidden dialog keeps its state and is shown again once this dialog closes.</p>
                 </td>
@@ -173,6 +181,8 @@
     <li>Dialogs replace each other in sequence rather than at the same time: the one on screen starts leaving, and the next one animates in 160ms later. The same head start applies in reverse, when a hidden dialog comes back. The scrim is handed over between them, so the page behind keeps a single, steady scrim.</li>
     <li>A hidden dialog keeps its component instance, so scroll position, form state and subscriptions are preserved. It is marked <code>inert</code> while hidden, so it takes no focus and is skipped by screen readers.</li>
     <li>Dialogs can also be hidden on purpose, to let the page be used without losing the dialog: <code>dialogRef.hide()</code> sends one away with the closing animation, <code>dialogRef.show()</code> brings it back with the opening one. <code>hideAll()</code> and <code>showAll()</code> do the same for everything on screen, the full screen dialog included.</li>
+    <li>A dialog hidden through <code>dialogRef.hide()</code> stays hidden until <code>dialogRef.show()</code> is called on it. It does not come back when a dialog that was open over it closes, and <code>showAll()</code> leaves it alone too &mdash; only the dialogs hidden by <code>previousDialog: 'hide'</code> or <code>hideAll()</code> come back on their own. This holds even when <code>hide()</code> is called while the dialog above is still closing, so a video player can move to picture in picture right after a dialog over it closes.</li>
+    <li>Going back or forward in the browser history closes every open dialog by default. Pass <code>closeOnNavigation: false</code> to keep a dialog open instead, for example to move a video player to picture in picture on Back. Router navigation does not close dialogs either way.</li>
     <li>While every dialog is hidden the page belongs to the user again: the scrim is gone, scrolling is released, the page is exposed to assistive technology once more, and focus goes back to the element that opened the first dialog. A hidden dialog also ignores the Escape key, since it is not the dialog the key is meant for.</li>
     <li>Page scrolling stays blocked for as long as one dialog of the stack is on screen, and focus returns to the element that opened the first dialog once the last one closes.</li>
 </ul>

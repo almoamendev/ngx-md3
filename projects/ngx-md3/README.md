@@ -120,6 +120,29 @@ export class Tasks {
 
 Without `LIST_REORDER` a `draggable` list renders as a plain list, `(dropped)` never fires, and a warning is logged in dev mode. Reordering is meant for `md3-list-item` elements written directly inside `md3-list`; see the list docs for wrapping items in your own components.
 
+## Dialogs
+
+`DialogService.open()` opens a dialog and `openFullScreen()` opens one that covers the window. Both take a `DialogConfig` from `@almoamendev/ngx-md3/dialog`. Two options decide what can close a dialog without your code asking:
+
+| Option | Default | |
+| --- | --- | --- |
+| `disableCloseEvents` | `false` | When `true`, clicking the scrim or pressing Escape doesn't close the dialog. |
+| `closeOnNavigation` | `true` | When `false`, the dialog stays open when the user goes Back or Forward in the browser history (a `popstate`). Router navigation never closes dialogs on its own. |
+
+A video player that should move to picture in picture on Back instead of closing:
+
+```ts
+const player = this.dialogs.openFullScreen(VideoPlayer, {
+  disableCloseEvents: true,
+  closeOnNavigation: false,
+});
+
+// Later, when the app moves the video to picture in picture:
+player.hide();
+```
+
+A dialog hidden through `DialogRef.hide()` stays hidden until you call `show()` on it. The service never brings it back on its own: not when a dialog that was open over it closes, and not through `showAll()`. Only dialogs the service hid itself (with `previousDialog: 'hide'` or `hideAll()`) come back automatically.
+
 ## Links
 
 - Docs & component gallery: https://almoamendev.github.io/ngx-md3/
