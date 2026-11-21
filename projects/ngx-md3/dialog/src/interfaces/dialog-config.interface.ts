@@ -24,6 +24,15 @@ export interface DialogConfig<D = unknown> {
     disableCloseEvents?: boolean;
 
     /**
+     * Whether the dialog closes when the user navigates back or forward in the
+     * browser history. Defaults to true. Set it to false to keep the dialog open,
+     * for example to move a video player to picture in picture on Back instead.
+     * Navigation inside the app through the router does not close dialogs either
+     * way; close them yourself when a route change should.
+     */
+    closeOnNavigation?: boolean;
+
+    /**
      * What happens to a dialog that is already open when this dialog opens.
      * A hidden dialog keeps its state and is shown again once this dialog closes.
      */

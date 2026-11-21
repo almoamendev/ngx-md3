@@ -6,12 +6,14 @@ import { Dialog } from './dialog';
 import { FullScreenDialog } from './full-screen-dialog/full-screen-dialog';
 import { DIALOG_COMPONENT, DIALOG_CONFIG, DIALOG_DATA, DialogRef } from './dialog-ref';
 import { DialogConfig, DialogContainer, PreviousDialog } from './interfaces/dialog-config.interface';
+import { getDialogHiddenBy, markDialogHiddenBy } from './dialog-hidden-by';
 import { DIALOG_CONTEXT, DialogContext, applyScale } from '@almoamendev/ngx-md3/core';
 
 interface ResolvedDialogConfig<D = unknown> extends DialogConfig<D> {
     data: D | undefined;
     bindDataToInputs: boolean;
     disableCloseEvents: boolean;
+    closeOnNavigation: boolean;
     previousDialog: PreviousDialog;
     role: 'dialog' | 'alertdialog';
     ariaLabel: string;
@@ -151,6 +153,9 @@ export class DialogService {
             // Scrim and Escape handling lives in DialogRef so the dialog can
             // play its exit animation before the overlay is disposed.
             disableClose: true,
+            // Back and Forward close the dialog unless the app keeps it open,
+            // e.g. to move a video player to picture in picture instead.
+            closeOnNavigation: dialogConfig.closeOnNavigation,
         });
 
         this.registerDialog(dialogRef, cdkRef, dialogConfig, previousRef);
@@ -230,6 +235,9 @@ export class DialogService {
             scrollStrategy: this.overlay.scrollStrategies.noop(),
             restoreFocus: this.rootTrigger ?? true,
             disableClose: true,
+            // Back and Forward close the dialog unless the app keeps it open,
+            // e.g. to move a video player to picture in picture instead.
+            closeOnNavigation: dialogConfig.closeOnNavigation,
         });
 
         this.registerDialog(dialogRef, cdkRef, dialogConfig, previousRef);
@@ -284,14 +292,16 @@ export class DialogService {
     public hideAll(): Promise<void> {
         const visible = this.refs.filter((ref) => !ref.isHidden && !ref.isClosing);
 
-        return Promise.all(visible.map((ref) => ref.hide())).then(() => undefined);
+        return Promise.all(visible.map((ref) => this.hideForService(ref))).then(() => undefined);
     }
 
     /**
      * Brings the dialogs back on screen, whether they were hidden one by one or
      * all at once: the dialog that was on top returns, along with the full
      * screen dialog it sits in. Dialogs hidden behind another dialog stay
-     * hidden, since that is where they belong once the stack is back.
+     * hidden, since that is where they belong once the stack is back, and so
+     * do dialogs hidden through DialogRef.hide(): those wait for their own
+     * show() call.
      */
     public showAll(): void {
         const topRef = this.topRef();
@@ -304,11 +314,11 @@ export class DialogService {
 
         // The full screen dialog is the context the top one sits in, so it
         // comes back first and the dialog on top ends up on top, with the focus.
-        if (fullScreenRef && fullScreenRef !== topRef && fullScreenRef.isHidden) {
+        if (fullScreenRef && fullScreenRef !== topRef && this.isHiddenByService(fullScreenRef)) {
             fullScreenRef.show();
         }
 
-        if (topRef.isHidden) {
+        if (this.isHiddenByService(topRef)) {
             topRef.show();
         }
     }
@@ -334,6 +344,7 @@ export class DialogService {
             data: config.data,
             bindDataToInputs: config.bindDataToInputs ?? false,
             disableCloseEvents: config.disableCloseEvents ?? false,
+            closeOnNavigation: config.closeOnNavigation ?? true,
             previousDialog: config.previousDialog ?? 'close',
             role: config.role ?? 'dialog',
             ariaLabel: config.ariaLabel ?? '',
@@ -358,7 +369,37 @@ export class DialogService {
     ): Promise<void> {
         previousRef.overlayRef.backdropElement?.classList.add(SCRIM_KEPT_CLASS);
 
-        return behavior === 'hide' ? previousRef.hide() : this.closeRegularDialogs();
+        return behavior === 'hide' ? this.hideForService(previousRef) : this.closeRegularDialogs();
+    }
+
+    /**
+     * Hides a dialog on behalf of the service, which is what allows the
+     * service to bring it back later. A dialog that is already hidden keeps
+     * whoever hid it: one the app hid stays the app's to show.
+     */
+    private hideForService(ref: DialogRef<any, any>): Promise<void> {
+        if (ref.isHidden || ref.isClosing) {
+            return Promise.resolve();
+        }
+
+        const hidden = ref.hide();
+        markDialogHiddenBy(ref, 'service');
+
+        return hidden;
+    }
+
+    /** Whether the dialog is hidden and the service is the one that hid it. */
+    private isHiddenByService(ref: DialogRef<any, any>): boolean {
+        return ref.isHidden && getDialogHiddenBy(ref) === 'service';
+    }
+
+    /**
+     * Whether the service may put the dialog back on screen on its own: it is
+     * visible already, or the service hid it. A dialog the app hid is not
+     * brought back until the app shows it.
+     */
+    private canRestore(ref: DialogRef<any, any>): boolean {
+        return !ref.isHidden || this.isHiddenByService(ref);
     }
 
     /**
@@ -419,6 +460,14 @@ export class DialogService {
         previousRef: DialogRef<any, any>,
     ): void {
         if (previousRef.isClosing) {
+            return;
+        }
+
+        // The app hid the dialog underneath, possibly while this one was
+        // already closing: it stays hidden, and the closing scrim fades out
+        // on its own since nothing takes it over.
+        if (!this.canRestore(previousRef)) {
+            closingRef.overlayRef.backdropElement?.classList.remove(SCRIM_KEPT_CLASS);
             return;
         }
 
@@ -522,7 +571,7 @@ export class DialogService {
             // The closing dialog gets the same head start it was given when it
             // took the screen, and keeps the scrim until then. Nothing to keep
             // when the dialog underneath has no scrim of its own.
-            if (previousRef.overlayRef.backdropElement) {
+            if (previousRef.overlayRef.backdropElement && this.canRestore(previousRef)) {
                 ref.overlayRef.backdropElement?.classList.add(SCRIM_KEPT_CLASS);
             }
 
@@ -547,7 +596,11 @@ export class DialogService {
 
         const hostRef = this.fullScreenDialog;
 
-        if (hostRef?.isHidden && this.refs.indexOf(hostRef) < this.refs.indexOf(ref)) {
+        if (
+            hostRef
+            && this.isHiddenByService(hostRef)
+            && this.refs.indexOf(hostRef) < this.refs.indexOf(ref)
+        ) {
             hostRef.show();
         }
     }

@@ -4,6 +4,7 @@ import { OverlayRef } from '@angular/cdk/overlay';
 import { InjectionToken, Type } from '@angular/core';
 import { filter, Observable, Subject, take } from 'rxjs';
 import { DialogConfig, DialogContainer } from './interfaces/dialog-config.interface';
+import { clearDialogHiddenBy, markDialogHiddenBy } from './dialog-hidden-by';
 
 export const DIALOG_DATA = new InjectionToken<unknown>('MD3_DIALOG_DATA');
 export const DIALOG_CONFIG = new InjectionToken<DialogConfig>('MD3_DIALOG_CONFIG');
@@ -77,9 +78,20 @@ export class DialogRef<T = unknown, R = unknown> {
      * its content, form state and subscriptions survive until show() is called.
      * The page underneath becomes usable again while the dialog waits behind it.
      * The promise resolves once the dialog is out of sight.
+     *
+     * A dialog hidden this way stays hidden until show() is called on it: the
+     * service never brings it back on its own, not when a dialog above it
+     * closes and not through showAll(). That also holds for a dialog the
+     * service had already hidden, behind another dialog for instance.
      */
     public hide(): Promise<void> {
-        if (this.hidden || this.closeStarted) {
+        if (this.closeStarted) {
+            return Promise.resolve();
+        }
+
+        markDialogHiddenBy(this, 'app');
+
+        if (this.hidden) {
             return Promise.resolve();
         }
 
@@ -100,6 +112,8 @@ export class DialogRef<T = unknown, R = unknown> {
         if (this.closeStarted) {
             return;
         }
+
+        clearDialogHiddenBy(this);
 
         if (this.hidden) {
             this.hidden = false;

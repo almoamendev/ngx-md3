@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.13.0
+
+### Dialogs: a dialog the app hid stays hidden
+
+Closing a dialog could bring back a dialog the app had hidden on purpose. When a dialog closed, the service waited for the 160 ms handover and then called `show()` on the dialog underneath, without checking why that dialog was hidden. A full-screen video player that the app had moved to picture in picture with `hide()`, right after closing a dialog over it, came back over the next page.
+
+The service now remembers who hid each dialog:
+
+- A dialog hidden through `DialogRef.hide()` stays hidden until the app calls `show()` on it. This holds whenever `hide()` is called, during the handover delay too, and also for a dialog the service had already hidden behind another one.
+- Closing a dialog brings back the dialog underneath only when it is on screen already or the service hid it, with `previousDialog: 'hide'`.
+- The same rule applies to the full-screen dialog a restored dialog sits in, and to `showAll()`: it brings back what `hideAll()` or the service hid, and leaves dialogs hidden through `DialogRef.hide()` alone. Before, `showAll()` also showed those.
+
+`previousDialog: 'hide'`, `hideAll()` and `showAll()` work as before for dialogs the app didn't hide itself. The public API doesn't change.
+
+### Dialogs: `closeOnNavigation`
+
+New `closeOnNavigation?: boolean` option on `DialogConfig`, for `open()` and `openFullScreen()`. It defaults to `true`, which is what every dialog did before: going Back or Forward in the browser history (a `popstate`) closes it. Set it to `false` to keep the dialog open, for example to move a video player to picture in picture on Back instead of closing it.
+
 ## 0.12.0
 
 ### List reordering moved to `@almoamendev/ngx-md3/list-reorder`

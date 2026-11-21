@@ -103,6 +103,12 @@ interface DialogConfig<D = unknown> {
     disableCloseEvents?: boolean;
 
     /**
+     * When disabled, dialog stays open on browser Back / Forward (popstate)
+     * @default true
+     */
+    closeOnNavigation?: boolean;
+
+    /**
      * What happens to a dialog that is already open when this dialog opens.
      * A hidden dialog keeps its state and is shown again once this dialog closes.
      * @default close
@@ -184,6 +190,8 @@ class DialogRef<T = unknown, R = unknown> {
      * Hide the dialog with the closing animation while keeping it alive,
      * then bring it back with the opening animation. Also handled
      * automatically when opening a dialog with previousDialog: 'hide'.
+     * A dialog hidden with hide() stays hidden until show() is called:
+     * the service never brings it back on its own.
      * Resolves once the dialog is out of sight
      */
     public hide(): Promise<void>;
@@ -245,7 +253,8 @@ class DialogService {
     /**
      * Put the dialogs back on screen: the dialog that was on top, along
      * with the full screen dialog it sits in. Dialogs hidden behind
-     * another dialog stay hidden
+     * another dialog stay hidden, and so do dialogs hidden through
+     * DialogRef.hide()
      */
     public showAll(): void;
 
