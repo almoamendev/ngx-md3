@@ -28,18 +28,18 @@
         }
 
         ::ng-deep md3-list-item, ::ng-deep [md3-list-item] {
-            &.md3-state-component:first-child, &:first-child [md3-primary-action] {
+            &.md3-state-component:first-child, &:first-child [md3-item-primary-action] {
                 --border-top-start-r: var(--md-border-radius-large);
                 --border-top-end-r: var(--md-border-radius-large);
             }
             
             // The drag preview is appended to the list, so the item before it is the real last one.
-            &.md3-state-component:last-child, &.md3-state-component:has(+ .cdk-drag-preview:last-child), &:last-child [md3-primary-action] {
+            &.md3-state-component:last-child, &.md3-state-component:has(+ .cdk-drag-preview:last-child), &:last-child [md3-item-primary-action] {
                 --border-bottom-start-r: var(--md-border-radius-large);
                 --border-bottom-end-r: var(--md-border-radius-large);
             }
 
-            &.md3-state-component:hover, [md3-primary-action]:hover {
+            &.md3-state-component:hover, [md3-item-primary-action]:hover {
                 --border-radius: var(--md-border-radius-medium);
 
                 --border-top-start-r: var(--border-radius);
@@ -48,7 +48,7 @@
                 --border-bottom-end-r: var(--border-radius);
             }
 
-            &.md3-state-component:focus, [md3-primary-action]:focus {
+            &.md3-state-component:focus, [md3-item-primary-action]:focus {
                 --border-radius: var(--md-border-radius-large);
 
                 --border-top-start-r: var(--border-radius);
