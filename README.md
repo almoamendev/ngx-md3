@@ -92,6 +92,27 @@ The global styles stay where they were:
 @use '@almoamendev/ngx-md3/src/lib/styles/md3.scss';
 ```
 
+## Serving the fonts yourself
+
+`md3.scss` loads its fonts from Google Fonts: Google Sans, Roboto, Noto Sans Arabic, Material Icons and Material Symbols. An app that has to work offline, or must not call Google, uses `md3-core.scss` instead. It has the same tokens and base styles without the font imports, so the app declares the families it uses with its own `@font-face` rules:
+
+```scss
+@use '@almoamendev/ngx-md3/src/lib/styles/md3-core.scss';
+
+@font-face {
+    font-family: 'Google Sans';
+    src: url('/fonts/google-sans.woff2') format('woff2');
+    font-weight: 400 700;
+}
+
+@font-face {
+    font-family: 'Material Symbols Rounded';
+    src: url('/fonts/material-symbols-rounded.woff2') format('woff2');
+}
+```
+
+`md3-fonts.scss` lists the families and the Google Fonts URLs. `md3.scss` is `md3-fonts.scss` followed by `md3-core.scss`, so its output is the same as before.
+
 ## Reorderable lists
 
 Drag-and-drop reordering lives in its own entry point, so lists that are never reordered don't load `@angular/cdk/drag-drop`. Add `LIST_REORDER` to the imports of each component whose template has a `draggable` list; the markup stays the same.
