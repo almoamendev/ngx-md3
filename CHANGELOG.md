@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.14.0
+
+### Styles: serve the fonts yourself with `md3-core.scss`
+
+`md3.scss` loaded its fonts from Google Fonts with `@import` rules at its top, so an app that used it always called Google and showed no icons offline. The file is now split in two:
+
+- `md3-fonts.scss`: the Google Fonts imports (Google Sans, Roboto, Noto Sans Arabic, the five Material Icons styles and the three Material Symbols styles).
+- `md3-core.scss`: the tokens and base styles, without any font import.
+
+`md3.scss` uses both and compiles to the same CSS as before, so apps that use it don't change. An app that ships its own font files uses `md3-core.scss` and declares the same font families with its own `@font-face` rules. See "Serving the fonts yourself" in the README.
+
 ## 0.13.0
 
 ### Dialogs: a dialog the app hid stays hidden
