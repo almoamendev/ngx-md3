@@ -120,3 +120,9 @@
         }
     }
 }
+
+@container (max-width: 23.5em) {
+    :host {
+        min-width: 10em;
+    }
+}
